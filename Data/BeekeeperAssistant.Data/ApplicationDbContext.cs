@@ -28,6 +28,18 @@
 
         public DbSet<Beehive> Beehives { get; set; }
 
+        public DbSet<UserTask> UserTasks { get; set; }
+
+        public DbSet<UserNote> UserNotes { get; set; }
+
+        public DbSet<Queen> Queens { get; set; }
+
+        public DbSet<UserTasks> UsersTasks { get; set; }
+
+        public DbSet<UserNotes> UsersNotes { get; set; }
+
+        public DbSet<UserApiaries> UsersApiaries { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -49,6 +61,48 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // User Tasks
+            builder.Entity<UserTasks>()
+                .HasKey(ut => new { ut.UserId, ut.TaskId });
+
+            builder.Entity<UserTasks>()
+                .HasOne(ut => ut.Task)
+                .WithMany(t => t.UserTasks)
+                .HasForeignKey(t => t.TaskId);
+
+            builder.Entity<UserTasks>()
+                .HasOne(ut => ut.User)
+                .WithMany(t => t.UserTasks)
+                .HasForeignKey(t => t.UserId);
+
+            // User Apiaries
+            builder.Entity<UserApiaries>()
+               .HasKey(ut => new { ut.UserId, ut.ApiaryId });
+
+            builder.Entity<UserApiaries>()
+                .HasOne(ut => ut.Apiary)
+                .WithMany(t => t.UserApiaries)
+                .HasForeignKey(t => t.ApiaryId);
+
+            builder.Entity<UserApiaries>()
+                .HasOne(ut => ut.User)
+                .WithMany(t => t.UserApiaries)
+                .HasForeignKey(t => t.UserId);
+
+            // User Notes
+            builder.Entity<UserNotes>()
+               .HasKey(ut => new { ut.UserId, ut.NoteId });
+
+            builder.Entity<UserNotes>()
+                .HasOne(ut => ut.Note)
+                .WithMany(t => t.UserNotes)
+                .HasForeignKey(t => t.NoteId);
+
+            builder.Entity<UserNotes>()
+                .HasOne(ut => ut.User)
+                .WithMany(t => t.UserNotes)
+                .HasForeignKey(t => t.UserId);
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

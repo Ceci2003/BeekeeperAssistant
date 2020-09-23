@@ -33,5 +33,12 @@ namespace BeekeeperAssistant.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<UserTasks> UserTasks { get; set; }
+
+        public virtual ICollection<UserApiaries> UserApiaries { get; set; }
+
+        public virtual ICollection<UserNotes> UserNotes { get; set; }
+
     }
 }

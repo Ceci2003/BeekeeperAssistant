@@ -10,10 +10,15 @@
     {
         public int Number { get; set; }
 
-        public string Name { get; set; }
+#nullable enable
+        public string? Name { get; set; }
 
         public ApiaryType ApiaryType { get; set; }
 
-        public string Location { get; set; }
+#nullable enable
+        public string? Adress { get; set; }
+
+#nullable disable
+        public virtual ICollection<UserApiaries> UserApiaries { get; set; }
     }
 }

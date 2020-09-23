@@ -24,6 +24,10 @@
         {
         }
 
+        public DbSet<Apiary> Apiaries { get; set; }
+
+        public DbSet<Beehive> Beehives { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

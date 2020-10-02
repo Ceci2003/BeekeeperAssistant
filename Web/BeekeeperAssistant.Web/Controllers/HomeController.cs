@@ -1,13 +1,22 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Linq;
 
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly IApiaryService apiaryService;
+
+        public HomeController(IApiaryService apiaryService)
+        {
+            this.apiaryService = apiaryService;
+        }
+
         public IActionResult Index()
         {
             return this.View();

@@ -8,7 +8,7 @@
 
     public class Apiary : BaseDeletableModel<int>
     {
-        public int Number { get; set; }
+        public string Number { get; set; }
 
 #nullable enable
         public string? Name { get; set; }

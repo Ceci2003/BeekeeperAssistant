@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@GlobalConstants.SystemName - @this.ViewData["Title"]</title>
 
-    <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
+    <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
 
     <environment names="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -25,18 +25,71 @@
     <header>
         <partial name="_LoginPartial" />
     </header>
-    
+
     <div class="text-center">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
-    
-    <footer class="border-top footer text-muted text-center">
-        <div class="container">
+
+    <footer class="page-footer font-small blue pt-4">
+        <div class="container-fluid text-center text-md-left">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <a class="navbar-brand logo-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img class="logo" src="~/images/BA_demoLogo.png" alt="logo" />
+                        @GlobalConstants.SystemName
+                    </a>
+                </div>
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-3 mb-md-0 mb-3">
+                </div>
+
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <div class="row ">
+                        <div class="col-lg-12 d-flex justify-content-around" id="socialMedia">
+                            <ul class="list-unstyled">
+                                <li class="d-inline"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li class="d-inline"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li class="d-inline"><a href="#"><i class="fab fa-yelp"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Links -->
+                    @*<h5 class="text-uppercase">Social media</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>*@
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+        <!-- Copyright -->
+
     </footer>
 
     <environment names="Development">

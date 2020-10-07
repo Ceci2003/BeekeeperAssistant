@@ -23,4 +23,9 @@
     <ProjectReference Include="..\..\Services\BeekeeperAssistant.Services.Mapping\BeekeeperAssistant.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Administration\Dashboard\" />
+    <Folder Include="Home\" />
+  </ItemGroup>
+
 </Project>

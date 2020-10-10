@@ -5,13 +5,7 @@
 }
 
 body {
-    /* margin-bottom: 60px; */
-    font-family: Verdana,sans-serif;
-    /* background-color: #110400; */
-}
 
-main {
-    background-color: #110400;
 }
 
 .navbar-custom {
@@ -96,11 +90,12 @@ a.register-btn3:hover {
 
 .card-group-functions {
     border-bottom: 5px solid #F29422;
+    background-color: #110400;
 }
 
 .card-group-functions h2 {
     color: white;
-    margin: 0 37%;
+    margin: 0 35%;
     padding: 10px;
     border-bottom: 5px solid #F29422
 }
@@ -180,6 +175,15 @@ button.accept-policy {
 footer {
     background-color: #110400;
     color: white;
+}
+
+footer .icon {
+    color: white;
+    font-size: 20px;
+}
+
+footer .icon :hover {
+    color: #F29422;
 }
 
 @media (min-width: 768px) {

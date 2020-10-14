@@ -8,6 +8,8 @@ body {
 
 }
 
+/*Navigation*/
+
 .navbar-custom {
     background-color: #110400;
 }
@@ -61,6 +63,8 @@ a.register-btn3:hover {
     color: white;
 }
 
+/*Banner*/
+
 .banner {
     position: relative;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/banner.jpg);
@@ -87,6 +91,8 @@ a.register-btn3:hover {
 .banner-text p {
     padding-top: 5px;
 }
+
+/*Function Cards*/
 
 .card-group-functions {
     border-bottom: 5px solid #F29422;
@@ -149,8 +155,17 @@ a.register-btn3:hover {
     color: white;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+/*Login Form*/
+
+.login-form {
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/banner.jpg);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px solid #F29422;
+    border-top: 5px solid #F29422;
+    color: white;
+}
 
 .border-top {
     border-top: 1px solid #e5e5e5;
@@ -169,8 +184,7 @@ button.accept-policy {
     line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+/*Footer*/
 
 footer {
     background-color: #110400;

@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
     using System.Linq;
 
@@ -15,6 +16,15 @@
         public HomeController(IApiaryService apiaryService)
         {
             this.apiaryService = apiaryService;
+        }
+
+        [Route("{*url}", Order = 999)]
+        public IActionResult HttpError()
+        {
+            this.HttpContext.Response.StatusCode = 404;
+            return this.View();
+
+            // TODO: This may be done better with filters. If you return this.NotFound() it won't show HttpError page!
         }
 
         public IActionResult Index()

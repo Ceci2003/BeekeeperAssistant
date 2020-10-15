@@ -24,5 +24,9 @@
 
         // Create
         Task AddApiary();
+
+        // Get all user apiaries
+
+        IEnumerable<T> GetAllUserApiaries<T>(string userId);
     }
 }

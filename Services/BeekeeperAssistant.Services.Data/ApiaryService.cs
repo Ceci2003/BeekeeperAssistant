@@ -13,11 +13,14 @@
     public class ApiaryService : IApiaryService
     {
         private readonly IRepository<UsersApiaries> usersApiariesRepository;
+        private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
 
         public ApiaryService(
-            IRepository<UsersApiaries> usersApiariesRepository)
+            IRepository<UsersApiaries> usersApiariesRepository,
+            IDeletableEntityRepository<Apiary> apiaryRepository)
         {
             this.usersApiariesRepository = usersApiariesRepository;
+            this.apiaryRepository = apiaryRepository;
         }
 
         public Task AddApiary()
@@ -38,6 +41,12 @@
         public IEnumerable<T> GetAllApiaries<T>()
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetAllUserApiaries<T>(string userId)
+        {
+            var allUserApiaries = this.usersApiariesRepository.All().Where(ua => ua.UserId == userId).To<T>().ToList();
+            return allUserApiaries;
         }
 
         public T GetApiaryById<T>(int id)

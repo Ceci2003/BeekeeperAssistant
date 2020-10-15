@@ -1,0 +1,13 @@
+﻿@model IEnumerable<BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel>
+@{ 
+    ViewData["Title"] = "All Beeheives";
+}
+
+<ul>
+    @foreach (var apiary in Model)
+    {
+        <li>
+            @apiary.ApiaryNumber - @apiary.ApiaryName - @apiary.ApiaryApiaryType - @apiary.ApiaryAdress
+        </li>
+    }
+</ul>

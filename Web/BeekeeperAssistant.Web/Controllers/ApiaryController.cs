@@ -9,9 +9,11 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class ApiaryController : Controller
     {
         private readonly IApiaryService apiaryService;
@@ -60,11 +62,18 @@
                 ApiaryId = apiary.Id,
                 UserId = currentUser.Id,
             };
+
             await this.userApiRepository.AddAsync(userApiaries);
             await this.userApiRepository.SaveChangesAsync();
 
             return this.Redirect("/");
         }
 
+        public async Task<IActionResult> All()
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var allApiarires = this.apiaryService.GetAllUserApiaries<AllUserApiariesViewModel>(currentUser.Id);
+            return this.View(allApiarires);
+        }
     }
 }

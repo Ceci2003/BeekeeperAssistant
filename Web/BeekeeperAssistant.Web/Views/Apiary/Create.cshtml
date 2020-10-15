@@ -1,0 +1,31 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.CreateApiaryInputModel
+@{
+    ViewData["Title"] = "Create Apiary";
+}
+<form asp-controller="Apiary" asp-action="Create">
+    <div>
+        <label asp-for="@Model.Number"></label>
+        <input type="text" asp-for="@Model.Number" />
+        <span asp-validation-for="@Model.Number"></span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.Name"></label>
+        <input type="text" asp-for="@Model.Name" />
+        <span asp-validation-for="@Model.Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.ApiaryType"></label>
+        <select asp-for="@Model.ApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+        <span asp-validation-for="@Model.Adress"></span>
+    </div>
+
+    <div>
+        <label asp-for="@Model.Adress"></label>
+        <input type="text" asp-for="@Model.Adress" />
+        <span asp-validation-for="@Model.Adress"></span>
+    </div>
+
+    <input type="submit" value="Submit" />
+</form>

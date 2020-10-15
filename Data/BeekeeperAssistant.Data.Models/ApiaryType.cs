@@ -7,5 +7,6 @@
     public enum ApiaryType
     {
         Stationary = 1,
+        Moveable = 2,
     }
 }

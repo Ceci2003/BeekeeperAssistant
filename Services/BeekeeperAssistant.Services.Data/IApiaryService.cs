@@ -2,13 +2,27 @@
 {
     using System.Collections.Generic;
     using System.Text;
+    using System.Threading.Tasks;
+    using BeekeeperAssistant.Data.Models;
 
     public interface IApiaryService
     {
+        // GetAll
         IEnumerable<T> GetAllApiaries<T>();
 
+        // GetByNumber
+        T GetApiaryByNumber<T>(string number, ApplicationUser user);
+
+        // GetById
         T GetApiaryById<T>(int id);
 
-        IEnumerable<T> GetAllUserApiaries<T>(string userId);
+        // Delete
+        void DeleteById(int id);
+
+        // Edit
+        void EditApiaryById();
+
+        // Create
+        Task AddApiary();
     }
 }

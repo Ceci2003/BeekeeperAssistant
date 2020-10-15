@@ -102,13 +102,13 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("beeRouts", "Apiary/{apiNumber}", new { controller = "Apiary", action = "GetByNumber" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b"});
+                        endpoints.MapControllerRoute("beeRouts", "Apiary/{apiNumber}", new { controller = "Apiary", action = "GetByNumber" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
 
-                        // Beehive/All
-                        // Beehive/{ApiNumber}/{Number}
+                        // Beehive/All (User)
+                        // Beehive/{ApiNumber}/{Number} (UserApis)
                         // Apiary/All
                         // Apiary/{ApiNumber}
                     });

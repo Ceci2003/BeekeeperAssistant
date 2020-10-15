@@ -7,15 +7,20 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
         private readonly IApiaryService apiaryService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public HomeController(IApiaryService apiaryService)
+        public HomeController(
+            IApiaryService apiaryService,
+            UserManager<ApplicationUser> userManager)
         {
             this.apiaryService = apiaryService;
+            this.userManager = userManager;
         }
 
         [Route("{*url}", Order = 999)]

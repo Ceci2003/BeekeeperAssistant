@@ -8,6 +8,11 @@
 
     public class Apiary : BaseDeletableModel<int>
     {
+        public Apiary()
+        {
+            this.UsersApiaries = new HashSet<UsersApiaries>();
+        }
+
         public string Number { get; set; }
 
 #nullable enable
@@ -19,6 +24,7 @@
         public string? Adress { get; set; }
 
 #nullable disable
-        public virtual ICollection<UserApiaries> UserApiaries { get; set; }
+
+        public virtual ICollection<UsersApiaries> UsersApiaries { get; set; }
     }
 }

@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    public class ApiaryController : Controller
+    public class ApiaryController : BaseController
     {
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
@@ -33,6 +33,7 @@
             this.apiaryRepository = apiaryRepository;
         }
 
+        // Does not work!
         public IActionResult GetByNumber(string apiNumber)
         {
             return this.View();

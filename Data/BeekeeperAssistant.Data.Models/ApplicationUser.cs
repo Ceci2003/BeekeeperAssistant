@@ -16,6 +16,7 @@ namespace BeekeeperAssistant.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.UsersApiaries = new HashSet<UsersApiaries>();
         }
 
         // Audit info
@@ -34,11 +35,6 @@ namespace BeekeeperAssistant.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<UserTasks> UserTasks { get; set; }
-
-        public virtual ICollection<UserApiaries> UserApiaries { get; set; }
-
-        public virtual ICollection<UserNotes> UserNotes { get; set; }
-
+        public virtual ICollection<UsersApiaries> UsersApiaries { get; set; }
     }
 }

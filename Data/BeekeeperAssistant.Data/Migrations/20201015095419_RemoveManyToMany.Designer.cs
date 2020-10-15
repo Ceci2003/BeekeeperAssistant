@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201015095419_RemoveManyToMany")]
+    partial class RemoveManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -360,21 +362,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("UserTasks");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.UsersApiaries", b =>
-                {
-                    b.Property<int>("ApiaryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ApiaryId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UsersApiaries");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -493,21 +480,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
                         .WithMany()
                         .HasForeignKey("BeehiveId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.UsersApiaries", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Apiary", "Apiary")
-                        .WithMany("UsersApiaries")
-                        .HasForeignKey("ApiaryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
-                        .WithMany("UsersApiaries")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

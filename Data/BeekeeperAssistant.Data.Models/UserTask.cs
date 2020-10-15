@@ -20,6 +20,5 @@
         public bool IsCompleted { get; set; }
 
 #nullable disable
-        public virtual ICollection<UserTasks> UserTasks { get; set; }
     }
 }

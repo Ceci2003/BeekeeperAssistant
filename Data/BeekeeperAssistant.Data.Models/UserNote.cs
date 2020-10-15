@@ -12,7 +12,5 @@
 
 #nullable enable
         public string? Text { get; set; }
-
-        public virtual ICollection<UserNotes> UserNotes { get; set; }
     }
 }

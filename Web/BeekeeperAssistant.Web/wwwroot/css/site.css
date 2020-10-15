@@ -8,6 +8,10 @@ body {
 
 }
 
+main {
+    margin-bottom: 8.55em;
+}
+
 /*Navigation*/
 
 .navbar-custom {
@@ -23,16 +27,22 @@ body {
     margin-right: 10px;
 }
 
-.logo-link :hover {
-    color: wheat;
-}
-
 .logo-link {
     color: wheat;
 }
 
+.logo-link :hover {
+    color: wheat;
+    text-decoration: none;
+}
+
 nav ul li a {
     color: white;
+    letter-spacing: 2px;
+}
+
+nav ul li a:hover {
+    color: #F29422;
     letter-spacing: 2px;
 }
 
@@ -157,9 +167,9 @@ a.register-btn3:hover {
 
 /*Login Form*/
 
-.login-form {
+.login-register-form {
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/banner.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/bannerLR.jpg);
     background-size: cover;
     background-position: center;
     border-bottom: 5px solid #F29422;
@@ -189,6 +199,11 @@ button.accept-policy {
 footer {
     background-color: #110400;
     color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8.55em;
+    white-space: nowrap;
 }
 
 footer .icon {

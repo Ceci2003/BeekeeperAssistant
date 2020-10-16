@@ -14,13 +14,16 @@
     {
         private readonly IRepository<UsersApiaries> usersApiariesRepository;
         private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ApiaryService(
             IRepository<UsersApiaries> usersApiariesRepository,
-            IDeletableEntityRepository<Apiary> apiaryRepository)
+            IDeletableEntityRepository<Apiary> apiaryRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.usersApiariesRepository = usersApiariesRepository;
             this.apiaryRepository = apiaryRepository;
+            this.userManager = userManager;
         }
 
         public Task AddApiary()
@@ -57,6 +60,12 @@
         public T GetApiaryByNumber<T>(string number, ApplicationUser user)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetApiaryIdByNumber(string apiNumber, ApplicationUser user)
+        {
+            var apiId = this.usersApiariesRepository.All().Where(ua => ua.UserId == user.Id && ua.Apiary.Number == apiNumber).FirstOrDefault().ApiaryId;
+            return apiId;
         }
     }
 }

@@ -1,13 +1,14 @@
-﻿@model IEnumerable<BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel>
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel
 @{ 
     ViewData["Title"] = "All Beeheives";
 }
 
 <ul>
-    @foreach (var apiary in Model)
+    @foreach (var apiary in Model.AllUserApiaries)
     {
         <li>
-            @apiary.ApiaryNumber - @apiary.ApiaryName - @apiary.ApiaryApiaryType - @apiary.ApiaryAdress
+            @apiary.ApiaryNumber - <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryName</a> - @apiary.ApiaryApiaryType - @apiary.ApiaryAdress - <a asp-controller="Beehive" asp-action="Create"  asp-route-id="@apiary.Apiary.Id">Create Beehive</a>
         </li>
     }
+
 </ul>

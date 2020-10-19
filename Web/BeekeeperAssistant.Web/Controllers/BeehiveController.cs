@@ -43,6 +43,7 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
         {
+            // Check if there is already a beehive with the same Nuumber
             if (!this.ModelState.IsValid)
             {
                 var beehive = new Beehive()
@@ -56,7 +57,7 @@
                     HasDevice = inputModel.HasDevice,
                     HasPolenCatcher = inputModel.HasPolenCatcher,
                     HasPropolisCatcher = inputModel.HasPropolisCatcher,
-            };
+                };
                 await this.beehiveRepository.AddAsync(beehive);
                 await this.beehiveRepository.SaveChangesAsync();
             }

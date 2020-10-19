@@ -43,21 +43,23 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
         {
-            var beehive = new Beehive()
+            if (!this.ModelState.IsValid)
             {
-                ApiaryId = inputModel.ApiaryId,
-                BeehivePower = inputModel.BeehivePower,
-                BeehiveSystem = inputModel.BeehiveSystem,
-                BeehiveType = inputModel.BeehiveType,
-                Date = inputModel.Date,
-                Number = inputModel.Number,
-                HasDevice = inputModel.HasDevice,
-                HasPolenCatcher = inputModel.HasPolenCatcher,
-                HasPropolisCatcher = inputModel.HasPropolisCatcher,
+                var beehive = new Beehive()
+                {
+                    ApiaryId = inputModel.ApiaryId,
+                    BeehivePower = inputModel.BeehivePower,
+                    BeehiveSystem = inputModel.BeehiveSystem,
+                    BeehiveType = inputModel.BeehiveType,
+                    Date = inputModel.Date,
+                    Number = inputModel.Number,
+                    HasDevice = inputModel.HasDevice,
+                    HasPolenCatcher = inputModel.HasPolenCatcher,
+                    HasPropolisCatcher = inputModel.HasPropolisCatcher,
             };
-
-            await this.beehiveRepository.AddAsync(beehive);
-            await this.beehiveRepository.SaveChangesAsync();
+                await this.beehiveRepository.AddAsync(beehive);
+                await this.beehiveRepository.SaveChangesAsync();
+            }
 
             return this.Redirect("/");
         }

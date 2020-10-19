@@ -37,7 +37,6 @@
             this.beehiveService = beehiveService;
         }
 
-        // Does not work!
         public async Task<IActionResult> GetByNumber(string apiNumber)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -72,6 +71,7 @@
             await this.apiaryRepository.AddAsync(apiary);
             await this.apiaryRepository.SaveChangesAsync();
 
+            // Check if there is already a apiary with the same Number
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var userApiaries = new UsersApiaries()
             {

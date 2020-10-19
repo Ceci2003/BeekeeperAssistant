@@ -12,6 +12,10 @@
 
         public int ApiaryId { get; set; }
 
+        public string CreatorId { get; set; }
+
+        public ApplicationUser Creator { get; set; }
+
         public int Number { get; set; }
 
         public BeehiveSystem BeehiveSystem { get; set; }

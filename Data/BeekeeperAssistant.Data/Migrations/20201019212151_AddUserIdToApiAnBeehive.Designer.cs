@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201019212151_AddUserIdToApiAnBeehive")]
+    partial class AddUserIdToApiAnBeehive
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +37,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatorId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
@@ -53,11 +52,14 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Apiaries");
                 });
@@ -204,9 +206,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatorId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -231,13 +230,16 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApiaryId");
 
-                    b.HasIndex("CreatorId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Beehives");
                 });
@@ -491,9 +493,9 @@ namespace BeekeeperAssistant.Data.Migrations
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Apiary", b =>
                 {
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "Creator")
+                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("CreatorId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Beehive", b =>
@@ -504,9 +506,9 @@ namespace BeekeeperAssistant.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "Creator")
+                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("CreatorId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Queen", b =>

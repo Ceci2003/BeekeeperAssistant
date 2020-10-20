@@ -30,5 +30,7 @@
         IEnumerable<T> GetAllUserApiaries<T>(string userId);
 
         int GetApiaryIdByNumber(string apiNumber, ApplicationUser user);
+
+        bool ApiaryExists(string apiNumber, ApplicationUser user);
     }
 }

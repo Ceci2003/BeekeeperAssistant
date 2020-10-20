@@ -21,5 +21,19 @@
             var allBeehives = this.beehiveRepository.All().Where(a => a.ApiaryId == apiaryId).To<T>().ToList();
             return allBeehives;
         }
+
+        public bool NumberExists(int number, ApplicationUser user)
+        {
+            var beehive = this.beehiveRepository.All().Where(b => b.Number == number).FirstOrDefault();
+
+            if (beehive == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

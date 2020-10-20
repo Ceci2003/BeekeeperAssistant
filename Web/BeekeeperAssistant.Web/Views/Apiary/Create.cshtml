@@ -3,10 +3,11 @@
     ViewData["Title"] = "Create Apiary";
 }
 <form asp-controller="Apiary" asp-action="Create">
+    <div class="text-danger" asp-validation-summary="All"></div>
     <div>
         <label asp-for="@Model.Number"></label>
         <input type="text" asp-for="@Model.Number" />
-        <span asp-validation-for="@Model.Number"></span>
+        <div><span class="text-danger" asp-validation-for="@Model.Number"></span></div>
     </div>
 
     <div>

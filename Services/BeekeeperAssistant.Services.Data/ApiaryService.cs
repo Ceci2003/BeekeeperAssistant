@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
@@ -66,6 +67,19 @@
         {
             var apiId = this.usersApiariesRepository.All().Where(ua => ua.UserId == user.Id && ua.Apiary.Number == apiNumber).FirstOrDefault().ApiaryId;
             return apiId;
+        }
+
+        public bool ApiaryExists(string apiNumber, ApplicationUser user)
+        {
+            var api = this.apiaryRepository.All().Where(a => a.Number == apiNumber).FirstOrDefault();
+            if (api == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

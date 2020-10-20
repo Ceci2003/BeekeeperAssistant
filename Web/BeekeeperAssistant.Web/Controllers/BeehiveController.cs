@@ -10,6 +10,7 @@
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -18,13 +19,16 @@
     {
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
         private readonly IBeehiveService beehiveService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public BeehiveController(
             IDeletableEntityRepository<Beehive> beehiveRepository,
-            IBeehiveService beehiveService)
+            IBeehiveService beehiveService,
+            UserManager<ApplicationUser> userManager)
         {
             this.beehiveRepository = beehiveRepository;
             this.beehiveService = beehiveService;
+            this.userManager = userManager;
         }
 
         // Does not work!
@@ -43,24 +47,36 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
         {
+            var user = await this.userManager.GetUserAsync(this.User);
+
             // Check if there is already a beehive with the same Nuumber
+            if (this.beehiveService.NumberExists(inputModel.Number, user))
+            {
+                this.ModelState.AddModelError("Number", "Number already exists");
+                return this.View(inputModel);
+            }
+
             if (!this.ModelState.IsValid)
             {
-                var beehive = new Beehive()
-                {
-                    ApiaryId = inputModel.ApiaryId,
-                    BeehivePower = inputModel.BeehivePower,
-                    BeehiveSystem = inputModel.BeehiveSystem,
-                    BeehiveType = inputModel.BeehiveType,
-                    Date = inputModel.Date,
-                    Number = inputModel.Number,
-                    HasDevice = inputModel.HasDevice,
-                    HasPolenCatcher = inputModel.HasPolenCatcher,
-                    HasPropolisCatcher = inputModel.HasPropolisCatcher,
-                };
-                await this.beehiveRepository.AddAsync(beehive);
-                await this.beehiveRepository.SaveChangesAsync();
+                return this.View(inputModel);
             }
+
+            var beehive = new Beehive()
+            {
+                ApiaryId = inputModel.ApiaryId,
+                BeehivePower = inputModel.BeehivePower,
+                BeehiveSystem = inputModel.BeehiveSystem,
+                BeehiveType = inputModel.BeehiveType,
+                Date = inputModel.Date,
+                Number = inputModel.Number,
+                HasDevice = inputModel.HasDevice,
+                HasPolenCatcher = inputModel.HasPolenCatcher,
+                HasPropolisCatcher = inputModel.HasPropolisCatcher,
+            };
+
+            await this.beehiveRepository.AddAsync(beehive);
+            await this.beehiveRepository.SaveChangesAsync();
+
 
             return this.Redirect("/");
         }

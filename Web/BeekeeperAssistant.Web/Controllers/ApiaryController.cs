@@ -50,8 +50,8 @@
             return this.View(viewModel);
         }
 
-        // TODO: Require Api number to be unique. Make CRUD operations in separate Service.
-        // Make model validations. Make shure everything is clean!
+        // TODO: Make CRUD operations in separate Service.
+        // Make shure everything is clean!
         // Make Seeding!
         public IActionResult Create()
         {
@@ -61,6 +61,18 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            if (this.apiaryService.ApiaryExists(inputModel.Number, currentUser))
+            {
+                this.ModelState.AddModelError("Number", "Invalid apiary number!");
+                return this.View(inputModel);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
             var apiary = new Apiary()
             {
                 Adress = inputModel.Adress,
@@ -72,7 +84,6 @@
             await this.apiaryRepository.SaveChangesAsync();
 
             // Check if there is already a apiary with the same Number
-            var currentUser = await this.userManager.GetUserAsync(this.User);
             var userApiaries = new UsersApiaries()
             {
                 ApiaryId = apiary.Id,

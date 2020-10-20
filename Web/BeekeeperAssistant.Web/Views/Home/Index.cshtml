@@ -121,39 +121,54 @@
 }
 else
 {
-    <ul class="today-datas">
-        <!-- List #1 -->
-        <li>
-            <!-- Graph -->
-            <div><span id="todayspark1" class="spark"><canvas width="77" height="30" style="display: inline-block; width: 77px; height: 30px; vertical-align: top;"></canvas></span></div>
-            <!-- Text -->
-            <div class="datas-text">11,500 visitors/day</div>
-        </li>
-        <li>
-            <div><span id="todayspark2" class="spark"><canvas width="101" height="30" style="display: inline-block; width: 101px; height: 30px; vertical-align: top;"></canvas></span></div>
-            <div class="datas-text">15,000 Pageviews</div>
-        </li>
-        <li>
-            <div><span id="todayspark3" class="spark"><canvas width="175" height="30" style="display: inline-block; width: 175px; height: 30px; vertical-align: top;"></canvas></span></div>
-            <div class="datas-text">30.55% Bounce Rate</div>
-        </li>
-        <li>
-            <div><span id="todayspark4" class="spark"><canvas width="186" height="30" style="display: inline-block; width: 186px; height: 30px; vertical-align: top;"></canvas></span></div>
-            <div class="datas-text">$16,00 Revenue/Day</div>
-        </li>
-        <li>
-            <div><span id="todayspark5" class="spark"><canvas width="250" height="30" style="display: inline-block; width: 250px; height: 30px; vertical-align: top;"></canvas></span></div>
-            <div class="datas-text">12,000000 visitors every Month</div>
-        </li>
-    </ul>
+    <div class="row d-flex justify-content-center flex-wrap m-0">
+        <div class="card position-relative apiaries-dashboard-card m-4">
+            <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
+            <div class="card-body">
+                <strong>3</strong>
+            </div>
+            <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Apiary</h4></a>
+            <ul class="today-datas">
+                <li>
+                    <div><span id="todayspark1" class="spark"><canvas width="77" height="30" style="display: inline-block; width: 77px; height: 30px; vertical-align: top;"></canvas></span></div>
+                    <div class="datas-text">11,500 visitors/day</div>
+                </li>
+                <li>
+                    <div><span id="todayspark2" class="spark"><canvas width="101" height="30" style="display: inline-block; width: 101px; height: 30px; vertical-align: top;"></canvas></span></div>
+                    <div class="datas-text">15,000 Pageviews</div>
+                </li>
+                <li>
+                    <div><span id="todayspark3" class="spark"><canvas width="175" height="30" style="display: inline-block; width: 175px; height: 30px; vertical-align: top;"></canvas></span></div>
+                    <div class="datas-text">30.55% Bounce Rate</div>
+                </li>
+                <li>
+                    <div><span id="todayspark4" class="spark"><canvas width="186" height="30" style="display: inline-block; width: 186px; height: 30px; vertical-align: top;"></canvas></span></div>
+                    <div class="datas-text">$16,00 Revenue/Day</div>
+                </li>
+                <li>
+                    <div><span id="todayspark5" class="spark"><canvas width="250" height="30" style="display: inline-block; width: 250px; height: 30px; vertical-align: top;"></canvas></span></div>
+                    <div class="datas-text">12,000000 visitors every Month</div>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="align-self-md-center">
         <div class="text-center">
             <a asp-controller="Apiary" asp-action="Create">Create Apiary</a>
         </div>
-
-        <div class="text-center">
-            <a asp-controller="Apiary" asp-action="All">My Apiaries</a>
+        <div class="card position-relative beehives-dashboard-card m-4">
+            <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
+            <div class="card-body">
+                <strong>3</strong>
+            </div>
+            <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Apiary</h4></a>
+        </div>
+        <div class="card position-relative queens-dashboard-card m-4">
+            <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
+            <div class="card-body">
+                <strong>3</strong>
+            </div>
+            <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Apiary</h4></a>
         </div>
     </div>
-
 }

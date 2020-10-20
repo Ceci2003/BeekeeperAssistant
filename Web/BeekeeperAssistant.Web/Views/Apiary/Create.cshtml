@@ -2,30 +2,48 @@
 @{
     ViewData["Title"] = "Create Apiary";
 }
+<<<<<<< .mine
 <form asp-controller="Apiary" asp-action="Create">
     <div class="text-danger" asp-validation-summary="All"></div>
     <div>
+
+
+
+
+=======
+
+<form asp-action="AddApiary" asp-controller="Apiaries" method="post">
+    <div class="col-md-4">
+        <h1>Add new apiary</h1>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+    <div class="form-group col-md-4">
+>>>>>>> .theirs
         <label asp-for="@Model.Number"></label>
+<<<<<<< .mine
         <input type="text" asp-for="@Model.Number" />
         <div><span class="text-danger" asp-validation-for="@Model.Number"></span></div>
+=======
+        <input type="text" asp-for="@Model.Number" class="form-control" />
+        <span asp-validation-for="@Model.Number" class="text-danger"></span>
+>>>>>>> .theirs
     </div>
-
-    <div>
+    <div class="form-group col-md-4">
         <label asp-for="@Model.Name"></label>
-        <input type="text" asp-for="@Model.Name" />
-        <span asp-validation-for="@Model.Name"></span>
+        <input type="text" asp-for="@Model.Name" class="form-control" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
     </div>
-
-    <div>
-        <label asp-for="@Model.ApiaryType"></label>
-        <select asp-for="@Model.ApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-        <span asp-validation-for="@Model.ApiaryType"></span>
-    </div>
-
-    <div>
+    <div class="form-group col-md-4">
         <label asp-for="@Model.Adress"></label>
-        <input type="text" asp-for="@Model.Adress" />
-        <span asp-validation-for="@Model.Adress"></span>
+        <input type="text" asp-for="@Model.Adress" class="form-control" />
+        <span asp-validation-for="@Model.Adress" class="text-danger"></span>
     </div>
-    <input type="submit" value="Submit" />
+    <div class="form-group col-md-4">
+        <label asp-for="@Model.ApiaryType"></label>
+        <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType">
+            <select asp-for="@Model.ApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+        </select>
+        <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary mt-4" value="Add apiary" />
 </form>

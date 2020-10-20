@@ -71,7 +71,7 @@
 
         public bool ApiaryExists(string apiNumber, ApplicationUser user)
         {
-            var api = this.apiaryRepository.All().Where(a => a.Number == apiNumber).FirstOrDefault();
+            var api = this.apiaryRepository.All().Where(a => a.Number == apiNumber && a.CreatorId == user.Id).FirstOrDefault();
             if (api == null)
             {
                 return false;

@@ -24,7 +24,7 @@
 
         public bool NumberExists(int number, ApplicationUser user)
         {
-            var beehive = this.beehiveRepository.All().Where(b => b.Number == number).FirstOrDefault();
+            var beehive = this.beehiveRepository.All().Where(b => b.Number == number && b.CreatorId == user.Id).FirstOrDefault();
 
             if (beehive == null)
             {

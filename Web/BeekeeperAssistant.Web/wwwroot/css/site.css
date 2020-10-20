@@ -12,28 +12,43 @@ main {
     margin-bottom: 8.55em;
 }
 
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
 /*Navigation*/
 
 .navbar-custom {
     background-color: #110400;
+    position: static;
+    /*width: 100%;*/
 }
 
 .navbar-brand {
     margin-right: 2rem;
+    color: wheat;
+}
+
+.navbar-brand:hover {
+    color: wheat;
 }
 
 .logo {
     width: 50px;
     margin-right: 10px;
-}
-
-.logo-link {
-    color: wheat;
-}
-
-.logo-link :hover {
-    color: wheat;
-    text-decoration: none;
 }
 
 nav ul li a {
@@ -139,7 +154,7 @@ a.register-btn3:hover {
 
 .card{
 	position: absolute;
-	height: 100%;
+	/*height: 100%;*/
 	width: 100%;
 	transition: all 0.9s;
     backface-visibility: hidden;
@@ -165,7 +180,7 @@ a.register-btn3:hover {
     color: white;
 }
 
-/*Login Form*/
+/*Login / Register Forms*/
 
 .login-register-form {
     position: relative;
@@ -177,25 +192,66 @@ a.register-btn3:hover {
     color: white;
 }
 
-.border-top {
-    border-top: 1px solid #e5e5e5;
+.btn-login-register {
+    background: #f6830f;
+    border-color: #f6830f;
+    color: white;
+    font-weight: bold;
 }
 
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
+/* Breadcrumb */
+.breadcrumb {
+    background-color: transparent;
 }
 
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+/*Index*/
+.apiaries-dashboard-card {
+    border: 2px solid #0e918c;
+    width: 24%;
 }
 
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
+.apiaries-dashboard-card a {
+    background-color: #0e918c;
+    color: white;
+    text-decoration: none;
 }
+
+.apiaries-dashboard-card card-footer {
+    background-color: #0e918c;
+}
+
+.apiaries-dashboard-card a :hover {
+    background-color: #0bada7;
+}
+
+.beehives-dashboard-card {
+    border: 2px solid #f6830f;
+    width: 24%;
+}
+
+.beehives-dashboard-card a {
+    background-color: #f6830f;
+    color: white;
+    text-decoration: none;
+}
+
+.queens-dashboard-card {
+    border: 2px solid #bb2205;
+    width: 24%;
+}
+
+.queens-dashboard-card a {
+    background-color: #bb2205;
+    color: white;
+    text-decoration: none;
+}
+
+.apiaries-dashboard-card strong, .beehives-dashboard-card strong, .queens-dashboard-card strong {
+    font-size: 1.5em;
+}
+
 
 /*Footer*/
-
 footer {
     background-color: #110400;
     color: white;
@@ -215,8 +271,24 @@ footer .icon :hover {
     color: #F29422;
 }
 
+.footer-copyright a {
+    color: white;
+    letter-spacing: 2px;
+}
+
+.footer-copyright a:hover {
+    color: #F29422;
+    letter-spacing: 2px;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-color: forestgreen;
     }
 }

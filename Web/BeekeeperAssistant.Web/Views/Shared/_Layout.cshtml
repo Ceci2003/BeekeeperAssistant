@@ -27,6 +27,11 @@
         <partial name="_LoginPartial" />
     </header>
 
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        
+    }
+
     <div class="text-center">
         <partial name="_CookieConsentPartial" />
         <main role="main">

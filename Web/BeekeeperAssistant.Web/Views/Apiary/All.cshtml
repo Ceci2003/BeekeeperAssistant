@@ -1,13 +1,45 @@
-﻿@model IEnumerable<BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel>
-@{ 
+﻿@using BeekeeperAssistant.Common
+@model IEnumerable<BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel>
+@{
     ViewData["Title"] = "All Beeheives";
+    char noName = '-';
 }
 
-<ul>
-    @foreach (var apiary in Model)
-    {
-        <li>
-            @apiary.ApiaryNumber - @apiary.ApiaryName - @apiary.ApiaryApiaryType - @apiary.ApiaryAdress
-        </li>
-    }
-</ul>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
+    </ol>
+</nav>
+<h2>Apiaries</h2>
+<div class="pl-4 pr-4">
+    <a asp-controller="Apiary" asp-action="Create" class="btn btn-primary btn-info text-white float-right" style="margin-bottom: 20px;" type="submit"><i class="fas fa-plus-square pr-2"></i><strong>Create new apiary</strong></a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Address</th>
+                <th scope="col" width="160">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var apiary in Model)
+            {
+                <tr>
+                    <th scope="row">@apiary.ApiaryNumber</th>
+                    <td>
+                        @if (string.IsNullOrWhiteSpace(@apiary.ApiaryName))@noName else @apiary.ApiaryName
+                    </td>
+                    <td>@apiary.ApiaryApiaryType</td>
+                    <td>@apiary.ApiaryAdress</td>
+                    <td>
+                        <a type="submit" class="btn btn-primary btn-danger text-white float-right" href="#"><i class="far fa-trash-alt"></i></a>
+                        <a type="submit" class="btn btn-primary btn-success text-white float-right" style="margin-right: 10px;" href="#"><i class="far fa-edit"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

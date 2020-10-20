@@ -1,0 +1,13 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
+@{
+    ViewData["Title"] = "All Beehives";
+}
+
+<ul>
+
+    @foreach (var beehive in Model.AllUserBeehives)
+    {
+        <li>@beehive.Number - @beehive.BeehivePower - @beehive.BeehiveSystem - @beehive.BeehiveType - @beehive.Date - @beehive.HasDevice - @beehive.HasPolenCatcher</li>
+    }
+
+</ul>

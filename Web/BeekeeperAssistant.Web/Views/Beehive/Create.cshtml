@@ -1,0 +1,49 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
+@{ 
+    ViewData["Title"] = "Beehive Create";
+}
+
+<form asp-controller="Beehive" asp-action="Create">
+    <div>
+        <label asp-for="@Model.Number"></label>
+        <input type="number" asp-for="@Model.Number" />
+        <span asp-validation-for="@Model.Number"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.BeehiveSystem"></label>
+        <select asp-for="@Model.BeehiveSystem" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveSystem>()"></select>
+        <span asp-validation-for="@Model.BeehiveSystem"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.BeehiveType"></label>
+        <select asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()"></select>
+        <span asp-validation-for="@Model.BeehiveType"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.Date"></label>
+        <input type="datetime-local" asp-for="@Model.Date" />
+        <span asp-validation-for="@Model.Date"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.BeehivePower"></label>
+        <select asp-for="@Model.BeehivePower" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehivePower>()"></select>
+        <span asp-validation-for="@Model.BeehivePower"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.HasDevice"></label>
+        <input type="checkbox" asp-for="@Model.HasDevice" />
+        <span asp-validation-for="@Model.HasDevice"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.HasPolenCatcher"></label>
+        <input type="checkbox" asp-for="@Model.HasPolenCatcher" />
+        <span asp-validation-for="@Model.HasPolenCatcher"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.HasPropolisCatcher"></label>
+        <input type="checkbox" asp-for="@Model.HasPropolisCatcher" />
+        <span asp-validation-for="@Model.HasPropolisCatcher"></span>
+    </div>
+    <input type="hidden" asp-for="@Model.ApiaryId" value="@ViewData["ApiaryId"]"/>
+    <input type="submit" value="Submit" />
+</form>

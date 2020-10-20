@@ -1,21 +1,14 @@
-﻿namespace BeekeeperAssistant.Data.Models
+﻿namespace BeekeeperAssistant.Web.ViewModels.Beehives
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
 
-    using BeekeeperAssistant.Data.Common.Models;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
 
-    public class Beehive : BaseDeletableModel<int>
+    public class UserBeehiveViewModel : IMapFrom<Beehive>
     {
-        public Apiary Apiary { get; set; }
-
-        public int ApiaryId { get; set; }
-
-        public string CreatorId { get; set; }
-
-        public ApplicationUser Creator { get; set; }
-
         public int Number { get; set; }
 
         public BeehiveSystem BeehiveSystem { get; set; }

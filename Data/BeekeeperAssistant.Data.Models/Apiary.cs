@@ -15,6 +15,10 @@
 
         public string Number { get; set; }
 
+        public string CreatorId { get; set; }
+
+        public ApplicationUser Creator { get; set; }
+
 #nullable enable
         public string? Name { get; set; }
 
@@ -26,5 +30,7 @@
 #nullable disable
 
         public virtual ICollection<UsersApiaries> UsersApiaries { get; set; }
+
+        public virtual ICollection<Beehive> Beehives { get; set; }
     }
 }

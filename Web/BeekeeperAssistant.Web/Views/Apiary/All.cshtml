@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 ﻿@using BeekeeperAssistant.Common
 @model IEnumerable<BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel>
 @{
+=======
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel
+@{ 
+>>>>>>> d9aa04ab68dddccb388a6cbb60db55e18701902e
     ViewData["Title"] = "All Beeheives";
     char noName = '-';
 }
 
+<<<<<<< HEAD
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
@@ -43,3 +49,14 @@
         </tbody>
     </table>
 </div>
+=======
+<ul>
+    @foreach (var apiary in Model.AllUserApiaries)
+    {
+        <li>
+            @apiary.ApiaryNumber - <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryName</a> - @apiary.ApiaryApiaryType - @apiary.ApiaryAdress - <a asp-controller="Beehive" asp-action="Create"  asp-route-id="@apiary.Apiary.Id">Create Beehive</a>
+        </li>
+    }
+
+</ul>
+>>>>>>> d9aa04ab68dddccb388a6cbb60db55e18701902e

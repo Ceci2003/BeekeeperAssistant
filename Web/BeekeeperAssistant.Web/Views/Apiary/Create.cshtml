@@ -50,7 +50,7 @@
     <div class="form-group">
         <label asp-for="@Model.ApiaryType"></label>
         <select asp-for="@Model.ApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-        <span asp-validation-for="@Model.Adress"></span>
+        <span asp-validation-for="@Model.ApiaryType"></span>
     </div>
 
     <div class="form-group">
@@ -58,6 +58,7 @@
         <input type="text" asp-for="@Model.Adress" />
         <span asp-validation-for="@Model.Adress"></span>
     </div>
+<<<<<<< HEAD
 
     <input type="submit" class="btn btn-login-register text-center w-100" value="Submit" />
 </form>*@
@@ -132,3 +133,7 @@
 
         <input type="submit" value="Submit" />
     </form>*@
+=======
+    <input type="submit" value="Submit" />
+</form>
+>>>>>>> d9aa04ab68dddccb388a6cbb60db55e18701902e

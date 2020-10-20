@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
 
     public interface IApiaryService
@@ -26,7 +27,8 @@
         Task AddApiary();
 
         // Get all user apiaries
-
         IEnumerable<T> GetAllUserApiaries<T>(string userId);
+
+        int GetApiaryIdByNumber(string apiNumber, ApplicationUser user);
     }
 }

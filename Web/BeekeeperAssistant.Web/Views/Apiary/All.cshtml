@@ -1,16 +1,12 @@
-<<<<<<< HEAD
-﻿@using BeekeeperAssistant.Common
-@model IEnumerable<BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel>
-@{
-=======
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel
-@{ 
->>>>>>> d9aa04ab68dddccb388a6cbb60db55e18701902e
+@using BeekeeperAssistant.Common
+
+@{
     ViewData["Title"] = "All Beeheives";
     char noName = '-';
+
 }
 
-<<<<<<< HEAD
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
@@ -31,15 +27,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var apiary in Model)
+            @foreach (var apiary in Model.AllUserApiaries)
             {
                 <tr>
-                    <th scope="row">@apiary.ApiaryNumber</th>
+                    <th scope="row">r</th>
                     <td>
-                        @if (string.IsNullOrWhiteSpace(@apiary.ApiaryName))@noName else @apiary.ApiaryName
+                    @if (string.IsNullOrWhiteSpace(@apiary.ApiaryName))@noName else @apiary.ApiaryName
                     </td>
-                    <td>@apiary.ApiaryApiaryType</td>
-                    <td>@apiary.ApiaryAdress</td>
+                    <td>e</td>
+                    <td>s</td>
                     <td>
                         <a type="submit" class="btn btn-primary btn-danger text-white float-right" href="#"><i class="far fa-trash-alt"></i></a>
                         <a type="submit" class="btn btn-primary btn-success text-white float-right" style="margin-right: 10px;" href="#"><i class="far fa-edit"></i></a>
@@ -47,16 +43,5 @@
                 </tr>
             }
         </tbody>
-    </table>
+</table>
 </div>
-=======
-<ul>
-    @foreach (var apiary in Model.AllUserApiaries)
-    {
-        <li>
-            @apiary.ApiaryNumber - <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryName</a> - @apiary.ApiaryApiaryType - @apiary.ApiaryAdress - <a asp-controller="Beehive" asp-action="Create"  asp-route-id="@apiary.Apiary.Id">Create Beehive</a>
-        </li>
-    }
-
-</ul>
->>>>>>> d9aa04ab68dddccb388a6cbb60db55e18701902e

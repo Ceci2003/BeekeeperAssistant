@@ -19,10 +19,10 @@
         T GetApiaryById<T>(int id);
 
         // Delete
-        Task DeleteById(int id);
+        Task DeleteById(int id, ApplicationUser user);
 
         // Edit
-        void EditApiaryById();
+        void EditApiaryById(int id, ApplicationUser user);
 
         // Create
         Task AddApiary(ApplicationUser user, CreateApiaryInputModel inputModel);

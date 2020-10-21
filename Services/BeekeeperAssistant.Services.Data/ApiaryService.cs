@@ -43,9 +43,14 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public async Task DeleteById(int id)
+        public async Task DeleteById(int id, ApplicationUser user)
         {
-            var apiary = this.apiaryRepository.All().Where(a => a.Id == id).FirstOrDefault();
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == user.Id).FirstOrDefault();
+            if (apiary == null)
+            {
+                return;
+            }
+
             this.apiaryRepository.Delete(apiary);
             await this.apiaryRepository.SaveChangesAsync();
         }

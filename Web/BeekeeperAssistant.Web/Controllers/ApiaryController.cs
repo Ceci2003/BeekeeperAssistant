@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     [Authorize]
     public class ApiaryController : BaseController
@@ -66,7 +67,8 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await this.apiaryService.DeleteById(id);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            await this.apiaryService.DeleteById(id, currentUser);
             return this.Redirect("/");
         }
 

@@ -17,5 +17,9 @@
 
         public string Adress { get; set; }
 
+        public int Id { get; set; }
+
+
+
     }
 }

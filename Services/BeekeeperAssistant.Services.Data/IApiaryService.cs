@@ -19,7 +19,7 @@
         T GetApiaryById<T>(int id);
 
         // Delete
-        void DeleteById(int id);
+        Task DeleteById(int id);
 
         // Edit
         void EditApiaryById();

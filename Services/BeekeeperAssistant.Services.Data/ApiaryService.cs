@@ -43,9 +43,11 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public void DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id).FirstOrDefault();
+            this.apiaryRepository.Delete(apiary);
+            await this.apiaryRepository.SaveChangesAsync();
         }
 
         public void EditApiaryById()

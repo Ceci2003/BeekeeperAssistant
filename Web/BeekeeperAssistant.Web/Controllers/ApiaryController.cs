@@ -64,6 +64,13 @@
         }
 
         [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.apiaryService.DeleteById(id);
+            return this.Redirect("/");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);

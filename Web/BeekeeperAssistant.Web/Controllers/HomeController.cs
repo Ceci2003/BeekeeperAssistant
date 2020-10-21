@@ -3,10 +3,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -32,9 +34,22 @@
             // TODO: This may be done better with filters. If you return this.NotFound() it won't show HttpError page!
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return this.View();
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            if (currentUser == null)
+            {
+                return this.View();
+            }
+            else
+            {
+                var viewModel = new LoginHomeViewModel()
+                {
+                    Count = this.apiaryService.GetAllUserApiaries<UserApiaryViewModel>(currentUser?.Id).ToList().Count,
+                };
+
+                return this.View(viewModel);
+            }
         }
 
         public IActionResult Privacy()

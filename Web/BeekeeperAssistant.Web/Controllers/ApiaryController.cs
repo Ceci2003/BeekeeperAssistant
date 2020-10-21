@@ -40,8 +40,14 @@
         public async Task<IActionResult> GetByNumber(string apiNumber)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiId = this.apiaryService.GetApiaryIdByNumber(apiNumber, currentUser);
-            var allApiaryBeehives = this.beehiveService.GetAllUserBeehivesByApiaryId<UserBeehiveViewModel>(apiId);
+            var apiary = this.apiaryService.GetApiaryByNumber(apiNumber, currentUser);
+
+            if (apiary == null)
+            {
+                return this.Forbid();
+            }
+
+            var allApiaryBeehives = this.beehiveService.GetAllUserBeehivesByApiaryId<UserBeehiveViewModel>(apiary.Id);
 
             var viewModel = new AllUserBeehivesViewModel()
             {
@@ -50,7 +56,6 @@
             return this.View(viewModel);
         }
 
-        // TODO: Make CRUD operations in separate Service.
         // Make shure everything is clean!
         // Make Seeding!
         public IActionResult Create()
@@ -73,25 +78,7 @@
                 return this.View(inputModel);
             }
 
-            var apiary = new Apiary()
-            {
-                Adress = inputModel.Adress,
-                Name = inputModel.Name,
-                Number = inputModel.Number,
-                ApiaryType = inputModel.ApiaryType,
-            };
-            await this.apiaryRepository.AddAsync(apiary);
-            await this.apiaryRepository.SaveChangesAsync();
-
-            // Check if there is already a apiary with the same Number
-            var userApiaries = new UsersApiaries()
-            {
-                ApiaryId = apiary.Id,
-                UserId = currentUser.Id,
-            };
-
-            await this.userApiRepository.AddAsync(userApiaries);
-            await this.userApiRepository.SaveChangesAsync();
+            await this.apiaryService.AddApiary(currentUser, inputModel);
 
             return this.Redirect("/");
         }

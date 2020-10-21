@@ -7,16 +7,15 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class UserApiaryViewModel : IMapFrom<UsersApiaries>
+    public class UserApiaryViewModel : IMapFrom<Apiary>
     {
-        public string ApiaryNumber { get; set; }
+        public string Number { get; set; }
 
-        public string ApiaryName { get; set; }
+        public string Name { get; set; }
 
-        public ApiaryType ApiaryApiaryType { get; set; }
+        public ApiaryType ApiaryType { get; set; }
 
-        public string ApiaryAdress { get; set; }
+        public string Adress { get; set; }
 
-        public Apiary Apiary { get; set; }
     }
 }

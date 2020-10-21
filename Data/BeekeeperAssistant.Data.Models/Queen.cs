@@ -10,7 +10,7 @@
     {
         public int BeehiveId { get; set; }
 
-        public Beehive Beehive { get; set; }
+        public virtual Beehive Beehive { get; set; }
 
         public DateTime FertilizationDate { get; set; }
 

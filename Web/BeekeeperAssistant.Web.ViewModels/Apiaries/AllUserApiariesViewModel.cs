@@ -7,7 +7,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class AllUserApiariesViewModel : IMapFrom<UsersApiaries>
+    public class AllUserApiariesViewModel
     {
        public IEnumerable<UserApiaryViewModel> AllUserApiaries { get; set; }
     }

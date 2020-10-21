@@ -30,19 +30,19 @@
             @foreach (var apiary in Model.AllUserApiaries)
             {
                 <tr>
-                    <th scope="row">@apiary.ApiaryNumber</th>
+                    <th scope="row">@apiary.Number</th>
                     <td>
-                        @if (string.IsNullOrWhiteSpace(@apiary.ApiaryName))
+                        @if (string.IsNullOrWhiteSpace(@apiary.Name))
                         {
                             @noName
                         }
                         else
                         {
-                            <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryName</a>
+                            <a href="/Apiary/@apiary.Number">@apiary.Name</a>
                         }
                     </td>
-                    <td>@apiary.ApiaryApiaryType</td>
-                    <td>@apiary.ApiaryAdress</td>
+                    <td>@apiary.ApiaryType</td>
+                    <td>@apiary.Adress</td>
                     <td>
                         <a type="submit" class="btn btn-primary btn-danger text-white float-right" href="#"><i class="far fa-trash-alt"></i></a>
                         <a type="submit" class="btn btn-primary btn-success text-white float-right" style="margin-right: 10px;" href="#"><i class="far fa-edit"></i></a>

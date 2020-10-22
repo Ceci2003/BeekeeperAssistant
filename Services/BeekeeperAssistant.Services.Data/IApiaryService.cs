@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
     public interface IApiaryService
     {
@@ -18,18 +19,18 @@
         T GetApiaryById<T>(int id);
 
         // Delete
-        void DeleteById(int id);
+        Task DeleteById(int id, ApplicationUser user);
 
         // Edit
-        void EditApiaryById();
+        void EditApiaryById(int id, ApplicationUser user);
 
         // Create
-        Task AddApiary();
+        Task AddApiary(ApplicationUser user, CreateApiaryInputModel inputModel);
 
         // Get all user apiaries
         IEnumerable<T> GetAllUserApiaries<T>(string userId);
 
-        int GetApiaryIdByNumber(string apiNumber, ApplicationUser user);
+        Apiary GetApiaryByNumber(string apiNumber, ApplicationUser user);
 
         bool ApiaryExists(string apiNumber, ApplicationUser user);
     }

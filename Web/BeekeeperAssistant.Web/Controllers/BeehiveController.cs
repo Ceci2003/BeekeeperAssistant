@@ -20,15 +20,18 @@
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
         private readonly IBeehiveService beehiveService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
 
         public BeehiveController(
             IDeletableEntityRepository<Beehive> beehiveRepository,
             IBeehiveService beehiveService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IDeletableEntityRepository<Apiary> apiaryRepository)
         {
             this.beehiveRepository = beehiveRepository;
             this.beehiveService = beehiveService;
             this.userManager = userManager;
+            this.apiaryRepository = apiaryRepository;
         }
 
         // Does not work!
@@ -38,8 +41,15 @@
         }
 
         // Add Action Create
-        public IActionResult Create(int id)
+        public async Task<IActionResult> Create(int id)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentApiary = this.apiaryRepository.All().Where(b => b.Id == id).FirstOrDefault();
+            if (currentApiary.CreatorId != currentUser.Id)
+            {
+                return this.Forbid();
+            }
+
             this.ViewData["ApiaryId"] = id;
             return this.View();
         }

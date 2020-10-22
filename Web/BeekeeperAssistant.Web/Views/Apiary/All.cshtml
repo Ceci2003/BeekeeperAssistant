@@ -29,35 +29,49 @@
         <tbody>
             @foreach (var apiary in Model.AllUserApiaries)
             {
-                <tr>
-                    <th scope="row">@apiary.ApiaryNumber</th>
-                    <td>
-                        @if (string.IsNullOrWhiteSpace(@apiary.ApiaryName))
-                        {
-                            @noNameAdress
-                        }
-                        else
-                        {
-                            <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryName</a>
-                        }
-                    </td>
-                    <td>@apiary.ApiaryApiaryType</td>
-                    <td>
-                        @if (string.IsNullOrWhiteSpace(@apiary.ApiaryAdress))
-                        {
-                            @noNameAdress
-                        }
-                        else
-                        {
-                            @apiary.ApiaryAdress
-                        }
-                    </td>
-                    <td>
-                        <a type="submit" class="btn btn-primary btn-danger text-white float-right" href="#"><i class="far fa-trash-alt"></i></a>
-                        <a type="submit" class="btn btn-primary btn-success text-white float-right" style="margin-right: 10px;" href="#"><i class="far fa-edit"></i></a>
-                    </td>
-                </tr>
+            <tr>
+                <th scope="row">@apiary.Number</th>
+                <td>
+                    @if (string.IsNullOrWhiteSpace(@apiary.Name))
+                    {
+                        @noNameAdress
+                    }
+                    else
+                    {
+                        <a href="/Apiary/@apiary.Number">@apiary.Name</a>
+                    }
+                </td>
+                <td>@apiary.ApiaryType</td>
+                <td>
+                    @if (string.IsNullOrWhiteSpace(@apiary.Adress))
+                    {
+                        @noNameAdress
+                    }
+                    else
+                    {
+                        @apiary.Adress
+                    }
+                </td>
+                <td>
+                    <form id="form-@apiary.Id" asp-action="Delete" asp-controller="Apiary" asp-route-id="@apiary.Id">
+                        <a class="btn btn-primary btn-danger text-white float-right" onclick="sendForm('form-@apiary.Id')">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </form>
+                    <a type="submit" class="btn btn-primary btn-success text-white float-right" style="margin-right: 10px;" href="#"><i class="far fa-edit"></i></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section Scripts
+{
+    <script>
+        function sendForm(formId) {
+            let form = formId;
+            document.getElementById(form).submit();
+        }
+    </script>
+}

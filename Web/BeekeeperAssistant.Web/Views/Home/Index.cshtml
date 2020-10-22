@@ -1,4 +1,5 @@
 ﻿@using BeekeeperAssistant.Common
+@model BeekeeperAssistant.Web.ViewModels.Home.LoginHomeViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
@@ -125,21 +126,21 @@ else
         <div class="card position-relative apiaries-dashboard-card m-4">
             <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
             <div class="card-body">
-                <strong>3</strong>
+                <strong>@Model.Count</strong>
             </div>
             <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Apiary</h4></a>
         </div>
         <div class="card position-relative beehives-dashboard-card m-4">
             <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Beehives</h4></a>
             <div class="card-body">
-                <strong>3</strong>
+                <strong>@Model.Count</strong>
             </div>
             <a asp-controller="Beehive" asp-action="Create"><h4 class="card-footer">Create Beehive</h4></a>
         </div>
         <div class="card position-relative queens-dashboard-card m-4">
             <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Queens</h4></a>
             <div class="card-body">
-                <strong>3</strong>
+                <strong>@Model.Count</strong>
             </div>
             <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Queen</h4></a>
         </div>

@@ -77,7 +77,6 @@
             await this.beehiveRepository.AddAsync(beehive);
             await this.beehiveRepository.SaveChangesAsync();
 
-
             return this.Redirect("/");
         }
 

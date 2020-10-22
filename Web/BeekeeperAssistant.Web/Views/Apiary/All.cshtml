@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "All Beeheives";
-    char noName = '-';
+    char noNameAdress = '-';
 
 }
 
@@ -34,7 +34,7 @@
                     <td>
                         @if (string.IsNullOrWhiteSpace(@apiary.ApiaryName))
                         {
-                            @noName
+                            @noNameAdress
                         }
                         else
                         {
@@ -42,7 +42,16 @@
                         }
                     </td>
                     <td>@apiary.ApiaryApiaryType</td>
-                    <td>@apiary.ApiaryAdress</td>
+                    <td>
+                        @if (string.IsNullOrWhiteSpace(@apiary.ApiaryAdress))
+                        {
+                            @noNameAdress
+                        }
+                        else
+                        {
+                            @apiary.ApiaryAdress
+                        }
+                    </td>
                     <td>
                         <a type="submit" class="btn btn-primary btn-danger text-white float-right" href="#"><i class="far fa-trash-alt"></i></a>
                         <a type="submit" class="btn btn-primary btn-success text-white float-right" style="margin-right: 10px;" href="#"><i class="far fa-edit"></i></a>

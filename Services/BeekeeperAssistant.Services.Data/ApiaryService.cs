@@ -28,7 +28,7 @@
             this.userManager = userManager;
         }
 
-        public async Task AddApiary(ApplicationUser user, CreateApiaryInputModel inputModel)
+        public async Task AddUserApiary(ApplicationUser user, CreateApiaryInputModel inputModel)
         {
             var apiary = new Apiary()
             {
@@ -55,9 +55,20 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public void EditApiaryById()
+        public async Task EditUserApiaryById(int id, ApplicationUser user, EditApiaryInputModel editApiaryInputModel)
         {
-            throw new NotImplementedException();
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == user.Id).FirstOrDefault();
+
+            if (apiary != null)
+            {
+                apiary.Number = editApiaryInputModel.Number;
+                apiary.Name = editApiaryInputModel.Name;
+                apiary.ApiaryType = editApiaryInputModel.ApiaryType;
+                apiary.Adress = editApiaryInputModel.Adress;
+
+                this.apiaryRepository.Update(apiary);
+                await this.apiaryRepository.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<T> GetAllApiaries<T>()
@@ -73,7 +84,8 @@
 
         public T GetApiaryById<T>(int id)
         {
-            throw new NotImplementedException();
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id).To<T>().FirstOrDefault();
+            return apiary;
         }
 
         public T GetApiaryByNumber<T>(string number, ApplicationUser user)
@@ -81,7 +93,13 @@
             throw new NotImplementedException();
         }
 
-        public Apiary GetApiaryByNumber(string apiNumber, ApplicationUser user)
+        public T GetUserApiaryById<T>(int id, ApplicationUser user)
+        {
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == user.Id).To<T>().FirstOrDefault();
+            return apiary;
+        }
+
+        public Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user)
         {
             var apiId = this.apiaryRepository.All().
                 Where(a => a.CreatorId == user.Id && a.Number == apiNumber).
@@ -90,7 +108,7 @@
             return apiId;
         }
 
-        public bool ApiaryExists(string apiNumber, ApplicationUser user)
+        public bool UserApiaryExists(string apiNumber, ApplicationUser user)
         {
             var api = this.apiaryRepository.All().Where(a => a.Number == apiNumber && a.CreatorId == user.Id).FirstOrDefault();
             if (api == null)

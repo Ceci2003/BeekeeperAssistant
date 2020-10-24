@@ -108,11 +108,6 @@
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
-
-                        // Beehive/All (User)
-                        // Beehive/{ApiNumber}/{Number} (UserApis)
-                        // Apiary/All
-                        // Apiary/{ApiNumber}
                     });
         }
     }

@@ -9,29 +9,24 @@
 
     public interface IApiaryService
     {
-        // GetAll
         IEnumerable<T> GetAllApiaries<T>();
 
-        // GetByNumber
         T GetApiaryByNumber<T>(string number, ApplicationUser user);
 
-        // GetById
         T GetApiaryById<T>(int id);
 
-        // Delete
+        T GetUserApiaryById<T>(int id, ApplicationUser user);
+
         Task DeleteById(int id, ApplicationUser user);
 
-        // Edit
-        void EditApiaryById(int id, ApplicationUser user);
+        Task EditUserApiaryById(int id, ApplicationUser user, EditApiaryInputModel editApiaryInputModel);
 
-        // Create
-        Task AddApiary(ApplicationUser user, CreateApiaryInputModel inputModel);
+        Task AddUserApiary(ApplicationUser user, CreateApiaryInputModel inputModel);
 
-        // Get all user apiaries
         IEnumerable<T> GetAllUserApiaries<T>(string userId);
 
-        Apiary GetApiaryByNumber(string apiNumber, ApplicationUser user);
+        Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user);
 
-        bool ApiaryExists(string apiNumber, ApplicationUser user);
+        bool UserApiaryExists(string apiNumber, ApplicationUser user);
     }
 }

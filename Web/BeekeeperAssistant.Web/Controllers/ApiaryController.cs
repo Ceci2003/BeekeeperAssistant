@@ -20,28 +20,22 @@
     {
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IRepository<UsersApiaries> userApiRepository;
-        private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
         private readonly IBeehiveService beehiveService;
 
         public ApiaryController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
-            IRepository<UsersApiaries> userApiRepository,
-            IDeletableEntityRepository<Apiary> apiaryRepository,
             IBeehiveService beehiveService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
-            this.userApiRepository = userApiRepository;
-            this.apiaryRepository = apiaryRepository;
             this.beehiveService = beehiveService;
         }
 
         public async Task<IActionResult> GetByNumber(string apiNumber)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiary = this.apiaryService.GetApiaryByNumber(apiNumber, currentUser);
+            var apiary = this.apiaryService.GetUserApiaryByNumber(apiNumber, currentUser);
 
             if (apiary == null)
             {
@@ -57,26 +51,24 @@
             return this.View(viewModel);
         }
 
-        // Make shure everything is clean!
-        // Make Seeding!
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            await this.apiaryService.DeleteById(id, currentUser);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
         public IActionResult Create()
         {
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            await this.apiaryService.DeleteById(id, currentUser);
-            return this.Redirect("/");
-        }
-
-        [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            if (this.apiaryService.ApiaryExists(inputModel.Number, currentUser))
+            if (this.apiaryService.UserApiaryExists(inputModel.Number, currentUser))
             {
                 this.ModelState.AddModelError("Number", "Invalid apiary number!");
                 return this.View(inputModel);
@@ -87,9 +79,36 @@
                 return this.View(inputModel);
             }
 
-            await this.apiaryService.AddApiary(currentUser, inputModel);
+            await this.apiaryService.AddUserApiary(currentUser, inputModel);
 
-            return this.Redirect("/");
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var apiary = this.apiaryService.GetUserApiaryById<EditApiaryInputModel>(id, currentUser);
+            return this.View(apiary);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (this.apiaryService.UserApiaryExists(inputModel.Number, currentUser))
+            {
+                this.ModelState.AddModelError("Number", "Invalid apiary number!");
+                return this.View(inputModel);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            await this.apiaryService.EditUserApiaryById(id, currentUser, inputModel);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> All()

@@ -1,11 +1,12 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
-    using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
 
     public interface IBeehiveService
     {
@@ -13,6 +14,6 @@
 
         bool NumberExists(int number, ApplicationUser user);
 
-        public Task AddBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel);
+        public Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel);
     }
 }

@@ -1,0 +1,36 @@
+﻿
+@model BeekeeperAssistant.Web.ViewModels.Apiaries.EditApiaryInputModel
+@{
+}
+
+
+    <form asp-controller="Apiary" asp-action="Edit">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="col-md-4">
+            <h1>Edit Apiary</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="form-group col-md-4">
+
+            <label asp-for="@Model.Number"></label>
+            <input type="text" asp-for="@Model.Number" />
+            <div><span class="text-danger" asp-validation-for="@Model.Number"></span></div>
+
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Name"></label>
+            <input type="text" asp-for="@Model.Name" class="form-control" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Adress"></label>
+            <input type="text" asp-for="@Model.Adress" class="form-control" />
+            <span asp-validation-for="@Model.Adress" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.ApiaryType"></label>
+            <select asp-for="@Model.ApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+            <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary mt-4" value="Edit Apiary" />
+    </form>

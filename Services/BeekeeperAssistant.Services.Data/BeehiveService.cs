@@ -17,7 +17,7 @@
             this.beehiveRepository = beehiveRepository;
         }
 
-        public async Task AddBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel)
+        public async Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel)
         {
             var beehive = new Beehive()
             {

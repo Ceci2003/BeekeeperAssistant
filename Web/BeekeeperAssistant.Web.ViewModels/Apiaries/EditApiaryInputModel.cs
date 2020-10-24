@@ -8,7 +8,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class CreateApiaryInputModel
+    public class EditApiaryInputModel : IMapFrom<Apiary>
     {
         [Required]
         public string Number { get; set; }
@@ -19,5 +19,6 @@
         public ApiaryType ApiaryType { get; set; }
 
         public string Adress { get; set; }
+
     }
 }

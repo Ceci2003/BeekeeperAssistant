@@ -120,5 +120,10 @@
                 return true;
             }
         }
+
+        public void EditApiaryById(int id, ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

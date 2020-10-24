@@ -40,17 +40,19 @@
             return this.View();
         }
 
-        // Add Action Create
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create()
         {
+            var apiaryId = int.Parse(this.TempData["ApiId"].ToString());
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var currentApiary = this.apiaryRepository.All().Where(b => b.Id == id).FirstOrDefault();
+            var currentApiary = this.apiaryRepository.All().Where(b => b.Id == apiaryId).FirstOrDefault();
             if (currentApiary.CreatorId != currentUser.Id)
             {
                 return this.Forbid();
             }
 
-            this.ViewData["ApiaryId"] = id;
+            this.TempData.Keep();
+            this.ViewData["ApiaryId"] = apiaryId;
+            this.ViewData["ApiNumber"] = currentApiary.Number;
             return this.View();
         }
 

@@ -48,6 +48,8 @@
             {
                 AllUserBeehives = allApiaryBeehives,
             };
+
+            this.TempData["ApiId"] = apiary.Id;
             return this.View(viewModel);
         }
 

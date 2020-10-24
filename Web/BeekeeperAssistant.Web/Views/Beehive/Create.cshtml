@@ -3,6 +3,8 @@
     ViewData["Title"] = "Beehive Create";
 }
 
+<h1>Apiary: @this.ViewData["ApiNumber"]</h1>
+
 <form asp-controller="Beehive" asp-action="Create">
     <div>
         <label asp-for="@Model.Number"></label>

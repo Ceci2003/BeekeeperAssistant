@@ -3,6 +3,8 @@
     ViewData["Title"] = "All Beehives";
 }
 
+<a class="btn btn-success" asp-controller="Beehive" asp-action="Create">Create Beehive</a>
+
 <ul>
 
     @foreach (var beehive in Model.AllUserBeehives)

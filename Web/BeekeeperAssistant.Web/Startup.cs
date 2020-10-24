@@ -8,6 +8,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Data.Repositories;
     using BeekeeperAssistant.Data.Seeding;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Services.Messaging;
@@ -60,6 +61,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IApiaryService, ApiaryService>();
             services.AddTransient<IBeehiveService, BeehiveService>();
+            services.AddTransient<IStringManipulationService, StringManipulationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

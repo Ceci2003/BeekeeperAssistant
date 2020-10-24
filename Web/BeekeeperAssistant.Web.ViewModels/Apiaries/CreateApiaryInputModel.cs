@@ -11,6 +11,11 @@
     public class CreateApiaryInputModel
     {
         [Required]
+        public string FirstNumber { get; set; }
+
+        [Required]
+        public string SecondNumber { get; set; }
+
         public string Number { get; set; }
 
         public string Name { get; set; }

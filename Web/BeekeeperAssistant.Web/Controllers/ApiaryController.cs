@@ -7,6 +7,7 @@
 
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
@@ -20,15 +21,18 @@
     {
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IStringManipulationService stringManipulationService;
         private readonly IBeehiveService beehiveService;
 
         public ApiaryController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
+            IStringManipulationService stringManipulationService,
             IBeehiveService beehiveService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
+            this.stringManipulationService = stringManipulationService;
             this.beehiveService = beehiveService;
         }
 
@@ -69,6 +73,8 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
+            var finalNumber = this.stringManipulationService.JoinStringWithSymbol(inputModel.FirstNumber, inputModel.SecondNumber, "-");
+            inputModel.Number = finalNumber;
             var currentUser = await this.userManager.GetUserAsync(this.User);
             if (this.apiaryService.UserApiaryExists(inputModel.Number, currentUser))
             {

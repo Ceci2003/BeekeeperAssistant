@@ -1,51 +1,60 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
-@{ 
-    ViewData["Title"] = "Beehive Create";
+@{
+    ViewData["Title"] = "Creat Beehivee";
 }
 
-<h1>Apiary: @this.ViewData["ApiNumber"]</h1>
 
-<form asp-controller="Beehive" asp-action="Create">
-    <div>
-        <label asp-for="@Model.Number"></label>
-        <input type="number" asp-for="@Model.Number" />
-        <span asp-validation-for="@Model.Number"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.BeehiveSystem"></label>
-        <select asp-for="@Model.BeehiveSystem" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveSystem>()"></select>
-        <span asp-validation-for="@Model.BeehiveSystem"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.BeehiveType"></label>
-        <select asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()"></select>
-        <span asp-validation-for="@Model.BeehiveType"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.Date"></label>
-        <input type="datetime-local" asp-for="@Model.Date" />
-        <span asp-validation-for="@Model.Date"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.BeehivePower"></label>
-        <select asp-for="@Model.BeehivePower" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehivePower>()"></select>
-        <span asp-validation-for="@Model.BeehivePower"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.HasDevice"></label>
-        <input type="checkbox" asp-for="@Model.HasDevice" />
-        <span asp-validation-for="@Model.HasDevice"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.HasPolenCatcher"></label>
-        <input type="checkbox" asp-for="@Model.HasPolenCatcher" />
-        <span asp-validation-for="@Model.HasPolenCatcher"></span>
-    </div>
-    <div>
-        <label asp-for="@Model.HasPropolisCatcher"></label>
-        <input type="checkbox" asp-for="@Model.HasPropolisCatcher" />
-        <span asp-validation-for="@Model.HasPropolisCatcher"></span>
-    </div>
-    <input type="hidden" asp-for="@Model.ApiaryId" value="@ViewData["ApiaryId"]"/>
-    <input type="submit" value="Submit" />
-</form>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Beehives" asp-action="All">Beehives All</a></li>
+        <li class="breadcrumb-item">Create</li>
+    </ol>
+</nav>
+<h1>Apiary: @this.ViewData["ApiNumber"]</h1>
+<div class="beehive-create">
+    <form asp-controller="Beehive" asp-action="Create">
+        <div>
+            <label asp-for="@Model.Number"></label>
+            <input class="form-control" type="number" asp-for="@Model.Number" />
+            <span asp-validation-for="@Model.Number"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.BeehiveSystem"></label>
+            <select class="custom-select" asp-for="@Model.BeehiveSystem" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveSystem>()"></select>
+            <span class="text-danger" asp-validation-for="@Model.BeehiveSystem"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.BeehiveType"></label>
+            <select class="custom-select" asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()"></select>
+            <span class="text-danger" asp-validation-for="@Model.BeehiveType"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.Date"></label>
+            <input class="form-control" type="datetime-local" asp-for="@Model.Date" />
+            <span class="text-danger" asp-validation-for="@Model.Date"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.BeehivePower"></label>
+            <select class="custom-select" asp-for="@Model.BeehivePower" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehivePower>()"></select>
+            <span class="text-danger" asp-validation-for="@Model.BeehivePower"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.HasDevice"></label>
+            <input class="form-check-input" type="checkbox" asp-for="@Model.HasDevice" />
+            <span class="text-danger" asp-validation-for="@Model.HasDevice"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.HasPolenCatcher"></label>
+            <input class="form-check-input" type="checkbox" asp-for="@Model.HasPolenCatcher" />
+            <span class="text-danger" asp-validation-for="@Model.HasPolenCatcher"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.HasPropolisCatcher"></label>
+            <input class="form-check-input" type="checkbox" asp-for="@Model.HasPropolisCatcher" />
+            <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
+        </div>
+        <input type="hidden" asp-for="@Model.ApiaryId" value="@ViewData["ApiaryId"]" />
+        <input type="submit" value="Submit" />
+    </form>
+</div>

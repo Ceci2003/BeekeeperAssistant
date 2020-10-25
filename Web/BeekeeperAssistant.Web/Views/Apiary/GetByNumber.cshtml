@@ -3,7 +3,17 @@
     ViewData["Title"] = "All Beehives";
 }
 
-<a class="btn btn-success" asp-controller="Beehive" asp-action="Create">Create Beehive</a>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Apiaries All</a></li>
+        <li class="breadcrumb-item"><a asp-controller="" asp-action="">Number</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Beehives</li>
+    </ol>
+</nav>
+
+@*<a class="btn btn-success" asp-controller="Beehive" asp-action="Create">Create Beehive</a>
 
 <ul>
 
@@ -12,4 +22,32 @@
         <li>@beehive.Number - @beehive.BeehivePower - @beehive.BeehiveSystem - @beehive.BeehiveType - @beehive.Date - @beehive.HasDevice - @beehive.HasPolenCatcher</li>
     }
 
-</ul>
+</ul>*@
+
+<h2>Number - Beehives</h2>
+<div class="pl-4 pr-4">
+    <a asp-controller="Beehive" asp-action="Create" class="btn btn-success text-white float-right"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Power</th>
+                <th scope="col">System</th>
+                <th scope="col">Type</th>
+                <th scope="col">Created On</th>
+                <th scope="col" width="160">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var beehive in Model.AllUserBeehives)
+            {
+                <tr>
+                    <td scope="row">
+                        @beehive.Number
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

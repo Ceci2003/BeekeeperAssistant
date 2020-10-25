@@ -202,6 +202,8 @@ a.register-btn3:hover {
 /* Breadcrumb */
 .breadcrumb {
     background-color: transparent;
+    margin: 0;
+    padding-bottom: 0;
 }
 
 /*Index*/
@@ -250,6 +252,18 @@ a.register-btn3:hover {
     font-size: 1.5em;
 }
 
+/* Apiary Create & Edit*/
+.apiary-create, .apiary-edit, .beehive-create form {
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    padding-top: 0;
+}
+
+/* Apiary Create */
+.apiary-create form span {
+    padding: 12% 1% 0 1%;
+}
 
 /*Footer*/
 footer {
@@ -274,6 +288,7 @@ footer .icon :hover {
 .footer-copyright a {
     color: white;
     letter-spacing: 2px;
+    text-decoration: none;
 }
 
 .footer-copyright a:hover {

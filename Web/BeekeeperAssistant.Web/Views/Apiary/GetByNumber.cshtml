@@ -15,14 +15,14 @@
 
 @*<a class="btn btn-success" asp-controller="Beehive" asp-action="Create">Create Beehive</a>
 
-<ul>
+    <ul>
 
-    @foreach (var beehive in Model.AllUserBeehives)
-    {
-        <li>@beehive.Number - @beehive.BeehivePower - @beehive.BeehiveSystem - @beehive.BeehiveType - @beehive.Date - @beehive.HasDevice - @beehive.HasPolenCatcher</li>
-    }
+        @foreach (var beehive in Model.AllUserBeehives)
+        {
+            <li>@beehive.Number - @beehive.BeehivePower - @beehive.BeehiveSystem - @beehive.BeehiveType - @beehive.Date - @beehive.HasDevice - @beehive.HasPolenCatcher</li>
+        }
 
-</ul>*@
+    </ul>*@
 
 <h2>Number - Beehives</h2>
 <div class="pl-4 pr-4">
@@ -41,12 +41,23 @@
         <tbody>
             @foreach (var beehive in Model.AllUserBeehives)
             {
-                <tr>
-                    <td scope="row">
-                        @beehive.Number
-                    </td>
-                    
-                </tr>
+            <tr>
+                <td scope="row">
+                    @beehive.Number
+                </td>
+                <td scope="row">
+                    @beehive.BeehivePower
+                </td>
+                <td scope="row">
+                    @beehive.BeehiveSystem
+                </td>
+                <td scope="row">
+                    @beehive.BeehiveType
+                </td>
+                <td scope="row">
+                    @beehive.CreatedOn
+                </td>
+            </tr>
             }
         </tbody>
     </table>

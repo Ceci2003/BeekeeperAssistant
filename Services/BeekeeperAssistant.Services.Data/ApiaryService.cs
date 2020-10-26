@@ -101,18 +101,18 @@
 
         public Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user)
         {
-            var apiId = this.apiaryRepository.All().
+            var apiaryId = this.apiaryRepository.All().
                 Where(a => a.CreatorId == user.Id && a.Number == apiNumber).
                 FirstOrDefault();
 
-            return apiId;
+            return apiaryId;
         }
 
         public bool UserApiaryExists(string apiNumber, ApplicationUser user)
         {
-            var api = this.apiaryRepository.All().Where(a => a.Number == apiNumber && a.CreatorId == user.Id).FirstOrDefault();
+            var apiary = this.apiaryRepository.All().Where(a => a.Number == apiNumber && a.CreatorId == user.Id).FirstOrDefault();
 
-            if (api == null)
+            if (apiary == null)
             {
                 return false;
             }
@@ -122,13 +122,9 @@
             }
         }
 
-        public void EditApiaryById(int id, ApplicationUser user)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool EditApiaryExist(string apiNumber, ApplicationUser user, int apiId)
         {
+            // Implement with Ceci :D
             return true;
         }
     }

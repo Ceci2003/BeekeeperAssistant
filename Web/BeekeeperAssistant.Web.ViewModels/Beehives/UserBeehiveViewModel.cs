@@ -24,5 +24,7 @@
         public bool? HasPolenCatcher { get; set; }
 
         public bool? HasPropolisCatcher { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

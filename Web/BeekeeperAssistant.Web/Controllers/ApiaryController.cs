@@ -111,7 +111,6 @@
 
             if (this.apiaryService.EditApiaryExist(inputModel.Number, currentUser, id))
             {
-
             }
 
             if (!this.ModelState.IsValid)

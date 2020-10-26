@@ -30,6 +30,15 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-login-register text-center w-100">Register</button>
                 </div>
+
+                <div class="form-group">
+                    <p>
+                        <a id="forgot-password" asp-page="./Login">You have a registration?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login in</a>
+                    </p>
+                </div>
             </form>
         </div>
     </div>

@@ -2,32 +2,49 @@
 @{
     ViewData["Title"] = "Create Apiary";
 }
-<form asp-controller="Apiary" asp-action="Create">
-    <div class="col-md-4">
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Apiaries All</a></li>
+        <li class="breadcrumb-item">Create</li>
+    </ol>
+</nav>
+<div class="apiary-create">
+    <form asp-controller="Apiary" asp-action="Create">
         <h1>Add new apiary</h1>
-        <div asp-validation-summary="All" class="text-danger"></div>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="@Model.FirstNumber">Number</label>
-        <input type="text" asp-for="@Model.FirstNumber" class="" />
-        <span>-</span>
-        <input type="text" asp-for="@Model.SecondNumber" class="" />
-        <span asp-validation-for="@Model.SecondNumber" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="@Model.Name"></label>
-        <input type="text" asp-for="@Model.Name" class="form-control" />
-        <span asp-validation-for="@Model.Name" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="@Model.Adress"></label>
-        <input type="text" asp-for="@Model.Adress" class="form-control" />
-        <span asp-validation-for="@Model.Adress" class="text-danger"></span>
-    </div>
-    <div class="form-group col-md-4">
-        <label asp-for="@Model.ApiaryType"></label>
-        <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-        <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
-    </div>
-    <input type="submit" class="btn btn-primary mt-4" value="Add apiary" />
-</form>
+        <div class="form-group">
+            <label>Number</label>
+            <div class="d-flex">
+                <div>
+                    <label asp-for="@Model.FirstNumber">City Code</label>
+                    <input type="text" asp-for="@Model.FirstNumber" class="form-control text-right" placeholder="3345" />
+                    <span asp-validation-for="@Model.FirstNumber" class="text-danger"></span>
+                </div>
+                <span>-</span>
+                <div>
+                    <label asp-for="@Model.SecondNumber">Farm Number</label>
+                    <input type="text" asp-for="@Model.SecondNumber" class="form-control" placeholder="7836" />
+                    <span asp-validation-for="@Model.SecondNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Name"></label>
+            <input type="text" asp-for="@Model.Name" class="form-control" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Adress"></label>
+            <input type="text" asp-for="@Model.Adress" class="form-control" />
+            <span asp-validation-for="@Model.Adress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.ApiaryType"></label>
+            <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+            <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary mt-4" value="Add apiary" />
+    </form>
+</div>
+

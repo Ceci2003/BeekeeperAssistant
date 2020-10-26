@@ -28,5 +28,7 @@
         Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user);
 
         bool UserApiaryExists(string apiNumber, ApplicationUser user);
+
+        bool EditApiaryExist(string apiNumber, ApplicationUser user, int apiId);
     }
 }

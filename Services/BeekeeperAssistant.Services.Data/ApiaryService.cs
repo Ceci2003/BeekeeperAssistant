@@ -111,6 +111,7 @@
         public bool UserApiaryExists(string apiNumber, ApplicationUser user)
         {
             var api = this.apiaryRepository.All().Where(a => a.Number == apiNumber && a.CreatorId == user.Id).FirstOrDefault();
+
             if (api == null)
             {
                 return false;
@@ -124,6 +125,11 @@
         public void EditApiaryById(int id, ApplicationUser user)
         {
             throw new NotImplementedException();
+        }
+
+        public bool EditApiaryExist(string apiNumber, ApplicationUser user, int apiId)
+        {
+            return true;
         }
     }
 }

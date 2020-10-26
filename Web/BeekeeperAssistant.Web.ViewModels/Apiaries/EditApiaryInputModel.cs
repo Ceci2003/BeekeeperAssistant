@@ -7,6 +7,7 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     public class EditApiaryInputModel : IMapFrom<Apiary>
     {
@@ -19,6 +20,9 @@
         public ApiaryType ApiaryType { get; set; }
 
         public string Adress { get; set; }
+
+        [BindNever]
+        public string CreatorId { get; set; }
 
     }
 }

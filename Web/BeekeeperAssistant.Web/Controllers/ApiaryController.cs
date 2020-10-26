@@ -96,6 +96,11 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var apiary = this.apiaryService.GetUserApiaryById<EditApiaryInputModel>(id, currentUser);
+            if (apiary?.CreatorId != currentUser?.Id)
+            {
+                return this.Forbid();
+            }
+
             return this.View(apiary);
         }
 
@@ -104,10 +109,9 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (this.apiaryService.UserApiaryExists(inputModel.Number, currentUser))
+            if (this.apiaryService.EditApiaryExist(inputModel.Number, currentUser, id))
             {
-                this.ModelState.AddModelError("Number", "Invalid apiary number!");
-                return this.View(inputModel);
+
             }
 
             if (!this.ModelState.IsValid)

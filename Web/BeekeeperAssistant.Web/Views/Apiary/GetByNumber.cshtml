@@ -12,21 +12,9 @@
         <li class="breadcrumb-item active" aria-current="page">Beehives</li>
     </ol>
 </nav>
-
-@*<a class="btn btn-success" asp-controller="Beehive" asp-action="Create">Create Beehive</a>
-
-    <ul>
-
-        @foreach (var beehive in Model.AllUserBeehives)
-        {
-            <li>@beehive.Number - @beehive.BeehivePower - @beehive.BeehiveSystem - @beehive.BeehiveType - @beehive.Date - @beehive.HasDevice - @beehive.HasPolenCatcher</li>
-        }
-
-    </ul>*@
-
 <h2>Number - Beehives</h2>
 <div class="pl-4 pr-4">
-    <a asp-controller="Beehive" asp-action="Create" class="btn btn-success text-white float-right"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a>
+    <a asp-controller="Beehive" asp-action="Create" class="btn btn-success text-white float-right mb-2"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -55,7 +43,13 @@
                     @beehive.BeehiveType
                 </td>
                 <td scope="row">
-                    @beehive.CreatedOn
+                    @beehive.CreatedOn.ToString("dd - MMMM - yyyy")
+                </td>
+                <td>
+                        <a class="btn btn-primary btn-danger text-white float-right">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    <a class="btn btn-primary btn-success text-white float-right mr-5"><i class="far fa-edit"></i></a>
                 </td>
             </tr>
             }

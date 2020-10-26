@@ -206,6 +206,15 @@ a.register-btn3:hover {
     padding-bottom: 0;
 }
 
+.breadcrumb a {
+    color: #F29422;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #e68206;
+}
+
 /*Index*/
 .apiaries-dashboard-card {
     border: 2px solid #0e918c;
@@ -252,7 +261,12 @@ a.register-btn3:hover {
     font-size: 1.5em;
 }
 
-/* Apiary Create & Edit*/
+/* Tables */
+table tr td {
+    text-align:center;
+}
+
+/* Apiary & Beehive - Create & Edit forms */
 .apiary-create, .apiary-edit, .beehive-create form {
     width: 400px;
     margin: auto;
@@ -260,9 +274,58 @@ a.register-btn3:hover {
     padding-top: 0;
 }
 
+/*.apiary-create, .apiary-edit, .beehive-create form input .submit-btn {
+    border: 2px solid #dedede;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+    color: white;
+}*/
+
 /* Apiary Create */
 .apiary-create form span {
     padding: 12% 1% 0 1%;
+}
+
+.apiary-create form .submit-btn {
+    background-color: #0e918c;
+    border: 2px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    color: white;
+}
+
+.apiary-create form .submit-btn:hover {
+    background-color: #13a9a3;
+}
+
+/* Apiary Edit */
+.apiary-edit form .submit-btn {
+    background-color: #28A745;
+    border: 2px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    color: white;
+}
+
+.apiary-edit form .submit-btn:hover {
+    background-color: #2abf4c;
+}
+
+/* Beehive Create */
+.beehive-create form .submit-btn {
+    background-color: #f6830f;
+    border: 2px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    color: white;
+}
+
+.beehive-create form .submit-btn:hover {
+    background-color: #ff8810;
 }
 
 /*Footer*/

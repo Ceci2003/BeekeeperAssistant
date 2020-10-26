@@ -12,49 +12,55 @@
     </ol>
 </nav>
 <h1>Apiary: @this.ViewData["ApiNumber"]</h1>
-<div class="beehive-create">
+<div class="beehive-create text-left">
     <form asp-controller="Beehive" asp-action="Create">
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.Number"></label>
             <input class="form-control" type="number" asp-for="@Model.Number" />
             <span asp-validation-for="@Model.Number"></span>
         </div>
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.BeehiveSystem"></label>
             <select class="custom-select" asp-for="@Model.BeehiveSystem" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveSystem>()"></select>
             <span class="text-danger" asp-validation-for="@Model.BeehiveSystem"></span>
         </div>
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.BeehiveType"></label>
             <select class="custom-select" asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()"></select>
             <span class="text-danger" asp-validation-for="@Model.BeehiveType"></span>
         </div>
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.Date"></label>
             <input class="form-control" type="datetime-local" asp-for="@Model.Date" />
             <span class="text-danger" asp-validation-for="@Model.Date"></span>
         </div>
-        <div>
+        <div class="form-group">
             <label asp-for="@Model.BeehivePower"></label>
             <select class="custom-select" asp-for="@Model.BeehivePower" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehivePower>()"></select>
             <span class="text-danger" asp-validation-for="@Model.BeehivePower"></span>
         </div>
-        <div>
-            <label asp-for="@Model.HasDevice"></label>
-            <input class="form-check-input" type="checkbox" asp-for="@Model.HasDevice" />
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" asp-for="@Model.HasDevice" />
+                <label class="custom-control-label" asp-for="@Model.HasDevice"></label>
+            </div>
             <span class="text-danger" asp-validation-for="@Model.HasDevice"></span>
         </div>
-        <div>
-            <label asp-for="@Model.HasPolenCatcher"></label>
-            <input class="form-check-input" type="checkbox" asp-for="@Model.HasPolenCatcher" />
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" asp-for="@Model.HasPolenCatcher" />
+                <label class="custom-control-label" asp-for="@Model.HasPolenCatcher"></label>
+            </div>
             <span class="text-danger" asp-validation-for="@Model.HasPolenCatcher"></span>
         </div>
-        <div>
-            <label asp-for="@Model.HasPropolisCatcher"></label>
-            <input class="form-check-input" type="checkbox" asp-for="@Model.HasPropolisCatcher" />
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" asp-for="@Model.HasPropolisCatcher" />
+                <label class="custom-control-label" asp-for="@Model.HasPropolisCatcher"></label>
+            </div>
             <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
         </div>
         <input type="hidden" asp-for="@Model.ApiaryId" value="@ViewData["ApiaryId"]" />
-        <input type="submit" value="Submit" />
+        <input class="submit-btn mt-3" type="submit" value="Create Beehive" />
     </form>
 </div>

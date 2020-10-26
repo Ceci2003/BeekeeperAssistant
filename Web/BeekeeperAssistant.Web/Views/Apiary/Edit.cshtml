@@ -11,7 +11,7 @@
         <li class="breadcrumb-item active" aria-current="page">Edit</li>
     </ol>
 </nav>
-<div class="apiary-edit">
+<div class="apiary-edit text-left">
     <form asp-controller="Apiary" asp-action="Edit">
         <h1>Edit Apiary</h1>
         <h3>@Model.Number</h3>
@@ -36,6 +36,6 @@
             <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
             <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
         </div>
-        <input type="submit" class="btn btn-primary mt-4" value="Edit Apiary" />
+        <input type="submit" class="submit-btn mt-3" value="Edit Apiary" />
     </form>
 </div>

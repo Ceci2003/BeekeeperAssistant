@@ -11,7 +11,7 @@
     {
         public int ApiaryId { get; set; }
 
-        public int ApiaryNumber { get; set; }
+        public string ApiaryNumber { get; set; }
 
         public int Number { get; set; }
 

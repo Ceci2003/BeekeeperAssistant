@@ -9,6 +9,10 @@
 
     public class UserBeehiveViewModel : IMapFrom<Beehive>
     {
+        public int ApiaryId { get; set; }
+
+        public int ApiaryNumber { get; set; }
+
         public int Number { get; set; }
 
         public BeehiveSystem BeehiveSystem { get; set; }

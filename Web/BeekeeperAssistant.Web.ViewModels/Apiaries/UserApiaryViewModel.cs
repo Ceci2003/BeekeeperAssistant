@@ -19,7 +19,6 @@
 
         public int Id { get; set; }
 
-
-
+        public int BeehivesCount { get; set; }
     }
 }

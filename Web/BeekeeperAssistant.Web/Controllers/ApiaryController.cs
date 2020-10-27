@@ -51,6 +51,7 @@
             var viewModel = new AllUserBeehivesViewModel()
             {
                 AllUserBeehives = allApiaryBeehives,
+                ApiaryId = apiary.Id,
             };
 
             this.TempData["ApiId"] = apiary.Id;

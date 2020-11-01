@@ -45,7 +45,7 @@
             {
                 var viewModel = new LoginHomeViewModel()
                 {
-                    Count = this.apiaryService.GetAllUserApiaries<UserApiaryViewModel>(currentUser?.Id).ToList().Count(),
+                    ApiariesCount = this.apiaryService.GetAllUserApiaries<UserApiaryViewModel>(currentUser?.Id).ToList().Count(),
                 };
 
                 return this.View(viewModel);

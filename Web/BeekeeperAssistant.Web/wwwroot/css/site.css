@@ -1,372 +1,88 @@
-﻿html {
-    position: relative;
-    min-height: 100%;
-    font-size: 14px;
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
 body {
+    font-family: 'Montserrat', sans-serif;
+} 
 
-}
-
-main {
-    margin-bottom: 8.55em;
-}
-
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-}
-
-/*Navigation*/
-
-.navbar-custom {
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background-color: #110400;
-    position: static;
-    /*width: 100%;*/
 }
 
-.navbar-brand {
-    margin-right: 2rem;
-    color: wheat;
+.navbar .navbar-brand {
+    display: flex;
+    align-items: center;
 }
 
-.navbar-brand:hover {
-    color: wheat;
-}
-
-.logo {
+.navbar .navbar-brand .logo {
     width: 50px;
-    margin-right: 10px;
 }
 
-nav ul li a {
-    color: white;
-    letter-spacing: 2px;
-}
-
-nav ul li a:hover {
-    color: #F29422;
-    letter-spacing: 2px;
-}
-
-a.login-btn {
-    display: inline-block;
-    padding: 8.6px 15px 8.6px 0px;
-    margin: 0 4.8px 4.8px 0;
+.navbar .navbar-brand .logo-link {
     text-decoration: none;
-    color: white;
-}
-
-a.login-btn:hover {
-    color: #F29422;
-}
-
-a.register-btn3 {
-    display: inline-block;
-    padding: 5.6px 15px;
-    border: 3px solid;
-    border-radius: 30px;
-    margin: 0 4.8px 4.8px 0;
-    text-decoration: none;
-    font-weight: bold;
-    color: #F29422;
-}
-
-a.register-btn3:hover {
-    color: white;
-}
-
-/*Banner*/
-
-.banner {
-    position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/banner.jpg);
-    /* min-height: 100vh; */
-    background-size: cover;
-    background-position: center;
-    border-bottom: 5px solid #F29422;
-    border-top: 5px solid #F29422;
-}
-
-.banner-text {
-    color: white;
-    padding: 150px;
-    text-align: center;
-}
-
-.banner-text h1 {
-    margin: 10px;
-    padding-bottom: 20px;
-    border-bottom: 5px solid #F29422;
-    font-size: 4.5rem;
-}
-
-.banner-text p {
-    padding-top: 5px;
-}
-
-/*Function Cards*/
-
-.card-group-functions {
-    border-bottom: 5px solid #F29422;
-    background-color: #110400;
-}
-
-.card-group-functions h2 {
-    color: white;
-    margin: 0 35%;
-    padding: 10px;
-    border-bottom: 5px solid #F29422
-}
-
-.card-container {
-	position: relative;
-	width: 18rem;
-	perspective: 200rem;
-    height: 350px;
-}
-
-.card-container:hover .card-front{
-	transform: rotateY(180deg);
-}
-
-.card-container:hover .card-back{
-	transform: rotateY(0deg);
-}
-
-.card-back{
-	transform: rotateY(180deg);
-    background-color: #F29422;
-    color: white;
-}
-
-.card{
-	position: absolute;
-	/*height: 100%;*/
-	width: 100%;
-	transition: all 0.9s;
-    backface-visibility: hidden;
-    border-radius: 5px;
-}
-
-.card-back .card-body{
-    margin: 30px;
-    padding: 0;
-    background-color: #a63f0336;
-    border-radius: 5px;
-}
-
-.card-body a{
-	position: absolute;
-	top:50%;
-	left: 50%;
-	margin: -15% 0 0 -23%;
-}
-
-.card-functions {
-    background-color: #F29422;
-    color: white;
-}
-
-/*Login / Register Forms*/
-
-.login-register-form {
-    position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/bannerLR.jpg);
-    background-size: cover;
-    background-position: center;
-    border-bottom: 5px solid #F29422;
-    border-top: 5px solid #F29422;
-    color: white;
-}
-
-.btn-login-register {
-    background: #f6830f;
-    border-color: #f6830f;
-    color: white;
-    font-weight: bold;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-    background-color: transparent;
-    margin: 0;
-    padding-bottom: 0;
-}
-
-.breadcrumb a {
-    color: #F29422;
-    text-decoration: none;
-}
-
-.breadcrumb a:hover {
-    color: #e68206;
-}
-
-/*Index*/
-.apiaries-dashboard-card {
-    border: 2px solid #0e918c;
-    width: 24%;
-}
-
-.apiaries-dashboard-card a {
-    background-color: #0e918c;
-    color: white;
-    text-decoration: none;
-}
-
-.apiaries-dashboard-card card-footer {
-    background-color: #0e918c;
-}
-
-.apiaries-dashboard-card a :hover {
-    background-color: #0bada7;
-}
-
-.beehives-dashboard-card {
-    border: 2px solid #f6830f;
-    width: 24%;
-}
-
-.beehives-dashboard-card a {
-    background-color: #f6830f;
-    color: white;
-    text-decoration: none;
-}
-
-.queens-dashboard-card {
-    border: 2px solid #bb2205;
-    width: 24%;
-}
-
-.queens-dashboard-card a {
-    background-color: #bb2205;
-    color: white;
-    text-decoration: none;
-}
-
-.apiaries-dashboard-card strong, .beehives-dashboard-card strong, .queens-dashboard-card strong {
-    font-size: 1.5em;
-}
-
-/* Tables */
-table tr td {
-    text-align:center;
-}
-
-/* Apiary & Beehive - Create & Edit forms */
-.apiary-create, .apiary-edit, .beehive-create form {
-    width: 400px;
-    margin: auto;
-    padding: 30px;
-    padding-top: 0;
-}
-
-/*.apiary-create, .apiary-edit, .beehive-create form input .submit-btn {
-    border: 2px solid #dedede;
-    border-radius: 3px;
-    padding: 5px;
-    width: 100%;
-    color: white;
-}*/
-
-/* Apiary Create */
-.apiary-create form span {
-    padding: 12% 1% 0 1%;
-}
-
-.apiary-create form .submit-btn {
-    background-color: #0e918c;
-    border: 2px solid #dedede;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100%;
-    color: white;
-}
-
-.apiary-create form .submit-btn:hover {
-    background-color: #13a9a3;
-}
-
-/* Apiary Edit */
-.apiary-edit form .submit-btn {
-    background-color: #28A745;
-    border: 2px solid #dedede;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100%;
-    color: white;
-}
-
-.apiary-edit form .submit-btn:hover {
-    background-color: #2abf4c;
-}
-
-/* Beehive Create */
-.beehive-create form .submit-btn {
-    background-color: #f6830f;
-    border: 2px solid #dedede;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100%;
-    color: white;
-}
-
-.beehive-create form .submit-btn:hover {
-    background-color: #ff8810;
-}
-
-/*Footer*/
-footer {
-    background-color: #110400;
-    color: white;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 8.55em;
-    white-space: nowrap;
-}
-
-footer .icon {
-    color: white;
+    color: #f29422;
+    margin-left: 20px;
+    font-weight: 500;
     font-size: 20px;
 }
 
-footer .icon :hover {
-    color: #F29422;
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
 }
 
-.footer-copyright a {
-    color: white;
-    letter-spacing: 2px;
+.navbar ul li {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.navbar ul li a {
     text-decoration: none;
+    color: #f29422;
+    font-weight: 500;
 }
 
-.footer-copyright a:hover {
-    color: #F29422;
-    letter-spacing: 2px;
+.navbar .ul-out li a {
+    padding: 20px 20px;
+    border-top: 5px solid transparent;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+.navbar .ul-out li a:hover {
+    border-top: 5px solid white;
 }
 
-@media (max-width: 600px) {
-    body {
-        background-color: forestgreen;
-    }
+.navbar ul li .active {
+    border-top: 5px solid #f29422;
+}
+
+.navbar .ul-login-register li .login-btn {
+    color: white;
+    padding: 8px 15px;
+}
+
+.navbar .ul-login-register li .login-btn:hover {
+    color: #f29422;
+}
+
+.navbar .ul-login-register li .register-btn {
+    color: white;
+    border: 3px solid #f29422;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.navbar .ul-login-register li .register-btn:hover {
+    /* color: #f29422; */
+    border: 3px solid white;
 }

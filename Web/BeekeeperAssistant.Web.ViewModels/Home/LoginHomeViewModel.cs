@@ -8,6 +8,6 @@ namespace BeekeeperAssistant.Web.ViewModels.Home
 {
     public class LoginHomeViewModel
     {
-        public int Count { get; set; }
+        public int ApiariesCount { get; set; }
     }
 }

@@ -3,76 +3,55 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@{
+    string activeClass = "active";
+}
 
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <a class="navbar-brand logo-link" asp-area="" asp-controller="Home" asp-action="Index">
+<nav class="navbar">
+    <div class="navbar-brand">
         <img class="logo" src="~/images/BA_demoLogo.png" alt="logo" />
-        @GlobalConstants.SystemName
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-        <img class="navbar-toggler-icon" src="~/images/Colapse_menu_49.png" width="50" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-        @if (!this.SignInManager.IsSignedIn(this.User))
-        {
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-                <li class="nav-item">
-                    <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="register-btn3" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                </li>
-            </ul>
-        }
-        else
-        {
-
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-
-                
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
-                </li>
-                
-                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
-                    </li>
-                }   
-                <li class="nav-item">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                        <button type="submit" class="nav-link btn btn-link">Logout</button>
-                    </form>
-                </li>
-
-                
-                @* --profile-- *@
-                @*<li class="nav-item dropdown">.
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-default"
-                            aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>*@
-            </ul>
-        }
+        <a class="logo-link" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
     </div>
+    @if (!this.SignInManager.IsSignedIn(this.User))
+    {
+        <ul class="ul-out">
+            <li>
+                <a class="@if(this.ViewData["Title"].ToString() == "Начало"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+            </li>
+            <li>
+                <a class="@if(this.ViewData["Title"].ToString() == "За нас"){@activeClass}" href="#">За нас</a>
+            </li>
+            <li>
+                <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" href="#">Контакти</a>
+            </li>
+        </ul>
+        <ul class="ul-login-register">
+            <li>
+                <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+            <li>
+                <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+        </ul>
+    }
+    else
+    {
+
+        <ul class="nav-in">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
+            </li>
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                </li>
+            }
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                    <button type="submit" class="nav-link btn btn-link"><i class="fas fa-sign-out-alt"></i></button>
+                </form>
+            </li>
+        </ul>
+    }
 </nav>

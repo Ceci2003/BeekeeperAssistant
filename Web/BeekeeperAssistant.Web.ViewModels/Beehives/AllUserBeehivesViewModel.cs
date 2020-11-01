@@ -10,5 +10,7 @@
     public class AllUserBeehivesViewModel : IMapFrom<Beehive>
     {
         public IEnumerable<UserBeehiveViewModel> AllUserBeehives { get; set; }
+
+        public int ApiaryId { get; set; }
     }
 }

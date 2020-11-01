@@ -1,0 +1,78 @@
+﻿@using BeekeeperAssistant.Common
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@GlobalConstants.SystemName - @this.ViewData["Title"]</title>
+
+    <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
+    <script src="https://kit.fontawesome.com/3536069223.js" crossorigin="anonymous"></script>
+
+    <environment names="Development">
+        <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+</head>
+
+<body>
+    <aside class="main-header">
+        <nav>
+            <section class="main-header-img-wrapper">
+                <img src="https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg" alt="">
+                <h3 class="message">Добро утро, Иван!</h3>
+            </section>
+            <ul class="main-header-list">
+                <li class="main-list-item">
+                    <i class="fas fa-archive"></i>
+                    <a href="">Начало</a>
+                </li>
+                <li class="main-list-item">
+                    <i class="fas fa-archive"></i>
+                    <a href="">Пчелини</a>
+                </li>
+                <li class="main-list-item">
+                    <i class="fas fa-archive"></i>
+                    <a href="">Кошери</a>
+                </li>
+                <li class="main-list-item">
+                    <i class="fas fa-archive"></i>
+                    <a href="">Статистики</a>
+                </li>
+                <li class="main-list-item">
+                    <i class="fas fa-archive"></i>
+                    <a href="">Профил</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+    @this.RenderBody()
+    <footer class="main-footer">
+        <span>Beekeeper Asissistant</span>
+    </footer>
+    </main>
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @this.RenderSection("Scripts", required: false)
+</body>
+
+</html>

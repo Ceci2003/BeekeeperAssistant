@@ -8,13 +8,13 @@
     <title>@GlobalConstants.SystemName - @this.ViewData["Title"]</title>
 
     <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
-    <script src="https://kit.fontawesome.com/3536069223.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.13.0/css/all.css" crossorigin="anonymous"></script>
 
     <environment names="Development">
         <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
 
@@ -50,24 +50,22 @@
         </nav>
     </aside>
     <main class="main-content">
-    @this.RenderBody()
-    <footer class="main-footer">
-        <span>Beekeeper Asissistant</span>
-    </footer>
+        @this.RenderBody()
+        <footer class="main-footer">
+            <span>Beekeeper Asissistant</span>
+        </footer>
     </main>
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
-asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
-asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>

@@ -19,58 +19,155 @@
 </head>
 
 <body>
-    <aside class="main-header">
-        <nav>
-            <section class="main-header-img-wrapper">
-                <img src="https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg" alt="">
-                <h3 class="message">Добро утро, Иван!</h3>
+    <section class="main-document">
+        <aside class="main-aside">
+            <section class="profile">
+                <section class="profile-picture-wrapper">
+                    <img src="./images/beekeeper.png" alt="beekeeper image" />
+                </section>
+                <span class="greeting-message">Добро утро, Иван!</span>
+                <hr class="line">
+                <a href="https://www.google.com">
+                    <button>Моят профил</button>
+                </a>
             </section>
-            <ul class="main-header-list">
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Начало</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Пчелини</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Кошери</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Статистики</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Профил</a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-    <main class="main-content">
-        @this.RenderBody()
-        <footer class="main-footer">
-            <span>Beekeeper Asissistant</span>
-        </footer>
-    </main>
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+            <section class="nav-main">
+                <nav>
+                    <ul class="nav-main-list">
+                        <li class="nav-main-list-item">
+                            <button class="apiary-button nav-button">
+                                <span class="btn-text">Пчелини</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="api-options">
+                                <li>
+                                    <a href="">Добави пчелин</a>
+                                </li>
+                                <li>
+                                    <a href="">Всички пчелини</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="beehive-button nav-button">
+                                <span class="btn-text">Кошери</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="beehive-options">
+                                <li>
+                                    <a href="">Добави кошери</a>
+                                </li>
+                                <li>
+                                    <a href="">Всички кошери</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="queen-button nav-button">
+                                <span class="btn-text">Царици</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="queen-options">
+                                <li>
+                                    <a href="">Добави царица</a>
+                                </li>
+                                <li>
+                                    <a href="">Всички царици</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </aside>
+        <main class="main-content">
+            @this.RenderBody()
+        </main>
+        @section Scripts{ 
+            <script>
+                let beehiveList = document.querySelector(".beehive-options");
+                let queenList = document.querySelector(".queen-options");
+                let apiList = document.querySelector(".api-options");
 
-    @this.RenderSection("Scripts", required: false)
+                let apiButton = document.querySelector(".apiary-button");
+                apiButton.addEventListener("click", (e) => {
+
+                    if (!apiList.classList.contains("show")) {
+                        backgrounToBase();
+                        removeClass([beehiveList, queenList, apiList], "show")
+                        apiList.classList.add("show");
+                        apiButton.style.background = "#F0BB00";
+                    }
+                    else {
+                        removeClass([beehiveList, queenList, apiList], "show")
+                        apiList.classList.remove("show");
+                        apiButton.style.background = "#463525";
+                    }
+                })
+
+                let beehiveButton = document.querySelector(".beehive-button");
+                beehiveButton.addEventListener("click", (e) => {
+
+                    if (!beehiveList.classList.contains("show")) {
+                        backgrounToBase();
+                        removeClass([beehiveList, queenList, apiList], "show")
+                        beehiveList.classList.add("show");
+                        beehiveButton.style.background = "#F0BB00";
+                    }
+                    else {
+                        removeClass([beehiveList, queenList, apiList], "show")
+                        beehiveList.classList.remove("show");
+                        beehiveButton.style.background = "#463525";
+                    }
+                })
+
+
+                let queenButton = document.querySelector(".queen-button");
+                queenButton.addEventListener("click", (e) => {
+
+                    if (!queenList.classList.contains("show")) {
+                        backgrounToBase();
+                        removeClass([beehiveList, queenList, apiList], "show")
+                        queenList.classList.add("show");
+                        queenButton.style.background = "#F0BB00";
+                    }
+                    else {
+                        removeClass([beehiveList, queenList, apiList], "show")
+                        queenList.classList.remove("show");
+                        queenButton.style.background = "#463525";
+                    }
+                })
+
+                function removeClass(elements, className) {
+                    elements.forEach(element => {
+                        element.classList.remove(className);
+                    });
+                }
+
+                function backgrounToBase() {
+                    queenButton.style.background = "#463525";
+                    beehiveButton.style.background = "#463525";
+                    apiButton.style.background = "#463525";
+                }
+            </script>
+        }
+        <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+            <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @this.RenderSection("Scripts", required: false)
 </body>
 
 </html>

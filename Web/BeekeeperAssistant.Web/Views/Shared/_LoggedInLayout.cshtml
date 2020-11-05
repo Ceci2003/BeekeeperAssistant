@@ -8,6 +8,7 @@
     <title>@GlobalConstants.SystemName - @this.ViewData["Title"]</title>
 
     <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
+    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v5.13.0/css/all.css" crossorigin="anonymous"></script>
 
     <environment names="Development">
@@ -25,7 +26,7 @@
                 <section class="profile-picture-wrapper">
                     <img src="~/images/beekeeper.png" alt="beekeeper image" />
                 </section>
-                <span class="greeting-message">Добро утро, Иван!</span>
+                <span class="greeting-message">Добро утро, @User.Identity.Name!</span>
                 <hr class="line">
                 <a href="https://www.google.com">
                     <button>Моят профил</button>

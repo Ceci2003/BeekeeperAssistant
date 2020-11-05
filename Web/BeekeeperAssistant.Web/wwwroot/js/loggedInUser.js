@@ -14,7 +14,7 @@ apiButton.addEventListener("click", (e) => {
     else {
         removeClass([beehiveList, queenList, apiList], "show")
         apiList.classList.remove("show");
-        apiButton.style.background = "#463525";
+        apiButton.style.background = "#2B1C12";
     }
 })
 
@@ -30,7 +30,7 @@ beehiveButton.addEventListener("click", (e) => {
     else {
         removeClass([beehiveList, queenList, apiList], "show")
         beehiveList.classList.remove("show");
-        beehiveButton.style.background = "#463525";
+        beehiveButton.style.background = "#2B1C12";
     }
 })
 
@@ -47,7 +47,7 @@ queenButton.addEventListener("click", (e) => {
     else {
         removeClass([beehiveList, queenList, apiList], "show")
         queenList.classList.remove("show");
-        queenButton.style.background = "#463525";
+        queenButton.style.background = "#2B1C12";
     }
 })
 
@@ -58,7 +58,7 @@ function removeClass(elements, className) {
 }
 
 function backgrounToBase() {
-    queenButton.style.background = "#463525";
-    beehiveButton.style.background = "#463525";
-    apiButton.style.background = "#463525";
+    queenButton.style.background = "#2B1C12";
+    beehiveButton.style.background = "#2B1C12";
+    apiButton.style.background = "#2B1C12";
 }

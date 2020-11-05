@@ -28,7 +28,7 @@ a {
 .main-aside {
     display: flex;
     flex-direction: column;
-    background-color: #33271C;
+    background-color: #110400;
     width: 300px;
     height: 100%;
 }
@@ -52,7 +52,7 @@ a {
 
 .nav-main-list-item button {
     width: 100%;
-    background-color: #463525;
+    background-color: #2B1C12;
     border: 1px solid #281402;
     color: white;
     outline: none;
@@ -140,6 +140,7 @@ a {
     color: white;
     font-size: 20px;
     font-weight: 700;
+    text-align: center;
 }
 
 hr {

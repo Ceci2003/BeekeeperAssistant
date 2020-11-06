@@ -12,46 +12,23 @@
         <img class="logo" src="~/images/BA_demoLogo.png" alt="logo" />
         <a class="logo-link" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
     </div>
-    @if (!this.SignInManager.IsSignedIn(this.User))
-    {
-        <ul class="ul-out">
-            <li>
-                <a class="@if(this.ViewData["Title"].ToString() == "Начало"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
-            </li>
-            <li>
-                <a class="@if(this.ViewData["Title"].ToString() == "За нас"){@activeClass}" href="#">За нас</a>
-            </li>
-            <li>
-                <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" href="#">Контакти</a>
-            </li>
-        </ul>
-        <ul class="ul-login-register">
-            <li>
-                <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">Вход</a>
-            </li>
-            <li>
-                <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
-            </li>
-        </ul>
-    }
-    else
-    {
-
-        <ul class="nav-in">
-            <li class="nav-item">
-                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Здравейте, @(this.User.Identity.Name)!</a>
-            </li>
-            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Админ</a>
-                </li>
-            }
-            <li class="nav-item">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                    <button type="submit" class="nav-link btn btn-link"><i class="fas fa-sign-out-alt"></i></button>
-                </form>
-            </li>
-        </ul>
-    }
+    <ul class="ul-out">
+        <li>
+            <a class="@if(this.ViewData["Title"].ToString() == "Начало"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li>
+            <a class="@if(this.ViewData["Title"].ToString() == "За нас"){@activeClass}" href="#">За нас</a>
+        </li>
+        <li>
+            <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" href="#">Контакти</a>
+        </li>
+    </ul>
+    <ul class="ul-login-register">
+        <li>
+            <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">Вход</a>
+        </li>
+        <li>
+            <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+        </li>
+    </ul>
 </nav>

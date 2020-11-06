@@ -9,70 +9,102 @@
 
     <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v5.13.0/css/all.css" crossorigin="anonymous"></script>
 
     <environment names="Development">
         <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
 
 <body>
-    <aside class="main-header">
-        <nav>
-            <section class="main-header-img-wrapper">
-                <img src="https://icon-library.com/images/admin-user-icon/admin-user-icon-4.jpg" alt="">
-                <h3 class="message">Добро утро, Иван!</h3>
+    <section class="main-document">
+        <aside class="main-aside">
+            <section class="profile">
+                <section class="profile-picture-wrapper">
+                    <img src="~/images/beekeeper.png" alt="beekeeper image" />
+                </section>
+                <span class="greeting-message">Добро утро, @User.Identity.Name!</span>
+                <hr class="line">
+                <a href="https://www.google.com">
+                    <button>Моят профил</button>
+                </a>
             </section>
-            <ul class="main-header-list">
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Начало</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Пчелини</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Кошери</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Статистики</a>
-                </li>
-                <li class="main-list-item">
-                    <i class="fas fa-archive"></i>
-                    <a href="">Профил</a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-    <main class="main-content">
-    @this.RenderBody()
-    <footer class="main-footer">
-        <span>Beekeeper Asissistant</span>
-    </footer>
-    </main>
-    <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
-asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
-asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+            <section class="nav-main">
+                <nav>
+                    <ul class="nav-main-list">
+                        <li class="nav-main-list-item">
+                            <button class="apiary-button nav-button">
+                                <span class="btn-text">Пчелини</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="api-options">
+                                <li>
+                                    <a href="">Добави пчелин</a>
+                                </li>
+                                <li>
+                                    <a href="">Всички пчелини</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="beehive-button nav-button">
+                                <span class="btn-text">Кошери</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="beehive-options">
+                                <li>
+                                    <a href="">Добави кошери</a>
+                                </li>
+                                <li>
+                                    <a href="">Всички кошери</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="queen-button nav-button">
+                                <span class="btn-text">Царици</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="queen-options">
+                                <li>
+                                    <a href="">Добави царица</a>
+                                </li>
+                                <li>
+                                    <a href="">Всички царици</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                <button type="submit" class="nav-link btn btn-link text-dark">Изход</button>
+            </form>
+        </aside>
+        <main class="main-content">
+            @this.RenderBody()
+        </main>
+        <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+            <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
 
-    @this.RenderSection("Scripts", required: false)
+        @this.RenderSection("Scripts", required: false)
 </body>
 
 </html>

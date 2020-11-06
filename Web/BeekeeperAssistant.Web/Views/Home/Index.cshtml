@@ -1,7 +1,7 @@
 ﻿@using BeekeeperAssistant.Common
 @model BeekeeperAssistant.Web.ViewModels.Home.LoginHomeViewModel
 @{
-    this.ViewData["Title"] = "Контакти";
+    this.ViewData["Title"] = "Начало";
 }
 
 @if (!this.User.Identity.IsAuthenticated)
@@ -14,63 +14,62 @@
         </div>
     </div>
 
-    @* <div class="card-group-functions">
-        <div>
-            <h2>Top Features</h2>
-        </div>
-        <div class="card-group justify-content-center">
-            <div class="card-container m-5">
-                <div class="card card-front card-functions">
-                    <div class="m-auto p-1">
-                        <img class="card-img-top" src="/images/BA_demoLogo.png" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card card-back">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-container m-5">
-                <div class="card card-front card-functions">
-                    <div class="m-auto p-1">
-                        <img class="card-img-top" src="/images/BA_demoLogo.png" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card card-back">
-                    <div class="card-body">
-                        <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-container m-5">
-                <div class="card card-front card-functions">
-                    <div class="m-auto p-1">
-                        <img class="card-img-top" src="/images/BA_demoLogo.png" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card card-back">
-                    <div class="card-body">
-                        <a href="#" class="btn btn-success">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> *@
 
+
+    <div class="app-benefits-cards">
+       <h1>Ползи на @GlobalConstants.SystemName</h1>
+       <hr>
+        <div class="app-benefits-cards-collection">
+            <div class="app-benefits-card">
+                <div class="app-benefits-card-inner">
+                    <div class="app-benefits-card-front">
+                        <div class="app-benefits-card-body">
+                            <i class="fas fa-laptop-house"></i>
+                            <h3>лесен за работа</h3>
+                        </div>
+                    </div>
+                    <div class="app-benefits-card-back">
+                        <div class="app-benefits-card-body">
+                        <h3>лесен за работа</h3>
+                        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-benefits-card">
+                <div class="app-benefits-card-inner">
+                    <div class="app-benefits-card-front">
+                        <div class="app-benefits-card-body">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3>лесен за работа</h3>
+                        </div>
+                    </div>
+                    <div class="app-benefits-card-back">
+                        <div class="app-benefits-card-body">
+                        <h3>лесен за работа</h3>
+                        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-benefits-card">
+                <div class="app-benefits-card-inner">
+                    <div class="app-benefits-card-front">
+                        <div class="app-benefits-card-body">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>лесен за работа</h3>
+                        </div>
+                    </div>
+                    <div class="app-benefits-card-back">
+                        <div class="app-benefits-card-body">
+                        <h3>лесен за работа</h3>
+                        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
 }
 else
 {

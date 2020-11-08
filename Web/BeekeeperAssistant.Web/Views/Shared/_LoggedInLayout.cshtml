@@ -1,4 +1,14 @@
 ﻿@using BeekeeperAssistant.Common
+@{
+    string greeting = "";
+    if  (DateTime.Now.Hour < 12){
+    greeting = "Добро утро";
+    }else if  (DateTime.Now.Hour < 18){
+        greeting = "Добър ден";
+    }else {
+        greeting = "Добър вечер";
+    }
+}
 <!DOCTYPE html>
 <html>
 
@@ -27,7 +37,7 @@
                 <section class="profile-picture-wrapper">
                     <img src="~/images/beekeeper.png" alt="beekeeper image" />
                 </section>
-                <span class="greeting-message">Добро утро, @User.Identity.Name!</span>
+                <span class="greeting-message">@greeting, @User.Identity.Name!</span>
                 <hr class="line">
                 <a href="https://www.google.com">
                     <button>Моят профил</button>

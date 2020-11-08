@@ -91,6 +91,34 @@ body {
     border: 3px solid white;
 }
 
+/* Cookies Policy*/
+
+.cookies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    position: fixed;
+    padding: 20px;
+    background-color: #F29422;
+    color: white;
+    opacity: 0.9;
+    transition: opacity 0.6s;
+    bottom: 0;
+}
+
+.cookies button {
+    color: white;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cookies button:hover {
+    color: whitesmoke;
+}
+
 /* Banner */
 
 .banner {

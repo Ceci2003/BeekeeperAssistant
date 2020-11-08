@@ -7,7 +7,6 @@
     <title>@GlobalConstants.SystemName - @this.ViewData["Title"]</title>
     <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
-    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" />
     
     <environment names="Development">
         <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
@@ -21,8 +20,7 @@
         <partial name="_LoginPartial" />
     </header>
 
-    <div class="text-center">
-        <partial name="_CookieConsentPartial" />
+    <div>
         <main role="main">
             @this.RenderBody()
         </main>
@@ -50,6 +48,7 @@
         </div>
         <p class="footer-copyright">&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - Всички права запазени</p>
     </footer>
+    <partial name="_CookieConsentPartial" />
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>

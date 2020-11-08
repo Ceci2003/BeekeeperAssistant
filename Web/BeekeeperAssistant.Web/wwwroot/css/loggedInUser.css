@@ -79,11 +79,11 @@ a {
     max-width: 160px;
 }
 
-    .profile-picture-wrapper img {
-        width: 100%;
-        border: 8px solid white;
-        border-radius: 50%;
-    }
+.profile-picture-wrapper img {
+    width: 100%;
+    border: 8px solid white;
+    border-radius: 50%;
+}
 
 .nav-button {
     padding: 10px 0;
@@ -110,12 +110,12 @@ a {
     border: 1px solid #281402;
 }
 
-    .nav-main-list-item ul li a {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 10px 0px;
-    }
+.nav-main-list-item ul li a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+}
 
 .nav-main-list-item .queen-options,
 .nav-main-list-item .beehive-options,
@@ -157,7 +157,7 @@ hr {
     font-weight: 700;
     border: none;
     color: white;
-    background: #FF9C07;
+    background: #FF7800;
     margin-top: 20px;
     cursor: pointer;
 }

@@ -51,9 +51,14 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
+        public async Task<IActionResult> Create(int id, CreateBeehiveInputModel inputModel)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
 
             // Check if there is already a beehive with the same Nuumber
             if (this.beehiveService.NumberExists(inputModel.Number, user))
@@ -62,14 +67,15 @@
                 return this.View(inputModel);
             }
 
-            if (!this.ModelState.IsValid)
+            var api = this.apiaryService.GetApiaryById<UserApiaryViewModel>(id);
+            if (api.CreatorId != user.Id)
             {
-                return this.View(inputModel);
+                return this.BadRequest();
             }
 
             var beehive = new Beehive()
             {
-                ApiaryId = inputModel.ApiaryId,
+                ApiaryId = id,
                 BeehivePower = inputModel.BeehivePower,
                 BeehiveSystem = inputModel.BeehiveSystem,
                 BeehiveType = inputModel.BeehiveType,

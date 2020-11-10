@@ -1,4 +1,5 @@
-﻿
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 body {
     margin: 0%;
     height: 100%;
@@ -31,6 +32,7 @@ a {
     background-color: #110400;
     width: 300px;
     height: 100%;
+    position: relative;
 }
 
 .profile {
@@ -169,4 +171,16 @@ hr {
 .main-document {
     display: flex;
     height: 100%;
+}
+
+.btn-logout{
+    background-color:red;
+    border:none;
+    position:absolute;
+    top:10px;
+    right:10px;
+    color:white;
+    font-weight:bold;
+    padding:5px 10px;
+    border-radius:7px;
 }

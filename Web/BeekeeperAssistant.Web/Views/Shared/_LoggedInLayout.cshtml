@@ -26,7 +26,7 @@
         <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/loggedInUser.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
 
@@ -39,7 +39,7 @@
                 </section>
                 <span class="greeting-message">@greeting, @User.Identity.Name!</span>
                 <hr class="line">
-                <a href="https://www.google.com">
+                <a asp-area="Identity" asp-page="/Account/Manage/Index">
                     <button>Моят профил</button>
                 </a>
             </section>
@@ -92,7 +92,7 @@
                 </nav>
             </section>
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="nav-link btn btn-link text-dark">Изход</button>
+                <button type="submit" class="btn-logout nav-link btn btn-link text-dark">Изход</button>
             </form>
         </aside>
         <main class="main-content">
@@ -104,14 +104,14 @@
             <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
             <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
         </environment>
         <environment names="Staging,Production">
             <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
             <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
             <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
+            <script src="~/js/loggedInUser.min.js" asp-append-version="true"></script>
         </environment>
 
         @this.RenderSection("Scripts", required: false)

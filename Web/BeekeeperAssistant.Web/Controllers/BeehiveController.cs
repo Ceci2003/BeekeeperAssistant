@@ -42,17 +42,6 @@
 
         public async Task<IActionResult> Create()
         {
-            var apiaryId = int.Parse(this.TempData["ApiId"].ToString());
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var currentApiary = this.apiaryRepository.All().Where(b => b.Id == apiaryId).FirstOrDefault();
-            if (currentApiary.CreatorId != currentUser.Id)
-            {
-                return this.Forbid();
-            }
-
-            this.TempData.Keep();
-            this.ViewData["ApiaryId"] = apiaryId;
-            this.ViewData["ApiNumber"] = currentApiary.Number;
             return this.View();
         }
 

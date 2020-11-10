@@ -6,6 +6,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+h1,h2,h3,h4,h5,h6{
+    margin:10px 0;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -17,6 +21,8 @@ html {
 li {
     list-style: none;
 }
+
+
 
 ul {
     padding: 0%;
@@ -39,7 +45,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 40px;
 }
 
 .nav-main {
@@ -78,7 +84,7 @@ a {
 .profile-picture-wrapper {
     display: flex;
     justify-content: center;
-    max-width: 160px;
+    max-width: 125px;
 }
 
 .profile-picture-wrapper img {
@@ -169,18 +175,24 @@ hr {
 }
 
 .main-document {
-    display: flex;
     height: 100%;
+    position:fixed;
+    top:0;
+}
+.main-content {
+    margin-left: 300px;
+    height:100%;
 }
 
-.btn-logout{
-    background-color:red;
-    border:none;
-    position:absolute;
-    top:10px;
-    right:10px;
-    color:white;
-    font-weight:bold;
-    padding:5px 10px;
-    border-radius:7px;
+.btn-logout {
+    background-color: red;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor:pointer;
+    border-radius: 7px;
 }

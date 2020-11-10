@@ -1,14 +1,4 @@
 ﻿@using BeekeeperAssistant.Common
-@{
-    string greeting = "";
-    if  (DateTime.Now.Hour < 12){
-    greeting = "Добро утро";
-    }else if  (DateTime.Now.Hour < 18){
-        greeting = "Добър ден";
-    }else {
-        greeting = "Добър вечер";
-    }
-}
 <!DOCTYPE html>
 <html>
 
@@ -31,70 +21,7 @@
 </head>
 
 <body>
-    <section class="main-document">
-        <aside class="main-aside">
-            <section class="profile">
-                <section class="profile-picture-wrapper">
-                    <img src="~/images/beekeeper.png" alt="beekeeper image" />
-                </section>
-                <span class="greeting-message">@greeting, @User.Identity.Name!</span>
-                <hr class="line">
-                <a asp-area="Identity" asp-page="/Account/Manage/Index">
-                    <button>Моят профил</button>
-                </a>
-            </section>
-            <section class="nav-main">
-                <nav>
-                    <ul class="nav-main-list">
-                        <li class="nav-main-list-item">
-                            <button class="apiary-button nav-button">
-                                <span class="btn-text">Пчелини</span>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <ul class="api-options">
-                                <li>
-                                    <a asp-controller="Apiary" asp-action="Create">Добави пчелин</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Apiary" asp-action="All">Всички пчелини</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-main-list-item">
-                            <button class="beehive-button nav-button">
-                                <span class="btn-text">Кошери</span>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <ul class="beehive-options">
-                                <li>
-                                    <a asp-controller="Beehive" asp-action="Create">Добави кошери</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Beehive" asp-action="All">Всички кошери</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-main-list-item">
-                            <button class="queen-button nav-button">
-                                <span class="btn-text">Царици</span>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <ul class="queen-options">
-                                <li>
-                                    <a asp-controller="Queen" asp-action="Create">Добави царица</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Queen" asp-action="All">Всички царици</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </section>
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="btn-logout nav-link btn btn-link text-dark">Изход</button>
-            </form>
-        </aside>
+    <partial name="_LoggedInUserPartial"/>
         <main class="main-content">
             @this.RenderBody()
         </main>

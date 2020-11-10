@@ -1,4 +1,5 @@
 ﻿using System;
+
 using BeekeeperAssistant.Data;
 using BeekeeperAssistant.Data.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(BeekeeperAssistant.Web.Areas.Identity.IdentityHostingStartup))]
+
 namespace BeekeeperAssistant.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup

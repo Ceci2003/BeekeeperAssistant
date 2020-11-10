@@ -74,7 +74,7 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
-            //var finalNumber = this.stringManipulationService.JoinStringWithSymbol(inputModel.CityCode, inputModel.FarmNumber, "-");
+            // var finalNumber = this.stringManipulationService.JoinStringWithSymbol(inputModel.CityCode, inputModel.FarmNumber, "-");
             var a = inputModel.Number;
             var currentUser = await this.userManager.GetUserAsync(this.User);
             if (this.apiaryService.UserApiaryExists(inputModel.Number, currentUser))

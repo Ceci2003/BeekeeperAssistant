@@ -11,7 +11,7 @@ namespace BeekeeperAssistant.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    ApiaryId = table.Column<int>(nullable: false)
+                    ApiaryId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

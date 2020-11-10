@@ -23,6 +23,5 @@
 
         [BindNever]
         public string CreatorId { get; set; }
-
     }
 }

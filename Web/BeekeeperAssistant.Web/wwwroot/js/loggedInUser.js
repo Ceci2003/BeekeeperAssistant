@@ -7,10 +7,10 @@ let apiButton = document.querySelector(".apiary-button");
 apiButton.addEventListener("click", (e) => {
 
     if (!apiList.classList.contains("show")) {
-        showMenu("add", apiList, apiButton, "#2B1C12", sidebarArrows[1]);
+        showMenu("add", apiList, apiButton, "#F0BB00", sidebarArrows[1]);
     }
     else {
-        showMenu("remove", apiList, apiButton, "#F0BB00", sidebarArrows[1]);
+        showMenu("remove", apiList, apiButton, "#2B1C12", sidebarArrows[1]);
     }
 })
 

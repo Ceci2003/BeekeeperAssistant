@@ -30,10 +30,12 @@
             <nav>
                 <ul class="nav-main-list">
                     <li class="nav-main-list-item">
-                        <button class="home-button nav-button">
-                            <span class="btn-text">Начало</span>
-                            <i class="fas fa-angle-left" style="color: transparent;"></i>
-                        </button>
+                        <a asp-controller="Home" asp-action="Index">
+                            <button class="home-button nav-button">
+                                <span class="btn-text">Начало</span>
+                                <i class="fas fa-angle-left" style="color: transparent;"></i>
+                            </button>
+                        </a>
                     </li>
                     <li class="nav-main-list-item">
                         <button class="apiary-button nav-button">
@@ -56,7 +58,7 @@
                         </button>
                         <ul class="beehive-options">
                             <li>
-                                <a asp-controller="Beehive" asp-action="Create">Добави кошери</a>
+                                <a asp-controller="Beehive" asp-action="Create">Добави кошер</a>
                             </li>
                             <li>
                                 <a asp-controller="Beehive" asp-action="All">Всички кошери</a>

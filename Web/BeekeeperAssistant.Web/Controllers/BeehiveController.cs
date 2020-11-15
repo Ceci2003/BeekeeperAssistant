@@ -89,5 +89,16 @@
             return this.Redirect("/");
         }
 
+        public async Task<IActionResult> All()
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var allUserBeehives = this.beehiveService.GetAllUserBeehives<UserBeehiveViewModel>(currentUser);
+            var viewModel = new AllUserBeehivesViewModel()
+            {
+                AllUserBeehives = allUserBeehives,
+            };
+            return this.View(viewModel);
+        }
+
     }
 }

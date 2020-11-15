@@ -1,0 +1,18 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
+
+@{
+
+}
+
+@foreach (var beehive in Model.AllUserBeehives)
+{
+    <span>@beehive.Number</span>@:-
+    <span>@beehive.HasPropolisCatcher</span>@:-
+    <span>@beehive.HasPolenCatcher</span>@:-
+    <span>@beehive.HasDevice</span>@:-
+    <span>@beehive.Date</span>@:-
+    <span>@beehive.CreatedOn</span>@:-
+    <span>@beehive.BeehiveType</span>@:-
+    <span>@beehive.BeehiveSystem</span>@:-
+    <span>@beehive.BeehivePower</span>
+}

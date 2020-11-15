@@ -6,10 +6,10 @@ let apiButton = document.querySelector(".apiary-button");
 apiButton.addEventListener("click", (e) => {
 
     if (!apiList.classList.contains("show")) {
-        showMenu("add", apiList, apiButton, "#F0BB00");
+        showMenu("add", apiList, apiButton, "#2B1C12");
     }
     else {
-        showMenu("add", apiList, apiButton, "#2B1C12");
+        showMenu("remove", apiList, apiButton, "#F0BB00");
     }
 })
 
@@ -20,7 +20,7 @@ beehiveButton.addEventListener("click", (e) => {
         showMenu("add", beehiveList, beehiveButton, "#F0BB00");
     }
     else {
-        showMenu("add", beehiveList, beehiveButton, "#2B1C12");
+        showMenu("remove", beehiveList, beehiveButton, "#2B1C12");
     }
 })
 
@@ -32,7 +32,7 @@ queenButton.addEventListener("click", (e) => {
         showMenu("add", queenList, queenButton, "#F0BB00");
     }
     else {
-        showMenu("add", queenList, queenButton, "#2B1C12");
+        showMenu("remove", queenList, queenButton, "#2B1C12");
     }
 })
 

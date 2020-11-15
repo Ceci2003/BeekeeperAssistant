@@ -197,6 +197,7 @@ hr {
 
 .all-lists-links {
     display: block;
+    text-align: center;
 }
 
 .all-lists-links .items {
@@ -208,4 +209,10 @@ hr {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    color: white;
+}
+
+.all-lists-links .apiaries-list-link {
+    margin: 0 auto;
+    background-color: #0e918c;
 }

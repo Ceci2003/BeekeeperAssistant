@@ -8,28 +8,33 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.EntityFrameworkCore.Query.Internal;
 
     [Authorize]
     public class BeehiveController : BaseController
     {
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
         private readonly IBeehiveService beehiveService;
+        private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
 
         public BeehiveController(
             IDeletableEntityRepository<Beehive> beehiveRepository,
             IBeehiveService beehiveService,
+            IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
             IDeletableEntityRepository<Apiary> apiaryRepository)
         {
             this.beehiveRepository = beehiveRepository;
             this.beehiveService = beehiveService;
+            this.apiaryService = apiaryService;
             this.userManager = userManager;
             this.apiaryRepository = apiaryRepository;
         }
@@ -40,26 +45,20 @@
             return this.View();
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create(int id)
         {
-            var apiaryId = int.Parse(this.TempData["ApiId"].ToString());
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var currentApiary = this.apiaryRepository.All().Where(b => b.Id == apiaryId).FirstOrDefault();
-            if (currentApiary.CreatorId != currentUser.Id)
-            {
-                return this.Forbid();
-            }
-
-            this.TempData.Keep();
-            this.ViewData["ApiaryId"] = apiaryId;
-            this.ViewData["ApiNumber"] = currentApiary.Number;
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
+        public async Task<IActionResult> Create(int id, CreateBeehiveInputModel inputModel)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
 
             // Check if there is already a beehive with the same Nuumber
             if (this.beehiveService.NumberExists(inputModel.Number, user))
@@ -68,14 +67,15 @@
                 return this.View(inputModel);
             }
 
-            if (!this.ModelState.IsValid)
+            var api = this.apiaryService.GetApiaryById<UserApiaryViewModel>(id);
+            if (api.CreatorId != user.Id)
             {
-                return this.View(inputModel);
+                return this.BadRequest();
             }
 
             var beehive = new Beehive()
             {
-                ApiaryId = inputModel.ApiaryId,
+                ApiaryId = id,
                 BeehivePower = inputModel.BeehivePower,
                 BeehiveSystem = inputModel.BeehiveSystem,
                 BeehiveType = inputModel.BeehiveType,

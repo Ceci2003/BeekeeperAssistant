@@ -1,14 +1,5 @@
 ﻿@using BeekeeperAssistant.Common
-@{
-    string greeting = "";
-    if  (DateTime.Now.Hour < 12){
-        greeting = "Добро утро";
-    }else if  (DateTime.Now.Hour < 18){
-        greeting = "Добър ден";
-    }else {
-        greeting = "Добър вечер";
-    }
-}
+
 <!DOCTYPE html>
 <html>
 
@@ -26,96 +17,34 @@
         <link href="~/css/loggedInUser.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/loggedInUser.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
 
 <body>
-    <section class="main-document">
-        <aside class="main-aside">
-            <section class="profile">
-                <section class="profile-picture-wrapper">
-                    <img src="~/images/beekeeper.png" alt="beekeeper image" />
-                </section>
-                <span class="greeting-message">@greeting, @User.Identity.Name!</span>
-                <hr class="line">
-                <a href="https://www.google.com">
-                    <button>Моят профил</button>
-                </a>
-            </section>
-            <section class="nav-main">
-                <nav>
-                    <ul class="nav-main-list">
-                        <li class="nav-main-list-item">
-                            <button class="apiary-button nav-button">
-                                <span class="btn-text">Пчелини</span>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <ul class="api-options">
-                                <li>
-                                    <a href="">Добави пчелин</a>
-                                </li>
-                                <li>
-                                    <a href="">Всички пчелини</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-main-list-item">
-                            <button class="beehive-button nav-button">
-                                <span class="btn-text">Кошери</span>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <ul class="beehive-options">
-                                <li>
-                                    <a href="">Добави кошери</a>
-                                </li>
-                                <li>
-                                    <a href="">Всички кошери</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-main-list-item">
-                            <button class="queen-button nav-button">
-                                <span class="btn-text">Царици</span>
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <ul class="queen-options">
-                                <li>
-                                    <a href="">Добави царица</a>
-                                </li>
-                                <li>
-                                    <a href="">Всички царици</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </section>
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="nav-link btn btn-link text-dark">Изход</button>
-            </form>
-        </aside>
-        <main class="main-content">
-            @this.RenderBody()
-        </main>
-        <environment names="Development">
-            <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-            <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-            <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-            <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-        </environment>
-        <environment names="Staging,Production">
-            <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-            <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-            <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
-        </environment>
+    <partial name="_LoggedInUserPartial"/>
+    
+    <main class="main-content">
+        @this.RenderBody()
+    </main>
 
-        @this.RenderSection("Scripts", required: false)
-    </section>
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
+        <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/loggedInUser.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @this.RenderSection("Scripts", required: false)
 </body>
 
 </html>

@@ -1,13 +1,14 @@
-﻿using BeekeeperAssistant.Services.Data;
-using BeekeeperAssistant.Web.ViewModels.Apiaries;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Web.ViewComponents
+﻿namespace BeekeeperAssistant.Web.ViewComponents
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ApiaryInfoViewComponent : ViewComponent
     {
         private readonly IApiaryService apiaryService;

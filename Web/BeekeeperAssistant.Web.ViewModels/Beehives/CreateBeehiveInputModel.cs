@@ -9,8 +9,6 @@
 
     public class CreateBeehiveInputModel
     {
-        public int ApiaryId { get; set; }
-
         [Required]
         public int Number { get; set; }
 

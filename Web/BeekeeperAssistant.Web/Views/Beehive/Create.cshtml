@@ -11,7 +11,7 @@
         <li class="breadcrumb-item">Create</li>
     </ol>
 </nav>
-<h1>Apiary: @this.ViewData["ApiNumber"]</h1>
+<h1>Beehive: @this.ViewData["ApiNumber"]</h1>
 <div class="beehive-create text-left">
     <form asp-controller="Beehive" asp-action="Create">
         <div class="form-group">
@@ -60,7 +60,6 @@
             </div>
             <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
         </div>
-        <input type="hidden" asp-for="@Model.ApiaryId" value="@ViewData["ApiaryId"]" />
         <input class="submit-btn mt-3" type="submit" value="Create Beehive" />
     </form>
 </div>

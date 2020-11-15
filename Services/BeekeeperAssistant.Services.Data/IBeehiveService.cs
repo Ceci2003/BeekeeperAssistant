@@ -14,6 +14,6 @@
 
         bool NumberExists(int number, ApplicationUser user);
 
-        public Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel);
+        public Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel,int apiId);
     }
 }

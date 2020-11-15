@@ -15,7 +15,7 @@
 <h2>Number - Beehives</h2>
 <vc:apiary-info api-id="@Model.ApiaryId"></vc:apiary-info>
 <div class="pl-4 pr-4">
-    <a asp-controller="Beehive" asp-action="Create" class="btn btn-success text-white float-right mb-2"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a>
+    <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId" class="btn btn-success text-white float-right mb-2"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a>
     <table class="table table-bordered">
         <thead>
             <tr>

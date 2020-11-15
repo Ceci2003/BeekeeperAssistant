@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
@@ -17,11 +18,11 @@
             this.beehiveRepository = beehiveRepository;
         }
 
-        public async Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel)
+        public async Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel, int apiId)
         {
             var beehive = new Beehive()
             {
-                ApiaryId = inputModel.ApiaryId,
+                ApiaryId = apiId,
                 BeehivePower = inputModel.BeehivePower,
                 BeehiveSystem = inputModel.BeehiveSystem,
                 BeehiveType = inputModel.BeehiveType,

@@ -14,6 +14,8 @@
 
         bool NumberExists(int number, ApplicationUser user);
 
+        IEnumerable<T> GetAllUserBeehives<T>(ApplicationUser user);
+
         public Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel,int apiId);
     }
 }

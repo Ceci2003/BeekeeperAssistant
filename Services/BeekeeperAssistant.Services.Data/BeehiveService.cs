@@ -31,10 +31,17 @@
                 HasDevice = inputModel.HasDevice,
                 HasPolenCatcher = inputModel.HasPolenCatcher,
                 HasPropolisCatcher = inputModel.HasPropolisCatcher,
+                CreatorId = user.Id,
             };
 
             await this.beehiveRepository.AddAsync(beehive);
             await this.beehiveRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAllUserBeehives<T>(ApplicationUser user)
+        {
+            var beehives = this.beehiveRepository.All().Where(b => b.CreatorId == user.Id).To<T>().ToList();
+            return beehives;
         }
 
         public IEnumerable<T> GetAllUserBeehivesByApiaryId<T>(int apiaryId)

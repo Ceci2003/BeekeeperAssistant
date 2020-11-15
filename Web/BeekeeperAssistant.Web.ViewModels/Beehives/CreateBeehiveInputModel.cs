@@ -4,8 +4,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text;
-
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using Microsoft.AspNetCore.Mvc;
 
     public class CreateBeehiveInputModel
     {
@@ -23,6 +24,10 @@
 
         [Required]
         public BeehivePower BeehivePower { get; set; }
+
+        public IEnumerable<SelectListOptionApiaryViewModel> AllApiaries { get; set; }
+
+        public int ApiId { get; set; }
 
         public bool HasDevice { get; set; }
 

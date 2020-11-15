@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.EntityFrameworkCore.Query.Internal;
 
@@ -45,15 +46,25 @@
             return this.View();
         }
 
-        public IActionResult Create(int id)
+        public async Task<IActionResult> Create(int id)
         {
-            return this.View();
+            var inputModel = new CreateBeehiveInputModel();
+
+            if (id == 0)
+            {
+                var currentUser = await this.userManager.GetUserAsync(this.User);
+                var allUserApiariries = this.apiaryService.GetAllUserApiaries<SelectListOptionApiaryViewModel>(currentUser.Id);
+                inputModel.AllApiaries = allUserApiariries;
+            }
+
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int id, CreateBeehiveInputModel inputModel)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+            var apiId = id == 0 ? inputModel.ApiId : id;
 
             if (!this.ModelState.IsValid)
             {
@@ -67,31 +78,27 @@
                 return this.View(inputModel);
             }
 
-            var api = this.apiaryService.GetApiaryById<UserApiaryViewModel>(id);
+            var api = this.apiaryService.GetApiaryById<UserApiaryViewModel>(apiId);
             if (api.CreatorId != user.Id)
             {
                 return this.BadRequest();
             }
 
-            var beehive = new Beehive()
-            {
-                ApiaryId = id,
-                BeehivePower = inputModel.BeehivePower,
-                BeehiveSystem = inputModel.BeehiveSystem,
-                BeehiveType = inputModel.BeehiveType,
-                Date = inputModel.Date,
-                Number = inputModel.Number,
-                HasDevice = inputModel.HasDevice,
-                HasPolenCatcher = inputModel.HasPolenCatcher,
-                HasPropolisCatcher = inputModel.HasPropolisCatcher,
-            };
-
-            await this.beehiveRepository.AddAsync(beehive);
-            await this.beehiveRepository.SaveChangesAsync();
+            await this.beehiveService.AddUserBeehive(user, inputModel, apiId);
 
             return this.Redirect("/");
         }
 
-        // Add Action All
+        public async Task<IActionResult> All()
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var allUserBeehives = this.beehiveService.GetAllUserBeehives<UserBeehiveViewModel>(currentUser);
+            var viewModel = new AllUserBeehivesViewModel()
+            {
+                AllUserBeehives = allUserBeehives,
+            };
+            return this.View(viewModel);
+        }
+
     }
 }

@@ -73,67 +73,61 @@
 }
 else
 {
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
+            <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
+        </ol>
+    </div>
+
     <div class="all-lists-links">
         <h1>Към всички пчелини</h1>
         <div class="items">
             <div class="apiaries-list-link">
                 <a asp-controller="Apiary" asp-action="All">
-                        <h4 class="card-header">My Apiaries</h4>
-                        <i class="fas fa-arrow-circle-right"></i>
+                    <h4 class="card-header">My Apiaries</h4>
+                    <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
             <div class="apiaries-list-link">
                 <a asp-controller="Apiary" asp-action="All">
-                        <h4 class="card-header">My Apiaries</h4>
-                        <i class="fas fa-arrow-circle-right"></i>
+                    <h4 class="card-header">My Apiaries</h4>
+                    <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
             <div class="apiaries-list-link">
                 <a asp-controller="Apiary" asp-action="All">
-                        <h4 class="card-header">My Apiaries</h4>
-                        <i class="fas fa-arrow-circle-right"></i>
+                    <h4 class="card-header">My Apiaries</h4>
+                    <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
     </div>
-    <div class="all-lists-links">
-        <h1>Към всички пчелини</h1>
-        <div class="items">            
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
-                <i class="fas fa-arrow-circle-right"></i>
+
+    
+    <div class="all-lists-cards">
+        <h1>Списъци</h1>
+        <div class="lists-items">
+            <div class="apiaries-list-card">
+                <div class="apiaries-list-link"></div>
+                <a asp-controller="Apiary" asp-action="All">
+                    <h4 class="card-header"></h4>
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
-                <i class="fas fa-arrow-circle-right"></i>
+            <div class="apiaries-list-card">
+                <a asp-controller="Apiary" asp-action="All">
+                    <h4 class="card-header">My Apiaries</h4>
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
-                <i class="fas fa-arrow-circle-right"></i>
+            <div class="apiaries-list-card">
+                <a asp-controller="Apiary" asp-action="All">
+                    <h4 class="card-header">My Apiaries</h4>
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center flex-wrap m-0">
-        <div class="card position-relative apiaries-dashboard-card m-4">
-            <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Apiaries</h4></a>
-            <div class="card-body">
-                @* <strong>@Model.ApiariesCount</strong> *@
-            </div>
-            <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Apiary</h4></a>
-        </div>
-        <div class="card position-relative beehives-dashboard-card m-4">
-            <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Beehives</h4></a>
-            <div class="card-body">
-                @* <strong>@Model.ApiariesCount</strong> *@
-            </div>
-            <a asp-controller="Beehive" asp-action="Create"><h4 class="card-footer">Create Beehive</h4></a>
-        </div>
-        <div class="card position-relative queens-dashboard-card m-4">
-            <a asp-controller="Apiary" asp-action="All"><h4 class="card-header">My Queens</h4></a>
-            <div class="card-body">
-                @* <strong>@Model.ApiariesCount</strong> *@
-            </div>
-            <a asp-controller="Apiary" asp-action="Create"><h4 class="card-footer">Create Queen</h4></a>
         </div>
     </div>
 }

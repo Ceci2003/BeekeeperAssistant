@@ -19,6 +19,17 @@
             <input class="form-control" type="number" asp-for="@Model.Number" />
             <span asp-validation-for="@Model.Number"></span>
         </div>
+        @if (Model.AllApiaries != null)
+        {
+            <div>
+                <select asp-for="ApiId">
+                    @foreach (var api in Model.AllApiaries)
+                    {
+                        <option value="@api.Id">@api.Number</option>
+                    }
+                </select>
+            </div>
+        }
         <div class="form-group">
             <label asp-for="@Model.BeehiveSystem"></label>
             <select class="custom-select" asp-for="@Model.BeehiveSystem" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveSystem>()"></select>

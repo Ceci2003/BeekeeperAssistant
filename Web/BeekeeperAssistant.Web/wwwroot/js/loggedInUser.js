@@ -1,20 +1,15 @@
-﻿let beehiveList = document.querySelector(".beehive-options");
+﻿let apiList = document.querySelector(".api-options");
+let beehiveList = document.querySelector(".beehive-options");
 let queenList = document.querySelector(".queen-options");
-let apiList = document.querySelector(".api-options");
 
 let apiButton = document.querySelector(".apiary-button");
 apiButton.addEventListener("click", (e) => {
 
     if (!apiList.classList.contains("show")) {
-        backgrounToBase();
-        removeClass([beehiveList, queenList, apiList], "show")
-        apiList.classList.add("show");
-        apiButton.style.background = "#F0BB00";
+        showMenu("add", apiList, apiButton, "#F0BB00");
     }
     else {
-        removeClass([beehiveList, queenList, apiList], "show")
-        apiList.classList.remove("show");
-        apiButton.style.background = "#2B1C12";
+        showMenu("add", apiList, apiButton, "#2B1C12");
     }
 })
 
@@ -22,15 +17,10 @@ let beehiveButton = document.querySelector(".beehive-button");
 beehiveButton.addEventListener("click", (e) => {
 
     if (!beehiveList.classList.contains("show")) {
-        backgrounToBase();
-        removeClass([beehiveList, queenList, apiList], "show")
-        beehiveList.classList.add("show");
-        beehiveButton.style.background = "#F0BB00";
+        showMenu("add", beehiveList, beehiveButton, "#F0BB00");
     }
     else {
-        removeClass([beehiveList, queenList, apiList], "show")
-        beehiveList.classList.remove("show");
-        beehiveButton.style.background = "#2B1C12";
+        showMenu("add", beehiveList, beehiveButton, "#2B1C12");
     }
 })
 
@@ -39,17 +29,24 @@ let queenButton = document.querySelector(".queen-button");
 queenButton.addEventListener("click", (e) => {
 
     if (!queenList.classList.contains("show")) {
-        backgrounToBase();
-        removeClass([beehiveList, queenList, apiList], "show")
-        queenList.classList.add("show");
-        queenButton.style.background = "#F0BB00";
+        showMenu("add", queenList, queenButton, "#F0BB00");
     }
     else {
-        removeClass([beehiveList, queenList, apiList], "show")
-        queenList.classList.remove("show");
-        queenButton.style.background = "#2B1C12";
+        showMenu("add", queenList, queenButton, "#2B1C12");
     }
 })
+
+function showMenu(addOrRemove, list, button, btnBackground) {
+    backgroundToBase();
+    removeClass([beehiveList, queenList, apiList], "show");
+    if (addOrRemove == "add") {
+        list.classList.add("show");
+    }
+    else if (addOrRemove == "remove") {
+        list.classList.remove("show");
+    }
+    button.style.background = btnBackground;
+}
 
 function removeClass(elements, className) {
     elements.forEach(element => {
@@ -57,7 +54,7 @@ function removeClass(elements, className) {
     });
 }
 
-function backgrounToBase() {
+function backgroundToBase() {
     queenButton.style.background = "#2B1C12";
     beehiveButton.style.background = "#2B1C12";
     apiButton.style.background = "#2B1C12";

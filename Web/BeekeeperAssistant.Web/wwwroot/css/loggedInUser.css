@@ -1,16 +1,15 @@
-﻿
-body {
-    margin: 0%;
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-}
-
-* {
+﻿* {
     box-sizing: border-box;
 }
 
 html {
     height: 100%;
+}
+
+body {
+    margin: 0%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
 li {
@@ -169,4 +168,19 @@ hr {
 .main-document {
     display: flex;
     height: 100%;
+}
+
+.all-lists-links {
+    display: block;
+}
+
+.all-lists-links .items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.all-lists-links .apiaries-list-link a {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

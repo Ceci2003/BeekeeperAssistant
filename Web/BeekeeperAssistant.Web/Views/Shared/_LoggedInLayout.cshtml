@@ -2,7 +2,7 @@
 @{
     string greeting = "";
     if  (DateTime.Now.Hour < 12){
-    greeting = "Добро утро";
+        greeting = "Добро утро";
     }else if  (DateTime.Now.Hour < 18){
         greeting = "Добър ден";
     }else {
@@ -115,6 +115,7 @@
         </environment>
 
         @this.RenderSection("Scripts", required: false)
+    </section>
 </body>
 
 </html>

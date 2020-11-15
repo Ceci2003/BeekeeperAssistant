@@ -73,60 +73,51 @@
 }
 else
 {
-    <div aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
-            <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
+    <div class="breadcrumb">
+        <h1>Намирате се на:</h1> 
+        <ol class="breadcrumb-list">
+            <li class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index">Начало</a></li>
         </ol>
     </div>
-
-    <div class="all-lists-links">
-        <h1>Към всички пчелини</h1>
-        <div class="items">
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header">My Apiaries</h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header">My Apiaries</h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header">My Apiaries</h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
     
     <div class="all-lists-cards">
         <h1>Списъци</h1>
         <div class="lists-items">
             <div class="apiaries-list-card">
-                <div class="apiaries-list-link"></div>
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header"></h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
+                <div class="apiaries-list-card-title">
+                    <img src="./images/Apiary.png" />
+                    <p>Достъп до пчелините:</p>
+                </div>
+                <div class="apiaries-list-card-link">
+                    <a asp-controller="Apiary" asp-action="All">
+                        <p class="card-link">Към списъка</p>
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>                
             </div>
-            <div class="apiaries-list-card">
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header">My Apiaries</h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
+            <div class="beehives-list-card">
+                <div class="beehives-list-card-title">
+                    <img src="./images/Apiary.png" />
+                    <p>Достъп до кошерите:</p>
+                </div>
+                <div class="beehives-list-card-link">
+                    <a asp-controller="Apiary" asp-action="All">
+                        <p class="card-link">Към списъка</p>
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>                
             </div>
-            <div class="apiaries-list-card">
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header">My Apiaries</h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
+            <div class="queens-list-card">
+                <div class="queens-list-card-title">
+                    <img src="./images/Apiary.png" />
+                    <p>Достъп до кралиците:</p>
+                </div>
+                <div class="queens-list-card-link">
+                    <a asp-controller="Apiary" asp-action="All">
+                        <p class="card-link">Към списъка</p>
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>                
             </div>
         </div>
     </div>

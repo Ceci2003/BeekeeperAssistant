@@ -201,38 +201,119 @@ hr {
 }
 
 /* Breadcrumb */
-
 .breadcrumb {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    background-color: #110400;
 }
 
-.breadcrumb li:nth-child(n+2):before {
+.breadcrumb h1 {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+.breadcrumb-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb-list li:nth-child(n+2):before {
     content: "/";
     display: inline-block;
-    margin-left: -1.3em;
-    width: 1.3em;
+    margin: 0 0.2em;
+    color: #F29422;
 }
 
+.breadcrumb-list li a {
+    color: white;
+}
 
+.breadcrumb-list li a:hover {
+    color: #F29422;
+}
+
+.breadcrumb-item.active {
+    color: #F29422;
+}
+
+/* Idex Lists Links Cards */
 
 .all-lists-cards {
+    border: 2px solid lightgray;
+    margin: 20px;
     display: block;
+    border-radius: 5px;
+}
+
+.all-lists-cards h1 {
+    background-color: white;
+    width: 160px;
+    margin: -15px 15px 20px;
     text-align: center;
 }
 
 .all-lists-cards .lists-items {
     display: flex;
     flex-wrap: wrap;
-}
-
-.all-lists-cards .apiaries-list-card a {
-    display: flex;
-    align-items: center;
     justify-content: space-around;
-    color: white;
 }
 
-.all-lists-cards .apiaries-list-card {
-    margin: 0 auto;
-    background-color: #0e918c;
+.all-lists-cards .lists-items a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: black;
+}
+
+.all-lists-cards .lists-items a i {
+    font-size: 25px;
+    color:  #3EBA9B;
+}
+
+.all-lists-cards .lists-items img {
+    width: 50px;
+}
+
+.apiaries-list-card, .beehives-list-card, .queens-list-card {
+    border: 2px solid lightgray;
+    margin-bottom: 40px;
+}
+
+.apiaries-list-card-title, .beehives-list-card-title, .queens-list-card-title {
+    display: flex;
+    justify-content: space-between;
+    width: 290px;
+    padding: 10px;
+    color: white;
+    background-color: #3EBA9B;
+    border-bottom: 2px solid lightgray;
+}
+
+.apiaries-list-card .apiaries-list-card-title {
+    background-color: #3EBA9B;
+}
+
+.beehives-list-card .beehives-list-card-title {
+    background-color: #FEAD34;
+}
+
+.queens-list-card .queens-list-card-title {
+    background-color: #DA3C3D;
+}
+
+.apiaries-list-card-link a i {
+    color: #3EBA9B;
+}
+
+.beehives-list-card-link a i {
+    color: #FEAD34;
+}
+
+.queens-list-card-link a i {
+    color: #DA3C3D;
 }

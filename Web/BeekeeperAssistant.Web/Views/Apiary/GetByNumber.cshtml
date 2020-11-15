@@ -3,15 +3,15 @@
     ViewData["Title"] = "All Beehives";
 }
 
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Apiaries All</a></li>
-        <li class="breadcrumb-item"><a asp-controller="" asp-action="">Number</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Beehives</li>
+<div class="breadcrumb">
+    <h1>Намирате се на:</h1> 
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Пчелини - всички</a></li>
+        <li class="breadcrumb-item">Кошери Пчелин №1234-1234</li>
     </ol>
-</nav>
+</div>
+
 <h2>Number - Beehives</h2>
 <vc:apiary-info api-id="@Model.ApiaryId"></vc:apiary-info>
 <div class="pl-4 pr-4">

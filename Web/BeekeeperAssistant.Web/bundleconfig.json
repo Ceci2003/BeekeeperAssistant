@@ -19,7 +19,6 @@
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js",
-      "wwwroot/js/loggedInUser.js"
     ],
     // Optionally specify minification options
     "minify": {

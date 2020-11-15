@@ -200,24 +200,39 @@ hr {
     border-radius: 7px;
 }
 
-.all-lists-links {
+/* Breadcrumb */
+
+.breadcrumb {
+    display: flex;
+}
+
+.breadcrumb li:nth-child(n+2):before {
+    content: "/";
+    display: inline-block;
+    margin-left: -1.3em;
+    width: 1.3em;
+}
+
+
+
+.all-lists-cards {
     display: block;
     text-align: center;
 }
 
-.all-lists-links .lists-items {
+.all-lists-cards .lists-items {
     display: flex;
     flex-wrap: wrap;
 }
 
-.all-lists-links .apiaries-list-link a {
+.all-lists-cards .apiaries-list-card a {
     display: flex;
     align-items: center;
     justify-content: space-around;
     color: white;
 }
 
-.all-lists-links .apiaries-list-link {
+.all-lists-cards .apiaries-list-card {
     margin: 0 auto;
     background-color: #0e918c;
 }

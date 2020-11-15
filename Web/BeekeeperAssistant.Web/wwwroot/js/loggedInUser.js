@@ -7,10 +7,10 @@ let apiButton = document.querySelector(".apiary-button");
 apiButton.addEventListener("click", (e) => {
 
     if (!apiList.classList.contains("show")) {
-        showMenu("add", apiList, apiButton, "#2B1C12", sidebarArrows[0]);
+        showMenu("add", apiList, apiButton, "#2B1C12", sidebarArrows[1]);
     }
     else {
-        showMenu("remove", apiList, apiButton, "#F0BB00", sidebarArrows[0]);
+        showMenu("remove", apiList, apiButton, "#F0BB00", sidebarArrows[1]);
     }
 })
 
@@ -18,10 +18,10 @@ let beehiveButton = document.querySelector(".beehive-button");
 beehiveButton.addEventListener("click", (e) => {
 
     if (!beehiveList.classList.contains("show")) {
-        showMenu("add", beehiveList, beehiveButton, "#F0BB00", sidebarArrows[1]);
+        showMenu("add", beehiveList, beehiveButton, "#F0BB00", sidebarArrows[2]);
     }
     else {
-        showMenu("remove", beehiveList, beehiveButton, "#2B1C12", sidebarArrows[1]);
+        showMenu("remove", beehiveList, beehiveButton, "#2B1C12", sidebarArrows[2]);
     }
 })
 
@@ -30,10 +30,10 @@ let queenButton = document.querySelector(".queen-button");
 queenButton.addEventListener("click", (e) => {
 
     if (!queenList.classList.contains("show")) {
-        showMenu("add", queenList, queenButton, "#F0BB00", sidebarArrows[2]);
+        showMenu("add", queenList, queenButton, "#F0BB00", sidebarArrows[3]);
     }
     else {
-        showMenu("remove", queenList, queenButton, "#2B1C12", sidebarArrows[2]);
+        showMenu("remove", queenList, queenButton, "#2B1C12", sidebarArrows[3]);
     }
 })
 

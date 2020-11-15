@@ -73,6 +73,14 @@
 }
 else
 {
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
+            <li class="breadcrumb-item active" aria-current="page">Apiaries All</li>
+        </ol>
+    </div>
+
     <div class="all-lists-links">
         <h1>Към всички пчелини</h1>
         <div class="items">
@@ -98,23 +106,23 @@ else
     </div>
 
     
-    <div class="all-lists-links">
-        <h1>Към всички пчелини</h1>
+    <div class="all-lists-cards">
+        <h1>Списъци</h1>
         <div class="lists-items">
-            <div class="apiaries-list-link">
-                <div class=""></div>
+            <div class="apiaries-list-card">
+                <div class="apiaries-list-link"></div>
+                <a asp-controller="Apiary" asp-action="All">
+                    <h4 class="card-header"></h4>
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+            <div class="apiaries-list-card">
                 <a asp-controller="Apiary" asp-action="All">
                     <h4 class="card-header">My Apiaries</h4>
                     <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
-            <div class="apiaries-list-link">
-                <a asp-controller="Apiary" asp-action="All">
-                    <h4 class="card-header">My Apiaries</h4>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-            <div class="apiaries-list-link">
+            <div class="apiaries-list-card">
                 <a asp-controller="Apiary" asp-action="All">
                     <h4 class="card-header">My Apiaries</h4>
                     <i class="fas fa-arrow-circle-right"></i>

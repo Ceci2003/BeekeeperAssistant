@@ -8,7 +8,6 @@
 }
 
 <div class="breadcrumb">
-    <h1>Намирате се на:</h1> 
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
         <li class="breadcrumb-item active">Пчелини - всички</li>
@@ -16,19 +15,19 @@
     </ol>
 </div>
 
-<h2>Apiaries</h2>
+<h2>Пчелини</h2>
 
 <div class="pl-4 pr-4 text-left">
-    <a asp-controller="Apiary" asp-action="Create" class="btn btn-info text-white float-right mb-2" type="submit"><i class="fas fa-plus-square pr-2"></i><strong>Create new apiary</strong></a>
+    <a asp-controller="Apiary" asp-action="Create" class="table-create apiary" type="submit"><i class="fas fa-plus-square pr-2"></i><strong>Create new apiary</strong></a>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Number</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Address</th>
-                <th scope="col" width="90">Beehives</th>
-                <th scope="col" width="160">Edit</th>
+                <th scope="col">№ на Пчелина</th>
+                <th scope="col">Име</th>
+                <th scope="col">Тип</th>
+                <th scope="col">Адрес</th>
+                <th scope="col" width="90">Бр. Кошери</th>
+                <th scope="col" width="160">Редактиране</th>
             </tr>
         </thead>
         <tbody>
@@ -64,11 +63,11 @@
                     </td>
                     <td>
                         <form id="form-@apiary.Id" asp-action="Delete" asp-controller="Apiary" asp-route-id="@apiary.Id">
-                            <a class="btn btn-primary btn-danger text-white float-right" onclick="sendForm('form-@apiary.Id')">
+                            <a class="table-delete" onclick="sendForm('form-@apiary.Id')">
                                 <i class="far fa-trash-alt"></i>
                             </a>
                         </form>
-                        <a class="btn btn-primary btn-success text-white float-right mr-5" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id"><i class="far fa-edit"></i></a>
+                        <a class="table-edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id"><i class="far fa-edit"></i></a>
                     </td>
                 </tr>
             }

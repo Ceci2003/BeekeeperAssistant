@@ -30,6 +30,16 @@ a {
     text-decoration: none;
 }
 
+.sidebar-breadcrumb-title {
+    color: white;
+    text-align: right;
+}
+
+.sidebar-breadcrumb-title h1 {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
 .main-aside {
     display: flex;
     flex-direction: column;
@@ -52,16 +62,24 @@ a {
     align-items: center;
 }
 
-    .nav-main nav {
-        width: 100%;
-    }
+.nav-main nav {
+    width: 100%;
+}
 
 .nav-main-list-item button {
     width: 100%;
-    background-color: #2B1C12;
-    border: 1px solid #281402;
+    background-color: transparent;
     color: white;
     outline: none;
+    border: none;
+}
+
+.nav-main-list-item button {
+    /* border-top: 1px solid #281402; */
+}
+
+.nav-main-list-item button:hover {
+    background-color:  #FF7800;
 }
 
 .nav-main-list li {
@@ -188,19 +206,105 @@ hr {
 }
 
 .btn-logout {
-    background-color: red;
+    background-color: transparent;
     border: none;
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     color: white;
     font-weight: bold;
     padding: 5px 10px;
     cursor:pointer;
     border-radius: 7px;
+    font-size: 20px;
+}
+
+.btn-logout:hover {
+    background-color: red;
+}
+
+/* Tooltip */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color:  #FF7800;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FF7800 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-left {
+    top: 40%;
+    left: 104%;
+}
+
+.tooltip-right {
+    top: -5px;
+    left: 125%;
+}
+
+.tooltip-top {
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip-bottom {
+    top: 135%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip-left::after {
+    top: 50%;
+    left: 100%;
+    rotate: 270deg;
+}
+
+.tooltip-right::after {
+    top: 50%;
+    right: 100%;
+    rotate: 90deg;
+}
+
+.tooltip-top::after {
+    top: 100%;
+    left: 50%;
+}
+
+.tooltip-bottom::after {
+    bottom: 100%;
+    left: 50%;
 }
 
 /* Breadcrumb */
+
 .breadcrumb {
     display: flex;
     flex-wrap: wrap;
@@ -217,7 +321,7 @@ hr {
 
 .breadcrumb-list {
     display: flex;
-    margin: 0;
+    margin: 10px;
     padding: 0;
 }
 
@@ -295,25 +399,25 @@ hr {
 }
 
 .apiaries-list-card .apiaries-list-card-title {
-    background-color: #3EBA9B;
+    background-color: #3EBA9B !important;
 }
 
 .beehives-list-card .beehives-list-card-title {
-    background-color: #FEAD34;
+    background-color: #FEAD34 !important;
 }
 
 .queens-list-card .queens-list-card-title {
-    background-color: #DA3C3D;
+    background-color: #DA3C3D !important;
 }
 
 .apiaries-list-card-link a i {
-    color: #3EBA9B;
+    color: #3EBA9B !important;
 }
 
 .beehives-list-card-link a i {
-    color: #FEAD34;
+    color: #FEAD34 !important;
 }
 
 .queens-list-card-link a i {
-    color: #DA3C3D;
+    color: #DA3C3D !important;
 }

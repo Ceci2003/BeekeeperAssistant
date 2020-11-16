@@ -16,6 +16,9 @@
 
 <section class="main-document">
     <aside class="main-aside">
+        <div class="sidebar-breadcrumb-title">
+            <h1>Намирате се на:</h1>
+        </div>
         <section class="profile">
             <section class="profile-picture-wrapper">
                 <img src="~/images/beekeeper.png" alt="beekeeper image" />
@@ -83,7 +86,7 @@
             </nav>
         </section>
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-            <button type="submit" class="btn-logout nav-link btn btn-link text-dark">Изход</button>
+            <button type="submit" class="btn-logout nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </aside>
 </section>

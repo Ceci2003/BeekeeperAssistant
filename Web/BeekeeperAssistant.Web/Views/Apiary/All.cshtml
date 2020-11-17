@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "All Beeheives";
     char empty = '-';
-
 }
 
 <div class="breadcrumb">
@@ -15,11 +14,15 @@
     </ol>
 </div>
 
-<h2>Пчелини</h2>
-
-<div class="pl-4 pr-4 text-left">
-    <a asp-controller="Apiary" asp-action="Create" class="table-create apiary" type="submit"><i class="fas fa-plus-square pr-2"></i><strong>Create new apiary</strong></a>
-    <table class="table table-bordered">
+<div class="all-apiaries-table">
+    <h2>Пчелини</h2>
+    <div class="table-options">
+        <a asp-controller="Apiary" asp-action="Create" class="table-create-apiary" type="submit">
+            <i class="fas fa-plus-square pr-2"></i>
+            <strong>Създайте нов пчелин</strong>
+        </a>
+    </div>
+    <table>
         <thead>
             <tr>
                 <th scope="col">№ на Пчелина</th>
@@ -62,12 +65,13 @@
                         @apiary.BeehivesCount
                     </td>
                     <td>
+                        <a class="table-edit" href="/Apiary/@apiary.Number"><i class="far fa-bookmark"></i></a>
+                        <a class="table-edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id"><i class="far fa-edit"></i></a>
                         <form id="form-@apiary.Id" asp-action="Delete" asp-controller="Apiary" asp-route-id="@apiary.Id">
                             <a class="table-delete" onclick="sendForm('form-@apiary.Id')">
                                 <i class="far fa-trash-alt"></i>
                             </a>
                         </form>
-                        <a class="table-edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id"><i class="far fa-edit"></i></a>
                     </td>
                 </tr>
             }

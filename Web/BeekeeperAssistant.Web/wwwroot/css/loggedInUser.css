@@ -79,7 +79,7 @@ a {
 }
 
 .nav-main-list-item button:hover {
-    background-color:  #FF7800;
+    background-color:  #FF7800 !important;
 }
 
 .nav-main-list li {
@@ -135,7 +135,7 @@ a {
 }
 
 .nav-main-list-item ul li {
-    background-color: #705842;
+    background-color: #30221f;
     border: 1px solid #281402;
 }
 

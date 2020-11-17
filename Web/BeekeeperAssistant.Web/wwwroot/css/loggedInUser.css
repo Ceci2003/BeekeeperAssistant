@@ -237,7 +237,7 @@ hr {
     position: relative;
     display: inline-block;
 }
-  
+
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 120px;
@@ -352,16 +352,17 @@ hr {
     color: #F29422;
 }
 
-/* All Table's options */
+/* All Table's options and data */
 
 .table-options {
     display: flex;
     flex-wrap: wrap;
-    justify-content: right;
+    justify-content: right !important;
     margin: 10px auto;
+    float: right;
 }
 
-.table-options .table-create-element, 
+.table-options .table-create-element,
 .table-empty {
     display: inline-block;
     padding: 10px;
@@ -370,6 +371,95 @@ hr {
     color: white;
     border-radius: 5px;
 }
+
+.table-options .table-create-element:hover,
+.table-empty:hover {
+    background-color: #47A8F5;
+}
+
+.table-data {
+    text-align: center;
+    padding: 0 50px;
+}
+
+.table-options .table-create-element i,
+.table-options .table-empty i {
+    margin-right: 5px;
+}
+
+/* .table-data .table-create-apiary i {
+    margin-right: 5px;
+} */
+
+.table-data table {
+    border-collapse: collapse;
+    /* margin: 0 50px; */
+    width: 100%;
+}
+
+.table-data td, th {
+    border: 1px solid lightgray;
+    padding: 0.5em;
+}
+
+.table-data table a {
+    color: #038C8C;
+}
+
+.table-data tr td:last-child {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5em 20px;
+}
+
+.table-data tr a {
+    cursor: pointer;
+}
+
+/* View Data Table's options and data */
+
+.data-view {
+    border: 2px solid lightgray;
+    margin: 20px 50px;
+    display: block;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.data-view h2 {
+    background-color: white;
+    width: 300px;
+    margin: -20px 15px;
+    text-align: center;
+}
+
+.data-view div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.data-view div i {
+    font-size: 100px;
+    margin-left: auto;
+}
+
+.data-view table {
+    margin: 30px auto;
+    font-size: 20px;
+    /* width: 100%; */
+}
+
+.data-view table td:first-child {
+    text-align: end;
+    padding: 5px 10px 5px 0px;
+}
+
+.data-view table td:last-child {
+    text-align: left;
+}
+
 /* Idex Lists Links Cards */
 
 .all-lists-cards {
@@ -450,44 +540,14 @@ hr {
 
 /* All Apiaries */
 
-.all-apiaries-table {
-    text-align: center;
-    padding: 0 50px;
-}
-
-.all-apiaries-table .table-create-apiary {
+.table-data .table-create-apiary {
     width: 250px;
 }
 
-.all-apiaries-table .table-create-apiary i {
-    margin-right: 5px;
-}
-
-.all-apiaries-table table {
-    border-collapse: collapse;
-    /* margin: 0 50px; */
-    width: 100%;
-}
-
-.all-apiaries-table td, th {
-    border: 1px solid lightgray;
-    padding: 0.5em;
-}
-
-.all-apiaries-table table a {
+.table-data.apiaries table a {
     color: #038C8C;
 }
 
-.all-apiaries-table tr a {
-    cursor: pointer;
-}
-
-.all-apiaries-table tr td:last-child {
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 20px;
-}
-
-.all-apiaries-table .table-create-apiary {
+.table-data .table-create-apiary {
     color: #038C8C;
 }

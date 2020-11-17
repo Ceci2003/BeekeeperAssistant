@@ -1,6 +1,36 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.ApiaryDataViewModel
 
-<h1 id="apiaryNumber">@Model.Adress</h1>
-<h1>@Model.ApiaryType</h1>
-<h1>@Model.Name</h1>
-<h1>@Model.Number</h1>
+<div class="data-view">
+    <h2>Информация за пчелина</h2>
+    <div>
+        <i class="fas fa-book"></i>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Номер на пчелина:</td>
+                    <td id="apiaryNumberData">@Model.Number</td>
+                </tr>
+                <tr>
+                    <td>Адрес на пчелина:</td>
+                    <td>@Model.Adress</td>
+                </tr>
+                <tr>
+                    <td>Име на пчелина:</td>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td>Тип на пчелина:</td>
+                    <td>@Model.ApiaryType</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="edit">
+                        <a class="table-edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@Model.Id">
+                            Редактирайте пчелина
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

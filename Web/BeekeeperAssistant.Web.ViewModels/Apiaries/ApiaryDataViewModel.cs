@@ -9,6 +9,8 @@
 
     public class ApiaryDataViewModel : IMapFrom<Apiary>
     {
+        public string Id { get; set; }
+
         public string Number { get; set; }
 
         public ApiaryType ApiaryType { get; set; }

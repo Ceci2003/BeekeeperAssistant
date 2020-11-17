@@ -146,6 +146,14 @@ a {
     padding: 10px 0px;
 }
 
+    .nav-main-list-item ul li a:hover {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0px;
+        background-color: #4d3632;
+    }
+
 .nav-main-list-item .queen-options,
 .nav-main-list-item .beehive-options,
 .nav-main-list-item .api-options {
@@ -344,15 +352,6 @@ hr {
     color: #F29422;
 }
 
-/* All Table's options */
-
-.table-options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: right;
-    margin: 10px auto;
-}
-
 /* Idex Lists Links Cards */
 
 .all-lists-cards {
@@ -429,49 +428,4 @@ hr {
 
 .queens-list-card-link a i {
     color: #DA3C3D !important;
-}
-
-/* All Apiaries */
-
-.all-apiaries-table {
-    text-align: center;
-    padding: 0 50px;
-}
-
-.all-apiaries-table .table-options .table-create-apiary {
-    display: inline-block;
-    padding: 10px;
-    width: 250px;
-    background-color: #038C8C;
-    color: white;
-    border-radius: 5px;
-}
-
-.all-apiaries-table .table-options .table-create-apiary i {
-    margin-right: 5px;
-}
-
-.all-apiaries-table table {
-    border-collapse: collapse;
-    /* margin: 0 50px; */
-    width: 100%;
-}
-
-.all-apiaries-table td, th {
-    border: 1px solid lightgray;
-    padding: 0.5em;
-}
-
-.all-apiaries-table table a {
-    color: #038C8C;
-}
-
-.all-apiaries-table tr a {
-    cursor: pointer;
-}
-
-.all-apiaries-table tr td:last-child {
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 20px;
 }

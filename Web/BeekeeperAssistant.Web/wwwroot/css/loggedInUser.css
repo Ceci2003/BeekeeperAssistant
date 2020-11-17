@@ -79,7 +79,7 @@ a {
 }
 
 .nav-main-list-item button:hover {
-    background-color:  #FF7800;
+    background-color:  #FF7800 !important;
 }
 
 .nav-main-list li {
@@ -135,7 +135,7 @@ a {
 }
 
 .nav-main-list-item ul li {
-    background-color: #705842;
+    background-color: #30221f;
     border: 1px solid #281402;
 }
 
@@ -145,6 +145,14 @@ a {
     justify-content: center;
     padding: 10px 0px;
 }
+
+    .nav-main-list-item ul li a:hover {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0px;
+        background-color: #4d3632;
+    }
 
 .nav-main-list-item .queen-options,
 .nav-main-list-item .beehive-options,
@@ -362,16 +370,6 @@ hr {
     color: white;
     border-radius: 5px;
 }
-
-/* .table-empty {
-    display: inline-block;
-    padding: 10px;
-    width: 250px;
-    background-color: #038C8C;
-    color: white;
-    border-radius: 5px;
-} */
-
 /* Idex Lists Links Cards */
 
 .all-lists-cards {

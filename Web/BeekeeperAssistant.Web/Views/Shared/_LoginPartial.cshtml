@@ -17,10 +17,10 @@
             <a class="@if(this.ViewData["Title"].ToString() == "Начало"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
         </li>
         <li>
-            <a class="@if(this.ViewData["Title"].ToString() == "За нас"){@activeClass}" href="#">За нас</a>
+            <a class="@if(this.ViewData["Title"].ToString() == "За нас"){@activeClass}" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
         </li>
         <li>
-            <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" href="#">Контакти</a>
+            <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a>
         </li>
     </ul>
     <ul class="ul-login-register">

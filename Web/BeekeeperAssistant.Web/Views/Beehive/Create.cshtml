@@ -3,22 +3,21 @@
     ViewData["Title"] = "Creat Beehivee";
 }
 
-<div class="breadcrumb">
-    <h1>Намирате се на:</h1> 
+<nav class="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
         <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Кошери - всички</a></li>
-        <li class="breadcrumb-item">Създай</li>
+        <li class="breadcrumb-item active">Създай</li>
     </ol>
-</div>
+</nav>
 
-<nav aria-label="breadcrumb">
+@*<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
         <li class="breadcrumb-item"><a asp-controller="Beehives" asp-action="All">Beehives All</a></li>
         <li class="breadcrumb-item">Create</li>
     </ol>
-</nav>
+</nav>*@
 <h1>Beehive: @this.ViewData["ApiNumber"]</h1>
 <div class="beehive-create text-left">
     <form asp-controller="Beehive" asp-action="Create">

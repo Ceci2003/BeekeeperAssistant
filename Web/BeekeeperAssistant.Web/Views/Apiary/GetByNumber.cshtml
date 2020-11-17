@@ -7,51 +7,51 @@
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
         <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Пчелини - всички</a></li>
-        <li class="breadcrumb-item active">Кошери Пчелин №1234-1234</li>
+        <li class="breadcrumb-item active">Кошери Пчелин №<span id="apiaryNumber"></span></li>
     </ol>
 </div>
 
-<h2>Number - Beehives</h2>
+<h2>№<span id="apiaryNumber"></span> - Beehives</h2>
 <vc:apiary-info api-id="@Model.ApiaryId"></vc:apiary-info>
 <div class="pl-4 pr-4">
     <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId" class="btn btn-success text-white float-right mb-2"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Number</th>
-                <th scope="col">Power</th>
-                <th scope="col">System</th>
-                <th scope="col">Type</th>
-                <th scope="col">Created On</th>
-                <th scope="col" width="160">Edit</th>
+                <th scope="col">№ на Кошер</th>
+                <th scope="col">Силла</th>
+                <th scope="col">Система</th>
+                <th scope="col">Тип</th>
+                <th scope="col">Създаден на</th>
+                <th scope="col" width="160">Редактиране</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var beehive in Model.AllUserBeehives)
             {
-            <tr>
-                <td scope="row">
-                    @beehive.Number
-                </td>
-                <td scope="row">
-                    @beehive.BeehivePower
-                </td>
-                <td scope="row">
-                    @beehive.BeehiveSystem
-                </td>
-                <td scope="row">
-                    @beehive.BeehiveType
-                </td>
-                <td scope="row">
-                    @beehive.CreatedOn.ToString("dd - MMMM - yyyy")
-                </td>
-                <td>
+                <tr>
+                    <td scope="row">
+                        @beehive.Number
+                    </td>
+                    <td scope="row">
+                        @beehive.BeehivePower
+                    </td>
+                    <td scope="row">
+                        @beehive.BeehiveSystem
+                    </td>
+                    <td scope="row">
+                        @beehive.BeehiveType
+                    </td>
+                    <td scope="row">
+                        @beehive.CreatedOn.ToString("dd - MMMM - yyyy")
+                    </td>
+                    <td>
                         <a class="btn btn-primary btn-danger text-white float-right">
                             <i class="far fa-trash-alt"></i>
                         </a>
-                    <a class="btn btn-primary btn-success text-white float-right mr-5"><i class="far fa-edit"></i></a>
-                </td>
-            </tr>
+                        <a class="btn btn-primary btn-success text-white float-right mr-5"><i class="far fa-edit"></i></a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

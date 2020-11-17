@@ -59,7 +59,7 @@ function removeClass(elements, className) {
 }
 
 function backgroundToBase() {
-    queenButton.style.background = "#2B1C12";
-    beehiveButton.style.background = "#2B1C12";
-    apiButton.style.background = "#2B1C12";
+    queenButton.style.background = "#110400";
+    beehiveButton.style.background = "#110400";
+    apiButton.style.background = "#110400";
 }

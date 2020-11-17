@@ -353,6 +353,25 @@ hr {
     margin: 10px auto;
 }
 
+.table-options .table-create-element, 
+.table-empty {
+    display: inline-block;
+    padding: 10px;
+    width: 250px;
+    background-color: #038C8C;
+    color: white;
+    border-radius: 5px;
+}
+
+/* .table-empty {
+    display: inline-block;
+    padding: 10px;
+    width: 250px;
+    background-color: #038C8C;
+    color: white;
+    border-radius: 5px;
+} */
+
 /* Idex Lists Links Cards */
 
 .all-lists-cards {
@@ -438,16 +457,11 @@ hr {
     padding: 0 50px;
 }
 
-.all-apiaries-table .table-options .table-create-apiary {
-    display: inline-block;
-    padding: 10px;
+.all-apiaries-table .table-create-apiary {
     width: 250px;
-    background-color: #038C8C;
-    color: white;
-    border-radius: 5px;
 }
 
-.all-apiaries-table .table-options .table-create-apiary i {
+.all-apiaries-table .table-create-apiary i {
     margin-right: 5px;
 }
 
@@ -474,4 +488,8 @@ hr {
     display: flex;
     justify-content: space-around;
     padding: 8px 20px;
+}
+
+.all-apiaries-table .table-create-apiary {
+    color: #038C8C;
 }

@@ -79,48 +79,51 @@ else
         </ol>
     </div>
     
-    <div class="all-lists-cards">
-        <h1>Списъци</h1>
-        <div class="lists-items">
-            <div class="apiaries-list-card">
-                <div class="apiaries-list-card-title">
-                    <img src="./images/Apiary.png" />
-                    <p>Достъп до пчелините:</p>
+    <div class="page-content">
+        <div class="all-lists-cards">
+            <h1>Списъци</h1>
+            <div class="lists-items">
+                <div class="apiaries-list-card">
+                    <div class="apiaries-list-card-title">
+                        <img src="./images/Apiary.png" />
+                        <p>Достъп до пчелините:</p>
+                    </div>
+                    <div class="apiaries-list-card-link">
+                        <a asp-controller="Apiary" asp-action="All" class="tooltip">
+                            <span class="tooltip-text tooltip-top">Виж всички пчелини</span>
+                            <p class="card-link">Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>                
                 </div>
-                <div class="apiaries-list-card-link">
-                    <a asp-controller="Apiary" asp-action="All" class="tooltip">
-                        <span class="tooltip-text tooltip-top">Виж всички пчелини</span>
-                        <p class="card-link">Към списъка</p>
-                        <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>                
-            </div>
-            <div class="beehives-list-card">
-                <div class="beehives-list-card-title">
-                    <img src="./images/Beehive.png" />
-                    <p>Достъп до кошерите:</p>
+                <div class="beehives-list-card">
+                    <div class="beehives-list-card-title">
+                        <img src="./images/Beehive.png" />
+                        <p>Достъп до кошерите:</p>
+                    </div>
+                    <div class="beehives-list-card-link">
+                        <a asp-controller="Beehive" asp-action="All" class="tooltip">
+                            <span class="tooltip-text tooltip-top">Виж всички кошери</span>
+                            <p class="card-link">Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>                
                 </div>
-                <div class="beehives-list-card-link">
-                    <a asp-controller="Beehive" asp-action="All" class="tooltip">
-                        <span class="tooltip-text tooltip-top">Виж всички кошери</span>
-                        <p class="card-link">Към списъка</p>
-                        <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>                
-            </div>
-            <div class="queens-list-card">
-                <div class="queens-list-card-title">
-                    <img src="./images/Apiary.png" />
-                    <p>Достъп до цариците:</p>
+                <div class="queens-list-card">
+                    <div class="queens-list-card-title">
+                        <img src="./images/Apiary.png" />
+                        <p>Достъп до цариците:</p>
+                    </div>
+                    <div class="queens-list-card-link">
+                        <a asp-controller="Apiary" asp-action="All" class="tooltip">
+                            <span class="tooltip-text tooltip-top">Виж всички кралици</span>
+                            <p class="card-link">Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>                
                 </div>
-                <div class="queens-list-card-link">
-                    <a asp-controller="Apiary" asp-action="All" class="tooltip">
-                        <span class="tooltip-text tooltip-top">Виж всички кралици</span>
-                        <p class="card-link">Към списъка</p>
-                        <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>                
             </div>
         </div>
     </div>
+    
 }

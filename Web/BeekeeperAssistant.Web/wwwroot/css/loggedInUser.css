@@ -235,6 +235,13 @@ hr {
     color: #B21B05;
 }
 
+/* Page Contend */
+.page-content {
+    margin-top: 40px;
+    padding-top: 10px;
+}
+
+
 /* Tooltip */
 
 .tooltip {

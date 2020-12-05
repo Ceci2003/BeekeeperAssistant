@@ -11,31 +11,33 @@
     </ol>
 </div>
 
-<div class="apiary-edit text-left">
-    <form asp-controller="Apiary" asp-action="Edit">
-        <h1>Edit Apiary</h1>
-        <h3>@Model.Number</h3>
-        <div class="form-group">
-            <label asp-for="@Model.Number"></label>
-            <input type="text" asp-for="@Model.Number" class="form-control" />
-            <div><span class="text-danger" asp-validation-for="@Model.Number"></span></div>
+<div class="page-content">
+    <div class="apiary-edit text-left">
+        <form asp-controller="Apiary" asp-action="Edit">
+            <h1>Edit Apiary</h1>
+            <h3>@Model.Number</h3>
+            <div class="form-group">
+                <label asp-for="@Model.Number"></label>
+                <input type="text" asp-for="@Model.Number" class="form-control" />
+                <div><span class="text-danger" asp-validation-for="@Model.Number"></span></div>
 
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Name"></label>
-            <input type="text" asp-for="@Model.Name" class="form-control" />
-            <span asp-validation-for="@Model.Name" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Adress"></label>
-            <input type="text" asp-for="@Model.Adress" class="form-control" />
-            <span asp-validation-for="@Model.Adress" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.ApiaryType"></label>
-            <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-            <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
-        </div>
-        <input type="submit" class="submit-btn mt-3" value="Edit Apiary" />
-    </form>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Name"></label>
+                <input type="text" asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Adress"></label>
+                <input type="text" asp-for="@Model.Adress" class="form-control" />
+                <span asp-validation-for="@Model.Adress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ApiaryType"></label>
+                <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+                <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
+            </div>
+            <input type="submit" class="submit-btn mt-3" value="Edit Apiary" />
+        </form>
+    </div>
 </div>

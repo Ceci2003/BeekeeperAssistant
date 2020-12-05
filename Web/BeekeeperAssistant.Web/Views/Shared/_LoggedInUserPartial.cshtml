@@ -15,78 +15,80 @@
 }
 @* BUTTON SHULD NOT BE IN 'A' TAG *@
 <section class="main-document">
-    <aside class="main-aside">
+    <div class="main-aside">
         <div class="sidebar-breadcrumb-title">
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                <button type="submit" class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+            </form>
             <h1>Намирате се на:</h1>
         </div>
-        <section class="profile">
-            <section class="profile-picture-wrapper">
-                <img src="~/images/beekeeper.png" alt="beekeeper image" />
-            </section>
-            <span class="greeting-message">@greeting, @User.Identity.Name!</span>
-            <hr class="line">
-            <a asp-area="Identity" asp-page="/Account/Manage/Index">
-                <button>Моят профил</button>
-            </a>
-        </section>
-        <section class="nav-main">
-            <nav>
-                <ul class="nav-main-list">
-                    <li class="nav-main-list-item">
-                        <a asp-controller="Home" asp-action="Index">
-                            <button class="home-button nav-button">
-                                <span class="btn-text">Начало</span>
-                                <i class="fas fa-angle-left" style="color: transparent;"></i>
+        <div class="aside-content">
+            <div class="profile">
+                <div class="profile-picture-wrapper">
+                    <img src="~/images/beekeeper.png" alt="beekeeper image" />
+                </div>
+                <span class="greeting-message">@greeting, @User.Identity.Name!</span>
+                <hr class="line">
+                <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                    <button>Моят профил</button>
+                </a>
+            </div>
+            <section class="nav-main">
+                <nav>
+                    <ul class="nav-main-list">
+                        <li class="nav-main-list-item">
+                            <a asp-controller="Home" asp-action="Index">
+                                <button class="home-button nav-button">
+                                    <span class="btn-text">Начало</span>
+                                    <i class="fas fa-angle-left" style="color: transparent;"></i>
+                                </button>
+                            </a>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="apiary-button nav-button">
+                                <span class="btn-text">Пчелини</span>
+                                <i class="fas fa-angle-left"></i>
                             </button>
-                        </a>
-                    </li>
-                    <li class="nav-main-list-item">
-                        <button class="apiary-button nav-button">
-                            <span class="btn-text">Пчелини</span>
-                            <i class="fas fa-angle-left"></i>
-                        </button>
-                        <ul class="api-options">
-                            <li>
-                                <a asp-controller="Apiary" asp-action="Create">Добави пчелин</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Apiary" asp-action="All">Всички пчелини</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-main-list-item">
-                        <button class="beehive-button nav-button">
-                            <span class="btn-text">Кошери</span>
-                            <i class="fas fa-angle-left"></i>
-                        </button>
-                        <ul class="beehive-options">
-                            <li>
-                                <a asp-controller="Beehive" asp-action="Create">Добави кошер</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Beehive" asp-action="All">Всички кошери</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-main-list-item">
-                        <button class="queen-button nav-button">
-                            <span class="btn-text">Царици</span>
-                            <i class="fas fa-angle-left"></i>
-                        </button>
-                        <ul class="queen-options">
-                            <li>
-                                <a asp-controller="Queen" asp-action="Create">Добави царица</a>
-                            </li>
-                            <li>
-                                <a asp-controller="Queen" asp-action="All">Всички царици</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </section>
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-            <button type="submit" class="btn-logout nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
-    </aside>
+                            <ul class="api-options">
+                                <li>
+                                    <a asp-controller="Apiary" asp-action="Create">Добави пчелин</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Apiary" asp-action="All">Всички пчелини</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="beehive-button nav-button">
+                                <span class="btn-text">Кошери</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="beehive-options">
+                                <li>
+                                    <a asp-controller="Beehive" asp-action="Create">Добави кошер</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Beehive" asp-action="All">Всички кошери</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-main-list-item">
+                            <button class="queen-button nav-button">
+                                <span class="btn-text">Царици</span>
+                                <i class="fas fa-angle-left"></i>
+                            </button>
+                            <ul class="queen-options">
+                                <li>
+                                    <a asp-controller="Queen" asp-action="Create">Добави царица</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Queen" asp-action="All">Всички царици</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </section>  
+        </div>      
+    </div>
 </section>

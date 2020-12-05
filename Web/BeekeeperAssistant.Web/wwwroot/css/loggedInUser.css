@@ -31,6 +31,8 @@ a {
 }
 
 .sidebar-breadcrumb-title {
+    display: flex;
+    justify-content: space-between;
     color: white;
     text-align: right;
 }
@@ -47,6 +49,10 @@ a {
     width: 300px;
     height: 100%;
     position: relative;
+}
+
+.aside-content {
+    overflow-y: scroll;
 }
 
 .profile {
@@ -72,14 +78,6 @@ a {
     color: white;
     outline: none;
     border: none;
-}
-
-.nav-main-list-item button {
-    /* border-top: 1px solid #281402; */
-}
-
-.nav-main-list-item button:hover {
-    background-color:  #FF7800 !important;
 }
 
 .nav-main-list li {
@@ -118,6 +116,10 @@ a {
     cursor: pointer;
 }
 
+.nav-button:hover {
+    background-color:  #FF7800 !important;
+}
+
 .btn-text {
     display: block;
     margin: 0 auto;
@@ -134,25 +136,25 @@ a {
     transform: rotate(-90deg);
 }
 
-.nav-main-list-item ul li {
-    background-color: #30221f;
-    border: 1px solid #281402;
+.api-options li {
+    background-color: #110400;
+    /* border: 1px solid #110400; */
 }
 
-.nav-main-list-item ul li a {
+.api-options li a {
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 10px 0px;
 }
 
-    .nav-main-list-item ul li a:hover {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 10px 0px;
-        background-color: #4d3632;
-    }
+.api-options li a:hover {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+    background-color:  #FF7800 !important;
+}
 
 .nav-main-list-item .queen-options,
 .nav-main-list-item .beehive-options,
@@ -208,6 +210,7 @@ hr {
     position:fixed;
     top:0;
 }
+
 .main-content {
     margin-left: 300px;
     height:100%;
@@ -216,9 +219,9 @@ hr {
 .btn-logout {
     background-color: transparent;
     border: none;
-    position: absolute;
+    /* position: absolute;
     bottom: 10px;
-    right: 10px;
+    right: 10px; */
     color: white;
     font-weight: bold;
     padding: 5px 10px;
@@ -228,7 +231,8 @@ hr {
 }
 
 .btn-logout:hover {
-    background-color: red;
+    /* background-color: red; */
+    color: #B21B05;
 }
 
 /* Tooltip */
@@ -314,11 +318,10 @@ hr {
 /* Breadcrumb */
 
 .breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
     font-size: 16px;
-    color: white;
     background-color: #110400;
 }
 

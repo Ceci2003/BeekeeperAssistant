@@ -12,32 +12,33 @@
 </div>
 
 <div class="page-content">
-    <div class="apiary-edit text-left">
+    <div class="apiary create-edit edit">
         <form asp-controller="Apiary" asp-action="Edit">
             <h1>Edit Apiary</h1>
             <h3>@Model.Number</h3>
-            <div class="form-group">
+            <div class="form-group number">
                 <label asp-for="@Model.Number"></label>
                 <input type="text" asp-for="@Model.Number" class="form-control" />
-                <div><span class="text-danger" asp-validation-for="@Model.Number"></span></div>
-
+                <span class="text-danger" asp-validation-for="@Model.Number"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group name">
                 <label asp-for="@Model.Name"></label>
                 <input type="text" asp-for="@Model.Name" class="form-control" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group adress">
                 <label asp-for="@Model.Adress"></label>
                 <input type="text" asp-for="@Model.Adress" class="form-control" />
                 <span asp-validation-for="@Model.Adress" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group type">
                 <label asp-for="@Model.ApiaryType"></label>
                 <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
                 <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
             </div>
-            <input type="submit" class="submit-btn mt-3" value="Edit Apiary" />
+            <div class="form-group submit">
+                <input type="submit" class="submit-btn mt-3" value="Edit Apiary" />
+            </div>
         </form>
     </div>
 </div>

@@ -30,6 +30,8 @@ a {
     text-decoration: none;
 }
 
+/* Sidebar */
+
 .sidebar-breadcrumb-title {
     display: flex;
     justify-content: space-between;
@@ -235,9 +237,32 @@ hr {
     color: #B21B05;
 }
 
+/* Scrollbar */
+    /* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+    /* Track */
+::-webkit-scrollbar-track {
+    background: #110400; 
+}
+
+    /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6F6968; 
+}
+
+    /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #5C5655; 
+}
+
+
 /* Page Contend */
 .page-content {
     margin-top: 40px;
+    margin-bottom: 40px;
     padding-top: 10px;
 }
 
@@ -412,14 +437,14 @@ hr {
     padding: 0.5em;
 }
 
-.table-data table a {
+.table-data table td:first-child a {
     color: #038C8C;
 }
 
 .table-data tr td:last-child {
     display: flex;
     justify-content: space-around;
-    padding: 0.5em 20px;
+    padding: 10px 20px;
 }
 
 .table-data tr a {
@@ -468,6 +493,34 @@ hr {
 
 .data-view table td:last-child {
     text-align: left;
+}
+
+.table-read {
+    color: #038C8C;
+}
+
+.table-edit {
+    color: #008000;
+}
+
+.table-delete {
+    color: #B21B05;
+}
+
+.td-strong {
+    background-color: #88B85C;
+}
+
+.td-medium {
+    background-color: #F0B66B;
+}
+
+.td-weak {
+    background-color: #D9695D;
+}
+
+.td-strong, .td-medium, .td-weak {
+    color: white;
 }
 
 /* Idex Lists Links Cards */
@@ -554,10 +607,103 @@ hr {
     width: 250px;
 }
 
-.table-data.apiaries table a {
+/* .table-data.apiaries table a {
     color: #038C8C;
-}
+} */
 
 .table-data .table-create-apiary {
     color: #038C8C;
+}
+
+/* Apiary Info Page */
+.data-view.apiary img {
+    height: 250px;
+    margin: 30px 0 0 auto;
+}
+
+/* Create Edit Forms */
+.create-edit {
+    text-align: center;
+    margin: 0 auto;
+    width: 315px;
+}
+
+.form-group {
+    display: grid;
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.form-group {
+    display: grid;
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.form-group input[type=submit],
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group input,
+.form-group select {
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border: 3px solid #F29422;
+}
+
+.form-group.submit input {
+    justify-self: center;
+    width: 50%;
+    background-color: #2d9932;
+    border: none;
+    padding: 5px;
+    color: white;
+}
+
+.form-group.submit input:hover {
+    background-color: #88B85C;
+}
+
+.form-group.submit input:focus {
+    border: none;
+}
+
+/* Create Edit Apiary */
+.apiary.create-edit .form-group.number .apiary-number {
+    display: flex;
+    justify-content: center;
+}
+
+.apiary.create-edit .form-group.number .apiary-number .city-code input {
+    text-align: right;
+}
+
+.apiary.create-edit .form-group.number .apiary-number .city-code,
+.apiary.create-edit .form-group.number .apiary-number .farm-number {
+    display: grid;
+    width: 100%;
+}
+
+.apiary.create-edit .form-group.number .apiary-number .city-code input,
+.apiary.create-edit .form-group.number .apiary-number .farm-number input {
+    width: 150px;
+}
+
+.apiary.create-edit .form-group.number .apiary-number .number-separator {
+    display: flex;
+    align-self: end;
+    padding: 1px 5px;
+}
+
+.apiary.create-edit.create .form-group.submit input {
+    background-color: #47A8F5;
+}
+
+.apiary.create-edit.create .form-group.submit input:hover {
+    background-color: #3EBA9B;
 }

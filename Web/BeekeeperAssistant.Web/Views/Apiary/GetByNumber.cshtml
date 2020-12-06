@@ -1,6 +1,11 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
+﻿@*@using System;*@
+@model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
 @{
     ViewData["Title"] = "All Beehives";
+    var classesDict = new Dictionary<string, string>();
+    classesDict.Add("strong", "td-strong");
+    classesDict.Add("medium", "td-medium");
+    classesDict.Add("weak", "td-weak");
 }
 
 <div class="breadcrumb">
@@ -37,11 +42,11 @@
             <tbody>
                 @foreach (var beehive in Model.AllUserBeehives)
                 {
-                    <tr>
+                    <tr>    @*class="@classesDict[beehive.BeehivePower.ToString().ToLower()]"*@
                         <td scope="row">
                             @beehive.Number
                         </td>
-                        <td scope="row">
+                        <td scope="row" class="@classesDict[beehive.BeehivePower.ToString().ToLower()]">
                             @beehive.BeehivePower
                         </td>
                         <td scope="row">

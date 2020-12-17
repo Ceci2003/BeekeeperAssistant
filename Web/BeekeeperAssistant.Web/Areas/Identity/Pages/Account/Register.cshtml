@@ -4,29 +4,67 @@
     ViewData["Title"] = "Регистрация";
 }
 
-<div class="login-register-form">
-    <h1>@ViewData["Title"]</h1>
+<div class="login-register-form-back">
+    <div class="form login-register-form">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h1>@ViewData["Title"]</h1>
             <h4>Създай нов профил.</h4>
             <hr />
-            @* <div asp-validation-summary="All" class="text-danger"></div> *@
+
+            <!-- <div asp-validation-summary="All" class="text-danger"></div> -->
+
             <div class="input-group">
-                <input type="text" asp-for="Input.Email" required="" />
-                <label asp-for="Input.Email">Имейл</label>
+                <label class="field field_v2">
+                    <i class="fas fa-envelope"></i>
+                    <input class="field__input" type="text" asp-for="Input.Email" required="" placeholder="melnik909@ya.ru" />
+                    <span class="field__label-wrap">
+                        <span class="field__label" asp-for="Input.Email">Имейл</span>
+                    </span>
+                </label>
                 <span asp-validation-for="Input.Email"></span>
             </div>
 
             <div class="input-group">
-                <input type="password" asp-for="Input.Password" required="" />
-                <label asp-for="Input.Password">Парола</label>
+                <label class="field field_v2">
+                    <i class="fas fa-lock"></i>
+                    <input id="input-password" class="field__input" type="password" asp-for="Input.Password" required="" placeholder="" />
+                    <span class="field__label-wrap">
+                        <span class="field__label" asp-for="Input.Password">Парола</span>
+                    </span>
+                    <a id="password-eye" onclick="passwordShowHide()" href="#"><i class="fas fa-eye"></i></a>
+                </label>
                 <span asp-validation-for="Input.Password"></span>
             </div>
 
             <div class="input-group">
+                <label class="field field_v2">
+                    <i class="fas fa-lock"></i>
+                    <input id="input-re-password" class="field__input" type="password" asp-for="Input.ConfirmPassword" required="" placeholder="" />
+                    <span class="field__label-wrap">
+                        <span class="field__label" asp-for="Input.ConfirmPassword">Потвърдете паролата</span>
+                    </span>
+                    <a id="re-password-eye" onclick="rePasswordShowHide()" href="#"><i class="fas fa-eye"></i></a>
+                </label>
+                <span asp-validation-for="Input.ConfirmPassword"></span>
+            </div>
+
+            <!-- <div class="input-group">
+                <input type="text" asp-for="Input.Email" required="" />
+                <label asp-for="Input.Email">Имейл</label>
+                <span asp-validation-for="Input.Email"></span>
+            </div> -->
+
+            <!-- <div class="input-group">
+                <input type="password" asp-for="Input.Password" required="" />
+                <label asp-for="Input.Password">Парола</label>
+                <span asp-validation-for="Input.Password"></span>
+            </div> -->
+
+            <!-- <div class="input-group">
                 <input type="password" asp-for="Input.ConfirmPassword" required="" />
                 <label asp-for="Input.ConfirmPassword">Потвърдете паролата</label>
                 <span asp-validation-for="Input.ConfirmPassword"></span>
-            </div>
+            </div> -->
 
             <button type="submit" class="submit-btn">@ViewData["Title"]</button>
 

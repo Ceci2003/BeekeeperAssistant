@@ -238,22 +238,22 @@ hr {
 }
 
 /* Scrollbar */
-    /* width */
+/* width */
 ::-webkit-scrollbar {
     width: 15px;
 }
 
-    /* Track */
+/* Track */
 ::-webkit-scrollbar-track {
     background: #110400; 
 }
 
-    /* Handle */
+/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #6F6968; 
 }
 
-    /* Handle on hover */
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #5C5655; 
 }
@@ -261,7 +261,7 @@ hr {
 
 /* Page Contend */
 .page-content {
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 40px;
     padding-top: 10px;
 }

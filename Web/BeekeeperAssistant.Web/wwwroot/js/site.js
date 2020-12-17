@@ -1,4 +1,33 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function passwordShowHide() {
+    const input = document.querySelector('#input-password');
+    const eye = document.querySelector('#password-eye');
+    if (input.type == 'password') {
+        input.type = 'text';
+        eye.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+        input.type = 'password';
+        eye.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+}
 
-// Write your JavaScript code.
+function rePasswordShowHide() {
+    const input = document.querySelector('#input-re-password');
+    const eye = document.querySelector('#re-password-eye');
+    if (input.type == 'password') {
+        input.type = 'text';
+        eye.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+        input.type = 'password';
+        eye.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+}
+
+
+// if(document.getElementsByClassName("field-validation-error").length != 0)
+// {
+//     document.querySelectorAll(".submit-btn")[0].disabled=true;
+// }
+// else
+// {
+//     document.querySelectorAll(".submit-btn")[0].disabled=false
+// }

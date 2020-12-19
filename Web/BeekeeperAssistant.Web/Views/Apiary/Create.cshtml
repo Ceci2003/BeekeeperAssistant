@@ -1,20 +1,20 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.CreateApiaryInputModel
 @{
-    ViewData["Title"] = "Create Apiary";
+    ViewData["Title"] = "Добавете пчелин";
 }
 
 <div class="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
         <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Пчелини - всички</a></li>
-        <li class="breadcrumb-item active">Създай</li>
+        <li class="breadcrumb-item active">Добавете пчелин</li>
     </ol>
 </div>
 
 <div class="page-content">
     <div class="apiary create-edit create">
         <form asp-controller="Apiary" asp-action="Create">
-            <h1>Add new apiary</h1>
+            <h1>@this.ViewData["Title"]</h1>
             <div class="form-group number">
                 <label>Number</label>
                 <div class="apiary-number">

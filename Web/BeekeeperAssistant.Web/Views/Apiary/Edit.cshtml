@@ -1,6 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.EditApiaryInputModel
 @{
-    ViewData["Title"] = $"Edit Apiary {Model.Number}";
+    ViewData["Title"] = $"Редактиране пчелин: {Model.Number}";
 }
 
 <div class="breadcrumb">
@@ -14,7 +14,7 @@
 <div class="page-content">
     <div class="apiary create-edit edit">
         <form asp-controller="Apiary" asp-action="Edit">
-            <h1>Edit Apiary</h1>
+            <h1>@this.ViewData["Title"]</h1>
             <h3>@Model.Number</h3>
             <div class="form-group number">
                 <label asp-for="@Model.Number"></label>

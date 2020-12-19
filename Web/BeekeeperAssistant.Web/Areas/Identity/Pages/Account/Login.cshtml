@@ -5,48 +5,76 @@
     ViewData["Title"] = "Вход";
 }
 
-<div class="login-register-form">
-    <h1 class="mt-3 mb-4">@ViewData["Title"]</h1>
-            <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @* <div asp-validation-summary="All" class="text-danger"></div> *@
-                <div class="input-group">
-                    <input type="text" asp-for="Input.Email" required="" />
-                    <label asp-for="Input.Email">Имейл</label>
-                    <span asp-validation-for="Input.Email"></span>
-                </div>
-                <div class="input-group">
-                    <input type="password" asp-for="Input.Password" required="" />
-                    <label asp-for="Input.Password">Парола</label>
-                    <span asp-validation-for="Input.Password"></span>
-                </div>
-                <label class="container" asp-for="Input.RememberMe">
-                    <input asp-for="Input.RememberMe" />
-                    @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    <span class="checkmark"></span>
+
+<div class="login-register-form-back">
+    <div class="form login-register-form">
+        <form id="account" method="post">
+            <h1>@ViewData["Title"]</h1>
+            <h4>Използвайте вече създаден профил.</h4>
+            <hr />
+
+            @* <div asp-validation-summary="All" class="text-danger"></div> *@
+            
+            <div class="input-group">
+                <label class="field field_v2">
+                    <i class="fas fa-envelope"></i>
+                    <input class="field__input" type="text" asp-for="Input.Email" required="" placeholder="" />
+                    <span class="field__label-wrap">
+                        <span class="field__label" asp-for="Input.Email">Имейл</span>
+                    </span>
                 </label>
+                <span asp-validation-for="Input.Email"></span>
+            </div>
+            <div class="input-group">
+                <label class="field field_v2">
+                    <i class="fas fa-lock"></i>
+                    <input id="input-password" class="field__input" type="password" asp-for="Input.Password" required="" placeholder="" />
+                    <span class="field__label-wrap">
+                        <span class="field__label" asp-for="Input.Password">Парола</span>
+                    </span>
+                    <a id="password-eye" onclick="passwordShowHide()" href="#"><i class="fas fa-eye"></i></a>
+                </label>
+                <span asp-validation-for="Input.Password"></span>
+            </div>
 
+            @* <div class="input-group">
+                <input type="text" asp-for="Input.Email" required="" />
+                <label asp-for="Input.Email">Имейл</label>
+                <span asp-validation-for="Input.Email"></span>
+            </div>
+            <div class="input-group">
+                <input type="password" asp-for="Input.Password" required="" />
+                <label asp-for="Input.Password">Парола</label>
+                <span asp-validation-for="Input.Password"></span>
+            </div> *@
+
+            <label class="container text-left" asp-for="Input.RememberMe">
+                <input asp-for="Input.RememberMe" />
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                <span class="checkmark"></span>
+            </label>
+
+            <div class="submit-group">
                 <button type="submit" class="submit-btn">@ViewData["Title"]</button>
+            </div>
 
-                @* login with google *@
-                @*<div class="form-group">
-                    <p>or sign up with:</p>
-                    <button type="submit" class="btn btn-login-register text-center w-100">Log in</button>
-                    <button type="submit" class="btn btn-login-register text-center w-100">Log in</button>
+            @* login with google *@
+            @*<div class="form-group">
+                <p>or sign up with:</p>
+                <button type="submit" class="btn btn-login-register text-center w-100">Log in</button>
+                <button type="submit" class="btn btn-login-register text-center w-100">Log in</button>
 
-                </div>*@
+            </div>*@
 
-                <div class="link-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Забравена парола?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрирай се!</a>
-                    </p>
-                </div>
-            </form>
-        </div>
+            <div class="link-group">
+                <p>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Забравена парола?</a>
+                </p>
+                <p>
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрирай се!</a>
+                </p>
+            </div>
+        </form>
     </div>
 </div>
 

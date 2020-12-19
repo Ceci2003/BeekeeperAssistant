@@ -2,7 +2,7 @@
 @using BeekeeperAssistant.Common
 
 @{
-    ViewData["Title"] = "All Beeheives";
+    ViewData["Title"] = "Пчелини всички";
     char empty = '-';
 }
 
@@ -15,7 +15,7 @@
 
 <div class="page-content">
     <div class="table-data apiaries">
-        <h2>Пчелини</h2>
+        <h2>@this.ViewData["Title"]</h2>
         @if (Model.AllUserApiaries.Any())
         {
             <div class="table-options">

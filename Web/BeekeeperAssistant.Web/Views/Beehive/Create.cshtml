@@ -1,18 +1,18 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
 @{
-    ViewData["Title"] = "Creat Beehivee";
+    ViewData["Title"] = "Добавете кошер";
 }
 
 <nav class="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
         <li class="breadcrumb-item"><a asp-controller="Apiary" asp-action="All">Кошери - всички</a></li>
-        <li class="breadcrumb-item active">Създай</li>
+        <li class="breadcrumb-item active">Добавете кошер</li>
     </ol>
 </nav>
 
 <div class="page-content">
-    <h1>Beehive: @this.ViewData["ApiNumber"]</h1>
+    <h1>Добавете кошер</h1>
     <div class="beehive-create text-left">
         <form asp-controller="Beehive" asp-action="Create">
             <div class="form-group">

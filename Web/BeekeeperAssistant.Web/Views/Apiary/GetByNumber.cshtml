@@ -1,7 +1,7 @@
 ﻿@*@using System;*@
 @model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
 @{
-    ViewData["Title"] = "All Beehives";
+    ViewData["Title"] = $"Пчелин №{@Model.ApiaryId}";
     var classesDict = new Dictionary<string, string>();
     classesDict.Add("strong", "td-strong");
     classesDict.Add("medium", "td-medium");
@@ -20,7 +20,7 @@
     <vc:apiary-info api-id="@Model.ApiaryId"></vc:apiary-info>
 
     <div class="table-data beehives">
-        <h2>№<span class="apiaryNumber"></span> - Beehives</h2>
+        <h2>№<span class="apiaryNumber"></span> - Кошери</h2>
         <div class="table-options">
             <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId" class="table-create-element">
                 <i class="fas fa-plus-square pr-2"></i>

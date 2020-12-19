@@ -16,14 +16,13 @@
             <div class="input-group">
                 <label class="field field_v2">
                     <i class="fas fa-envelope"></i>
-                    <input class="field__input" type="text" asp-for="Input.Email" required="" placeholder="melnik909@ya.ru" />
+                    <input class="field__input" type="text" asp-for="Input.Email" required="" placeholder="" />
                     <span class="field__label-wrap">
                         <span class="field__label" asp-for="Input.Email">Имейл</span>
                     </span>
                 </label>
                 <span asp-validation-for="Input.Email"></span>
             </div>
-
             <div class="input-group">
                 <label class="field field_v2">
                     <i class="fas fa-lock"></i>
@@ -35,7 +34,6 @@
                 </label>
                 <span asp-validation-for="Input.Password"></span>
             </div>
-
             <div class="input-group">
                 <label class="field field_v2">
                     <i class="fas fa-lock"></i>
@@ -47,24 +45,6 @@
                 </label>
                 <span asp-validation-for="Input.ConfirmPassword"></span>
             </div>
-
-            <!-- <div class="input-group">
-                <input type="text" asp-for="Input.Email" required="" />
-                <label asp-for="Input.Email">Имейл</label>
-                <span asp-validation-for="Input.Email"></span>
-            </div> -->
-
-            <!-- <div class="input-group">
-                <input type="password" asp-for="Input.Password" required="" />
-                <label asp-for="Input.Password">Парола</label>
-                <span asp-validation-for="Input.Password"></span>
-            </div> -->
-
-            <!-- <div class="input-group">
-                <input type="password" asp-for="Input.ConfirmPassword" required="" />
-                <label asp-for="Input.ConfirmPassword">Потвърдете паролата</label>
-                <span asp-validation-for="Input.ConfirmPassword"></span>
-            </div> -->
 
             <button type="submit" class="submit-btn">@ViewData["Title"]</button>
 

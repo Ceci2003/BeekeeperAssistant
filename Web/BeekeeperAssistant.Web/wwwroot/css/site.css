@@ -324,8 +324,6 @@ footer h1 {
     display: grid;
     grid-gap: 30px;
     justify-content: center;
-
-    text-align: center;
 }
 
 .login-register-form form {
@@ -334,6 +332,11 @@ footer h1 {
 
 .login-register-form form h1 {
     margin-bottom: 30px;
+}
+
+.login-register-form form h1,
+.login-register-form form h4 {
+    text-align: center;
 }
 
 .login-register-form form hr {
@@ -381,6 +384,13 @@ footer h1 {
     font-size: 30px;
     left: 13px;
     top: 12px;
+    margin: 0 auto;
+}
+
+.field #password-eye i,
+.field #re-password-eye i{
+    position: absolute;
+    left: -70px;
     margin: 0 auto;
 }
 
@@ -544,7 +554,7 @@ footer h1 {
     display: block;
     position: relative;
     padding-left: 35px;
-    margin-bottom: 12px;
+    margin: 20px 0;
     cursor: pointer;
     font-size: 16px;
     -webkit-user-select: none;
@@ -566,7 +576,7 @@ footer h1 {
 .checkmark {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 13px;
     height: 20px;
     width: 20px;
     background-color: white;
@@ -606,4 +616,18 @@ display: block;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
+
+.submit-group {
+    width: 100%;
+    text-align: center;
+}
+
+@-moz-document url-prefix() {
+    .field #password-eye i,
+    .field #re-password-eye i{
+        position: absolute;
+        left: -30px;
+        margin: 0 auto;
+    }
 }

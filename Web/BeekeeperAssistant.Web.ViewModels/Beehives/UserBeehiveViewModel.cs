@@ -26,5 +26,9 @@
         public bool? HasPropolisCatcher { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public Apiary Apiary { get; set; }
+
+        public string ApiaryNumber { get; set; }
     }
 }

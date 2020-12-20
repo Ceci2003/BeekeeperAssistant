@@ -16,10 +16,10 @@
         <form asp-controller="Apiary" asp-action="Create">
             <h1>@this.ViewData["Title"]</h1>
             <div class="form-group number">
-                <label>Number</label>
+                <label>Номер</label>
                 <div class="apiary-number">
                     <div class="city-code">
-                        <label asp-for="@Model.CityCode">City Code</label>
+                        <label asp-for="@Model.CityCode">Код</label>
                         <input type="text" asp-for="@Model.CityCode" class="form-control text-right" placeholder="3345" />
                         <span asp-validation-for="@Model.CityCode" class="text-danger"></span>
                     </div>
@@ -27,7 +27,7 @@
                         <span>-</span>
                     </div>
                     <div class="farm-number">
-                        <label asp-for="@Model.FarmNumber">Farm Number</label>
+                        <label asp-for="@Model.FarmNumber">Номер</label>
                         <input type="text" asp-for="@Model.FarmNumber" class="" placeholder="7836" />
                         <span asp-validation-for="@Model.FarmNumber" class=""></span>
                     </div>
@@ -35,17 +35,17 @@
                 <span class="text-danger" asp-validation-for="Number"></span>
             </div>
             <div class="form-group name">
-                <label asp-for="@Model.Name"></label>
+                <label asp-for="@Model.Name">Име</label>
                 <input type="text" asp-for="@Model.Name" class="form-control" placeholder="Honey Farm" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="form-group adres">
-                <label asp-for="@Model.Adress"></label>
+                <label asp-for="@Model.Adress">Адрес</label>
                 <input type="text" asp-for="@Model.Adress" class="form-control" placeholder="Montana, Montana" />
                 <span asp-validation-for="@Model.Adress" class="text-danger"></span>
             </div>
             <div class="form-group type">
-                <label asp-for="@Model.ApiaryType"></label>
+                <label asp-for="@Model.ApiaryType">Тип</label>
                 <select asp-for="@Model.ApiaryType" class="custom-select" id="inputGroupSelectApiaryType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
                 <span asp-validation-for="@Model.ApiaryType" class="text-danger"></span>
             </div>

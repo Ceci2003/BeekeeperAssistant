@@ -1,6 +1,7 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
 @{
     ViewData["Title"] = "Добавете кошер";
+    
 }
 
 <nav class="breadcrumb">
@@ -12,63 +13,73 @@
 </nav>
 
 <div class="page-content">
-    <h1>Добавете кошер</h1>
-    <div class="beehive-create text-left">
+    <div class="beehive create-edit create">
         <form asp-controller="Beehive" asp-action="Create">
+            <h1 class="text-center">@this.ViewData["Title"]</h1>
             <div class="form-group">
-                <label asp-for="@Model.Number"></label>
-                <input class="form-control" type="number" asp-for="@Model.Number" />
+                <label asp-for="@Model.Number">Номер</label>
+                <input class="form-control" type="number" min="1" value="1" asp-for="@Model.Number" />
                 <span asp-validation-for="@Model.Number"></span>
             </div>
             @if (Model.AllApiaries != null)
             {
-                <div>
+                <div class="form-group">
+                    <label asp-for="ApiId">Номер на пчелин</label>
+                    <select class="custom-select" asp-for="ApiId">
+                        @foreach (var api in Model.AllApiaries)
+                        {
+                            <option value="@api.Id">@api.Number</option>
+                        }
+                    </select>
+                    <span class="text-danger" asp-validation-for="@Model.BeehivePower"></span>
+                </div>
+                @* <div>
                     <select asp-for="ApiId">
                         @foreach (var api in Model.AllApiaries)
                         {
                             <option value="@api.Id">@api.Number</option>
                         }
                     </select>
-                </div>
+                </div> *@
             }
             <div class="form-group">
-                <label asp-for="@Model.BeehiveSystem"></label>
+                <label asp-for="@Model.BeehiveSystem">Система</label>
                 <select class="custom-select" asp-for="@Model.BeehiveSystem" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveSystem>()"></select>
                 <span class="text-danger" asp-validation-for="@Model.BeehiveSystem"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.BeehiveType"></label>
+                <label asp-for="@Model.BeehiveType">Тип</label>
                 <select class="custom-select" asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()"></select>
                 <span class="text-danger" asp-validation-for="@Model.BeehiveType"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Date"></label>
-                <input class="form-control" type="datetime-local" asp-for="@Model.Date" />
+                <label asp-for="@Model.Date">Дата на създаване</label>
+                <input class="form-control" type="date" asp-for="@Model.Date" value="@DateTime.Now.ToString("dd.MM.yyyy")" />
                 <span class="text-danger" asp-validation-for="@Model.Date"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.BeehivePower"></label>
+                <label asp-for="@Model.BeehivePower">Сила на кошера</label>
                 <select class="custom-select" asp-for="@Model.BeehivePower" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehivePower>()"></select>
                 <span class="text-danger" asp-validation-for="@Model.BeehivePower"></span>
             </div>
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.HasDevice" />
-                    <label class="custom-control-label" asp-for="@Model.HasDevice"></label>
+                    <label class="custom-control-label" asp-for="@Model.HasDevice">Апарат за майки</label>
                 </div>
                 <span class="text-danger" asp-validation-for="@Model.HasDevice"></span>
             </div>
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.HasPolenCatcher" />
-                    <label class="custom-control-label" asp-for="@Model.HasPolenCatcher"></label>
+                    <label class="custom-control-label" asp-for="@Model.HasPolenCatcher">Прашецоуловител</label>
                 </div>
                 <span class="text-danger" asp-validation-for="@Model.HasPolenCatcher"></span>
             </div>
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
                     <input class="custom-control-input" type="checkbox" asp-for="@Model.HasPropolisCatcher" />
-                    <label class="custom-control-label" asp-for="@Model.HasPropolisCatcher"></label>
+                    <label class="custom-control-label" asp-for="@Model.HasPropolisCatcher">Решетка за прополис</label>
                 </div>
                 <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
             </div>
@@ -76,4 +87,3 @@
         </form>
     </div> 
 </div>
-

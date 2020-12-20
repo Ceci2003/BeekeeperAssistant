@@ -6,6 +6,7 @@
     classesDict.Add("strong", "td-strong");
     classesDict.Add("medium", "td-medium");
     classesDict.Add("weak", "td-weak");
+    classesDict.Add("info", "information");
 }
 
 <div class="breadcrumb">
@@ -20,19 +21,18 @@
     <vc:apiary-info api-id="@Model.ApiaryId"></vc:apiary-info>
 
     <div class="table-data beehives">
-        <h2>№<span class="apiaryNumber"></span> - Кошери</h2>
+        <h2>№<span class="apiaryNumber"></span>:  Кошери</h2>
         <div class="table-options">
             <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId" class="table-create-element">
                 <i class="fas fa-plus-square pr-2"></i>
                 <strong>Създайте нов кошер</strong>
             </a>
         </div>
-        @* <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId" class="btn btn-success text-white float-right mb-2"><i class="fas fa-plus-square pr-2"></i><strong>Create Beehive</strong></a> *@
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">№ на Кошер</th>
-                    <th scope="col">Силла</th>
+                    <th scope="col">Сила</th>
                     <th scope="col">Система</th>
                     <th scope="col">Тип</th>
                     <th scope="col">Създаден на</th>
@@ -42,9 +42,9 @@
             <tbody>
                 @foreach (var beehive in Model.AllUserBeehives)
                 {
-                    <tr>    @*class="@classesDict[beehive.BeehivePower.ToString().ToLower()]"*@
+                    <tr class="@if (beehive.HasDevice == true) { @classesDict["info"] } ">
                         <td scope="row">
-                            @beehive.Number
+                            <a href="/Beehive/@beehive.Number">@beehive.Number</a>
                         </td>
                         <td scope="row" class="@classesDict[beehive.BeehivePower.ToString().ToLower()]">
                             @beehive.BeehivePower
@@ -59,15 +59,26 @@
                             @beehive.CreatedOn.ToString("dd - MMMM - yyyy")
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-danger text-white float-right">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
-                            <a class="btn btn-primary btn-success text-white float-right mr-5"><i class="far fa-edit"></i></a>
+                            <a class="table-read" href=""><i class="far fa-bookmark"></i></a>
+                            <a class="table-edit" asp-controller="" asp-action="" asp-route-id=""><i class="far fa-edit"></i></a>
+                            <form id="form-" asp-action="Delete" asp-controller="" asp-route-id="">
+                                <a class="table-delete" onclick="sendForm('form-')">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </form>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+        <div class="table-legend">
+            <p>Легенда</p>
+            <ul>
+                <li class="beehive-dwith-device">
+                    <span></span> - кошерът е с апарат
+                </li>
+            </ul>
+        </div>
     </div>  
 </div>
 

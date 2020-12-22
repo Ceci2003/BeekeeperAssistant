@@ -15,11 +15,11 @@
 
 <div class="page-content">
     <div class="table-data beehives">
-        <h2>@this.ViewData["Title"]</h2>
+        <h1>@this.ViewData["Title"]</h1>
         @if (Model.AllUserBeehives.Any())
         {
             <div class="table-options">
-                <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId" class="table-create-element">
+                <a class="table-create-element" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId">
                     <i class="fas fa-plus-square pr-2"></i>
                     <strong>Създайте нов кошер</strong>
                 </a>

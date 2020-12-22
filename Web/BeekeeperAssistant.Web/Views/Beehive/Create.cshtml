@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.BeehiveType">Тип на кошера</label>
-                <select class="custom-select" asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()" size=""></select>
+                <select class="custom-select" asp-for="@Model.BeehiveType" asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.BeehiveType>()"></select>
                 <span class="text-danger" asp-validation-for="@Model.BeehiveType"></span>
             </div>
             <div class="form-group">
@@ -85,22 +85,9 @@
                 </div>                
                 <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
             </div>
-            
-            @* <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" asp-for="@Model.HasPolenCatcher" />
-                    <label class="custom-control-label" asp-for="@Model.HasPolenCatcher">Прашецоуловител</label>
-                </div>
-                <span class="text-danger" asp-validation-for="@Model.HasPolenCatcher"></span>
-            </div> *@
-            @* <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" asp-for="@Model.HasPropolisCatcher" />
-                    <label class="custom-control-label" asp-for="@Model.HasPropolisCatcher">Решетка за прополис</label>
-                </div>
-                <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
-            </div> *@
-            <input class="submit-btn mt-3" type="submit" value="Create Beehive" />
+            <div class="form-group submit">
+                <input class="submit-btn" type="submit" value="Create Beehive" />
+            </div>
         </form>
     </div> 
 </div>

@@ -501,6 +501,16 @@ input:checked + .slider:before {
     background-color: #47A8F5;
 }
 
+.table-data.apiaries .table-options .table-create-element,
+.table-empty {
+    background-color: #038C8C;
+}
+
+.table-data.apiaries .table-options .table-create-element:hover,
+.table-empty:hover {
+    background-color: #47A8F5;
+}
+
 .table-data {
     text-align: center;
     padding: 0 50px;
@@ -509,6 +519,14 @@ input:checked + .slider:before {
 .table-options .table-create-element i,
 .table-options .table-empty i {
     margin-right: 5px;
+}
+
+.table-data.beehives .table-options .table-create-element {
+    background-color: #FEAD34;
+}
+
+.table-data.beehives .table-options .table-create-element:hover {
+    background-color: #F0B66B;
 }
 
 /* .table-data .table-create-apiary i {
@@ -774,18 +792,19 @@ input:checked + .slider:before {
 .form-group input,
 .form-group select {
     font-size: 20px;
+    border: 3px solid lightgray;
+    outline: none;
     border-radius: 5px;
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    outline: none;
-    border: 3px solid #F29422;
+    border-color: #F29422;
 }
 
 .form-group.submit input {
     justify-self: center;
-    width: 50%;
+    width: 65%;
     background-color: #2d9932;
     border: none;
     padding: 5px;
@@ -798,6 +817,22 @@ input:checked + .slider:before {
 
 .form-group.submit input:focus {
     border: none;
+}
+
+.apiary.create-edit .form-group.submit .submit-btn {
+    background-color: #17A2B8;
+}
+
+.apiary.create-edit .form-group.submit .submit-btn:hover {
+    background-color: #3EBA9B;
+}
+
+.beehive.create-edit .form-group.submit .submit-btn {
+    background-color: #F29422;
+}
+
+.beehive.create-edit .form-group.submit .submit-btn:hover {
+    background-color: #FEAD34;
 }
 
 /* Create Edit Apiary */

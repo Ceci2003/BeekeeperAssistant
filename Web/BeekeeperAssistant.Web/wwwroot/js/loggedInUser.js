@@ -49,7 +49,7 @@ function showMenu(addOrRemove, list, button, btnBackground, arrow) {
         list.classList.remove("show");
         arrow.classList.remove("rotate-90");
     }
-    button.style.background = btnBackground;
+    // button.style.background = btnBackground;
 }
 
 function removeClass(elements, className) {

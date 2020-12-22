@@ -214,7 +214,7 @@ hr {
     border-radius: 20px;
 }
 
-.profile a button {
+.profile-button {
     padding: 15px 40px;
     border-radius: 10px;
     font-size: 15px;
@@ -224,6 +224,10 @@ hr {
     background: #FF7800;
     margin-top: 20px;
     cursor: pointer;
+}
+
+.profile-button:hover {
+    background: #F29422;
 }
 
 .line {
@@ -253,6 +257,7 @@ hr {
     cursor:pointer;
     border-radius: 7px;
     font-size: 20px;
+    outline: none;
 }
 
 .btn-logout:hover {
@@ -370,6 +375,67 @@ hr {
     left: 50%;
 }
 
+/* Switches On/Off Yes/No */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 29px;
+}
+  
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #008000;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #B21B05;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #B21B05;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
 /* Breadcrumb */
 
 .breadcrumb {
@@ -387,7 +453,7 @@ hr {
 
 .breadcrumb-list {
     display: flex;
-    margin: 10px;
+    margin: 10px 0;
     padding: 0;
 }
 
@@ -474,29 +540,25 @@ hr {
     cursor: pointer;
 }
 
-.table-data tbody tr .information a {
+.table-data table .information td:first-child a {
     color: wheat;
 }
 
-.table-data table .information td:first-child a {
-    color: wheat;
+.table-data table .information td:last-child .table-read {
+    color: white;
 }
 
 .table-legend {
     text-align: left;
 }
 
-.table-legend h1 {
-    
-}
-
-.table-legend .beehive-dwith-device {
+.table-legend .beehive-with-device {
     display: flex;
     align-content: center;
     margin-top: 10px;
 }
 
-.table-legend .beehive-dwith-device span {
+.table-legend .beehive-with-device span {
     background-color: #17A2B8;
     width: 20px;
     height: 20px;

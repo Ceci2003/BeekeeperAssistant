@@ -2,7 +2,8 @@
 {
     public enum BeehivePower
     {
-        Weak = 1,
-        Strong = 2,
+        Слаб = 1,
+        Среден = 2,
+        Силен = 3,
     }
 }

@@ -1,4 +1,7 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.ApiaryDataViewModel
+@{
+    char empty = '-';
+}
 
 <div class="data-view apiary">
     <h2>Информация за пчелина</h2>
@@ -12,11 +15,29 @@
                 </tr>
                 <tr>
                     <td>Адрес на пчелина:</td>
-                    <td>@Model.Adress</td>
+                    <td>
+                        @if (string.IsNullOrWhiteSpace(@Model.Adress))
+                        {
+                            @empty
+                        }
+                        else
+                        {
+                            @Model.Adress
+                        }
+                    </td>
                 </tr>
                 <tr>
                     <td>Име на пчелина:</td>
-                    <td>@Model.Name</td>
+                    <td>
+                        @if (string.IsNullOrWhiteSpace(@Model.Name))
+                        {
+                            @empty
+                        }
+                        else
+                        {
+                            @Model.Name
+                        }
+                    </td>
                 </tr>
                 <tr>
                     <td>Тип на пчелина:</td>

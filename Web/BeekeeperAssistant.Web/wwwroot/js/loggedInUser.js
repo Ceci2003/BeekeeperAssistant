@@ -1,9 +1,9 @@
-﻿let apiList = document.querySelector(".api-options");
-let beehiveList = document.querySelector(".beehive-options");
-let queenList = document.querySelector(".queen-options");
-let sidebarArrows = document.querySelectorAll(".fa-angle-left");
+﻿const apiList = document.querySelector(".api-options");
+const beehiveList = document.querySelector(".beehive-options");
+const queenList = document.querySelector(".queen-options");
+const sidebarArrows = document.querySelectorAll(".fa-angle-left");
 
-let apiButton = document.querySelector(".apiary-button");
+const apiButton = document.querySelector(".apiary-button");
 apiButton.addEventListener("click", (e) => {
 
     if (!apiList.classList.contains("show")) {
@@ -14,7 +14,7 @@ apiButton.addEventListener("click", (e) => {
     }
 })
 
-let beehiveButton = document.querySelector(".beehive-button");
+const beehiveButton = document.querySelector(".beehive-button");
 beehiveButton.addEventListener("click", (e) => {
 
     if (!beehiveList.classList.contains("show")) {
@@ -26,7 +26,7 @@ beehiveButton.addEventListener("click", (e) => {
 })
 
 
-let queenButton = document.querySelector(".queen-button");
+const queenButton = document.querySelector(".queen-button");
 queenButton.addEventListener("click", (e) => {
 
     if (!queenList.classList.contains("show")) {
@@ -36,6 +36,15 @@ queenButton.addEventListener("click", (e) => {
         showMenu("remove", queenList, queenButton, "#110400", sidebarArrows[3]);
     }
 })
+
+
+const dataPicker = document.querySelector("#dataPick");
+dataPicker.addEventListener("click", (e) => {
+    var today = new Date();
+    dataPicker.value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+})
+
+//  Functions
 
 function showMenu(addOrRemove, list, button, btnBackground, arrow) {
     backgroundToBase();

@@ -110,7 +110,7 @@
 
             await this.beehiveService.AddUserBeehive(user, inputModel, apiId);
 
-            return this.Redirect("/");
+            return this.Redirect($"/Apiary/{api.Number}");
         }
 
         public async Task<IActionResult> All()

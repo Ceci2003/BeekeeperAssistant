@@ -61,6 +61,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IApiaryService, ApiaryService>();
             services.AddTransient<IBeehiveService, BeehiveService>();
+            services.AddTransient<IQueenService, QueenService>();
             services.AddTransient<IStringManipulationService, StringManipulationService>();
         }
 
@@ -107,6 +108,7 @@
                     {
                         endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiNumber}", new { controller = "Apiary", action = "GetByNumber" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
                         endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiNumber}/{id}", new { controller = "Beehive", action = "GetById" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
+                        endpoints.MapControllerRoute("queenRoute", "Queen/{id}", new { controller = "Queen", action = "ById" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

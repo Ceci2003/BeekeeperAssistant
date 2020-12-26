@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Queen
+﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
     using System;
     using System.Collections.Generic;

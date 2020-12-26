@@ -48,13 +48,13 @@
                             </td>
                             @switch (beehive.BeehivePower.ToString().ToLower())
                             {
-                                case "силен": powerClass = "td-strong"; break;
-                                case "среден": powerClass = "td-medium"; break;
-                                case "слаб": powerClass = "td-weak"; break;
+                                case "strong": powerClass = "td-strong"; break;
+                                case "medium": powerClass = "td-medium"; break;
+                                case "weak": powerClass = "td-weak"; break;
                                 default: powerClass = string.Empty; break;
                             }
                             <td scope="row" class="@powerClass">
-                                @beehive.BeehivePower
+                                @beehive.BeehivePower.GetDescription()
                             </td>
                             <td scope="row">
                                 @beehive.BeehiveSystem

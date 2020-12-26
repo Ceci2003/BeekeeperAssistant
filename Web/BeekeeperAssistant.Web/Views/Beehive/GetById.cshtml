@@ -1,6 +1,8 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.BeehiveDataViewModel
 @{
     ViewData["Title"] = $"Кошер №{@Model.Number}";
+    string have = "Има";
+    string dontHave = "Няма";
 }
 
 <div class="breadcrumb">
@@ -12,15 +14,87 @@
 </div>
 
 <div class="page-content">
-    <ul>
-        <li>1 @Model.Number</li>
-        <li>2 <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a></li>
-        <li>3 @Model.BeehiveSystem</li>
-        <li>4 @Model.BeehiveType</li>
-        <li>5 @Model.CreationDate</li>
-        <li>6 @Model.BeehivePower</li>
-        <li>7 @Model.HasDevice</li>
-        <li>8 @Model.HasPropolisCatcher</li>
-        <li>9 @Model.HasPolenCatcher</li>
-    </ul>
+    <div class="data-view beehive">
+        <h2>Информация за кошера</h2>
+        <div>
+            <div class="data-image">
+                <img src="/images/inproggress.png" alt="в процес на разработка...">
+            </div>
+            <div class="data-info">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Номер на кошера:</td>
+                            <td>@Model.Number</td>
+                        </tr>
+                        <tr>
+                            <td>Номер на пчелина:</td>
+                            <td><a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a></td>
+                        </tr>
+                        <tr>
+                            <td>Система:</td>
+                            <td>@Model.BeehiveSystem</td>
+                        </tr>
+                        <tr>
+                            <td>Тип:</td>
+                            <td>@Model.BeehiveType</td>
+                        </tr>
+                        <tr>
+                            <td>Дата на създаване:</td>
+                            <td>@Model.CreationDate.ToString("dd - MMMM - yyyy")</td>
+                        </tr>
+                        <tr>
+                            <td>Сила</td>
+                            <td>@Model.BeehivePower.GetDescription()</td>
+                        </tr>
+                        <tr>
+                            <td>Апарат:</td>
+                            <td>
+                                @if (Model.HasDevice)
+                                {
+                                    @have
+                                }
+                                else {
+                                    @dontHave
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Прашецоуловител:</td>
+                            <td>
+                                @if (Model.HasPropolisCatcher)
+                                {
+                                    @have
+                                }
+                                else {
+                                    @dontHave
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Решетка за прополис:</td>
+                            <td>
+                                @if (Model.HasPolenCatcher)
+                                {
+                                    @have
+                                }
+                                else {
+                                    @dontHave
+                                }
+                            </td>
+                        </tr>
+                        <tr class="edit">
+                            <td></td>
+                            <td>
+                                <a class="table-edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@Model.Id">
+                                    Редактирайте кошера
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
 </div>

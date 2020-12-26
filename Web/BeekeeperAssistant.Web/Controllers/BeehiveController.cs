@@ -54,6 +54,7 @@
 
             var viewModel = new BeehiveDataViewModel()
             {
+                Id = beehive.Id,
                 Number = beehive.Number,
                 BeehiveSystem = beehive.BeehiveSystem,
                 BeehiveType = beehive.BeehiveType,

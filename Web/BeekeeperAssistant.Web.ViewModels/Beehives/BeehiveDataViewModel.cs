@@ -9,6 +9,8 @@
 
     public class BeehiveDataViewModel : IMapFrom<Beehive>
     {
+        public int Id { get; set; }
+        
         public int Number { get; set; }
 
         public BeehiveSystem BeehiveSystem { get; set; }

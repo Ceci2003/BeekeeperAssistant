@@ -6,52 +6,56 @@
 <div class="data-view apiary">
     <h2>Информация за пчелина</h2>
     <div>
-        <img src="/images/inproggress.png" alt="в процес на разработка...">
-        <table>
-            <tbody>
-                <tr>
-                    <td>Номер на пчелина:</td>
-                    <td id="apiaryNumberData">@Model.Number</td>
-                </tr>
-                <tr>
-                    <td>Адрес на пчелина:</td>
-                    <td>
-                        @if (string.IsNullOrWhiteSpace(@Model.Adress))
-                        {
-                            @empty
-                        }
-                        else
-                        {
-                            @Model.Adress
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>Име на пчелина:</td>
-                    <td>
-                        @if (string.IsNullOrWhiteSpace(@Model.Name))
-                        {
-                            @empty
-                        }
-                        else
-                        {
-                            @Model.Name
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>Тип на пчелина:</td>
-                    <td>@Model.ApiaryType</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="edit">
-                        <a class="table-edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@Model.Id">
-                            Редактирайте пчелина
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="data-image">
+            <img src="/images/inproggress.png" alt="в процес на разработка...">
+        </div>
+        <div class="data-info">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Номер на пчелина:</td>
+                        <td id="apiaryNumberData">@Model.Number</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес на пчелина:</td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(@Model.Adress))
+                            {
+                                @empty
+                            }
+                            else
+                            {
+                                @Model.Adress
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Име на пчелина:</td>
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(@Model.Name))
+                            {
+                                @empty
+                            }
+                            else
+                            {
+                                @Model.Name
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Тип на пчелина:</td>
+                        <td>@Model.ApiaryType</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="edit">
+                            <a class="table-edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@Model.Id">
+                                Редактирайте пчелина
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

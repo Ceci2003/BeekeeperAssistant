@@ -8,9 +8,15 @@ namespace BeekeeperAssistant.Services.Data
     public interface IQueenService
     {
 
-        Task<int> CreateQueen(CreateQueenInputModel inputModel,int beehiveId);
+        Task<int> CreateQueen(CreateQueenInputModel inputModel, int beehiveId, string currentUserId);
 
         T GetQueenById<T>(int id);
+
+        IEnumerable<T> GetAllQueens<T>(int beehiveId, string currentUserId);
+
+        IEnumerable<T> GetAllUserQueens<T>(string currentUserId);
+
+
 
     }
 }

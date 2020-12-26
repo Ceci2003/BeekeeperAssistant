@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -18,11 +19,12 @@
             this.queenReepository = queenReepository;
         }
 
-        public async Task<int> CreateQueen(CreateQueenInputModel inputModel,int beehiveId)
+        public async Task<int> CreateQueen(CreateQueenInputModel inputModel,int beehiveId, string currentUserId)
         {
             var model = new Queen()
             {
                 Breed = inputModel.QueenBreed,
+                UserId = currentUserId,
                 Color = inputModel.QueenColor,
                 FertilizationDate = inputModel.FertilizationDate,
                 GivingDate = inputModel.GivingDate,
@@ -37,6 +39,18 @@
             await this.queenReepository.SaveChangesAsync();
 
             return model.Id;
+        }
+
+        public IEnumerable<T> GetAllQueens<T>(int beehiveId, string currentUserId)
+        {
+            var allBeehiveQueens = this.queenReepository.All().Where(q => q.BeehiveId == beehiveId && q.UserId == currentUserId).To<T>().ToList();
+            return allBeehiveQueens;
+        }
+
+        public IEnumerable<T> GetAllUserQueens<T>(string currentUserId)
+        {
+            var allBeehiveQueens = this.queenReepository.All().Where(q => q.UserId == currentUserId).To<T>().ToList();
+            return allBeehiveQueens;
         }
 
         public T GetQueenById<T>(int id)

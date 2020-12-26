@@ -1,0 +1,26 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.BeehiveDataViewModel
+@{
+    ViewData["Title"] = $"Кошер №{@Model.Number}";
+}
+
+<div class="breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
+        <li class="breadcrumb-item"><a href="/Apiary/@Model.ApiaryNumber">Пчелин №@Model.ApiaryNumber</a></li>
+        <li class="breadcrumb-item active">Кошер №@Model.Number</li>
+    </ol>
+</div>
+
+<div class="page-content">
+    <ul>
+        <li>1 @Model.Number</li>
+        <li>2 <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a></li>
+        <li>3 @Model.BeehiveSystem</li>
+        <li>4 @Model.BeehiveType</li>
+        <li>5 @Model.CreationDate</li>
+        <li>6 @Model.BeehivePower</li>
+        <li>7 @Model.HasDevice</li>
+        <li>8 @Model.HasPropolisCatcher</li>
+        <li>9 @Model.HasPolenCatcher</li>
+    </ul>
+</div>

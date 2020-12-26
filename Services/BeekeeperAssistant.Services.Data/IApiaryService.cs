@@ -17,6 +17,8 @@
 
         T GetUserApiaryById<T>(int id, ApplicationUser user);
 
+        Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user);
+
         Task DeleteById(int id, ApplicationUser user);
 
         Task EditUserApiaryById(int id, ApplicationUser user, EditApiaryInputModel editApiaryInputModel);
@@ -24,8 +26,6 @@
         Task AddUserApiary(ApplicationUser user, CreateApiaryInputModel inputModel);
 
         IEnumerable<T> GetAllUserApiaries<T>(string userId);
-
-        Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user);
 
         bool UserApiaryExists(string apiNumber, ApplicationUser user);
 

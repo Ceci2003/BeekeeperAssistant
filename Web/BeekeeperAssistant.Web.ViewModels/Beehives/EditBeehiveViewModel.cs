@@ -6,8 +6,9 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class CreateBeehiveInputModel
+    public class EditBeehiveViewModel
     {
         [Required]
         public int Number { get; set; }
@@ -33,5 +34,8 @@
         public bool HasPolenCatcher { get; set; }
 
         public bool HasPropolisCatcher { get; set; }
+
+        [BindNever]
+        public string CreatorId { get; set; }
     }
 }

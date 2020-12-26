@@ -8,9 +8,9 @@
 
     public class Beehive : BaseDeletableModel<int>
     {
-        public virtual Apiary Apiary { get; set; }
-
         public int ApiaryId { get; set; }
+
+        public virtual Apiary Apiary { get; set; }
 
         public string CreatorId { get; set; }
 

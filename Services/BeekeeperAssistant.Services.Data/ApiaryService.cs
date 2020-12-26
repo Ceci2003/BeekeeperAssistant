@@ -124,6 +124,7 @@
 
         public bool EditApiaryExist(string apiNumber, ApplicationUser user, int apiId)
         {
+            // TODO: EditApiary Service
             // Implement with Ceci :D
             return true;
         }

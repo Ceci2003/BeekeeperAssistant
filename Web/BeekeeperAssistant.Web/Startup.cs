@@ -106,7 +106,7 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiNumber}", new { controller = "Apiary", action = "GetByNumber" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
-                        endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiNumber}/{beehiveNumber}", new { controller = "Beehive", action = "GetByNumber" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
+                        endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiNumber}/{id}", new { controller = "Beehive", action = "GetById" }, constraints: new { apiNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

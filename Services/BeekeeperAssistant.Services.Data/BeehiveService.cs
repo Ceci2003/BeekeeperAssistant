@@ -38,6 +38,16 @@
             await this.beehiveRepository.SaveChangesAsync();
         }
 
+        public Task DeleteById(int id, ApplicationUser user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task EditUserApiaryById(int id, int apiaryId, ApplicationUser user, EditBeehiveViewModel editBeehiveInputModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<T> GetAllUserBeehives<T>(ApplicationUser user)
         {
             var beehives = this.beehiveRepository.All().Where(b => b.CreatorId == user.Id).To<T>().ToList();
@@ -48,6 +58,18 @@
         {
             var allBeehives = this.beehiveRepository.All().Where(a => a.ApiaryId == apiaryId).To<T>().ToList();
             return allBeehives;
+        }
+
+        public Beehive GetBeehiveById(int id)
+        {
+            var beehive = this.beehiveRepository.All().Where(b => b.Id == id).FirstOrDefault();
+            return beehive;
+        }
+
+        public T GetUserBeehiveById<T>(int id, ApplicationUser user)
+        {
+            var beehive = this.beehiveRepository.All().Where(b => b.Id == id && b.Creator == user).To<T>().FirstOrDefault();
+            return beehive;
         }
 
         public bool NumberExists(int number, ApplicationUser user)

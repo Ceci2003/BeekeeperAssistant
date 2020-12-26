@@ -1,5 +1,4 @@
-﻿@*@using System;*@
-@model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllUserBeehivesViewModel
 @{
     ViewData["Title"] = $"Пчелин №{@Model.ApiaryId}";
     string infoClass = "information";
@@ -42,7 +41,7 @@
                 {
                     <tr class="@if (beehive.HasDevice == true) { @infoClass } ">
                         <td scope="row">
-                            <a href="/Beehive/@beehive.Number">@beehive.Number</a>
+                            <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
                         </td>
                         @switch (beehive.BeehivePower.ToString().ToLower())
                         {

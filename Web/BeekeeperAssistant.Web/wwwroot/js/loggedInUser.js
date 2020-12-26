@@ -39,7 +39,7 @@ queenButton.addEventListener("click", (e) => {
 
 
 const dataPicker = document.querySelector("#dataPick");
-dataPicker.addEventListener("click", (e) => {
+dataPicker?.addEventListener("click", (e) => {
     var today = new Date();
     dataPicker.value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 })

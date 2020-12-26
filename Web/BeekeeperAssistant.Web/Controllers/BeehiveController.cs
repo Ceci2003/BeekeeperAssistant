@@ -41,9 +41,33 @@
         }
 
         // Does not work!
-        public IActionResult GetByNumber()
+        public async Task<IActionResult> GetById(int id)
         {
-            return this.View();
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var beehive = this.beehiveService.GetBeehiveById(id);
+            beehive.Apiary = this.apiaryRepository.All().Where(a => a.Id == beehive.ApiaryId).FirstOrDefault();
+
+            if (beehive == null)
+            {
+                return this.Forbid();
+            }
+
+            var viewModel = new BeehiveDataViewModel()
+            {
+                Number = beehive.Number,
+                BeehiveSystem = beehive.BeehiveSystem,
+                BeehiveType = beehive.BeehiveType,
+                CreationDate = beehive.Date,
+                BeehivePower = beehive.BeehivePower,
+                ApiId = beehive.ApiaryId,
+                Apiary = beehive.Apiary,
+                ApiaryNumber = beehive.Apiary.Number,
+                HasDevice = beehive.HasDevice == true ? true : false,
+                HasPolenCatcher = beehive.HasPolenCatcher == true ? true : false,
+                HasPropolisCatcher = beehive.HasPropolisCatcher == true ? true : false,
+            };
+
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Create(int id)

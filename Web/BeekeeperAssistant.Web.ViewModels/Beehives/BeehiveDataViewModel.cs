@@ -2,31 +2,28 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    using System.Text;
 
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Services.Mapping;
 
-    public class CreateBeehiveInputModel
+    public class BeehiveDataViewModel : IMapFrom<Beehive>
     {
-        [Required]
         public int Number { get; set; }
 
-        [Required]
         public BeehiveSystem BeehiveSystem { get; set; }
 
-        [Required]
         public BeehiveType BeehiveType { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        [Required]
         public BeehivePower BeehivePower { get; set; }
 
-        public IEnumerable<SelectListOptionApiaryViewModel> AllApiaries { get; set; }
-
         public int ApiId { get; set; }
+
+        public Apiary Apiary { get; set; }
+
+        public string ApiaryNumber { get; set; }
 
         public bool HasDevice { get; set; }
 

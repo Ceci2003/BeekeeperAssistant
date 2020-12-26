@@ -1,9 +1,14 @@
-﻿namespace BeekeeperAssistant.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeekeeperAssistant.Data.Models
 {
     public enum BeehivePower
     {
-        Слаб = 1,
-        Среден = 2,
-        Силен = 3,
+        [Display(Name = "Слаб")]
+        Weak = 1,
+        [Display(Name = "Среден")]
+        Medium = 2,
+        [Display(Name = "Силен")]
+        Strong = 3,
     }
 }

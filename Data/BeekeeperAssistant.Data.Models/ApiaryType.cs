@@ -7,13 +7,19 @@
 
     public enum ApiaryType
     {
-        Основен = 1,
-        Стационарен = 2,
-        Подвижен = 3,
-        Помощен = 4,
+        [Display(Name = "Основен")]
+        Basic = 1,
+        [Display(Name = "Стационарен")]
+        Stationary = 2,
+        [Display(Name = "Подвижен")]
+        Mobile = 3,
+        [Display(Name = "Помощен")]
+        Supporting = 4,
         [Display(Name = "за майко производство")]
-        заМйкоПроизводство = 5,
+        ForTheProductionOfMothers = 5,
         [Display(Name = "за отводки")]
-        заОтводки = 6,
+        ForPropagation = 6,
+        [Display(Name = "друг")]
+        Other = 5,
     }
 }

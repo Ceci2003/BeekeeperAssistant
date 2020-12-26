@@ -12,8 +12,6 @@
 
         public string Number { get; set; }
 
-        [Required]
-        public QueenColor Color { get; set; }
 
         public DateTime FertilizationDate { get; set; }
 

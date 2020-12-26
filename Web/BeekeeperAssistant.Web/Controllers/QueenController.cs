@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Web.ViewModels.Queen;
     using Microsoft.AspNetCore.Mvc;
 
     public class QueenController : Controller
@@ -20,7 +20,7 @@
         }
 
         [HttpPost]
-        public IActionResult Create(string putAnInputModel)
+        public IActionResult Create(CreateQueenInputModel inputModel)
         {
             return this.Redirect("/");
         }

@@ -2,5 +2,6 @@
 {
     public enum QueenBreed
     {
+        Test = 1,
     }
 }

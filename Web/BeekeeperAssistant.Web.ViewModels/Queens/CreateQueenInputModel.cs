@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Queen
+﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
     using System;
     using System.Collections.Generic;
@@ -12,8 +12,6 @@
 
         public string Number { get; set; }
 
-        [Required]
-        public QueenColor Color { get; set; }
 
         public DateTime FertilizationDate { get; set; }
 

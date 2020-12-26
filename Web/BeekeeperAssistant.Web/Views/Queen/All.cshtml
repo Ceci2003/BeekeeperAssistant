@@ -1,5 +1,23 @@
-﻿@{ 
+﻿@{
 
 }
+@model BeekeeperAssistant.Web.ViewModels.Queens.AllUserQueensViewModel
 
-<h1>All Works!</h1>
+@foreach (var queen in Model.UserQueens)
+{
+    <div>
+        @queen.Breed
+    </div>
+    <div>
+        @queen.Color
+    </div>
+    <div>
+        @queen.HygenicHabits
+    </div>
+    <div>
+        @queen.Origin
+    </div>
+    <div>
+        @queen.Temperament
+    </div>
+}

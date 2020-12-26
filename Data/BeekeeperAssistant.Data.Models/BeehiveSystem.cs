@@ -4,24 +4,29 @@
 
     public enum BeehiveSystem
     {
-        Лангстрот = 1,
+        [Display(Name = "Лангстрот")]
+        Langstroth = 1,
         [Display(Name = "Лангстрот-Рут")]
-        ЛангстротРут = 2,
-        Фарар = 3,
+        LangstrothRuth = 2,
+        [Display(Name = "Фарар")]
+        Farrar = 3,
         [Display(Name = "Дадан-Блат")]
-        ДаданБлат = 4,
+        DadanBlatt = 4,
         [Display(Name = "Многокорпусен Кошер")]
-        МногокорпусенКошер = 5,
+        MultiHullKosher = 5,
         [Display(Name = "Тип Павилион")]
-        ТипПавилион = 6,
-        Лежак = 7,
-        Тръвна = 8,
-        Полистиролни = 8,
+        PavilionType = 6,
+        [Display(Name = "Лежак")]
+        Lying = 7,
+        [Display(Name = "Тръвна")]
+        Travna = 8,
+        [Display(Name = "Полистиролни")]
+        Polystyrene = 8,
         [Display(Name = "Алпийският кошер Роже Делон")]
-        АлпийскиятКошерРожеДелон = 10,
+        AlpineBeehiveRogerDelon = 10,
         [Display(Name = "С въртящи рамки")]
-        СВъртящиРамки = 11,
+        WithRotatingFrames = 11,
         [Display(Name = "За отглеждане на майки")]
-        ЗаОтглежданеНаМайки = 12,
+        ForRaisingMothers = 12,
     }
 }

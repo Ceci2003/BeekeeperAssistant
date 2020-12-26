@@ -5,13 +5,13 @@
     public enum BeehiveType
     {
         [Display(Name = "Пчелно семейство")]
-        ПчелноСемейство = 1,
+        BeeFamily = 1,
         [Display(Name = "рояк")]
-        swarm = 2,
+        Swarm = 2,
         [Display(Name = "кошер")]
-        beehive = 3,
+        Beehive = 3,
         [Display(Name = "отводка")]
-        reproductive = 4,
+        ForPropagation = 4,
         [Display(Name = "друг")]
         Other = 5,
     }

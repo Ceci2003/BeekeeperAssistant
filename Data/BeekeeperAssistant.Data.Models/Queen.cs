@@ -24,8 +24,8 @@
 
         public string Temperament { get; set; }
 
-        public bool Marked { get; set; }
+        public QueenColor Color { get; set; }
 
-        public string Color { get; set; }
+        public QueenBreed Breed { get; set; }
     }
 }

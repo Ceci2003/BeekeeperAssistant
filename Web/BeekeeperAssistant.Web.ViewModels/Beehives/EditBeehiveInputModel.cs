@@ -5,10 +5,11 @@
     using System.ComponentModel.DataAnnotations;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class EditBeehiveViewModel
+    public class EditBeehiveInputModel : IMapFrom<Beehive>
     {
         [Required]
         public int Number { get; set; }
@@ -27,7 +28,9 @@
 
         public IEnumerable<SelectListOptionApiaryViewModel> AllApiaries { get; set; }
 
-        public int ApiId { get; set; }
+        public int ApiaryId { get; set; }
+
+        public Apiary Apiary { get; set; }
 
         public bool HasDevice { get; set; }
 

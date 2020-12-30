@@ -114,6 +114,21 @@
             return this.Redirect($"/Apiary/{api.Number}");
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var beehive = this.beehiveService.GetUserBeehiveById<EditBeehiveInputModel>(id, currentUser);
+            var allUserApiariries = this.apiaryService.GetAllUserApiaries<SelectListOptionApiaryViewModel>(currentUser.Id);
+            beehive.AllApiaries = allUserApiariries;
+
+            if (beehive?.CreatorId != currentUser?.Id)
+            {
+                return this.Forbid();
+            }
+
+            return this.View(beehive);
+        }
+
         public async Task<IActionResult> All()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);

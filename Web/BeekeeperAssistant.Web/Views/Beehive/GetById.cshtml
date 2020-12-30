@@ -3,6 +3,10 @@
     ViewData["Title"] = $"Кошер №{@Model.Number}";
     string have = "Има";
     string dontHave = "Няма";
+    Dictionary<string, string> powerClasses = new Dictionary<string, string>();
+    powerClasses.Add("weak", "td-weak");
+    powerClasses.Add("medium", "td-medium");
+    powerClasses.Add("strong", "td-strong");
 }
 
 <div class="breadcrumb">
@@ -45,7 +49,7 @@
                         </tr>
                         <tr>
                             <td>Сила</td>
-                            <td>@Model.BeehivePower.GetDescription()</td>
+                            <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">@Model.BeehivePower.GetDescription()</td>
                         </tr>
                         <tr>
                             <td>Апарат:</td>

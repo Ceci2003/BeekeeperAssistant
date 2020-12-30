@@ -43,9 +43,26 @@
             throw new System.NotImplementedException();
         }
 
-        public Task EditUserApiaryById(int id, int apiaryId, ApplicationUser user, EditBeehiveViewModel editBeehiveInputModel)
+        public async Task EditUserBeehiveById(int id, ApplicationUser user, EditBeehiveInputModel editBeehiveInputModel)
         {
-            throw new System.NotImplementedException();
+            var beehive = this.beehiveRepository.All().Where(b => b.Id == id && b.CreatorId == user.Id).FirstOrDefault();
+
+            if (beehive != null)
+            {
+                beehive.Number = editBeehiveInputModel.Number;
+                beehive.BeehiveSystem = editBeehiveInputModel.BeehiveSystem;
+                beehive.BeehiveType = editBeehiveInputModel.BeehiveType;
+                beehive.Date = editBeehiveInputModel.Date;
+                beehive.BeehivePower = editBeehiveInputModel.BeehivePower;
+                beehive.ApiaryId = editBeehiveInputModel.ApiaryId;
+                beehive.HasDevice = editBeehiveInputModel.HasDevice;
+                beehive.HasPolenCatcher = editBeehiveInputModel.HasPolenCatcher;
+                beehive.HasPropolisCatcher = editBeehiveInputModel.HasPropolisCatcher;
+                beehive.CreatorId = user.Id;
+
+                this.beehiveRepository.Update(beehive);
+                await this.beehiveRepository.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<T> GetAllUserBeehives<T>(ApplicationUser user)
@@ -68,7 +85,7 @@
 
         public T GetUserBeehiveById<T>(int id, ApplicationUser user)
         {
-            var beehive = this.beehiveRepository.All().Where(b => b.Id == id && b.Creator == user).To<T>().FirstOrDefault();
+            var beehive = this.beehiveRepository.All().Where(b => b.Id == id && b.CreatorId == user.Id).To<T>().FirstOrDefault();
             return beehive;
         }
 

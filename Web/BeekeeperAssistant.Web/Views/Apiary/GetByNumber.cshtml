@@ -3,6 +3,10 @@
     ViewData["Title"] = $"Пчелин №{@Model.ApiaryId}";
     string infoClass = "information";
     string powerClass = string.Empty;
+    Dictionary<string, string> powerClasses = new Dictionary<string, string>();
+    powerClasses.Add("weak", "td-weak");
+    powerClasses.Add("medium", "td-medium");
+    powerClasses.Add("strong", "td-strong");
 
 }
 
@@ -43,14 +47,7 @@
                         <td scope="row">
                             <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
                         </td>
-                        @switch (beehive.BeehivePower.ToString().ToLower())
-                        {
-                            case "strong": powerClass = "td-strong"; break;
-                            case "medium": powerClass = "td-medium"; break;
-                            case "weak": powerClass = "td-weak"; break;
-                            default: powerClass = string.Empty; break;
-                        }
-                        <td scope="row" class="@powerClass">
+                        <td scope="row" class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">
                             @beehive.BeehivePower.GetDescription()
                         </td>
                         <td scope="row">
@@ -63,8 +60,8 @@
                             @beehive.CreatedOn.ToString("dd - MMMM - yyyy")
                         </td>
                         <td>
-                            <a class="table-read" href=""><i class="far fa-bookmark"></i></a>
-                            <a class="table-edit" asp-controller="" asp-action="" asp-route-id=""><i class="far fa-edit"></i></a>
+                            <a class="table-read" href="/Beehive/@beehive.ApiaryNumber/"><i class="far fa-bookmark"></i></a>
+                            <a class="table-edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id"><i class="far fa-edit"></i></a>
                             <form id="form-" asp-action="Delete" asp-controller="" asp-route-id="">
                                 <a class="table-delete" onclick="sendForm('form-')">
                                     <i class="far fa-trash-alt"></i>

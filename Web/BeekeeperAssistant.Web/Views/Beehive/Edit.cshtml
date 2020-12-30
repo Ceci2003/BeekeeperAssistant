@@ -1,14 +1,13 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
-@{
-    ViewData["Title"] = "Добавете кошер";
-    
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.EditBeehiveInputModel
+@{ 
+    ViewData["Title"] = $"Редактиране кошер: {Model.Number}";
 }
 
 <div class="breadcrumb">
     <ol class="breadcrumb-list">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Начало</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Beehive" asp-action="All">Кошери - всички</a></li>
-        <li class="breadcrumb-item active">Добавете кошер</li>
+        <li class="breadcrumb-item"><a href="/Apiary/@Model.Apiary.Number">Пчелин №@Model.Apiary.Number</a></li>
+        <li class="breadcrumb-item active">Редактирай кошер - @Model.Number</li>
     </ol>
 </div>
 
@@ -24,8 +23,8 @@
             @if (Model.AllApiaries != null)
             {
                 <div class="form-group">
-                    <label asp-for="ApiId">Номер на пчелин</label>
-                    <select class="custom-select" asp-for="ApiId">
+                    <label asp-for="ApiaryId">Номер на пчелин</label>
+                    <select class="custom-select" asp-for="ApiaryId">
                         @foreach (var api in Model.AllApiaries)
                         {
                             <option value="@api.Id">@api.Number</option>
@@ -58,7 +57,7 @@
             <div class="form-group">
                 <div class="custom-checkbox">
                     <label class="switch" asp-for="@Model.HasDevice">
-                        <input type="checkbox" asp-for="@Model.HasDevice">
+                        <input type="checkbox" asp-for="@Model.HasDevice" checked="@if (@Model.HasDevice) { @true } else { @false }">
                         <span class="slider round"></span>
                     </label>
                     Апарат за майки

@@ -16,7 +16,7 @@
 
         Task DeleteById(int id, ApplicationUser user);
 
-        Task EditUserApiaryById(int id, int apiaryId, ApplicationUser user, EditBeehiveViewModel editBeehiveInputModel);
+        Task EditUserBeehiveById(int id, ApplicationUser user, EditBeehiveInputModel editBeehiveInputModel);
 
         public Task AddUserBeehive(ApplicationUser user, CreateBeehiveInputModel inputModel, int apiId);
 

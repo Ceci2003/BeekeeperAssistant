@@ -12,12 +12,12 @@
 </div>
 
 <div class="page-content">
-    <div class="beehive create-edit create">
-        <form asp-controller="Beehive" asp-action="Create">
+    <div class="beehive create-edit edit">
+        <form asp-controller="Beehive" asp-action="Edit">
             <h1 class="text-center">@this.ViewData["Title"]</h1>
             <div class="form-group">
                 <label asp-for="@Model.Number">Номер</label>
-                <input class="form-control" type="number" min="1" value="1" asp-for="@Model.Number" />
+                <input class="form-control" type="number" min="1" asp-for="@Model.Number" />
                 <span asp-validation-for="@Model.Number"></span>
             </div>
             @if (Model.AllApiaries != null)
@@ -85,7 +85,7 @@
                 <span class="text-danger" asp-validation-for="@Model.HasPropolisCatcher"></span>
             </div>
             <div class="form-group submit">
-                <input class="submit-btn" type="submit" value="Create Beehive" />
+                <input class="submit-btn" type="submit" value="Редактирайте" />
             </div>
         </form>
     </div> 

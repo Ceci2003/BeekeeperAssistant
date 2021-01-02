@@ -129,6 +129,20 @@
             return this.View(beehive);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditBeehiveInputModel inputModel)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            await this.beehiveService.EditUserBeehiveById(id, currentUser, inputModel);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
         public async Task<IActionResult> All()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -139,6 +153,5 @@
             };
             return this.View(viewModel);
         }
-
     }
 }

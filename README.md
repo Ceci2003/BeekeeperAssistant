@@ -1,2 +1,2 @@
 # BeekeeperAssistant
-Our project to help beekeepers
+Web application to help Bulgarian beekeepers

@@ -88,6 +88,12 @@
             return apiary;
         }
 
+        public Apiary GetApiaryById(int id)
+        {
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id).FirstOrDefault();
+            return apiary;
+        }
+
         public T GetApiaryByNumber<T>(string number, ApplicationUser user)
         {
             throw new NotImplementedException();

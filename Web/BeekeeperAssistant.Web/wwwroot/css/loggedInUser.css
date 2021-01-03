@@ -554,6 +554,15 @@ input:checked + .slider:before {
     padding: 0.6em 0;
 }
 
+.table-data table td:first-child a,
+.table-data table td:first-child + td a {
+    color: #038C8C;
+    display:inline-block;
+    width:100%;
+    height:100%;
+    padding: 0.6em 0;
+}
+
 .table-data tr td:last-child {
     display: flex;
     justify-content: space-around;
@@ -564,7 +573,8 @@ input:checked + .slider:before {
     cursor: pointer;
 }
 
-.table-data table .information td:first-child a {
+.table-data table .information td:first-child a,
+.table-data table .information td:first-child + td a {
     color: wheat;
     display:inline-block;
     width:100%;

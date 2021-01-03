@@ -15,6 +15,8 @@
 
         T GetApiaryById<T>(int id);
 
+        Apiary GetApiaryById(int id);
+
         T GetUserApiaryById<T>(int id, ApplicationUser user);
 
         Apiary GetUserApiaryByNumber(string apiNumber, ApplicationUser user);

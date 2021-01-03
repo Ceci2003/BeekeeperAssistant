@@ -88,7 +88,7 @@
         [HttpPost]
         public async Task<IActionResult> Create(int id, CreateBeehiveInputModel inputModel)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
             var apiId = id == 0 ? inputModel.ApiId : id;
 
             if (!this.ModelState.IsValid)
@@ -97,19 +97,19 @@
             }
 
             // Check if there is already a beehive with the same Nuumber
-            if (this.beehiveService.NumberExists(inputModel.Number, user))
+            if (this.beehiveService.NumberExists(inputModel.Number, currentUser))
             {
                 this.ModelState.AddModelError("Number", "Number already exists");
                 return this.View(inputModel);
             }
 
             var api = this.apiaryService.GetApiaryById<UserApiaryViewModel>(apiId);
-            if (api.CreatorId != user.Id)
+            if (api.CreatorId != currentUser.Id)
             {
                 return this.BadRequest();
             }
 
-            await this.beehiveService.AddUserBeehive(user, inputModel, apiId);
+            await this.beehiveService.AddUserBeehive(currentUser, inputModel, apiId);
 
             return this.Redirect($"/Apiary/{api.Number}");
         }
@@ -136,6 +136,19 @@
 
             if (!this.ModelState.IsValid)
             {
+                return this.View(inputModel);
+            }
+
+            // TODO: Apiary protection
+
+            // Check if there is already a beehive with the same Nuumber
+            var beehiveOriginalNumber = this.beehiveService.GetBeehiveById(id).Number;
+            if (inputModel.Number != beehiveOriginalNumber && this.beehiveService.NumberExists(inputModel.Number, currentUser))
+            {
+                this.ModelState.AddModelError("Number", "Номерът вече съществува!");
+                inputModel.Number = beehiveOriginalNumber;
+                inputModel.Apiary = this.apiaryService.GetApiaryById(inputModel.ApiaryId);
+                inputModel.AllApiaries = this.apiaryService.GetAllUserApiaries<SelectListOptionApiaryViewModel>(currentUser.Id);
                 return this.View(inputModel);
             }
 

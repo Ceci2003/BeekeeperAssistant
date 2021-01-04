@@ -49,18 +49,18 @@
             return this.View();
         }
 
-        public IActionResult ById(int id)
-        {
-            var queen = this.queenService.GetQueenById<QueenDataViewModel>(id);
-            return this.View(queen);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(CreateQueenInputModel inputModel)
         {
             var currUser = await this.userManager.GetUserAsync(this.User);
             var queenId = await this.queenService.CreateQueen(inputModel, 1, currUser.Id);
             return this.Redirect($"/Queen/{queenId}");
+        }
+
+        public IActionResult ById(int id)
+        {
+            var queen = this.queenService.GetQueenById<QueenDataViewModel>(id);
+            return this.View(queen);
         }
     }
 }

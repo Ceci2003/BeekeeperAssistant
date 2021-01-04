@@ -47,6 +47,10 @@ a {
     color: white;
 }
 
+.information a {
+    color: wheat;
+}
+
 /* Sidebar */
 
 .sidebar-breadcrumb-title {

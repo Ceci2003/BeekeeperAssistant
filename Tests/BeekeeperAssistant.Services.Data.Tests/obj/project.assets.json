@@ -2747,7 +2747,8 @@
         "dependencies": {
           "BeekeeperAssistant.Data.Common": "1.0.0",
           "BeekeeperAssistant.Data.Models": "1.0.0",
-          "BeekeeperAssistant.Services.Mapping": "1.0.0"
+          "BeekeeperAssistant.Services.Mapping": "1.0.0",
+          "BeekeeperAssistant.Web.ViewModels": "1.0.0"
         },
         "compile": {
           "bin/placeholder/BeekeeperAssistant.Services.Data.dll": {}
@@ -2767,6 +2768,20 @@
         },
         "runtime": {
           "bin/placeholder/BeekeeperAssistant.Services.Mapping.dll": {}
+        }
+      },
+      "BeekeeperAssistant.Web.ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "BeekeeperAssistant.Data.Models": "1.0.0",
+          "BeekeeperAssistant.Services.Mapping": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BeekeeperAssistant.Web.ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BeekeeperAssistant.Web.ViewModels.dll": {}
         }
       }
     }
@@ -8809,6 +8824,11 @@
       "type": "project",
       "path": "../../Services/BeekeeperAssistant.Services.Mapping/BeekeeperAssistant.Services.Mapping.csproj",
       "msbuildProject": "../../Services/BeekeeperAssistant.Services.Mapping/BeekeeperAssistant.Services.Mapping.csproj"
+    },
+    "BeekeeperAssistant.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "path": "../../Web/BeekeeperAssistant.Web.ViewModels/BeekeeperAssistant.Web.ViewModels.csproj",
+      "msbuildProject": "../../Web/BeekeeperAssistant.Web.ViewModels/BeekeeperAssistant.Web.ViewModels.csproj"
     }
   },
   "projectFileDependencyGroups": {

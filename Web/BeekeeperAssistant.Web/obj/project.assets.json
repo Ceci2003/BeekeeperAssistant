@@ -2989,7 +2989,8 @@
         "dependencies": {
           "BeekeeperAssistant.Data.Common": "1.0.0",
           "BeekeeperAssistant.Data.Models": "1.0.0",
-          "BeekeeperAssistant.Services.Mapping": "1.0.0"
+          "BeekeeperAssistant.Services.Mapping": "1.0.0",
+          "BeekeeperAssistant.Web.ViewModels": "1.0.0"
         },
         "compile": {
           "bin/placeholder/BeekeeperAssistant.Services.Data.dll": {}

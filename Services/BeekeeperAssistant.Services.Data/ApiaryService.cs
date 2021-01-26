@@ -64,12 +64,6 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>()
-        {
-            var apiaries = this.apiaryRepository.All().To<T>().ToList();
-            return apiaries;
-        }
-
         public IEnumerable<T> GetAllByUser<T>(string userId)
         {
             var apiaries = this.apiaryRepository.All().Where(a => a.CreatorId == userId).To<T>().ToList();

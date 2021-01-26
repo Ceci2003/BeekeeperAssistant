@@ -8,8 +8,6 @@
 
     public interface IApiaryService
     {
-        IEnumerable<T> GetAll<T>();
-
         IEnumerable<T> GetAllByUser<T>(string userId);
 
         T GetByNUmber<T>(string number, string userId);
@@ -25,3 +23,4 @@
         bool Exists(string apiaryNumber, string userId);
     }
 }
+

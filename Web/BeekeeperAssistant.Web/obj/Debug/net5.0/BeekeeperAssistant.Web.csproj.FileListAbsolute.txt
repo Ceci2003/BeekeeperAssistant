@@ -928,3 +928,6 @@ D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\D
 D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\ref\BeekeeperAssistant.Web.dll
 D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\BeekeeperAssistant.Web.pdb
 D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\BeekeeperAssistant.Web.genruntimeconfig.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\Create.cshtml.g.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\ByNumber.cshtml.g.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\All.cshtml.g.cs

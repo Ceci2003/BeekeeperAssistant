@@ -30,3 +30,5 @@ D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Serv
 D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Data\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Data.csproj.CopyComplete
 D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Data\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Data.dll
 D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Data\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Data.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Data\bin\Debug\netstandard2.1\BeekeeperAssistant.Web.ViewModels.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Data\bin\Debug\netstandard2.1\BeekeeperAssistant.Web.ViewModels.pdb

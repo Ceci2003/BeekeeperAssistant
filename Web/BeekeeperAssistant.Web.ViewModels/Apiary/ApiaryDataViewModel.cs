@@ -18,5 +18,7 @@
         public string Adress { get; set; }
 
         public string Name { get; set; }
+
+        public IEnumerable<Beehive> Beehives { get; set; }
     }
 }

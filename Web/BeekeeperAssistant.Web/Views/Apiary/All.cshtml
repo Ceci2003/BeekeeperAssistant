@@ -1,0 +1,10 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel
+
+@{
+    ViewData["Title"] = "Пчелини всички";
+}
+
+@foreach (var apiary in Model.AllUserApiaries)
+{
+    <a href="/Apiary/@apiary.Number">@apiary.Number   |   </a>
+}

@@ -8,6 +8,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Data.Repositories;
     using BeekeeperAssistant.Data.Seeding;
+    using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Services.Messaging;
     using BeekeeperAssistant.Web.ViewModels;
@@ -63,6 +64,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IApiaryService, ApiaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,6 +105,7 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{number}", new { controller = "Apiary", action = "ByNumber" }, constraints: new { number = @"\b([\d]{4}\b)-(\b\d{4})\b" });
                         endpoints.MapRazorPages();
                     });
         }

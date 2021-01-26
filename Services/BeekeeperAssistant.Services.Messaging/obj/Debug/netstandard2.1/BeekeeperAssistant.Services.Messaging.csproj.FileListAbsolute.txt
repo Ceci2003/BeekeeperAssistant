@@ -1,0 +1,9 @@
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.deps.json
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.csprojAssemblyReference.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.AssemblyInfoInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.AssemblyInfo.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.csproj.CoreCompileInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Messaging\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Messaging.pdb

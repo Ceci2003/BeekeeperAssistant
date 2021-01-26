@@ -1,0 +1,9 @@
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.deps.json
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.csprojAssemblyReference.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.AssemblyInfoInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.AssemblyInfo.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.csproj.CoreCompileInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services.Mapping\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.Mapping.pdb

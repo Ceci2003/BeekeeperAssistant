@@ -1,0 +1,12 @@
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\bin\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.deps.json
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\bin\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\bin\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\bin\Debug\netstandard2.1\BeekeeperAssistant.Data.Common.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\bin\Debug\netstandard2.1\BeekeeperAssistant.Data.Common.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.csprojAssemblyReference.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.AssemblyInfoInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.AssemblyInfo.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.csproj.CoreCompileInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.csproj.CopyComplete
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data.Models\obj\Debug\netstandard2.1\BeekeeperAssistant.Data.Models.pdb

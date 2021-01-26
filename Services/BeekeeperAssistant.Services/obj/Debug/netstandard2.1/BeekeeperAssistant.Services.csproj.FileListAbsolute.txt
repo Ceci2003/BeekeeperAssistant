@@ -1,0 +1,8 @@
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.deps.json
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\bin\Debug\netstandard2.1\BeekeeperAssistant.Services.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.AssemblyInfoInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.AssemblyInfo.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.csproj.CoreCompileInputs.cache
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.dll
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.pdb

@@ -2788,19 +2788,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\UserE1\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
+      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
       "projectName": "BeekeeperAssistant.Services.Messaging",
-      "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
-      "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-      "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\obj\\",
+      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2852,7 +2852,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -449,7 +449,6 @@ D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssi
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
-D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Settings\Index.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs

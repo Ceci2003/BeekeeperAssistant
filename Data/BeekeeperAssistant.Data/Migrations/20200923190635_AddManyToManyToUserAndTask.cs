@@ -11,7 +11,7 @@
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    TaskId = table.Column<int>(nullable: false)
+                    TaskId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

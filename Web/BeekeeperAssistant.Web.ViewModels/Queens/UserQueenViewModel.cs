@@ -1,8 +1,8 @@
-﻿using BeekeeperAssistant.Data.Models;
-using BeekeeperAssistant.Services.Mapping;
-
-namespace BeekeeperAssistant.Web.ViewModels.Queens
+﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+
     public class UserQueenViewModel : IMapFrom<Queen>
     {
         public string Origin { get; set; }

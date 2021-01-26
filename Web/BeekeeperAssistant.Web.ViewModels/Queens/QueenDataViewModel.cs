@@ -1,11 +1,12 @@
-﻿using BeekeeperAssistant.Data.Models;
-using BeekeeperAssistant.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeekeeperAssistant.Web.ViewModels.Queens
+﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+
     public class QueenDataViewModel : IMapFrom<Queen>
     {
         public DateTime FertilizationDate { get; set; }

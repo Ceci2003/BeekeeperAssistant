@@ -19,7 +19,7 @@
             this.queenReepository = queenReepository;
         }
 
-        public async Task<int> CreateQueen(CreateQueenInputModel inputModel,int beehiveId, string currentUserId)
+        public async Task<int> CreateQueen(CreateQueenInputModel inputModel, int beehiveId, string currentUserId)
         {
             var model = new Queen()
             {

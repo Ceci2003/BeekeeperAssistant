@@ -9,9 +9,7 @@
 
     public class CreateQueenInputModel
     {
-
         public string Number { get; set; }
-
 
         public DateTime FertilizationDate { get; set; }
 
@@ -33,6 +31,5 @@
 
         [Required]
         public QueenBreed QueenBreed { get; set; }
-
     }
 }

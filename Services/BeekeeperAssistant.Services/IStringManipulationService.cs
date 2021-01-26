@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace BeekeeperAssistant.Services
+﻿namespace BeekeeperAssistant.Services
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface IStringManipulationService
     {
         string JoinStringWithSymbol(string first, string second, string symbol);

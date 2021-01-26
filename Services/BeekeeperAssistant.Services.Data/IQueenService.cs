@@ -1,13 +1,13 @@
-﻿using BeekeeperAssistant.Web.ViewModels.Queens;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Services.Data
+﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Web.ViewModels.Queens;
+
     public interface IQueenService
     {
-
         Task<int> CreateQueen(CreateQueenInputModel inputModel, int beehiveId, string currentUserId);
 
         T GetQueenById<T>(int id);
@@ -15,8 +15,5 @@ namespace BeekeeperAssistant.Services.Data
         IEnumerable<T> GetAllQueens<T>(int beehiveId, string currentUserId);
 
         IEnumerable<T> GetAllUserQueens<T>(string currentUserId);
-
-
-
     }
 }

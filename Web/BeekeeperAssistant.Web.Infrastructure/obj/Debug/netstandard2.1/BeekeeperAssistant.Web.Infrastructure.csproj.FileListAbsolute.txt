@@ -7,3 +7,12 @@ D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssi
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.csproj.CoreCompileInputs.cache
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.dll
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\bin\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.deps.json
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\bin\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\bin\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.csprojAssemblyReference.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.AssemblyInfoInputs.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.AssemblyInfo.cs
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web.Infrastructure\obj\Debug\netstandard2.1\BeekeeperAssistant.Web.Infrastructure.pdb

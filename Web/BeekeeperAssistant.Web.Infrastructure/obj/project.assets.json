@@ -60,19 +60,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\UserE1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+      "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
       "projectName": "BeekeeperAssistant.Web.Infrastructure",
-      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\obj\\",
+      "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
+      "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -120,7 +120,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

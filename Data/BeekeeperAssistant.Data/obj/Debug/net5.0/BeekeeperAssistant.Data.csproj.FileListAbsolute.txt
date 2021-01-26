@@ -21,3 +21,26 @@ D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAss
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\ref\BeekeeperAssistant.Data.dll
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.pdb
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.genruntimeconfig.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\appsettings.json
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.deps.json
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.runtimeconfig.json
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.runtimeconfig.dev.json
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\ref\BeekeeperAssistant.Data.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Common.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.Common.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.Models.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Common.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.Common.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\bin\Debug\net5.0\BeekeeperAssistant.Data.Models.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.csprojAssemblyReference.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.AssemblyInfoInputs.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.AssemblyInfo.cs
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.csproj.CoreCompileInputs.cache
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.csproj.CopyComplete
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\ref\BeekeeperAssistant.Data.dll
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.pdb
+D:\Programming\Project Repos\BeekeeperAssistant\Data\BeekeeperAssistant.Data\obj\Debug\net5.0\BeekeeperAssistant.Data.genruntimeconfig.cache

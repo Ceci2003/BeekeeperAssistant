@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "0Fbwy6Ysx7QdPPkKqFYjhbriSdKtSHdD8Gf2xKRx0M6q8501jE6manlpLazlZKXvowuNYHKhlYRNJ/lwpkPtrw==",
+  "dgSpecHash": "ywDHkHcQ0/91dOEju9P5VTjH8U2h+M8JdL1vwIwQof+J5syBrD17AAPTO7Yuezuj1ZtyJc4Gnk1L1CVAKavbhA==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+  "projectFilePath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.312\\stylecop.analyzers.1.2.0-beta.312.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.312\\stylecop.analyzers.unstable.1.2.0.312.nupkg.sha512"
+    "C:\\Users\\UserE1\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.312\\stylecop.analyzers.1.2.0-beta.312.nupkg.sha512",
+    "C:\\Users\\UserE1\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.312\\stylecop.analyzers.unstable.1.2.0.312.nupkg.sha512"
   ],
   "logs": []
 }

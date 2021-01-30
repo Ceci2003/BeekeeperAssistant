@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
     using System.Threading.Tasks;
 
     [Authorize]
@@ -22,7 +23,7 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> All ()
+        public async Task<IActionResult> All()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var allApiarires = this.apiaryService.GetAllByUser<UserApiaryViewModel>(currentUser.Id);
@@ -67,6 +68,62 @@
 
             await this.apiaryService.Add(inputModel, currenUser.Id);
             return this.Redirect($"/Apiary/{inputModel.Number}");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var currenUser = await this.userManager.GetUserAsync(this.User);
+            var inputModel = this.apiaryService.GetById<EditApiaryInputModel>(id, currenUser.Id);
+            var numbers = inputModel.Number.Split('-').ToList();
+            inputModel.CityCode = numbers[0];
+            inputModel.FarmNumber = numbers[1];
+            if (inputModel?.CreatorId != currenUser?.Id)
+            {
+                return this.Forbid();
+            }
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
+        {
+            var currenUser = await this.userManager.GetUserAsync(this.User);
+
+            if (this.apiaryService.Exists(inputModel.Number, currenUser.Id))
+            {
+                this.ModelState.AddModelError("Number", "Existing apiary number!");
+                return this.View(inputModel);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            inputModel.Number = $"{inputModel.CityCode}-{inputModel.FarmNumber}";
+
+            await this.apiaryService.EditById(id, inputModel, currenUser.Id);
+            return this.Redirect($"/Apiary/{inputModel.Number}");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (!this.apiaryService.Exists(id, currentUser.Id))
+            {
+                return this.NotFound();
+            }
+
+            //if (this.apiaryService.GetById<Apiary>(id, currentUser.Id) == null)
+            //{
+            //    return this.Forbid();
+            //}
+
+            await this.apiaryService.DeleteById(id, currentUser.Id);
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

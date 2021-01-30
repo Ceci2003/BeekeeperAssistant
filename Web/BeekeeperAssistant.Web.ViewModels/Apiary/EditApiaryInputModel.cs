@@ -8,6 +8,15 @@
     public class EditApiaryInputModel : IMapFrom<Apiary>
     {
         [Required]
+        [MaxLength(4)]
+        [RegularExpression(@"\d{4}")]
+        public string CityCode { get; set; }
+
+        [Required]
+        [MaxLength(4)]
+        [RegularExpression(@"\d{4}")]
+        public string FarmNumber { get; set; }
+
         public string Number { get; set; }
 
         public string Name { get; set; }

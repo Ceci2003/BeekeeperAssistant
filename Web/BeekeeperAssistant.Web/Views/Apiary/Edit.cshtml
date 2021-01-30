@@ -1,9 +1,14 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.CreateApiaryInputModel;
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.EditApiaryInputModel
+
 @{
-    this.ViewData["Title"] = "Create Apiary";
+    ViewData["Title"] = "Edit Apiary";
 }
 
-<form asp-controller="Apiary" asp-action="Create">
+<h1>Edit</h1>
+
+<h4>EditApiaryInputModel</h4>
+<hr />
+<form asp-controller="Apiary" asp-action="Edit">
     <h1>@this.ViewData["Title"]</h1>
     <div>
         <label asp-for="@Model.CityCode"></label>
@@ -43,3 +48,4 @@
 <div>
     <a class="btn btn-primary" asp-action="All">Bask To All Apiary</a>
 </div>
+

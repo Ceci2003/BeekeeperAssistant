@@ -95,5 +95,19 @@
                 return true;
             }
         }
+
+        public bool Exists(int id, string userId)
+        {
+            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).FirstOrDefault();
+
+            if (apiary == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

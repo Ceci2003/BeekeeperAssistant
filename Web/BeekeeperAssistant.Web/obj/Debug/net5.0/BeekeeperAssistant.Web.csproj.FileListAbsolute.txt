@@ -931,3 +931,5 @@ D:\Programming\Project Repos\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\D
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\Create.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\ByNumber.cshtml.g.cs
 D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\All.cshtml.g.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Apiary\Edit.cshtml.g.cs
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Web\BeekeeperAssistant.Web\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs

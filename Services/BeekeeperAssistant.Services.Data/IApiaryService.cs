@@ -21,6 +21,8 @@
         Task DeleteById(int id, string userId);
 
         bool Exists(string apiaryNumber, string userId);
+
+        bool Exists(int id, string userId);
     }
 }
 

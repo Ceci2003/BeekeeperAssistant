@@ -3,4 +3,53 @@
     this.ViewData["Title"] = "Apiary Details";
 }
 
-@Model.Name
+<div class="col-6">
+    <table class="table text-center">
+        <tbody>
+            <tr>
+                <th scope="row">Number:</th>
+                <td>@Model.Number</td>
+            </tr>
+            <tr>
+                <th scope="row">Name:</th>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <th scope="row">Type:</th>
+                <td>@Model.ApiaryType</td>
+            </tr>
+            <tr>
+                <th scope="row">Adress:</th>
+                <td>@Model.Adress</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Edit Apiary</a>
+<form asp-controller="Apiary" asp-action="Delete" asp-route-id="@Model.Id">
+    <input class="btn btn-danger" type="submit" value="Delete" />
+</form>
+
+<h1 class="text-center">beehives</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var beehive in Model.Beehives)
+        {
+            <tr>
+                <th scope="row">@beehive.Number</th>
+                <td>@beehive.BeehivePower</td>
+                <td>@beehive.BeehiveSystem</td>
+                <td>@beehive.BeehiveType</td>
+            </tr>
+        }
+    </tbody>
+</table>

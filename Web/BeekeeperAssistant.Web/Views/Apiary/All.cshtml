@@ -1,4 +1,5 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllUserApiariesViewModel
+@using BeekeeperAssistant.Common
 
 @{
     ViewData["Title"] = "Пчелини всички";
@@ -6,5 +7,8 @@
 
 @foreach (var apiary in Model.AllUserApiaries)
 {
-    <a href="/Apiary/@apiary.Number">@apiary.Number   |   </a>
+    <div>
+        <a class="btn btn-info" href="/Apiary/@apiary.Number">@apiary.Number</a>
+        <p></p>
+    </div>
 }

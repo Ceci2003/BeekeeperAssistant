@@ -15,3 +15,4 @@ D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Serv
 D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.csproj.CoreCompileInputs.cache
 D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.dll
 D:\Programming\Project Repos\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.pdb
+D:\Work\Projects\BeekeeperAssistant\App\Web\BeekeeperAssistant\Services\BeekeeperAssistant.Services\obj\Debug\netstandard2.1\BeekeeperAssistant.Services.csprojAssemblyReference.cache

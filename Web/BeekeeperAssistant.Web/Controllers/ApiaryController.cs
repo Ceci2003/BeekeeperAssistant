@@ -105,11 +105,7 @@
 
             inputModel.Number = number;
 
-<<<<<<< HEAD
             await this.apiaryService.Edit(id, inputModel, currentUser.Id);
-=======
-            await this.apiaryService.EditById(id, inputModel, currentUser.Id);
->>>>>>> e770cbcf8c29ccb9c7bc73efc744e99e1b39f078
             return this.Redirect($"/Apiary/{inputModel.Number}");
         }
 
@@ -117,7 +113,7 @@
         public async Task<IActionResult> Delete(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiary = this.apiaryService.GetById<Apiary>(id, currentUser.Id);
+            var apiary = this.apiaryService.GetById<ApiaryViewModel>(id, currentUser.Id);
 
             if (!this.apiaryService.Exists(id, currentUser.Id))
             {

@@ -8849,11 +8849,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Services.Data.Tests\\BeekeeperAssistant.Services.Data.Tests.csproj",
+      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Services.Data.Tests\\BeekeeperAssistant.Services.Data.Tests.csproj",
       "projectName": "BeekeeperAssistant.Services.Data.Tests",
-      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Services.Data.Tests\\BeekeeperAssistant.Services.Data.Tests.csproj",
+      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Services.Data.Tests\\BeekeeperAssistant.Services.Data.Tests.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Services.Data.Tests\\obj\\",
+      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Services.Data.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8870,11 +8870,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj"
             },
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj"
             }
           }
         }

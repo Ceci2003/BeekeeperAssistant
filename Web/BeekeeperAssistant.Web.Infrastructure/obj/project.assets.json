@@ -65,11 +65,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
       "projectName": "BeekeeperAssistant.Web.Infrastructure",
-      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\obj\\",
+      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

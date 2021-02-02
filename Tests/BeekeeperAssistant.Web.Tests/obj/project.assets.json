@@ -11258,11 +11258,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Web.Tests\\BeekeeperAssistant.Web.Tests.csproj",
+      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Web.Tests\\BeekeeperAssistant.Web.Tests.csproj",
       "projectName": "BeekeeperAssistant.Web.Tests",
-      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Web.Tests\\BeekeeperAssistant.Web.Tests.csproj",
+      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Web.Tests\\BeekeeperAssistant.Web.Tests.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Web.Tests\\obj\\",
+      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Web.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11279,8 +11279,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj"
             }
           }
         }

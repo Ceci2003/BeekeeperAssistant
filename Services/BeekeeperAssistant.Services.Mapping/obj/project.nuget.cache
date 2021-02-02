@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IX0fhdA4CAezCzgyCaLRAlUQhx32a7XZMdbB0LNCqHrJUUWG1zcBAH3enlAVYWXfq/6X11bDtpqVxJ2mJRRveA==",
+  "dgSpecHash": "zIglXG/D3MJ6tZc6o96M6V6AUlQzilRkdOIQ8jBlELg6xw7w2cOh4kHMgtr/2HZKv0D+l4PBFEPtpfZXhLadsw==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj",
+  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

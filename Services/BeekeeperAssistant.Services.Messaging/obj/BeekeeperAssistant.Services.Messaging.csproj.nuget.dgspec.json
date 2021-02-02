@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {}
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {}
   },
   "projects": {
-    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
         "projectName": "BeekeeperAssistant.Services.Messaging",
-        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\obj\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Messaging\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

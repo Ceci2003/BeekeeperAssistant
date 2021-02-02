@@ -1226,11 +1226,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
+      "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
       "projectName": "BeekeeperAssistant.Services.Data",
-      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
+      "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\obj\\",
+      "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1247,17 +1247,17 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
             },
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
             },
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
             },
-            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
-              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj"
+            "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
+              "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj"
             }
           }
         }

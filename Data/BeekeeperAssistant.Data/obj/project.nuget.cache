@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PZAIKK2Fk/c82+g+pl6JNYyJPlRRMVpz1iatnVu3fKEumRKAV8c9R9Wq5y+M+SketDRTvU1KF5wM8hDOTsZcNw==",
+  "dgSpecHash": "V0onfXZjY4j1VtS9CFwGJaJYNbDludhTK5m1slu2nSZO2NXgyv4Pou6MDKLl4rkFQSVdE3HjgwUgOqZexdcrVw==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj",
+  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",

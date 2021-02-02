@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b68Gxx6tNrAB5M4kjGfAnB9EddUMkPtut8vtA2owF+rxIjZFm0XFk+NUocFY8eUyKzPNOwA3stHMmQ3qFQd3vw==",
+  "dgSpecHash": "dvW94YXv8l7m9QrfhaKMxn1pOGxkvisjgIdhVLy9vXpg9DAWtopsCGRXzEt8bntRaiWzRaiaafxL/Z/4YX/cQQ==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Tests\\BeekeeperAssistant.Services.Data.Tests\\BeekeeperAssistant.Services.Data.Tests.csproj",
+  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Tests\\BeekeeperAssistant.Services.Data.Tests\\BeekeeperAssistant.Services.Data.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",

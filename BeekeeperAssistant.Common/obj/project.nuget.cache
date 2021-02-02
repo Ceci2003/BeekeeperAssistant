@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UMAMy74Lri09RRpJgLUPDt2WMl12JKZkppUeZBlSW9qm/+GRstsNnIUMezrcFOMuCy7XALzbsqDw4C5RSQDFxQ==",
+  "dgSpecHash": "00LverJ/pxXG4zdiOfHvb9di4Kbx7TcPX2rvO6ulVjzA7JJKewJxDGQI7Fn1zwRQEczTvfBtMw1wyElxP7/kRg==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj",
+  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.312\\stylecop.analyzers.1.2.0-beta.312.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.312\\stylecop.analyzers.unstable.1.2.0.312.nupkg.sha512"

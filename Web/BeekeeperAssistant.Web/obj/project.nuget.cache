@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ng0iDhQ/iiDKGTi2tFqF85Ytl7KB2ub32nfzXjocNIV9jPDjNjbck/lW/Dc6TSuyOrGaUOWdSolQhnbeLfO+1g==",
+  "dgSpecHash": "QMD0naLOTVUNjV0c2ixzKgdG/yttvQ1O1LfeX0xt/nZskuWJlC1ahL8SnlY/+OaWKDURgKRtom0jXozfG1iUMg==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj",
+  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\buildbundlerminifier\\3.2.449\\buildbundlerminifier.3.2.449.nupkg.sha512",

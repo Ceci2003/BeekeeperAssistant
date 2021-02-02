@@ -12,10 +12,10 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BeekeeperAssistant.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssi" +
-    "stant.Data", "BeekeeperAssistant.Data.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BeekeeperAssistant.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssis" +
-    "tant.Web", "BeekeeperAssistant.Web.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BeekeeperAssistant.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Data\\BeekeeperAss" +
+    "istant.Data", "BeekeeperAssistant.Data.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BeekeeperAssistant.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Web\\BeekeeperAssi" +
+    "stant.Web", "BeekeeperAssistant.Web.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeekeeperAssistant.Web.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

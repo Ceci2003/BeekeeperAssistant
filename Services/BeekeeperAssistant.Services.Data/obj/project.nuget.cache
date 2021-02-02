@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bGJRaI1yiiNIdG479G4M+bMdeGjzbTB0EzMuJ9NlViJ9nW+cWd27HROrK+IumSm2OKFPZWkg/u2ZhpKPOmL2/A==",
+  "dgSpecHash": "JqV2b4PKoyM9RD5hEyxFbnj2Oqqn6EQPbbenxDN/AAmHRsJ9vjNUydIU4/Wjnyo22GBh4lnZAk1mzRy/eMj/eQ==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
+  "projectFilePath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant2\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",

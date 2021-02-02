@@ -1,13 +1,14 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     [Authorize]
     public class ApiaryController : BaseController
@@ -57,7 +58,7 @@
             var currenUser = await this.userManager.GetUserAsync(this.User);
             if (this.apiaryService.Exists(inputModel.Number, currenUser.Id))
             {
-                this.ModelState.AddModelError("Number", "Existing apiary number!");
+                this.ModelState.AddModelError("Error", "Existing apiary number!");
                 return this.View(inputModel);
             }
 
@@ -88,11 +89,12 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
-            var currenUser = await this.userManager.GetUserAsync(this.User);
-
-            if (this.apiaryService.Exists(inputModel.Number, currenUser.Id))
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var originalModel = this.apiaryService.GetById<EditApiaryInputModel>(id, currentUser.Id);
+            var number = $"{inputModel.CityCode}-{inputModel.FarmNumber}";
+            if (this.apiaryService.Exists(number, currentUser.Id) && number != originalModel.Number)
             {
-                this.ModelState.AddModelError("Number", "Existing apiary number!");
+                this.ModelState.AddModelError("Error", "Existing apiary number!");
                 return this.View(inputModel);
             }
 
@@ -101,9 +103,9 @@
                 return this.View(inputModel);
             }
 
-            inputModel.Number = $"{inputModel.CityCode}-{inputModel.FarmNumber}";
+            inputModel.Number = number;
 
-            await this.apiaryService.EditById(id, inputModel, currenUser.Id);
+            await this.apiaryService.EditById(id, inputModel, currentUser.Id);
             return this.Redirect($"/Apiary/{inputModel.Number}");
         }
 
@@ -111,16 +113,22 @@
         public async Task<IActionResult> Delete(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
+            var apiary = this.apiaryService.GetById<Apiary>(id, currentUser.Id);
 
             if (!this.apiaryService.Exists(id, currentUser.Id))
             {
                 return this.NotFound();
             }
 
-            //if (this.apiaryService.GetById<Apiary>(id, currentUser.Id) == null)
-            //{
-            //    return this.Forbid();
-            //}
+            if (apiary.CreatorId != currentUser.Id)
+            {
+                return this.Forbid();
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect($"/Apiary/{apiary.Number}");
+            }
 
             await this.apiaryService.DeleteById(id, currentUser.Id);
             return this.RedirectToAction(nameof(this.All));

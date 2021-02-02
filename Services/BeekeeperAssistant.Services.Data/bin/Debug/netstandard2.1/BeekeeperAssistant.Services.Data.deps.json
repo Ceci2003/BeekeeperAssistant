@@ -12,6 +12,7 @@
           "BeekeeperAssistant.Data.Common": "1.0.0",
           "BeekeeperAssistant.Data.Models": "1.0.0",
           "BeekeeperAssistant.Services.Mapping": "1.0.0",
+          "BeekeeperAssistant.Web.ViewModels": "1.0.0",
           "StyleCop.Analyzers": "1.2.0-beta.312"
         },
         "runtime": {
@@ -338,6 +339,15 @@
         "runtime": {
           "BeekeeperAssistant.Services.Mapping.dll": {}
         }
+      },
+      "BeekeeperAssistant.Web.ViewModels/1.0.0": {
+        "dependencies": {
+          "BeekeeperAssistant.Data.Models": "1.0.0",
+          "BeekeeperAssistant.Services.Mapping": "1.0.0"
+        },
+        "runtime": {
+          "BeekeeperAssistant.Web.ViewModels.dll": {}
+        }
       }
     }
   },
@@ -568,6 +578,11 @@
       "sha512": ""
     },
     "BeekeeperAssistant.Services.Mapping/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BeekeeperAssistant.Web.ViewModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

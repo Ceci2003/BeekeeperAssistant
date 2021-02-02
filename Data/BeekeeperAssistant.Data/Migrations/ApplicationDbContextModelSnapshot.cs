@@ -17,7 +17,55 @@ namespace BeekeeperAssistant.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Apiary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ApiaryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ApiaryType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApiaryId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Apiaries");
+                });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.ApplicationRole", b =>
                 {
@@ -139,7 +187,127 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Setting", b =>
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Beehive", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("ApiaryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BeehivePower")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BeehiveSystem")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BeehiveType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("HasDevice")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("HasPolenCatcher")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("HasPropolisCatcher")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApiaryId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Beehives");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Queen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("BeehiveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Breed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Color")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FertilizationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("GivingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HygenicHabits")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Origin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QueenType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Temperament")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BeehiveId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Queens");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.UserNote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,17 +326,58 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Value")
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Settings");
+                    b.ToTable("UserNotes");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.UserTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("UserTasks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -275,6 +484,53 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Apiary", b =>
+                {
+                    b.HasOne("BeekeeperAssistant.Data.Models.Apiary", null)
+                        .WithMany("Apiaries")
+                        .HasForeignKey("ApiaryId");
+
+                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Beehive", b =>
+                {
+                    b.HasOne("BeekeeperAssistant.Data.Models.Apiary", "Apiary")
+                        .WithMany("Beehives")
+                        .HasForeignKey("ApiaryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.Navigation("Apiary");
+
+                    b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Queen", b =>
+                {
+                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
+                        .WithMany()
+                        .HasForeignKey("BeehiveId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Beehive");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("BeekeeperAssistant.Data.Models.ApplicationRole", null)
@@ -324,6 +580,13 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Apiary", b =>
+                {
+                    b.Navigation("Apiaries");
+
+                    b.Navigation("Beehives");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.ApplicationUser", b =>

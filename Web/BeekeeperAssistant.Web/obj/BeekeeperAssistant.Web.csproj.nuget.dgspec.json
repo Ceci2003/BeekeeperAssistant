@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj": {}
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj": {}
   },
   "projects": {
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj",
         "projectName": "BeekeeperAssistant.Common",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -62,21 +62,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj",
         "projectName": "BeekeeperAssistant.Data.Common",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -128,21 +128,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj",
         "projectName": "BeekeeperAssistant.Data.Models",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -156,8 +156,8 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
               }
             }
           }
@@ -198,21 +198,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj",
         "projectName": "BeekeeperAssistant.Data",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -226,14 +226,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
               }
             }
           }
@@ -294,21 +294,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
         "projectName": "BeekeeperAssistant.Services.Data",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -322,14 +322,17 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Common\\BeekeeperAssistant.Data.Common.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
+              },
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj"
               }
             }
           }
@@ -366,21 +369,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj",
         "projectName": "BeekeeperAssistant.Services.Mapping",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -432,21 +435,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
         "projectName": "BeekeeperAssistant.Services.Messaging",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -498,21 +501,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj",
         "projectName": "BeekeeperAssistant.Services",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -560,21 +563,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
         "projectName": "BeekeeperAssistant.Web.Infrastructure",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -622,21 +625,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj",
         "projectName": "BeekeeperAssistant.Web.ViewModels",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -650,11 +653,11 @@
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
               }
             }
           }
@@ -691,21 +694,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj": {
+    "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj",
+        "projectUniqueName": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj",
         "projectName": "BeekeeperAssistant.Web",
-        "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj",
-        "packagesPath": "C:\\Users\\UserE1\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\obj\\",
+        "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\BeekeeperAssistant.Web.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\UserE1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -719,32 +722,32 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\BeekeeperAssistant.Common\\BeekeeperAssistant.Common.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data.Models\\BeekeeperAssistant.Data.Models.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Data\\BeekeeperAssistant.Data\\BeekeeperAssistant.Data.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Data\\BeekeeperAssistant.Services.Data.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Mapping\\BeekeeperAssistant.Services.Mapping.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services.Messaging\\BeekeeperAssistant.Services.Messaging.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Services\\BeekeeperAssistant.Services\\BeekeeperAssistant.Services.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.Infrastructure\\BeekeeperAssistant.Web.Infrastructure.csproj"
               },
-              "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
-                "projectPath": "D:\\Programming\\Project Repos\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj"
+              "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj": {
+                "projectPath": "D:\\Work\\Projects\\BeekeeperAssistant\\App\\Web\\BeekeeperAssistant\\Web\\BeekeeperAssistant.Web.ViewModels\\BeekeeperAssistant.Web.ViewModels.csproj"
               }
             }
           }
@@ -808,7 +811,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

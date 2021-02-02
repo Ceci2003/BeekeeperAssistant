@@ -1,0 +1,86 @@
+﻿.side-navigation {
+    background-color: #432D26;
+    height: 100%;
+    width: 100%;
+    max-width: 270px;
+    position: absolute;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.user-image img {
+    width: 110px;
+    height: 110px;
+    border-radius: 100px;
+}
+
+.user-text {
+    margin-top: 15px;
+    text-align: center;
+    word-break: break-all;
+    padding: 0 15px;
+}
+
+.user-image {
+    margin-top: 50px;
+}
+
+p {
+    margin: 0px;
+}
+
+.apiary-nav {
+    margin-top: 50px;
+}
+
+.primary {
+    background-color: #F1C424;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 0px;
+}
+
+    .primary a {
+        color: black;
+        font-size: 18px;
+    }
+
+.secondary {
+    background-color: #664339;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0px;
+}
+
+    .secondary a {
+        color: white;
+        font-size: 15px;
+    }
+
+.leave {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.leave button {
+    background-color: transparent;
+    border: none;
+}
+
+.fa-sign-out-alt {
+    color: white;
+    font-size: 23px;
+}
+
+main {
+    margin-left: 270px;
+}

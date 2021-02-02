@@ -105,7 +105,11 @@
 
             inputModel.Number = number;
 
+<<<<<<< HEAD
             await this.apiaryService.Edit(id, inputModel, currentUser.Id);
+=======
+            await this.apiaryService.EditById(id, inputModel, currentUser.Id);
+>>>>>>> e770cbcf8c29ccb9c7bc73efc744e99e1b39f078
             return this.Redirect($"/Apiary/{inputModel.Number}");
         }
 

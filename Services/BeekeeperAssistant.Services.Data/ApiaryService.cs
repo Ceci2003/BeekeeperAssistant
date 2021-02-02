@@ -36,7 +36,7 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public async Task EditById(int id, EditApiaryInputModel inputModel, string userId)
+        public async Task Edit(int id, EditApiaryInputModel inputModel, string userId)
         {
             var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).FirstOrDefault();
 
@@ -52,7 +52,7 @@
             }
         }
 
-        public async Task DeleteById(int id, string userId)
+        public async Task Delete(int id, string userId)
         {
             var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).FirstOrDefault();
             if (apiary == null)
@@ -64,7 +64,7 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllByUser<T>(string userId)
+        public IEnumerable<T> GetAll<T>(string userId)
         {
             var apiaries = this.apiaryRepository.All().Where(a => a.CreatorId == userId).To<T>().ToList();
             return apiaries;

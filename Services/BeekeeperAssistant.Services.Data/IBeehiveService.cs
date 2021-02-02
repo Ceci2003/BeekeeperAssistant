@@ -19,6 +19,6 @@
 
         Task Delete(int id, string userId);
 
-        bool Exists(int beehiveNumber, int apisryId, string userId);
+        bool Exists(int beehiveNumber, int apiaryId, string userId);
     }
 }

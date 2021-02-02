@@ -90,10 +90,8 @@
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
 
         public bool Exists(int id, string userId)
@@ -104,10 +102,8 @@
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
     }
 }

@@ -1,40 +1,60 @@
-﻿.side-navigation {
-    background-color: #432D26;
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "OpenSans", sans-serif;
+} 
+
+/* Global variables */
+:root {
+    --orange: #FF7800;
+    --main-background: #110400;
+    --white: #ffffff;
+}
+
+
+/* Side navigation */
+.sidebar-navigation {
+    background-color: var(--main-background);
     height: 100%;
     width: 100%;
     max-width: 270px;
     position: absolute;
 }
 
-.user {
+/* Side navigation user area */
+.sidebar-navigation .user-area {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: white;
+    color: var(--white);
 }
 
-.user-image img {
-    width: 110px;
-    height: 110px;
+.sidebar-navigation .user-image {
+    margin-top: 50px;
+}
+
+.sidebar-navigation .user-image img {
+    width: 130px;
+    height: 130px;
     border-radius: 100px;
+    border: 4px solid var(--orange);
 }
 
-.user-text {
+.sidebar-navigation .user-greeting {
     margin-top: 15px;
     text-align: center;
     word-break: break-all;
     padding: 0 15px;
 }
 
-.user-image {
-    margin-top: 50px;
-}
-
-p {
-    margin: 0px;
-}
-
+/* Side navigation dropdowns*/
 .apiary-nav {
     margin-top: 50px;
 }
@@ -47,10 +67,10 @@ p {
     padding: 7px 0px;
 }
 
-    .primary a {
-        color: black;
-        font-size: 18px;
-    }
+.primary a {
+    color: black;
+    font-size: 18px;
+}
 
 .secondary {
     background-color: #664339;
@@ -60,10 +80,10 @@ p {
     padding: 5px 0px;
 }
 
-    .secondary a {
-        color: white;
-        font-size: 15px;
-    }
+.secondary a {
+    color: white;
+    font-size: 15px;
+}
 
 .leave {
     position: absolute;

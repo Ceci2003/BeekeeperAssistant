@@ -1,89 +1,70 @@
 ﻿const apiList = document.querySelector(".api-options");
 const beehiveList = document.querySelector(".beehive-options");
 const queenList = document.querySelector(".queen-options");
-const sidebarArrows = document.querySelectorAll(".fa-angle-left");
+const sidebarArrows = document.querySelectorAll(".primary .fas.fa-angle-left");
 
-const apiButton = document.querySelector(".apiary-button");
+const apiButton = document.querySelector(".apiaries-drop-btn");
 apiButton.addEventListener("click", (e) => {
 
-    if (!apiList.classList.contains("show")) {
-        showMenu("add", apiList, apiButton, "#FF7800", sidebarArrows[1]);
+    if (apiList.classList.contains("show")) {
+        showHideMenu(true, apiList, document.querySelector(".apiaries-drop-btn .fa-angle-left"));
     }
     else {
-        showMenu("remove", apiList, apiButton, "#110400", sidebarArrows[1]);
+        showHideMenu(false, apiList, document.querySelector(".apiaries-drop-btn .fa-angle-left"));
     }
 })
 
-const beehiveButton = document.querySelector(".beehive-button");
-beehiveButton.addEventListener("click", (e) => {
+const beehivesButton = document.querySelector(".beehives-drop-btn");
+beehivesButton.addEventListener("click", (e) => {
 
-    if (!beehiveList.classList.contains("show")) {
-        showMenu("add", beehiveList, beehiveButton, "#FF7800", sidebarArrows[2]);
+    if (beehivesButton.classList.contains("show")) {
+        showHideMenu(true, beehiveList, document.querySelector(".beehives-drop-btn .fa-angle-left"));
     }
     else {
-        showMenu("remove", beehiveList, beehiveButton, "#110400", sidebarArrows[2]);
+        showHideMenu(false, beehiveList, document.querySelector(".beehives-drop-btn .fa-angle-left"));
     }
 })
 
+const queensButton = document.querySelector(".queens-drop-btn");
+queensButton.addEventListener("click", (e) => {
 
-const queenButton = document.querySelector(".queen-button");
-queenButton.addEventListener("click", (e) => {
-
-    if (!queenList.classList.contains("show")) {
-        showMenu("add", queenList, queenButton, "#FF7800", sidebarArrows[3]);
+    if (queensButton.classList.contains("show")) {
+        showHideMenu(true, queenList, document.querySelector(".queens-drop-btn .fa-angle-left"));
     }
     else {
-        showMenu("remove", queenList, queenButton, "#110400", sidebarArrows[3]);
+        showHideMenu(false, queenList, document.querySelector(".queens-drop-btn .fa-angle-left"));
     }
 })
-
-
-const dataPicker = document.querySelector("#dataPick");
-dataPicker?.addEventListener("click", (e) => {
-    var today = new Date();
-    dataPicker.value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-})
-
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.apiary-button')) {
-        var dropdowns = document.getElementsByClassName("api-options");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
 
 //  Functions
-function showMenu(addOrRemove, list, button, btnBackground, arrow) {
-    backgroundToBase();
+function showHideMenu(addOrRemove, list, arrow) {
+    // backgroundToBase();
     removeClass([beehiveList, queenList, apiList], "show");
-    removeClass(sidebarArrows, "rotate-90");
-    if (addOrRemove == "add") {
-        list.classList.add("show");
-        arrow.classList.add("rotate-90");
-    }
-    else if (addOrRemove == "remove") {
+    removeClass(sidebarArrows, "rotate-270");
+
+    if (addOrRemove) {
         list.classList.remove("show");
-        arrow.classList.remove("rotate-90");
+        arrow.classList.remove("rotate-270");
+    }
+    else {
+        list.classList.add("show");
+        arrow.classList.add("rotate-270");
     }
     // button.style.background = btnBackground;
 }
 
 function removeClass(elements, className) {
-    elements.forEach(element => {
-        element.classList.remove(className);
-    });
+    if (elements.length == 1) {
+        elements.classList.remove(className);
+    } else {
+        elements.forEach(element => {
+            element.classList.remove(className);
+        });   
+    }
 }
 
-function backgroundToBase() {
-    queenButton.style.background = "#110400";
-    beehiveButton.style.background = "#110400";
-    apiButton.style.background = "#110400";
-}
+// function backgroundToBase() {
+//     queenButton.style.background = "#110400";
+//     beehiveButton.style.background = "#110400";
+//     apiButton.style.background = "#110400";
+// }

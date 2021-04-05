@@ -6,15 +6,34 @@
     box-sizing: border-box;
 }
 
+main {
+    margin-left: 270px;
+}
+
 body {
     font-family: "OpenSans", sans-serif;
-} 
+}
+
+a {
+    text-decoration: none;
+}
+
+.content {
+    padding: 0 50px;
+}
 
 /* Global variables */
 :root {
     --orange: #FF7800;
     --main-background: #110400;
     --white: #ffffff;
+    --lightgray: #d3d3d3;
+    --apiaries-color: #17A2B8;
+    --apiaries-color-hover: #3EBA9B;
+    --beehives-color: #F29422;
+    --beehives-color-hover: #FEAD34;
+    --queens-color: #DA3C3D;
+    --queens-color-hover: #D9695D;
 }
 
 
@@ -50,6 +69,7 @@ body {
 
 .sidebar-navigation .user-greeting {
     margin-top: 15px;
+    /* margin-bottom: 15px; */
     text-align: center;
     word-break: break-all;
     padding: 0 15px;
@@ -61,6 +81,10 @@ body {
     background-color: var(--white);
     border-radius: 3px;
     width: 70%;
+}
+
+.sidebar-navigation .navigations {
+    margin-bottom: 50px;
 }
 
 /* Side navigation dropdowns*/
@@ -101,39 +125,10 @@ body {
 }
 
 .secondary{
-    text-decoration: none;
     color: var(--white);
 }
 
-/* .apiary-nav {
-    margin-top: 50px;
-}
-
-.primary {
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px 0px;
-}
-
-.primary a {
-    color: black;
-    font-size: 18px;
-}
-
-.secondary {
-    background-color: #664339;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 0px;
-}
-
-.secondary a {
-    color: white;
-    font-size: 15px;
-}
+/* 
 
 .leave {
     position: absolute;
@@ -149,11 +144,50 @@ body {
 .fa-sign-out-alt {
     color: white;
     font-size: 23px;
+} 
+
+*/
+
+
+/* Apiaries */
+.btn.apiary-create {
+    float: right;
+    background-color: var(--apiaries-color);
+    border: none;
+    color: var(--white);
 }
 
-main {
-    margin-left: 270px;
-} */
+.btn.apiary-create:hover {
+    background-color: var(--apiaries-color-hover);
+}
+
+
+
+/* Combined */
+.btn {
+    padding: 10px 20px;
+    border: 1px solid var(--main-background);
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.data-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.data-table td,
+.data-table th {
+  border: 1px solid var(--lightgray);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+td a {
+
+}
+
+
 
 .rotate-270 {
     transform: rotate(270deg);

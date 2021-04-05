@@ -27,6 +27,7 @@
         [Required]
         public ApiaryType ApiaryType { get; set; }
 
+        [Display(Name = "Населено място", ShortName = "Населено място")]
         public string Adress { get; set; }
     }
 }

@@ -2,13 +2,42 @@
 @using BeekeeperAssistant.Common
 
 @{
-    ViewData["Title"] = "Пчелини всички";
+    ViewData["Title"] = "Пчелини-всички";
 }
 
-@foreach (var apiary in Model.AllUserApiaries)
-{
-    <div>
-        <a class="btn btn-info" href="/Apiary/@apiary.Number">@apiary.Number</a>
-        <p></p>
-    </div>
-}
+<div class="content">
+    <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
+        <i class="fas fa-plus-square pr-2"></i>
+        Създайте нов пчелин
+    </a>
+    @if (Model.AllUserApiaries.Any())
+    {
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Име</th>
+                    <th>Адрес</th>
+                    <th>Вид</th>
+                    <th>Бр. кошери</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var apiary in Model.AllUserApiaries)
+                {
+                    <tr>
+                        <td><a href="/Apiary/@apiary.Number">@apiary.Number</a></td>
+                        <td>@apiary.Name</td>
+                        <td>@apiary.Adress</td>
+                        <td>@apiary.ApiaryType</td>
+                        <td>@apiary.BeehivesCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+    }
+    else
+    {
+        <h1>Empty</h1>
+    }
+</div>

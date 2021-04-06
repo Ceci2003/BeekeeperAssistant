@@ -17,7 +17,7 @@ apiButton.addEventListener("click", (e) => {
 const beehivesButton = document.querySelector(".beehives-drop-btn");
 beehivesButton.addEventListener("click", (e) => {
 
-    if (beehivesButton.classList.contains("show")) {
+    if (beehiveList.classList.contains("show")) {
         showHideMenu(true, beehiveList, document.querySelector(".beehives-drop-btn .fa-angle-left"));
     }
     else {
@@ -28,7 +28,7 @@ beehivesButton.addEventListener("click", (e) => {
 const queensButton = document.querySelector(".queens-drop-btn");
 queensButton.addEventListener("click", (e) => {
 
-    if (queensButton.classList.contains("show")) {
+    if (queenList.classList.contains("show")) {
         showHideMenu(true, queenList, document.querySelector(".queens-drop-btn .fa-angle-left"));
     }
     else {

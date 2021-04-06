@@ -26,13 +26,14 @@ a {
 :root {
   --orange: #ff7800;
   /* --red: #AB0000; */
-  --red: #8C0712;
-  --red-hover: #BF0A0A;
+  --red: #8c0712;
+  --red-hover: #bf0a0a;
   --green: #014017;
-  --green-hover: #1A5918;
-  --blue: #0D6493;
-  --blue-hover: #1287C6;
+  --green-hover: #1a5918;
+  --blue: #0d6493;
+  --blue-hover: #1287c6;
   --main-background: #110400;
+  --gray-background: #f1f2f3;
   --white: #ffffff;
   --lightgray: #d3d3d3;
   --apiaries-color: #17a2b8;
@@ -213,36 +214,88 @@ td.number a:hover {
 }
 
 td.edit {
-    padding: 0;
+  padding: 0;
 }
 
 td.edit div {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 td.edit div a.mark {
-    color: var(--blue);
+  color: var(--blue);
 }
 
 td.edit div a.mark:hover {
-    color: var(--blue-hover);
+  color: var(--blue-hover);
 }
 
 td.edit div a.edit {
-    color: var(--green);
+  color: var(--green);
 }
 
 td.edit div a.edit:hover {
-    color: var(--green-hover);
+  color: var(--green-hover);
 }
 
 td.edit div a.delete {
-    color: var(--red);
+  color: var(--red);
 }
 
 td.edit div a.delete:hover {
-    color: var(--red-hover);
+  color: var(--red-hover);
+}
+
+.form-box {
+  position: absolute;
+  top: 50%;
+  left: 58%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  /* background: rgba(0,0,0,.5); */
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  /* border-radius: 5px; */
+}
+
+.form-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  text-align: center;
+}
+
+.form-box .input-box {
+  position: relative;
+}
+
+.form-box .input-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid var(--lightgray);
+  outline: none;
+  background: transparent;
+}
+
+.form-box .input-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.form-box .input-box input:focus ~ label,
+.form-box .input-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: var(--lightgray);
+  font-size: 12px;
 }
 
 .rotate-270 {

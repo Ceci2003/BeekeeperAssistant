@@ -58,7 +58,6 @@
             await this.apiaryRepository.SaveChangesAsync();
 
             return apiary.Number;
-
         }
 
         // TODO: Add pagination
@@ -93,12 +92,3 @@
         }
     }
 }
-
-
-
-// GetAllUserApiaries + pagination
-// GetUserApiaryByNumber
-// GetApairyById
-// CreateUserApiary
-// DeleteUserApiaryById / DeleteUserApiaryByNumber
-// EditUserApiaryByNumber / EditUserApiaryById

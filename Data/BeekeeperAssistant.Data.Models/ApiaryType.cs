@@ -15,11 +15,11 @@
         Mobile = 3,
         [Display(Name = "Помощен")]
         Supporting = 4,
-        [Display(Name = "за майко производство")]
+        [Display(Name = "За майко производство")]
         ForTheProductionOfMothers = 5,
-        [Display(Name = "за отводки")]
+        [Display(Name = "За отводки")]
         ForPropagation = 6,
-        [Display(Name = "друг")]
-        Other = 5,
+        [Display(Name = "Друг")]
+        Other = 7,
     }
 }

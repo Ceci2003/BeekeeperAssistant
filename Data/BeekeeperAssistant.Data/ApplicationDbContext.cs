@@ -28,9 +28,9 @@
 
         public DbSet<Beehive> Beehives { get; set; }
 
-        public DbSet<UserTask> UserTasks { get; set; }
+        public DbSet<Duty> Duties { get; set; }
 
-        public DbSet<UserNote> UserNotes { get; set; }
+        public DbSet<Note> Notes { get; set; }
 
         public DbSet<Queen> Queens { get; set; }
 

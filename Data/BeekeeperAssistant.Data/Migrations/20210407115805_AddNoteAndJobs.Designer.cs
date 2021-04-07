@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210407115805_AddNoteAndJobs")]
+    partial class AddNoteAndJobs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace BeekeeperAssistant.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("ApplicationUserDuty", b =>
+            modelBuilder.Entity("ApplicationUserJobs", b =>
                 {
                     b.Property<int>("TasksId")
                         .HasColumnType("int");
@@ -31,7 +33,7 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ApplicationUserDuty");
+                    b.ToTable("ApplicationUserJobs");
                 });
 
             modelBuilder.Entity("ApplicationUserNote", b =>
@@ -272,7 +274,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("Beehives");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Duty", b =>
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Jobs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -310,7 +312,7 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Duties");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Note", b =>
@@ -509,9 +511,9 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ApplicationUserDuty", b =>
+            modelBuilder.Entity("ApplicationUserJobs", b =>
                 {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Duty", null)
+                    b.HasOne("BeekeeperAssistant.Data.Models.Jobs", null)
                         .WithMany()
                         .HasForeignKey("TasksId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -574,7 +576,7 @@ namespace BeekeeperAssistant.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
-                        .WithMany("Queens")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Beehive");
@@ -647,8 +649,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Claims");
 
                     b.Navigation("Logins");
-
-                    b.Navigation("Queens");
 
                     b.Navigation("Roles");
                 });

@@ -105,7 +105,9 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{number}", new { controller = "Apiary", action = "ByNumber" }, constraints: new { number = @"\b([\d]{4}\b)-(\b\d{4})\b" });
+
+                        // TODO: Create ApiaryNumber Constraint
+                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber}", new { controller = "Apiary", action = "ByNumber" }, constraints: new { apiaryNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
                         endpoints.MapRazorPages();
                     });
         }

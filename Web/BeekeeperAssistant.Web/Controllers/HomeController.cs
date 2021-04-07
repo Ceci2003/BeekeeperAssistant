@@ -3,7 +3,7 @@
     using System.Diagnostics;
 
     using BeekeeperAssistant.Web.ViewModels;
-
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController

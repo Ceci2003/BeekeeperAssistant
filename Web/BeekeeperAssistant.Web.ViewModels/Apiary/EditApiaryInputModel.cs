@@ -1,7 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
     using System.ComponentModel.DataAnnotations;
-
+    using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
@@ -17,7 +17,7 @@
         [RegularExpression(@"\d{4}")]
         public string FarmNumber { get; set; }
 
-        public string Number { get; set; }
+        public string Number => $"{this.CityCode}-{this.FarmNumber}";
 
         public string Name { get; set; }
 
@@ -25,7 +25,5 @@
         public ApiaryType ApiaryType { get; set; }
 
         public string Adress { get; set; }
-
-        public string CreatorId { get; set; }
     }
 }

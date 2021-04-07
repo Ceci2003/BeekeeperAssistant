@@ -36,11 +36,12 @@
                         <td class="edit">
                             <div>
                                 <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                                @*Make with button not anchor tag!*@
                                 <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id"><i class="far fa-edit"></i></a>
                                 <form id="form-@apiary.Id" asp-action="Delete" asp-controller="Apiary" asp-route-id="@apiary.Id">
-                                    <a class="delete" onclick="sendForm('form-@apiary.Id')">
+                                    <button type="submit" class="delete">
                                         <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    </button>
                                 </form>
                             </div>
                         </td>

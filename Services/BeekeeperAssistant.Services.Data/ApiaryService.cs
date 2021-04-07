@@ -8,102 +8,97 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using BeekeeperAssistant.Web.ViewModels.Apiaries;
-    using Microsoft.AspNetCore.Identity;
 
     public class ApiaryService : IApiaryService
     {
         private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
 
-        public ApiaryService(
-            IDeletableEntityRepository<Apiary> apiaryRepository)
+        public ApiaryService(IDeletableEntityRepository<Apiary> apiaryRepository)
         {
             this.apiaryRepository = apiaryRepository;
         }
 
-        public async Task Add(CreateApiaryInputModel inputModel, string userId)
+        public async Task<string> CreateUserApiaryAsync(string userId, string number, string name, ApiaryType apiaryType, string adress)
         {
-            var apiary = new Apiary()
+            var newApiary = new Apiary
             {
-                Adress = inputModel.Adress,
-                Name = inputModel.Name,
-                Number = inputModel.Number,
-                ApiaryType = inputModel.ApiaryType,
                 CreatorId = userId,
+                Number = number,
+                Name = name,
+                ApiaryType = apiaryType,
+                Adress = adress,
             };
 
-            await this.apiaryRepository.AddAsync(apiary);
+            await this.apiaryRepository.AddAsync(newApiary);
             await this.apiaryRepository.SaveChangesAsync();
+
+            var apiaryNumber = newApiary.Number;
+            return apiaryNumber;
         }
 
-        public async Task Edit(int id, EditApiaryInputModel inputModel, string userId)
+        public async Task DeleteApiaryByIdAsync(int apiaryId)
         {
-            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).FirstOrDefault();
-
-            if (apiary != null)
-            {
-                apiary.Number = inputModel.Number;
-                apiary.Name = inputModel.Name;
-                apiary.ApiaryType = inputModel.ApiaryType;
-                apiary.Adress = inputModel.Adress;
-
-                this.apiaryRepository.Update(apiary);
-                await this.apiaryRepository.SaveChangesAsync();
-            }
-        }
-
-        public async Task Delete(int id, string userId)
-        {
-            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).FirstOrDefault();
-            if (apiary == null)
-            {
-                return;
-            }
+            var apiary = this.apiaryRepository.All()
+                .FirstOrDefault(a => a.Id == apiaryId);
 
             this.apiaryRepository.Delete(apiary);
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAll<T>(string userId)
+        public async Task<string> EditApiaryByIdAsync(int apiaryId, string number, string name, ApiaryType apiaryType, string address)
         {
-            var apiaries = this.apiaryRepository.All().Where(a => a.CreatorId == userId).To<T>().ToList();
-            return apiaries;
+            var apiary = this.apiaryRepository.All()
+                .FirstOrDefault(a => a.Id == apiaryId);
+
+            apiary.Number = number;
+            apiary.Name = name;
+            apiary.ApiaryType = apiaryType;
+            apiary.Adress = address;
+
+            await this.apiaryRepository.SaveChangesAsync();
+
+            return apiary.Number;
+
         }
 
-        public T GetById<T>(int id, string userId)
+        // TODO: Add pagination
+        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1)
         {
-            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).To<T>().FirstOrDefault();
+            var userApiaries = this.apiaryRepository.All()
+                .Where(a => a.CreatorId == userId)
+                .To<T>()
+                .ToList();
+
+            return userApiaries;
+        }
+
+        public T GetApiaryById<T>(int apiaryId)
+        {
+            var apiary = this.apiaryRepository.All()
+                .Where(a => a.Id == apiaryId)
+                .To<T>()
+                .FirstOrDefault();
+
             return apiary;
         }
 
-        public T GetByNUmber<T>(string number, string userId)
+        public T GetUserApiaryByNumber<T>(string userId, string number)
         {
-            var apiary = this.apiaryRepository.All().Where(a => a.Number == number && a.CreatorId == userId).To<T>().FirstOrDefault();
+            var apiary = this.apiaryRepository.All()
+                .Where(a => a.Number == number && a.CreatorId == userId)
+                .To<T>()
+                .FirstOrDefault();
+
             return apiary;
-        }
-
-        public bool Exists(string apiaryNumber, string userId)
-        {
-            var apiary = this.apiaryRepository.All().Where(a => a.Number == apiaryNumber && a.CreatorId == userId).FirstOrDefault();
-
-            if (apiary == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool Exists(int id, string userId)
-        {
-            var apiary = this.apiaryRepository.All().Where(a => a.Id == id && a.CreatorId == userId).FirstOrDefault();
-
-            if (apiary == null)
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
+
+
+
+// GetAllUserApiaries + pagination
+// GetUserApiaryByNumber
+// GetApairyById
+// CreateUserApiary
+// DeleteUserApiaryById / DeleteUserApiaryByNumber
+// EditUserApiaryByNumber / EditUserApiaryById

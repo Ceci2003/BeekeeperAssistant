@@ -8,6 +8,7 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Services.Validations;
 
     public class CreateApiaryInputModel
     {
@@ -21,6 +22,7 @@
         [RegularExpression(@"\d{4}")]
         public string FarmNumber { get; set; }
 
+        [ApiaryNumberIsValidValidation]
         public string Number => $"{this.CityCode}-{this.FarmNumber}";
 
         public string Name { get; set; }

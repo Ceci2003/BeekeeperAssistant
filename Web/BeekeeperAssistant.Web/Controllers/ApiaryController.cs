@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Authorization;
@@ -15,13 +16,16 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
+        private readonly IApiaryNumberService apiaryNumberService;
 
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
-            IApiaryService apiaryService)
+            IApiaryService apiaryService,
+            IApiaryNumberService apiaryNumberService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
+            this.apiaryNumberService = apiaryNumberService;
         }
 
         public async Task<IActionResult> All()
@@ -73,16 +77,22 @@
         {
             var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
 
+            viewModel.CityCode = this.apiaryNumberService.GetCityCode(viewModel.Number);
+            viewModel.FarmNumber = this.apiaryNumberService.GetFarmNumber(viewModel.Number);
+
             return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
+            // TODO: Add VALIDATION ATTRIBUTE if the apiary exists in the database!
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
+
+            inputModel.Number = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
 
             var apiaryNumber = await this.apiaryService.EditApiaryByIdAsync(id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
 

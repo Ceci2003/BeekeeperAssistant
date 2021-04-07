@@ -25,7 +25,7 @@
         [Required]
         public BeehivePower BeehivePower { get; set; }
 
-        public IEnumerable<SelectListOptionApiaryViewModel> AllApiaries { get; set; }
+        public IEnumerable<KeyValuePair<int, string>> AllApiaries { get; set; }
 
         public int ApiaryId { get; set; }
 

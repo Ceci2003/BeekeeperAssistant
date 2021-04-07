@@ -6,12 +6,16 @@
 
     using BeekeeperAssistant.Data.Common.Models;
 
-    public class UserTask : BaseDeletableModel<int>
+    public class Duty : BaseDeletableModel<int>
     {
+        public Duty()
+        {
+            this.Users = new HashSet<ApplicationUser>();
+        }
+
         public string Title { get; set; }
 
-#nullable enable
-        public string? Text { get; set; }
+        public string Text { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -19,6 +23,6 @@
 
         public bool IsCompleted { get; set; }
 
-#nullable disable
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

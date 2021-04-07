@@ -8,6 +8,11 @@
 
     public class Beehive : BaseDeletableModel<int>
     {
+        public Beehive()
+        {
+            this.Queens = new HashSet<Queen>();
+        }
+
         public int ApiaryId { get; set; }
 
         public virtual Apiary Apiary { get; set; }
@@ -26,10 +31,12 @@
 
         public BeehivePower BeehivePower { get; set; }
 
-        public bool? HasDevice { get; set; }
+        public bool HasDevice { get; set; }
 
-        public bool? HasPolenCatcher { get; set; }
+        public bool HasPolenCatcher { get; set; }
 
-        public bool? HasPropolisCatcher { get; set; }
+        public bool HasPropolisCatcher { get; set; }
+
+        public ICollection<Queen> Queens { get; set; }
     }
 }

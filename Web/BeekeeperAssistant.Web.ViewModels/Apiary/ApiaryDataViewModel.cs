@@ -19,6 +19,7 @@
 
         public string Name { get; set; }
 
+        // Change with Beehive view model
         public IEnumerable<Beehive> Beehives { get; set; }
     }
 }

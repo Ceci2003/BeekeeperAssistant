@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Authorization;
@@ -13,38 +14,43 @@
     [Authorize]
     public class ApiaryController : BaseController
     {
-        private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IApiaryService apiaryService;
+        private readonly IApiaryNumberService apiaryNumberService;
 
         public ApiaryController(
+            UserManager<ApplicationUser> userManager,
             IApiaryService apiaryService,
-            UserManager<ApplicationUser> userManager)
+            IApiaryNumberService apiaryNumberService)
         {
-            this.apiaryService = apiaryService;
             this.userManager = userManager;
+            this.apiaryService = apiaryService;
+            this.apiaryNumberService = apiaryNumberService;
         }
 
         public async Task<IActionResult> All()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var allApiarires = this.apiaryService.GetAll<ApiaryViewModel>(currentUser.Id);
-            var viewModel = new AllApiariesViewModel()
+
+            var viewModel = new AllApiariesViewModel
             {
-                AllUserApiaries = allApiarires,
+                AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id),
             };
+
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ByNumber(string number)
+        public async Task<IActionResult> ByNumber(string apiaryNumber)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiary = this.apiaryService.GetByNUmber<ApiaryDataViewModel>(number, currentUser.Id);
-            if (apiary == null)
+            var viewModel = this.apiaryService.GetUserApiaryByNumber<ApiaryDataViewModel>(currentUser.Id, apiaryNumber);
+
+            if (viewModel == null)
             {
-                return this.Forbid();
+                return this.NotFound();
             }
 
-            return this.View(apiary);
+            return this.View(viewModel);
         }
 
         public IActionResult Create()
@@ -55,82 +61,48 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
-            var currenUser = await this.userManager.GetUserAsync(this.User);
-            if (this.apiaryService.Exists(inputModel.Number, currenUser.Id))
-            {
-                this.ModelState.AddModelError("Error", "Existing apiary number!");
-                return this.View(inputModel);
-            }
-
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
 
-            await this.apiaryService.Add(inputModel, currenUser.Id);
-            return this.Redirect($"/Apiary/{inputModel.Number}");
+            // TODO: Add VALIDATION ATTRIBUTE if the apiary exists in the database!
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var apiaryNumber = await this.apiaryService.CreateUserApiaryAsync(currentUser.Id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
+
+            return this.RedirectToAction(nameof(this.ByNumber), new { apiaryNumber });
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
-            var currenUser = await this.userManager.GetUserAsync(this.User);
-            var inputModel = this.apiaryService.GetById<EditApiaryInputModel>(id, currenUser.Id);
-            var numbers = inputModel.Number.Split('-').ToList();
-            inputModel.CityCode = numbers[0];
-            inputModel.FarmNumber = numbers[1];
-            if (inputModel?.CreatorId != currenUser?.Id)
-            {
-                return this.Forbid();
-            }
+            var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
 
-            return this.View(inputModel);
+            viewModel.CityCode = this.apiaryNumberService.GetCityCode(viewModel.Number);
+            viewModel.FarmNumber = this.apiaryNumberService.GetFarmNumber(viewModel.Number);
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var originalModel = this.apiaryService.GetById<EditApiaryInputModel>(id, currentUser.Id);
-            var number = $"{inputModel.CityCode}-{inputModel.FarmNumber}";
-            if (this.apiaryService.Exists(number, currentUser.Id) && number != originalModel.Number)
-            {
-                this.ModelState.AddModelError("Error", "Existing apiary number!");
-                return this.View(inputModel);
-            }
-
+            // TODO: Add VALIDATION ATTRIBUTE if the apiary exists in the database!
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
 
-            inputModel.Number = number;
+            inputModel.Number = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
 
-            await this.apiaryService.Edit(id, inputModel, currentUser.Id);
-            return this.Redirect($"/Apiary/{inputModel.Number}");
+            var apiaryNumber = await this.apiaryService.EditApiaryByIdAsync(id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
+
+            return this.RedirectToAction(nameof(this.ByNumber), new { apiaryNumber });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiary = this.apiaryService.GetById<ApiaryViewModel>(id, currentUser.Id);
-
-            if (!this.apiaryService.Exists(id, currentUser.Id))
-            {
-                return this.NotFound();
-            }
-
-            if (apiary.CreatorId != currentUser.Id)
-            {
-                return this.Forbid();
-            }
-
-            if (!this.ModelState.IsValid)
-            {
-                return this.Redirect($"/Apiary/{apiary.Number}");
-            }
-
-            await this.apiaryService.Delete(id, currentUser.Id);
+            await this.apiaryService.DeleteApiaryByIdAsync(id);
             return this.RedirectToAction(nameof(this.All));
         }
     }

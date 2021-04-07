@@ -51,7 +51,7 @@
         {
             var sw = Stopwatch.StartNew();
             Console.WriteLine(sw.Elapsed);
-            return await Task.FromResult(0);
+            return await System.Threading.Tasks.Task.FromResult(0);
         }
 
         private static void ConfigureServices(ServiceCollection services)

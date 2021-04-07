@@ -1,26 +1,30 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System.Collections.Generic;
+    using System.Text;
     using System.Threading.Tasks;
 
-    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Data.Models;
 
     public interface IApiaryService
     {
-        IEnumerable<T> GetAll<T>(string userId);
+        IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1);
 
-        T GetByNUmber<T>(string number, string userId);
+        T GetUserApiaryByNumber<T>(string userId, string number);
 
-        T GetById<T>(int id, string userId);
+        T GetApiaryById<T>(int apiaryId);
 
-        Task Add(CreateApiaryInputModel inputModel, string userId);
+        Task<string> CreateUserApiaryAsync(string userId, string number, string name, ApiaryType apiaryType, string address);
 
-        Task Edit(int id, EditApiaryInputModel inputModel, string userId);
+        Task DeleteApiaryByIdAsync(int apiaryId);
 
-        Task Delete(int id, string userId);
-
-        bool Exists(string apiaryNumber, string userId);
-
-        bool Exists(int id, string userId);
+        Task<string> EditApiaryByIdAsync(int apiaryId, string number, string name, ApiaryType apiaryType, string address);
     }
 }
+
+// GetAllUserApiaries + pagination
+// GetUserApiaryByNumber
+// GetApairyById
+// CreateUserApiary
+// DeleteUserApiaryById / DeleteUserApiaryByNumber
+// EditUserApiaryByNumber / EditUserApiaryById

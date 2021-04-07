@@ -1,7 +1,8 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
     using System.ComponentModel.DataAnnotations;
-
+    using System.Linq;
+    using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
@@ -26,6 +27,5 @@
 
         public string Adress { get; set; }
 
-        public string CreatorId { get; set; }
     }
 }

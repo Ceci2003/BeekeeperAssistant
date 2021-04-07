@@ -26,8 +26,8 @@ a {
 :root {
   --orange: #ff7800;
   /* --red: #AB0000; */
-  --red: #8c0712;
-  --red-hover: #bf0a0a;
+  --red: #bf0a0a;
+  --red-hover: #8c0712;
   --green: #014017;
   --green-hover: #1a5918;
   --blue: #0d6493;
@@ -36,12 +36,12 @@ a {
   --gray-background: #f1f2f3;
   --white: #ffffff;
   --lightgray: #d3d3d3;
-  --apiaries-color: #17a2b8;
-  --apiaries-color-hover: #3eba9b;
-  --beehives-color: #f29422;
-  --beehives-color-hover: #fead34;
-  --queens-color: #da3c3d;
-  --queens-color-hover: #d9695d;
+  --apiary-color: #17a2b8;
+  --apiary-color-hover: #6ce7e3;
+  --beehive-color: #f29422;
+  --beehive-color-hover: #fead34;
+  --queen-color: #da3c3d;
+  --queen-color-hover: #d9695d;
 }
 
 /* Side navigation */
@@ -136,7 +136,7 @@ a {
   color: var(--white);
 }
 
-/* 
+/*
 
 .leave {
     position: absolute;
@@ -152,20 +152,20 @@ a {
 .fa-sign-out-alt {
     color: white;
     font-size: 23px;
-} 
+}
 
 */
 
 /* Apiaries */
 .btn.apiary-create {
   float: right;
-  background-color: var(--apiaries-color);
+  background-color: var(--apiary-color);
   border: none;
   color: var(--white);
 }
 
 .btn.apiary-create:hover {
-  background-color: var(--apiaries-color-hover);
+  background-color: var(--apiary-color-hover);
 }
 
 /* Combined */
@@ -179,6 +179,38 @@ a {
   border: 1px solid var(--main-background);
   border-radius: 3px;
   margin-bottom: 10px;
+}
+
+.btn.apiary,
+.btn.beehive,
+.btn.queen {
+  font-size: 18px;
+  color: var(--white);
+  border: none;
+}
+
+.btn.apiary {
+  background-color: var(--apiary-color);
+}
+
+.btn.apiary:hover {
+  background-color: var(--blue-hover);
+}
+
+.btn.beehive {
+  background-color: var(--beehive-color);
+}
+
+.btn.beehive:hover {
+  background-color: var(--beehive-color-hover);
+}
+
+.btn.queen {
+  background-color: var(--queen-color);
+}
+
+.btn.beehive:hover {
+  background-color: var(--queen-color-hover);
 }
 
 .data-table {
@@ -250,13 +282,20 @@ td.edit div a.delete:hover {
   position: absolute;
   top: 50%;
   left: 58%;
-  width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
   /* background: rgba(0,0,0,.5); */
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   /* border-radius: 5px; */
+}
+
+.form-box .back {
+  color: var(--red);
+}
+
+.form-box .back:hover {
+  color: var(--red-hover);
 }
 
 .form-box h2 {
@@ -265,37 +304,42 @@ td.edit div a.delete:hover {
   text-align: center;
 }
 
-.form-box .input-box {
-  position: relative;
+.form-box .input-apiary-number {
+  display: flex;
 }
 
-.form-box .input-box input {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid var(--lightgray);
-  outline: none;
-  background: transparent;
+.form-box .input-apiary-number span {
+  padding: 0px 10px;
+  font-size: 30px;
+  /* font-weight: bold; */
+  align-self: flex-end;
+}
+
+.form-box .input-box {
+  display: grid;
+  font-size: 18px;
 }
 
 .form-box .input-box label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 16px;
-  pointer-events: none;
-  transition: 0.5s;
+  margin-bottom: 5px;
 }
 
-.form-box .input-box input:focus ~ label,
-.form-box .input-box input:valid ~ label {
-  top: -20px;
-  left: 0;
-  color: var(--lightgray);
-  font-size: 12px;
+.form-box .input-box input,
+.form-box .input-box select {
+  outline: none;
+  font-size: 18px;
+  border: 3px solid var(--lightgray);
+  padding: 3px;
+}
+
+.form-box .input-box input:focus,
+.form-box .input-box select:focus {
+  border: 3px solid var(--orange);
+}
+
+.form-box .btn-group {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .rotate-270 {

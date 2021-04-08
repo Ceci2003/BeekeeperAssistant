@@ -12,6 +12,7 @@
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Services.Messaging;
+    using BeekeeperAssistant.Web.Infrastructure.RouteConstraints;
     using BeekeeperAssistant.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,11 @@
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddRouting(options =>
+            {
+                options.ConstraintMap.Add("apiaryNumber", typeof(ApiaryNumberRouteConstraint));
+            });
 
             services.AddSingleton(this.configuration);
 
@@ -109,7 +115,7 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
                         // TODO: Create ApiaryNumber Constraint
-                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber}", new { controller = "Apiary", action = "ByNumber" }, constraints: new { apiaryNumber = @"\b([\d]{4}\b)-(\b\d{4})\b" });
+                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber:apiaryNumber}", new { controller = "Apiary", action = "ByNumber" });
                         endpoints.MapRazorPages();
                     });
         }

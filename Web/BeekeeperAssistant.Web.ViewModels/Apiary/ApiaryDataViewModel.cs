@@ -6,6 +6,7 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
 
     public class ApiaryDataViewModel : IMapFrom<Apiary>
     {
@@ -19,7 +20,6 @@
 
         public string Name { get; set; }
 
-        // Change with Beehive view model
-        public IEnumerable<Beehive> Beehives { get; set; }
+        public IEnumerable<BeehiveViewModel> Beehives { get; set; }
     }
 }

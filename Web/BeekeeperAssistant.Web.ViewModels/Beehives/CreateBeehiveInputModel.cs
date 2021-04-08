@@ -5,11 +5,13 @@
     using System.ComponentModel.DataAnnotations;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Web.Infrastructure.ValidationAttributes.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
     public class CreateBeehiveInputModel
     {
         [Required]
+        // [BeehiveNumberExistsValidation]
         public int Number { get; set; }
 
         [Required]
@@ -21,12 +23,12 @@
         [Required]
         public DateTime Date { get; set; }
 
+        public int ApiaryId { get; set; }
+
         [Required]
         public BeehivePower BeehivePower { get; set; }
 
-        public IEnumerable<KeyValuePair<int, string>> AllApiaries { get; set; }
-
-        public int ApiaryId { get; set; }
+        public IEnumerable<KeyValuePair<string, int>> AllApiaries { get; set; }
 
         public bool HasDevice { get; set; }
 

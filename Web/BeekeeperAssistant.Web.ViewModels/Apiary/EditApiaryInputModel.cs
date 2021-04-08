@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
     using System.ComponentModel.DataAnnotations;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
@@ -18,7 +19,6 @@
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
         public string FarmNumber { get; set; }
 
-        // TODO: Make logic for number edit
         [RegularExpression(GlobalConstants.ApiaryFullNumberRegex)]
         public string Number { get; set; }
 

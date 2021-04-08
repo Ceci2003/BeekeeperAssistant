@@ -111,11 +111,10 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber:apiaryNumber}", new { controller = "Apiary", action = "ByNumber" });
+                        endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}", new { controller = "Beehive", action = "ById" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-
-                        // TODO: Create ApiaryNumber Constraint
-                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber:apiaryNumber}", new { controller = "Apiary", action = "ByNumber" });
                         endpoints.MapRazorPages();
                     });
         }

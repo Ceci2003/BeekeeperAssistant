@@ -1,0 +1,53 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
+@using BeekeeperAssistant.Data.Models;
+@{
+    var keyValuePairApiaries = new List<SelectListItem>();
+
+    if (Model.AllApiaries != null)
+    {
+        keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Key.ToString(), x.Value.ToString())).ToList();
+    }
+}
+
+<form asp-controller="Beehive" asp-action="Create" method="post">
+    <div>
+        <label asp-for="@Model.Number"></label>
+        <input asp-for="@Model.Number" />
+        <span asp-validation-for="@Model.Number"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.Date"></label>
+        <input asp-for="@Model.Date" />
+        <span asp-validation-for="@Model.Date"></span>
+    </div>
+
+    @if (Model.AllApiaries != null)
+    {
+        <label asp-for="@Model.ApiaryId"></label>
+        <select asp-for="@Model.ApiaryId" asp-items="keyValuePairApiaries"></select>
+    }
+
+    <div>
+        <select asp-for="@Model.BeehiveSystem" asp-items="@Html.GetEnumSelectList<BeehiveSystem>()"></select>
+    </div>
+    <div>
+        <select asp-for="@Model.BeehiveType" asp-items="@Html.GetEnumSelectList<BeehiveType>()"></select>
+    </div>
+    <div>
+        <select asp-for="@Model.BeehivePower" asp-items="@Html.GetEnumSelectList<BeehivePower>()"></select>
+    </div>
+    <div>
+        <label asp-for="@Model.HasDevice"></label>
+        <input asp-for="@Model.HasDevice" />
+    </div>
+    <div>
+        <label asp-for="@Model.HasPolenCatcher"></label>
+        <input asp-for="@Model.HasPolenCatcher" />
+    </div>
+    <div>
+        <label asp-for="@Model.HasPropolisCatcher"></label>
+        <input asp-for="@Model.HasPropolisCatcher" />
+    </div>
+
+    <button type="submit">Submit</button>
+</form>

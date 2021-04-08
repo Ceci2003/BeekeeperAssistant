@@ -19,6 +19,8 @@
         Task DeleteApiaryByIdAsync(int apiaryId);
 
         Task<string> EditApiaryByIdAsync(int apiaryId, string number, string name, ApiaryType apiaryType, string address);
+
+        public IEnumerable<KeyValuePair<string, int>> GetUserApiariesAsKeyValuePairs(string userId);
     }
 }
 

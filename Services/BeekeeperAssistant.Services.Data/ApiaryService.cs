@@ -81,6 +81,18 @@
             return apiary;
         }
 
+        public IEnumerable<KeyValuePair<string, int>> GetUserApiariesAsKeyValuePairs(string userId)
+        {
+            // TODO: REFACTOR
+            var allApiaries = this.apiaryRepository.All()
+                .Where(a => a.CreatorId == userId)
+                .OrderByDescending(a => a.CreatedOn)
+                .Select(a => new KeyValuePair<string, int>(a.Number, a.Id))
+                .ToList();
+
+            return allApiaries;
+        }
+
         public T GetUserApiaryByNumber<T>(string userId, string number)
         {
             var apiary = this.apiaryRepository.All()

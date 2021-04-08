@@ -31,7 +31,6 @@
         public async Task<IActionResult> All()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-
             var viewModel = new AllApiariesViewModel
             {
                 AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id),
@@ -66,11 +65,10 @@
                 return this.View(inputModel);
             }
 
-            // TODO: Add VALIDATION ATTRIBUTE if the apiary exists in the database!
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var apiaryNumber = await this.apiaryService.CreateUserApiaryAsync(currentUser.Id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
 
-            return this.RedirectToAction(nameof(this.ByNumber), new { apiaryNumber });
+            return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
         public IActionResult Edit(int id)
@@ -86,7 +84,6 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
-            // TODO: Add VALIDATION ATTRIBUTE if the apiary exists in the database!
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
@@ -96,7 +93,7 @@
 
             var apiaryNumber = await this.apiaryService.EditApiaryByIdAsync(id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
 
-            return this.RedirectToAction(nameof(this.ByNumber), new { apiaryNumber });
+            return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
         [HttpPost]

@@ -17,6 +17,7 @@
         [RegularExpression(@"\d{4}")]
         public string FarmNumber { get; set; }
 
+        // TODO: Make logic for number edit
         public string Number { get; set; }
 
         public string Name { get; set; }

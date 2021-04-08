@@ -16,19 +16,23 @@
         [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
+        [Display(Name = "Номер на населеното място")]
         public string CityCode { get; set; }
 
         [Required(ErrorMessage = GlobalConstants.FarmNumberRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
+        [Display(Name = "Номер на пчелина")]
         public string FarmNumber { get; set; }
 
         [ApiaryExistsValidation(ErrorMessage = GlobalConstants.ApiaryExistsErrorMessage)]
         public string Number => $"{this.CityCode}-{this.FarmNumber}";
 
+        [Display(Name = "Име на пчелина")]
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Вид на пчелина")]
         public ApiaryType ApiaryType { get; set; }
 
         [Display(Name = "Населено място")]

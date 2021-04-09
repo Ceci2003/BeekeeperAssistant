@@ -1,10 +1,14 @@
-﻿using BeekeeperAssistant.Data.Common.Repositories;
-using BeekeeperAssistant.Data.Models;
-using System;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Services.Data
+﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
+
     public class BeehiveService : IBeehiveService
     {
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
@@ -34,6 +38,26 @@ namespace BeekeeperAssistant.Services.Data
             await this.beehiveRepository.SaveChangesAsync();
 
             return beehive.Id;
+        }
+
+        public async Task<string> DeleteBeehiveByIdAsync(int beehiveId)
+        {
+            var beehive = this.beehiveRepository.All().Include(b => b.Apiary).FirstOrDefault(b => b.Id == beehiveId);
+
+            this.beehiveRepository.Delete(beehive);
+            await this.beehiveRepository.SaveChangesAsync();
+
+            return beehive.Apiary.Number;
+        }
+
+        public T GetBeehiveById<T>(int beehiveId)
+        {
+            var beehive = this.beehiveRepository.All()
+                .Where(b => b.Id == beehiveId)
+                .To<T>()
+                .FirstOrDefault();
+
+            return beehive;
         }
     }
 }

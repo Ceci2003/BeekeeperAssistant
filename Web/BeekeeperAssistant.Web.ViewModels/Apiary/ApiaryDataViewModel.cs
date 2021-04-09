@@ -16,6 +16,8 @@
 
         public ApiaryType ApiaryType { get; set; }
 
+        public string CreatorId { get; set; }
+
         public string Adress { get; set; }
 
         public string Name { get; set; }

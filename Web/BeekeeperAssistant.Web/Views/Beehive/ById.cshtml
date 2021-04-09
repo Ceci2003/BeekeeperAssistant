@@ -1,5 +1,18 @@
-﻿@{ 
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.BeehiveDataViewModel
+@{
 
 }
 
-<h1>Created</h1>
+@Model.Number
+@Model.BeehivePower
+@Model.BeehiveSystem
+@Model.BeehiveType
+@Model.Date
+@Model.HasDevice
+@Model.HasPolenCatcher
+@Model.HasPropolisCatcher
+
+<form asp-controller="Beehive" asp-action="Delete" asp-route-data="@Model.Id">
+    <button type="submit">Delete</button>
+</form>
+

@@ -18,6 +18,11 @@
             return this.View();
         }
 
+        public IActionResult HttpError(string httpError)
+        {
+            return this.View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

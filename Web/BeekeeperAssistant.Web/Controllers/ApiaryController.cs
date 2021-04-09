@@ -49,6 +49,11 @@
                 return this.NotFound();
             }
 
+            if (viewModel.CreatorId != currentUser.Id)
+            {
+                return this.BadRequest();
+            }
+
             return this.View(viewModel);
         }
 
@@ -99,6 +104,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            // TODO: When dleting delete the beehives too
             await this.apiaryService.DeleteApiaryByIdAsync(id);
             return this.RedirectToAction(nameof(this.All));
         }

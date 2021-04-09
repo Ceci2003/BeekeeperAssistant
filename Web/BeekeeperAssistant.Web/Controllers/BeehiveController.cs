@@ -26,9 +26,22 @@
             this.beehiveService = beehiveService;
         }
 
-        public IActionResult ById(int beehiveId)
+        public async Task<IActionResult> ById(int beehiveId)
         {
-            return this.View();
+            var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            if (viewModel.CreatorId != currentUser.Id)
+            {
+                return this.BadRequest();
+            }
+
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Create(int? id)
@@ -86,6 +99,21 @@
         public IActionResult Edit(EditBeehiveInputModel inputModel)
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (beehive.CreatorId != currentUser.Id)
+            {
+                return this.BadRequest();
+            }
+
+            var apiaryNumber = await this.beehiveService.DeleteBeehiveByIdAsync(id);
+            return this.Redirect($"/Apiary/{apiaryNumber}");
         }
     }
 }

@@ -19,5 +19,9 @@ namespace BeekeeperAssistant.Services.Data
             bool hasDevice,
             bool hasPolenCatcher,
             bool hasPropolisCatcher);
+
+        T GetBeehiveById<T>(int beehiveId);
+
+        Task<string> DeleteBeehiveByIdAsync(int beehiveId);
     }
 }

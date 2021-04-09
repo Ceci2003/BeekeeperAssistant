@@ -90,6 +90,10 @@ a {
   width: 70%;
 }
 
+.sidebar-navigation .user-area .profile {
+  color: var(--white);
+}
+
 .sidebar-navigation .navigations {
   margin-bottom: 50px;
 }
@@ -169,7 +173,12 @@ a {
 }
 
 /* Combined */
-.title {
+.title-1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.h1 {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -288,6 +297,7 @@ td.edit div a.delete:hover {
   box-sizing: border-box;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   /* border-radius: 5px; */
+  width: 450px;
 }
 
 .form-box .back {
@@ -306,6 +316,18 @@ td.edit div a.delete:hover {
 
 .form-box .input-apiary-number {
   display: flex;
+}
+
+.form-box .input-apiary-number .input-box label {
+  height: 40px;
+}
+
+.form-box .input-apiary-number .input-box input {
+  width: 170px;
+}
+
+.form-box .input-apiary-number .input-box #CityCode {
+  text-align: right;
 }
 
 .form-box .input-apiary-number span {
@@ -340,6 +362,19 @@ td.edit div a.delete:hover {
 .form-box .btn-group {
   display: flex;
   justify-content: flex-end;
+}
+
+.info-preview {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-preview .info-img {
+  max-height: 300px;
+}
+
+.info-preview .info-table {
+  width: 100%;
 }
 
 .rotate-270 {

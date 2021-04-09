@@ -54,6 +54,7 @@
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
+
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -73,6 +74,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IApiaryService, ApiaryService>();
             services.AddTransient<IApiaryNumberService, ApiaryNumberService>();
+            services.AddTransient<IBeehiveService, BeehiveService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +101,7 @@
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/Home/HttpError", "?httpError={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

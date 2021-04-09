@@ -51,6 +51,11 @@
                 <td>@beehive.BeehivePower</td>
                 <td>@beehive.BeehiveSystem</td>
                 <td>@beehive.BeehiveType</td>
+                <td>
+                    <form method="post" asp-controller="Beehive" asp-action="Delete" asp-route-id="@beehive.Id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

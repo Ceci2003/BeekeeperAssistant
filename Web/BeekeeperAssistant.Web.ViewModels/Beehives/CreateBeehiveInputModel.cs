@@ -3,15 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Linq;
+    using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Web.Infrastructure.ValidationAttributes.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using Microsoft.Extensions.DependencyInjection;
 
-    public class CreateBeehiveInputModel
+    public class CreateBeehiveInputModel : IValidatableObject
     {
         [Required]
-        // [BeehiveNumberExistsValidation]
         public int Number { get; set; }
 
         [Required]
@@ -23,6 +23,7 @@
         [Required]
         public DateTime Date { get; set; }
 
+        [Required]
         public int ApiaryId { get; set; }
 
         [Required]
@@ -35,5 +36,20 @@
         public bool HasPolenCatcher { get; set; }
 
         public bool HasPropolisCatcher { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errorList = new List<ValidationResult>();
+            var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
+            var beehive = beehiveRepository.All().FirstOrDefault(b => b.Number == this.Number && b.ApiaryId == this.ApiaryId);
+
+            if (beehive != null)
+            {
+                errorList.Add(new ValidationResult("Beehive already exists!"));
+            }
+
+            return errorList;
+
+        }
     }
 }

@@ -8,14 +8,19 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class ApiaryService : IApiaryService
     {
         private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
+        private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
 
-        public ApiaryService(IDeletableEntityRepository<Apiary> apiaryRepository)
+        public ApiaryService(
+            IDeletableEntityRepository<Apiary> apiaryRepository,
+            IDeletableEntityRepository<Beehive> beehiveRepository)
         {
             this.apiaryRepository = apiaryRepository;
+            this.beehiveRepository = beehiveRepository;
         }
 
         public async Task<string> CreateUserApiaryAsync(string userId, string number, string name, ApiaryType apiaryType, string adress)
@@ -81,6 +86,17 @@
             return apiary;
         }
 
+        public string GetApiaryNumberByBeehiveId(int beehiveId)
+        {
+            var apiaryNumber = this.beehiveRepository.All()
+                .Include(a => a.Apiary)
+                .FirstOrDefault(b => b.Id == beehiveId)
+                .Apiary
+                .Number;
+
+            return apiaryNumber;
+        }
+
         public IEnumerable<KeyValuePair<string, int>> GetUserApiariesAsKeyValuePairs(string userId)
         {
             // TODO: REFACTOR
@@ -101,6 +117,12 @@
                 .FirstOrDefault();
 
             return apiary;
+        }
+
+        public int GetUserApiaryIdByNumber(string userId, string apiaryNumber)
+        {
+            var apiary = this.apiaryRepository.All().FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber);
+            return apiary.Id;
         }
     }
 }

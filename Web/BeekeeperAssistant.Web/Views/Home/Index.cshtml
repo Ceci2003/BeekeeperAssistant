@@ -13,9 +13,49 @@
     }
     else
     {
-        <div class="text-center">
-            <a class="btn btn-primary" asp-controller="Apiary" asp-action="Create">Create Apiary</a>
-            <a class="btn btn-primary" asp-controller="Apiary" asp-action="All">All Apiary</a>
+        <div class="dashboard-cards-list">
+            <div class="dashboard-card">
+                <div class="dashboard-card-header apiary">
+                    <img src="~/img/apiaryIcon.png" alt="apiaryIcon.png">
+                    <h1>Достъп до пчелините:</h1>
+                </div>
+                <div class="dashboard-card-body apiary">
+                    <a asp-controller="" asp-action="">
+                        <div>
+                            <p>Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card-header beehive">
+                    <img src="~/img/beehiveIcon.png" alt="beehiveIcon.png">
+                    <h1>Достъп до кошерите:</h1>
+                </div>
+                <div class="dashboard-card-body beehive">
+                    <a asp-controller="" asp-action="">
+                        <div>
+                            <p>Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card-header queen">
+                    <img src="~/img/queenIcon.png" alt="queenIcon.png">
+                    <h1>Достъп до кралиците:</h1>
+                </div>
+                <div class="dashboard-card-body queen">
+                    <a asp-controller="" asp-action="">
+                        <div>
+                            <p>Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     }
 </div>

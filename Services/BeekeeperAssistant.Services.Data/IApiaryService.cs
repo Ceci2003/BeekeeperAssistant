@@ -10,6 +10,10 @@
     {
         IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1);
 
+        string GetApiaryNumberByBeehiveId(int beehiveId);
+
+        int GetUserApiaryIdByNumber(string userId, string apiaryNumber);
+
         T GetUserApiaryByNumber<T>(string userId, string number);
 
         T GetApiaryById<T>(int apiaryId);

@@ -1,23 +1,29 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     [Authorize]
     public class BeehiveController : BaseController
     {
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IBeehiveService beehiveService;
 
-        public BeehiveController(IApiaryService apiaryService, UserManager<ApplicationUser> userManager)
+        public BeehiveController(
+            IApiaryService apiaryService,
+            UserManager<ApplicationUser> userManager,
+            IBeehiveService beehiveService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
+            this.beehiveService = beehiveService;
         }
 
         public IActionResult ById(int beehiveId)
@@ -34,25 +40,41 @@
                 var currentUser = await this.userManager.GetUserAsync(this.User);
                 inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
             }
+            else
+            {
+                inputModel.ApiaryId = id.Value;
+            }
 
             return this.View(inputModel);
         }
 
         [HttpPost]
-        public IActionResult Create(int? id, CreateBeehiveInputModel inputModel)
+        public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
         {
-            var apiId = id == null ? inputModel.ApiaryId : id;
-
+            // TODO: Validate the user
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
 
-            // TODO: Add validation attributes
-            // TODO: Add servies for beehive service
-            // TODO: Create crud for beehives
-            // TODO: Start implementing queens
-            return this.RedirectToAction(nameof(this.ById));
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var beehiveId = await this.beehiveService
+                .CreateUserBeehiveAsync(
+                currentUser.Id,
+                inputModel.Number,
+                inputModel.BeehiveSystem,
+                inputModel.BeehiveType,
+                inputModel.Date,
+                inputModel.ApiaryId,
+                inputModel.BeehivePower,
+                inputModel.HasDevice,
+                inputModel.HasPolenCatcher,
+                inputModel.HasPropolisCatcher);
+
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+
+            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
         public IActionResult Edit(int id)

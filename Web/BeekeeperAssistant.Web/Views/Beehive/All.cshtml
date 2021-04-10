@@ -1,0 +1,35 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllBeehivesViewModel;
+@{ 
+
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var beehive in Model.AllBeehives)
+        {
+            <tr>
+                <th scope="row">@beehive.ApiaryNumber</th>
+                <td>@beehive.Number</td>
+                <td>@beehive</td>
+                <td>@beehive.BeehivePower</td>
+                <td>@beehive.BeehiveSystem</td>
+                <td>@beehive.BeehiveType</td>
+                <td>
+                    <form method="post" asp-controller="Beehive" asp-action="Delete" asp-route-id="@beehive.Id">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

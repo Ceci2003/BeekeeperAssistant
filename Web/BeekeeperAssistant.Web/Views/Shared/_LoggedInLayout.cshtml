@@ -1,6 +1,9 @@
 ﻿@using BeekeeperAssistant.Common
 @{
     string greeting = "";
+
+    // TODO: Do this with js, because it will print the time on the server!
+
     if (DateTime.Now.Hour < 12)
     {
         greeting = "Добро утро";
@@ -70,7 +73,7 @@
                     <i class="fas fa-angle-left"></i>
                 </div>
                 <div class="beehive-options hide">
-                    <a class="secondary" href="#">
+                    <a class="secondary" asp-controller="Beehive" asp-action="All">
                         Всички
                     </a>
                     <a class="secondary" asp-controller="Beehive" asp-action="Create">

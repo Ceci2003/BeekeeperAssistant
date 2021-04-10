@@ -23,20 +23,17 @@
         public DateTime Date { get; set; }
 
         [Required]
-        public BeehivePower BeehivePower { get; set; }
-
-        public IEnumerable<KeyValuePair<int, string>> AllApiaries { get; set; }
-
         public int ApiaryId { get; set; }
 
-        public Apiary Apiary { get; set; }
+        [Required]
+        public BeehivePower BeehivePower { get; set; }
+
+        public IEnumerable<KeyValuePair<string, int>> AllApiaries { get; set; }
 
         public bool HasDevice { get; set; }
 
         public bool HasPolenCatcher { get; set; }
 
         public bool HasPropolisCatcher { get; set; }
-
-        public string CreatorId { get; set; }
     }
 }

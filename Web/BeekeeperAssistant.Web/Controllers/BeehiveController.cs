@@ -26,6 +26,19 @@
             this.beehiveService = beehiveService;
         }
 
+        public async Task<IActionResult> All()
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id);
+
+            var viewModel = new AllBeehivesViewModel
+            {
+                AllBeehives = beehives,
+            };
+
+            return this.View(viewModel);
+        }
+
         public async Task<IActionResult> ById(int beehiveId)
         {
             var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
@@ -90,15 +103,34 @@
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return this.View();
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var inputModel = this.beehiveService.GetBeehiveById<EditBeehiveInputModel>(id);
+            inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+
+            return this.View(inputModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(EditBeehiveInputModel inputModel)
+        public async Task<IActionResult> Edit(int id, EditBeehiveInputModel inputModel)
         {
-            return this.View();
+            var beehiveId = await this.beehiveService.EditUserBeehiveAsync(
+                id,
+                inputModel.Number,
+                inputModel.BeehiveSystem,
+                inputModel.BeehiveType,
+                inputModel.Date,
+                inputModel.ApiaryId,
+                inputModel.BeehivePower,
+                inputModel.HasDevice,
+                inputModel.HasPolenCatcher,
+                inputModel.HasPropolisCatcher);
+
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+
+            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
         [HttpPost]

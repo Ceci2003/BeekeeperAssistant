@@ -22,6 +22,20 @@ namespace BeekeeperAssistant.Services.Data
 
         T GetBeehiveById<T>(int beehiveId);
 
+        IEnumerable<T> GetAllUserBeehives<T>(string userId);
+
         Task<string> DeleteBeehiveByIdAsync(int beehiveId);
+
+        Task<int> EditUserBeehiveAsync(
+            int beehiveId,
+            int number,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            BeehivePower beehivePower,
+            bool hasDevice,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher);
     }
 }

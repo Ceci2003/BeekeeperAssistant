@@ -7,8 +7,6 @@
 
     public class AllBeehivesViewModel : IMapFrom<Beehive>
     {
-        public IEnumerable<BeehiveViewModel> AllUserBeehives { get; set; }
-
-        public int ApiaryId { get; set; }
+        public IEnumerable<BeehiveViewModel> AllBeehives { get; set; }
     }
 }

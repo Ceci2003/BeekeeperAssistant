@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
@@ -49,7 +50,6 @@
             }
 
             return errorList;
-
         }
     }
 }

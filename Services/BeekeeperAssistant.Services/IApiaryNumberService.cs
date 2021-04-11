@@ -10,6 +10,5 @@
         string GetFarmNumber(string number);
 
         string CreateApiaryNumber(string cityCode, string farmNumber);
-
     }
 }

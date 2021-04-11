@@ -20,6 +20,5 @@
         public BeehiveSystem BeehiveSystem { get; set; }
 
         public BeehiveType BeehiveType { get; set; }
-
     }
 }

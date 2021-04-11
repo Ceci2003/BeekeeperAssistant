@@ -14,6 +14,11 @@
             return this.View();
         }
 
+        public IActionResult ById(int id)
+        {
+            return this.View();
+        }
+
         public IActionResult Create()
         {
             return this.View();

@@ -10,6 +10,7 @@
             <h1 class="text-danger">Oops...</h1>
             <h3 class="text-danger">You're not logged in!</h3>
         </div>
+        @*TODO: Separate these into two view components*@
     }
     else
     {
@@ -20,7 +21,7 @@
                     <h1>Достъп до пчелините:</h1>
                 </div>
                 <div class="dashboard-card-body apiary">
-                    <a asp-controller="" asp-action="">
+                    <a asp-controller="Apiary" asp-action="All">
                         <div>
                             <p>Към списъка</p>
                             <i class="fas fa-arrow-circle-right"></i>
@@ -34,7 +35,7 @@
                     <h1>Достъп до кошерите:</h1>
                 </div>
                 <div class="dashboard-card-body beehive">
-                    <a asp-controller="" asp-action="">
+                    <a asp-controller="Beehive" asp-action="All">
                         <div>
                             <p>Към списъка</p>
                             <i class="fas fa-arrow-circle-right"></i>

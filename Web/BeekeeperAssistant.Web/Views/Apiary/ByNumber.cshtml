@@ -47,7 +47,9 @@
         @foreach (var beehive in Model.Beehives)
         {
             <tr>
-                <th scope="row">@beehive.Number</th>
+                <th scope="row">
+                    <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                </th>
                 <td>@beehive.BeehivePower</td>
                 <td>@beehive.BeehiveSystem</td>
                 <td>@beehive.BeehiveType</td>

@@ -28,7 +28,7 @@
             this.apiaryNumberService = apiaryNumberService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllApiariesViewModel

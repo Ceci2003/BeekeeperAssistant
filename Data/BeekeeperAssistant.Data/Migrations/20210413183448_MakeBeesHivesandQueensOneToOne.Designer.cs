@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210413183448_MakeBeesHivesandQueensOneToOne")]
+    partial class MakeBeesHivesandQueensOneToOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +34,21 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("ApplicationUserDuty");
+                });
+
+            modelBuilder.Entity("ApplicationUserNote", b =>
+                {
+                    b.Property<int>("NotesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("NotesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("ApplicationUserNote");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Apiary", b =>
@@ -246,7 +263,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QueenId")
+                    b.Property<int>("QueenId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -301,6 +318,38 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Duties");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Note", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Queen", b =>
@@ -482,6 +531,21 @@ namespace BeekeeperAssistant.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ApplicationUserNote", b =>
+                {
+                    b.HasOne("BeekeeperAssistant.Data.Models.Note", null)
+                        .WithMany()
+                        .HasForeignKey("NotesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Apiary", b =>
                 {
                     b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "Creator")
@@ -505,7 +569,9 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.HasOne("BeekeeperAssistant.Data.Models.Queen", "Queen")
                         .WithMany()
-                        .HasForeignKey("QueenId");
+                        .HasForeignKey("QueenId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Apiary");
 

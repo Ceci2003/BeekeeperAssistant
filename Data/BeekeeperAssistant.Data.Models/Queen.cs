@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
 
     using BeekeeperAssistant.Data.Common.Models;
 
     public class Queen : BaseDeletableModel<int>
     {
+        [ForeignKey(nameof(Beehive))]
         public int BeehiveId { get; set; }
 
         public virtual Beehive Beehive { get; set; }

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Web.ViewModels.Queens;
     using Microsoft.AspNetCore.Mvc;
 
     public class QueenController : Controller
@@ -19,14 +19,24 @@
             return this.View();
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return this.View();
+            var inputModel = new CreateQueenInputModel
+            {
+                BeehiveId = id,
+            };
+
+            return this.View(inputModel);
         }
 
         [HttpPost]
-        public IActionResult Create(string hereGoesInutModel)
+        public IActionResult Create(CreateQueenInputModel inputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             return this.Redirect("/");
         }
 

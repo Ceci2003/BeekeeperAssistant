@@ -30,8 +30,6 @@
 
         public DbSet<Duty> Duties { get; set; }
 
-        public DbSet<Note> Notes { get; set; }
-
         public DbSet<Queen> Queens { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

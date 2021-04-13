@@ -1,34 +1,76 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllBeehivesViewModel;
-@{ 
-
+@{
+    ViewData["Title"] = "Кошери-всички";
+    string hasDevice = "has-device";
+    Dictionary<string, string> powerClasses = new Dictionary<string, string>();
+    powerClasses.Add("weak", "td-weak");
+    powerClasses.Add("medium", "td-medium");
+    powerClasses.Add("strong", "td-strong");
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var beehive in Model.AllBeehives)
-        {
-        <tr>
-            <th scope="row">@beehive.ApiaryNumber</th>
-            <td>@beehive.Number</td>
-            <td>@beehive.BeehivePower</td> @*TODO: Change this everywhere: @Html.DisplayFor(x => beehive.BeehivePower) *@
-            <td>@beehive.BeehiveSystem</td>
-            <td>@beehive.BeehiveType</td>
-            <td>
-                <form method="post" asp-controller="Beehive" asp-action="Delete" asp-route-id="@beehive.Id">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-            <td>
-                <a asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">Edit</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+
+<div class="content">
+    <h1 class="title-1">@ViewData["Title"]</h1>
+    <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create">
+        <i class="fas fa-plus-square pr-2"></i>
+        Създайте нов кошер
+    </a>
+    @if (Model.AllBeehives.Any())
+    {
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Номер на пчелин</th>
+                    <th>Вид</th>
+                    <th>Система</th>
+                    <th>Сила</th>
+                    <th>Редактиране</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var beehive in Model.AllBeehives)
+                {
+                    <tr class="@if (beehive.HasDevice == true) { @hasDevice }">
+                        <td class="number">
+                            <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                        </td>
+                        <td class="number">
+                            <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
+                        </td>
+                        <td>@beehive.BeehiveType</td>
+                        <td>@beehive.BeehiveSystem</td>
+                        <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">@Html.DisplayFor(x =>
+                    beehive.BeehivePower)</td>
+                        <td class="edit">
+                            <div>
+                                @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
+                                <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                                <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-itemid="@beehive.Id">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
+                            asp-route-itemid="@beehive.Id">
+                                    <button type="submit" class="delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="table-legend">
+            <p>Легенда</p>
+            <ul>
+                <li class="beehive-with-device">
+                    <span></span> - кошерът е с апарат
+                </li>
+            </ul>
+        </div>
+    }
+    else
+    {
+        <h1>Empty</h1>
+    }
+</div>

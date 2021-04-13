@@ -29,6 +29,7 @@ a {
   --red: #bf0a0a;
   --red-hover: #8c0712;
   --green: #014017;
+  --green-2: #558b2f;
   --green-hover: #1a5918;
   --blue: #0d6493;
   --blue-hover: #1287c6;
@@ -146,6 +147,16 @@ a {
   margin-bottom: 20px;
 }
 
+.title-2 {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.title-1.left,
+.title-2.left {
+  text-align: left;
+}
+
 /* Buttons */
 .btn {
   padding: 10px 20px;
@@ -186,15 +197,36 @@ a {
   background-color: var(--queen-color-hover);
 }
 
-.btn.apiary-create {
+.btn.apiary-create,
+.btn.queen-create,
+.btn.beehive-create {
   float: right;
-  background-color: var(--apiary-color);
   border: none;
   color: var(--white);
 }
 
+.btn.apiary-create {
+  background-color: var(--apiary-color);
+}
+
 .btn.apiary-create:hover {
-  background-color: var(--apiary-color-hover);
+  background-color: var(--blue-hover);
+}
+
+.btn.queen-create {
+  background-color: var(--queen-color);
+}
+
+.btn.apiary-queen:hover {
+  background-color: var(--queen-color-hover);
+}
+
+.btn.beehive-create {
+  background-color: var(--beehive-color);
+}
+
+.btn.beehive-create:hover {
+  background-color: var(--beehive-color-hover);
 }
 
 /* Tables */
@@ -208,6 +240,11 @@ a {
   border: 1px solid var(--lightgray);
   padding: 8px;
   text-align: left;
+}
+
+tr.has-device {
+  background-color: var(--red-hover);
+  color: var(--white);
 }
 
 td.number {
@@ -228,6 +265,14 @@ td.number a:hover {
   height: 100%;
   padding: 8px;
   color: var(--blue-hover);
+}
+
+tr.has-device td.number a {
+  color: var(--white);
+}
+
+tr.has-device td.number a:hover {
+  color: var(--lightgray);
 }
 
 td.edit {
@@ -255,12 +300,70 @@ td.edit div a.edit:hover {
   color: var(--green-hover);
 }
 
-td.edit div a.delete {
+td.edit div button.delete {
+  color: var(--red);
+  background: none;
+  border: none;
+  font-size: 15px;
+}
+
+td.edit div button.delete:hover {
+  color: var(--red-hover);
+}
+
+tr.has-device td.edit div a.mark {
+  color: var(--blue-hover);
+}
+
+tr.has-device td.edit div a.mark:hover {
+  color: var(--blue);
+}
+
+tr.has-device td.edit div a.edit {
+  color: var(--green-2);
+}
+
+tr.has-device td.edit div a.edit:hover {
+  color: var(--green-hover);
+}
+
+tr.has-device td.edit div a.delete {
   color: var(--red);
 }
 
-td.edit div a.delete:hover {
-  color: var(--red-hover);
+tr.has-device td.edit div a.delete:hover {
+  color: var(--queen-color);
+}
+
+td.td-weak {
+  background-color: var(--queen-color-hover);
+}
+
+td.td-medium {
+  background-color: var(--beehive-color-hover);
+}
+
+td.td-strong {
+  background-color: var(--apiary-color-hover);
+}
+
+.table-legend {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.table-legend .beehive-with-device {
+  display: flex;
+  align-content: center;
+  margin-top: 10px;
+}
+
+.table-legend .beehive-with-device span {
+  background-color: var(--red-hover);
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin-right: 10px;
 }
 
 /* Create and Edit forms */
@@ -286,7 +389,6 @@ td.edit div a.delete:hover {
 }
 
 .form-box h2 {
-  margin: 0 0 30px;
   padding: 0;
   text-align: center;
 }
@@ -317,6 +419,7 @@ td.edit div a.delete:hover {
 .form-box .input-box {
   display: grid;
   font-size: 18px;
+  margin-top: 10px;
 }
 
 .form-box .input-box label {
@@ -336,9 +439,21 @@ td.edit div a.delete:hover {
   border: 3px solid var(--orange);
 }
 
+.form-box .input-box.check {
+  display: flex;
+}
+
+.form-box .input-box.check input[type="checkbox"] {
+}
+
 .form-box .btn-group {
   display: flex;
   justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.form-box .btn-group .btn {
+  margin: 0;
 }
 
 /* Preview */

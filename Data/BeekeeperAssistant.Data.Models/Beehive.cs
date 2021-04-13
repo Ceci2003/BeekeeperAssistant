@@ -2,17 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
 
     using BeekeeperAssistant.Data.Common.Models;
 
     public class Beehive : BaseDeletableModel<int>
     {
-        public Beehive()
-        {
-            this.Queens = new HashSet<Queen>();
-        }
-
         public int ApiaryId { get; set; }
 
         public virtual Apiary Apiary { get; set; }
@@ -37,6 +33,9 @@
 
         public bool HasPropolisCatcher { get; set; }
 
-        public ICollection<Queen> Queens { get; set; }
+        [ForeignKey(nameof(Queen))]
+        public int? QueenId { get; set; }
+
+        public Queen Queen { get; set; }
     }
 }

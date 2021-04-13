@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210413184459_RemoveNotes")]
+    partial class RemoveNotes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,7 +248,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QueenId")
+                    b.Property<int>("QueenId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -505,7 +507,9 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.HasOne("BeekeeperAssistant.Data.Models.Queen", "Queen")
                         .WithMany()
-                        .HasForeignKey("QueenId");
+                        .HasForeignKey("QueenId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Apiary");
 

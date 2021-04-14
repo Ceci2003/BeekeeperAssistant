@@ -6,10 +6,11 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class BeehiveDataViewModel : IMapFrom<Beehive>
+    public class BeehiveDataViewModel : IMapFrom<Beehive>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -30,5 +31,15 @@
         public bool HasPropolisCatcher { get; set; }
 
         public string CreatorId { get; set; }
+
+        public bool HasQueen { get; set; }
+
+        public int QueenId { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Beehive, BeehiveDataViewModel>()
+                .ForMember(x => x.HasQueen, y => y.MapFrom(x => x.Queen == null));
+        }
     }
 }

@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210414075458_RedoOneToOne")]
+    partial class RedoOneToOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,6 +259,10 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
+                    b.HasIndex("QueenId")
+                        .IsUnique()
+                        .HasFilter("[QueenId] IS NOT NULL");
+
                     b.ToTable("Beehives");
                 });
 
@@ -351,9 +357,6 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BeehiveId")
-                        .IsUnique();
 
                     b.HasIndex("IsDeleted");
 
@@ -502,24 +505,22 @@ namespace BeekeeperAssistant.Data.Migrations
                         .WithMany("Beehives")
                         .HasForeignKey("CreatorId");
 
+                    b.HasOne("BeekeeperAssistant.Data.Models.Queen", "Queen")
+                        .WithOne("Beehive")
+                        .HasForeignKey("BeekeeperAssistant.Data.Models.Beehive", "QueenId");
+
                     b.Navigation("Apiary");
 
                     b.Navigation("Creator");
+
+                    b.Navigation("Queen");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Queen", b =>
                 {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
-                        .WithOne("Queen")
-                        .HasForeignKey("BeekeeperAssistant.Data.Models.Queen", "BeehiveId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
                         .WithMany("Queens")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Beehive");
 
                     b.Navigation("User");
                 });
@@ -595,9 +596,9 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Roles");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Beehive", b =>
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.Queen", b =>
                 {
-                    b.Navigation("Queen");
+                    b.Navigation("Beehive");
                 });
 #pragma warning restore 612, 618
         }

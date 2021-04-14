@@ -53,6 +53,11 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Beehive>()
+                .HasOne(b => b.Queen)
+                .WithOne(q => q.Beehive)
+                .HasForeignKey<Queen>(q => q.BeehiveId);
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

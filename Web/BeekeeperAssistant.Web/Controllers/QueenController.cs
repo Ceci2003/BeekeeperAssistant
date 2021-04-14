@@ -4,19 +4,45 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Queens;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class QueenController : Controller
     {
+        private readonly IQueenService queenService;
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public QueenController(
+            IQueenService queenService,
+            UserManager<ApplicationUser> userManager)
+        {
+            this.queenService = queenService;
+            this.userManager = userManager;
+        }
+
         public IActionResult All(int page = 1)
         {
             return this.View();
         }
 
-        public IActionResult ById(int id)
+        public IActionResult ById(int? id)
         {
-            return this.View();
+            if (id == null)
+            {
+                return this.BadRequest();
+            }
+
+            var viewModel = this.queenService.GetQueenById<QueenDataViewModel>(id.Value);
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
         }
 
         public IActionResult Create(int id)
@@ -30,14 +56,18 @@
         }
 
         [HttpPost]
-        public IActionResult Create(CreateQueenInputModel inputModel)
+        public async Task<IActionResult> Create(CreateQueenInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            return this.Redirect("/");
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var queenId = await this.queenService.CreateUserQueenAsync(user.Id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed, inputModel.BeehiveId);
+
+            return this.Redirect($"/Queen/ById/{queenId}");
         }
 
         [HttpPost]

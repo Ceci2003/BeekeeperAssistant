@@ -5,7 +5,6 @@
 
 <div class="content">
     <table>
-        
     </table>
 </div>
 
@@ -24,5 +23,8 @@
 
 <a asp-controller="Beehive" asp-action="Edit">Edit Beehive</a>
 
-<a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Create queen</a>
+@if (!Model.HasQueen)
+{
+    <a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Create queen</a>
+}
 

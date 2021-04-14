@@ -39,7 +39,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Beehive, BeehiveDataViewModel>()
-                .ForMember(x => x.HasQueen, y => y.MapFrom(x => x.Queen == null));
+                .ForMember(x => x.HasQueen, y => y.MapFrom(x => x.Queen != null));
         }
     }
 }

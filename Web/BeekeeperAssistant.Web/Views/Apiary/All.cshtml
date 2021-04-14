@@ -6,7 +6,7 @@
 }
 
 <div class="content">
-    <h1 class="title">@ViewData["Title"]</h1>
+    <h1 class="title-1">@ViewData["Title"]</h1>
     <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
         <i class="fas fa-plus-square pr-2"></i>
         Създайте нов пчелин
@@ -28,7 +28,9 @@
                 @foreach (var apiary in Model.AllUserApiaries)
                 {
                     <tr>
-                        <td class="number"><a href="/Apiary/@apiary.Number">@apiary.Number</a></td>
+                        <td class="number">
+                            <a href="/Apiary/@apiary.Number">@apiary.Number</a>
+                        </td>
                         <td>@apiary.Name</td>
                         <td>@apiary.Adress</td>
                         <td>@apiary.ApiaryType</td>
@@ -37,8 +39,10 @@
                             <div>
                                 @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
                                 <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id"><i class="far fa-edit"></i></a>
-                                <form id="form-@apiary.Id" asp-action="Delete" asp-controller="Apiary" asp-route-id="@apiary.Id">
+                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete" asp-route-id="@apiary.Id">
                                     <button type="submit" class="delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>

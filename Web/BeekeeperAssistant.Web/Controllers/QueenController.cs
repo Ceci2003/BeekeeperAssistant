@@ -23,9 +23,15 @@
             this.userManager = userManager;
         }
 
-        public IActionResult All(int page = 1)
+        public async Task<IActionResult> All(int page = 1)
         {
-            return this.View();
+            var user = await this.userManager.GetUserAsync(this.User);
+            var viewModel = new AllQueensViewModel
+            {
+                AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id),
+            };
+
+            return this.View(viewModel);
         }
 
         public IActionResult ById(int? id)
@@ -71,9 +77,10 @@
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return this.Redirect("/");
+            await this.queenService.DeleteQueenAsync(id);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult Edit(int id)

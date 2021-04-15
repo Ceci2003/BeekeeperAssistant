@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using BeekeeperAssistant.Services.Mapping;
+    using System.Collections.Generic;
 
     public class QueenService : IQueenService
     {
@@ -42,6 +43,23 @@
             await this.queenRepository.SaveChangesAsync();
 
             return queen.Id;
+        }
+
+        public async Task DeleteQueenAsync(int queenId)
+        {
+            var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
+            this.queenRepository.HardDelete(queen);
+            await this.queenRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAllUserQueens<T>(string userId)
+        {
+            var allQueens = this.queenRepository.All()
+                .Where(q => q.UserId == userId)
+                .To<T>()
+                .ToList();
+
+            return allQueens;
         }
 
         // TODO: Write all funtions with arrows =>

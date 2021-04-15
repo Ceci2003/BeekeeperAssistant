@@ -23,5 +23,9 @@
             int beehiveId);
 
         T GetQueenById<T>(int queenId);
+
+        IEnumerable<T> GetAllUserQueens<T>(string userId);
+
+        Task DeleteQueenAsync(int queenId);
     }
 }

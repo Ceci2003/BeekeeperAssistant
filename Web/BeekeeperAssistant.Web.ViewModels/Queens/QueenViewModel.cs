@@ -1,0 +1,18 @@
+﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
+{
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+
+    public class QueenViewModel : IMapFrom<Queen>
+    {
+        public int Id { get; set; }
+
+        public int BeehiveId { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string BeehiveApiaryNumber { get; set; }
+
+        public QueenColor Color { get; set; }
+    }
+}

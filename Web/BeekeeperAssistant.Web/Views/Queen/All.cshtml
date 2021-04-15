@@ -1,3 +1,18 @@
-﻿@{ 
+﻿@model BeekeeperAssistant.Web.ViewModels.Queens.AllQueensViewModel
+@{
 
+}
+
+@foreach (var queen in Model.AllQueens)
+{
+    <div>
+        <a asp-controller="Queen" asp-action="ById" asp-route-id="@queen.Id">@queen.Id</a>
+        <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
+        <a href="/Beehive/@queen.BeehiveApiaryNumber/@queen.BeehiveId">@queen.BeehiveNumber</a>
+        @queen.Color
+        <form asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+    
 }

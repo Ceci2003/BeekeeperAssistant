@@ -1,9 +1,22 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllApiariesViewModel
-@using BeekeeperAssistant.Common
-
 @{
     ViewData["Title"] = "Пчелини-всички";
 }
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
@@ -42,7 +55,8 @@
                                 <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete" asp-route-id="@apiary.Id">
+                                <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
+                            asp-route-id="@apiary.Id">
                                     <button type="submit" class="delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>

@@ -18,8 +18,12 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 .content {
-  padding: 20px 50px 0 50px;
+  padding: 60px 50px 0 50px;
 }
 
 /* Global variables */
@@ -54,6 +58,19 @@ a {
   position: absolute;
 }
 
+.sidebar-navigation .sidebar-breadcrumb {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 10px;
+}
+
+.sidebar-navigation .sidebar-breadcrumb h1 {
+  font-size: 16px;
+  color: var(--orange);
+}
+
 /* Side navigation user area */
 .sidebar-navigation .user-area {
   display: flex;
@@ -65,7 +82,7 @@ a {
 }
 
 .sidebar-navigation .user-image {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .sidebar-navigation .user-image img {
@@ -335,6 +352,12 @@ tr.has-device td.edit div a.delete:hover {
   color: var(--queen-color);
 }
 
+td.td-weak,
+td.td-medium,
+td.td-strong {
+  color: var(--white);
+}
+
 td.td-weak {
   background-color: var(--queen-color-hover);
 }
@@ -344,7 +367,7 @@ td.td-medium {
 }
 
 td.td-strong {
-  background-color: var(--apiary-color-hover);
+  background-color: var(--green-2);
 }
 
 .table-legend {
@@ -551,6 +574,55 @@ td.td-strong {
   align-items: center;
   padding: 5px;
   height: 100%;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  background-color: var(--main-background);
+}
+
+.breadcrumb .breadcrumb-list {
+  display: flex;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.breadcrumb .breadcrumb-list li:nth-child(n + 2):before {
+  content: "/";
+  display: inline-block;
+  margin: 0 0.2em;
+  color: var(--orange);
+}
+
+.breadcrumb .breadcrumb-list li a {
+  color: var(--white);
+}
+
+.breadcrumb .breadcrumb-list li a:hover {
+  color: var(--orange);
+}
+
+.breadcrumb-item.active {
+  color: var(--orange);
+}
+
+.breadcrumb .breadcrumb-leave {
+  margin-right: 280px;
+}
+
+.breadcrumb .breadcrumb-leave form .exit {
+  border: none;
+  background: none;
+  color: var(--white);
+  font-size: 18px;
 }
 
 .rotate-270 {

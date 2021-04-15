@@ -46,7 +46,6 @@
         <thead>
             <tr>
                 <th>Номер</th>
-                <th>Номер на пчелин</th>
                 <th>Вид</th>
                 <th>Система</th>
                 <th>Сила</th>
@@ -59,9 +58,6 @@
                 <tr class="@if (beehive.HasDevice == true) { @hasDevice }">
                     <td class="number">
                         <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
-                    </td>
-                    <td class="number">
-                        <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
                     </td>
                     <td>@beehive.BeehiveType</td>
                     <td>@beehive.BeehiveSystem</td>

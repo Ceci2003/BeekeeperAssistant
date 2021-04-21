@@ -375,6 +375,26 @@ td.td-strong {
   background-color: var(--green-2);
 }
 
+td.queen-yellow {
+  background-color: var(--beehive-color-hover);
+  color: var(--white);
+}
+
+td.queen-green {
+  background-color: var(--green-hover);
+  color: var(--white);
+}
+
+td.queen-blue {
+  background-color: var(--blue-hover);
+  color: var(--white);
+}
+
+td.queen-red {
+  background-color: var(--queen-color);
+  color: var(--white);
+}
+
 .table-legend {
   margin-top: 10px;
   text-align: left;

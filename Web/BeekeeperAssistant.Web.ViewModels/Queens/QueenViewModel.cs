@@ -2,6 +2,7 @@
 {
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using System;
 
     public class QueenViewModel : IMapFrom<Queen>
     {
@@ -14,5 +15,11 @@
         public string BeehiveApiaryNumber { get; set; }
 
         public QueenColor Color { get; set; }
+
+        public DateTime GivingDate { get; set; }
+
+        public string Origin { get; set; }
+
+        public QueenBreed Breed { get; set; }
     }
 }

@@ -1,18 +1,75 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Queens.AllQueensViewModel
 @{
-
+    ViewData["Title"] = "Кралици-всички";
 }
 
-@foreach (var queen in Model.AllQueens)
-{
-    <div>
-        <a asp-controller="Queen" asp-action="ById" asp-route-id="@queen.Id">@queen.Id</a>
-        <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
-        <a href="/Beehive/@queen.BeehiveApiaryNumber/@queen.BeehiveId">@queen.BeehiveNumber</a>
-        @queen.Color
-        <form asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">
-            <button type="submit">Delete</button>
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
-    
-}
+</div>
+
+<div class="content">
+    <h1 class="title-1">@ViewData["Title"]</h1>
+    @if (Model.AllQueens.Any())
+    {
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Цвят</th>
+                    <th>Номер на кошер</th>
+                    <th>Номер на пчелин</th>
+                    <th>Дата на придаване</th>
+                    <th>Произход</th>
+                    <th>Порода</th>
+                    <th>Редактиране</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var queen in Model.AllQueens)
+                {
+                    <tr>
+                        <td class="queen-@queen.Color.ToString().ToLower()">@queen.Color</td>
+                        <td class="number">
+                            <a href="/Beehive/@queen.BeehiveApiaryNumber/@queen.BeehiveNumber">@queen.BeehiveNumber</a>
+                        </td>
+                        <td class="number">
+                            <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
+                        </td>
+                        <td>@queen.GivingDate</td>
+                        <td>@queen.Origin</td>
+                        <td>@queen.Breed</td>
+                        <td class="edit">
+                            <div>
+                                @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
+                                <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@queen.Id">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <form id="form-@queen.Id" asp-controller="Apiary" asp-action="Delete"
+                            asp-route-id="@queen.Id">
+                                    <button type="submit" class="delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1>Empty</h1>
+    }
+</div>

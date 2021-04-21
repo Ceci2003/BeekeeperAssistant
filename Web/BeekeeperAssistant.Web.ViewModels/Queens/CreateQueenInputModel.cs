@@ -13,27 +13,35 @@
     public class CreateQueenInputModel : IMapFrom<Queen>
     {
         [Required]
-        public DateTime FertilizationDate { get; set; }
+        public int BeehiveId { get; set; }
 
         [Required]
-        public DateTime GivingDate { get; set; }
-
-        [Required]
-        public QueenType QueenType { get; set; }
-
-        public string Origin { get; set; }
-
-        public string HygenicHabits { get; set; }
-
-        public string Temperament { get; set; }
-
-        [Required]
+        [Display(Name = "Цвят")]
         public QueenColor Color { get; set; }
 
         [Required]
+        [Display(Name = "порода")]
         public QueenBreed Breed { get; set; }
 
         [Required]
-        public int BeehiveId { get; set; }
+        [Display(Name = "Дата на олождане")]
+        public DateTime FertilizationDate { get; set; }
+
+        [Required]
+        [Display(Name = "Дата на придаване")]
+        public DateTime GivingDate { get; set; }
+
+        [Required]
+        [Display(Name = "Вид")]
+        public QueenType QueenType { get; set; }
+
+        [Display(Name = "Произход")]
+        public string Origin { get; set; }
+
+        [Display(Name = "Хигиенни навици")]
+        public string HygenicHabits { get; set; }
+
+        [Display(Name = "Нрав")]
+        public string Temperament { get; set; }
     }
 }

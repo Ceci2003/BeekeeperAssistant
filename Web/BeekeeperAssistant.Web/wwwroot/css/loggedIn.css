@@ -164,6 +164,10 @@ li {
 }
 
 /* Combined */
+.title-0 {
+  text-align: center;
+}
+
 .title-1 {
   text-align: center;
   margin-bottom: 20px;
@@ -174,9 +178,16 @@ li {
   margin-bottom: 18px;
 }
 
+.title-0.left,
 .title-1.left,
 .title-2.left {
   text-align: left;
+}
+
+.view-title {
+  background-color: var(--white);
+  /* width: 300px; */
+  text-align: center;
 }
 
 /* Buttons */
@@ -252,6 +263,30 @@ li {
 }
 
 /* Tables */
+.data-view {
+  display: flex;
+  /* justify-content: space-between; */
+  font-size: 18px;
+  margin-bottom: 30px;
+  border: 1px solid var(--lightgray);
+  margin-top: -35px;
+  padding: 10px;
+}
+
+.data-view table tr th {
+  text-align: right;
+}
+
+.data-edit {
+  display: grid;
+  align-items: center;
+  padding: 10px;
+}
+
+.date-edit .btn {
+  margin: 0px;
+}
+
 .data-table {
   border-collapse: collapse;
   width: 100%;

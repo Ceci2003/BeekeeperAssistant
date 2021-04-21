@@ -27,8 +27,9 @@
 </div>
 
 <div class="content">
-    <div class="col-6">
-        <table class="table text-center">
+    <h1 class="title-1 view-title">@ViewData["Title"]</h1>
+    <div class="data-view">
+        <table>
             <tbody>
                 <tr>
                     <th scope="row">Number:</th>
@@ -48,14 +49,17 @@
                 </tr>
             </tbody>
         </table>
+        <div class="data-edit">
+            <a class="btn edit" asp-action="Edit" asp-route-id="@Model.Id">Редактирай</a>
+            <form asp-controller="Apiary" asp-action="Delete" asp-route-id="@Model.Id">
+                <input class="btn delete" type="submit" value="Изтрий" />
+            </form>
+        </div>
     </div>
 
-    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Edit Apiary</a>
-    <form asp-controller="Apiary" asp-action="Delete" asp-route-id="@Model.Id">
-        <input class="btn btn-danger" type="submit" value="Delete" />
-    </form>
 
-    <h2 class="title-2 left">Кошери</h2>
+
+    <h2 class="title-0 left">Кошери</h2>
     <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">
         <i class="fas fa-plus-square pr-2"></i>
         Създайте нов кошер
@@ -88,7 +92,8 @@
                             <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <form method="post" id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete" asp-route-id="@beehive.Id">
+                            <form method="post" id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
+                            asp-route-id="@beehive.Id">
                                 <button type="submit" class="delete">
                                     <i class="far fa-trash-alt"></i>
                                 </button>

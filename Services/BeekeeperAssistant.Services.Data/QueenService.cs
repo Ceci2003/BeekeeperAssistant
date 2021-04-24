@@ -1,12 +1,13 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
-    using BeekeeperAssistant.Data.Common.Repositories;
-    using BeekeeperAssistant.Data.Models;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using System.Collections.Generic;
 
     public class QueenService : IQueenService
     {

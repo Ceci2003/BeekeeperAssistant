@@ -44,6 +44,5 @@ namespace BeekeeperAssistant.Data.Models
         public virtual ICollection<Queen> Queens { get; set; }
 
         public virtual ICollection<Duty> Tasks { get; set; }
-
     }
 }

@@ -47,16 +47,15 @@
                         </td>
                         <td>@queen.GivingDate</td>
                         <td>@queen.Origin</td>
-                        <td>@queen.Breed</td>
+                        <td>@Html.DisplayFor(x => queen.Breed)</td>
                         <td class="edit">
                             <div>
                                 @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
                                 <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@queen.Id">
+                                <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <form id="form-@queen.Id" asp-controller="Apiary" asp-action="Delete"
-                            asp-route-id="@queen.Id">
+                                <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">
                                     <button type="submit" class="delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>

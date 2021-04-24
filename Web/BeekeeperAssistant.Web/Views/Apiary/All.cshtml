@@ -40,30 +40,29 @@
             <tbody>
                 @foreach (var apiary in Model.AllUserApiaries)
                 {
-                    <tr>
-                        <td class="number">
-                            <a href="/Apiary/@apiary.Number">@apiary.Number</a>
-                        </td>
-                        <td>@apiary.Name</td>
-                        <td>@apiary.Adress</td>
-                        <td>@apiary.ApiaryType</td>
-                        <td>@apiary.BeehivesCount</td>
-                        <td class="edit">
-                            <div>
-                                @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
-                                <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
-                            asp-route-id="@apiary.Id">
-                                    <button type="submit" class="delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="number">
+                        <a href="/Apiary/@apiary.Number">@apiary.Number</a>
+                    </td>
+                    <td>@apiary.Name</td>
+                    <td>@apiary.Adress</td>
+                    <td>@Html.DisplayFor(x => apiary.ApiaryType)</td> 
+                    <td>@apiary.BeehivesCount</td>
+                    <td class="edit">
+                        <div>
+                            @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
+                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete" asp-route-id="@apiary.Id">
+                                <button type="submit" class="delete">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

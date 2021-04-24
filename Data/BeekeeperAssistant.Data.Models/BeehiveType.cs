@@ -6,13 +6,13 @@
     {
         [Display(Name = "Пчелно семейство")]
         BeeFamily = 1,
-        [Display(Name = "рояк")]
+        [Display(Name = "Рояк")]
         Swarm = 2,
-        [Display(Name = "кошер")]
+        [Display(Name = "Кошер")]
         Beehive = 3,
-        [Display(Name = "отводка")]
+        [Display(Name = "Отводка")]
         ForPropagation = 4,
-        [Display(Name = "друг")]
+        [Display(Name = "Друг")]
         Other = 5,
     }
 }

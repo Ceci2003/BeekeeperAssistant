@@ -4,15 +4,15 @@
 
     public enum QueenType
     {
-        [Display(Name = "произведена")]
+        [Display(Name = "Произведена")]
         Produced = 1,
         [Display(Name = "няма")]
         None = 2,
-        [Display(Name = "роева")]
+        [Display(Name = "Роева")]
         SwarmingMother = 3,
-        [Display(Name = "самосмяна")]
+        [Display(Name = "Самосмяна")]
         SelfReplacement = 4,
-        [Display(Name = "свищева")]
+        [Display(Name = "Свищева")]
         Fistulous = 5,
     }
 }

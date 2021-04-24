@@ -5,8 +5,9 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class AllBeehivesViewModel : IMapFrom<Beehive>
+    public class AllBeehivesViewModel
     {
         public IEnumerable<BeehiveViewModel> AllBeehives { get; set; }
+
     }
 }

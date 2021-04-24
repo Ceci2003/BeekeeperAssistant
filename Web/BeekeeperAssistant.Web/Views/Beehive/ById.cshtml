@@ -18,7 +18,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -31,9 +31,9 @@
 
 @Model.ApiaryNumber
 @Model.Number
-@Model.BeehivePower
-@Model.BeehiveSystem
-@Model.BeehiveType
+<td>@Html.DisplayFor(x => Model.BeehivePower)</td>
+<td>@Html.DisplayFor(x => Model.BeehiveSystem)</td>
+<td>@Html.DisplayFor(x => Model.BeehiveType)</td>
 @Model.Date
 @Model.HasDevice
 @Model.HasPolenCatcher

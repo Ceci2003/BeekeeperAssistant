@@ -196,12 +196,12 @@ li {
   border: 1px solid var(--main-background);
   border-radius: 3px;
   margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .btn.apiary,
 .btn.beehive,
 .btn.queen {
-  font-size: 18px;
   color: var(--white);
   border: none;
 }
@@ -262,15 +262,43 @@ li {
   background-color: var(--beehive-color-hover);
 }
 
+.btn.edit {
+  width: 135px;
+  color: var(--white);
+  background-color: var(--green);
+}
+
+.btn.edit:hover {
+  background-color: var(--green-hover);
+}
+
+.btn.delete {
+  width: 135px;
+  font-size: 16px;
+  color: var(--white);
+  background-color: var(--red-hover);
+}
+
+.btn.delete:hover {
+  background-color: var(--red);
+}
+
 /* Tables */
 .data-view {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   font-size: 18px;
   margin-bottom: 30px;
   border: 1px solid var(--lightgray);
   margin-top: -35px;
   padding: 10px;
+  align-items: center;
+}
+
+.data-view table tr {
+  margin: 5px 0;
+  margin: 15px 0;
+  display: block;
 }
 
 .data-view table tr th {
@@ -461,6 +489,10 @@ td.queen-red {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   /* border-radius: 5px; */
   width: 450px;
+}
+
+.form-box.beehive {
+  padding: 20px 40px;
 }
 
 .form-box .back {

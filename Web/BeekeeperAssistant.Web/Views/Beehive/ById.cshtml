@@ -9,6 +9,9 @@
             <a asp-controller="Home" asp-action="Index">Начало</a>
         </li>
         <li class="breadcrumb-item">
+            <a href="/Apiary/@Model.ApiaryNumber">Кошери-всички</a>
+        </li>
+        <li class="breadcrumb-item">
             <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
@@ -26,6 +29,7 @@
     </table>
 </div>
 
+@Model.ApiaryNumber
 @Model.Number
 @Model.BeehivePower
 @Model.BeehiveSystem
@@ -34,6 +38,7 @@
 @Model.HasDevice
 @Model.HasPolenCatcher
 @Model.HasPropolisCatcher
+@Model.HasQueen - @Model.QueenId
 
 <form asp-controller="Beehive" asp-action="Delete" asp-route-data="@Model.Id">
     <button type="submit">Delete</button>

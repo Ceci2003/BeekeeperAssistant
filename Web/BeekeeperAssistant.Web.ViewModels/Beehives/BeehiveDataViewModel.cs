@@ -14,6 +14,8 @@
     {
         public int Id { get; set; }
 
+        public string ApiaryNumber { get; set; }
+
         public int Number { get; set; }
 
         public BeehiveSystem BeehiveSystem { get; set; }

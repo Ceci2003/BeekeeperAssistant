@@ -57,9 +57,22 @@
         </div>
     </div>
 
-    t - @Model.ForecastResult.Temp <br>
-    hum - @Model.ForecastResult.Humidity <br>
-    icon - @Model.ForecastResult.WeatherIcon
+    @if (@Model.ForecastResult == null)
+    {
+        <div>
+            <p style="font-size: 18px; color: red;">null</p>
+        </div>
+    }
+    else
+    {
+        string imgPath = Model.ForecastResult.WeatherIcon + ".png";
+        <div>
+            t - @Model.ForecastResult.Temp <br>
+            hum - @Model.ForecastResult.Humidity <br>
+            icon - @Model.ForecastResult.WeatherIcon
+            <img src="~/img/weather/@imgPath" alt="">
+        </div>
+    }
 
     <h2 class="title-0 left">Кошери</h2>
     <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">

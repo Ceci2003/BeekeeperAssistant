@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     using BeekeeperAssistant.Data.Models;
@@ -12,14 +13,18 @@
     {
         public string Id { get; set; }
 
+        [Display(Name = "Номер")]
         public string Number { get; set; }
 
+        [Display(Name = "Вид")]
         public ApiaryType ApiaryType { get; set; }
 
         public string CreatorId { get; set; }
 
+        [Display(Name = "Адрес")]
         public string Adress { get; set; }
 
+        [Display(Name = "Име")]
         public string Name { get; set; }
 
         public IEnumerable<BeehiveViewModel> Beehives { get; set; }

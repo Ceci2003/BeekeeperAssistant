@@ -27,7 +27,7 @@
                 <p>@this.User.Identity.Name</p>
             </div>
             <hr>
-            <a class="btn beehive" asp-area="Identity" asp-page="/Account/Manage/Index">
+            <a class="btn beehive-create" asp-area="Identity" asp-page="/Account/Manage/Index">
                 Профил
             </a>
         </section>
@@ -77,12 +77,6 @@
                 </div>
             </section>
         </section>
-        <div class="leave">
-            <form asp-area="Identity" asp-page="/Account/Logout"
-                  asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                <button type="submit"><i class="fas fa-sign-out-alt"></i></button>
-            </form>
-        </div>
     </aside>
     <main>
         @this.RenderBody()

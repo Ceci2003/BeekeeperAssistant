@@ -51,7 +51,7 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.apiaryService.GetUserApiaryByNumber<ApiaryDataViewModel>(currentUser.Id, apiaryNumber);
-            ForecastResult forecastResult = this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+            ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
             viewModel.ForecastResult = forecastResult;
 
             if (viewModel == null)

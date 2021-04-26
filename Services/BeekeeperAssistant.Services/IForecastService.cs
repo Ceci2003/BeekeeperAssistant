@@ -1,7 +1,9 @@
-﻿namespace BeekeeperAssistant.Services
+﻿using System.Threading.Tasks;
+
+namespace BeekeeperAssistant.Services
 {
     public interface IForecastService
     {
-        ForecastResult GetCurrentWeather(string cityName, string apiId);
+        Task<ForecastResult> GetCurrentWeather(string cityName, string apiId);
     }
 }

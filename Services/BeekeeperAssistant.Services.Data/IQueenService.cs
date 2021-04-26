@@ -27,5 +27,16 @@
         IEnumerable<T> GetAllUserQueens<T>(string userId);
 
         Task DeleteQueenAsync(int queenId);
+
+        Task<int> EditQueenAsync(
+            int queenId,
+            DateTime fertilizationDate,
+            DateTime givingDate,
+            QueenType queenType,
+            string origin,
+            string hygenicHabits,
+            string temperament,
+            QueenColor queenColor,
+            QueenBreed queenBreed);
     }
 }

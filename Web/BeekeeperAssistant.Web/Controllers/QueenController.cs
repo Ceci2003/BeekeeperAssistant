@@ -66,7 +66,6 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-
             var queenId = await this.queenService.CreateUserQueenAsync(user.Id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed, inputModel.BeehiveId);
 
             return this.Redirect($"/Queen/ById/{queenId}");
@@ -86,9 +85,10 @@
         }
 
         [HttpPost]
-        public IActionResult Edit(EditQueenInutModel inutModel)
+        public async Task<IActionResult> Edit(int id, EditQueenInutModel inputModel)
         {
-            return this.Redirect("/");
+            var queenId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
+            return this.Redirect($"/Queen/ById/{queenId}");
         }
     }
 }

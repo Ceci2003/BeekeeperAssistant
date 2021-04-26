@@ -53,6 +53,24 @@
             await this.queenRepository.SaveChangesAsync();
         }
 
+        public async Task<int> EditQueenAsync(int queenId, DateTime fertilizationDate, DateTime givingDate, QueenType queenType, string origin, string hygenicHabits, string temperament, QueenColor queenColor, QueenBreed queenBreed)
+        {
+            var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
+
+            queen.FertilizationDate = fertilizationDate;
+            queen.GivingDate = givingDate;
+            queen.QueenType = queenType;
+            queen.Origin = origin;
+            queen.HygenicHabits = hygenicHabits;
+            queen.Temperament = temperament;
+            queen.Color = queenColor;
+            queen.Breed = queenBreed;
+
+            await this.queenRepository.SaveChangesAsync();
+            return queen.Id;
+
+        }
+
         public IEnumerable<T> GetAllUserQueens<T>(string userId)
         {
             var allQueens = this.queenRepository.All()

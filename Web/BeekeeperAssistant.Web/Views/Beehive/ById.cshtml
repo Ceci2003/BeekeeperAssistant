@@ -41,8 +41,13 @@
 
 <a asp-controller="Beehive" asp-action="Edit">Edit Beehive</a>
 
-@if (!Model.HasQueen)
+@if (Model.HasQueen)
 {
-    <a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Create queen</a>
+    <a asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">Edit Queen</a>
+    <a asp-controller="Queen" asp-action="ById" asp-route-id="@Model.QueenId">View Queen</a>
+}
+else
+{
+    <a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Create Queen</a>
 }
 

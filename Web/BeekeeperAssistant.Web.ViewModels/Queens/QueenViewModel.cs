@@ -1,8 +1,9 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
+    using System;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using System;
 
     public class QueenViewModel : IMapFrom<Queen>
     {

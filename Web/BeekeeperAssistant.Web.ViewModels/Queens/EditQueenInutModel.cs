@@ -10,7 +10,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class CreateQueenInputModel
+    public class EditQueenInutModel : IMapFrom<Queen>
     {
         [Required]
         public int BeehiveId { get; set; }
@@ -20,7 +20,7 @@
         public QueenColor Color { get; set; }
 
         [Required]
-        [Display(Name = "порода")]
+        [Display(Name = "Порода")]
         public QueenBreed Breed { get; set; }
 
         [Required]

@@ -8,6 +8,5 @@
     public class AllBeehivesViewModel
     {
         public IEnumerable<BeehiveViewModel> AllBeehives { get; set; }
-
     }
 }

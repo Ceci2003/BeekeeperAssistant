@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Queens;
@@ -34,14 +35,9 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ById(int? id)
+        public IActionResult ById(int id)
         {
-            if (id == null)
-            {
-                return this.BadRequest();
-            }
-
-            var viewModel = this.queenService.GetQueenById<QueenDataViewModel>(id.Value);
+            var viewModel = this.queenService.GetQueenById<QueenDataViewModel>(id);
 
             if (viewModel == null)
             {
@@ -85,10 +81,12 @@
 
         public IActionResult Edit(int id)
         {
-            return this.View();
+            var inputModel = this.queenService.GetQueenById<EditQueenInutModel>(id);
+            return this.View(inputModel);
         }
 
-        public IActionResult Edit(string hereGoesInputModel)
+        [HttpPost]
+        public IActionResult Edit(EditQueenInutModel inutModel)
         {
             return this.Redirect("/");
         }

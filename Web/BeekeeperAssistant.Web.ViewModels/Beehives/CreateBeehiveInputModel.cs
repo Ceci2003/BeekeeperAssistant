@@ -30,7 +30,7 @@
         [Required]
         public BeehivePower BeehivePower { get; set; }
 
-        public IEnumerable<KeyValuePair<string, int>> AllApiaries { get; set; }
+        public IEnumerable<KeyValuePair<int, string>> AllApiaries { get; set; }
 
         public bool HasDevice { get; set; }
 

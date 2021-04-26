@@ -59,7 +59,7 @@
                             <div>
                                 @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
                                 <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                                <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-itemid="@beehive.Id">
+                                <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                     <i class="far fa-edit"></i>
                                 </a>
                                 <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"

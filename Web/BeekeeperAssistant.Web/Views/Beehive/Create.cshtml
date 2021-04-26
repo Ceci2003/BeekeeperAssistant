@@ -6,7 +6,7 @@
     var keyValuePairApiaries = new List<SelectListItem>();
     if (Model.AllApiaries != null)
     {
-        keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Key.ToString(), x.Value.ToString())).ToList();
+        keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
     }
 }
 

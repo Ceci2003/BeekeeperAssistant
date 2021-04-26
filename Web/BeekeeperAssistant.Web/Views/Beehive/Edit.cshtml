@@ -1,8 +1,7 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.EditBeehiveInputModel
 @using BeekeeperAssistant.Data.Models;
 @{
-    var keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Key.ToString(),
-            x.Value.ToString())).ToList();
+    var keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
 }
 
 <div class="breadcrumb">

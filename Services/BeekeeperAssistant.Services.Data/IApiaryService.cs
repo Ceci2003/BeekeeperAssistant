@@ -24,7 +24,7 @@
 
         Task<string> EditApiaryByIdAsync(int apiaryId, string number, string name, ApiaryType apiaryType, string address);
 
-        public IEnumerable<KeyValuePair<string, int>> GetUserApiariesAsKeyValuePairs(string userId);
+        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
     }
 }
 

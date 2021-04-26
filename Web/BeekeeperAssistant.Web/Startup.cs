@@ -73,6 +73,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IApiaryService, ApiaryService>();
+            services.AddTransient<IForecastService, ForecastService>();
             services.AddTransient<IApiaryNumberService, ApiaryNumberService>();
             services.AddTransient<IBeehiveService, BeehiveService>();
             services.AddTransient<IQueenService, QueenService>();

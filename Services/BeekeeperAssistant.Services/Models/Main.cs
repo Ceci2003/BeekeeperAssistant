@@ -10,7 +10,7 @@
 
         public double Feels_like { get; set; }
 
-        public int Temp_min { get; set; }
+        public double Temp_min { get; set; }
 
         public double Temp_max { get; set; }
 

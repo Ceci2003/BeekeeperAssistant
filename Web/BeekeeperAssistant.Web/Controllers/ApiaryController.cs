@@ -2,14 +2,15 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
 
     [Authorize]
     public class ApiaryController : BaseController
@@ -17,15 +18,22 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
         private readonly IApiaryNumberService apiaryNumberService;
+        private readonly IConfiguration configuration;
+
+        private readonly IForecastService forecastService;
 
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
             IApiaryService apiaryService,
-            IApiaryNumberService apiaryNumberService)
+            IApiaryNumberService apiaryNumberService,
+            IConfiguration configuration,
+            IForecastService forecastService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
             this.apiaryNumberService = apiaryNumberService;
+            this.configuration = configuration;
+            this.forecastService = forecastService;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -43,6 +51,8 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.apiaryService.GetUserApiaryByNumber<ApiaryDataViewModel>(currentUser.Id, apiaryNumber);
+            ForecastResult forecastResult = this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+            viewModel.ForecastResult = forecastResult;
 
             if (viewModel == null)
             {

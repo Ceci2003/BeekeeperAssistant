@@ -6,6 +6,7 @@
     using System.Text;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
 
@@ -26,6 +27,8 @@
 
         [Display(Name = "Име")]
         public string Name { get; set; }
+
+        public ForecastResult ForecastResult { get; set; }
 
         public IEnumerable<BeehiveViewModel> Beehives { get; set; }
     }

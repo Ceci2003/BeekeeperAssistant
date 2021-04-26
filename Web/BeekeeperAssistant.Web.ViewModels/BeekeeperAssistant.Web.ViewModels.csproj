@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BeekeeperAssistant.Data.Models\BeekeeperAssistant.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\BeekeeperAssistant.Services.Mapping\BeekeeperAssistant.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\BeekeeperAssistant.Services\BeekeeperAssistant.Services.csproj" />
     <ProjectReference Include="..\BeekeeperAssistant.Web.Infrastructure\BeekeeperAssistant.Web.Infrastructure.csproj" />
   </ItemGroup>
 

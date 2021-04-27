@@ -19,7 +19,17 @@
             this.beehiveRepository = beehiveRepository;
         }
 
-        public async Task<int> CreateUserBeehiveAsync(string userId, int number, BeehiveSystem beehiveSystem, BeehiveType beehiveType, DateTime dateTime, int apiaryId, BeehivePower beehivePower, bool hasDevice, bool hasPolenCatcher, bool hasPropolisCatcher)
+        public async Task<int> CreateUserBeehiveAsync(
+            string userId,
+            int number,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            BeehivePower beehivePower,
+            bool hasDevice,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher)
         {
             var beehive = new Beehive
             {
@@ -53,7 +63,17 @@
             return beehive.Apiary.Number;
         }
 
-        public async Task<int> EditUserBeehiveAsync(int beehiveId, int number, BeehiveSystem beehiveSystem, BeehiveType beehiveType, DateTime dateTime, int apiaryId, BeehivePower beehivePower, bool hasDevice, bool hasPolenCatcher, bool hasPropolisCatcher)
+        public async Task<int> EditUserBeehiveAsync(
+            int beehiveId,
+            int number,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            BeehivePower beehivePower,
+            bool hasDevice,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher)
         {
             var beehive = this.beehiveRepository.All()
                 .FirstOrDefault(b => b.Id == beehiveId);
@@ -73,24 +93,16 @@
             return beehive.Id;
         }
 
-        public IEnumerable<T> GetAllUserBeehives<T>(string userId)
-        {
-            var allUserBeehives = this.beehiveRepository.All()
+        public IEnumerable<T> GetAllUserBeehives<T>(string userId) =>
+            this.beehiveRepository.All()
                 .Where(b => b.CreatorId == userId)
                 .To<T>()
                 .ToList();
 
-            return allUserBeehives;
-        }
-
-        public T GetBeehiveById<T>(int beehiveId)
-        {
-            var beehive = this.beehiveRepository.All()
+        public T GetBeehiveById<T>(int beehiveId) =>
+            this.beehiveRepository.All()
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
-
-            return beehive;
-        }
     }
 }

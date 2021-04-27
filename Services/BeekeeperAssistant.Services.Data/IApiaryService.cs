@@ -1,7 +1,6 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
@@ -18,19 +17,22 @@
 
         T GetApiaryById<T>(int apiaryId);
 
-        Task<string> CreateUserApiaryAsync(string userId, string number, string name, ApiaryType apiaryType, string address);
+        Task<string> CreateUserApiaryAsync(
+            string userId,
+            string number,
+            string name,
+            ApiaryType apiaryType,
+            string address);
 
         Task DeleteApiaryByIdAsync(int apiaryId);
 
-        Task<string> EditApiaryByIdAsync(int apiaryId, string number, string name, ApiaryType apiaryType, string address);
+        Task<string> EditApiaryByIdAsync(
+            int apiaryId,
+            string number,
+            string name,
+            ApiaryType apiaryType,
+            string address);
 
         public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
     }
 }
-
-// GetAllUserApiaries + pagination
-// GetUserApiaryByNumber
-// GetApairyById
-// CreateUserApiary
-// DeleteUserApiaryById / DeleteUserApiaryByNumber
-// EditUserApiaryByNumber / EditUserApiaryById

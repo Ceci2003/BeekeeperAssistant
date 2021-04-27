@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
@@ -12,6 +10,7 @@
     {
         Task<int> CreateUserQueenAsync(
             string userId,
+            int beehiveId,
             DateTime fertilizationDate,
             DateTime givingDate,
             QueenType queenType,
@@ -19,8 +18,7 @@
             string hygenicHabits,
             string temperament,
             QueenColor queenColor,
-            QueenBreed queenBreed,
-            int beehiveId);
+            QueenBreed queenBreed);
 
         T GetQueenById<T>(int queenId);
 

@@ -48,7 +48,6 @@
             GC.SuppressFinalize(this);
         }
 
-        // TODO: Add delete many entities with bulk operation
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

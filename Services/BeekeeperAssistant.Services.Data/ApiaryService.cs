@@ -1,6 +1,5 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -23,7 +22,12 @@
             this.beehiveRepository = beehiveRepository;
         }
 
-        public async Task<string> CreateUserApiaryAsync(string userId, string number, string name, ApiaryType apiaryType, string adress)
+        public async Task<string> CreateUserApiaryAsync(
+            string userId,
+            string number,
+            string name,
+            ApiaryType apiaryType,
+            string adress)
         {
             var newApiary = new Apiary
             {
@@ -50,7 +54,12 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public async Task<string> EditApiaryByIdAsync(int apiaryId, string number, string name, ApiaryType apiaryType, string address)
+        public async Task<string> EditApiaryByIdAsync(
+            int apiaryId,
+            string number,
+            string name,
+            ApiaryType apiaryType,
+            string address)
         {
             var apiary = this.apiaryRepository.All()
                 .FirstOrDefault(a => a.Id == apiaryId);
@@ -66,62 +75,43 @@
         }
 
         // TODO: Add pagination
-        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1)
-        {
-            var userApiaries = this.apiaryRepository.All()
+        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1) =>
+            this.apiaryRepository.All()
                 .Where(a => a.CreatorId == userId)
                 .To<T>()
                 .ToList();
 
-            return userApiaries;
-        }
-
-        public T GetApiaryById<T>(int apiaryId)
-        {
-            var apiary = this.apiaryRepository.All()
+        public T GetApiaryById<T>(int apiaryId) =>
+            this.apiaryRepository.All()
                 .Where(a => a.Id == apiaryId)
                 .To<T>()
                 .FirstOrDefault();
 
-            return apiary;
-        }
-
-        public string GetApiaryNumberByBeehiveId(int beehiveId)
-        {
-            var apiaryNumber = this.beehiveRepository.All()
+        public string GetApiaryNumberByBeehiveId(int beehiveId) =>
+            this.beehiveRepository.All()
                 .Include(a => a.Apiary)
                 .FirstOrDefault(b => b.Id == beehiveId)
                 .Apiary
                 .Number;
 
-            return apiaryNumber;
-        }
-
-        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId)
-        {
-            // TODO: REFACTOR
-            var allApiaries = this.apiaryRepository.All()
+        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId) =>
+            this.apiaryRepository.All()
                 .Where(a => a.CreatorId == userId)
                 .OrderByDescending(a => a.CreatedOn)
                 .Select(a => new KeyValuePair<int, string>(a.Id, a.Number))
                 .ToList();
 
-            return allApiaries;
-        }
-
-        public T GetUserApiaryByNumber<T>(string userId, string number)
-        {
-            var apiary = this.apiaryRepository.All()
+        public T GetUserApiaryByNumber<T>(string userId, string number) =>
+            this.apiaryRepository.All()
                 .Where(a => a.Number == number && a.CreatorId == userId)
                 .To<T>()
                 .FirstOrDefault();
 
-            return apiary;
-        }
-
         public int GetUserApiaryIdByNumber(string userId, string apiaryNumber)
         {
-            var apiary = this.apiaryRepository.All().FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber);
+            var apiary = this.apiaryRepository.All()
+                .FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber);
+
             return apiary.Id;
         }
     }

@@ -2,12 +2,12 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -114,7 +114,6 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            // TODO: When dleting delete the beehives too
             await this.apiaryService.DeleteApiaryByIdAsync(id);
             return this.RedirectToAction(nameof(this.All));
         }

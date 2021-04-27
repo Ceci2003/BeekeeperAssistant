@@ -14,13 +14,25 @@
         private readonly IDeletableEntityRepository<Queen> queenRepository;
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
 
-        public QueenService(IDeletableEntityRepository<Queen> queenRepository, IDeletableEntityRepository<Beehive> beehiveRepository)
+        public QueenService(
+            IDeletableEntityRepository<Queen> queenRepository,
+            IDeletableEntityRepository<Beehive> beehiveRepository)
         {
             this.queenRepository = queenRepository;
             this.beehiveRepository = beehiveRepository;
         }
 
-        public async Task<int> CreateUserQueenAsync(string userId, DateTime fertilizationDate, DateTime givingDate, QueenType queenType, string origin, string hygenicHabits, string temperament, QueenColor queenColor, QueenBreed queenBreed, int beehiveId)
+        public async Task<int> CreateUserQueenAsync(
+            string userId,
+            int beehiveId,
+            DateTime fertilizationDate,
+            DateTime givingDate,
+            QueenType queenType,
+            string origin,
+            string hygenicHabits,
+            string temperament,
+            QueenColor queenColor,
+            QueenBreed queenBreed)
         {
             var queen = new Queen
             {
@@ -53,7 +65,16 @@
             await this.queenRepository.SaveChangesAsync();
         }
 
-        public async Task<int> EditQueenAsync(int queenId, DateTime fertilizationDate, DateTime givingDate, QueenType queenType, string origin, string hygenicHabits, string temperament, QueenColor queenColor, QueenBreed queenBreed)
+        public async Task<int> EditQueenAsync(
+            int queenId,
+            DateTime fertilizationDate,
+            DateTime givingDate,
+            QueenType queenType,
+            string origin,
+            string hygenicHabits,
+            string temperament,
+            QueenColor queenColor,
+            QueenBreed queenBreed)
         {
             var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
 
@@ -68,28 +89,18 @@
 
             await this.queenRepository.SaveChangesAsync();
             return queen.Id;
-
         }
 
-        public IEnumerable<T> GetAllUserQueens<T>(string userId)
-        {
-            var allQueens = this.queenRepository.All()
+        public IEnumerable<T> GetAllUserQueens<T>(string userId) =>
+            this.queenRepository.All()
                 .Where(q => q.UserId == userId)
                 .To<T>()
                 .ToList();
 
-            return allQueens;
-        }
-
-        // TODO: Write all funtions with arrows =>
-        public T GetQueenById<T>(int queenId)
-        {
-            var queen = this.queenRepository.All()
+        public T GetQueenById<T>(int queenId) =>
+            this.queenRepository.All()
                 .Where(q => q.Id == queenId)
                 .To<T>()
                 .FirstOrDefault();
-
-            return queen;
-        }
     }
 }

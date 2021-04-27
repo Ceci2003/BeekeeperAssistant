@@ -66,7 +66,18 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var queenId = await this.queenService.CreateUserQueenAsync(user.Id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed, inputModel.BeehiveId);
+            var queenId = await this.queenService
+                .CreateUserQueenAsync(
+                user.Id,
+                inputModel.BeehiveId,
+                inputModel.FertilizationDate,
+                inputModel.GivingDate,
+                inputModel.QueenType,
+                inputModel.Origin,
+                inputModel.HygenicHabits,
+                inputModel.Temperament,
+                inputModel.Color,
+                inputModel.Breed);
 
             return this.Redirect($"/Queen/ById/{queenId}");
         }

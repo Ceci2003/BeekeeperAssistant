@@ -12,31 +12,28 @@
     {
         public async Task<ForecastResult> GetCurrentWeather(string cityName, string apiId)
         {
-            // API path with CITY parameter and other parameters.
-            string stringUrl = string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&cnt=1&APPID={1}", cityName, apiId);
+            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cityName}&units=metric&cnt=1&APPID={apiId}";
 
             using (WebClient client = new WebClient())
             {
-
                 try
                 {
                     var url = new Uri(stringUrl);
                     string json = await client.DownloadStringTaskAsync(url);
 
-                    // Converting to OBJECT from JSON string.
                     ForecastModel weatherInfo = JsonConvert.DeserializeObject<ForecastModel>(json);
 
-                    // Special VIEWMODEL design to send only required fields not all fields which received from www.openweathermap.org api
-                    ForecastResult weatherResult = new ForecastResult();
-
-                    weatherResult.City = weatherInfo.Name;
-                    weatherResult.Description = weatherInfo.Weather[0].Description;
-                    weatherResult.Humidity = Convert.ToString(weatherInfo.Main.Humidity);
-                    weatherResult.Temp = Convert.ToString(weatherInfo.Main.Temp);
-                    weatherResult.TempFeelsLike = Convert.ToString(weatherInfo.Main.Feels_like);
-                    weatherResult.TempMax = Convert.ToString(weatherInfo.Main.Temp_max);
-                    weatherResult.TempMin = Convert.ToString(weatherInfo.Main.Temp_min);
-                    weatherResult.WeatherIcon = weatherInfo.Weather[0].Icon;
+                    ForecastResult weatherResult = new ForecastResult
+                    {
+                        City = weatherInfo.Name,
+                        Description = weatherInfo.Weather[0].Description,
+                        Humidity = weatherInfo.Main.Humidity.ToString(),
+                        Temp = weatherInfo.Main.Temp.ToString(),
+                        TempFeelsLike = weatherInfo.Main.Feels_like.ToString(),
+                        TempMax = weatherInfo.Main.Temp_max.ToString(),
+                        TempMin = weatherInfo.Main.Temp_min.ToString(),
+                        WeatherIcon = weatherInfo.Weather[0].Icon,
+                    };
 
                     return weatherResult;
                 }

@@ -33,7 +33,6 @@
             this.Update(entity);
         }
 
-        // TODO: Add delete many entities with bulk operation
         public override void Delete(TEntity entity)
         {
             entity.IsDeleted = true;

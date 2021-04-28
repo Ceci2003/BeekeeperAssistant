@@ -95,13 +95,13 @@
 
         public int GetAllBeehivesCountByApiaryId(int apiaryId)
         {
-            var count = this.beehiveRepository.All().Where(b => b.ApiaryId == apiaryId).Count();
+            var count = this.beehiveRepository.AllAsNoTracking().Where(b => b.ApiaryId == apiaryId).Count();
             return count;
         }
 
         public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0)
         {
-            var query = this.beehiveRepository.All()
+            var query = this.beehiveRepository.AllAsNoTracking()
                 .Where(b => b.CreatorId == userId
                        && b.Apiary.IsDeleted == false)
                 .Skip(skip);
@@ -117,13 +117,13 @@
 
         public int GetAllUserBeehivesCount(string userId)
         {
-            var count = this.beehiveRepository.All().Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false).Count();
+            var count = this.beehiveRepository.AllAsNoTracking().Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false).Count();
             return count;
         }
 
         public IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0)
         {
-            var query = this.beehiveRepository.All()
+            var query = this.beehiveRepository.AllAsNoTracking()
                 .OrderByDescending(b => b.CreatedOn)
                 .Where(b => b.ApiaryId == apiaryId).Skip(skip);
 
@@ -136,7 +136,7 @@
         }
 
         public T GetBeehiveById<T>(int beehiveId) =>
-            this.beehiveRepository.All()
+            this.beehiveRepository.AllAsNoTracking()
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();

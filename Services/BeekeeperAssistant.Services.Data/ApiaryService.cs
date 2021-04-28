@@ -76,14 +76,14 @@
 
         public int GetAllUserApiariesCount(string userId)
         {
-            var apiariesCount = this.apiaryRepository.All().Where(a => a.CreatorId == userId).Count();
+            var apiariesCount = this.apiaryRepository.AllAsNoTracking().Where(a => a.CreatorId == userId).Count();
 
             return apiariesCount;
         }
 
         public IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0)
         {
-            var qurey = this.apiaryRepository.All()
+            var qurey = this.apiaryRepository.AllAsNoTracking()
                 .OrderByDescending(x => x.CreatedOn)
                 .Where(a => a.CreatorId == userId).Skip(skip);
 
@@ -96,34 +96,34 @@
         }
 
         public T GetApiaryById<T>(int apiaryId) =>
-            this.apiaryRepository.All()
+            this.apiaryRepository.AllAsNoTracking()
                 .Where(a => a.Id == apiaryId)
                 .To<T>()
                 .FirstOrDefault();
 
         public string GetApiaryNumberByBeehiveId(int beehiveId) =>
-            this.beehiveRepository.All()
+            this.beehiveRepository.AllAsNoTracking()
                 .Include(a => a.Apiary)
                 .FirstOrDefault(b => b.Id == beehiveId)
                 .Apiary
                 .Number;
 
         public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId) =>
-            this.apiaryRepository.All()
+            this.apiaryRepository.AllAsNoTracking()
                 .Where(a => a.CreatorId == userId)
                 .OrderByDescending(a => a.CreatedOn)
                 .Select(a => new KeyValuePair<int, string>(a.Id, a.Number))
                 .ToList();
 
         public T GetUserApiaryByNumber<T>(string userId, string number) =>
-            this.apiaryRepository.All()
+            this.apiaryRepository.AllAsNoTracking()
                 .Where(a => a.Number == number && a.CreatorId == userId)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetUserApiaryIdByNumber(string userId, string apiaryNumber)
         {
-            var apiary = this.apiaryRepository.All()
+            var apiary = this.apiaryRepository.AllAsNoTracking()
                 .FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber);
 
             return apiary.Id;

@@ -58,6 +58,7 @@
             return queen.Id;
         }
 
+        // TODO: Refactor Code!
         public async Task DeleteQueenAsync(int queenId)
         {
             var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
@@ -93,7 +94,7 @@
 
         public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)
         {
-            var query = this.queenRepository.All()
+            var query = this.queenRepository.AllAsNoTracking()
                 .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Skip(skip);
 
             if (take.HasValue)
@@ -106,12 +107,12 @@
 
         public int GetAllUserQueensCount(string userId)
         {
-            var count = this.queenRepository.All().Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Count();
+            var count = this.queenRepository.AllAsNoTracking().Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Count();
             return count;
         }
 
         public T GetQueenById<T>(int queenId) =>
-            this.queenRepository.All()
+            this.queenRepository.AllAsNoTracking()
                 .Where(q => q.Id == queenId)
                 .To<T>()
                 .FirstOrDefault();

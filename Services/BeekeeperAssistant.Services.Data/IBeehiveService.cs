@@ -22,7 +22,7 @@
 
         T GetBeehiveById<T>(int beehiveId);
 
-        IEnumerable<T> GetAllUserBeehives<T>(string userId);
+        IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0);
 
         Task<string> DeleteBeehiveByIdAsync(int beehiveId);
 
@@ -41,5 +41,7 @@
         IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0);
 
         int GetAllBeehivesCountByApiaryId(int apiaryId);
+
+        int GetAllUserBeehivesCount(string userId);
     }
 }

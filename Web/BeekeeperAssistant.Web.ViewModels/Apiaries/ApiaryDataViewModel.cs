@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text;
+
     using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
@@ -36,6 +37,5 @@
 
         [IgnoreMap]
         public IEnumerable<BeehiveViewModel> Beehives { get; set; }
-
     }
 }

@@ -35,6 +35,6 @@
 
         public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 
-        int GetAllApiariesCount();
+        int GetAllUserApiariesCount(string userId);
     }
 }

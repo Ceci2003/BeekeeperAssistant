@@ -52,7 +52,7 @@
                 AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, ItemsPerPage, (page - 1) * ItemsPerPage),
             };
 
-            var count = this.apiaryService.GetAllApiariesCount();
+            var count = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
             if (viewModel.PagesCount == 0)
             {

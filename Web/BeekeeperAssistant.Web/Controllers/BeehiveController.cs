@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
@@ -12,6 +13,8 @@
     [Authorize]
     public class BeehiveController : BaseController
     {
+        private const int BeehivesPerPage = 12;
+
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
@@ -29,12 +32,20 @@
         public async Task<IActionResult> All(int page = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id);
 
             var viewModel = new AllBeehivesViewModel
             {
-                AllBeehives = beehives,
+                AllBeehives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id, BeehivesPerPage, (page - 1) * BeehivesPerPage),
             };
+
+            var count = this.beehiveService.GetAllUserBeehivesCount(currentUser.Id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / BeehivesPerPage);
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

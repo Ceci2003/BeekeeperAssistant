@@ -8,5 +8,9 @@
     public class AllBeehivesViewModel
     {
         public IEnumerable<BeehiveViewModel> AllBeehives { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
     }
 }

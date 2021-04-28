@@ -74,9 +74,9 @@
             return apiary.Number;
         }
 
-        public int GetAllApiariesCount()
+        public int GetAllUserApiariesCount(string userId)
         {
-            var apiariesCount = this.apiaryRepository.All().Count();
+            var apiariesCount = this.apiaryRepository.All().Where(a => a.CreatorId == userId).Count();
 
             return apiariesCount;
         }

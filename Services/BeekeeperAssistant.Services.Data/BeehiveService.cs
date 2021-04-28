@@ -99,11 +99,24 @@
             return count;
         }
 
-        public IEnumerable<T> GetAllUserBeehives<T>(string userId) =>
-            this.beehiveRepository.All()
-                .Where(b => b.CreatorId == userId)
-                .To<T>()
-                .ToList();
+        public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0)
+        {
+            var query = this.beehiveRepository.All()
+                .Where(b => b.CreatorId == userId).Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
+        public int GetAllUserBeehivesCount(string userId)
+        {
+            var count = this.beehiveRepository.All().Where(b => b.CreatorId == userId).Count();
+            return count;
+        }
 
         public IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0)
         {

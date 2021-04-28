@@ -91,11 +91,24 @@
             return queen.Id;
         }
 
-        public IEnumerable<T> GetAllUserQueens<T>(string userId) =>
-            this.queenRepository.All()
-                .Where(q => q.UserId == userId)
-                .To<T>()
-                .ToList();
+        public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)
+        {
+            var query = this.queenRepository.All()
+                .Where(q => q.UserId == userId).Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
+        public int GetAllUserQueensCount(string userId)
+        {
+            var count = this.queenRepository.All().Where(q => q.UserId == userId).Count();
+            return count;
+        }
 
         public T GetQueenById<T>(int queenId) =>
             this.queenRepository.All()

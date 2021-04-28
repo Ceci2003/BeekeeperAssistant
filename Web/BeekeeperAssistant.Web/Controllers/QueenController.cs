@@ -13,6 +13,8 @@
 
     public class QueenController : Controller
     {
+        private const int QueensPerPage = 12;
+
         private readonly IQueenService queenService;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -29,8 +31,17 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllQueensViewModel
             {
-                AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id),
+                AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id, QueensPerPage, (page - 1) * QueensPerPage),
             };
+
+            var count = this.queenService.GetAllUserQueensCount(user.Id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / QueensPerPage);
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

@@ -22,9 +22,11 @@
 
         T GetQueenById<T>(int queenId);
 
-        IEnumerable<T> GetAllUserQueens<T>(string userId);
+        IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0);
 
         Task DeleteQueenAsync(int queenId);
+
+        int GetAllUserQueensCount(string userId);
 
         Task<int> EditQueenAsync(
             int queenId,

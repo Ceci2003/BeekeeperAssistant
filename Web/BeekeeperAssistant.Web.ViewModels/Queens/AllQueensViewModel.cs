@@ -9,5 +9,9 @@
     public class AllQueensViewModel
     {
         public IEnumerable<QueenViewModel> AllQueens { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
     }
 }

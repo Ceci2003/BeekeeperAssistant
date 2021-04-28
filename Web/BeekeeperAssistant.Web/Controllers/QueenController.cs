@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Queens;
@@ -13,8 +14,6 @@
 
     public class QueenController : Controller
     {
-        private const int QueensPerPage = 12;
-
         private readonly IQueenService queenService;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -31,11 +30,11 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllQueensViewModel
             {
-                AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id, QueensPerPage, (page - 1) * QueensPerPage),
+                AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage),
             };
 
             var count = this.queenService.GetAllUserQueensCount(user.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / QueensPerPage);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.QueensPerPage);
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;

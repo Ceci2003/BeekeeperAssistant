@@ -102,19 +102,22 @@
         public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0)
         {
             var query = this.beehiveRepository.All()
-                .Where(b => b.CreatorId == userId).Skip(skip);
+                .Where(b => b.CreatorId == userId
+                       && b.Apiary.IsDeleted == false)
+                .Skip(skip);
 
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
             }
 
-            return query.To<T>().ToList();
+            var result = query.To<T>().ToList();
+            return result;
         }
 
         public int GetAllUserBeehivesCount(string userId)
         {
-            var count = this.beehiveRepository.All().Where(b => b.CreatorId == userId).Count();
+            var count = this.beehiveRepository.All().Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false).Count();
             return count;
         }
 

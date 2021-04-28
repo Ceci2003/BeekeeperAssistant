@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
@@ -13,8 +14,6 @@
     [Authorize]
     public class BeehiveController : BaseController
     {
-        private const int BeehivesPerPage = 12;
-
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
@@ -33,13 +32,15 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
+            var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+
             var viewModel = new AllBeehivesViewModel
             {
-                AllBeehives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id, BeehivesPerPage, (page - 1) * BeehivesPerPage),
+                AllBeehives = allBehhives,
             };
 
             var count = this.beehiveService.GetAllUserBeehivesCount(currentUser.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / BeehivesPerPage);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;

@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
@@ -17,9 +18,6 @@
     [Authorize]
     public class ApiaryController : BaseController
     {
-        private const int ItemsPerPage = 6;
-        private const int BeehivesPerPage = 12;
-
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
@@ -49,11 +47,11 @@
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllApiariesViewModel
             {
-                AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, ItemsPerPage, (page - 1) * ItemsPerPage),
+                AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
             var count = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;
@@ -82,9 +80,9 @@
             ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
             viewModel.ForecastResult = forecastResult;
 
-            viewModel.Beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(viewModel.Id, BeehivesPerPage, (page - 1) * BeehivesPerPage);
+            viewModel.Beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
             var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / BeehivesPerPage);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 
             if (viewModel.PagesCount == 0)
             {

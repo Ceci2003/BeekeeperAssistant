@@ -94,7 +94,7 @@
         public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)
         {
             var query = this.queenRepository.All()
-                .Where(q => q.UserId == userId).Skip(skip);
+                .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Skip(skip);
 
             if (take.HasValue)
             {
@@ -106,7 +106,7 @@
 
         public int GetAllUserQueensCount(string userId)
         {
-            var count = this.queenRepository.All().Where(q => q.UserId == userId).Count();
+            var count = this.queenRepository.All().Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Count();
             return count;
         }
 

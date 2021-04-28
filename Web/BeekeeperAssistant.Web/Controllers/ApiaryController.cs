@@ -8,6 +8,7 @@
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,11 @@
     public class ApiaryController : BaseController
     {
         private const int ItemsPerPage = 6;
+        private const int BeehivesPerPage = 12;
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
+        private readonly IBeehiveService beehiveService;
         private readonly IApiaryNumberService apiaryNumberService;
         private readonly IConfiguration configuration;
 
@@ -28,12 +31,14 @@
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
             IApiaryService apiaryService,
+            IBeehiveService beehiveService,
             IApiaryNumberService apiaryNumberService,
             IConfiguration configuration,
             IForecastService forecastService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
+            this.beehiveService = beehiveService;
             this.apiaryNumberService = apiaryNumberService;
             this.configuration = configuration;
             this.forecastService = forecastService;
@@ -59,12 +64,10 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ByNumber(string apiaryNumber)
+        public async Task<IActionResult> ByNumber(string apiaryNumber, int page = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.apiaryService.GetUserApiaryByNumber<ApiaryDataViewModel>(currentUser.Id, apiaryNumber);
-            ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
-            viewModel.ForecastResult = forecastResult;
 
             if (viewModel == null)
             {
@@ -75,6 +78,20 @@
             {
                 return this.BadRequest();
             }
+
+            ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+            viewModel.ForecastResult = forecastResult;
+
+            viewModel.Beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(viewModel.Id, BeehivesPerPage, (page - 1) * BeehivesPerPage);
+            var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / BeehivesPerPage);
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

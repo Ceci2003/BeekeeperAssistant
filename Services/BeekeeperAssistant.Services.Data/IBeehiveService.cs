@@ -37,5 +37,9 @@
             bool hasDevice,
             bool hasPolenCatcher,
             bool hasPropolisCatcher);
+
+        IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0);
+
+        int GetAllBeehivesCountByApiaryId(int apiaryId);
     }
 }

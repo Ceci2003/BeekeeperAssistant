@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@
     [Authorize]
     public class ApiaryController : BaseController
     {
+        private const int ItemsPerPage = 6;
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
         private readonly IApiaryNumberService apiaryNumberService;
@@ -41,8 +44,17 @@
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllApiariesViewModel
             {
-                AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id),
+                AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, ItemsPerPage, (page - 1) * ItemsPerPage),
             };
+
+            var count = this.apiaryService.GetAllApiariesCount();
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

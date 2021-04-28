@@ -77,7 +77,6 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
         {
-            // TODO: Validate the user
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);

@@ -74,12 +74,26 @@
             return apiary.Number;
         }
 
-        // TODO: Add pagination
-        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1) =>
-            this.apiaryRepository.All()
-                .Where(a => a.CreatorId == userId)
-                .To<T>()
-                .ToList();
+        public int GetAllApiariesCount()
+        {
+            var apiariesCount = this.apiaryRepository.All().Count();
+
+            return apiariesCount;
+        }
+
+        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0)
+        {
+            var qurey = this.apiaryRepository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Where(a => a.CreatorId == userId).Skip(skip);
+
+            if (take.HasValue)
+            {
+                qurey = qurey.Take(take.Value);
+            }
+
+            return qurey.To<T>().ToList();
+        }
 
         public T GetApiaryById<T>(int apiaryId) =>
             this.apiaryRepository.All()

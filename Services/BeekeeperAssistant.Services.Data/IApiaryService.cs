@@ -7,7 +7,7 @@
 
     public interface IApiaryService
     {
-        IEnumerable<T> GetAllUserApiaries<T>(string userId, int page = 1);
+        IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0);
 
         string GetApiaryNumberByBeehiveId(int beehiveId);
 
@@ -34,5 +34,7 @@
             string address);
 
         public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
+
+        int GetAllApiariesCount();
     }
 }

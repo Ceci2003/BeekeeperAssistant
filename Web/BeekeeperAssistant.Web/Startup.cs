@@ -77,6 +77,7 @@
             services.AddTransient<IApiaryNumberService, ApiaryNumberService>();
             services.AddTransient<IBeehiveService, BeehiveService>();
             services.AddTransient<IQueenService, QueenService>();
+            services.AddTransient<IHarvestService, HarvestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

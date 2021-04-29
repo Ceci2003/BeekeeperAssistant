@@ -47,7 +47,8 @@
 
         public async Task DeleteApiaryByIdAsync(int apiaryId)
         {
-            var apiary = this.apiaryRepository.All()
+            var apiary = this.apiaryRepository
+                .All()
                 .FirstOrDefault(a => a.Id == apiaryId);
 
             this.apiaryRepository.Delete(apiary);
@@ -74,18 +75,19 @@
             return apiary.Number;
         }
 
-        public int GetAllUserApiariesCount(string userId)
-        {
-            var apiariesCount = this.apiaryRepository.AllAsNoTracking().Where(a => a.CreatorId == userId).Count();
-
-            return apiariesCount;
-        }
+        public int GetAllUserApiariesCount(string userId) =>
+            this.apiaryRepository
+                .AllAsNoTracking()
+                .Where(a => a.CreatorId == userId)
+                .Count();
 
         public IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0)
         {
-            var qurey = this.apiaryRepository.AllAsNoTracking()
+            var qurey = this.apiaryRepository
+                .AllAsNoTracking()
                 .OrderByDescending(x => x.CreatedOn)
-                .Where(a => a.CreatorId == userId).Skip(skip);
+                .Where(a => a.CreatorId == userId)
+                .Skip(skip);
 
             if (take.HasValue)
             {
@@ -121,12 +123,10 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetUserApiaryIdByNumber(string userId, string apiaryNumber)
-        {
-            var apiary = this.apiaryRepository.AllAsNoTracking()
-                .FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber);
-
-            return apiary.Id;
-        }
+        public int GetUserApiaryIdByNumber(string userId, string apiaryNumber) =>
+            this.apiaryRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber)
+                .Id;
     }
 }

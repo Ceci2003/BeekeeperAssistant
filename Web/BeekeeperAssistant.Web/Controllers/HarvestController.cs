@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
@@ -38,7 +39,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ById(int id)
+        public IActionResult ById(int id)
         {
             var viewModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
 

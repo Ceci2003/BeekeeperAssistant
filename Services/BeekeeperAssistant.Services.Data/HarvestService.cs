@@ -32,6 +32,7 @@
             var harvest = new Harvest
             {
                 HarvestName = harvestName,
+                BeehiveId = beehiveId,
                 DateOfHarves = dateOfHarves,
                 Product = product,
                 HoneyType = honeyType,
@@ -54,7 +55,9 @@
             string note,
             int amount)
         {
-            var harvest = this.harvestRepository.All().FirstOrDefault(h => h.Id == harvestId);
+            var harvest = this.harvestRepository
+                .All()
+                .FirstOrDefault(h => h.Id == harvestId);
 
             harvest.HarvestName = harvestName;
             harvest.DateOfHarves = dateOfHarves;
@@ -69,19 +72,24 @@
 
         public async Task DeleteHarvestAsync(int harvestId)
         {
-            var harvest = this.harvestRepository.All().FirstOrDefault(h => h.Id == harvestId);
+            var harvest = this.harvestRepository
+                .All()
+                .FirstOrDefault(h => h.Id == harvestId);
+
             this.harvestRepository.Delete(harvest);
             await this.harvestRepository.SaveChangesAsync();
         }
 
         public T GetHarvestById<T>(int harvestId) =>
-            this.harvestRepository.All()
+            this.harvestRepository
+            .All()
             .Where(h => h.Id == harvestId)
             .To<T>()
             .FirstOrDefault();
 
         public IEnumerable<T> GetAllUserHarvests<T>(string userId) =>
-            this.harvestRepository.All()
+            this.harvestRepository
+            .All()
             .To<T>()
             .ToList();
     }

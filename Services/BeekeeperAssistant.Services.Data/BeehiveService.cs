@@ -53,7 +53,8 @@
 
         public async Task<string> DeleteBeehiveByIdAsync(int beehiveId)
         {
-            var beehive = this.beehiveRepository.All()
+            var beehive = this.beehiveRepository
+                .All()
                 .Include(b => b.Apiary)
                 .FirstOrDefault(b => b.Id == beehiveId);
 
@@ -75,7 +76,8 @@
             bool hasPolenCatcher,
             bool hasPropolisCatcher)
         {
-            var beehive = this.beehiveRepository.All()
+            var beehive = this.beehiveRepository
+                .All()
                 .FirstOrDefault(b => b.Id == beehiveId);
 
             beehive.Number = number;
@@ -93,17 +95,17 @@
             return beehive.Id;
         }
 
-        public int GetAllBeehivesCountByApiaryId(int apiaryId)
-        {
-            var count = this.beehiveRepository.AllAsNoTracking().Where(b => b.ApiaryId == apiaryId).Count();
-            return count;
-        }
+        public int GetAllBeehivesCountByApiaryId(int apiaryId) =>
+            this.beehiveRepository
+                .AllAsNoTracking()
+                .Where(b => b.ApiaryId == apiaryId)
+                .Count();
 
         public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0)
         {
-            var query = this.beehiveRepository.AllAsNoTracking()
-                .Where(b => b.CreatorId == userId
-                       && b.Apiary.IsDeleted == false)
+            var query = this.beehiveRepository
+                .AllAsNoTracking()
+                .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Skip(skip);
 
             if (take.HasValue)
@@ -115,11 +117,11 @@
             return result;
         }
 
-        public int GetAllUserBeehivesCount(string userId)
-        {
-            var count = this.beehiveRepository.AllAsNoTracking().Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false).Count();
-            return count;
-        }
+        public int GetAllUserBeehivesCount(string userId) =>
+            this.beehiveRepository
+                .AllAsNoTracking()
+                .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
+                .Count();
 
         public IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0)
         {

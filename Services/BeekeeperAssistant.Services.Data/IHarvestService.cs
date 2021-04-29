@@ -1,9 +1,10 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
-    using BeekeeperAssistant.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Models;
 
     public interface IHarvestService
     {

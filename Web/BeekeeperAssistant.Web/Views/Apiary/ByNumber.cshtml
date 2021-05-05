@@ -1,6 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.ApiaryDataViewModel;
 @{
-    this.ViewData["Title"] = "Информациа за пчелин - №" + Model.Number;
+    this.ViewData["Title"] = "Информация за пчелин - №" + Model.Number;
     string hasDevice = "has-device";
     Dictionary<string, string> powerClasses = new Dictionary<string, string>();
     powerClasses.Add("weak", "td-weak");
@@ -100,10 +100,9 @@
                     <td class="number">
                         <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
                     </td>
-                    <td>@beehive.BeehiveType</td>
-                    <td>@beehive.BeehiveSystem</td>
-                    <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">@Html.DisplayFor(x =>
-                    beehive.BeehivePower)</td>
+                        <td>@Html.DisplayFor(x => beehive.BeehiveType)</td>
+                        <td>@Html.DisplayFor(x => beehive.BeehiveSystem)</td>
+                        <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">@Html.DisplayFor(x => beehive.BeehivePower)</td>
                     <td class="edit">
                         <div>
                             @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
@@ -123,6 +122,44 @@
             }
         </tbody>
     </table>
+    <div class="pagination">
+        <ul>
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#"><i class="fas fa-arrow-left"></i></a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
+                    asp-route-page="@(this.Model.CurrentPage - 1)"><i class="fas fa-arrow-left"></i></a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                    asp-route-page="@i">@i</a>
+                </li>
+            }
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#"><i class="fas fa-arrow-right"></i></a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                    asp-route-page="@(this.Model.CurrentPage + 1)"><i class="fas fa-arrow-right"></i></a>
+                </li>
+            }
+        </ul>
+    </div>
     <div class="table-legend">
         <p>Легенда</p>
         <ul>
@@ -132,44 +169,3 @@
         </ul>
     </div>
 </div>
-
-<nav>
-    <ul class="pagination justify-content-center">
-        @if (this.Model.CurrentPage == 1)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Previous</a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
-                asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
-            </li>
-        }
-
-        @for (int i = 1; i <= this.Model.PagesCount; i++)
-        {
-            var active = i == this.Model.CurrentPage ? "active" : string.Empty;
-            <li class="page-item @active">
-                <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                asp-route-page="@i">@i</a>
-            </li>
-        }
-
-        @if (this.Model.CurrentPage == this.Model.PagesCount)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
-            </li>
-        }
-    </ul>
-</nav>

@@ -80,6 +80,8 @@ li {
 .sidebar-navigation .sidebar-breadcrumb h1 {
   font-size: 16px;
   color: var(--orange);
+  width: 100%;
+  text-align: end;
 }
 
 /* Side navigation user area */
@@ -473,7 +475,7 @@ td.queen-red {
 }
 
 .table-legend {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   text-align: left;
 }
 
@@ -750,6 +752,56 @@ td.queen-red {
 
 .breadcrumb .breadcrumb-leave form .exit:hover {
   color: var(--red);
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.pagination ul {
+  display: flex;
+  align-content: center;
+}
+
+.pagination ul .page-item {
+  margin: 0 3px;
+}
+
+.pagination ul .page-item.active a {
+  color: var(--white);
+  background-color: var(--orange);
+}
+
+.pagination ul .page-item a {
+  color: var(--orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  background-color: var(--gray-background);
+  border: 1px solid var(--lightgray);
+  border-radius: 5px;
+  box-shadow: 3px 2px #a9a9a954;
+}
+
+.pagination ul .page-item a:hover {
+  color: var(--white);
+  background-color: var(--beehive-color);
+}
+
+.pagination ul .page-item a:focus {
+  color: var(--white);
+  background-color: var(--orange);
+  box-shadow: none;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+
+.pagination ul .page-item.disabled a {
 }
 
 .rotate-270 {

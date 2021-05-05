@@ -13,12 +13,12 @@
 </head>
 
 <body>
+    <partial name="_CookieConsentPartial" />
     <header>
         <partial name="_LoginPartial" />
     </header>
 
     <main role="main" class="pb-3">
-        <partial name="_CookieConsentPartial" />
         @this.RenderBody()
     </main>
 
@@ -43,7 +43,7 @@
                 </ul>
             </div>
         </div>
-        <p class="footer-copyright">&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - Всички права запазени</p>
+        <p class="footer-copyright">&copy; @DateTime.Now.Year - @GlobalConstants.SystemName</p>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>

@@ -55,24 +55,26 @@
                 <input class="btn delete" type="submit" value="Изтрий" />
             </form>
         </div>
+        <div class="weather">
+            @if (@Model.ForecastResult == null)
+            {
+                <div>
+                    <p style="font-size: 18px; color: red; text-aline: center;">Населеното място <br>не е намерено;</p>
+                </div>
+            }
+            else
+            {
+                string imgPath = Model.ForecastResult.WeatherIcon + ".png";
+                <div>
+                    <div>
+                        <p>Температура: @Model.ForecastResult.Temp</p>
+                        <p>Влажност @Model.ForecastResult.Humidity</p>
+                    </div>
+                    <img src="~/img/weather/@imgPath" alt="">
+                </div>
+            }
+        </div>
     </div>
-
-    @if (@Model.ForecastResult == null)
-    {
-        <div>
-            <p style="font-size: 18px; color: red;">null</p>
-        </div>
-    }
-    else
-    {
-        string imgPath = Model.ForecastResult.WeatherIcon + ".png";
-        <div>
-            t - @Model.ForecastResult.Temp <br>
-            hum - @Model.ForecastResult.Humidity <br>
-            icon - @Model.ForecastResult.WeatherIcon
-            <img src="~/img/weather/@imgPath" alt="">
-        </div>
-    }
 
     <h2 class="title-0 left">Кошери</h2>
     <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">
@@ -140,10 +142,8 @@
         else
         {
             <li class="page-item">
-                <a class="page-link"
-                   asp-route-apiaryNumber="@Model.Number"
-                   asp-route="apiaryRoute"
-                   asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+                <a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
+                asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
             </li>
         }
 
@@ -151,10 +151,8 @@
         {
             var active = i == this.Model.CurrentPage ? "active" : string.Empty;
             <li class="page-item @active">
-                <a class="page-link"
-                   asp-route="apiaryRoute"
-                   asp-route-apiaryNumber="@Model.Number"
-                   asp-route-page="@i">@i</a>
+                <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                asp-route-page="@i">@i</a>
             </li>
         }
 
@@ -167,10 +165,8 @@
         else
         {
             <li class="page-item">
-                <a class="page-link"
-                   asp-route="apiaryRoute"
-                   asp-route-apiaryNumber="@Model.Number"
-                   asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+                <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
             </li>
         }
     </ul>

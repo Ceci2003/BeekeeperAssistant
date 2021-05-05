@@ -14,10 +14,10 @@
     </div>
     <ul class="ul-out">
         <li>
-            <a class="@if(this.ViewData["Title"].ToString() == "Начало"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+            <a class="@if(this.ViewData["Title"].ToString() == "Начало-Табло"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
         </li>
         <li>
-            <a class="" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
+            <a class="@if(this.ViewData["Title"].ToString() == "За нас"){@activeClass}" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
         </li>
         <li>
             <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a>

@@ -30,7 +30,7 @@
 
         public IActionResult HttpError(string httpError)
         {
-            return this.View();
+            return this.View(httpError);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

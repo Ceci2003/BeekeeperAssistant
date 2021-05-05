@@ -16,8 +16,8 @@
         public const string ApiaryTypeRequiredErrorMessage = "TODO: Implement";
 
         // Pagination values
-        public const int ApiariesPerPage = 6;
-        public const int BeehivesPerPage = 6;
-        public const int QueensPerPage = 12;
+        public const int ApiariesPerPage = 5;
+        public const int BeehivesPerPage = 25;
+        public const int QueensPerPage = 25;
     }
 }

@@ -1,5 +1,4 @@
 @using Microsoft.AspNetCore.Http.Features
-
 @{
     var consentFeature = this.Context.Features.Get<ITrackingConsentFeature>();
     var showBanner = !consentFeature?.CanTrack ?? false;
@@ -8,17 +7,23 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        We use cookies to understand how you use our site and to improve your experience. <a asp-area="" asp-controller="Home" asp-action="Privacy">Learn More</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Accept</span>
+    <div id="cookieConsent" class="cookies" role="alert">
+        <div>
+            Ние използваме бисквитки, за да разберем как използвате нашия сайт и да подобрим вашето изживяване.
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Научете повече</a>.
+        </div>
+        <button type="button" class="accept-cookies" data-dismiss="alert" aria-label="Close"
+        data-cookie-string="@cookieString">
+            <span aria-hidden="true">Приемам</span>
         </button>
     </div>
+
     <script>
         (function () {
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click", function () {
                 document.cookie = button.dataset.cookieString;
+                document.querySelector("#cookieConsent").style.display = "none";
             }, false);
         })();
     </script>

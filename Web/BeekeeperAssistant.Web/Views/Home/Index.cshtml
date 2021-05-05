@@ -3,15 +3,15 @@
     this.ViewData["Title"] = "Начало-Табло";
 }
 
-    @*TODO: Separate these into two view components*@
+@*TODO: Separate these into two view components*@
 @if (!User.Identity.IsAuthenticated)
 {
     <div class="banner">
         <div class="banner-text">
             <h1>@GlobalConstants.SystemName</h1>
-            <p>Мястоto за всеки пчелар!</p>
+            <p>...the best place to store your beekeeping data.</p>
         </div>
-    </div>   
+    </div>
 }
 else
 {

@@ -1,74 +1,92 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap');
 
-a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-    color: #0366d6;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
+* {
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
+} 
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #110400;
+    border-bottom: 5px solid #F29422;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+.navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .navbar-brand .logo {
+    width: 50px;
+}
+
+.navbar .navbar-brand .logo-link {
+    text-decoration: none;
+    color: #f29422;
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.navbar ul li {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.navbar .ul-out li {
+    letter-spacing: 0.2em;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #f29422;
+    font-weight: 500;
+}
+
+.navbar .ul-out li a {
+    padding: 20px 20px;
+    border-top: 5px solid transparent;
+}
+
+.navbar .ul-out li a:hover {
+    border-top: 5px solid white;
+}
+
+.navbar ul li .active {
+    border-top: 5px solid #f29422;
+}
+
+.navbar .ul-login-register li .login-btn {
+    color: white;
+    padding: 8px 15px;
+}
+
+.navbar .ul-login-register li .login-btn:hover {
+    color: #f29422;
+}
+
+.navbar .ul-login-register li .register-btn {
+    color: white;
+    border: 3px solid #f29422;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.navbar .ul-login-register li .register-btn:hover {
+    border: 3px solid white;
 }

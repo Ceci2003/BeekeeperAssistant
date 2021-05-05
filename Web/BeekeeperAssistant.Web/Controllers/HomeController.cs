@@ -18,6 +18,16 @@
             return this.View();
         }
 
+        public IActionResult About()
+        {
+            return this.View();
+        }
+
+        public IActionResult Contact()
+        {
+            return this.View();
+        }
+
         public IActionResult HttpError(string httpError)
         {
             return this.View();

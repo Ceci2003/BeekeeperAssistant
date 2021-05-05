@@ -3,32 +3,32 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@{
+    string activeClass = "active";
+}
 
-<ul class="navbar-nav">
-    @if (this.SignInManager.IsSignedIn(this.User))
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @this.User.Identity.Name!</a>
+<nav class="navbar">
+    <div class="navbar-brand">
+        <img class="logo" src="~/img/BA_demoLogo.png" alt="logo" />
+        <a class="logo-link" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+    </div>
+    <ul class="ul-out">
+        <li>
+            <a class="@if(this.ViewData["Title"].ToString() == "Начало"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
         </li>
-        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
-            </li>
-        }
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
+        <li>
+            <a class="" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
         </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <li>
+            <a class="@if(this.ViewData["Title"].ToString() == "Контакти"){@activeClass}" asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </ul>
+    <ul class="ul-login-register">
+        <li>
+            <a class="login-btn" asp-area="Identity" asp-page="/Account/Login">Вход</a>
         </li>
-    }
-</ul>
+        <li>
+            <a class="register-btn" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+        </li>
+    </ul>
+</nav>

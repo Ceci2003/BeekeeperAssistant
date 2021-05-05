@@ -36,8 +36,4 @@
     <ProjectReference Include="..\BeekeeperAssistant.Web.Infrastructure\BeekeeperAssistant.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BeekeeperAssistant.Web.ViewModels\BeekeeperAssistant.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Harvest\" />
-  </ItemGroup>
 </Project>

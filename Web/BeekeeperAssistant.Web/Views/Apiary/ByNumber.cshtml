@@ -27,7 +27,7 @@
 </div>
 
 <div class="content">
-    <h1 class="title-1 view-title">@ViewData["Title"]</h1>
+    <h1 class="title-1">@ViewData["Title"]</h1>
     <div class="data-view">
         <div class="apiary-info">
             <table>
@@ -68,11 +68,11 @@
             {
                 string imgPath = Model.ForecastResult.WeatherIcon + ".png";
                 <div>
-                    <div>
-                        <p>Температура: @Model.ForecastResult.Temp</p>
-                        <p>Влажност @Model.ForecastResult.Humidity</p>
-                    </div>
                     <img src="~/img/weather/@imgPath" alt="">
+                    <div>
+                        <p>Температура: @Model.ForecastResult.Temp°</p>
+                        <p>Влажност: @Model.ForecastResult.Humidity%</p>
+                    </div>
                 </div>
             }
         </div>

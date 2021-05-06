@@ -38,6 +38,8 @@
 
         public int QueenId { get; set; }
 
+        public Queen Queen { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Beehive, BeehiveDataViewModel>()

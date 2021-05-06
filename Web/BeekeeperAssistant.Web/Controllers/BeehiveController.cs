@@ -7,6 +7,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
+    using BeekeeperAssistant.Web.ViewModels.Harvest;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -17,15 +18,18 @@
         private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
+        private readonly IHarvestService harvestService;
 
         public BeehiveController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
-            IBeehiveService beehiveService)
+            IBeehiveService beehiveService,
+            IHarvestService harvestService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
+            this.harvestService = harvestService;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -65,6 +69,9 @@
             {
                 return this.BadRequest();
             }
+
+            var harvests = this.harvestService.GetAllUserHarvests<HarvestDatavVewModel>(currentUser.Id);
+            viewModel.Harvests = harvests;
 
             return this.View(viewModel);
         }

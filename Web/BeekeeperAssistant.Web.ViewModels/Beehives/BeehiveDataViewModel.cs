@@ -9,6 +9,7 @@
     using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Harvest;
 
     public class BeehiveDataViewModel : IMapFrom<Beehive>, IHaveCustomMappings
     {
@@ -39,6 +40,9 @@
         public int QueenId { get; set; }
 
         public Queen Queen { get; set; }
+
+        [IgnoreMap]
+        public IEnumerable<HarvestDatavVewModel> Harvests { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

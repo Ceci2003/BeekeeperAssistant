@@ -504,6 +504,9 @@ td.queen-red {
   border-radius: 8px;
   padding: 10px;
   text-align: center;
+
+  /* background: var(--main-background); */
+  color: var(--orange);
 }
 
 .data-view .weather p {
@@ -801,19 +804,19 @@ td.queen-red {
 .pagination ul .page-item.active .page-link {
   color: var(--white);
   background-color: var(--orange);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .pagination ul .page-item.active .page-link:hover {
   color: var(--white);
   background-color: var(--orange);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .pagination ul .page-item.active .page-link:focus {
   color: var(--white);
   background-color: var(--orange);
-  cursor: default;
+  cursor: not-allowed;
   box-shadow: 3px 2px #a9a9a954;
   margin-left: 0;
   margin-top: 0;

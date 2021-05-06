@@ -1,6 +1,10 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.BeehiveDataViewModel
 @{
     this.ViewData["Title"] = "Информация за кошер - №" + Model.Number;
+    Dictionary<string, string> powerClasses = new Dictionary<string, string>();
+    powerClasses.Add("weak", "td-weak");
+    powerClasses.Add("medium", "td-medium");
+    powerClasses.Add("strong", "td-strong");
 }
 
 <div class="breadcrumb">
@@ -18,43 +22,76 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
 </div>
 
 <div class="content">
-    <table>
-    </table>
+    <h1 class="title-1">@ViewData["Title"]</h1>
+    <div class="data-view">
+        <div class="apiary-info">
+            <table>
+                <tbody>
+                    <tr>
+                        <th scope="row">Номер:</th>
+                        <td>@Model.Number</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Пчелин:</th>
+                        <td>
+                            <a href="/Beehive/@Model.ApiaryNumber/@Model.Id">@Model.ApiaryNumber</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Сила:</th>
+                        <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">@Html.DisplayFor(x => Model.BeehivePower)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Система:</th>
+                        <td>@Html.DisplayFor(x => Model.BeehiveSystem)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Вид:</th>
+                        <td>@Html.DisplayFor(x => Model.BeehiveType)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Създаден на:</th>
+                        <td>@Model.Date</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Апарат:</th>
+                        <td>@Model.HasDevice</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Проп:</th>
+                        <td>@Model.HasPolenCatcher</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Праш:</th>
+                        <td>@Model.HasPropolisCatcher</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="data-edit">
+                <a class="btn edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@Model.Id">Редактирай</a>
+                <form asp-controller="Beehive" asp-action="Delete" asp-route-id="@Model.Id">
+                    <input class="btn delete" type="submit" value="Изтрий" />
+                </form>
+            </div>
+        </div>
+    </div>
+    @if (Model.HasQueen)
+    {
+        <a asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">Редактирайте кралицата</a>
+        <a asp-controller="Queen" asp-action="ById" asp-route-id="@Model.QueenId">Виж кралицата</a>
+    }
+    else
+    {
+        <a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Добавете кралица</a>
+    }
+
+
+    <a asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">Добавете добив</a>
 </div>
-
-@Model.ApiaryNumber
-@Model.Number
-<td>@Html.DisplayFor(x => Model.BeehivePower)</td>
-<td>@Html.DisplayFor(x => Model.BeehiveSystem)</td>
-<td>@Html.DisplayFor(x => Model.BeehiveType)</td>
-@Model.Date
-@Model.HasDevice
-@Model.HasPolenCatcher
-@Model.HasPropolisCatcher
-@Model.HasQueen - @Model.QueenId
-
-<form asp-controller="Beehive" asp-action="Delete" asp-route-data="@Model.Id">
-    <button type="submit">Delete</button>
-</form>
-
-<a asp-controller="Beehive" asp-action="Edit">Edit Beehive</a>
-
-@if (Model.HasQueen)
-{
-    <a asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">Edit Queen</a>
-    <a asp-controller="Queen" asp-action="ById" asp-route-id="@Model.QueenId">View Queen</a>
-}
-else
-{
-    <a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Create Queen</a>
-}
-
-
-<a asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">Добавете добив</a>

@@ -19,7 +19,7 @@
 - Username: , Tel. , E-mail: 
 
 ## Технологии
-Използвани технологии: C#, .NET, ASP.NET MVC, SignalR, HTML5, JavaScript, jQuery, CSS.
+Използвани технологии: C#, .NET, ASP.NET MVC, HTML5, CSS, JavaScript, jQuery.
 
 ## Сорс код
 Линк към сорс кода: https://github.com/Ceci2003/BeekeeperAssistant

@@ -67,16 +67,15 @@ var greetMessageElement = document.getElementById("greet-message");
 var currentDateTime = new Date();
 
 if (currentDateTime.getHours() < 12) {
-    greetMessageElement.innerText = "Добро утро"
+    greetMessageElement.innerText = "Добро утро";
 } else if (currentDateTime.getHours() < 18) {
-    greetMessageElement.innerText = "Добър ден"
+    greetMessageElement.innerText = "Добър ден";
 }
 else {
-    greetMessageElement.innerText = "Добър вечер"
+    greetMessageElement.innerText = "Добър вечер";
 }
 
-// function backgroundToBase() {
-//     queenButton.style.background = "#110400";
-//     beehiveButton.style.background = "#110400";
-//     apiButton.style.background = "#110400";
-// }
+const dataPicker = document.querySelector("#date-picker");
+dataPicker.value = currentDateTime.getDate() + '.' 
+                   + ('0' + (currentDateTime.getMonth() + 1)).slice(-2) + '.' 
+                   + ('0' + currentDateTime.getFullYear()).slice(-2);

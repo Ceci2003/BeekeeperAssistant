@@ -16,9 +16,6 @@
         <li class="breadcrumb-item">
             <a href="/Apiary/@Model.ApiaryNumber">Пчелин: @Model.ApiaryNumber</a>
         </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
-        </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
     <div class="breadcrumb-leave">
@@ -42,7 +39,7 @@
                     <tr>
                         <th scope="row">Пчелин:</th>
                         <td>
-                            <a href="/Beehive/@Model.ApiaryNumber/@Model.Id">@Model.ApiaryNumber</a>
+                            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
                         </td>
                     </tr>
                     <tr>
@@ -62,10 +59,10 @@
                     </tr>
                     <tr>
                         <th scope="row">Създаден на:</th>
-                        <td>@Model.Date</td>
+                        <td>@Model.Date.ToShortDateString()</td>
                     </tr>
                     <tr>
-                        <th scope="row">Апарат:</th>
+                        <th scope="row">Апарат за майки:</th>
                         @if (Model.HasDevice)
                         {
                             <td><b>Поставен</b></td>

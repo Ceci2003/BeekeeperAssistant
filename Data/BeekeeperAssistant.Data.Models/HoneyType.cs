@@ -11,11 +11,11 @@
         Acacia = 0,
         [Display(Name = "Билков")]
         Wildflower = 1,
-        [Display(Name = "Слънчоглед")]
+        [Display(Name = "Слънчогледов")]
         Sunflower = 2,
-        [Display(Name = "Детелина")]
+        [Display(Name = "От детелина")]
         Clover = 3,
-        [Display(Name = "Люцерна")]
+        [Display(Name = "От люцерна")]
         Alfalfa = 4,
         [Display(Name = "Друг")]
         Other = 5,

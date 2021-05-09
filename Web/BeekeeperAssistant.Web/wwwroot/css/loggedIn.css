@@ -30,7 +30,7 @@ li {
 }
 
 .content {
-  padding: 60px 50px 10px 50px;
+  padding: 60px 50px 25px 50px;
 }
 
 /* Global variables */
@@ -303,7 +303,7 @@ li {
 /* Tables */
 .data-view {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   font-size: 18px;
   margin-bottom: 30px;
   border: 1px solid var(--lightgray);
@@ -518,7 +518,7 @@ td.queen-red {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   font-size: 18px;
   margin-bottom: 30px;
   border: 1px solid var(--lightgray);
@@ -549,6 +549,11 @@ td.queen-red {
   border-radius: 10px;
 }
 
+.harvest-data .btn .beehive-create {
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+}
+
 .harvests-data table {
   width: 100%;
   border-collapse: collapse;
@@ -574,6 +579,7 @@ td.queen-red {
   text-align: center;
   padding: 8px;
   border: 1px solid var(--lightgray);
+  border-top: none;
 }
 
 /* Create and Edit forms */

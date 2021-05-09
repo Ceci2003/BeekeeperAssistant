@@ -11,6 +11,14 @@
 
     public class QueenDataViewModel : IMapFrom<Queen>
     {
+        public int Id { get; set; }
+
+        public int BeehiveId { get; set; }
+
+        public int ApiaryId { get; set; }
+
+        public Beehive Beehive { get; set; }
+
         public DateTime FertilizationDate { get; set; }
 
         public DateTime GivingDate { get; set; }

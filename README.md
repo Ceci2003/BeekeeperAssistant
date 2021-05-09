@@ -16,7 +16,7 @@
 - Username: ivancho_03 , Tel. 0885222962, E-mail: ivan4o03.it@gmail.com 
 
 Цветослав Илиев - разработил основата на проекта, дизайн
-- Username: , Tel. , E-mail: 
+- Username: ceci1706, Tel. 0878499026, E-mail: ceci1706@abv.bg
 
 ## Технологии
 Използвани технологии: C#, .NET, ASP.NET MVC, Entity Framework Core, HTML5, CSS3, JavaScript, jQuery.

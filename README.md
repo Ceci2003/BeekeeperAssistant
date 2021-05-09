@@ -13,13 +13,13 @@
 ## Екип
 
 Иван Ангелов - разработил основата на проекта, базата данни
-- Username: , Tel. , E-mail: 
+- Username: ivancho_03 , Tel. 0885222962, E-mail: ivan4o03.it@gmail.com 
 
 Цветослав Илиев - разработил основата на проекта, дизайн
 - Username: , Tel. , E-mail: 
 
 ## Технологии
-Използвани технологии: C#, .NET, ASP.NET MVC, HTML5, CSS, JavaScript, jQuery.
+Използвани технологии: C#, .NET, ASP.NET MVC, Entity Framework Core, HTML5, CSS3, JavaScript, jQuery.
 
 ## Сорс код
 Линк към сорс кода: https://github.com/Ceci2003/BeekeeperAssistant

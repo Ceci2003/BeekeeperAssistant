@@ -31,11 +31,13 @@
 ![Image of beehiveInfoEmpty](https://github.com/Ceci2003/BeekeeperAssistant/blob/master/Screenshots/beehiveInfoEmpty.png)
 ![Image of beehiveInfo](https://github.com/Ceci2003/BeekeeperAssistant/blob/master/Screenshots/beehiveInfo.png)
 
-
-*За всеки пчелин може да се направи отчет за добитата продукция.
-*Система за третиранията и прегледите на кошерите.
-
-*features
+Това е само прототип на проекта! Ще бъдат добавени:
+- система за следене и подръжка на инвентар
+- система за третиранията и прегледите на кошерите
+- създаване на отчети за добитата продукция, прегледи, третирания и др.
+- експортиране на информация в удобни формати(exel, pdf...)
+- още роли и администрация
+- магазин за предлагане на добити продукти и инвентар
 
 ## Екип
 

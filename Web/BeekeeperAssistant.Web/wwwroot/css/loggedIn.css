@@ -303,7 +303,7 @@ li {
 /* Tables */
 .data-view {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   font-size: 18px;
   margin-bottom: 30px;
   border: 1px solid var(--lightgray);
@@ -547,6 +547,33 @@ td.queen-red {
 .harvest-data {
   border: 1px solid var(--lightgray);
   border-radius: 10px;
+}
+
+.harvests-data table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-sdate,
+.table-amount {
+  width: 150px;
+  text-align: center;
+}
+
+.harvests-data table thead th:last-child {
+  max-width: 400px;
+}
+
+.harvests-data td,
+.harvests-data th {
+  border: 1px solid var(--lightgray);
+  padding: 8px;
+}
+
+.harvests-data p {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid var(--lightgray);
 }
 
 /* Create and Edit forms */

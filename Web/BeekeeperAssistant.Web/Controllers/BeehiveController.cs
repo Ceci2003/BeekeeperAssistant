@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
@@ -71,7 +72,7 @@
             }
 
             var harvests = this.harvestService.GetAllUserHarvests<HarvestDatavVewModel>(currentUser.Id);
-            viewModel.Harvests = harvests;
+            viewModel.Harvests = harvests.Where(h => h.BeehiveId == beehiveId);
 
             return this.View(viewModel);
         }

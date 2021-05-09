@@ -107,11 +107,11 @@
             </div>
         </div>
     </div>
-    @if (Model.HasQueen)
-    {
-        string imgPath = "queen" + Model.Queen.Color + ".png";
-        <h2 class="title-1">Кралица</h2>
-        <div class="queen-preview">
+    <h2 class="title-1">Кралица</h2>
+    <div class="queen-preview">
+        @if (Model.HasQueen)
+        {
+            string imgPath = "queen" + Model.Queen.Color + ".png";
             <img src="~/img/queen/@imgPath">
             <table>
                 <tr>
@@ -150,54 +150,69 @@
             <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">
                 Редактирайте кралицата
             </a>
-        </div>
 
-    }
-    else
-    {
-        <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
-            <i class="fas fa-plus-square pr-2"></i>
-            Добавете кралица
+        }
+        else
+        {
+            <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
+                <i class="fas fa-plus-square pr-2"></i>
+                Добавете кралица
+            </a>
+        }
+    </div>
+
+
+
+    <h2 class="title-1">Добиви</h2>
+    <div class="harvests-data">
+        <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+            Добавете
+            добив
         </a>
-    }
-
-
-    <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
-        Добавете
-        добив
-    </a>
-
-    @if (Model.Harvests.Any())
-    {
-        <div class="harvests-data">
-            <table>
-                <thead>
-                    <th>Име</th>
-                    <th>Дата</th>
-                    <th>Продукт</th>
-                    <th>Бележка</th>
-                </thead>
-                <tbody>
-                    @foreach (var harvest in Model.Harvests)
-                    {
-                        <tr>
-                            <td>
-                                @harvest.HarvestName
-                            </td>
-                            <td>
-                                @harvest.DateOfHarves
-                            </td>
-                            <td>
-                                @harvest.Product
-                            </td>
-                            <td>
-                                asd asd asd fgh tjue rutj
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-    }
+        <table>
+            <thead>
+                <th>Име</th>
+                <th class="table-sdate">Дата</th>
+                <th>Продукт</th>
+                <th class="table-amount">Количество</th>
+                <th>Бележка</th>
+            </thead>
+            <tbody>
+                @foreach (var harvest in Model.Harvests)
+                {
+                    <tr>
+                        <td>
+                            @harvest.HarvestName
+                        </td>
+                        <td class="table-sdate">
+                            @harvest.DateOfHarves.ToShortDateString()
+                        </td>
+                        <td>
+                            @harvest.Product
+                            @if (harvest.Product == "Мед")
+                            {
+                                <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                            }
+                        </td>
+                        <td class="table-amount">
+                            @harvest.Amount
+                            @switch (harvest.Product)
+                            {
+                                case "млечице":
+                                case "отрова": <span>гр.</span> break;
+                                default: <span>кг.</span> break;
+                            }
+                        </td>
+                        <td>
+                            @harvest.Note
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (!Model.Harvests.Any())
+        {
+            <p>няма добавени добиви</p>
+        }
+    </div>
 </div>

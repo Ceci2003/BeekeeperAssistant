@@ -4,6 +4,7 @@
 
     using BeekeeperAssistant.Web.ViewModels;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -28,9 +29,14 @@
             return this.View();
         }
 
-        public IActionResult HttpError(string httpError)
+        public IActionResult HttpError(int statusCode)
         {
-            return this.View(httpError);
+            var viewModel = new HttpErrorViewModel
+            {
+                StatusCode = statusCode,
+            };
+
+            return this.View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -104,7 +104,7 @@
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/Home/HttpError", "?httpError={0}");
+            app.UseStatusCodePagesWithReExecute("/Home/HttpError", "?statusCode={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

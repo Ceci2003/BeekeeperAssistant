@@ -32,8 +32,8 @@
 ![Image of beehiveInfo](https://github.com/Ceci2003/BeekeeperAssistant/blob/master/Screenshots/beehiveInfo.png)
 
 
-*За всеки пчелин може да се направи отчет за добитата продукция!
-
+*За всеки пчелин може да се направи отчет за добитата продукция.
+*Система за третиранията и прегледите на кошерите.
 
 *features
 

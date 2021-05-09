@@ -5,6 +5,7 @@
     powerClasses.Add("weak", "td-weak");
     powerClasses.Add("medium", "td-medium");
     powerClasses.Add("strong", "td-strong");
+    string note = "asd";
 }
 
 <div class="breadcrumb">
@@ -13,7 +14,7 @@
             <a asp-controller="Home" asp-action="Index">Начало</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.ApiaryNumber">Кошери-всички</a>
+            <a href="/Apiary/@Model.ApiaryNumber">Пчелин: @Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
             <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
@@ -46,8 +47,10 @@
                     </tr>
                     <tr>
                         <th scope="row">Сила:</th>
-                        <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">@Html.DisplayFor(x =>
-                            Model.BeehivePower)</td>
+                        <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">
+                            @Html.DisplayFor(x =>
+                            Model.BeehivePower)
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Система:</th>
@@ -63,15 +66,36 @@
                     </tr>
                     <tr>
                         <th scope="row">Апарат:</th>
-                        <td>@Model.HasDevice</td>
+                        @if (Model.HasDevice)
+                        {
+                            <td><b>Поставен</b></td>
+                        }
+                        else
+                        {
+                            <td>няма</td>
+                        }
                     </tr>
                     <tr>
-                        <th scope="row">Проп:</th>
-                        <td>@Model.HasPolenCatcher</td>
+                        <th scope="row">Решятка за прополис:</th>
+                        @if (Model.HasPolenCatcher)
+                        {
+                            <td><b>Поставена</b></td>
+                        }
+                        else
+                        {
+                            <td>няма</td>
+                        }
                     </tr>
                     <tr>
-                        <th scope="row">Праш:</th>
-                        <td>@Model.HasPropolisCatcher</td>
+                        <th scope="row">Прашецоуловител:</th>
+                        @if (Model.HasPropolisCatcher)
+                        {
+                            <td><b>Поставен</b></td>
+                        }
+                        else
+                        {
+                            <td>няма</td>
+                        }
                     </tr>
                 </tbody>
             </table>
@@ -85,27 +109,95 @@
     </div>
     @if (Model.HasQueen)
     {
-        <a asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">Редактирайте кралицата</a>
-        <a asp-controller="Queen" asp-action="ById" asp-route-id="@Model.QueenId">Виж кралицата</a>
-
         string imgPath = "queen" + Model.Queen.Color + ".png";
-        <img src="~/img/@imgPath">
-        <td>@Html.DisplayFor(x => Model.Queen.Color)</td>
+        <h2 class="title-1">Кралица</h2>
+        <div class="queen-preview">
+            <img src="~/img/queen/@imgPath">
+            <table>
+                <tr>
+                    <th scope="row">Цвят:</th>
+                    <td>@Html.DisplayFor(x => Model.Queen.Color)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Датана оплождане:</th>
+                    <td>@Model.Queen.FertilizationDate.ToString("dd.mm.yyyy")</td>
+                </tr>
+                <tr>
+                    <th scope="row">Дата на придаване:</th>
+                    <td>@Model.Queen.GivingDate.ToString("dd.mm.yyyy")</td>
+                </tr>
+                <tr>
+                    <th scope="row">Вид:</th>
+                    <td>@Html.DisplayFor(x => Model.Queen.QueenType)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Порода:</th>
+                    <td>@Html.DisplayFor(x => Model.Queen.Breed)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Произход:</th>
+                    <td>@Model.Queen.Origin</td>
+                </tr>
+                <tr>
+                    <th scope="row">Нрав:</th>
+                    <td>@Model.Queen.Temperament</td>
+                </tr>
+                <tr>
+                    <th scope="row">Хигиенни навици:</th>
+                    <td>@Model.Queen.HygenicHabits</td>
+                </tr>
+            </table>
+            <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">
+                Редактирайте кралицата
+            </a>
+        </div>
+
     }
     else
     {
-        <a asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">Добавете кралица</a>
+        <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
+            <i class="fas fa-plus-square pr-2"></i>
+            Добавете кралица
+        </a>
     }
 
 
-    <a asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">Добавете добив</a>
+    <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+        Добавете
+        добив
+    </a>
 
     @if (Model.Harvests.Any())
     {
-        foreach (var harvest in Model.Harvests)
-        {
-            <br />
-            @harvest.HarvestName
-        }
+        <div class="harvests-data">
+            <table>
+                <thead>
+                    <th>Име</th>
+                    <th>Дата</th>
+                    <th>Продукт</th>
+                    <th>Бележка</th>
+                </thead>
+                <tbody>
+                    @foreach (var harvest in Model.Harvests)
+                    {
+                        <tr>
+                            <td>
+                                @harvest.HarvestName
+                            </td>
+                            <td>
+                                @harvest.DateOfHarves
+                            </td>
+                            <td>
+                                @harvest.Product
+                            </td>
+                            <td>
+                                asd asd asd fgh tjue rutj
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
     }
 </div>

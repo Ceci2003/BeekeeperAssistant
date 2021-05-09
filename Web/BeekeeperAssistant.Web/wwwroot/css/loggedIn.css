@@ -513,6 +513,42 @@ td.queen-red {
   text-align: left;
 }
 
+/* Queen data */
+.queen-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-bottom: 30px;
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  padding: 10px;
+  align-items: center;
+}
+
+.queen-preview img {
+  width: 225px;
+  height: 225px;
+}
+
+.queen-preview table th {
+  text-align: right;
+  padding: 8px;
+}
+
+.queen-preview .btn.edit {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+/* Harvests data */
+.harvest-data {
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+}
+
 /* Create and Edit forms */
 .form-box {
   position: absolute;

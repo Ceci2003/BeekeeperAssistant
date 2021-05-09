@@ -13,6 +13,7 @@
 В него могат да се добавят неограничен брой пчелини и кошери. Имената и номерата на пчелините могат да се редактират. Номерът на пчелина се състои от 8 цифри разделени с тире. 
 
 Пример: 1243-9825; първите четири цифри представляват пощенският код на населеното място, а останалите номерът на животновъдния обект.
+
 ![Image of createApiary](https://github.com/Ceci2003/BeekeeperAssistant/blob/master/Screenshots/createApiary.png)
 ![Image of apiaryInfo](https://github.com/Ceci2003/BeekeeperAssistant/blob/master/Screenshots/apiaryInfo.png)
 

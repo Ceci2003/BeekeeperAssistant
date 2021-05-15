@@ -48,7 +48,7 @@
 - Username: ceci1706, Tel. 0878499026, E-mail: ceci1706@abv.bg
 
 ## Технологии
-Използвани технологии: C#, .NET, ASP.NET MVC, Entity Framework Core, HTML5, CSS3, JavaScript, jQuery.
+Използвани технологии: C#, .NET, ASP.NET MVC, Entity Framework Core, HTML5, CSS3, JavaScript, jQuery, AutoMapper.
 
 ## Сорс код
 Линк към сорс кода: https://github.com/Ceci2003/BeekeeperAssistant

@@ -11,6 +11,7 @@
         public const string ApiaryFullNumberRegex = @"\b([\d]{4}\b)-(\b\d{4})\b";
         public const int MaxPartNumberLength = 4;
         public const string CityCodeRequiredErrorMessage = "Въведете номер на населеното място";
+        public const string AddressRequiredErrorMessage = "Въведете населеното място";
         public const string FarmNumberRequiredErrorMessage = "Въведете номер животновъден обект";
         public const string ApiaryExistsErrorMessage = "Вече съществува пчелин с въведения номер";
         public const string ApiaryTypeRequiredErrorMessage = "Въведете вид на пчелина";

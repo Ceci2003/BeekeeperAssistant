@@ -22,7 +22,7 @@
         [Required(ErrorMessage = GlobalConstants.FarmNumberRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
-        [Display(Name = "Номер на пчелина")]
+        [Display(Name = "Номер на обект")]
         public string FarmNumber { get; set; }
 
         [ApiaryExistsValidation(ErrorMessage = GlobalConstants.ApiaryExistsErrorMessage)]
@@ -35,6 +35,7 @@
         [Display(Name = "Вид на пчелина")]
         public ApiaryType ApiaryType { get; set; }
 
+        [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [Display(Name = "Населено място")]
         public string Adress { get; set; }
     }

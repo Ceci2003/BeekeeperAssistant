@@ -541,10 +541,15 @@ td.queen-red {
   padding: 8px;
 }
 
-.queen-preview .btn.edit {
+.queen-preview .btn.edit,
+.queen-preview .btn.delete {
   text-align: center;
   width: 100%;
   margin-bottom: 5px;
+}
+
+.queen-preview form {
+  width: 100%;
 }
 
 /* Harvests data */

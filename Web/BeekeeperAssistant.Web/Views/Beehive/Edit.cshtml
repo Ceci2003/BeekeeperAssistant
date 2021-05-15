@@ -28,12 +28,12 @@
             <div class="input-box">
                 <label asp-for="@Model.Number"></label>
                 <input asp-for="@Model.Number" />
-                <span asp-validation-for="@Model.Number"></span>
+                <span class="error-msg" asp-validation-for="@Model.Number"></span>
             </div>
             <div class="input-box">
                 <label asp-for="@Model.Date"></label>
                 <input asp-for="@Model.Date" />
-                <span asp-validation-for="@Model.Date"></span>
+                <span class="error-msg" asp-validation-for="@Model.Date"></span>
             </div>
             <div class="input-box">
                 <label asp-for="@Model.ApiaryId"></label>

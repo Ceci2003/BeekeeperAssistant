@@ -20,7 +20,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -59,7 +59,9 @@
                     </tr>
                     <tr>
                         <th scope="row">Създаден на:</th>
-                        <td>@Model.Date.ToShortDateString()</td>
+                        <td>
+                            <time datetime="@Model.Date.ToString("O")"></time>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Апарат за майки:</th>
@@ -117,11 +119,13 @@
                 </tr>
                 <tr>
                     <th scope="row">Датана оплождане:</th>
-                    <td>@Model.Queen.FertilizationDate.ToString("dd.mm.yyyy")</td>
+                    <td>
+                        <time datetime="@Model.Queen.FertilizationDate.ToString("O")"></time>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">Дата на придаване:</th>
-                    <td>@Model.Queen.GivingDate.ToString("dd.mm.yyyy")</td>
+                    <td><time datetime="@Model.Queen.GivingDate.ToString("O")"></time></td>
                 </tr>
                 <tr>
                     <th scope="row">Вид:</th>
@@ -168,11 +172,11 @@
         </a>
         <table>
             <thead>
-                <th>Име</th>
-                <th class="table-sdate">Дата</th>
-                <th>Продукт</th>
-                <th class="table-amount">Количество</th>
-                <th>Бележка</th>
+            <th>Име</th>
+            <th class="table-sdate">Дата</th>
+            <th>Продукт</th>
+            <th class="table-amount">Количество</th>
+            <th>Бележка</th>
             </thead>
             <tbody>
                 @foreach (var harvest in Model.Harvests)
@@ -182,7 +186,7 @@
                             @harvest.HarvestName
                         </td>
                         <td class="table-sdate">
-                            @harvest.DateOfHarves.ToShortDateString()
+                            <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
                         </td>
                         <td>
                             @harvest.Product
@@ -196,8 +200,8 @@
                             @switch (harvest.Product)
                             {
                                 case "млечице":
-                                case "отрова": <span>гр.</span> break;
-                                default: <span>кг.</span> break;
+                                case "отрова":<span>гр.</span> break;
+                                default: <span>кг.</span>break;
                             }
                         </td>
                         <td>

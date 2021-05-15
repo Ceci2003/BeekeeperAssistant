@@ -87,18 +87,4 @@
     </div>
 </div>
 
-@section Scripts
-{
-    <script>
-        $(function () {
-            $("#cretion-date").datepicker({ dateFormat: 'yy-mm-dd' });
-            $("#cretion-date").datepicker({ dateFormat: 'yy-mm-dd' }).bind("change", function () {
-                var minValue = $(this).val();
-                minValue = $.datepicker.parseDate("yy-mm-dd", minValue);
-                minValue.setDate(minValue.getDate() + 1);
-                $("#cretion-date").datepicker("option", "minDate", minValue);
-            })
-        });
-    </script>
-}
 

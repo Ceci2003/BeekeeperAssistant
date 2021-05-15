@@ -250,7 +250,7 @@ body {
 }
 
 .form-box input:invalid {
-  background-color: var(--red);
+  border-color: var(--red);
 }
 
 .form-box .input-box.check {

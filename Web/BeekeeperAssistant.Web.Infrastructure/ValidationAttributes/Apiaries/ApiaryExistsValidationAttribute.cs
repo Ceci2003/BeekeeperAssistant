@@ -25,7 +25,7 @@
             var apiaryNumber = value as string;
 
             var doesApiaryExist = apiaryRepository.All()
-                .Where(a => a.Number == apiaryNumber && a.CreatorId == currentUserId)
+                .Where(a => a.Number == apiaryNumber)
                 .FirstOrDefault();
 
             if (doesApiaryExist == null)

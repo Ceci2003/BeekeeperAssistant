@@ -1,7 +1,7 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Queens.EditQueenInutModel
 @using BeekeeperAssistant.Data.Models;
 @{
-
+    this.ViewData["Title"] = "Редактиране на кралица";
 }
 
 <div class="breadcrumb">
@@ -29,46 +29,45 @@
         </a>
         <h2 class="title-2">@ViewData["Title"]</h2>
         <form asp-controller="Queen" asp-action="Edit" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="input-box">
                 <label asp-for="Color"></label>
                 <select asp-for="Color" asp-items="@Html.GetEnumSelectList<QueenColor>()"></select>
-                <span asp-validation-for="Color"></span>
+                <span class="error-msg" asp-validation-for="Color"></span>
             </div>
             <div class="input-box">
                 <label asp-for="FertilizationDate"></label>
                 <input asp-for="FertilizationDate" />
-                <span asp-validation-for="FertilizationDate"></span>
+                <span class="error-msg" asp-validation-for="FertilizationDate"></span>
             </div>
             <div class="input-box">
                 <label asp-for="GivingDate"></label>
                 <input asp-for="GivingDate" />
-                <span asp-validation-for="GivingDate"></span>
+                <span class="error-msg" asp-validation-for="GivingDate"></span>
             </div>
             <div class="input-box">
                 <label asp-for="QueenType"></label>
                 <select asp-for="QueenType" asp-items="@Html.GetEnumSelectList<QueenType>()"></select>
-                <span asp-validation-for="QueenType"></span>
+                <span class="error-msg" asp-validation-for="QueenType"></span>
             </div>
             <div class="input-box">
                 <label asp-for="Breed"></label>
                 <select asp-for="Breed" asp-items="@Html.GetEnumSelectList<QueenBreed>()"></select>
-                <span asp-validation-for="Breed"></span>
+                <span class="error-msg" asp-validation-for="Breed"></span>
             </div>
             <div class="input-box">
                 <label asp-for="Origin"></label>
                 <input asp-for="Origin" />
-                <span asp-validation-for="Origin"></span>
+                <span class="error-msg" asp-validation-for="Origin"></span>
             </div>
             <div class="input-box">
                 <label asp-for="Temperament"></label>
                 <input asp-for="Temperament" />
-                <span asp-validation-for="Temperament"></span>
+                <span class="error-msg" asp-validation-for="Temperament"></span>
             </div>
             <div class="input-box">
                 <label asp-for="HygenicHabits"></label>
                 <input asp-for="HygenicHabits" />
-                <span asp-validation-for="HygenicHabits"></span>
+                <span class="error-msg" asp-validation-for="HygenicHabits"></span>
             </div>
 
             <input type="hidden" asp-for="BeehiveId" />

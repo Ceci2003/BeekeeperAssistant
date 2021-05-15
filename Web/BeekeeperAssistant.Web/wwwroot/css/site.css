@@ -7,6 +7,29 @@
   padding: 0;
 }
 
+/* Global variables */
+:root {
+  --orange: #ff7800;
+  /* --red: #AB0000; */
+  --red: #bf0a0a;
+  --red-hover: #8c0712;
+  --green: #014017;
+  --green-2: #558b2f;
+  --green-hover: #1a5918;
+  --blue: #0d6493;
+  --blue-hover: #1287c6;
+  --main-background: #110400;
+  --gray-background: #f1f2f3;
+  --white: #ffffff;
+  --lightgray: #d3d3d3;
+  --apiary-color: #17a2b8;
+  --apiary-color-hover: #6ce7e3;
+  --beehive-color: #f29422;
+  --beehive-color-hover: #fead34;
+  --queen-color: #da3c3d;
+  --queen-color-hover: #d9695d;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -16,7 +39,7 @@ body {
   justify-content: space-around;
   align-items: center;
   background-color: #110400;
-  border-bottom: 5px solid #f29422;
+  border-bottom: 5px solid var(--beehive-color);
 }
 
 .navbar .navbar-brand {
@@ -30,7 +53,7 @@ body {
 
 .navbar .navbar-brand .logo-link {
   text-decoration: none;
-  color: #f29422;
+  color: var(--beehive-color);
   margin-left: 20px;
   font-weight: 500;
   font-size: 20px;
@@ -54,7 +77,7 @@ body {
 
 .navbar ul li a {
   text-decoration: none;
-  color: #f29422;
+  color: var(--beehive-color);
   font-weight: 500;
 }
 
@@ -68,7 +91,7 @@ body {
 }
 
 .navbar ul li .active {
-  border-top: 5px solid #f29422;
+  border-top: 5px solid var(--beehive-color);
 }
 
 .navbar .ul-login-register li .login-btn {
@@ -77,12 +100,12 @@ body {
 }
 
 .navbar .ul-login-register li .login-btn:hover {
-  color: #f29422;
+  color: var(--beehive-color);
 }
 
 .navbar .ul-login-register li .register-btn {
   color: white;
-  border: 3px solid #f29422;
+  border: 3px solid var(--beehive-color);
   border-radius: 20px;
   padding: 5px 15px;
 }
@@ -94,33 +117,32 @@ body {
 /* Cookies Policy*/
 
 .cookies {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-    position: fixed;
-    padding: 20px;
-    background-color: #F29422;
-    color: white;
-    opacity: 0.9;
-    transition: opacity 0.6s;
-    bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  position: fixed;
+  padding: 20px;
+  background-color: var(--beehive-color);
+  color: white;
+  opacity: 0.9;
+  transition: opacity 0.6s;
+  bottom: 0;
 }
 
 .cookies button {
-    color: white;
-    border: none;
-    background: none;
-    font-size: 16px;
-    cursor: pointer;
+  color: white;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .cookies button:hover {
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 /* Banner */
-
 .banner {
   display: flex;
   justify-content: space-around;
@@ -132,7 +154,7 @@ body {
   background-size: cover;
   background-position-y: top;
   color: wheat;
-  border-bottom: 5px solid #f29422;
+  border-bottom: 5px solid var(--beehive-color);
 }
 
 .banner-text h1 {
@@ -145,80 +167,225 @@ body {
   color: wheat;
 }
 
+.form-box-bg {
+  height: 580px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(/img/banner.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Forms */
+.form-box {
+  position: absolute;
+  top: 50%;
+  left: 58%;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  /* background: rgba(0,0,0,.5); */
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px rgba(242, 148, 34, 0.3);
+  color: var(--white);
+  width: 450px;
+}
+
+.form-box.login-register {
+  left: 50%;
+}
+
+.form-box.login-register form {
+  margin-bottom: 10px;
+}
+
+.form-box section {
+  text-align: center;
+}
+
+.form-box section p {
+  margin-top: 10px;
+}
+
+.form-box .back {
+  color: var(--red);
+}
+
+.form-box .back:hover {
+  color: var(--red-hover);
+}
+
+.form-box h2 {
+  padding: 0;
+  text-align: center;
+}
+
+.form-box hr {
+  height: 1px;
+  background-color: white;
+  border-radius: 1px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.form-box .input-box {
+  display: grid;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.form-box .input-box label {
+  margin-bottom: 5px;
+}
+
+.form-box .input-box input,
+.form-box .input-box select {
+  outline: none;
+  font-size: 18px;
+  border: 3px solid var(--lightgray);
+  padding: 3px;
+}
+
+.form-box .input-box input:focus,
+.form-box .input-box select:focus {
+  border: 3px solid var(--orange);
+}
+
+.form-box input:invalid {
+  border-color: var(--red);
+}
+
+.form-box .input-box.check {
+  display: flex;
+}
+
+.form-box .btn-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.form-box .btn-group .btn {
+  background: var(--orange);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px;
+  color: var(--white);
+  min-width: 100px;
+}
+
+.link-group {
+  display: flex;
+  margin-top: 20px;
+}
+
+.link-group a {
+  color: var(--beehive-color);
+}
+
+.link-group a:hover {
+  color: var(--beehive-color-hover);
+}
+
+span.error-msg {
+  display: block;
+  color: var(--red);
+  font-size: 18px;
+}
+
 /* Footer */
 
 footer {
-    /* position: absolute; */
-    width: 100%;
-    background-color: #110400;
-    border-top: 5px solid #F29422;
-    color: white;
+  /* position: absolute; */
+  width: 100%;
+  background-color: #110400;
+  border-top: 5px solid var(--beehive-color);
+  color: white;
 }
 
 footer h1 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 20px auto;
 }
 
 .footer-social {
-    text-align: center;
-    margin: 10px;
+  text-align: center;
+  margin: 10px;
 }
 
 .footer-about {
-    margin: 10px;
+  margin: 10px;
 }
 
 .footer-about ul {
-    list-style: none;
+  list-style: none;
 }
 
 .footer-about ul li {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .footer-social ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    list-style: none;
-    margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+  margin-top: 10px;
 }
 
 .footer-about ul li a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .footer-about ul li a:hover {
-    color: #F29422;
+  color: var(--beehive-color);
 }
 
 .footer-social ul li a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .footer-social ul li a:hover {
-    color: #F29422;
+  color: var(--beehive-color);
 }
 
 .footer-social ul li a i {
-    font-size: 25px;
-    transition: 1.5s;
+  font-size: 25px;
+  transition: 1.5s;
 }
 
 .footer-social ul li a i:hover {
-    transform:rotate(360deg);
+  transform: rotate(360deg);
 }
 
 .footer-copyright {
-    text-align: center;
-    padding: 10px;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #110400;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2a2623;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5c5655;
 }

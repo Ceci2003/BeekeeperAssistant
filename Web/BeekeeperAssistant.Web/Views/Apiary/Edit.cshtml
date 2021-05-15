@@ -26,38 +26,37 @@
         <a class="back" asp-controller="Apiary" asp-action="All"><i class="fas fa-arrow-left"></i></a>
         <h2 class="title-2">@ViewData["Title"]</h2>
         <form asp-controller="Apiary" asp-action="Edit">
-            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="input-apiary-number">
                 <div class="input-box">
                     <label asp-for="@Model.CityCode"></label>
                     <input type="text" asp-for="@Model.CityCode" />
-                    <span asp-validation-for="@Model.CityCode"></span>
+                    <span class="error-msg" asp-validation-for="@Model.CityCode"></span>
                 </div>
                 <span>-</span>
                 <div class="input-box">
                     <label asp-for="@Model.FarmNumber"></label>
                     <input type="text" asp-for="@Model.FarmNumber" />
-                    <span asp-validation-for="@Model.FarmNumber"></span>
+                    <span class="error-msg" asp-validation-for="@Model.FarmNumber"></span>
                 </div>
             </div>
             <br />
             <div class="input-box">
                 <label asp-for="@Model.Name"></label>
                 <input type="text" asp-for="@Model.Name" />
-                <span asp-validation-for="@Model.Name"></span>
+                <span class="error-msg" asp-validation-for="@Model.Name"></span>
             </div>
             <br />
             <div class="input-box">
                 <label asp-for="@Model.Adress"></label>
                 <input type="text" asp-for="@Model.Adress" />
-                <span asp-validation-for="@Model.Adress"></span>
+                <span class="error-msg" asp-validation-for="@Model.Adress"></span>
             </div>
             <br />
             <div class="input-box">
                 <label asp-for="@Model.ApiaryType"></label>
                 <select asp-for="@Model.ApiaryType"
                     asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-                <span asp-validation-for="@Model.ApiaryType"></span>
+                <span class="error-msg" asp-validation-for="@Model.ApiaryType"></span>
             </div>
             <br />
             <div class="btn-group">

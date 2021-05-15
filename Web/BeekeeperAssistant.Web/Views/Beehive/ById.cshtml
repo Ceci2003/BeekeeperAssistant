@@ -5,7 +5,6 @@
     powerClasses.Add("weak", "td-weak");
     powerClasses.Add("medium", "td-medium");
     powerClasses.Add("strong", "td-strong");
-    string note = "asd";
 }
 
 <div class="breadcrumb">
@@ -151,6 +150,9 @@
             <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">
                 Редактирайте кралицата
             </a>
+            <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
+                <input class="btn delete" type="submit" value="Изтрий" />
+            </form>
 
         }
         else
@@ -167,8 +169,7 @@
     <h2 class="title-1">Добиви</h2>
     <div class="harvests-data">
         <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
-            Добавете
-            добив
+            Добавете добив
         </a>
         <table>
             <thead>
@@ -200,8 +201,12 @@
                             @switch (harvest.Product)
                             {
                                 case "млечице":
-                                case "отрова":<span>гр.</span> break;
-                                default: <span>кг.</span>break;
+                                case "отрова":
+                                    <span>гр.</span>
+                                    break;
+                                default:
+                                    <span>кг.</span>
+                                    break;
                             }
                         </td>
                         <td>

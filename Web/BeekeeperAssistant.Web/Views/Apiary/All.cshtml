@@ -24,110 +24,102 @@
         <i class="fas fa-plus-square pr-2"></i>
         Създайте нов пчелин
     </a>
-    @if (Model.AllUserApiaries.Any())
-    {
-        <table class="data-table">
-            <thead>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Име</th>
+                <th>Адрес</th>
+                <th>Вид</th>
+                <th>Бр. кошери</th>
+                <th>Редактиране</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var apiary in Model.AllUserApiaries)
+            {
                 <tr>
-                    <th>Номер</th>
-                    <th>Име</th>
-                    <th>Адрес</th>
-                    <th>Вид</th>
-                    <th>Бр. кошери</th>
-                    <th>Редактиране</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var apiary in Model.AllUserApiaries)
-                {
-                    <tr>
-                        <td class="number">
-                            <a href="/Apiary/@apiary.Number">@apiary.Number</a>
-                        </td>
-                        <td>@apiary.Name</td>
-                        <td>@apiary.Adress</td>
-                        <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
-                        <td>@apiary.BeehivesCount</td>
-                        <td class="edit">
-                            <div>
-                                @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
-                                <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
+                    <td class="number">
+                        <a href="/Apiary/@apiary.Number">@apiary.Number</a>
+                    </td>
+                    <td>@apiary.Name</td>
+                    <td>@apiary.Adress</td>
+                    <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
+                    <td>@apiary.BeehivesCount</td>
+                    <td class="edit">
+                        <div>
+                            @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
+                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
                             asp-route-id="@apiary.Id">
-                                    <button type="submit" class="delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div class="pagination">
-            <ul>
-                @if (this.Model.CurrentPage == 1)
-                {
-                    <li class="page-item disabled">
-                        <span class="page-link">
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage - 1)">
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </li>
-                }
-                @for (int i = 1; i <= this.Model.PagesCount; i++)
-                {
-                    @if (i == this.Model.CurrentPage)
-                    {
-                        <li class="page-item active">
-                            <span class="page-link">@i</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-controller="Apiary" asp-action="All" asp-route-page="@i">@i</a>
-                        </li>
-                    }
-                }
-                @if (this.Model.CurrentPage == this.Model.PagesCount)
-                {
-                    <li class="page-item disabled">
-                        <span class="page-link">
-                            <i class="fas fa-arrow-right"></i>
-                        </span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage + 1)">
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
-
-    }
-    else
+                                <button type="submit" class="delete">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!Model.AllUserApiaries.Any())
     {
-        <h1>Empty</h1>
+        <p class="empty-row">няма добавени пчелини</p>
     }
-
-    @*// TODO: Rename class names *@
-
-
+    <div class="pagination">
+        <ul>
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Apiary" asp-action="All"
+                    asp-route-page="@(this.Model.CurrentPage - 1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                @if (i == this.Model.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Apiary" asp-action="All" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Apiary" asp-action="All"
+                    asp-route-page="@(this.Model.CurrentPage + 1)">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 </div>

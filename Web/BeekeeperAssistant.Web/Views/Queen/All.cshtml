@@ -20,110 +20,105 @@
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
-    @if (Model.AllQueens.Any())
-    {
-        <table class="data-table">
-            <thead>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Цвят</th>
+                <th>Номер на кошер</th>
+                <th>Номер на пчелин</th>
+                <th>Дата на придаване</th>
+                <th>Произход</th>
+                <th>Порода</th>
+                <th>Редактиране</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var queen in Model.AllQueens)
+            {
                 <tr>
-                    <th>Цвят</th>
-                    <th>Номер на кошер</th>
-                    <th>Номер на пчелин</th>
-                    <th>Дата на придаване</th>
-                    <th>Произход</th>
-                    <th>Порода</th>
-                    <th>Редактиране</th>
+                    <td class="queen-@queen.Color.ToString().ToLower()">@queen.Color</td>
+                    <td class="number">
+                        <a href="/Beehive/@queen.BeehiveApiaryNumber/@queen.BeehiveId">@queen.BeehiveNumber</a>
+                    </td>
+                    <td class="number">
+                        <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
+                    </td>
+                    <td>@queen.GivingDate</td>
+                    <td>@queen.Origin</td>
+                    <td>@Html.DisplayFor(x => queen.Breed)</td>
+                    <td class="edit">
+                        <div>
+                            @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
+                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">
+                                <button type="submit" class="delete">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var queen in Model.AllQueens)
-                {
-                    <tr>
-                        <td class="queen-@queen.Color.ToString().ToLower()">@queen.Color</td>
-                        <td class="number">
-                            <a href="/Beehive/@queen.BeehiveApiaryNumber/@queen.BeehiveId">@queen.BeehiveNumber</a>
-                        </td>
-                        <td class="number">
-                            <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
-                        </td>
-                        <td>@queen.GivingDate</td>
-                        <td>@queen.Origin</td>
-                        <td>@Html.DisplayFor(x => queen.Breed)</td>
-                        <td class="edit">
-                            <div>
-                                @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
-                                <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                                <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">
-                                    <button type="submit" class="delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div class="pagination">
-            <ul>
-                @if (this.Model.CurrentPage == 1)
-                {
-                    <li class="page-item disabled">
-                        <span class="page-link">
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage - 1)">
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
-                    </li>
-                }
-                @for (int i = 1; i <= this.Model.PagesCount; i++)
-                {
-                    @if (i == this.Model.CurrentPage)
-                    {
-                        <li class="page-item active">
-                            <span class="page-link">@i</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-controller="Apiary" asp-action="All" asp-route-page="@i">@i</a>
-                        </li>
-                    }
-                }
-                @if (this.Model.CurrentPage == this.Model.PagesCount)
-                {
-                    <li class="page-item disabled">
-                        <span class="page-link">
-                            <i class="fas fa-arrow-right"></i>
-                        </span>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage + 1)">
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
-    }
-    else
+            }
+        </tbody>
+    </table>
+    @if (!Model.AllQueens.Any())
     {
-        <h1>Empty</h1>
+        <p class="empty-row">няма добавени кралици</p>
     }
-
-
+    <div class="pagination">
+        <ul>
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Apiary" asp-action="All"
+                    asp-route-page="@(this.Model.CurrentPage - 1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                @if (i == this.Model.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Apiary" asp-action="All" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Apiary" asp-action="All"
+                    asp-route-page="@(this.Model.CurrentPage + 1)">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 </div>

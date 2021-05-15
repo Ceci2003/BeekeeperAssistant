@@ -123,6 +123,10 @@
             }
         </tbody>
     </table>
+    @if (!Model.Beehives.Any())
+    {
+        <p class="empty-row">пчелинът няма добавени кошери</p>
+    }
     <div class="pagination">
         <ul>
             @if (this.Model.CurrentPage == 1)

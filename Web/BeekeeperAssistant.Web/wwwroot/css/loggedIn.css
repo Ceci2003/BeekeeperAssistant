@@ -473,6 +473,13 @@ td.queen-red {
   color: var(--white);
 }
 
+.empty-row {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid var(--lightgray);
+  border-top: none;
+}
+
 .table-legend {
   /* margin-top: 10px; */
   text-align: left;

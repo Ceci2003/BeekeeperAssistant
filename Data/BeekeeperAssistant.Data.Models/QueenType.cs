@@ -6,7 +6,7 @@
     {
         [Display(Name = "Произведена")]
         Produced = 1,
-        [Display(Name = "няма")]
+        [Display(Name = "Няма")]
         None = 2,
         [Display(Name = "Роева")]
         SwarmingMother = 3,

@@ -20,7 +20,7 @@
         public QueenColor Color { get; set; }
 
         [Required]
-        [Display(Name = "порода")]
+        [Display(Name = "Порода")]
         public QueenBreed Breed { get; set; }
 
         [Required]

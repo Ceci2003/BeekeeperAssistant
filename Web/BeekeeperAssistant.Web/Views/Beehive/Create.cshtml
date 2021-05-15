@@ -35,6 +35,8 @@
         </a>
         <h2 class="title-2">@ViewData["Title"]</h2>
         <form asp-controller="Beehive" asp-action="Create">
+            <div class="error-msg" asp-validation-summary="All"></div>
+
             <div class="input-box">
                 <label asp-for="@Model.Number"></label>
                 <input asp-for="@Model.Number" min="0" />

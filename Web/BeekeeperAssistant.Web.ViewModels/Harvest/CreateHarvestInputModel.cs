@@ -10,8 +10,6 @@
         [Required]
         public int BeehiveId { get; set; }
 
-        public Beehive Beehive { get; set; }
-
         [Display(Name = "Име")]
         public string HarvestName { get; set; }
 

@@ -28,6 +28,7 @@
         </a>
         <h2 class="title-2">@ViewData["Title"]</h2>
         <form asp-controller="Apiary" asp-action="Create">
+            <div asp-validation-summary="All"></div>
             <div class="input-apiary-number">
                 <div class="input-box">
                     <label asp-for="@Model.CityCode"></label>

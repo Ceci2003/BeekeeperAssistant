@@ -24,7 +24,7 @@
 
         IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0);
 
-        Task DeleteQueenAsync(int queenId);
+        Task<int> DeleteQueenAsync(int queenId);
 
         int GetAllUserQueensCount(string userId);
 

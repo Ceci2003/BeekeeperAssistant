@@ -15,13 +15,16 @@
     public class QueenController : Controller
     {
         private readonly IQueenService queenService;
+        private readonly IApiaryService apiaryService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public QueenController(
             IQueenService queenService,
+            IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager)
         {
             this.queenService = queenService;
+            this.apiaryService = apiaryService;
             this.userManager = userManager;
         }
 
@@ -76,7 +79,7 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var queenId = await this.queenService
+            var beehiveId = await this.queenService
                 .CreateUserQueenAsync(
                 user.Id,
                 inputModel.BeehiveId,
@@ -89,14 +92,17 @@
                 inputModel.Color,
                 inputModel.Breed);
 
-            return this.Redirect($"/Queen/ById/{queenId}");
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+
+            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            await this.queenService.DeleteQueenAsync(id);
-            return this.RedirectToAction(nameof(this.All));
+            var beehiveId = await this.queenService.DeleteQueenAsync(id);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
         public IActionResult Edit(int id)
@@ -108,8 +114,10 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditQueenInutModel inputModel)
         {
-            var queenId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
-            return this.Redirect($"/Queen/ById/{queenId}");
+            var beehiveId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+
+            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
     }
 }

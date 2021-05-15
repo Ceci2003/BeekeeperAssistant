@@ -95,14 +95,19 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBeehiveInputModel inputModel)
+        public async Task<IActionResult> Create(int? id, CreateBeehiveInputModel inputModel)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
             if (!this.ModelState.IsValid)
             {
+                if (id == null)
+                {
+                    inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                }
+
                 return this.View(inputModel);
             }
-
-            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var beehiveId = await this.beehiveService
                 .CreateUserBeehiveAsync(

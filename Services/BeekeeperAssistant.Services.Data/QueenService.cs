@@ -55,15 +55,15 @@
             beehive.QueenId = queen.Id;
             await this.queenRepository.SaveChangesAsync();
 
-            return queen.Id;
+            return queen.BeehiveId;
         }
 
-        // TODO: Refactor Code!
-        public async Task DeleteQueenAsync(int queenId)
+        public async Task<int> DeleteQueenAsync(int queenId)
         {
             var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
             this.queenRepository.HardDelete(queen);
             await this.queenRepository.SaveChangesAsync();
+            return queen.BeehiveId;
         }
 
         public async Task<int> EditQueenAsync(
@@ -89,7 +89,7 @@
             queen.Breed = queenBreed;
 
             await this.queenRepository.SaveChangesAsync();
-            return queen.Id;
+            return queen.BeehiveId;
         }
 
         public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)

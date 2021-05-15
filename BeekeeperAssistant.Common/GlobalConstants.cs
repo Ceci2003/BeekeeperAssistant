@@ -18,7 +18,7 @@
 
         // Pagination values
         public const int ApiariesPerPage = 5;
-        public const int BeehivesPerPage = 25;
-        public const int QueensPerPage = 25;
+        public const int BeehivesPerPage = 12;
+        public const int QueensPerPage = 3;
     }
 }

@@ -25,10 +25,13 @@
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
-    <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create">
-        <i class="fas fa-plus-square pr-2"></i>
-        Създайте нов кошер
-    </a>
+    <div class="page-controls">
+        <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel"><i class="fas fa-file-download"></i> Excel</a>
+        <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create">
+            <i class="fas fa-plus-square pr-2"></i>
+            Създайте нов кошер
+        </a>
+    </div>
     <table class="data-table">
         <thead>
             <tr>
@@ -52,8 +55,10 @@
                     </td>
                     <td>@Html.DisplayFor(x => beehive.BeehiveType)</td>
                     <td>@Html.DisplayFor(x => beehive.BeehiveSystem)</td>
-                    <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">@Html.DisplayFor(x =>
-                    beehive.BeehivePower)</td>
+                    <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">
+                        @Html.DisplayFor(x =>
+                    beehive.BeehivePower)
+                    </td>
                     <td class="edit">
                         <div>
                             @*TODO: Make Web api that bookmarks and use templating engine to generate html*@

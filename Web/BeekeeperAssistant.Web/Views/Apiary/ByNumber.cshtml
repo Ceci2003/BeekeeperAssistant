@@ -79,10 +79,13 @@
     </div>
 
     <h2 class="title-0 left">Кошери</h2>
-    <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">
-        <i class="fas fa-plus-square pr-2"></i>
-        Създайте нов кошер
-    </a>
+    <div class="page-controls">
+        <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel" asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+        <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">
+            <i class="fas fa-plus-square pr-2"></i>
+            Създайте нов кошер
+        </a>
+    </div>
     <table class="data-table">
         <thead>
             <tr>

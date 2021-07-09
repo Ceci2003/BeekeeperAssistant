@@ -206,10 +206,13 @@ li {
 
 /* Buttons */
 .btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 10px 20px;
   border: 1px solid var(--main-background);
-  border-radius: 3px;
-  margin-bottom: 10px;
+  border-radius: 5px;
+  /* margin-bottom: 10px; */
   font-size: 16px;
 }
 
@@ -295,6 +298,27 @@ li {
 
 .btn.delete:hover {
   background-color: var(--red);
+}
+
+/* Page Controls */
+.page-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.export-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.export-file.excel {
+  border: 2px solid var(--green-hover);
+  border-radius: 5px;
+  color: var(--green-hover);
+  width: 90px;
 }
 
 /* Tables */

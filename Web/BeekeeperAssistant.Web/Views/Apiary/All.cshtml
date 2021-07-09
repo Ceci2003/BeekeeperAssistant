@@ -20,10 +20,13 @@
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
-    <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
-        <i class="fas fa-plus-square pr-2"></i>
-        Създайте нов пчелин
-    </a>
+    <div class="page-controls">
+        <a class="export-file excel" asp-controller="Apiary" asp-action="ExportToExcel"><i class="fas fa-file-download"></i> Excel</a>
+        <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
+            <i class="fas fa-plus-square pr-2"></i>
+            Създайте нов пчелин
+        </a>
+    </div>
     <table class="data-table">
         <thead>
             <tr>

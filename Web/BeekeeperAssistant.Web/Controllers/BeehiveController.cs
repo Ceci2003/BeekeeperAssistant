@@ -9,6 +9,7 @@
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Services.Messaging;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
@@ -25,17 +26,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
         private readonly IHarvestService harvestService;
+        private readonly IEmailSender emailSender;
 
         public BeehiveController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
             IBeehiveService beehiveService,
-            IHarvestService harvestService)
+            IHarvestService harvestService,
+            IEmailSender emailSender)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
             this.harvestService = harvestService;
+            this.emailSender = emailSender;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -128,7 +132,6 @@
                 inputModel.HasPropolisCatcher);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 

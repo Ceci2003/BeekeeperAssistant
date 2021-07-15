@@ -30,6 +30,37 @@
   --queen-color-hover: #d9695d;
 }
 
+p::selection,
+a::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection,
+label::selection,
+span::selection,
+li::selection,
+input::selection,
+select::selection,
+textarea::selection,
+th::selection,
+td::selection,
+img::selection {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+input,
+select,
+textarea {
+  outline: none;
+  font-size: 16px;
+  border: 2px solid var(--lightgray);
+  caret-color: var(--orange);
+  /* border-radius: 5px; */
+}
+
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -168,6 +199,9 @@ body {
 }
 
 .form-box-bg {
+  display: grid;
+  align-items: center;
+  justify-content: center;
   height: 580px;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(/img/banner.jpg);
@@ -177,20 +211,16 @@ body {
 
 /* Forms */
 .form-box {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
-  left: 58%;
+  left: 58%; */
   padding: 40px;
-  transform: translate(-50%, -50%);
-  /* background: rgba(0,0,0,.5); */
+  /* transform: translate(-50%, -50%); */
+  background: rgba(0,0,0,.5);
   box-sizing: border-box;
   box-shadow: 0px 0px 20px rgba(242, 148, 34, 0.3);
   color: var(--white);
   width: 450px;
-}
-
-.form-box.login-register {
-  left: 50%;
 }
 
 .form-box.login-register form {
@@ -294,7 +324,9 @@ span.error-msg {
 /* Footer */
 
 footer {
-  /* position: absolute; */
+  /* position: absolute;
+  left: 0;
+  bottom: 0; */
   width: 100%;
   background-color: #110400;
   border-top: 5px solid var(--beehive-color);

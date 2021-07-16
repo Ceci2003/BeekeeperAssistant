@@ -16,7 +16,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -24,54 +24,61 @@
 
 <div class="content">
     <div class="form-box">
-        <a class="back" asp-controller="Queen" asp-action="All">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-        <h2 class="title-2">@ViewData["Title"]</h2>
         <form asp-controller="Queen" asp-action="Edit" method="post">
-            <div class="input-box">
-                <label asp-for="Color"></label>
-                <select asp-for="Color" asp-items="@Html.GetEnumSelectList<QueenColor>()"></select>
-                <span class="error-msg" asp-validation-for="Color"></span>
+            <a class="back-arrow" asp-controller="Queen" asp-action="All">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>@ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            <div>
+                <div class="input-group">
+                    <label asp-for="Color"></label>
+                    <select asp-for="Color" asp-items="@Html.GetEnumSelectList<QueenColor>()"></select>
+                    <span class="error-msg" asp-validation-for="Color"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="FertilizationDate"></label>
+                    <input asp-for="FertilizationDate" />
+                    <span class="error-msg" asp-validation-for="FertilizationDate"></span>
+                </div>
             </div>
-            <div class="input-box">
-                <label asp-for="FertilizationDate"></label>
-                <input asp-for="FertilizationDate" />
-                <span class="error-msg" asp-validation-for="FertilizationDate"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="GivingDate"></label>
+                    <input asp-for="GivingDate" />
+                    <span class="error-msg" asp-validation-for="GivingDate"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="QueenType"></label>
+                    <select asp-for="QueenType" asp-items="@Html.GetEnumSelectList<QueenType>()"></select>
+                    <span class="error-msg" asp-validation-for="QueenType"></span>
+                </div>
             </div>
-            <div class="input-box">
-                <label asp-for="GivingDate"></label>
-                <input asp-for="GivingDate" />
-                <span class="error-msg" asp-validation-for="GivingDate"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="Breed"></label>
+                    <select asp-for="Breed" asp-items="@Html.GetEnumSelectList<QueenBreed>()"></select>
+                    <span class="error-msg" asp-validation-for="Breed"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="Temperament"></label>
+                    <input asp-for="Temperament" />
+                    <span class="error-msg" asp-validation-for="Temperament"></span>
+                </div>
             </div>
-            <div class="input-box">
-                <label asp-for="QueenType"></label>
-                <select asp-for="QueenType" asp-items="@Html.GetEnumSelectList<QueenType>()"></select>
-                <span class="error-msg" asp-validation-for="QueenType"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="Origin"></label>
+                    <input asp-for="Origin" />
+                    <span class="error-msg" asp-validation-for="Origin"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="HygenicHabits"></label>
+                    <input asp-for="HygenicHabits" />
+                    <span class="error-msg" asp-validation-for="HygenicHabits"></span>
+                </div>
             </div>
-            <div class="input-box">
-                <label asp-for="Breed"></label>
-                <select asp-for="Breed" asp-items="@Html.GetEnumSelectList<QueenBreed>()"></select>
-                <span class="error-msg" asp-validation-for="Breed"></span>
-            </div>
-            <div class="input-box">
-                <label asp-for="Origin"></label>
-                <input asp-for="Origin" />
-                <span class="error-msg" asp-validation-for="Origin"></span>
-            </div>
-            <div class="input-box">
-                <label asp-for="Temperament"></label>
-                <input asp-for="Temperament" />
-                <span class="error-msg" asp-validation-for="Temperament"></span>
-            </div>
-            <div class="input-box">
-                <label asp-for="HygenicHabits"></label>
-                <input asp-for="HygenicHabits" />
-                <span class="error-msg" asp-validation-for="HygenicHabits"></span>
-            </div>
-
             <input type="hidden" asp-for="BeehiveId" />
-
             <div class="btn-group">
                 <input class="btn queen" type="submit" value="Редактирай кралица" />
             </div>

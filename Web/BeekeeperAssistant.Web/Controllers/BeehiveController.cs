@@ -26,20 +26,17 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
         private readonly IHarvestService harvestService;
-        private readonly IEmailSender emailSender;
 
         public BeehiveController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
             IBeehiveService beehiveService,
-            IHarvestService harvestService,
-            IEmailSender emailSender)
+            IHarvestService harvestService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
             this.harvestService = harvestService;
-            this.emailSender = emailSender;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -182,9 +179,15 @@
 
         public async Task<IActionResult> ExportToExcel(int? id)
         {
-            // ToDo: Add Export by apiary Id
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveDataViewModel>(currentUser.Id).ToList();
+
+            // ToDo: Fix this
+            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveDataViewModel>(currentUser.Id);
+
+            if (id != null)
+            {
+                beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveDataViewModel>(id.Value);
+            }
 
             ExcelPackage pck = new ExcelPackage();
             ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");

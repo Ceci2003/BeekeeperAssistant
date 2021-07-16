@@ -39,7 +39,7 @@
             <div>
                 <div class="input-group">
                     <label asp-for="@Model.Number"></label>
-                    <input asp-for="@Model.Number" />
+                    <input asp-for="@Model.Number" min="1" />
                     <span class="" asp-validation-for="@Model.Number"></span>
                 </div>
                 @if (Model.AllApiaries != null)

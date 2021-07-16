@@ -23,42 +23,45 @@
 
 <div class="content">
     <div class="form-box">
-        <a class="back" asp-controller="Apiary" asp-action="All"><i class="fas fa-arrow-left"></i></a>
-        <h2 class="title-2">@ViewData["Title"]</h2>
         <form asp-controller="Apiary" asp-action="Edit">
+            <a class="back-arrow" asp-controller="Apiary" asp-action="All">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>@ViewData["Title"]</h2>
+            <div asp-validation-summary="All"></div>
             <div class="input-apiary-number">
-                <div class="input-box">
+                <div class="input-group city-code">
                     <label asp-for="@Model.CityCode"></label>
                     <input type="text" asp-for="@Model.CityCode" />
                     <span class="error-msg" asp-validation-for="@Model.CityCode"></span>
                 </div>
-                <span>-</span>
-                <div class="input-box">
+                <span class="dash">-</span>
+                <div class="input-group">
                     <label asp-for="@Model.FarmNumber"></label>
                     <input type="text" asp-for="@Model.FarmNumber" />
                     <span class="error-msg" asp-validation-for="@Model.FarmNumber"></span>
                 </div>
             </div>
-            <br />
-            <div class="input-box">
-                <label asp-for="@Model.Name"></label>
-                <input type="text" asp-for="@Model.Name" />
-                <span class="error-msg" asp-validation-for="@Model.Name"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.Name"></label>
+                    <input type="text" asp-for="@Model.Name" />
+                    <span class="error-msg" asp-validation-for="@Model.Name"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Adress"></label>
+                    <input type="text" asp-for="@Model.Adress" />
+                    <span class="error-msg" asp-validation-for="@Model.Adress"></span>
+                </div>
             </div>
-            <br />
-            <div class="input-box">
-                <label asp-for="@Model.Adress"></label>
-                <input type="text" asp-for="@Model.Adress" />
-                <span class="error-msg" asp-validation-for="@Model.Adress"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.ApiaryType"></label>
+                    <select asp-for="@Model.ApiaryType"
+                        asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+                    <span class="error-msg" asp-validation-for="@Model.ApiaryType"></span>
+                </div>
             </div>
-            <br />
-            <div class="input-box">
-                <label asp-for="@Model.ApiaryType"></label>
-                <select asp-for="@Model.ApiaryType"
-                    asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-                <span class="error-msg" asp-validation-for="@Model.ApiaryType"></span>
-            </div>
-            <br />
             <div class="btn-group">
                 <input class="btn apiary" type="submit" value="Редактирай" />
             </div>

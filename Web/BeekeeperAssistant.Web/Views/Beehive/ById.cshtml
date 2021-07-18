@@ -19,7 +19,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -173,11 +173,12 @@
         </a>
         <table>
             <thead>
-            <th>Име</th>
-            <th class="table-sdate">Дата</th>
-            <th>Продукт</th>
-            <th class="table-amount">Количество</th>
-            <th>Бележка</th>
+                <th>Име</th>
+                <th class="table-sdate">Дата</th>
+                <th>Продукт</th>
+                <th class="table-amount">Количество</th>
+                <th>Бележка</th>
+                <th>Редактиране</th>
             </thead>
             <tbody>
                 @foreach (var harvest in Model.Harvests)
@@ -211,6 +212,19 @@
                         </td>
                         <td>
                             @harvest.Note
+                        </td>
+                        <td class="edit">
+                            <div>
+                                <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                asp-route-id="@harvest.Id">
+                                    <button type="submit" class="delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 }

@@ -7,6 +7,8 @@
 
     public class HarvestDatavVewModel : IMapFrom<Harvest>
     {
+        public int Id { get; set; }
+
         public int BeehiveId { get; set; }
 
         public virtual Beehive Beehive { get; set; }

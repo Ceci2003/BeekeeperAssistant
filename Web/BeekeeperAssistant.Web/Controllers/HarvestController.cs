@@ -89,16 +89,21 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+            var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(inputModel.BeehiveId);
+
             await this.harvestService.DeleteHarvestAsync(id);
-            return this.RedirectToAction(nameof(this.All));
+
+            return this.Redirect($"/Beehive/{beehive.ApiaryNumber}/{beehive.Id}");
         }
 
         public IActionResult Edit(int id)
         {
-            var inputModel = this.harvestService.GetHarvestById<EditBeehiveInputModel>(id);
+            var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
             return this.View(inputModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Edit(int id, EditHarvestInputModel inputModel)
         {
             var harvestId = await this.harvestService.EditHarvestAsync(

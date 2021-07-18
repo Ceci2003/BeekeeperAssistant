@@ -220,6 +220,7 @@ p::selection, a::selection, h1::selection, h2::selection, h3::selection, h4::sel
     /* margin-bottom: 10px; */
     font-size: 16px;
     user-select: none;
+    cursor: pointer;
 }
 
 .btn i {
@@ -442,6 +443,7 @@ td.edit div button.delete {
     background: none;
     border: none;
     font-size: 15px;
+    cursor: pointer;
 }
 
 td.edit div button.delete:hover {
@@ -709,6 +711,10 @@ span.error-msg {
 
 .input-apiary-number .city-code input {
     text-align: right;
+}
+
+textarea {
+    resize: none;
 }
 
 /* Slider Yes/No */

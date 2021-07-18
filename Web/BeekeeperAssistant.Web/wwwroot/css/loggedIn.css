@@ -251,7 +251,7 @@ p::selection, a::selection, h1::selection, h2::selection, h3::selection, h4::sel
     background-color: var(--queen-color);
 }
 
-.btn.beehive:hover {
+.btn.queen:hover {
     background-color: var(--queen-color-hover);
 }
 

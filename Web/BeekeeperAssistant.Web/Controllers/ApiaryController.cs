@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
     using System;
+    using System.Drawing;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -14,6 +15,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
+    using OfficeOpenXml;
+    using OfficeOpenXml.Style;
 
     [Authorize]
     public class ApiaryController : BaseController
@@ -143,6 +146,48 @@
         {
             await this.apiaryService.DeleteApiaryByIdAsync(id);
             return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> ExportToExcel()
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryDataViewModel>(currentUser.Id);
+
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+            ws.Cells["A1:B1"].Merge = true;
+            ws.Cells["A1"].Value = "Доклад - Кошери";
+            ws.Cells["A2:B2"].Merge = true;
+            ws.Cells["A2"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
+
+            ws.Cells["A4"].Value = "Номер";
+            ws.Cells["B4"].Value = "Адрес";
+            ws.Cells["C4"].Value = "Име";
+            ws.Cells["D4"].Value = "Вид";
+            // ws.Cells["E4"].Value = "Брой кошери";
+
+            ws.Cells["A4:E4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["A4:E4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
+            ws.Cells["A4:E4"].Style.Font.Color.SetColor(Color.White);
+
+            int rowIndex = 5;
+            foreach (var apiary in apiaries)
+            {
+                ws.Cells[$"A{rowIndex}"].Value = apiary.Number;
+                ws.Cells[$"B{rowIndex}"].Value = apiary.Adress;
+                ws.Cells[$"C{rowIndex}"].Value = apiary.Name == null ? "-" : apiary.Name;
+                ws.Cells[$"D{rowIndex}"].Value = apiary.ApiaryType;
+                // ws.Cells[$"D{rowIndex}"].Value = apiary.Beehives.ToList().Count();
+
+                rowIndex++;
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+
+            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

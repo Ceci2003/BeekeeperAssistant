@@ -60,32 +60,6 @@
                     <select asp-for="@Model.BeehivePower" asp-items="@Html.GetEnumSelectList<BeehivePower>()"></select>
                 </div>
             </div>
-            @* <div class="input-box">
-                <label asp-for="@Model.Number"></label>
-                <input asp-for="@Model.Number" />
-                <span class="error-msg" asp-validation-for="@Model.Number"></span>
-            </div>
-            <div class="input-box">
-                <label asp-for="@Model.Date"></label>
-                <input asp-for="@Model.Date" />
-                <span class="error-msg" asp-validation-for="@Model.Date"></span>
-            </div>
-            <div class="input-box">
-                <label asp-for="@Model.ApiaryId"></label>
-                <select asp-for="@Model.ApiaryId" asp-items="keyValuePairApiaries"></select>
-            </div>
-            <div class="input-box">
-                <label asp-for="@Model.BeehiveSystem"></label>
-                <select asp-for="@Model.BeehiveSystem" asp-items="@Html.GetEnumSelectList<BeehiveSystem>()"></select>
-            </div>
-            <div class="input-box">
-                <label asp-for="@Model.BeehiveType"></label>
-                <select asp-for="@Model.BeehiveType" asp-items="@Html.GetEnumSelectList<BeehiveType>()"></select>
-            </div>
-            <div class="input-box">
-                <label asp-for="@Model.BeehivePower"></label>
-                <select asp-for="@Model.BeehivePower" asp-items="@Html.GetEnumSelectList<BeehivePower>()"></select>
-            </div> *@
             <div class="check">
                 <div class="input-group check">
                     <label asp-for="@Model.HasDevice"></label>

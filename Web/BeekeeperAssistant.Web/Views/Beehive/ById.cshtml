@@ -105,8 +105,8 @@
             </div>
         </div>
     </div>
-    <h2 class="title-1">Кралица</h2>
     <div class="queen-preview">
+        <h2 class="title-1">Кралица</h2>
         @if (Model.HasQueen)
         {
             string imgPath = "queen" + Model.Queen.Color + ".png";
@@ -164,13 +164,14 @@
         }
     </div>
 
-
-
-    <h2 class="title-1">Добиви</h2>
     <div class="harvests-data">
-        <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
-            Добавете добив
-        </a>
+        <h2>Добиви</h2>
+        <div class="page-controls">
+            <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel" asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+            <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+                Добавете добивs
+            </a>
+        </div>
         <table>
             <thead>
                 <th>Име</th>

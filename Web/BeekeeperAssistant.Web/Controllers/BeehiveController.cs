@@ -97,6 +97,8 @@
                 inputModel.ApiaryId = id.Value;
             }
 
+            inputModel.Date = DateTime.UtcNow.Date;
+
             return this.View(inputModel);
         }
 

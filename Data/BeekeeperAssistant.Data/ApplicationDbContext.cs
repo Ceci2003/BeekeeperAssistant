@@ -30,6 +30,10 @@
 
         public DbSet<Harvest> Harvests { get; set; }
 
+        public DbSet<Treatment> Treatments { get; set; }
+
+        public DbSet<TreatedBeehive> TreatedBeehives { get; set; }
+
         public DbSet<Duty> Duties { get; set; }
 
         public DbSet<Queen> Queens { get; set; }
@@ -59,6 +63,19 @@
                 .HasOne(b => b.Queen)
                 .WithOne(q => q.Beehive)
                 .HasForeignKey<Queen>(q => q.BeehiveId);
+
+            builder.Entity<TreatedBeehive>()
+                .HasKey(tb => new { tb.BeehiveId, tb.TreatmentId });
+
+            builder.Entity<TreatedBeehive>()
+                .HasOne<Beehive>(b => b.Beehive)
+                .WithMany(b => b.TreatedBeehives)
+                .HasForeignKey(b => b.BeehiveId);
+
+            builder.Entity<TreatedBeehive>()
+                .HasOne<Treatment>(t => t.Treatment)
+                .WithMany(t => t.TreatedBeehives)
+                .HasForeignKey(t => t.TreatmentId);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

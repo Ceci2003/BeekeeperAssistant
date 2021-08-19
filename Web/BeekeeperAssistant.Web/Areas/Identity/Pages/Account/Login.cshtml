@@ -9,6 +9,7 @@
         <h2 class="title-2">@ViewData["Title"]</h2>
         <hr />
         <form id="account" method="post">
+            <div class="error-msg" asp-validation-summary="All"></div>
             <div class="input-box">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />

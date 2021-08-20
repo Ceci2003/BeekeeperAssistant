@@ -8,6 +8,12 @@
 
     public class Apiary : BaseDeletableModel<int>
     {
+        public Apiary()
+        {
+            this.Beehives = new HashSet<Beehive>();
+            this.ApiaryHelpers = new HashSet<ApiaryHelper>();
+        }
+
         public string Number { get; set; }
 
         public string CreatorId { get; set; }
@@ -21,5 +27,7 @@
         public string Adress { get; set; }
 
         public virtual ICollection<Beehive> Beehives { get; set; }
+
+        public virtual ICollection<ApiaryHelper> ApiaryHelpers { get; set; }
     }
 }

@@ -1,9 +1,10 @@
-﻿namespace BeekeeperAssistant.Data.Models
-{
-    using BeekeeperAssistant.Data.Common.Models;
-    using System;
-    using System.Collections.Generic;
+﻿using BeekeeperAssistant.Data.Common.Models;
 
+using System;
+using System.Collections.Generic;
+
+namespace BeekeeperAssistant.Data.Models
+{
     public class Treatment : BaseDeletableModel<int>
     {
         public DateTime DateOfTreatment { get; set; }

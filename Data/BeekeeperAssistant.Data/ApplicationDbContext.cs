@@ -38,6 +38,8 @@
 
         public DbSet<Queen> Queens { get; set; }
 
+        public DbSet<ApiaryHelper> ApiaryHelpers { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -76,6 +78,9 @@
                 .HasOne<Treatment>(t => t.Treatment)
                 .WithMany(t => t.TreatedBeehives)
                 .HasForeignKey(t => t.TreatmentId);
+
+            builder.Entity<ApiaryHelper>()
+                .HasKey(ah => new { ah.ApiaryId, ah.UserId });
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

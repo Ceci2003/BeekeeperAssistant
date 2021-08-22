@@ -37,19 +37,19 @@
         [HttpPost]
         public async Task<IActionResult> Create(string data)
         {
-            var treatment = new Treatment
-            {
-                DateOfTreatment = DateTime.Now,
-                Name = "",
-                Note = "",
-                Disease = "",
-                Medication = "",
-                InputAs = InputAs.PerHive,
-                Quantity = 3,
-                Doses = Dose.Strips,
-            };
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var id = await this.treatmentService.CreateTreatment(DateTime.Now, "test", "note", "disease", "medicament", InputAs.PerHive, 3, Dose.Strips, 1);
+            var id = await this.treatmentService.CreateTreatment(
+                currentUser.Id,
+                DateTime.Now,
+                "test",
+                "note",
+                "disease",
+                "medicament",
+                InputAs.PerHive,
+                3,
+                Dose.Strips,
+                new List<int> { 1 });
 
             return this.View(id);
         }

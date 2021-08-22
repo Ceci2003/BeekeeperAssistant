@@ -1,15 +1,15 @@
-﻿using BeekeeperAssistant.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Services.Data
+﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Models;
+
     public interface ITreatmentService
     {
         Task<int> CreateTreatment(
+            string creatorId,
             DateTime dateOfTreatment,
             string name,
             string note,
@@ -18,6 +18,6 @@ namespace BeekeeperAssistant.Services.Data
             InputAs inputAs,
             double quantity,
             Dose dose,
-            int beehiveId);
+            List<int> beehiveIds);
     }
 }

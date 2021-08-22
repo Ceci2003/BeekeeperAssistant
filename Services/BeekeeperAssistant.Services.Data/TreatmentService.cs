@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
@@ -22,10 +23,11 @@
             this.treatedBeehivesRepository = treatedBeehivesRepository;
         }
 
-        public async Task<int> CreateTreatment(DateTime dateOfTreatment, string name, string note, string disease, string medication, InputAs inputAs, double quantity, Dose dose, int beehiveId)
+        public async Task<int> CreateTreatment(string creatorId, DateTime dateOfTreatment, string name, string note, string disease, string medication, InputAs inputAs, double quantity, Dose dose, List<int> beehiveIds)
         {
             var treatment = new Treatment
             {
+                CreatorId = creatorId,
                 DateOfTreatment = dateOfTreatment,
                 Name = name,
                 Note = note,
@@ -39,14 +41,17 @@
             await this.treatmentRepository.AddAsync(treatment);
             await this.treatmentRepository.SaveChangesAsync();
 
-            var treatedBeehive = new TreatedBeehive
+            foreach (var id in beehiveIds)
             {
-                BeehiveId = beehiveId,
-                TreatmentId = treatment.Id,
-            };
+                var treatedBeehive = new TreatedBeehive
+                {
+                    BeehiveId = id,
+                    TreatmentId = treatment.Id,
+                };
 
-            await this.treatedBeehivesRepository.AddAsync(treatedBeehive);
-            await this.treatedBeehivesRepository.SaveChangesAsync();
+                await this.treatedBeehivesRepository.AddAsync(treatedBeehive);
+                await this.treatedBeehivesRepository.SaveChangesAsync();
+            }
 
             return treatment.Id;
         }

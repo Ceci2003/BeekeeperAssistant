@@ -12,7 +12,7 @@
         [Display(Name = "Дата на третиране")]
         public DateTime DateOfTreatment { get; set; }
 
-        [Display(Name = "Име на третиарането")]
+        [Display(Name = "Име на третирането")]
         public string Name { get; set; }
 
         [Display(Name = "Бележка")]
@@ -27,7 +27,7 @@
         public string Medication { get; set; }
 
         [Required]
-        [Display(Name = "Виведете като")]
+        [Display(Name = "Въведете като")]
         public InputAs InputAs { get; set; }
 
         [Required]

@@ -27,6 +27,12 @@
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
+    <div class="page-controls">
+        <a class="btn beehive-create" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
+            <i class="fas fa-notes-medical"></i>
+            Добавете третиране
+        </a>
+    </div>
     <div class="data-view">
         <div class="qr-code">
             <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255" alt="W3Schools" width="250" height="250">
@@ -177,12 +183,12 @@
         </div>
         <table>
             <thead>
-                <th>Име</th>
-                <th class="table-sdate">Дата</th>
-                <th>Продукт</th>
-                <th class="table-amount">Количество</th>
-                <th>Бележка</th>
-                <th>Редактиране</th>
+            <th>Име</th>
+            <th class="table-sdate">Дата</th>
+            <th>Продукт</th>
+            <th class="table-amount">Количество</th>
+            <th>Бележка</th>
+            <th>Редактиране</th>
             </thead>
             <tbody>
                 @foreach (var harvest in Model.Harvests)
@@ -223,7 +229,7 @@
                                     <i class="far fa-edit"></i>
                                 </a>
                                 <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                asp-route-id="@harvest.Id">
+                                      asp-route-id="@harvest.Id">
                                     <button type="submit" class="delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>

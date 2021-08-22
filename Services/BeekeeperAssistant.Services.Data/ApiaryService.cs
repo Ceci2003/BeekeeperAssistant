@@ -110,6 +110,13 @@
                 .Apiary
                 .Number;
 
+        public int GetApiaryIdByBeehiveId(int beehiveId) =>
+            this.beehiveRepository.AllAsNoTracking()
+                .Include(a => a.Apiary)
+                .FirstOrDefault(b => b.Id == beehiveId)
+                .Apiary
+                .Id;
+
         public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId) =>
             this.apiaryRepository.AllAsNoTracking()
                 .Where(a => a.CreatorId == userId)

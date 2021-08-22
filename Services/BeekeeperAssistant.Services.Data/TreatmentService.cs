@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
@@ -35,7 +36,7 @@
                 Medication = medication,
                 InputAs = inputAs,
                 Quantity = quantity,
-                Doses = dose,
+                Dose = dose,
             };
 
             await this.treatmentRepository.AddAsync(treatment);
@@ -55,5 +56,11 @@
 
             return treatment.Id;
         }
+
+        public int GetAllUserTreatmentsCount(string userId) =>
+           this.treatmentRepository
+               .AllAsNoTracking()
+               .Where(a => a.CreatorId == userId)
+               .Count();
     }
 }

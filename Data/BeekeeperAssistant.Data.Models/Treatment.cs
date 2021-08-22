@@ -25,7 +25,7 @@
 
         public double Quantity { get; set; }
 
-        public Dose Doses { get; set; }
+        public Dose Dose { get; set; }
 
         public ICollection<TreatedBeehive> TreatedBeehives { get; set; }
     }

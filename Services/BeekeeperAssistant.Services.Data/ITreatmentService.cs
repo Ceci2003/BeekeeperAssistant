@@ -19,5 +19,7 @@
             double quantity,
             Dose dose,
             List<int> beehiveIds);
+
+        int GetAllUserTreatmentsCount(string userId);
     }
 }

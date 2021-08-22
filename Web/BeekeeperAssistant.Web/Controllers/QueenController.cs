@@ -65,6 +65,7 @@
             var inputModel = new CreateQueenInputModel
             {
                 BeehiveId = id,
+                GivingDate = DateTime.UtcNow.Date,
             };
 
             return this.View(inputModel);

@@ -25,224 +25,260 @@
     </div>
 </div>
 
-<div class="content">
-    <h1 class="title-1">@ViewData["Title"]</h1>
-    <div class="page-controls">
-        <a class="btn beehive-create" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
-            <i class="fas fa-notes-medical"></i>
-            Добавете третиране
-        </a>
-    </div>
-    <div class="data-view">
-        <div class="qr-code">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255" alt="W3Schools" width="250" height="250">
-        </div>
-        <div class="apiary-info">
-            <table>
-                <tbody>
-                    <tr>
-                        <th scope="row">Номер:</th>
-                        <td>@Model.Number</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Пчелин:</th>
-                        <td>
-                            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Сила:</th>
-                        <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">
-                            @Html.DisplayFor(x =>
-                            Model.BeehivePower)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Система:</th>
-                        <td>@Html.DisplayFor(x => Model.BeehiveSystem)</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Вид:</th>
-                        <td>@Html.DisplayFor(x => Model.BeehiveType)</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Създаден на:</th>
-                        <td>
-                            <time datetime="@Model.Date.ToString("O")"></time>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Апарат за майки:</th>
-                        @if (Model.HasDevice)
-                        {
-                            <td><b>Поставен</b></td>
-                        }
-                        else
-                        {
-                            <td>няма</td>
-                        }
-                    </tr>
-                    <tr>
-                        <th scope="row">Решятка за прополис:</th>
-                        @if (Model.HasPolenCatcher)
-                        {
-                            <td><b>Поставена</b></td>
-                        }
-                        else
-                        {
-                            <td>няма</td>
-                        }
-                    </tr>
-                    <tr>
-                        <th scope="row">Прашецоуловител:</th>
-                        @if (Model.HasPropolisCatcher)
-                        {
-                            <td><b>Поставен</b></td>
-                        }
-                        else
-                        {
-                            <td>няма</td>
-                        }
-                    </tr>
-                </tbody>
-            </table>
-            <div class="data-edit">
-                <a class="btn edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@Model.Id">Редактирай</a>
-                <form asp-controller="Beehive" asp-action="Delete" asp-route-id="@Model.Id">
-                    <input class="btn delete" type="submit" value="Изтрий" />
-                </form>
+
+
+
+
+<h1 class="tab-title title-1">@ViewData["Title"]</h1>
+<div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'Beehive')" id="defaultOpen"><i class="fas fa-archive"></i>Кошер №@Model.Number</button>
+    <button class="tablinks" onclick="openTab(event, 'Queen')"><i class="fas fa-crown"></i>Майка</button>
+    <button class="tablinks" onclick="openTab(event, 'Inspections')"><i class="far fa-calendar-check"></i>Прегледи</button>
+    <button class="tablinks" onclick="openTab(event, 'Treatments')"><i class="fas fa-notes-medical"></i>Третирания</button>
+    <button class="tablinks" onclick="openTab(event, 'Harvests')"><i class="fas fa-box"></i>Добиви</button>
+</div>
+
+<div class="tabs-body">
+    <div id="Beehive" class="tabcontent" style="display: block;">
+        <div class="data-view">
+            <div class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255"
+                    alt="W3Schools" width="250" height="250">
+            </div>
+            <div class="apiary-info">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Номер:</th>
+                            <td>@Model.Number</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Пчелин:</th>
+                            <td>
+                                <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Сила:</th>
+                            <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">
+                                @Html.DisplayFor(x =>
+                                Model.BeehivePower)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Система:</th>
+                            <td>@Html.DisplayFor(x => Model.BeehiveSystem)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Вид:</th>
+                            <td>@Html.DisplayFor(x => Model.BeehiveType)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Създаден на:</th>
+                            <td>
+                                <time datetime="@Model.Date.ToString("O")"></time>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Апарат за майки:</th>
+                            @if (Model.HasDevice)
+                            {
+                                <td><b>Поставен</b></td>
+                            }
+                            else
+                            {
+                                <td>няма</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th scope="row">Решятка за прополис:</th>
+                            @if (Model.HasPolenCatcher)
+                            {
+                                <td><b>Поставена</b></td>
+                            }
+                            else
+                            {
+                                <td>няма</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th scope="row">Прашецоуловител:</th>
+                            @if (Model.HasPropolisCatcher)
+                            {
+                                <td><b>Поставен</b></td>
+                            }
+                            else
+                            {
+                                <td>няма</td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="data-edit">
+                    <a class="btn edit" asp-controller="Beehive" asp-action="Edit"
+                        asp-route-id="@Model.Id">Редактирай</a>
+                    <form asp-controller="Beehive" asp-action="Delete" asp-route-id="@Model.Id">
+                        <input class="btn delete" type="submit" value="Изтрий" />
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <div class="queen-preview">
-        <h2 class="title-1">Кралица</h2>
-        @if (Model.HasQueen)
-        {
-            string imgPath = "queen" + Model.Queen.Color + ".png";
-            <img src="~/img/queen/@imgPath">
-            <table>
-                <tr>
-                    <th scope="row">Цвят:</th>
-                    <td>@Html.DisplayFor(x => Model.Queen.Color)</td>
-                </tr>
-                <tr>
-                    <th scope="row">Датана оплождане:</th>
-                    <td>
-                        <time datetime="@Model.Queen.FertilizationDate.ToString("O")"></time>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">Дата на придаване:</th>
-                    <td><time datetime="@Model.Queen.GivingDate.ToString("O")"></time></td>
-                </tr>
-                <tr>
-                    <th scope="row">Вид:</th>
-                    <td>@Html.DisplayFor(x => Model.Queen.QueenType)</td>
-                </tr>
-                <tr>
-                    <th scope="row">Порода:</th>
-                    <td>@Html.DisplayFor(x => Model.Queen.Breed)</td>
-                </tr>
-                <tr>
-                    <th scope="row">Произход:</th>
-                    <td>@Model.Queen.Origin</td>
-                </tr>
-                <tr>
-                    <th scope="row">Нрав:</th>
-                    <td>@Model.Queen.Temperament</td>
-                </tr>
-                <tr>
-                    <th scope="row">Хигиенни навици:</th>
-                    <td>@Model.Queen.HygenicHabits</td>
-                </tr>
-            </table>
-            <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">
-                Редактирайте кралицата
-            </a>
-            <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
-                <input class="btn delete" type="submit" value="Изтрий" />
-            </form>
-
-        }
-        else
-        {
-            <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
-                <i class="fas fa-plus-square pr-2"></i>
-                Добавете кралица
-            </a>
-        }
-    </div>
-
-    <div class="harvests-data">
-        <h2>Добиви</h2>
-        <div class="page-controls">
-            <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel" asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-            <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
-                Добавете добивs
-            </a>
-        </div>
-        <table>
-            <thead>
-            <th>Име</th>
-            <th class="table-sdate">Дата</th>
-            <th>Продукт</th>
-            <th class="table-amount">Количество</th>
-            <th>Бележка</th>
-            <th>Редактиране</th>
-            </thead>
-            <tbody>
-                @foreach (var harvest in Model.Harvests)
-                {
+    <div id="Queen" class="tabcontent">
+        <div class="queen-preview">
+            <h2 class="title-1">Кралица</h2>
+            @if (Model.HasQueen)
+            {
+                string imgPath = "queen" + Model.Queen.Color + ".png";
+                <img src="~/img/queen/@imgPath">
+                <table>
                     <tr>
+                        <th scope="row">Цвят:</th>
+                        <td>@Html.DisplayFor(x => Model.Queen.Color)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Датана оплождане:</th>
                         <td>
-                            @harvest.HarvestName
-                        </td>
-                        <td class="table-sdate">
-                            <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
-                        </td>
-                        <td>
-                            @harvest.Product
-                            @if (harvest.Product == "Мед")
-                            {
-                                <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
-                            }
-                        </td>
-                        <td class="table-amount">
-                            @harvest.Amount
-                            @switch (harvest.Product)
-                            {
-                                case "млечице":
-                                case "отрова":
-                                    <span>гр.</span>
-                                    break;
-                                default:
-                                    <span>кг.</span>
-                                    break;
-                            }
-                        </td>
-                        <td>
-                            @harvest.Note
-                        </td>
-                        <td class="edit">
-                            <div>
-                                <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                      asp-route-id="@harvest.Id">
-                                    <button type="submit" class="delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
+                            <time datetime="@Model.Queen.FertilizationDate.ToString("O")"></time>
                         </td>
                     </tr>
-                }
-            </tbody>
-        </table>
-        @if (!Model.Harvests.Any())
-        {
-            <p>няма добавени добиви</p>
-        }
+                    <tr>
+                        <th scope="row">Дата на придаване:</th>
+                        <td><time datetime="@Model.Queen.GivingDate.ToString("O")"></time></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Вид:</th>
+                        <td>@Html.DisplayFor(x => Model.Queen.QueenType)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Порода:</th>
+                        <td>@Html.DisplayFor(x => Model.Queen.Breed)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Произход:</th>
+                        <td>@Model.Queen.Origin</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Нрав:</th>
+                        <td>@Model.Queen.Temperament</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Хигиенни навици:</th>
+                        <td>@Model.Queen.HygenicHabits</td>
+                    </tr>
+                </table>
+                <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">
+                    Редактирайте кралицата
+                </a>
+                <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
+                    <input class="btn delete" type="submit" value="Изтрий" />
+                </form>
+
+            }
+            else
+            {
+                <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
+                    <i class="fas fa-plus-square pr-2"></i>
+                    Добавете кралица
+                </a>
+            }
+        </div>
     </div>
+    <div id="Inspections" class="tabcontent">
+        <h3>Inspections</h3>
+        <p>Inspections page.</p>
+    </div>
+    <div id="Treatments" class="tabcontent">
+        <div class="page-controls">
+            <a class="btn beehive-create" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
+                <i class="fas fa-notes-medical"></i>
+                Добавете третиране
+            </a>
+        </div>
+    </div>
+    <div id="Harvests" class="tabcontent">
+        <div class="harvests-data">
+            <h2>Добиви</h2>
+            <div class="page-controls">
+                <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
+                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+                    Добавете добивs
+                </a>
+            </div>
+            <table>
+                <thead>
+                    <th>Име</th>
+                    <th class="table-sdate">Дата</th>
+                    <th>Продукт</th>
+                    <th class="table-amount">Количество</th>
+                    <th>Бележка</th>
+                    <th>Редактиране</th>
+                </thead>
+                <tbody>
+                    @foreach (var harvest in Model.Harvests)
+                    {
+                        <tr>
+                            <td>
+                                @harvest.HarvestName
+                            </td>
+                            <td class="table-sdate">
+                                <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
+                            </td>
+                            <td>
+                                @harvest.Product
+                                @if (harvest.Product == "Мед")
+                                {
+                                    <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                                }
+                            </td>
+                            <td class="table-amount">
+                                @harvest.Amount
+                                @switch (harvest.Product)
+                                {
+                                    case "млечице":
+                                    case "отрова":
+                                        <span>гр.</span>
+                                        break;
+                                    default:
+                                        <span>кг.</span>
+                                        break;
+                                }
+                            </td>
+                            <td>
+                                @harvest.Note
+                            </td>
+                            <td class="edit">
+                                <div>
+                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                    asp-route-id="@harvest.Id">
+                                        <button type="submit" class="delete">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (!Model.Harvests.Any())
+            {
+                <p>няма добавени добиви</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="content">
+
+
+
+
 </div>

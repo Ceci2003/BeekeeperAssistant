@@ -20,6 +20,6 @@
             Dose dose,
             List<int> beehiveIds);
 
-        int GetAllUserTreatmentsCount(string userId);
+        int GetAllUserTreatmentsForLastYearCount(string userId);
     }
 }

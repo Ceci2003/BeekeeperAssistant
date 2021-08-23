@@ -1,4 +1,5 @@
 ﻿@using BeekeeperAssistant.Common
+@model BeekeeperAssistant.Web.ViewModels.Home.IndexViewModel
 @{
     this.ViewData["Title"] = "Табло";
 }
@@ -69,6 +70,71 @@ else
                             <i class="fas fa-arrow-circle-right"></i>
                         </div>
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="dashboard-cards-list">
+            <div class="dashboard-card">
+                <div class="card-data-view">
+                    <a class="card-data-view" asp-controller="Apiary" asp-action="All">
+                        <p>@Model.ApiariesCount</p>
+                        <p>Създадени пчелина</p>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboard-card card-data-view">
+                <div class="card-data-view">
+                    <a class="card-data-view" asp-controller="Beehive" asp-action="All">
+                        <p>@Model.BeehivesCount</p>
+                        <p>Създадени кошера</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="dashboard-cards-list">
+            <div class="dashboard-card">
+                <div class="dashboard-card-body apiary">
+                    <a asp-controller="Treatments" asp-action="All">
+                        <div>
+                            <p>Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="dashboard-card-header apiary">
+                    <p>Третирания за сезона: @Model.TreatmentsCount</p>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card-body apiary">
+                    <a asp-controller="Treatments" asp-action="All">
+                        <div>
+                            <p>Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="dashboard-card-header apiary">
+                    <p>Третирания за сезона: @Model.TreatmentsCount</p>
+                </div>
+            </div>
+            <div class="dashboard-card">
+                <div class="dashboard-card-body apiary">
+                    <a asp-controller="Treatments" asp-action="All">
+                        <div>
+                            <p>Към списъка</p>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="dashboard-card-header apiary">
+                    <p>Третирания за сезона: @Model.TreatmentsCount</p>
                 </div>
             </div>
         </div>

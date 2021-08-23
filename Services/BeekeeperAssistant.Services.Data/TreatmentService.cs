@@ -57,10 +57,10 @@
             return treatment.Id;
         }
 
-        public int GetAllUserTreatmentsCount(string userId) =>
+        public int GetAllUserTreatmentsForLastYearCount(string userId) =>
            this.treatmentRepository
                .AllAsNoTracking()
-               .Where(a => a.CreatorId == userId)
+               .Where(t => t.CreatorId == userId && (DateTime.UtcNow.Year - t.DateOfTreatment.Year) <= 1)
                .Count();
     }
 }

@@ -31,15 +31,7 @@
 
         public async Task<IActionResult> Index()
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-
-            var viewModel = new IndexViewModel()
-            {
-                ApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id),
-                BeehivesCount = this.beehiveService.GetAllUserBeehivesCount(currentUser.Id),
-                TreatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id),
-            };
-            return this.View(viewModel);
+            return this.View();
         }
 
         public IActionResult Privacy()

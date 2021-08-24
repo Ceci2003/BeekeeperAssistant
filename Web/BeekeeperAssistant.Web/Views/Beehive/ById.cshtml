@@ -174,7 +174,7 @@
             else
             {
                 <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
-                    <i class="fas fa-plus-square pr-2"></i>
+                    <i class="fas fa-crown"></i>
                     Добавете кралица
                 </a>
             }
@@ -199,6 +199,7 @@
                 <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
                     asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                 <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+                    <i class="fas fa-box"></i>
                     Добавете добивs
                 </a>
             </div>

@@ -29,7 +29,7 @@
             this.treatmentService = treatmentService;
         }
 
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
             return this.View();
         }

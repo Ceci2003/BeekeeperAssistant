@@ -18,7 +18,8 @@
             BeehivePower beehivePower,
             bool hasDevice,
             bool hasPolenCatcher,
-            bool hasPropolisCatcher);
+            bool hasPropolisCatcher,
+            bool isItMovable);
 
         T GetBeehiveById<T>(int beehiveId);
 
@@ -36,7 +37,8 @@
             BeehivePower beehivePower,
             bool hasDevice,
             bool hasPolenCatcher,
-            bool hasPropolisCatcher);
+            bool hasPropolisCatcher,
+            bool isItMovable);
 
         IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0);
 

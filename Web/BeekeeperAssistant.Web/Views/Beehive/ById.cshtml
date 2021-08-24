@@ -76,6 +76,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <th scope="row">Подвижен:</th>
+                            @if (Model.IsItMovable)
+                            {
+                                <td><b>Да</b></td>
+                            }
+                            else
+                            {
+                                <td>Не</td>
+                            }
+                        </tr>
+                        <tr>
                             <th scope="row">Апарат за майки:</th>
                             @if (Model.HasDevice)
                             {
@@ -87,7 +98,7 @@
                             }
                         </tr>
                         <tr>
-                            <th scope="row">Решятка за прополис:</th>
+                            <th scope="row">Решетка за прополис:</th>
                             @if (Model.HasPolenCatcher)
                             {
                                 <td><b>Поставена</b></td>
@@ -122,7 +133,6 @@
     </div>
     <div id="Queen" class="tabcontent">
         <div class="queen-preview">
-            <h2 class="title-1">Кралица</h2>
             @if (Model.HasQueen)
             {
                 string imgPath = "queen" + Model.Queen.Color + ".png";
@@ -175,7 +185,7 @@
             {
                 <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
                     <i class="fas fa-crown"></i>
-                    Добавете кралица
+                    Добавете майка
                 </a>
             }
         </div>

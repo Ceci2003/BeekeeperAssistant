@@ -33,6 +33,8 @@
 
         public bool HasPropolisCatcher { get; set; }
 
+        public bool IsItMovable { get; set; }
+
         public string CreatorId { get; set; }
 
         public bool HasQueen { get; set; }

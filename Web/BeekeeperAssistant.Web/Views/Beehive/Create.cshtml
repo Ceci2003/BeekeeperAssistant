@@ -74,6 +74,13 @@
             </div>
             <div class="check">
                 <div class="input-group check">
+                    <label asp-for="@Model.IsItMovable"></label>
+                    <div class="slider-yes-no">
+                        <input asp-for="@Model.IsItMovable" />
+                        <label for="IsItMovable"></label>
+                    </div>
+                </div>
+                <div class="input-group check">
                     <label asp-for="@Model.HasDevice"></label>
                     <div class="slider-yes-no">
                         <input asp-for="@Model.HasDevice" />

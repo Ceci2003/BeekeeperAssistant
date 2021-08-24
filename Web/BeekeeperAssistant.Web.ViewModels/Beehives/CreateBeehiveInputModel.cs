@@ -47,6 +47,9 @@
         [Display(Name = "Решeтка за прополис")]
         public bool HasPropolisCatcher { get; set; }
 
+        [Display(Name = "Подвижен ли е")]
+        public bool IsItMovable { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

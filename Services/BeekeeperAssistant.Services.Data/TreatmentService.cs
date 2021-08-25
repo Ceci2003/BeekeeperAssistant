@@ -1,10 +1,14 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class TreatmentService : ITreatmentService
     {
@@ -22,10 +26,11 @@
             this.treatedBeehivesRepository = treatedBeehivesRepository;
         }
 
-        public async Task<int> CreateTreatment(DateTime dateOfTreatment, string name, string note, string disease, string medication, InputAs inputAs, double quantity, Dose dose, int beehiveId)
+        public async Task<int> CreateTreatment(string creatorId, DateTime dateOfTreatment, string name, string note, string disease, string medication, InputAs inputAs, double quantity, Dose dose, List<int> beehiveIds)
         {
             var treatment = new Treatment
             {
+                CreatorId = creatorId,
                 DateOfTreatment = dateOfTreatment,
                 Name = name,
                 Note = note,
@@ -33,22 +38,49 @@
                 Medication = medication,
                 InputAs = inputAs,
                 Quantity = quantity,
-                Doses = dose,
+                Dose = dose,
             };
 
             await this.treatmentRepository.AddAsync(treatment);
             await this.treatmentRepository.SaveChangesAsync();
 
-            var treatedBeehive = new TreatedBeehive
+            foreach (var id in beehiveIds)
             {
-                BeehiveId = beehiveId,
-                TreatmentId = treatment.Id,
-            };
+                var treatedBeehive = new TreatedBeehive
+                {
+                    BeehiveId = id,
+                    TreatmentId = treatment.Id,
+                };
 
-            await this.treatedBeehivesRepository.AddAsync(treatedBeehive);
-            await this.treatedBeehivesRepository.SaveChangesAsync();
+                await this.treatedBeehivesRepository.AddAsync(treatedBeehive);
+                await this.treatedBeehivesRepository.SaveChangesAsync();
+            }
 
             return treatment.Id;
         }
+
+        public IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0)
+        {
+            var qurey = this.treatedBeehivesRepository
+                .AllAsNoTracking()
+                .Where(a => a.Beehive.Id == beehiveId)
+                .OrderBy(tb => tb.Treatment.DateOfTreatment)
+                .OrderByDescending(tb => tb.Beehive.Apiary.Number)
+                .Select(t => t.Treatment)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                qurey = qurey.Take(take.Value);
+            }
+
+            return qurey.To<T>().ToList();
+        }
+
+        public int GetAllUserTreatmentsForLastYearCount(string userId) =>
+           this.treatmentRepository
+               .AllAsNoTracking()
+               .Where(t => t.CreatorId == userId && (DateTime.UtcNow.Year - t.DateOfTreatment.Year) <= 1)
+               .Count();
     }
 }

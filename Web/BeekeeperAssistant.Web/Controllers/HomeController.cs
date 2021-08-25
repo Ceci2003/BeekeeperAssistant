@@ -1,15 +1,35 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
     using System.Diagnostics;
-
+    using System.Threading.Tasks;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Home;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IApiaryService apiaryService;
+        private readonly IBeehiveService beehiveService;
+        private readonly ITreatmentService treatmentService;
+
+        public HomeController(
+            UserManager<ApplicationUser> userManager,
+            IApiaryService apiaryService,
+            IBeehiveService beehiveService,
+            ITreatmentService treatmentService)
+        {
+            this.userManager = userManager;
+            this.apiaryService = apiaryService;
+            this.beehiveService = beehiveService;
+            this.treatmentService = treatmentService;
+        }
+
+        public ActionResult Index()
         {
             return this.View();
         }

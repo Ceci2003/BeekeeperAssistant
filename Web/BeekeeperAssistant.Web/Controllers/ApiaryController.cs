@@ -48,13 +48,15 @@
         public async Task<IActionResult> All(int page = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = new AllApiariesViewModel
             {
                 AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
-            var count = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
+            var apiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)apiariesCount / GlobalConstants.ApiariesPerPage);
+
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;

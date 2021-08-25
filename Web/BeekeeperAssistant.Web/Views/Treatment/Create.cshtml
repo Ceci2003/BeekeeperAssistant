@@ -1,7 +1,12 @@
-﻿
+﻿@model BeekeeperAssistant.Web.ViewModels.Treatments.CreateTreatmentInputModel
 @{
-    this.ViewData["Title"] = "Добавяне на кошер";
-    string test = "test";
+    this.ViewData["Title"] = "Добавяне на третиране";
+
+    var keyValuepairApiaries = new List<SelectListItem>();
+    if (Model.Apiaries != null)
+    {
+        keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+    }
 }
 
 <div class="breadcrumb">
@@ -25,8 +30,73 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Treatment" asp-action="Create">
+            <a class="back-arrow" asp-controller="Beehive" asp-action="All">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>@ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            @if (Model.Apiaries != null)
+            {
+                <div class="input-group">
+                    <label asp-for="@Model.ApiaryId"></label>
+                    <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.AllBeehives"></label>
+                    <input asp-for="@Model.AllBeehives" />
+                    <span class="" asp-validation-for="@Model.AllBeehives"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.BeehiveNumbersSpaceSeparated"></label>
+                    <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
+                    <span class="" asp-validation-for="@Model.BeehiveNumbersSpaceSeparated"></span>
+                </div>
+            }
+            <div class="input-group">
+                <label asp-for="@Model.DateOfTreatment"></label>
+                <input asp-for="@Model.DateOfTreatment" />
+                <span class="" asp-validation-for="@Model.DateOfTreatment"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.Name"></label>
+                <input asp-for="@Model.Name" />
+                <span class="" asp-validation-for="@Model.Name"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.Note"></label>
+                <textarea asp-for="@Model.Note" cols="30" rows="10"></textarea>
+                <span asp-validation-for="@Model.Note"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.Disease"></label>
+                <input asp-for="@Model.Disease" />
+                <span class="" asp-validation-for="@Model.Disease"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.Medication"></label>
+                <input asp-for="@Model.Medication" />
+                <span class="" asp-validation-for="@Model.Medication"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.InputAs"></label>
+                <input asp-for="@Model.InputAs" />
+                <span class="" asp-validation-for="@Model.InputAs"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.Quantity"></label>
+                <input asp-for="@Model.Quantity" />
+                <span class="" asp-validation-for="@Model.Quantity"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="@Model.Dose"></label>
+                <input asp-for="@Model.Dose" />
+                <span class="" asp-validation-for="@Model.Dose"></span>
+            </div>
+
+
+            <input type="hidden" asp-for="@Model.ApiaryId" />
             <div class="btn-group">
-                <input class="btn beehive-create" type="submit" value="Добави кошер" />
+                <input class="btn beehive-create" type="submit" value="Добави третиране" />
             </div>
         </form>
     </div>

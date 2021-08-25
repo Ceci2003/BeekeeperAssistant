@@ -7,6 +7,10 @@
 
     public class Treatment : BaseDeletableModel<int>
     {
+        public string CreatorId { get; set; }
+
+        public virtual ApplicationUser Creator { get; set; }
+
         public DateTime DateOfTreatment { get; set; }
 
         public string Name { get; set; }
@@ -21,7 +25,7 @@
 
         public double Quantity { get; set; }
 
-        public Dose Doses { get; set; }
+        public Dose Dose { get; set; }
 
         public ICollection<TreatedBeehive> TreatedBeehives { get; set; }
     }

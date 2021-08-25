@@ -14,8 +14,6 @@
 
         public ApplicationUser User { get; set; }
 
-        public bool CanRead { get; set; }
-
-        public bool CanWrite { get; set; }
+        public Access Access { get; set; }
     }
 }

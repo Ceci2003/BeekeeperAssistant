@@ -40,6 +40,10 @@
 
         public DbSet<ApiaryHelper> ApiaryHelpers { get; set; }
 
+        public DbSet<BeehiveHelper> BeehivesHelpers { get; set; }
+
+        public DbSet<QueenHelper> QueensHelpers { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -81,6 +85,12 @@
 
             builder.Entity<ApiaryHelper>()
                 .HasKey(ah => new { ah.ApiaryId, ah.UserId });
+
+            builder.Entity<BeehiveHelper>()
+                .HasKey(ah => new { ah.BeehiveId, ah.UserId });
+
+            builder.Entity<QueenHelper>()
+                .HasKey(ah => new { ah.QueenId, ah.UserId });
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

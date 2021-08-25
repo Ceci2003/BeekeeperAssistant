@@ -13,6 +13,7 @@
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Treatments;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -26,17 +27,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
         private readonly IHarvestService harvestService;
+        private readonly ITreatmentService treatmentService;
 
         public BeehiveController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
             IBeehiveService beehiveService,
-            IHarvestService harvestService)
+            IHarvestService harvestService,
+            ITreatmentService treatmentService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
             this.harvestService = harvestService;
+            this.treatmentService = treatmentService;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -79,6 +83,8 @@
 
             var harvests = this.harvestService.GetAllUserHarvests<HarvestDatavVewModel>(currentUser.Id);
             viewModel.Harvests = harvests.Where(h => h.BeehiveId == beehiveId);
+            var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId);
+            viewModel.Treatments = treatments;
 
             return this.View(viewModel);
         }
@@ -128,7 +134,8 @@
                 inputModel.BeehivePower,
                 inputModel.HasDevice,
                 inputModel.HasPolenCatcher,
-                inputModel.HasPropolisCatcher);
+                inputModel.HasPropolisCatcher,
+                inputModel.IsItMovable);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
@@ -157,7 +164,8 @@
                 inputModel.BeehivePower,
                 inputModel.HasDevice,
                 inputModel.HasPolenCatcher,
-                inputModel.HasPropolisCatcher);
+                inputModel.HasPropolisCatcher,
+                inputModel.IsItMovable);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
@@ -202,24 +210,25 @@
             ws.Cells["A4"].Value = "Номер на кошера";
             ws.Cells["B4"].Value = "Създаден на";
             ws.Cells["C4"].Value = "Номер на пчелин";
-            ws.Cells["D4"].Value = "Сила";
-            ws.Cells["E4"].Value = "Система";
-            ws.Cells["F4"].Value = "Тип";
-            ws.Cells["G4"].Value = "Прашецоуловител";
-            ws.Cells["H4"].Value = "Решетка за прополис";
+            ws.Cells["D4"].Value = "Подвижен";
+            ws.Cells["E4"].Value = "Сила";
+            ws.Cells["F4"].Value = "Система";
+            ws.Cells["G4"].Value = "Тип";
+            ws.Cells["H4"].Value = "Прашецоуловител";
+            ws.Cells["I4"].Value = "Решетка за прополис";
 
-            ws.Cells["I4"].Value = "Кралица";
-            ws.Cells["J4"].Value = "Кралица-Цвят";
-            ws.Cells["K4"].Value = "Кралица-Дата на придаване";
-            ws.Cells["L4"].Value = "Кралица-Произход";
-            ws.Cells["M4"].Value = "Кралица-Вид";
-            ws.Cells["N4"].Value = "Кралица-Порода";
-            ws.Cells["O4"].Value = "Кралица-Нрав";
-            ws.Cells["P4"].Value = "Кралица-Хигиенни навици";
+            ws.Cells["J4"].Value = "Кралица";
+            ws.Cells["K4"].Value = "Кралица-Цвят";
+            ws.Cells["L4"].Value = "Кралица-Дата на придаване";
+            ws.Cells["M4"].Value = "Кралица-Произход";
+            ws.Cells["N4"].Value = "Кралица-Вид";
+            ws.Cells["O4"].Value = "Кралица-Порода";
+            ws.Cells["P4"].Value = "Кралица-Нрав";
+            ws.Cells["Q4"].Value = "Кралица-Хигиенни навици";
 
-            ws.Cells["A4:P4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            ws.Cells["A4:P4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-            ws.Cells["A4:P4"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["A4:Q4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["A4:Q4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
+            ws.Cells["A4:Q4"].Style.Font.Color.SetColor(Color.White);
 
             int rowIndex = 5;
             foreach (var beehive in beehives)
@@ -227,11 +236,15 @@
                 ws.Cells[$"A{rowIndex}"].Value = beehive.Number;
                 ws.Cells[$"B{rowIndex}"].Value = beehive.Date.ToString("dd-MM-yyyy");
                 ws.Cells[$"C{rowIndex}"].Value = beehive.ApiaryNumber;
-                ws.Cells[$"D{rowIndex}"].Value = beehive.BeehivePower;
-                ws.Cells[$"E{rowIndex}"].Value = beehive.BeehiveSystem;
-                ws.Cells[$"F{rowIndex}"].Value = beehive.BeehiveType;
-                ws.Cells[$"G{rowIndex}"].Value = beehive.HasPolenCatcher == true ? "Да" : "Не";
-                ws.Cells[$"H{rowIndex}"].Value = beehive.HasPropolisCatcher == true ? "Да" : "Не";
+                ws.Cells[$"D{rowIndex}"].Value = beehive.IsItMovable == true ? "✓	" : "";
+
+                ws.Cells[$"D{rowIndex}"].Style.Font.Bold = true;
+
+                ws.Cells[$"E{rowIndex}"].Value = beehive.BeehivePower;
+                ws.Cells[$"F{rowIndex}"].Value = beehive.BeehiveSystem;
+                ws.Cells[$"G{rowIndex}"].Value = beehive.BeehiveType;
+                ws.Cells[$"H{rowIndex}"].Value = beehive.HasPolenCatcher == true ? "Да" : "Не";
+                ws.Cells[$"I{rowIndex}"].Value = beehive.HasPropolisCatcher == true ? "Да" : "Не";
                 if (beehive.HasQueen)
                 {
                     //Color color = Color.White;
@@ -251,14 +264,14 @@
                     //ws.Cells[$"J{rowIndex}"].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     //ws.Cells[$"J{rowIndex}"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
 
-                    ws.Cells[$"I{rowIndex}"].Value = beehive.HasQueen == true ? "Да" : "Не";
-                    ws.Cells[$"J{rowIndex}"].Value = "";
-                    ws.Cells[$"K{rowIndex}"].Value = beehive.Queen.GivingDate.ToString("dd-MM-yyyy");
-                    ws.Cells[$"L{rowIndex}"].Value = beehive.Queen.Origin;
-                    ws.Cells[$"M{rowIndex}"].Value = beehive.Queen.QueenType;
-                    ws.Cells[$"N{rowIndex}"].Value = beehive.Queen.Breed;
-                    ws.Cells[$"O{rowIndex}"].Value = beehive.Queen.Temperament;
-                    ws.Cells[$"P{rowIndex}"].Value = beehive.Queen.HygenicHabits;
+                    ws.Cells[$"J{rowIndex}"].Value = beehive.HasQueen == true ? "Да" : "Не";
+                    ws.Cells[$"K{rowIndex}"].Value = beehive.Queen.Color.ToString();
+                    ws.Cells[$"L{rowIndex}"].Value = beehive.Queen.GivingDate.ToString("dd-MM-yyyy");
+                    ws.Cells[$"M{rowIndex}"].Value = beehive.Queen.Origin;
+                    ws.Cells[$"N{rowIndex}"].Value = beehive.Queen.QueenType;
+                    ws.Cells[$"O{rowIndex}"].Value = beehive.Queen.Breed;
+                    ws.Cells[$"P{rowIndex}"].Value = beehive.Queen.Temperament;
+                    ws.Cells[$"Q{rowIndex}"].Value = beehive.Queen.HygenicHabits;
                 }
 
                 rowIndex++;

@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210825173959_AddHelpers")]
+    partial class AddHelpers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -281,24 +283,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("Beehives");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveHelper", b =>
-                {
-                    b.Property<int>("BeehiveId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Access")
-                        .HasColumnType("int");
-
-                    b.HasKey("BeehiveId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BeehivesHelpers");
-                });
-
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Duty", b =>
                 {
                     b.Property<int>("Id")
@@ -453,24 +437,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Queens");
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.QueenHelper", b =>
-                {
-                    b.Property<int>("QueenId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Access")
-                        .HasColumnType("int");
-
-                    b.HasKey("QueenId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("QueensHelpers");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.TreatedBeehive", b =>
@@ -707,25 +673,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveHelper", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
-                        .WithMany()
-                        .HasForeignKey("BeehiveId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Beehive");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Harvest", b =>
                 {
                     b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", null)
@@ -754,25 +701,6 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Beehive");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.QueenHelper", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Queen", "Queen")
-                        .WithMany()
-                        .HasForeignKey("QueenId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Queen");
 
                     b.Navigation("User");
                 });

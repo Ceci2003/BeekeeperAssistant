@@ -12,6 +12,8 @@
         string GetApiaryNumberByBeehiveId(int beehiveId);
 
         string GetApiaryNumberByApiaryId(int apiaryId);
+        
+        int GetApiaryIdByBeehiveId(int beehiveId);
 
         int GetUserApiaryIdByNumber(string userId, string apiaryNumber);
 

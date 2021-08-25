@@ -59,6 +59,7 @@
             var inputModel = new CreateHarvestInputModel
             {
                 BeehiveId = id,
+                DateOfHarves = DateTime.Now.Date,
             };
 
             return this.View(inputModel);

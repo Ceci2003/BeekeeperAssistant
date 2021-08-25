@@ -29,7 +29,8 @@
             BeehivePower beehivePower,
             bool hasDevice,
             bool hasPolenCatcher,
-            bool hasPropolisCatcher)
+            bool hasPropolisCatcher,
+            bool isItMovable)
         {
             var beehive = new Beehive
             {
@@ -43,6 +44,7 @@
                 HasDevice = hasDevice,
                 HasPolenCatcher = hasPolenCatcher,
                 HasPropolisCatcher = hasPropolisCatcher,
+                IsItMovable = isItMovable,
             };
 
             await this.beehiveRepository.AddAsync(beehive);
@@ -74,7 +76,8 @@
             BeehivePower beehivePower,
             bool hasDevice,
             bool hasPolenCatcher,
-            bool hasPropolisCatcher)
+            bool hasPropolisCatcher,
+            bool isItMovable)
         {
             var beehive = this.beehiveRepository
                 .All()
@@ -89,6 +92,7 @@
             beehive.HasDevice = hasDevice;
             beehive.HasPolenCatcher = hasPolenCatcher;
             beehive.HasPropolisCatcher = hasPropolisCatcher;
+            beehive.IsItMovable = isItMovable;
 
             await this.beehiveRepository.SaveChangesAsync();
 
@@ -105,6 +109,8 @@
         {
             var query = this.beehiveRepository
                 .AllAsNoTracking()
+                .OrderBy(b => b.Apiary.Number)
+                .ThenBy(b => b.Number)
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Skip(skip);
 
@@ -126,7 +132,7 @@
         public IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0)
         {
             var query = this.beehiveRepository.AllAsNoTracking()
-                .OrderByDescending(b => b.CreatedOn)
+                .OrderBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId).Skip(skip);
 
             if (take.HasValue)

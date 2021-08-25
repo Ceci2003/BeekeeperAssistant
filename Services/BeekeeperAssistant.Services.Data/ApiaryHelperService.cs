@@ -20,7 +20,7 @@
             {
                 ApiaryId = apiaryId,
                 UserId = userId,
-                CanRead = true,
+                Access = Access.Read,
             };
 
             await this.apiaryHelperRepository.AddAsync(newApiaryHelper);

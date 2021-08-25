@@ -4,20 +4,22 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210822102640_RenameTreatmentDoses")]
+    partial class RenameTreatmentDoses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ApplicationUserDuty", b =>
                 {
@@ -39,7 +41,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
@@ -85,8 +87,11 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Access")
-                        .HasColumnType("int");
+                    b.Property<bool>("CanRead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CanWrite")
+                        .HasColumnType("bit");
 
                     b.HasKey("ApiaryId", "UserId");
 
@@ -220,7 +225,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ApiaryId")
                         .HasColumnType("int");
@@ -258,9 +263,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsItMovable")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -281,30 +283,12 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("Beehives");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveHelper", b =>
-                {
-                    b.Property<int>("BeehiveId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Access")
-                        .HasColumnType("int");
-
-                    b.HasKey("BeehiveId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BeehivesHelpers");
-                });
-
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Duty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -345,7 +329,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
@@ -399,7 +383,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BeehiveId")
                         .HasColumnType("int");
@@ -455,24 +439,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("Queens");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.QueenHelper", b =>
-                {
-                    b.Property<int>("QueenId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Access")
-                        .HasColumnType("int");
-
-                    b.HasKey("QueenId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("QueensHelpers");
-                });
-
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.TreatedBeehive", b =>
                 {
                     b.Property<int>("BeehiveId")
@@ -493,7 +459,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -548,7 +514,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -572,7 +538,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -707,25 +673,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveHelper", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
-                        .WithMany()
-                        .HasForeignKey("BeehiveId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Beehive");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Harvest", b =>
                 {
                     b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", null)
@@ -754,25 +701,6 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Beehive");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.QueenHelper", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Queen", "Queen")
-                        .WithMany()
-                        .HasForeignKey("QueenId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Queen");
 
                     b.Navigation("User");
                 });

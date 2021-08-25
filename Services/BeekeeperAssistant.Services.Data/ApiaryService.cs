@@ -128,5 +128,11 @@
                 .AllAsNoTracking()
                 .FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber)
                 .Id;
+
+        public string GetApiaryNumberByApiaryId(int apiaryId)
+            => this.apiaryRepository
+               .All()
+               .FirstOrDefault(a => a.Id == apiaryId)
+               .Number;
     }
 }

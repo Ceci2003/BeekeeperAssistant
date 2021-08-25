@@ -50,6 +50,5 @@ namespace BeekeeperAssistant.Data.Models
         public virtual ICollection<Harvest> Harvests { get; set; }
 
         public virtual ICollection<ApiaryHelper> ApiaryHelpers { get; set; }
-
     }
 }

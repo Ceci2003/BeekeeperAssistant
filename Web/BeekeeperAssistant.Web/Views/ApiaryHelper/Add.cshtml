@@ -1,0 +1,11 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.AddUserToApiaryInputModel
+
+<form method="post">
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <input type="submit" value="Добави" />
+</form>

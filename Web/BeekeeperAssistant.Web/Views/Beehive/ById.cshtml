@@ -27,10 +27,13 @@
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Beehive')" id="defaultOpen"><i class="fas fa-archive"></i>Кошер №@Model.Number</button>
+    <button class="tablinks" onclick="openTab(event, 'Beehive')" id="defaultOpen"><i class="fas fa-archive"></i>Кошер
+        №@Model.Number</button>
     <button class="tablinks" onclick="openTab(event, 'Queen')"><i class="fas fa-crown"></i>Майка</button>
-    <button class="tablinks" onclick="openTab(event, 'Inspections')"><i class="far fa-calendar-check"></i>Прегледи</button>
-    <button class="tablinks" onclick="openTab(event, 'Treatments')"><i class="fas fa-notes-medical"></i>Третирания</button>
+    <button class="tablinks" onclick="openTab(event, 'Inspections')"><i
+            class="far fa-calendar-check"></i>Прегледи</button>
+    <button class="tablinks" onclick="openTab(event, 'Treatments')"><i
+            class="fas fa-notes-medical"></i>Третирания</button>
     <button class="tablinks" onclick="openTab(event, 'Harvests')"><i class="fas fa-box"></i>Добиви</button>
 </div>
 
@@ -195,16 +198,77 @@
         <p>Inspections page.</p>
     </div>
     <div id="Treatments" class="tabcontent">
-        <div class="page-controls">
-            <a class="btn beehive-create" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
-                <i class="fas fa-notes-medical"></i>
-                Добавете третиране
-            </a>
+        <div class="harvests-data">
+            <div class="page-controls">
+                <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
+                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                <a class="btn beehive-create" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
+                    <i class="fas fa-notes-medical"></i>
+                    Добавете третиране
+                </a>
+            </div>
+            <table>
+                <thead>
+                    <th>Дата на третирането</th>
+                    <th>Име на третирането</th>
+                    <th>Заболяване</th>
+                    <th>Препарат</th>
+                    <th>Въведен като</th>
+                    <th>Количество</th>
+                    <th>Дозировка</th>
+                    <th>Редактиране</th>
+                </thead>
+                <tbody>
+                    @foreach (var treatment in Model.Treatments)
+                    {
+                        <tr>
+                            <td class="table-sdate">
+                                <time datetime="@treatment.DateOfTreatment.ToString("O")"></time>
+                            </td>
+                            <td>
+                                @treatment.Name
+                            </td>
+                            <td>
+                                @treatment.Disease
+                            </td>
+                            <td>
+                                @treatment.Medication
+                            </td>
+                            <td>
+                                @treatment.InputAs
+                            </td>
+                            <td class="table-amount">
+                                @treatment.Quantity
+                            </td>
+                            <td>
+                                @treatment.Dose
+                            </td>
+                            <td class="edit">
+                                <div>
+                                    <a class="edit" asp-controller="Treatment" asp-action="Edit"
+                                    asp-route-id="@treatment.TreatmentId">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <form id="form-@treatment.TreatmentId" asp-controller="Treatment" asp-action="Delete"
+                                    asp-route-id="@treatment.TreatmentId">
+                                        <button type="submit" class="delete">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (!Model.Treatments.Any())
+            {
+                <p>няма добавени третирания</p>
+            }
         </div>
     </div>
     <div id="Harvests" class="tabcontent">
         <div class="harvests-data">
-            <h2>Добиви</h2>
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
                     asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>

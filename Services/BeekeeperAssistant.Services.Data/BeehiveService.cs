@@ -109,6 +109,8 @@
         {
             var query = this.beehiveRepository
                 .AllAsNoTracking()
+                .OrderBy(b => b.Apiary.Number)
+                .ThenBy(b => b.Number)
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Skip(skip);
 
@@ -130,7 +132,7 @@
         public IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0)
         {
             var query = this.beehiveRepository.AllAsNoTracking()
-                .OrderByDescending(b => b.CreatedOn)
+                .OrderBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId).Skip(skip);
 
             if (take.HasValue)

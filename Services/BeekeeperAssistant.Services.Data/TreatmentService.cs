@@ -7,6 +7,8 @@
 
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class TreatmentService : ITreatmentService
     {
@@ -55,6 +57,24 @@
             }
 
             return treatment.Id;
+        }
+
+        public IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0)
+        {
+            var qurey = this.treatedBeehivesRepository
+                .AllAsNoTracking()
+                .Where(a => a.Beehive.Id == beehiveId)
+                .OrderBy(tb => tb.Treatment.DateOfTreatment)
+                .OrderByDescending(tb => tb.Beehive.Apiary.Number)
+                .Select(t => t.Treatment)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                qurey = qurey.Take(take.Value);
+            }
+
+            return qurey.To<T>().ToList();
         }
 
         public int GetAllUserTreatmentsForLastYearCount(string userId) =>

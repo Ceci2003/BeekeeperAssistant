@@ -21,5 +21,7 @@
             List<int> beehiveIds);
 
         int GetAllUserTreatmentsForLastYearCount(string userId);
+
+        IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0);
     }
 }

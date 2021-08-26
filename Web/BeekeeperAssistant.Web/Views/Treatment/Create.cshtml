@@ -1,4 +1,5 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Treatments.CreateTreatmentInputModel
+@using BeekeeperAssistant.Data.Models
 @{
     this.ViewData["Title"] = "Добавяне на третиране";
 
@@ -21,7 +22,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -37,60 +38,76 @@
             <div class="error-msg" asp-validation-summary="All"></div>
             @if (Model.Apiaries != null)
             {
-                <div class="input-group">
-                    <label asp-for="@Model.ApiaryId"></label>
-                    <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
+                <div>
+                    <div class="input-group">
+                        <label asp-for="@Model.ApiaryId"></label>
+                        <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
+                    </div>
+                    <div class="input-group check">
+                        <label asp-for="@Model.AllBeehives"></label>
+                        <div class="slider-yes-no">
+                            <input asp-for="@Model.AllBeehives" />
+                            <label for="AllBeehives"></label>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label asp-for="@Model.AllBeehives"></label>
-                    <input asp-for="@Model.AllBeehives" />
-                    <span class="" asp-validation-for="@Model.AllBeehives"></span>
-                </div>
-                <div class="input-group">
+                <div class="input-group max">
                     <label asp-for="@Model.BeehiveNumbersSpaceSeparated"></label>
                     <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
                     <span class="" asp-validation-for="@Model.BeehiveNumbersSpaceSeparated"></span>
                 </div>
             }
-            <div class="input-group">
-                <label asp-for="@Model.DateOfTreatment"></label>
-                <input asp-for="@Model.DateOfTreatment" />
-                <span class="" asp-validation-for="@Model.DateOfTreatment"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.DateOfTreatment"></label>
+                    <input asp-for="@Model.DateOfTreatment" />
+                    <span class="" asp-validation-for="@Model.DateOfTreatment"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Name"></label>
+                    <input asp-for="@Model.Name" />
+                    <span class="" asp-validation-for="@Model.Name"></span>
+                </div>
             </div>
-            <div class="input-group">
-                <label asp-for="@Model.Name"></label>
-                <input asp-for="@Model.Name" />
-                <span class="" asp-validation-for="@Model.Name"></span>
-            </div>
-            <div class="input-group">
+            <div class="input-group max">
                 <label asp-for="@Model.Note"></label>
                 <textarea asp-for="@Model.Note" cols="30" rows="10"></textarea>
                 <span asp-validation-for="@Model.Note"></span>
             </div>
-            <div class="input-group">
-                <label asp-for="@Model.Disease"></label>
-                <input asp-for="@Model.Disease" />
-                <span class="" asp-validation-for="@Model.Disease"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.Disease"></label>
+                    <input asp-for="@Model.Disease" />
+                    <span class="" asp-validation-for="@Model.Disease"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Medication"></label>
+                    <input asp-for="@Model.Medication" />
+                    <span class="" asp-validation-for="@Model.Medication"></span>
+                </div>
             </div>
-            <div class="input-group">
-                <label asp-for="@Model.Medication"></label>
-                <input asp-for="@Model.Medication" />
-                <span class="" asp-validation-for="@Model.Medication"></span>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.InputAs">На кошер</label>
+                    @Html.RadioButtonFor(s => s.InputAs, InputAs.PerHive)
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.InputAs">Общо</label>
+                    @Html.RadioButtonFor(s => s.InputAs, InputAs.Total)
+                </div>
             </div>
-            <div class="input-group">
-                <label asp-for="@Model.InputAs"></label>
-                <input asp-for="@Model.InputAs" />
-                <span class="" asp-validation-for="@Model.InputAs"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="@Model.Quantity"></label>
-                <input asp-for="@Model.Quantity" />
-                <span class="" asp-validation-for="@Model.Quantity"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="@Model.Dose"></label>
-                <input asp-for="@Model.Dose" />
-                <span class="" asp-validation-for="@Model.Dose"></span>
+
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.Quantity"></label>
+                    <input type="number" min="0" asp-for="@Model.Quantity" />
+                    <span class="" asp-validation-for="@Model.Quantity"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Dose"></label>
+                    <select asp-for="@Model.Dose" asp-items="@Html.GetEnumSelectList<Dose>()"></select>
+                    <span class="error-msg" asp-validation-for="@Model.Dose"></span>
+                </div>
             </div>
 
 
@@ -101,3 +118,8 @@
         </form>
     </div>
 </div>
+
+<script>
+    var 
+    
+</script>

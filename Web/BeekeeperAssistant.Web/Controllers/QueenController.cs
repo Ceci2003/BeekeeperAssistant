@@ -95,7 +95,11 @@
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
-            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
+            var tabPage = "Queen";
+
+            //return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
+            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}#{tabPage}");
+            //return RedirectToAction("ById", "Beehive", new { id = beehiveId, tabPage = "Queen" });
         }
 
         [HttpPost]

@@ -117,4 +117,16 @@ function openTab(tab, tabBody) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+// document.getElementById("defaultOpen").click();
+
+
+function allBeehives() {
+    var allBeehives = document.getElementById("AllBeehives");
+    var beehiveNumbersSpaceSeparated = document.getElementById("BeehiveNumbersSpaceSeparated");
+    if (allBeehives.value == true) {
+        beehiveNumbersSpaceSeparated.style.display = "none";
+    }
+    else {
+        beehiveNumbersSpaceSeparated.style.display = "block";
+    }
+}

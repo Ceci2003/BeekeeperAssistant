@@ -66,7 +66,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ById(int beehiveId)
+        public async Task<IActionResult> ById(int beehiveId, string tabPage = "Beehive")
         {
             var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -85,6 +85,7 @@
             viewModel.Harvests = harvests.Where(h => h.BeehiveId == beehiveId);
             var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId);
             viewModel.Treatments = treatments;
+            viewModel.TabPage = tabPage;
 
             return this.View(viewModel);
         }

@@ -44,6 +44,8 @@
 
         public Queen Queen { get; set; }
 
+        public string TabPage { get; set; }
+
         [IgnoreMap]
         public IEnumerable<HarvestDatavVewModel> Harvests { get; set; }
 

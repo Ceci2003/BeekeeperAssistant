@@ -2,12 +2,13 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
     public class TreatmentDataViewModel : IMapFrom<Treatment>
     {
-        public int TreatmentId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Дата на третиране")]

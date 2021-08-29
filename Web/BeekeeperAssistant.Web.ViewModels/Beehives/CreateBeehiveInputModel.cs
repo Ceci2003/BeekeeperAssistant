@@ -7,7 +7,6 @@
 
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.Extensions.DependencyInjection;
 
     public class CreateBeehiveInputModel : IValidatableObject

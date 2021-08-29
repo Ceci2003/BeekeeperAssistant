@@ -13,8 +13,6 @@
     public class HomeController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IApiaryService apiaryService;
-        private readonly IBeehiveService beehiveService;
         private readonly ITreatmentService treatmentService;
 
         public HomeController(
@@ -24,14 +22,19 @@
             ITreatmentService treatmentService)
         {
             this.userManager = userManager;
-            this.apiaryService = apiaryService;
-            this.beehiveService = beehiveService;
             this.treatmentService = treatmentService;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return this.View();
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var viewModel = new IndexViewModel
+            {
+                TreatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id),
+            };
+
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

@@ -8,6 +8,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -53,7 +54,6 @@
             }
             else
             {
-                inputModel.BeehiveId = id.Value;
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
             }
 
@@ -65,6 +65,20 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
+            if (!inputModel.AllBeehives)
+            {
+                var beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).Select(b => b.Number).ToList();
+                var selectedNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+
+                foreach (var number in selectedNumbers)
+                {
+                    if (!beehives.Contains(number))
+                    {
+                        this.ModelState.AddModelError(string.Empty, "Не съществува кошер с номер number в пчелина!");
+                    }
+                }
+            }
+
             if (!this.ModelState.IsValid)
             {
                 inputModel.DateOfTreatment = DateTime.UtcNow.Date;
@@ -72,19 +86,18 @@
                 {
                     inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
                 }
-                else
-                {
-                    inputModel.BeehiveId = id.Value;
-                }
 
                 return this.View(inputModel);
             }
 
+            var apiaryNumber = this.apiaryService.GetApiaryById<ApiaryViewModel>(inputModel.ApiaryId).Number;
+
             if (id == null)
             {
+                var apiaryBeehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).ToList();
                 if (inputModel.AllBeehives)
                 {
-                    var beehives = this.beehiveService.GetApiaryBeehivesById<Beehive>(inputModel.ApiaryId).Select(b => b.Id).ToList();
+                    var beehivesIds = apiaryBeehives.Select(b => b.Id).ToList();
                     await this.treatmentService.CreateTreatment(
                     currentUser.Id,
                     inputModel.DateOfTreatment,
@@ -95,10 +108,35 @@
                     inputModel.InputAs,
                     inputModel.Quantity,
                     inputModel.Dose,
-                    new List<int> { id.Value });
+                    beehivesIds);
+                }
+                else
+                {
+                    var selectedIds = new List<int>();
+                    var selectedBeehiveNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+                    foreach (var number in selectedBeehiveNumbers)
+                    {
+                        var beehive = apiaryBeehives.Where(b => b.Number == number).FirstOrDefault();
+                        if (beehive != null)
+                        {
+                            selectedIds.Add(beehive.Id);
+                        }
+                    }
+
+                    await this.treatmentService.CreateTreatment(
+                            currentUser.Id,
+                            inputModel.DateOfTreatment,
+                            inputModel.Name,
+                            inputModel.Note,
+                            inputModel.Disease,
+                            inputModel.Medication,
+                            inputModel.InputAs,
+                            inputModel.Quantity,
+                            inputModel.Dose,
+                            selectedIds);
                 }
 
-                return this.View();
+                return this.RedirectToAction("Index", "Home");
             }
             else
             {
@@ -114,9 +152,7 @@
                 inputModel.Dose,
                 new List<int> { id.Value });
 
-                var apiary = this.apiaryService.GetApiaryById<ApiaryDataViewModel>(inputModel.ApiaryId);
-
-                return this.RedirectToRoute("beehiveRoute", new { apiaryNumber = apiary.Number, beehiveId = id.Value });
+                return this.RedirectToRoute("beehiveRoute", new { apiaryNumber = apiaryNumber, beehiveId = id.Value });
             }
         }
     }

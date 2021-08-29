@@ -249,11 +249,11 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Treatment" asp-action="Edit"
-                                    asp-route-id="@treatment.TreatmentId">
+                                    asp-route-id="@treatment.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <form id="form-@treatment.TreatmentId" asp-controller="Treatment" asp-action="Delete"
-                                    asp-route-id="@treatment.TreatmentId">
+                                    <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
+                                    asp-route-id="@treatment.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>

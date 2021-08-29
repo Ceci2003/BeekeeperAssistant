@@ -3,11 +3,15 @@
 @{
     this.ViewData["Title"] = "Добавяне на третиране";
 
+    int textareaRows = 10;
     var keyValuepairApiaries = new List<SelectListItem>();
     if (Model.Apiaries != null)
     {
         keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+        textareaRows = 7;
     }
+
+
 }
 
 <div class="breadcrumb">
@@ -54,62 +58,46 @@
                 <div class="input-group max">
                     <label asp-for="@Model.BeehiveNumbersSpaceSeparated"></label>
                     <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
-                    <span class="" asp-validation-for="@Model.BeehiveNumbersSpaceSeparated"></span>
                 </div>
             }
             <div>
                 <div class="input-group">
                     <label asp-for="@Model.DateOfTreatment"></label>
                     <input asp-for="@Model.DateOfTreatment" />
-                    <span class="" asp-validation-for="@Model.DateOfTreatment"></span>
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.Name"></label>
                     <input asp-for="@Model.Name" />
-                    <span class="" asp-validation-for="@Model.Name"></span>
                 </div>
             </div>
             <div class="input-group max">
                 <label asp-for="@Model.Note"></label>
-                <textarea asp-for="@Model.Note" cols="30" rows="10"></textarea>
-                <span asp-validation-for="@Model.Note"></span>
+                <textarea asp-for="@Model.Note" cols="30" rows="@textareaRows"></textarea>
             </div>
             <div>
                 <div class="input-group">
                     <label asp-for="@Model.Disease"></label>
                     <input asp-for="@Model.Disease" />
-                    <span class="" asp-validation-for="@Model.Disease"></span>
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.Medication"></label>
                     <input asp-for="@Model.Medication" />
-                    <span class="" asp-validation-for="@Model.Medication"></span>
                 </div>
             </div>
-            <div>
-                <div class="input-group">
-                    <label asp-for="@Model.InputAs">На кошер</label>
-                    @Html.RadioButtonFor(s => s.InputAs, InputAs.PerHive, true)
-                </div>
-                <div class="input-group">
-                    <label asp-for="@Model.InputAs">Общо</label>
-                    @Html.RadioButtonFor(s => s.InputAs, InputAs.Total)
-                </div>
+            <div class="input-group max">
+                <label asp-for="@Model.InputAs"></label>
+                <select asp-for="@Model.InputAs" asp-items="@Html.GetEnumSelectList<InputAs>()"></select>
             </div>
-
             <div>
                 <div class="input-group">
                     <label asp-for="@Model.Quantity"></label>
                     <input type="number" min="0" asp-for="@Model.Quantity" />
-                    <span class="" asp-validation-for="@Model.Quantity"></span>
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.Dose"></label>
                     <select asp-for="@Model.Dose" asp-items="@Html.GetEnumSelectList<Dose>()"></select>
-                    <span class="error-msg" asp-validation-for="@Model.Dose"></span>
                 </div>
             </div>
-
 
             <input type="hidden" asp-for="@Model.ApiaryId" />
             <div class="btn-group">
@@ -120,6 +108,6 @@
 </div>
 
 <script>
-    var 
-    
+    var
+
 </script>

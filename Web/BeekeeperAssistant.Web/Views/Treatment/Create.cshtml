@@ -89,7 +89,7 @@
             <div>
                 <div class="input-group">
                     <label asp-for="@Model.InputAs">На кошер</label>
-                    @Html.RadioButtonFor(s => s.InputAs, InputAs.PerHive)
+                    @Html.RadioButtonFor(s => s.InputAs, InputAs.PerHive, true)
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.InputAs">Общо</label>

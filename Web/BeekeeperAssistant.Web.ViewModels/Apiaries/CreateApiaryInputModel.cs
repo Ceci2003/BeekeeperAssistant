@@ -1,15 +1,14 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Text;
+    using System.Linq;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.Infrastructure.ValidationAttributes.Apiaries;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class CreateApiaryInputModel
     {
@@ -38,5 +37,19 @@
         [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [Display(Name = "Населено място")]
         public string Adress { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errorList = new List<ValidationResult>();
+            var apiaryRepository = validationContext.GetService<IDeletableEntityRepository<Apiary>>();
+            var apiary = apiaryRepository.All().FirstOrDefault(a => a.Number == this.Number);
+
+            if (apiary != null)
+            {
+                errorList.Add(new ValidationResult("Вече съществува пчелин с такъв номер!"));
+            }
+
+            return errorList;
+        }
     }
 }

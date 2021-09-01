@@ -39,5 +39,7 @@
         [Required]
         [Display(Name = "Дозировка")]
         public Dose Dose { get; set; }
+
+        public string CreatorId { get; set; }
     }
 }

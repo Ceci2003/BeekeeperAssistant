@@ -26,7 +26,17 @@
             this.treatedBeehivesRepository = treatedBeehivesRepository;
         }
 
-        public async Task<int> CreateTreatment(string creatorId, DateTime dateOfTreatment, string name, string note, string disease, string medication, InputAs inputAs, double quantity, Dose dose, List<int> beehiveIds)
+        public async Task<int> CreateTreatment(
+            string creatorId,
+            DateTime dateOfTreatment,
+            string name,
+            string note,
+            string disease,
+            string medication,
+            InputAs inputAs,
+            double quantity,
+            Dose dose,
+            List<int> beehiveIds)
         {
             var treatment = new Treatment
             {
@@ -59,6 +69,46 @@
             return treatment.Id;
         }
 
+        public async Task<int> EditTreatment(
+            int treatmentId,
+            int beehiveId,
+            DateTime dateOfTreatment,
+            string name,
+            string note,
+            string disease,
+            string medication,
+            InputAs inputAs,
+            double quantity,
+            Dose dose)
+        {
+            var treatment = this.treatmentRepository
+                .All()
+                .FirstOrDefault(t => t.Id == treatmentId);
+
+            treatment.DateOfTreatment = dateOfTreatment;
+            treatment.Name = name;
+            treatment.Note = note;
+            treatment.Disease = disease;
+            treatment.Medication = medication;
+            treatment.InputAs = inputAs;
+            treatment.Quantity = quantity;
+            treatment.Dose = dose;
+
+            await this.treatmentRepository.SaveChangesAsync();
+
+            return treatmentId;
+        }
+
+        public async Task DeleteTreatmentAsync(int treatmentId)
+        {
+            var treatment = this.treatmentRepository
+                .All()
+                .FirstOrDefault(t => t.Id == treatmentId);
+
+            this.treatmentRepository.Delete(treatment);
+            await this.treatmentRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0)
         {
             var qurey = this.treatedBeehivesRepository
@@ -76,6 +126,13 @@
 
             return qurey.To<T>().ToList();
         }
+
+        public T GetTreatmentById<T>(int treatmentId) =>
+            this.treatmentRepository
+            .All()
+            .Where(t => t.Id == treatmentId)
+            .To<T>()
+            .FirstOrDefault();
 
         public int GetAllUserTreatmentsForLastYearCount(string userId) =>
            this.treatmentRepository

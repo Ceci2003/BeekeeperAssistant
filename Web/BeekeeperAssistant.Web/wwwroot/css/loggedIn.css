@@ -871,21 +871,22 @@ textarea {
   width: 270px;
   height: 100px;
   border: 1px solid var(--lightgray);
+  margin-bottom: 30px;
 }
 
 .dashboard-card .card-data-view {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    color: var(--blue);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: var(--blue);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .dashboard-card .card-data-view p:first-child {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .dashboard-card .dashboard-card-header {
@@ -958,6 +959,38 @@ textarea {
   align-items: center;
   padding: 5px;
   height: 100%;
+}
+
+/* count-add */
+.count-add-card {
+  width: 270px;
+  height: 140px;
+  border: 1px solid var(--lightgray);
+  margin-bottom: 30px;
+}
+
+.count-add-card-body {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.count-add-card-footer {
+  height: 40px;
+  background-color: var(--beehive-color);
+}
+
+.count-add-card-body a,
+.count-add-card-footer a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.count-add-card-footer a {
+  color: var(--white);
 }
 
 /* Breadcrumb */
@@ -1106,7 +1139,7 @@ textarea {
 }
 
 .tab .tablinks i {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 /* Change background color of buttons on hover */
@@ -1122,7 +1155,7 @@ textarea {
 }
 
 .tab .tablinks.active:hover {
-    background-color: var(--white);
+  background-color: var(--white);
 }
 
 .tabs-body {

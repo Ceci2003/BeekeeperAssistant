@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web
 {
+    using System.Globalization;
     using System.Reflection;
 
     using BeekeeperAssistant.Data;
@@ -116,12 +117,13 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber:apiaryNumber}", new { controller = "Apiary", action = "ByNumber" });
                         endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}", new { controller = "Beehive", action = "ById" });
+                        endpoints.MapControllerRoute("beehiveTreatmentRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}#tabPage={tabPage}", new { controller = "Beehive", action = "ById", tabPage = "" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

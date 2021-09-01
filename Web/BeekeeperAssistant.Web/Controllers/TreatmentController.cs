@@ -155,5 +155,53 @@
                 return this.RedirectToRoute("beehiveRoute", new { apiaryNumber = apiaryNumber, beehiveId = id.Value });
             }
         }
+
+        public async Task<IActionResult> Edit(int id, int? beehiveId)
+        {
+            var inputModel = this.treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditTreatmentInputModel inputModel)
+        {
+            // ToDo: make quantity string
+            // var quantity = Convert.ToDouble(inputModel.Quantity);
+
+            await this.treatmentService.EditTreatment(
+                id,
+                inputModel.BeehiveId.Value,
+                inputModel.DateOfTreatment,
+                inputModel.Name,
+                inputModel.Note,
+                inputModel.Disease,
+                inputModel.Medication,
+                inputModel.InputAs,
+                inputModel.Quantity,
+                inputModel.Dose);
+
+            var tabPage = "Treatment";
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(inputModel.BeehiveId.Value);
+
+            //return this.Redirect($"/Beehive/{beehive.ApiaryNumber}/{inputModel.BeehiveId.Value}#{tabPage}");
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Treatments" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, int? beehiveId)
+        {
+            var treatment = this.treatmentService.GetTreatmentById<TreatmentDataViewModel>(id);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (treatment.CreatorId != currentUser.Id)
+            {
+                return this.BadRequest();
+            }
+
+            await this.treatmentService.DeleteTreatmentAsync(id);
+
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Treatments" });
+        }
     }
 }

@@ -1,0 +1,114 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Treatments.EditTreatmentInputModel
+@using BeekeeperAssistant.Data.Models
+@{
+    this.ViewData["Title"] = "Редактиране на третиране";
+
+    int textareaRows = 10;
+    var keyValuepairApiaries = new List<SelectListItem>();
+    if (Model.Apiaries != null)
+    {
+        keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+        textareaRows = 7;
+    }
+
+
+}
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-box">
+        <form asp-controller="Treatment" asp-action="Edit">
+            <a class="back-arrow" asp-controller="Beehive" asp-action="All">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>@ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            @if (Model.Apiaries != null)
+            {
+                <div>
+                    <div class="input-group">
+                        <label asp-for="@Model.ApiaryId"></label>
+                        <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
+                    </div>
+                    <div class="input-group check">
+                        <label asp-for="@Model.AllBeehives"></label>
+                        <div class="slider-yes-no">
+                            <input asp-for="@Model.AllBeehives" />
+                            <label for="AllBeehives"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group max">
+                    <label asp-for="@Model.BeehiveNumbersSpaceSeparated"></label>
+                    <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
+                </div>
+            }
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.DateOfTreatment"></label>
+                    <input asp-for="@Model.DateOfTreatment" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Name"></label>
+                    <input asp-for="@Model.Name" />
+                </div>
+            </div>
+            <div class="input-group max">
+                <label asp-for="@Model.Note"></label>
+                <textarea asp-for="@Model.Note" cols="30" rows="@textareaRows"></textarea>
+            </div>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.Disease"></label>
+                    <input asp-for="@Model.Disease" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Medication"></label>
+                    <input asp-for="@Model.Medication" />
+                </div>
+            </div>
+            <div class="input-group max">
+                <label asp-for="@Model.InputAs"></label>
+                <select asp-for="@Model.InputAs" asp-items="@Html.GetEnumSelectList<InputAs>()"></select>
+            </div>
+            <div>
+                <div class="input-group">
+                    <label asp-for="@Model.Quantity"></label>
+                    <input type="text" min="0" asp-for="@Model.Quantity" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Dose"></label>
+                    <select asp-for="@Model.Dose" asp-items="@Html.GetEnumSelectList<Dose>()"></select>
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="@Model.ApiaryId" />
+            <input type="hidden" asp-for="@Model.BeehiveId" />
+            <div class="btn-group">
+                <input class="btn beehive-create" type="submit" value="Редактирай третиране" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var
+
+</script>

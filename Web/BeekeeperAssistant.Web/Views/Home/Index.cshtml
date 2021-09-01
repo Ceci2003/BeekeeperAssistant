@@ -22,7 +22,7 @@ else
         </ul>
         <div class="breadcrumb-leave">
             <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+                  asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
                 <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
             </form>
         </div>
@@ -61,7 +61,7 @@ else
             <div class="dashboard-card">
                 <div class="dashboard-card-header queen">
                     <img src="~/img/queenIcon.png" alt="queenIcon.png">
-                    <h1>Достъп до кралиците:</h1>
+                    <h1>Достъп до майките:</h1>
                 </div>
                 <div class="dashboard-card-body queen">
                     <a asp-controller="Queen" asp-action="All">
@@ -73,12 +73,27 @@ else
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="content">
         <div class="dashboard-cards-list">
-            <div class="dashboard-card">
-                <div class="dashboard-card-body apiary">
+            <div class="count-add-card">
+                <div class="count-add-card-body">
+                    <a asp-controller="Treatments" asp-action="All">
+                        <div>
+                            <p>@Model.TreatmentsCount</p>
+                            <p>Третирания за сезона</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="count-add-card-footer">
+                    <a asp-controller="Treatments" asp-action="All">
+                        <i class="fas fa-notes-medical"></i>
+                        <p>Добави третиране</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="count-add-card">
+                <div class="count-add-card-body apiary">
                     <a asp-controller="Treatments" asp-action="All">
                         <div>
                             <p>Към списъка</p>
@@ -86,12 +101,12 @@ else
                         </div>
                     </a>
                 </div>
-                <div class="dashboard-card-header apiary">
+                <div class="count-add-card-header apiary">
                     <p>Третирания за сезона: @Model.TreatmentsCount</p>
                 </div>
             </div>
-            <div class="dashboard-card">
-                <div class="dashboard-card-body apiary">
+            <div class="count-add-card">
+                <div class="count-add-card-body apiary">
                     <a asp-controller="Treatments" asp-action="All">
                         <div>
                             <p>Към списъка</p>
@@ -99,20 +114,7 @@ else
                         </div>
                     </a>
                 </div>
-                <div class="dashboard-card-header apiary">
-                    <p>Третирания за сезона: @Model.TreatmentsCount</p>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <div class="dashboard-card-body apiary">
-                    <a asp-controller="Treatments" asp-action="All">
-                        <div>
-                            <p>Към списъка</p>
-                            <i class="fas fa-arrow-circle-right"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="dashboard-card-header apiary">
+                <div class="count-add-card-header apiary">
                     <p>Третирания за сезона: @Model.TreatmentsCount</p>
                 </div>
             </div>

@@ -34,11 +34,6 @@
             this.beehiveService = beehiveService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> Create(int? id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -67,14 +62,17 @@
 
             if (!inputModel.AllBeehives)
             {
-                var beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).Select(b => b.Number).ToList();
-                var selectedNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
-
-                foreach (var number in selectedNumbers)
+                if (inputModel.BeehiveNumbersSpaceSeparated != null)
                 {
-                    if (!beehives.Contains(number))
+                    var beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).Select(b => b.Number).ToList();
+                    var selectedNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+
+                    foreach (var number in selectedNumbers)
                     {
-                        this.ModelState.AddModelError(string.Empty, "Не съществува кошер с номер number в пчелина!");
+                        if (!beehives.Contains(number))
+                        {
+                            this.ModelState.AddModelError(string.Empty, "Не съществува кошер с номер number в пчелина!");
+                        }
                     }
                 }
             }
@@ -152,7 +150,7 @@
                 inputModel.Dose,
                 new List<int> { id.Value });
 
-                return this.RedirectToRoute("beehiveRoute", new { apiaryNumber = apiaryNumber, beehiveId = id.Value });
+                return this.RedirectToAction("ById", "Beehive", new { beehiveId = id.Value, tabPage = "Treatments" });
             }
         }
 
@@ -184,7 +182,6 @@
             var tabPage = "Treatment";
             var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(inputModel.BeehiveId.Value);
 
-            //return this.Redirect($"/Beehive/{beehive.ApiaryNumber}/{inputModel.BeehiveId.Value}#{tabPage}");
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Treatments" });
         }
 

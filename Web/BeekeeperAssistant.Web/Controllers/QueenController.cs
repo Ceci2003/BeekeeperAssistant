@@ -57,7 +57,7 @@
                 return this.NotFound();
             }
 
-            return this.View(viewModel);
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = viewModel.BeehiveId, tabPage = "Queen" });
         }
 
         public IActionResult Create(int id)
@@ -95,19 +95,15 @@
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
-            var tabPage = "Queen";
-
-            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
-            //return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}#{tabPage}");
-            //return RedirectToAction("ById", "Beehive", new { id = beehiveId, tabPage = "Queen" });
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var beehiveId = await this.queenService.DeleteQueenAsync(id);
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
+
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
 
         public IActionResult Edit(int id)
@@ -120,9 +116,8 @@
         public async Task<IActionResult> Edit(int id, EditQueenInutModel inputModel)
         {
             var beehiveId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
-            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
     }
 }

@@ -85,20 +85,17 @@
                     inputModel.Note,
                     inputModel.Amount);
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(inputModel.BeehiveId);
-
-            return this.Redirect($"/Beehive/{beehive.ApiaryNumber}/{beehive.Id}");
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Harvests" });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(inputModel.BeehiveId);
 
             await this.harvestService.DeleteHarvestAsync(id);
 
-            return this.Redirect($"/Beehive/{beehive.ApiaryNumber}/{beehive.Id}");
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Harvests" });
         }
 
         public IActionResult Edit(int id)
@@ -119,9 +116,7 @@
                 inputModel.Note,
                 inputModel.Amount);
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(inputModel.BeehiveId);
-
-            return this.Redirect($"/Beehive/{beehive.ApiaryNumber}/{beehive.Id}");
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Harvests" });
         }
 
         public async Task<IActionResult> ExportToExcel(int id)

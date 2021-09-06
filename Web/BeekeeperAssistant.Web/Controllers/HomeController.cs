@@ -2,11 +2,13 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Home;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +30,11 @@
         public async Task<ActionResult> Index()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return this.View();
+            }
 
             var viewModel = new IndexViewModel
             {
@@ -66,7 +73,7 @@
         public IActionResult Error()
         {
             return this.View(
-                new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+                new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }

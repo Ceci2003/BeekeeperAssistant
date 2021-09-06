@@ -28,6 +28,8 @@
 
         public DbSet<Beehive> Beehives { get; set; }
 
+        public DbSet<Inspection> Inspections { get; set; }
+
         public DbSet<Harvest> Harvests { get; set; }
 
         public DbSet<Treatment> Treatments { get; set; }

@@ -64,15 +64,22 @@
             {
                 if (inputModel.BeehiveNumbersSpaceSeparated != null)
                 {
-                    var beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).Select(b => b.Number).ToList();
-                    var selectedNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
-
-                    foreach (var number in selectedNumbers)
+                    try
                     {
-                        if (!beehives.Contains(number))
+                        var beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).Select(b => b.Number).ToList();
+                        var selectedNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => Convert.ToInt32(n)).ToList();
+
+                        foreach (var number in selectedNumbers)
                         {
-                            this.ModelState.AddModelError(string.Empty, "Не съществува кошер с номер number в пчелина!");
+                            if (!beehives.Contains(number))
+                            {
+                                this.ModelState.AddModelError(string.Empty, $"Не съществува кошер с номер {number} в пчелина!");
+                            }
                         }
+                    }
+                    catch (Exception)
+                    {
+                        this.ModelState.AddModelError(string.Empty, "Номерата на кошерите не са въведени правилно!");
                     }
                 }
             }

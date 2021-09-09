@@ -31,7 +31,7 @@
             </a>
             <h2>@ViewData["Title"] - №@Model.Number</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Number"></label>
                     <input asp-for="@Model.Number" />
@@ -43,7 +43,7 @@
                     <span class="" asp-validation-for="@Model.Date"></span>
                 </div>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.BeehiveSystem"></label>
                     <select asp-for="@Model.BeehiveSystem"
@@ -54,7 +54,7 @@
                     <select asp-for="@Model.BeehiveType" asp-items="@Html.GetEnumSelectList<BeehiveType>()"></select>
                 </div>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.BeehivePower"></label>
                     <select asp-for="@Model.BeehivePower" asp-items="@Html.GetEnumSelectList<BeehivePower>()"></select>

@@ -36,7 +36,7 @@
             </a>
             <h2>@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Number"></label>
                     <input asp-for="@Model.Number" min="1" value="1" />
@@ -50,7 +50,7 @@
                     </div>
                 }
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Date"></label>
                     <input asp-for="@Model.Date" />
@@ -62,7 +62,7 @@
                         asp-items="@Html.GetEnumSelectList<BeehiveSystem>()"></select>
                 </div>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.BeehiveType"></label>
                     <select asp-for="@Model.BeehiveType" asp-items="@Html.GetEnumSelectList<BeehiveType>()"></select>

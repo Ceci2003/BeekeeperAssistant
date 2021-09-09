@@ -1,0 +1,287 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Inspection.CreateInspectionInputModel
+@using BeekeeperAssistant.Data.Models
+
+@{
+    this.ViewData["Title"] = "Добавяне на преглед";
+
+    int textAreaRows = 10;
+    var keyValuepairApiaries = new List<SelectListItem>();
+    if (Model.Apiaries != null)
+    {
+        keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+        textAreaRows = 7;
+    }
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#hide").click(function () {
+            $("p").hide();
+        });
+        $("#show").click(function () {
+            $("p").show();
+        });
+    });
+</script>
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-box">
+        <form asp-controller="Inspection" asp-action="Create">
+            <a class="back-arrow" asp-controller="Beehive" asp-action="All">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>@ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="DateOfInspection"></label>
+                    <input asp-for="DateOfInspection" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="InspectionType"></label>
+                    <select asp-for="InspectionType" asp-items="@Html.GetEnumSelectList<InspectionType>()"></select>
+                </div>
+            </div>
+            <div class="input-group max">
+                <label asp-for="Note"></label>
+                <textarea asp-for="Note" cols="30" rows="@textAreaRows"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>
+                    <input asp-for="Swarmed" /> @Html.DisplayNameFor(model => model.Swarmed)
+                </label>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="BeehivePower"></label>
+                    <select asp-for="BeehivePower" asp-items="@Html.GetEnumSelectList<BeehivePower>()"></select>
+                </div>
+                <div class="input-group">
+                    <label asp-for="BeehiveTemperament"></label>
+                    <select asp-for="BeehiveTemperament"
+                        asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
+                </div>
+            </div>
+            <div class="input-group max">
+                <label asp-for="BeehiveAction"></label>
+                <select asp-for="BeehiveAction" asp-items="@Html.GetEnumSelectList<BeehiveAction>()"></select>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="Weight"></label>
+                    <input asp-for="Weight" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="HiveTemperature"></label>
+                    <input asp-for="HiveTemperature" />
+                </div>
+            </div>
+            <div class="input-group">
+                <label asp-for="HiveHumidity"></label>
+                <input asp-for="HiveHumidity" />
+            </div>
+
+
+
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeQueenSection" /> @Html.DisplayNameFor(model =>
+                    model.IncludeQueenSection)
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeBrood" /> @Html.DisplayNameFor(model =>
+                    model.IncludeBrood)
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeFramesWith" /> @Html.DisplayNameFor(model =>
+                    model.IncludeFramesWith)
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeActivity" /> @Html.DisplayNameFor(model =>
+                    model.IncludeActivity)
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeStorage" /> @Html.DisplayNameFor(model =>
+                    model.IncludeStorage)
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeSpottedProblem" /> @Html.DisplayNameFor(model =>
+                    model.IncludeSpottedProblem)
+                </label>
+            </div>
+            <div class="input-group">
+                <label>
+                    <input asp-for="IncludeWeatherInfo" /> @Html.DisplayNameFor(model =>
+                    model.IncludeWeatherInfo)
+                </label>
+            </div>
+
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label>
+                        <input asp-for="QueenSeen" /> @Html.DisplayNameFor(model =>
+                        model.QueenSeen)
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label asp-for="QueenCells"></label>
+                    <select asp-for="QueenCells" asp-items="@Html.GetEnumSelectList<QueenCells>()"></select>
+                </div>
+                <div class="input-group">
+                    <label asp-for="QueenWorkingStatus"></label>
+                    <select asp-for="QueenWorkingStatus"
+                        asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
+                </div>
+                <div class="input-group">
+                    <label asp-for="QueenPowerStatus"></label>
+                    <select asp-for="QueenPowerStatus" asp-items="@Html.GetEnumSelectList<QueenPowerStatus>()"></select>
+                </div>
+            </div>
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label>
+                        <input asp-for="Eggs" /> @Html.DisplayNameFor(model => model.Eggs)
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label>
+                        <input asp-for="ClappedBrood" /> @Html.DisplayNameFor(model =>
+                        model.ClappedBrood)
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label>
+                        <input asp-for="UnclappedBrood" /> @Html.DisplayNameFor(model =>
+                        model.UnclappedBrood)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label asp-for="FramesWithBees"></label>
+                    <input asp-for="FramesWithBees" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="FramesWithBrood"></label>
+                    <input asp-for="FramesWithBrood" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="FramesWithHoney"></label>
+                    <input asp-for="FramesWithHoney" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="FramesWithPollen"></label>
+                    <input asp-for="FramesWithPollen" />
+                </div>
+            </div>
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label asp-for="BeeActivity"></label>
+                    <input asp-for="BeeActivity" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="OrientationActivity"></label>
+                    <input asp-for="OrientationActivity" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="PollenActivity"></label>
+                    <input asp-for="PollenActivity" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="ForragingActivity"></label>
+                    <input asp-for="ForragingActivity" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="BeesPerMinute"></label>
+                    <input asp-for="BeesPerMinute" />
+                </div>
+            </div>
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label asp-for="StoredHoney"></label>
+                    <input asp-for="StoredHoney" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="StoredPollen"></label>
+                    <input asp-for="StoredPollen" />
+                </div>
+            </div>
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label asp-for="Disease"></label>
+                    <input asp-for="Disease" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="Treatment"></label>
+                    <input asp-for="Treatment" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="Pests"></label>
+                    <input asp-for="Pests" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="Predators"></label>
+                    <input asp-for="Predators" />
+                </div>
+            </div>
+
+            <div class="form-check-section">
+                <div class="input-group">
+                    <label asp-for="Conditions"></label>
+                    <input asp-for="Conditions" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="WeatherTemperature"></label>
+                    <input asp-for="WeatherTemperature" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="WeatherHumidity"></label>
+                    <input asp-for="WeatherHumidity" />
+                </div>
+            </div>
+
+            <input type="hidden" asp-for="@Model.ApiaryId" />
+            <div class="btn-group">
+                <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906233038_UpdateInspectionNames")]
+    partial class UpdateInspectionNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -479,9 +481,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<bool>("IncludeSpottedProblem")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IncludeStorage")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IncludeWeatherInfo")
                         .HasColumnType("bit");
 
@@ -503,10 +502,10 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<string>("Pests")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PollenActivity")
+                    b.Property<int>("PolenActivity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Predators")
+                    b.Property<string>("Predation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QueenCells")

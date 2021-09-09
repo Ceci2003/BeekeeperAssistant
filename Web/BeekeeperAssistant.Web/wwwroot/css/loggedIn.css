@@ -688,7 +688,7 @@ td.queen-red {
   margin-bottom: 15px;
 }
 
-.form-box form div {
+.form-box form .row-form-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

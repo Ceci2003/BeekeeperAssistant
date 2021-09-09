@@ -42,7 +42,7 @@
             <div class="error-msg" asp-validation-summary="All"></div>
             @if (Model.Apiaries != null)
             {
-                <div>
+                <div class="row-form-group">
                     <div class="input-group">
                         <label asp-for="@Model.ApiaryId"></label>
                         <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
@@ -60,7 +60,7 @@
                     <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
                 </div>
             }
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.DateOfTreatment"></label>
                     <input asp-for="@Model.DateOfTreatment" />
@@ -74,7 +74,7 @@
                 <label asp-for="@Model.Note"></label>
                 <textarea asp-for="@Model.Note" cols="30" rows="@textareaRows"></textarea>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Disease"></label>
                     <input asp-for="@Model.Disease" />
@@ -88,7 +88,7 @@
                 <label asp-for="@Model.InputAs"></label>
                 <select asp-for="@Model.InputAs" asp-items="@Html.GetEnumSelectList<InputAs>()"></select>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Quantity"></label>
                     <input type="text" min="0" asp-for="@Model.Quantity" />

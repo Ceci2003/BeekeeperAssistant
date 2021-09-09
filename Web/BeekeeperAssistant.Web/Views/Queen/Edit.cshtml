@@ -30,7 +30,7 @@
             </a>
             <h2>@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="Color"></label>
                     <select asp-for="Color" asp-items="@Html.GetEnumSelectList<QueenColor>()"></select>
@@ -42,7 +42,7 @@
                     <span class="error-msg" asp-validation-for="FertilizationDate"></span>
                 </div>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="GivingDate"></label>
                     <input asp-for="GivingDate" />
@@ -54,7 +54,7 @@
                     <span class="error-msg" asp-validation-for="QueenType"></span>
                 </div>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="Breed"></label>
                     <select asp-for="Breed" asp-items="@Html.GetEnumSelectList<QueenBreed>()"></select>
@@ -66,7 +66,7 @@
                     <span class="error-msg" asp-validation-for="Temperament"></span>
                 </div>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="Origin"></label>
                     <textarea asp-for="Origin" cols="30" rows="5"></textarea>

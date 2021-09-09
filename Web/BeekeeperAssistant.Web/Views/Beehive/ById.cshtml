@@ -201,8 +201,16 @@
         </div>
     </div>
     <div id="Inspections" class="tabcontent" style="display: @if(Model.TabPage == "Inspections") {@block}; else {@none}">
-        <h3>Inspections</h3>
-        <p>Inspections page.</p>
+        <div class="harvests-data">
+            <div class="page-controls">
+                <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
+                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                <a class="btn beehive-create" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
+                    <i class="fas fa-notes-medical"></i>
+                    Добавете преглед
+                </a>
+            </div>
+        </div>
     </div>
     <div id="Treatments" class="tabcontent" style="display: @if(Model.TabPage == "Treatments") {@block}; else {@none}">
         <div class="harvests-data">

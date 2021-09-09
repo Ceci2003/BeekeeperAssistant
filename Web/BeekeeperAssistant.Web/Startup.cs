@@ -80,6 +80,7 @@
             services.AddTransient<IQueenService, QueenService>();
             services.AddTransient<IHarvestService, HarvestService>();
             services.AddTransient<ITreatmentService, TreatmentService>();
+            services.AddTransient<IInspectionService, InspectionService>();
             services.AddTransient<IApiaryHelperService, ApiaryHelperService>();
 
         }

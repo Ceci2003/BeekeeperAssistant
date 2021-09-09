@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906233748_UpdateNamesInInspection")]
+    partial class UpdateNamesInInspection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -477,9 +479,6 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IncludeSpottedProblem")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IncludeStorage")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IncludeWeatherInfo")

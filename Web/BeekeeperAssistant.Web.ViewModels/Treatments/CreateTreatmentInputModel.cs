@@ -63,7 +63,7 @@
                 {
                     if (!apiaryBeehivesNumbers.Contains(number))
                     {
-                        errorList.Add(new ValidationResult($"Не съществува кошер с номер <strong>{number}</strong> в пчелина!"));
+                        errorList.Add(new ValidationResult($"Не съществува кошер с номер {number} в пчелина!"));
                     }
                 }
             }

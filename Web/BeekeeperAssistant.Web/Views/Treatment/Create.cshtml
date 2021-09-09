@@ -3,15 +3,13 @@
 @{
     this.ViewData["Title"] = "Добавяне на третиране";
 
-    int textareaRows = 10;
+    int textAreaRows = 10;
     var keyValuepairApiaries = new List<SelectListItem>();
     if (Model.Apiaries != null)
     {
         keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
-        textareaRows = 7;
+        textAreaRows = 7;
     }
-
-
 }
  
 <div class="breadcrumb">
@@ -42,7 +40,7 @@
             <div class="error-msg" asp-validation-summary="All"></div>
             @if (Model.Apiaries != null)
             {
-                <div>
+                <div class="row-form-group">
                     <div class="input-group">
                         <label asp-for="@Model.ApiaryId"></label>
                         <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
@@ -60,7 +58,7 @@
                     <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
                 </div>
             }
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.DateOfTreatment"></label>
                     <input asp-for="@Model.DateOfTreatment" />
@@ -72,9 +70,9 @@
             </div>
             <div class="input-group max">
                 <label asp-for="@Model.Note"></label>
-                <textarea asp-for="@Model.Note" cols="30" rows="@textareaRows"></textarea>
+                <textarea asp-for="@Model.Note" cols="30" rows="@textAreaRows"></textarea>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Disease"></label>
                     <input asp-for="@Model.Disease" />
@@ -88,10 +86,10 @@
                 <label asp-for="@Model.InputAs"></label>
                 <select asp-for="@Model.InputAs" asp-items="@Html.GetEnumSelectList<InputAs>()"></select>
             </div>
-            <div>
+            <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Quantity"></label>
-                    <input type="number" min="0" asp-for="@Model.Quantity" />
+                    <input asp-for="@Model.Quantity" />
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.Dose"></label>
@@ -101,13 +99,8 @@
 
             <input type="hidden" asp-for="@Model.ApiaryId" />
             <div class="btn-group">
-                <input class="btn beehive-create" type="submit" value="Добави третиране" />
+                <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
             </div>
         </form>
     </div>
 </div>
-
-<script>
-    var
-
-</script>

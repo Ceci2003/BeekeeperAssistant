@@ -1,9 +1,8 @@
 ﻿namespace BeekeeperAssistant.Data.Models
 {
-    using BeekeeperAssistant.Data.Common.Models;
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+
+    using BeekeeperAssistant.Data.Common.Models;
 
     public class Inspection : BaseDeletableModel<int>
     {
@@ -28,9 +27,9 @@
 
         public BeehiveTemperament BeehiveTemperament { get; set; }
 
-        public BeehiveActions BeehiveActions { get; set; }
+        public BeehiveAction BeehiveAction { get; set; }
 
-        public int Weight { get; set; }
+        public double Weight { get; set; }
 
         public double HiveTemperature { get; set; }
 
@@ -59,13 +58,13 @@
         // Frames with
         public bool IncludeFramesWith { get; set; }
 
-        public int Bees { get; set; }
+        public int FramesWithBees { get; set; }
 
-        public int Brood { get; set; }
+        public int FramesWithBrood { get; set; }
 
-        public int Honey { get; set; }
+        public int FramesWithHoney { get; set; }
 
-        public int Pollen { get; set; }
+        public int FramesWithPollen { get; set; }
 
         // Activity
         public bool IncludeActivity { get; set; }
@@ -74,13 +73,15 @@
 
         public Activity OrientationActivity { get; set; }
 
-        public Activity PolenActivity { get; set; }
+        public Activity PollenActivity { get; set; }
 
         public Activity ForragingActivity { get; set; }
 
         public int BeesPerMinute { get; set; }
 
         // Storages
+        public bool IncludeStorage { get; set; }
+
         public StoragePower StoredHoney { get; set; }
 
         public StoragePower StoredPollen { get; set; }
@@ -94,7 +95,7 @@
 
         public string Pests { get; set; }
 
-        public string Predation { get; set; }
+        public string Predators { get; set; }
 
         // Weather info
         public bool IncludeWeatherInfo { get; set; }

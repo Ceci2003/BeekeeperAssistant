@@ -82,6 +82,10 @@
                         this.ModelState.AddModelError(string.Empty, "Номерата на кошерите не са въведени правилно!");
                     }
                 }
+                else
+                {
+                    this.ModelState.AddModelError(string.Empty, "Изберете кошери!");
+                }
             }
 
             if (!this.ModelState.IsValid)

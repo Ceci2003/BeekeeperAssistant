@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906232238_RenameBeehiveActions")]
+    partial class RenameBeehiveActions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -416,7 +418,13 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("BeehiveTemperament")
                         .HasColumnType("int");
 
+                    b.Property<int>("Bees")
+                        .HasColumnType("int");
+
                     b.Property<int>("BeesPerMinute")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Brood")
                         .HasColumnType("int");
 
                     b.Property<bool>("ClappedBrood")
@@ -446,23 +454,14 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("ForragingActivity")
                         .HasColumnType("int");
 
-                    b.Property<int>("FramesWithBees")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FramesWithBrood")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FramesWithHoney")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FramesWithPollen")
-                        .HasColumnType("int");
-
                     b.Property<double>("HiveHumidity")
                         .HasColumnType("float");
 
                     b.Property<double>("HiveTemperature")
                         .HasColumnType("float");
+
+                    b.Property<int>("Honey")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IncludeActivity")
                         .HasColumnType("bit");
@@ -477,9 +476,6 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IncludeSpottedProblem")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IncludeStorage")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IncludeWeatherInfo")
@@ -503,10 +499,13 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<string>("Pests")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PollenActivity")
+                    b.Property<int>("PolenActivity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Predators")
+                    b.Property<int>("Pollen")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Predation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QueenCells")
@@ -542,8 +541,8 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<double>("WeatherTemperature")
                         .HasColumnType("float");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

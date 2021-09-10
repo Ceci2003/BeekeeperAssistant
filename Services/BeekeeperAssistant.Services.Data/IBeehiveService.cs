@@ -44,6 +44,8 @@
 
         int GetAllBeehivesCountByApiaryId(int apiaryId);
 
+        T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber);
+
         int GetAllUserBeehivesCount(string userId);
     }
 }

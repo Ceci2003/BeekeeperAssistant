@@ -96,7 +96,7 @@
         [Display(Name = "Активност на пчелите")]
         public Activity BeeActivity { get; set; }
 
-        [Display(Name = " ориентационните полети")]
+        [Display(Name = "Oриентационни полети")]
         public Activity OrientationActivity { get; set; }
 
         [Display(Name = "Принос на прашец")]
@@ -149,24 +149,26 @@
 
         public IEnumerable<KeyValuePair<int, string>> Apiaries { get; set; }
 
+        [Display(Name = "Пчелин")]
         public int ApiaryId { get; set; }
 
         [Display(Name = "Въведете номер на кошера")]
         public int SelectedBeehiveNumber { get; set; }
 
-        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    var errorList = new List<ValidationResult>();
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errorList = new List<ValidationResult>();
 
-        //    var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
-        //    var apiaryBeehivesNumbers = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId).Select(b => b.Number);
+            var beehiveNumber = int.Parse(this.SelectedBeehiveNumber.ToString());
+            var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
+            var beehive = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId && b.Number == beehiveNumber).FirstOrDefault();
 
-        //    if (!apiaryBeehivesNumbers.Contains(this.SelectedBeehiveNumber))
-        //    {
-        //        errorList.Add(new ValidationResult($"Не съществува кошер с номер {this.SelectedBeehiveNumber} в пчелина!"));
-        //    }
+            if (beehive == null)
+            {
+                errorList.Add(new ValidationResult($"Не съществува кошер с номер {this.SelectedBeehiveNumber} в пчелина!"));
+            }
 
-        //    return errorList;
-        //}
+            return errorList;
+        }
     }
 }

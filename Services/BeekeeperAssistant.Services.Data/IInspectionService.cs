@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
@@ -58,5 +59,9 @@
             string userId,
             int beehiveId,
             CreateInspectionInputModel inputModel);
+
+        int GetAllUserInspectionsForLastYearCount(string userId);
+
+        IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0);
     }
 }

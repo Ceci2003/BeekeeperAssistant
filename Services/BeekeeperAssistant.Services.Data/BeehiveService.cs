@@ -148,5 +148,11 @@
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
+
+        public T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber) =>
+            this.beehiveRepository.AllAsNoTracking()
+                .Where(b => b.Apiary.Number == apiaryNumber && b.Number == beehiveNumber)
+                .To<T>()
+                .FirstOrDefault();
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
@@ -70,5 +73,16 @@
 
             return inspection.Id;
         }
+
+        public IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetAllUserInspectionsForLastYearCount(string userId) =>
+           this.inspectionRepository
+               .AllAsNoTracking()
+               .Where(t => t.CreatorId == userId)
+               .Count();
     }
 }

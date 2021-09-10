@@ -119,6 +119,30 @@ function openTab(tab, tabBody) {
 // Get the element with id="defaultOpen" and click on it
 // document.getElementById("defaultOpen").click();
 
+function formSection(btn) {
+    var btnId = btn.currentTarget.id.substr(3);
+    var btn = document.getElementById('btn' + btnId);
+    var div = document.getElementById(btnId);
+    var checkBox = document.getElementById('Include' + btnId.substr(0, btnId.length-7));
+
+    if (div.style.display == "none") {
+        div.style.display = "flex";
+        checkBox.value = true;
+        div.classList.remove("close-section");
+        div.classList.add("open-section");
+        btn.classList.add("section-button-clicked");
+    }
+    else {
+        div.style.display = "none";
+        checkBox.value = false;
+        div.classList.remove("open-section");
+        div.classList.add("close-section");
+        btn.classList.remove("section-button-clicked");
+    }
+    
+    console.log(div.classList);
+}
+
 
 function allBeehives() {
     var allBeehives = document.getElementById("AllBeehives");

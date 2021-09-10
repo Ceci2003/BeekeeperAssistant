@@ -767,6 +767,93 @@ textarea {
   color: red;
 }
 
+.section-button {
+  /* display: inline-block; */
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: var(--green-2);
+  color: var(--white);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.section-button-clicked {
+  background-color: var(--queen-color);
+}
+
+/* Form sections animation */
+.open-section {
+  background-color: var(--white);
+  animation: open-section 0.5s;
+}
+
+.close-section {
+  animation: open-section 0.5s;
+  animation-direction: reverse;
+}
+
+@keyframes open-section {
+  /* 0% {
+		opacity: 0;
+		transform: scale(0);
+    -webkit-transform: scale(0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+    -webkit-transform: scale(1);
+	} */
+
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+@keyframes close-section {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* 0% {
+		opacity: 1;
+		transform: scale(1);
+    -webkit-transform: scale(1);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(0);
+    -webkit-transform: scale(0);
+	} */
+}
+
+.form-checkbox {
+  background-color: var(--gray-background);
+  border-radius: 5px;
+}
+
+.form-checkbox label {
+  padding: 10px;
+  cursor: pointer;
+}
+
 /* Slider Yes/No */
 
 .slider-yes-no input[type="checkbox"] {

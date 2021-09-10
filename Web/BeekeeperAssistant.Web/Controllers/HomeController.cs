@@ -16,15 +16,18 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITreatmentService treatmentService;
+        private readonly IInspectionService inspectionService;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
-            ITreatmentService treatmentService)
+            ITreatmentService treatmentService,
+            IInspectionService inspectionService)
         {
             this.userManager = userManager;
             this.treatmentService = treatmentService;
+            this.inspectionService = inspectionService;
         }
 
         public async Task<ActionResult> Index()
@@ -39,6 +42,7 @@
             var viewModel = new IndexViewModel
             {
                 TreatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id),
+                InspectionsCount = this.inspectionService.GetAllUserInspectionsForLastYearCount(currentUser.Id),
             };
 
             return this.View(viewModel);

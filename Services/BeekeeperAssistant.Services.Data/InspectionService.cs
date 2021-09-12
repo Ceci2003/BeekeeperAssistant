@@ -75,7 +75,7 @@
             return inspection.Id;
         }
 
-        public async Task<int> EditUserInspectionAsync(string userId, int inspectionId, EditInspectionInputModel inputModel)
+        public async Task<int> EditUserInspectionAsync(int inspectionId, EditInspectionInputModel inputModel)
         {
             var inspection = this.inspectionRepository
                 .All()

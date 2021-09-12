@@ -26,7 +26,6 @@
         private readonly IBeehiveService beehiveService;
         private readonly IApiaryNumberService apiaryNumberService;
         private readonly IConfiguration configuration;
-
         private readonly IForecastService forecastService;
 
         public ApiaryController(

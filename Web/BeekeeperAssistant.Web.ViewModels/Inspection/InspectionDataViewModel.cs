@@ -10,6 +10,10 @@
     {
         public int Id { get; set; }
 
+        public int BeehiveId { get; set; }
+
+        public string CreatorId { get; set; }
+
         [Display(Name = "Дата на прегледа")]
         public DateTime DateOfInspection { get; set; }
 

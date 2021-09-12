@@ -61,7 +61,6 @@
             CreateInspectionInputModel inputModel);
 
         Task<int> EditUserInspectionAsync(
-            string userId,
             int inspectionId,
             EditInspectionInputModel inputModel);
 

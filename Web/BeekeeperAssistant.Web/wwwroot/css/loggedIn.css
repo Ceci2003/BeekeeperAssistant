@@ -131,6 +131,15 @@ img::selection {
   padding: 0 15px;
 }
 
+.sidebar-navigation .profile-btn {
+  background-color: var(--orange);
+  color: var(--white);
+}
+
+.sidebar-navigation .profile-btn:hover {
+  background-color: var(--beehive-color);
+}
+
 .sidebar-navigation .user-area hr {
   margin: 10px;
   height: 5px;
@@ -361,6 +370,18 @@ img::selection {
   color: var(--white);
 }
 
+.create-data {
+  background-color: var(--white);
+  color: var(--beehive-color);
+  border: 2px solid var(--beehive-color);
+}
+
+.create-data:hover {
+  background-color: var(--beehive-color);
+  color: var(--white);
+  border: 2px solid var(--beehive-color);
+}
+
 /* Tables */
 
 .data-view {
@@ -501,22 +522,16 @@ tr.has-device td.edit div a.delete:hover {
   color: var(--queen-color);
 }
 
-td.td-weak,
-td.td-medium,
-td.td-strong {
-  color: var(--white);
-}
-
 td.td-weak {
-  background-color: var(--queen-color-hover);
+  color: var(--queen-color-hover);
 }
 
 td.td-medium {
-  background-color: var(--beehive-color-hover);
+  color: var(--beehive-color-hover);
 }
 
 td.td-strong {
-  background-color: var(--green-2);
+  color: var(--green-2);
 }
 
 td.queen-yellow {
@@ -569,6 +584,10 @@ td.queen-red {
   display: flex;
 }
 
+.apiary-info td {
+  padding-left: 5px;
+}
+
 .data-view .weather {
   border: 1px solid var(--lightgray);
   border-radius: 8px;
@@ -580,6 +599,14 @@ td.queen-red {
 
 .data-view .weather p {
   text-align: left;
+}
+
+.beehive-apiary-num {
+  color: var(--apiary-color);
+}
+
+.beehive-apiary-num a {
+  color: var(--apiary-color);
 }
 
 /* Queen data */

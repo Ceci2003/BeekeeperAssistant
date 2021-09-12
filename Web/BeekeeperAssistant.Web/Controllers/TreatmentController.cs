@@ -190,9 +190,6 @@
                 inputModel.Quantity,
                 inputModel.Dose);
 
-            var tabPage = "Treatment";
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(inputModel.BeehiveId.Value);
-
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Treatments" });
         }
 

@@ -141,5 +141,13 @@
                .All()
                .FirstOrDefault(a => a.Id == apiaryId)
                .Number;
+
+        public T GetUserApiaryByBeehiveId<T>(int beehiveId) =>
+            this.beehiveRepository.AllAsNoTracking()
+                .Include(a => a.Apiary)
+                .Where(b => b.Id == beehiveId)
+                .Select(b => b.Apiary)
+                .To<T>()
+                .FirstOrDefault();
     }
 }

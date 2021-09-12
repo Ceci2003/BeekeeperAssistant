@@ -19,6 +19,8 @@
 
         T GetUserApiaryByNumber<T>(string userId, string number);
 
+        T GetUserApiaryByBeehiveId<T>(int beehiveId);
+
         T GetApiaryById<T>(int apiaryId);
 
         Task<string> CreateUserApiaryAsync(

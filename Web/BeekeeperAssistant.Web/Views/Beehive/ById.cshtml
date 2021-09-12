@@ -60,19 +60,18 @@
                     <tbody>
                         <tr>
                             <th scope="row">Номер:</th>
-                            <td>@Model.Number</td>
+                            <td><strong>@Model.Number</strong></td>
                         </tr>
                         <tr>
                             <th scope="row">Пчелин:</th>
-                            <td>
-                                <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+                            <td class="beehive-apiary-num">
+                                <a href="/Apiary/@Model.ApiaryNumber"><strong>@Model.ApiaryNumber</strong></a>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Сила:</th>
                             <td class="@powerClasses[Model.BeehivePower.ToString().ToLower()]">
-                                @Html.DisplayFor(x =>
-                                Model.BeehivePower)
+                                <strong>@Html.DisplayFor(x => Model.BeehivePower)</strong>
                             </td>
                         </tr>
                         <tr>
@@ -210,7 +209,7 @@
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
                     asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn beehive-create" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
+                <a class="btn create-data" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
                     <i class="fas fa-notes-medical"></i>
                     Добавете преглед
                 </a>
@@ -219,8 +218,8 @@
                 <thead>
                     <th>Дата на прегледа</th>
                     <th>Вид на прегледа</th>
-                    <th>Бележка</th>
                     <th>Роил ли се е</th>
+                    <th>Сила на кошера</th>
                     <th>Редактиране</th>
                 </thead>
                 <tbody>
@@ -236,9 +235,6 @@
                                 @Html.DisplayFor(i => inspection.InspectionType)
                             </td>
                             <td>
-                                @inspection.Note
-                            </td>
-                            <td>
                                 @if (inspection.Swarmed)
                                 {
                                     <b>@yesNo[1]</b>
@@ -247,6 +243,9 @@
                                 {
                                     @yesNo[0]
                                 }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(i => inspection.BeehivePower)
                             </td>
                             <td class="edit">
                                 <div>
@@ -274,7 +273,7 @@
                     }
                 </tbody>
             </table>
-            @if (!Model.Treatments.Any())
+            @if (!Model.Inspections.Any())
             {
                 <p>няма добавени третирания</p>
             }
@@ -285,7 +284,7 @@
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
                     asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn beehive-create" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
+                <a class="btn create-data" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
                     <i class="fas fa-notes-medical"></i>
                     Добавете третиране
                 </a>
@@ -364,7 +363,7 @@
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
                     asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn beehive-create" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+                <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
                     <i class="fas fa-box"></i>
                     Добавете добивs
                 </a>

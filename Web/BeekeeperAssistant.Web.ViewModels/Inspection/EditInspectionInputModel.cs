@@ -9,6 +9,8 @@
 
     public class EditInspectionInputModel : IMapFrom<Inspection>
     {
+        public int BeehiveId { get; set; }
+
         [Required]
         [Display(Name = "Дата на прегледа")]
         public DateTime DateOfInspection { get; set; }

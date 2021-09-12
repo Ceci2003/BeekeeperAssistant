@@ -6,29 +6,37 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Inspection;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
 
     public class InspectionController : BaseController
     {
         private readonly IInspectionService inspectionService;
         private readonly IBeehiveService beehiveService;
         private readonly IApiaryService apiaryService;
+        private readonly IForecastService forecastService;
+        private readonly IConfiguration configuration;
         private readonly UserManager<ApplicationUser> userManager;
 
         public InspectionController(
             IInspectionService inspectionService,
             IBeehiveService beehiveService,
             IApiaryService apiaryService,
+            IForecastService forecastService,
+            IConfiguration configuration,
             UserManager<ApplicationUser> userManager)
         {
             this.inspectionService = inspectionService;
             this.beehiveService = beehiveService;
             this.apiaryService = apiaryService;
+            this.forecastService = forecastService;
+            this.configuration = configuration;
             this.userManager = userManager;
         }
 
@@ -48,6 +56,16 @@
             else
             {
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+
+                //var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
+                //ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+                //if (forecastResult != null)
+                //{
+                //    inputModel.IncludeWeatherInfo = true;
+                //    inputModel.Conditions = forecastResult.Description;
+                //    inputModel.WeatherTemperature = double.Parse(forecastResult.Temp);
+                //    inputModel.WeatherHumidity = double.Parse(forecastResult.Humidity);
+                //}
             }
 
             return this.View(inputModel);
@@ -80,6 +98,54 @@
                 return this.View(inputModel);
             }
 
+            if (!inputModel.IncludeQueenSection)
+            {
+                if (inputModel.QueenSeen || inputModel.QueenCells != QueenCells.None)
+                {
+                    inputModel.IncludeQueenSection = true;
+                }
+            }
+
+            if (!inputModel.IncludeBrood)
+            {
+                if (inputModel.Eggs || inputModel.ClappedBrood || inputModel.UnclappedBrood)
+                {
+                    inputModel.IncludeBrood = true;
+                }
+            }
+
+            if (!inputModel.IncludeFramesWith)
+            {
+                if (inputModel.FramesWithBees != 0 || inputModel.FramesWithBrood != 0 || inputModel.FramesWithHoney != 0 || inputModel.FramesWithPollen != 0)
+                {
+                    inputModel.IncludeFramesWith = true;
+                }
+            }
+
+            if (!inputModel.IncludeActivity)
+            {
+                if (inputModel.BeeActivity != Activity.Low || inputModel.OrientationActivity != Activity.Low || inputModel.PollenActivity != Activity.Low || inputModel.ForragingActivity != Activity.Low || inputModel.BeesPerMinute != 0)
+                {
+                    inputModel.IncludeActivity = true;
+                }
+            }
+
+            if (!inputModel.IncludeSpottedProblem)
+            {
+                if (inputModel.Disease != null || inputModel.Treatment != null || inputModel.Pests != null || inputModel.Predators != null)
+                {
+                    inputModel.IncludeSpottedProblem = true;
+                }
+            }
+
+            if (!inputModel.IncludeWeatherInfo)
+            {
+                if (inputModel.Conditions != null || inputModel.WeatherTemperature != null || inputModel.WeatherHumidity != null)
+                {
+                    inputModel.IncludeWeatherInfo = true;
+                }
+            }
+
             if (id == null)
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, beehive.Id, inputModel);
@@ -103,7 +169,25 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditInspectionInputModel inputModel)
         {
-            return this.View();
+            await this.inspectionService.EditUserInspectionAsync(id, inputModel);
+
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Inspections" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var inspection = this.inspectionService.GetInspectionById<InspectionDataViewModel>(id);
+
+            if (inspection.CreatorId != currentUser.Id)
+            {
+                return this.BadRequest();
+            }
+
+            await this.inspectionService.DeleteInspectionAsync(id);
+
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inspection.BeehiveId, tabPage = "Inspections" });
         }
     }
 }

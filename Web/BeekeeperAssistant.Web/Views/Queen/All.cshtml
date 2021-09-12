@@ -1,6 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Queens.AllQueensViewModel
 @{
-    ViewData["Title"] = "Кралици-всички";
+    ViewData["Title"] = "Майки-всички";
 }
 
 <div class="breadcrumb">
@@ -38,7 +38,7 @@
                 <tr>
                     <td class="queen-@queen.Color.ToString().ToLower()">@queen.Color</td>
                     <td class="number">
-                        <a href="/Beehive/@queen.BeehiveApiaryNumber/@queen.BeehiveId">@queen.BeehiveNumber</a>
+                        <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId" asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
                     </td>
                     <td class="number">
                         <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>

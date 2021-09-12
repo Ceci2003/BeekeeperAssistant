@@ -13,6 +13,7 @@
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Inspection;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -28,19 +29,22 @@
         private readonly IBeehiveService beehiveService;
         private readonly IHarvestService harvestService;
         private readonly ITreatmentService treatmentService;
+        private readonly IInspectionService inspectionService;
 
         public BeehiveController(
             IApiaryService apiaryService,
             UserManager<ApplicationUser> userManager,
             IBeehiveService beehiveService,
             IHarvestService harvestService,
-            ITreatmentService treatmentService)
+            ITreatmentService treatmentService,
+            IInspectionService inspectionService)
         {
             this.apiaryService = apiaryService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
             this.harvestService = harvestService;
             this.treatmentService = treatmentService;
+            this.inspectionService = inspectionService;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -85,6 +89,8 @@
             viewModel.Harvests = harvests.Where(h => h.BeehiveId == beehiveId);
             var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId);
             viewModel.Treatments = treatments;
+            var inspections = this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(beehiveId);
+            viewModel.Inspections = inspections;
 
             if (string.IsNullOrEmpty(tabPage))
             {

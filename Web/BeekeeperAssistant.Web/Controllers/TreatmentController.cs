@@ -60,7 +60,7 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!inputModel.AllBeehives)
+            if (id == null && !inputModel.AllBeehives)
             {
                 if (inputModel.BeehiveNumbersSpaceSeparated != null)
                 {
@@ -165,7 +165,7 @@
             }
         }
 
-        public async Task<IActionResult> Edit(int id, int? beehiveId)
+        public async Task<IActionResult> Edit(int id)
         {
             var inputModel = this.treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
 

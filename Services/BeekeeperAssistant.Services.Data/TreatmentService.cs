@@ -114,8 +114,7 @@
             var qurey = this.treatedBeehivesRepository
                 .AllAsNoTracking()
                 .Where(a => a.Beehive.Id == beehiveId)
-                .OrderBy(tb => tb.Treatment.DateOfTreatment)
-                .OrderByDescending(tb => tb.Beehive.Apiary.Number)
+                .OrderByDescending(tb => tb.Treatment.DateOfTreatment)
                 .Select(t => t.Treatment)
                 .Skip(skip);
 

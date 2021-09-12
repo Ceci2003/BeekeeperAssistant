@@ -10,6 +10,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Inspection;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
 
     public class BeehiveDataViewModel : IMapFrom<Beehive>, IHaveCustomMappings
@@ -51,6 +52,9 @@
 
         [IgnoreMap]
         public IEnumerable<TreatmentDataViewModel> Treatments { get; set; }
+
+        [IgnoreMap]
+        public IEnumerable<InspectionDataViewModel> Inspections { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

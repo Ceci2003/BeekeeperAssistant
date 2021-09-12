@@ -365,7 +365,7 @@ img::selection {
 
 .data-view {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-size: 18px;
   margin-bottom: 30px;
   border: 1px solid var(--lightgray);
@@ -595,6 +595,7 @@ td.queen-red {
   border-radius: 10px;
   padding: 10px;
   align-items: center;
+  justify-content: space-around;
 }
 
 .queen-preview img {
@@ -660,6 +661,10 @@ td.queen-red {
   padding: 8px;
   border: 1px solid var(--lightgray);
   border-top: none;
+}
+
+.data-table-expand td div {
+  padding: 8px;
 }
 
 /* All forms */

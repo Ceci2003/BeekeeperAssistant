@@ -58,12 +58,30 @@
         {
             var currentuser = await this.userManager.GetUserAsync(this.User);
 
+            var apiary = this.apiaryService.GetApiaryById<ApiaryViewModel>(inputModel.ApiaryId);
+            var beehive = this.beehiveService.GetBeehiveByNumber<BeehiveViewModel>(inputModel.SelectedBeehiveNumber, apiary.Number);
+
+            if (id == null && beehive == null)
+            {
+                this.ModelState.AddModelError(string.Empty, $"Не съществува кошер с номер {inputModel.SelectedBeehiveNumber} в пчелина!");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentuser.Id);
+                }
+                else
+                {
+                    inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                }
+
+                return this.View(inputModel);
+            }
+
             if (id == null)
             {
-                var apiary = this.apiaryService.GetApiaryById<ApiaryViewModel>(inputModel.ApiaryId);
-                var beehiveNumber = int.Parse(inputModel.SelectedBeehiveNumber.ToString());
-                var beehive = this.beehiveService.GetBeehiveByNumber<BeehiveViewModel>(beehiveNumber, apiary.Number);
-
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, beehive.Id, inputModel);
 
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehive.Id, tabPage = "Inspections" });
@@ -74,6 +92,18 @@
 
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = id.Value, tabPage = "Inspections" });
             }
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.inspectionService.GetInspectionById<EditInspectionInputModel>(id);
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditInspectionInputModel inputModel)
+        {
+            return this.View();
         }
     }
 }

@@ -6,6 +6,8 @@
     powerClasses.Add("weak", "td-weak");
     powerClasses.Add("medium", "td-medium");
     powerClasses.Add("strong", "td-strong");
+    string yesText = "Да";
+    string noText = "Не";
 }
 
 <div class="breadcrumb">
@@ -39,6 +41,7 @@
             <tr>
                 <th>Номер</th>
                 <th>Номер на пчелин</th>
+                <th>Подвижен</th>
                 <th>Вид</th>
                 <th>Система</th>
                 <th>Сила</th>
@@ -54,6 +57,16 @@
                     </td>
                     <td class="number">
                         <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
+                    </td>
+                    <td>
+                        @if (beehive.IsItMovable)
+                        {
+                            @yesText
+                        }
+                        else
+                        {
+                            @noText
+                        }
                     </td>
                     <td>@Html.DisplayFor(x => beehive.BeehiveType)</td>
                     <td>@Html.DisplayFor(x => beehive.BeehiveSystem)</td>

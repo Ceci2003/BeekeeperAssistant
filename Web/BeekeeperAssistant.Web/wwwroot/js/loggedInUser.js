@@ -121,9 +121,11 @@ function openTab(tab, tabBody) {
 
 function formSection(btn) {
     var btnId = btn.currentTarget.id.substr(3);
-    var btn = document.getElementById('btn' + btnId);
+    var btn = document.getElementById("btn" + btnId);
     var div = document.getElementById(btnId);
-    var checkBox = document.getElementById('Include' + btnId.substr(0, btnId.length-7));
+    var checkBox = document.getElementById(
+        "Include" + btnId.substr(0, btnId.length - 7)
+    );
 
     if (div.style.display == "none") {
         div.style.display = "flex";
@@ -131,26 +133,53 @@ function formSection(btn) {
         div.classList.remove("close-section");
         div.classList.add("open-section");
         btn.classList.add("section-button-clicked");
-    }
-    else {
+    } else {
         div.style.display = "none";
         checkBox.value = false;
         div.classList.remove("open-section");
         div.classList.add("close-section");
         btn.classList.remove("section-button-clicked");
     }
-    
-    console.log(div.classList);
 }
 
+// expand table row
+function expandTable(element, tab) {
+    var masterId = element.id;
+    var expandId = masterId.replace("Master", "Expand");
+    var expandRow = document.getElementById(expandId);
+
+    // hide expanded
+
+    console.log(expandRow);
+    console.log(expandRow.style.display == "none");
+    // expand selected
+    if (expandRow.style.display == "none") {
+        expandRow.style.display = "";
+    } else {
+        expandRow.style.display = "none";
+    }
+    
+    var allExpandSelector = '*[id^="' + expandId.replace(/[0-9]/g, "") + '"]';
+    var allExpandRows = document.querySelectorAll(allExpandSelector);
+    hideExpanded(allExpandRows, expandRow);
+}
+
+function hideExpanded(allExpandRows, exeptRow) {
+    allExpandRows.forEach((row) => {
+        if (row != exeptRow) {
+            row.style.display = "none";
+        }
+    });
+}
 
 function allBeehives() {
     var allBeehives = document.getElementById("AllBeehives");
-    var beehiveNumbersSpaceSeparated = document.getElementById("BeehiveNumbersSpaceSeparated");
+    var beehiveNumbersSpaceSeparated = document.getElementById(
+        "BeehiveNumbersSpaceSeparated"
+    );
     if (allBeehives.value == true) {
         beehiveNumbersSpaceSeparated.style.display = "none";
-    }
-    else {
+    } else {
         beehiveNumbersSpaceSeparated.style.display = "block";
     }
 }

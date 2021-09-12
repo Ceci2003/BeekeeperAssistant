@@ -1,16 +1,11 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Inspection.CreateInspectionInputModel
+﻿@model BeekeeperAssistant.Web.ViewModels.Inspection.EditInspectionInputModel
 @using BeekeeperAssistant.Data.Models
 
 @{
-    this.ViewData["Title"] = "Добавяне на преглед";
+    this.ViewData["Title"] = "Редактиране на преглед";
 
     int textAreaRows = 10;
-    var keyValuepairApiaries = new List<SelectListItem>();
-    if (Model.Apiaries != null)
-    {
-        keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
-        textAreaRows = 7;
-    }
+    string openSectionClass = "open-section";
 }
 
 <div class="breadcrumb">
@@ -33,25 +28,12 @@
 
 <div class="content">
     <div class="form-box">
-        <form asp-controller="Inspection" asp-action="Create">
+        <form asp-controller="Inspection" asp-action="Edit">
             <a class="back-arrow" asp-controller="Beehive" asp-action="All">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h2>@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
-            @if (Model.Apiaries != null)
-            {
-                <div class="row-form-group">
-                    <div class="input-group">
-                        <label asp-for="@Model.ApiaryId"></label>
-                        <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
-                    </div>
-                    <div class="input-group">
-                        <label asp-for="@Model.SelectedBeehiveNumber"></label>
-                        <input asp-for="@Model.SelectedBeehiveNumber" />
-                    </div>
-                </div>
-            }
             <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="DateOfInspection"></label>
@@ -237,7 +219,7 @@
                     <input asp-for="WeatherHumidity" />
                 </div>
             </div>
-            
+
             <input type="hidden" asp-for="@Model.IncludeQueenSection">
             <input type="hidden" asp-for="@Model.IncludeBrood">
             <input type="hidden" asp-for="@Model.IncludeFramesWith">
@@ -245,10 +227,30 @@
             <input type="hidden" asp-for="@Model.IncludeStorage">
             <input type="hidden" asp-for="@Model.IncludeSpottedProblem">
             <input type="hidden" asp-for="@Model.IncludeWeatherInfo">
-            <input type="hidden" asp-for="@Model.ApiaryId" />
             <div class="btn-group">
                 <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    window.onload = function () {
+        this.check = function (hiddenElementId) {
+            var element = document.getElementById(hiddenElementId);
+            var btnName = 'btn' + hiddenElementId.substr(7) + 'Section';
+
+            if (element.value == 'True') {
+                document.getElementById(btnName).click();
+            }
+        }
+
+        this.check("IncludeQueenSection");
+        this.check("IncludeBrood");
+        this.check("IncludeFramesWith");
+        this.check("IncludeActivity");
+        this.check("IncludeStorage");
+        this.check("IncludeSpottedProblem");
+        this.check("IncludeWeatherInfo");
+    };
+</script>

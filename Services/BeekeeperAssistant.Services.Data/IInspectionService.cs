@@ -60,6 +60,15 @@
             int beehiveId,
             CreateInspectionInputModel inputModel);
 
+        Task<int> EditUserInspectionAsync(
+            string userId,
+            int inspectionId,
+            EditInspectionInputModel inputModel);
+
+        Task DeleteInspectionAsync(int inspectionId);
+
+        T GetInspectionById<T>(int inspectionId);
+
         int GetAllUserInspectionsForLastYearCount(string userId);
 
         IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0);

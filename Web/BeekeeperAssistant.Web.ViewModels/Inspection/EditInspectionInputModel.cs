@@ -3,16 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
 
-    using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
-    using Microsoft.Extensions.DependencyInjection;
+    using BeekeeperAssistant.Services.Mapping;
 
-    public class CreateInspectionInputModel
+    public class EditInspectionInputModel : IMapFrom<Inspection>
     {
         [Required]
-        [Display(Name="Дата на прегледа")]
+        [Display(Name = "Дата на прегледа")]
         public DateTime DateOfInspection { get; set; }
 
         [Required]
@@ -146,28 +144,5 @@
 
         [Display(Name = "Влажност")]
         public double WeatherHumidity { get; set; }
-
-        public IEnumerable<KeyValuePair<int, string>> Apiaries { get; set; }
-
-        [Display(Name = "Пчелин")]
-        public int ApiaryId { get; set; }
-
-        [Display(Name = "Въведете номер на кошера")]
-        public int SelectedBeehiveNumber { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            var errorList = new List<ValidationResult>();
-
-            var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
-            var beehive = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId && b.Number == this.SelectedBeehiveNumber).FirstOrDefault();
-
-            if (beehive == null)
-            {
-                errorList.Add(new ValidationResult($"Не съществува кошер с номер {this.SelectedBeehiveNumber} в пчелина!"));
-            }
-
-            return errorList;
-        }
     }
 }

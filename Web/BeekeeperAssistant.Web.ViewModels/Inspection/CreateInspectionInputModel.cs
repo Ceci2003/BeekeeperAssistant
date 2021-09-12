@@ -141,11 +141,15 @@
         [Display(Name = "Условия")]
         public string Conditions { get; set; }
 
+        public double WeatherTemperature => Convert.ToDouble(this.WeatherTemperatureString);
+
         [Display(Name = "Температура")]
-        public double WeatherTemperature { get; set; }
+        public string WeatherTemperatureString { get; set; }
+
+        public double WeatherHumidity => Convert.ToDouble(this.WeatherHumidityString);
 
         [Display(Name = "Влажност")]
-        public double WeatherHumidity { get; set; }
+        public string WeatherHumidityString { get; set; }
 
         public IEnumerable<KeyValuePair<int, string>> Apiaries { get; set; }
 

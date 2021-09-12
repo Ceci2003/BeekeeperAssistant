@@ -164,12 +164,23 @@ function expandTable(element, tab) {
     hideExpanded(allExpandRows, expandRow);
 }
 
+// hide expanded row
 function hideExpanded(allExpandRows, exeptRow) {
     allExpandRows.forEach((row) => {
         if (row != exeptRow) {
             row.style.display = "none";
         }
     });
+}
+
+// check form include sections
+function checkFormSection(hiddenElementId) {
+    var element = document.getElementById(hiddenElementId);
+    var btnName = 'btn' + hiddenElementId.substr(7) + 'Section';
+
+    if (element.value == 'True') {
+        document.getElementById(btnName).click();
+    }
 }
 
 function allBeehives() {

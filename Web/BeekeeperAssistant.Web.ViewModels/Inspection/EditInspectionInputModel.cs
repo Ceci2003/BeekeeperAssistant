@@ -141,10 +141,14 @@
         [Display(Name = "Условия")]
         public string Conditions { get; set; }
 
-        [Display(Name = "Температура")]
         public double WeatherTemperature { get; set; }
 
-        [Display(Name = "Влажност")]
+        [Display(Name = "Температура")]
+        public string WeatherTemperatureString { get; set; }
+
         public double WeatherHumidity { get; set; }
+
+        [Display(Name = "Влажност")]
+        public string WeatherHumidityString { get; set; }
     }
 }

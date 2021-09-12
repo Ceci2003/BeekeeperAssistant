@@ -39,11 +39,20 @@
                 return this.View();
             }
 
-            var viewModel = new IndexViewModel
+            var viewModel = new IndexViewModel();
+
+            var treatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id);
+            var inspectionsCount = this.inspectionService.GetAllUserInspectionsForLastYearCount(currentUser.Id);
+
+            if (treatmentsCount != null)
             {
-                TreatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id),
-                InspectionsCount = this.inspectionService.GetAllUserInspectionsForLastYearCount(currentUser.Id),
-            };
+                viewModel.TreatmentsCount = treatmentsCount;
+            }
+
+            if (inspectionsCount != null)
+            {
+                viewModel.InspectionsCount = inspectionsCount;
+            }
 
             return this.View(viewModel);
         }
@@ -63,11 +72,17 @@
             return this.View();
         }
 
-        public IActionResult HttpError(int statusCode)
+        public IActionResult HttpError(int statusCode, string message)
         {
+            if (string.IsNullOrEmpty(message))
+            {
+                message = "Не успяхме да намерим стряницата която търсите";
+            }
+
             var viewModel = new HttpErrorViewModel
             {
                 StatusCode = statusCode,
+                Message = message,
             };
 
             return this.View(viewModel);
@@ -78,6 +93,7 @@
         {
             return this.View(
                 new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+            //return this.HttpError(404, string.Empty);
         }
     }
 }

@@ -229,12 +229,12 @@
                     <input asp-for="Conditions" />
                 </div>
                 <div class="input-group">
-                    <label asp-for="WeatherTemperature"></label>
-                    <input asp-for="WeatherTemperature" />
+                    <label asp-for="WeatherTemperatureString"></label>
+                    <input type="text" asp-for="WeatherTemperatureString" />
                 </div>
                 <div class="input-group">
-                    <label asp-for="WeatherHumidity"></label>
-                    <input asp-for="WeatherHumidity" />
+                    <label asp-for="WeatherHumidityString"></label>
+                    <input type="text" asp-for="WeatherHumidityString" />
                 </div>
             </div>
             
@@ -252,3 +252,15 @@
         </form>
     </div>
 </div>
+
+<script>
+    window.onload = function () {
+        checkFormSection("IncludeQueenSection");
+        checkFormSection("IncludeBrood");
+        checkFormSection("IncludeFramesWith");
+        checkFormSection("IncludeActivity");
+        checkFormSection("IncludeStorage");
+        checkFormSection("IncludeSpottedProblem");
+        checkFormSection("IncludeWeatherInfo");
+    };
+</script>

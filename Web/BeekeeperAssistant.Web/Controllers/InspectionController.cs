@@ -57,15 +57,15 @@
             {
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
 
-                //var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
-                //ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
-                //if (forecastResult != null)
-                //{
-                //    inputModel.IncludeWeatherInfo = true;
-                //    inputModel.Conditions = forecastResult.Description;
-                //    inputModel.WeatherTemperature = double.Parse(forecastResult.Temp);
-                //    inputModel.WeatherHumidity = double.Parse(forecastResult.Humidity);
-                //}
+                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
+                ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+                if (forecastResult != null)
+                {
+                    inputModel.IncludeWeatherInfo = true;
+                    inputModel.Conditions = forecastResult.Description;
+                    inputModel.WeatherTemperatureString = forecastResult.Temp;
+                    inputModel.WeatherHumidityString = forecastResult.Humidity;
+                }
             }
 
             return this.View(inputModel);
@@ -163,12 +163,17 @@
         public IActionResult Edit(int id)
         {
             var inputModel = this.inspectionService.GetInspectionById<EditInspectionInputModel>(id);
+            inputModel.WeatherHumidityString = inputModel.WeatherHumidity.ToString();
+            inputModel.WeatherTemperatureString = inputModel.WeatherTemperature.ToString();
             return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditInspectionInputModel inputModel)
         {
+            inputModel.WeatherHumidity = Convert.ToDouble(inputModel.WeatherHumidityString);
+            inputModel.WeatherTemperature = Convert.ToDouble(inputModel.WeatherTemperatureString);
+
             await this.inspectionService.EditUserInspectionAsync(id, inputModel);
 
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Inspections" });

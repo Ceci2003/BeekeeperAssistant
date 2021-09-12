@@ -62,7 +62,7 @@
                 <div class="input-group">
                     <label asp-for="BeehiveTemperament"></label>
                     <select asp-for="BeehiveTemperament"
-                        asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
+                            asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
                 </div>
             </div>
             <div class="input-group max">
@@ -89,7 +89,7 @@
                 <div class="input-group form-checkbox">
                     <label>
                         <input asp-for="QueenSeen" /> @Html.DisplayNameFor(model =>
-                        model.QueenSeen)
+model.QueenSeen)
                     </label>
                 </div>
                 <div class="input-group">
@@ -99,7 +99,7 @@
                 <div class="input-group">
                     <label asp-for="QueenWorkingStatus"></label>
                     <select asp-for="QueenWorkingStatus"
-                        asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
+                            asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
                 </div>
                 <div class="input-group">
                     <label asp-for="QueenPowerStatus"></label>
@@ -117,13 +117,13 @@
                 <div class="input-group form-checkbox">
                     <label>
                         <input asp-for="ClappedBrood" /> @Html.DisplayNameFor(model =>
-                        model.ClappedBrood)
+model.ClappedBrood)
                     </label>
                 </div>
                 <div class="input-group form-checkbox">
                     <label>
                         <input asp-for="UnclappedBrood" /> @Html.DisplayNameFor(model =>
-                        model.UnclappedBrood)
+model.UnclappedBrood)
                     </label>
                 </div>
             </div>
@@ -211,12 +211,12 @@
                     <input asp-for="Conditions" />
                 </div>
                 <div class="input-group">
-                    <label asp-for="WeatherTemperature"></label>
-                    <input asp-for="WeatherTemperature" />
+                    <label asp-for="WeatherHumidityString"></label>
+                    <input type="text" asp-for="WeatherHumidityString" />
                 </div>
                 <div class="input-group">
-                    <label asp-for="WeatherHumidity"></label>
-                    <input asp-for="WeatherHumidity" />
+                    <label asp-for="WeatherTemperatureString"></label>
+                    <input type="text" asp-for="WeatherTemperatureString" />
                 </div>
             </div>
 
@@ -246,12 +246,12 @@
             }
         }
 
-        this.check("IncludeQueenSection");
-        this.check("IncludeBrood");
-        this.check("IncludeFramesWith");
-        this.check("IncludeActivity");
-        this.check("IncludeStorage");
-        this.check("IncludeSpottedProblem");
-        this.check("IncludeWeatherInfo");
+        checkFormSection("IncludeQueenSection");
+        checkFormSection("IncludeBrood");
+        checkFormSection("IncludeFramesWith");
+        checkFormSection("IncludeActivity");
+        checkFormSection("IncludeStorage");
+        checkFormSection("IncludeSpottedProblem");
+        checkFormSection("IncludeWeatherInfo");
     };
 </script>

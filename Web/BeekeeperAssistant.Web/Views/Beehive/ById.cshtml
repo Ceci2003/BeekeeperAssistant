@@ -237,14 +237,14 @@
                             <td>
                                 @if (inspection.Swarmed)
                                 {
-                                    <b>@yesNo[1]</b>
+                                    <strong>@yesNo[1]</strong>
                                 }
                                 else
                                 {
                                     @yesNo[0]
                                 }
                             </td>
-                            <td>
+                            <td class="@powerClasses[inspection.BeehivePower.ToString().ToLower()]">
                                 @Html.DisplayFor(i => inspection.BeehivePower)
                             </td>
                             <td class="edit">
@@ -265,8 +265,156 @@
                         <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
                             <td colspan="5">
                                 <div>
-                                    @Html.DisplayFor(x => inspection.BeehivePower)
-                                    @Html.DisplayFor(x => inspection.BeehiveTemperament)
+                                    <table class="expand-data-table">
+                                        <tbody>
+                                            <tr>
+                                                <th></th>
+                                                <td>@Html.DisplayFor(x => inspection.BeehiveAction)</td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <td>@inspection.Weight</td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <td>@inspection.HiveTemperature</td>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <td>@inspection.HiveHumidity</td>
+                                            </tr>
+                                            @if (inspection.IncludeQueenSection)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>
+                                                        @if (inspection.QueenSeen)
+                                                        {
+                                                            @yesNo[1]
+                                                        }
+                                                        else
+                                                        {
+                                                            <strong>@yesNo[0]</strong>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.QueenCells)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.QueenWorkingStatus)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.QueenPowerStatus)</td>
+                                                </tr>
+                                            }
+                                            @if (inspection.IncludeBrood)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.Eggs</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.ClappedBrood</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.UnclappedBrood</td>
+                                                </tr>
+                                            }
+                                            @if (inspection.IncludeFramesWith)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.FramesWithBees</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.FramesWithBrood</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.FramesWithHoney</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.FramesWithPollen</td>
+                                                </tr>
+                                            }
+                                            @if (inspection.IncludeActivity)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.BeeActivity)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.OrientationActivity)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.PollenActivity)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.ForragingActivity)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.BeesPerMinute</td>
+                                                </tr>
+                                            }
+                                            @if (inspection.IncludeStorage)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.StoredHoney)</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@Html.DisplayFor(x => inspection.StoredPollen)</td>
+                                                </tr>
+                                            }
+                                            @if (inspection.IncludeSpottedProblem)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.Disease</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.Treatment</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.Pests</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.Predators</td>
+                                                </tr>
+                                            }
+                                            @if (inspection.IncludeWeatherInfo)
+                                            {
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.Conditions</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.WeatherTemperature</td>
+                                                </tr>
+                                                <tr>
+                                                    <th></th>
+                                                    <td>@inspection.WeatherHumidity</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </td>
                         </tr>

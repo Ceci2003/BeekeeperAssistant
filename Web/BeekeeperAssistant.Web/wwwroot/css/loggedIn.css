@@ -522,15 +522,21 @@ tr.has-device td.edit div a.delete:hover {
   color: var(--queen-color);
 }
 
-td.td-weak {
+.td-weak,
+.td-medium,
+.td-strong {
+  font-weight: bold;
+}
+
+.td-weak {
   color: var(--queen-color-hover);
 }
 
-td.td-medium {
+.td-medium {
   color: var(--beehive-color-hover);
 }
 
-td.td-strong {
+.td-strong {
   color: var(--green-2);
 }
 
@@ -693,6 +699,8 @@ td.queen-red {
 .data-table-expand td div {
   padding: 8px;
 }
+
+
 
 /* All forms */
 

@@ -38,10 +38,10 @@
         [Display(Name = "Маса на кошера(кг.)")]
         public double Weight { get; set; }
 
-        [Display(Name = "Температура на кошера")]
+        [Display(Name = "Температура на кошера(t°)")]
         public double HiveTemperature { get; set; }
 
-        [Display(Name = "Влажност на кошера")]
+        [Display(Name = "Влажност на кошера(%)")]
         public double HiveHumidity { get; set; }
 
         // Queen section
@@ -143,12 +143,12 @@
 
         public double WeatherTemperature => Convert.ToDouble(this.WeatherTemperatureString);
 
-        [Display(Name = "Температура")]
+        [Display(Name = "Температура(t°)")]
         public string WeatherTemperatureString { get; set; }
 
         public double WeatherHumidity => Convert.ToDouble(this.WeatherHumidityString);
 
-        [Display(Name = "Влажност")]
+        [Display(Name = "Влажност(%)")]
         public string WeatherHumidityString { get; set; }
 
         public IEnumerable<KeyValuePair<int, string>> Apiaries { get; set; }

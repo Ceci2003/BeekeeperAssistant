@@ -111,6 +111,12 @@
             return count;
         }
 
+        public T GetQueenByBeehiveId<T>(int beehiveId) =>
+            this.queenRepository.AllAsNoTracking()
+                .Where(q => q.BeehiveId == beehiveId)
+                .To<T>()
+                .FirstOrDefault();
+
         public T GetQueenById<T>(int queenId) =>
             this.queenRepository.AllAsNoTracking()
                 .Where(q => q.Id == queenId)

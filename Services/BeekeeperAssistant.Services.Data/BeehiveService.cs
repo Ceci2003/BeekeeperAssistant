@@ -13,10 +13,23 @@
     public class BeehiveService : IBeehiveService
     {
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
+        private readonly IDeletableEntityRepository<Queen> queenRepository;
+        private readonly IDeletableEntityRepository<Inspection> inspectionRepository;
+        private readonly IDeletableEntityRepository<Treatment> treatmentRepository;
+        private readonly IRepository<TreatedBeehive> treatedBeehiveRepository;
 
-        public BeehiveService(IDeletableEntityRepository<Beehive> beehiveRepository)
+        public BeehiveService(
+            IDeletableEntityRepository<Beehive> beehiveRepository,
+            IDeletableEntityRepository<Queen> queenRepository,
+            IDeletableEntityRepository<Inspection> inspectionRepository,
+            IDeletableEntityRepository<Treatment> treatmentRepository,
+            IRepository<TreatedBeehive> treatedBeehiveRepository)
         {
             this.beehiveRepository = beehiveRepository;
+            this.queenRepository = queenRepository;
+            this.inspectionRepository = inspectionRepository;
+            this.treatmentRepository = treatmentRepository;
+            this.treatedBeehiveRepository = treatedBeehiveRepository;
         }
 
         public async Task<int> CreateUserBeehiveAsync(
@@ -55,6 +68,39 @@
 
         public async Task<string> DeleteBeehiveByIdAsync(int beehiveId)
         {
+            var queen = this.queenRepository.AllAsNoTracking()
+                .FirstOrDefault(q => q.BeehiveId == beehiveId);
+
+            if (queen != null)
+            {
+                this.queenRepository.Delete(queen);
+            }
+
+            var inspections = this.inspectionRepository.All()
+                .Where(i => i.BeehiveId == beehiveId)
+                .ToList();
+
+            if (inspections.Any())
+            {
+                foreach (var inspection in inspections)
+                {
+                    this.inspectionRepository.Delete(inspection);
+                }
+            }
+
+            var treatments = this.treatedBeehiveRepository.All()
+                .Where(tb => tb.BeehiveId == beehiveId)
+                .Select(tb => tb.Treatment)
+                .ToList();
+
+            if (treatments.Any())
+            {
+                foreach (var treatment in treatments)
+                {
+                    this.treatmentRepository.Delete(treatment);
+                }
+            }
+
             var beehive = this.beehiveRepository
                 .All()
                 .Include(b => b.Apiary)

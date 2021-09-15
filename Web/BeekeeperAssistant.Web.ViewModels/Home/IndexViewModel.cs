@@ -5,5 +5,7 @@
         public int TreatmentsCount { get; set; }
 
         public int InspectionsCount { get; set; }
+
+        public int HarvestsCount { get; set; }
     }
 }

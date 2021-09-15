@@ -5,32 +5,27 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Web.ViewModels.Harvest;
 
     public interface IHarvestService
     {
         Task<int> CreateUserHarvestAsync(
-            string userId,
-            int beehiveId,
-            string harvestName,
-            DateTime dateOfHarves,
-            string product,
-            HoneyType honeyType,
-            string note,
-            int amount);
+            string creatorId,
+            CreateHarvestInputModel inputModel,
+            List<int> beehiveIds);
 
         Task<int> EditHarvestAsync(
             int harvestId,
-            string harvestName,
-            DateTime dateOfHarves,
-            string product,
-            HoneyType honeyType,
-            string note,
-            int amount);
+            EditHarvestInputModel inputModel);
 
         Task DeleteHarvestAsync(int harvestId);
 
         T GetHarvestById<T>(int harvestId);
 
+        int GetAllUserHarvestsForLastYearCount(string userId);
+
         IEnumerable<T> GetAllUserHarvests<T>(string userId);
+
+        IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId);
     }
 }

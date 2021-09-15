@@ -30,11 +30,13 @@
 
         public DbSet<Inspection> Inspections { get; set; }
 
-        public DbSet<Harvest> Harvests { get; set; }
-
         public DbSet<Treatment> Treatments { get; set; }
 
         public DbSet<TreatedBeehive> TreatedBeehives { get; set; }
+
+        public DbSet<Harvest> Harvests { get; set; }
+
+        public DbSet<HarvestedBeehive> HarvestedBeehives { get; set; }
 
         public DbSet<Duty> Duties { get; set; }
 
@@ -84,6 +86,19 @@
                 .HasOne<Treatment>(t => t.Treatment)
                 .WithMany(t => t.TreatedBeehives)
                 .HasForeignKey(t => t.TreatmentId);
+
+            builder.Entity<HarvestedBeehive>()
+                .HasKey(hb => new { hb.BeehiveId, hb.HarvestId });
+
+            builder.Entity<HarvestedBeehive>()
+                .HasOne<Beehive>(b => b.Beehive)
+                .WithMany(b => b.HarvestedBeehives)
+                .HasForeignKey(b => b.BeehiveId);
+
+            builder.Entity<HarvestedBeehive>()
+                .HasOne<Harvest>(h => h.Harvest)
+                .WithMany(h => h.HarvestedBeehives)
+                .HasForeignKey(h => h.HarvestId);
 
             builder.Entity<ApiaryHelper>()
                 .HasKey(ah => new { ah.ApiaryId, ah.UserId });

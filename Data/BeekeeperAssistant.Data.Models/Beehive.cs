@@ -40,7 +40,7 @@
 
         public Queen Queen { get; set; }
 
-        public ICollection<Harvest> Harvests { get; set; }
+        public ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
 
         public ICollection<TreatedBeehive> TreatedBeehives { get; set; }
     }

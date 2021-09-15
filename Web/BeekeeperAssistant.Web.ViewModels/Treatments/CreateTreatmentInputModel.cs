@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class CreateTreatmentInputModel
+    public class CreateTreatmentInputModel : IValidatableObject
     {
         [Required]
         [Display(Name = "Дата на третиране")]
@@ -50,21 +51,37 @@
         [Display(Name = "Всички кошери")]
         public bool AllBeehives { get; set; }
 
+        public int? BeehiveId { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();
-            if (!this.AllBeehives)
+            if (this.BeehiveId == null && !this.AllBeehives)
             {
-                var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
-                var apiaryBeehivesNumbers = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId).Select(b => b.Number);
-                var selectedBeehiveNumbers = this.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
-
-                foreach (var number in selectedBeehiveNumbers)
+                if (this.BeehiveNumbersSpaceSeparated != null)
                 {
-                    if (!apiaryBeehivesNumbers.Contains(number))
+                    try
                     {
-                        errorList.Add(new ValidationResult($"Не съществува кошер с номер {number} в пчелина!"));
+                        var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
+                        var apiaryBeehivesNumbers = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId).Select(b => b.Number);
+                        var selectedBeehiveNumbers = this.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+
+                        foreach (var number in selectedBeehiveNumbers)
+                        {
+                            if (!apiaryBeehivesNumbers.Contains(number))
+                            {
+                                errorList.Add(new ValidationResult($"Не съществува кошер с номер {number} в пчелина!"));
+                            }
+                        }
                     }
+                    catch (Exception)
+                    {
+                        errorList.Add(new ValidationResult($"Номерата на кошерите не са въведени правилно!"));
+                    }
+                }
+                else
+                {
+                    errorList.Add(new ValidationResult($"Изберете кошери!"));
                 }
             }
 

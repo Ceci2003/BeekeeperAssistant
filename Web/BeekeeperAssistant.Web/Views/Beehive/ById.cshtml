@@ -1,4 +1,5 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.BeehiveDataViewModel
+@using BeekeeperAssistant.Data.Models
 @{
     this.ViewData["Title"] = "Информация за кошер - №" + Model.Number;
     Dictionary<string, string> powerClasses = new Dictionary<string, string>();
@@ -511,7 +512,7 @@
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
                     asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-id="@Model.Id">
+                <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-beehiveId="@Model.Id">
                     <i class="fas fa-box"></i>
                     Добавете добивs
                 </a>
@@ -522,13 +523,14 @@
                     <th class="table-sdate">Дата</th>
                     <th>Продукт</th>
                     <th class="table-amount">Количество</th>
-                    <th>Бележка</th>
                     <th>Редактиране</th>
                 </thead>
                 <tbody>
                     @foreach (var harvest in Model.Harvests)
                     {
-                        <tr>
+                        string rowMasterId = "trMasterHarvest" + harvest.Id;
+                        string rowExpandId = "trExpandHarvest" + harvest.Id;
+                        <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
                             <td>
                                 @harvest.HarvestName
                             </td>
@@ -536,39 +538,34 @@
                                 <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
                             </td>
                             <td>
-                                @harvest.Product
-                                @if (harvest.Product == "Мед")
+                                @Html.DisplayFor(x => harvest.HarvestProductType)
+                                @if (harvest.HarvestProductType == HarvestProductType.Honey)
                                 {
                                     <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
                                 }
                             </td>
                             <td class="table-amount">
-                                @harvest.Amount
-                                @switch (harvest.Product)
-                                {
-                                    case "млечице":
-                                    case "отрова":
-                                        <span>гр.</span>
-                                        break;
-                                    default:
-                                        <span>кг.</span>
-                                        break;
-                                }
-                            </td>
-                            <td>
-                                @harvest.Note
+                                @harvest.Quantity
+                                <span>@Html.DisplayFor(x => harvest.Unit)</span>
                             </td>
                             <td class="edit">
                                 <div>
-                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id">
+                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                    asp-route-id="@harvest.Id">
+                                    asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
                                     </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
+                            <td colspan="8">
+                                <div>
+                                    <strong>Бележка:</strong> @harvest.Note
                                 </div>
                             </td>
                         </tr>

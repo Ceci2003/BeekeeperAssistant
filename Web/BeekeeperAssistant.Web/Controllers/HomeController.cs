@@ -17,17 +17,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITreatmentService treatmentService;
         private readonly IInspectionService inspectionService;
+        private readonly IHarvestService harvestService;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
             ITreatmentService treatmentService,
-            IInspectionService inspectionService)
+            IInspectionService inspectionService,
+            IHarvestService harvestService)
         {
             this.userManager = userManager;
             this.treatmentService = treatmentService;
             this.inspectionService = inspectionService;
+            this.harvestService = harvestService;
         }
 
         public async Task<ActionResult> Index()
@@ -43,16 +46,11 @@
 
             var treatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id);
             var inspectionsCount = this.inspectionService.GetAllUserInspectionsForLastYearCount(currentUser.Id);
+            var harvestsCount = this.harvestService.GetAllUserHarvestsForLastYearCount(currentUser.Id);
 
-            if (treatmentsCount != null)
-            {
-                viewModel.TreatmentsCount = treatmentsCount;
-            }
-
-            if (inspectionsCount != null)
-            {
-                viewModel.InspectionsCount = inspectionsCount;
-            }
+            viewModel.TreatmentsCount = treatmentsCount;
+            viewModel.InspectionsCount = inspectionsCount;
+            viewModel.HarvestsCount = harvestsCount;
 
             return this.View(viewModel);
         }

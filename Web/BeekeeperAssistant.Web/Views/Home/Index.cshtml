@@ -105,7 +105,7 @@ else
                 <div class="count-add-card-footer">
                     <a asp-controller="Inspection" asp-action="Create">
                         <div>
-                            <i class="fas fa-notes-medical"></i>
+                            <i class="far fa-calendar-check"></i>
                             <p>Добави преглед</p>
                         </div>
                     </a>
@@ -115,7 +115,7 @@ else
                 <div class="count-add-card-body">
                     <a asp-controller="Harvest" asp-action="All">
                         <div>
-                            <p>-</p>
+                            <p>@Model.HarvestsCount</p>
                             <p>Добива за сезона</p>
                         </div>
                     </a>
@@ -123,7 +123,7 @@ else
                 <div class="count-add-card-footer">
                     <a asp-controller="Harvest" asp-action="Create">
                         <div>
-                            <i class="fas fa-notes-medical"></i>
+                            <i class="fas fa-box"></i>
                             <p>Добави добив</p>
                         </div>
                     </a>

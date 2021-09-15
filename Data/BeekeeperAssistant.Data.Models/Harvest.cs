@@ -8,20 +8,24 @@
 
     public class Harvest : BaseDeletableModel<int>
     {
-        public int BeehiveId { get; set; }
+        public string CreatorId { get; set; }
 
-        public virtual Beehive Beehive { get; set; }
+        public virtual ApplicationUser Creator { get; set; }
 
         public string HarvestName { get; set; }
 
         public DateTime DateOfHarves { get; set; }
 
-        public string Product { get; set; }
+        public string Note { get; set; }
+
+        public HarvestProductType HarvestProductType { get; set; }
 
         public HoneyType HoneyType { get; set; }
 
-        public string Note { get; set; }
+        public double Quantity { get; set; }
 
-        public int Amount { get; set; }
+        public Unit Unit { get; set; }
+
+        public ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
     }
 }

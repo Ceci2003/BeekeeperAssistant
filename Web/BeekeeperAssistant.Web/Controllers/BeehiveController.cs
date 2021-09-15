@@ -85,8 +85,8 @@
                 return this.BadRequest();
             }
 
-            var harvests = this.harvestService.GetAllUserHarvests<HarvestDatavVewModel>(currentUser.Id);
-            viewModel.Harvests = harvests.Where(h => h.BeehiveId == beehiveId);
+            var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(beehiveId);
+            viewModel.Harvests = harvests;
             var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId);
             viewModel.Treatments = treatments;
             var inspections = this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(beehiveId);

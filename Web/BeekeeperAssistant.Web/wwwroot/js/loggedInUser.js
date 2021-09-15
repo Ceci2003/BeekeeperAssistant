@@ -148,10 +148,6 @@ function expandTable(element, tab) {
     var expandId = masterId.replace("Master", "Expand");
     var expandRow = document.getElementById(expandId);
 
-    // hide expanded
-
-    console.log(expandRow);
-    console.log(expandRow.style.display == "none");
     // expand selected
     if (expandRow.style.display == "none") {
         expandRow.style.display = "";
@@ -159,6 +155,7 @@ function expandTable(element, tab) {
         expandRow.style.display = "none";
     }
     
+    // hide expanded
     var allExpandSelector = '*[id^="' + expandId.replace(/[0-9]/g, "") + '"]';
     var allExpandRows = document.querySelectorAll(allExpandSelector);
     hideExpanded(allExpandRows, expandRow);

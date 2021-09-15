@@ -50,6 +50,7 @@
             else
             {
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                inputModel.BeehiveId = id.Value;
             }
 
             return this.View(inputModel);
@@ -59,34 +60,6 @@
         public async Task<IActionResult> Create(int? id, CreateTreatmentInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-
-            if (id == null && !inputModel.AllBeehives)
-            {
-                if (inputModel.BeehiveNumbersSpaceSeparated != null)
-                {
-                    try
-                    {
-                        var beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).Select(b => b.Number).ToList();
-                        var selectedNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => Convert.ToInt32(n)).ToList();
-
-                        foreach (var number in selectedNumbers)
-                        {
-                            if (!beehives.Contains(number))
-                            {
-                                this.ModelState.AddModelError(string.Empty, $"Не съществува кошер с номер {number} в пчелина!");
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        this.ModelState.AddModelError(string.Empty, "Номерата на кошерите не са въведени правилно!");
-                    }
-                }
-                else
-                {
-                    this.ModelState.AddModelError(string.Empty, "Изберете кошери!");
-                }
-            }
 
             if (!this.ModelState.IsValid)
             {

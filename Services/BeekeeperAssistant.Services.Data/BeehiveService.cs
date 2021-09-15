@@ -17,19 +17,25 @@
         private readonly IDeletableEntityRepository<Inspection> inspectionRepository;
         private readonly IDeletableEntityRepository<Treatment> treatmentRepository;
         private readonly IRepository<TreatedBeehive> treatedBeehiveRepository;
+        private readonly IDeletableEntityRepository<Harvest> harvestRepository;
+        private readonly IRepository<HarvestedBeehive> harvestedBeehiveRepository;
 
         public BeehiveService(
             IDeletableEntityRepository<Beehive> beehiveRepository,
             IDeletableEntityRepository<Queen> queenRepository,
             IDeletableEntityRepository<Inspection> inspectionRepository,
             IDeletableEntityRepository<Treatment> treatmentRepository,
-            IRepository<TreatedBeehive> treatedBeehiveRepository)
+            IRepository<TreatedBeehive> treatedBeehiveRepository,
+            IDeletableEntityRepository<Harvest> harvestRepository,
+            IRepository<HarvestedBeehive> harvestedBeehiveRepository)
         {
             this.beehiveRepository = beehiveRepository;
             this.queenRepository = queenRepository;
             this.inspectionRepository = inspectionRepository;
             this.treatmentRepository = treatmentRepository;
             this.treatedBeehiveRepository = treatedBeehiveRepository;
+            this.harvestRepository = harvestRepository;
+            this.harvestedBeehiveRepository = harvestedBeehiveRepository;
         }
 
         public async Task<int> CreateUserBeehiveAsync(
@@ -98,6 +104,19 @@
                 foreach (var treatment in treatments)
                 {
                     this.treatmentRepository.Delete(treatment);
+                }
+            }
+
+            var harvests = this.harvestedBeehiveRepository.All()
+                .Where(hb => hb.BeehiveId == beehiveId)
+                .Select(hb => hb.Harvest)
+                .ToList();
+
+            if (harvests.Any())
+            {
+                foreach (var harvest in harvests)
+                {
+                    this.harvestRepository.Delete(harvest);
                 }
             }
 

@@ -2,12 +2,23 @@
 @using BeekeeperAssistant.Data.Models;
 @{
     this.ViewData["Title"] = "Добавяне на добив";
+
+    int textAreaRows = 10;
+    var keyValuepairApiaries = new List<SelectListItem>();
+    if (Model.Apiaries != null)
+    {
+        keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+        textAreaRows = 7;
+    }
 }
 
 <div class="breadcrumb">
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -26,46 +37,78 @@
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h2>@ViewData["Title"]</h2>
-            <div asp-validation-summary="All"></div>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            @if (Model.Apiaries != null)
+            {
+                <div class="row-form-group">
+                    <div class="input-group">
+                        <label asp-for="@Model.ApiaryId"></label>
+                        <select asp-for="@Model.ApiaryId" asp-items="@keyValuepairApiaries"></select>
+                    </div>
+                    <div class="input-group check">
+                        <label asp-for="@Model.AllBeehives"></label>
+                        <div class="slider-yes-no">
+                            <input asp-for="@Model.AllBeehives" />
+                            <label for="AllBeehives"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group max">
+                    <label asp-for="@Model.BeehiveNumbersSpaceSeparated"></label>
+                    <input asp-for="@Model.BeehiveNumbersSpaceSeparated" />
+                </div>
+            }
             <div class="row-form-group">
                 <div class="input-group">
-                    <label asp-for="HarvestName"></label>
-                    <input asp-for="HarvestName">
-                    <span class="error-msg" asp-validation-for="HarvestName"></span>
+                    <label asp-for="@Model.DateOfHarves"></label>
+                    <input asp-for="@Model.DateOfHarves" />
                 </div>
                 <div class="input-group">
-                    <label asp-for="DateOfHarves"></label>
-                    <input asp-for="DateOfHarves">
-                    <span class="error-msg" asp-validation-for="DateOfHarves"></span>
+                    <label asp-for="@Model.HarvestName"></label>
+                    <input asp-for="@Model.HarvestName" />
+                </div>
+            </div>
+            <div class="input-group max">
+                <label asp-for="@Model.Note"></label>
+                <textarea asp-for="@Model.Note" cols="30" rows="@textAreaRows"></textarea>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.HarvestProductType"></label>
+                    <select asp-for="@Model.HarvestProductType" asp-items="@Html.GetEnumSelectList<HarvestProductType>()"></select>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.HoneyType"></label>
+                    <select asp-for="@Model.HoneyType" asp-items="@Html.GetEnumSelectList<HoneyType>()"></select>
                 </div>
             </div>
             <div class="row-form-group">
                 <div class="input-group">
-                    <label asp-for="Product"></label>
-                    <input asp-for="Product">
-                    <span class="error-msg" asp-validation-for="Product"></span>
+                    <label asp-for="@Model.QuantityText"></label>
+                    <input asp-for="@Model.QuantityText" />
                 </div>
                 <div class="input-group">
-                    <label asp-for="HoneyType"></label>
-                    <select asp-for="HoneyType" asp-items="@Html.GetEnumSelectList<HoneyType>()"></select>
-                    <span class="error-msg" asp-validation-for="HoneyType"></span>
+                    <label asp-for="@Model.Unit"></label>
+                    <select asp-for="@Model.Unit" asp-items="@Html.GetEnumSelectList<Unit>()"></select>
                 </div>
             </div>
-            <div class="row-form-group">
-                <div class="input-group">
-                    <label asp-for="Amount"></label>
-                    <input asp-for="Amount">
-                    <span class="error-msg" asp-validation-for="Amount"></span>
-                </div>
-                <div class="input-group">
-                    <label asp-for="Note"></label>
-                    <textarea asp-for="Note" cols="30" rows="5"></textarea>
-                    <span class="error-msg" asp-validation-for="Note"></span>
-                </div>
-            </div>
-            <input type="hidden" asp-for="BeehiveId">
+            <span asp-validation-for="ApiaryId"></span>
+            <span asp-validation-for="AllBeehives"></span>
+            <span asp-validation-for="BeehiveNumbersSpaceSeparated"></span>
+            <span asp-validation-for="DateOfHarves"></span>
+            <span asp-validation-for="HarvestName"></span>
+            <span asp-validation-for="Note"></span>
+            <span asp-validation-for="HarvestProductType"></span>
+            <span asp-validation-for="HoneyType"></span>
+            <span asp-validation-for="Quantity"></span>
+            <span asp-validation-for="QuantityText"></span>
+            <span asp-validation-for="Unit"></span>
+
+            <input type="hidden" asp-for="@Model.Unit" />
+            <input type="hidden" asp-for="@Model.BeehiveId" />
+            <input type="hidden" asp-for="@Model.ApiaryId" />
             <div class="btn-group">
-                <input class="btn beehive-create" type="submit" value="Добави добив" />
+                <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
             </div>
         </form>
     </div>

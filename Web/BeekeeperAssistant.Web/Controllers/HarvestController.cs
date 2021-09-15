@@ -17,18 +17,21 @@
 
     public class HarvestController : BaseController
     {
-        private readonly IHarvestService harvestService;
-        private readonly IBeehiveService beehiveService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IHarvestService harvestService;
+        private readonly IApiaryService apiaryService;
+        private readonly IBeehiveService beehiveService;
 
         public HarvestController(
+            UserManager<ApplicationUser> userManager,
             IHarvestService harvestService,
-            IBeehiveService beehiveService,
-            UserManager<ApplicationUser> userManager)
+            IApiaryService apiaryService,
+            IBeehiveService beehiveService)
         {
-            this.harvestService = harvestService;
-            this.beehiveService = beehiveService;
             this.userManager = userManager;
+            this.harvestService = harvestService;
+            this.apiaryService = apiaryService;
+            this.beehiveService = beehiveService;
         }
 
         public async Task<IActionResult> All()
@@ -54,13 +57,24 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Create(int id)
+        public async Task<IActionResult> Create(int? beehiveId)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
             var inputModel = new CreateHarvestInputModel
             {
-                BeehiveId = id,
                 DateOfHarves = DateTime.Now.Date,
             };
+
+            if (beehiveId == null)
+            {
+                inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+            }
+            else
+            {
+                inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId.Value);
+                inputModel.BeehiveId = beehiveId.Value;
+            }
 
             return this.View(inputModel);
         }
@@ -68,55 +82,84 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateHarvestInputModel inputModel)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                inputModel.DateOfHarves = DateTime.UtcNow.Date;
+                if (inputModel.BeehiveId == null)
+                {
+                    inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                }
+
+                return this.View(inputModel);
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
-            var harvestId = await this.harvestService.
-                CreateUserHarvestAsync(
-                    user.Id,
-                    inputModel.BeehiveId,
-                    inputModel.HarvestName,
-                    inputModel.DateOfHarves,
-                    inputModel.Product,
-                    inputModel.HoneyType,
-                    inputModel.Note,
-                    inputModel.Amount);
+            if (inputModel.BeehiveId == null)
+            {
+                var apiaryBeehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).ToList();
+                if (inputModel.AllBeehives)
+                {
+                    var beehiveIds = apiaryBeehives.Select(b => b.Id).ToList();
+                    await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, beehiveIds);
+                }
+                else
+                {
+                    var selectedIds = new List<int>();
+                    var selectedBeehivesNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+                    foreach (var number in selectedBeehivesNumbers)
+                    {
+                        var beehive = apiaryBeehives.FirstOrDefault(b => b.Number == number);
+                        if (beehive != null)
+                        {
+                            selectedIds.Add(beehive.Id);
+                        }
+                    }
 
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Harvests" });
+                    await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, selectedIds);
+                }
+
+                return this.RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
+
+                return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
+            }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Edit(int id, int beehiveId)
         {
             var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
-
-            await this.harvestService.DeleteHarvestAsync(id);
-
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Harvests" });
-        }
-
-        public IActionResult Edit(int id)
-        {
-            var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
+            inputModel.QuantityText = inputModel.Quantity.ToString();
             return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditHarvestInputModel inputModel)
         {
-            var harvestId = await this.harvestService.EditHarvestAsync(
-                id,
-                inputModel.HarvestName,
-                inputModel.DateOfHarves,
-                inputModel.Product,
-                inputModel.HoneyType,
-                inputModel.Note,
-                inputModel.Amount);
+            inputModel.Quantity = Convert.ToDouble(inputModel.QuantityText);
 
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Harvests" });
+            await this.harvestService.EditHarvestAsync(id, inputModel);
+
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, int beehiveId)
+        {
+            var currentuser = await this.userManager.GetUserAsync(this.User);
+            var inputModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
+
+            if (inputModel.CreatorId != currentuser.Id)
+            {
+                return this.BadRequest();
+            }
+
+            await this.harvestService.DeleteHarvestAsync(id);
+
+            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Harvests" });
         }
 
         public async Task<IActionResult> ExportToExcel(int id)
@@ -190,8 +233,8 @@
             {
                 ws.Cells[$"A{rowIndex}"].Value = harvest.HarvestName;
                 ws.Cells[$"B{rowIndex}"].Value = harvest.DateOfHarves;
-                ws.Cells[$"C{rowIndex}"].Value = harvest.Product == "Мед" ? $"Мед - {harvest.Product}" : $"{harvest.Product}";
-                ws.Cells[$"D{rowIndex}"].Value = harvest.Amount;
+                ws.Cells[$"C{rowIndex}"].Value = harvest.HarvestProductType.ToString();
+                ws.Cells[$"D{rowIndex}"].Value = harvest.Quantity;
                 ws.Cells[$"E{rowIndex}"].Value = harvest.Note;
 
                 rowIndex++;

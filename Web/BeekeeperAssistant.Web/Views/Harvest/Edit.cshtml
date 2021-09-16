@@ -73,7 +73,7 @@
             <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.HarvestProductType"></label>
-                    <select asp-for="@Model.HarvestProductType" asp-items="@Html.GetEnumSelectList<HarvestProductType>()"></select>
+                    <select asp-for="@Model.HarvestProductType" asp-items="@Html.GetEnumSelectList<HarvestProductType>()" onchange="hideHoneyType()"></select>
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.HoneyType"></label>
@@ -90,17 +90,6 @@
                     <select asp-for="@Model.Unit" asp-items="@Html.GetEnumSelectList<Unit>()"></select>
                 </div>
             </div>
-            <span asp-validation-for="ApiaryId"></span>
-            <span asp-validation-for="AllBeehives"></span>
-            <span asp-validation-for="BeehiveNumbersSpaceSeparated"></span>
-            <span asp-validation-for="DateOfHarves"></span>
-            <span asp-validation-for="HarvestName"></span>
-            <span asp-validation-for="Note"></span>
-            <span asp-validation-for="HarvestProductType"></span>
-            <span asp-validation-for="HoneyType"></span>
-            <span asp-validation-for="Quantity"></span>
-            <span asp-validation-for="QuantityText"></span>
-            <span asp-validation-for="Unit"></span>
 
             <input type="hidden" asp-for="@Model.Unit" />
             <input type="hidden" asp-for="@Model.BeehiveId" />
@@ -111,3 +100,25 @@
         </form>
     </div>
 </div>
+
+<script>
+    window.onload = hideHoneyType();
+
+    // show | hide honeyType
+    function hideHoneyType() {
+        var select = document.getElementById('HarvestProductType');
+        var value = select.options[select.selectedIndex].text;
+        var parentDiv = document.getElementById('HoneyType').parentElement;
+
+        if (value == 'мед') {
+            parentDiv.classList.remove("close-section");
+            parentDiv.classList.add("open-section");
+            parentDiv.style.display = "";
+        }
+        else {
+            parentDiv.classList.remove("open-section");
+            parentDiv.classList.add("close-section");
+            parentDiv.style.display = "none";
+        }
+    }
+</script>

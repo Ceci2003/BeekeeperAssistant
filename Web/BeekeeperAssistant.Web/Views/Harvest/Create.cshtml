@@ -75,9 +75,10 @@
             <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.HarvestProductType"></label>
-                    <select asp-for="@Model.HarvestProductType" asp-items="@Html.GetEnumSelectList<HarvestProductType>()"></select>
+                    <select asp-for="@Model.HarvestProductType"
+                        asp-items="@Html.GetEnumSelectList<HarvestProductType>()" onchange="hideHoneyType()"></select>
                 </div>
-                <div class="input-group">
+                <div class="input-group" style="display: none;">
                     <label asp-for="@Model.HoneyType"></label>
                     <select asp-for="@Model.HoneyType" asp-items="@Html.GetEnumSelectList<HoneyType>()"></select>
                 </div>
@@ -113,3 +114,25 @@
         </form>
     </div>
 </div>
+
+<script>
+    window.onload = hideHoneyType();
+
+    // show | hide honeyType
+    function hideHoneyType() {
+        var select = document.getElementById('HarvestProductType');
+        var value = select.options[select.selectedIndex].text;
+        var parentDiv = document.getElementById('HoneyType').parentElement;
+
+        if (value == 'мед') {
+            parentDiv.classList.remove("close-section");
+            parentDiv.classList.add("open-section");
+            parentDiv.style.display = "";
+        }
+        else {
+            parentDiv.classList.remove("open-section");
+            parentDiv.classList.add("close-section");
+            parentDiv.style.display = "none";
+        }
+    }
+</script>

@@ -8,22 +8,37 @@
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
+<link rel="stylesheet" href="~/css/profile.css">
 
-<h2>Manage your account</h2>
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-page="./Index">Профил</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
 
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
+
+<div class="profile-content">
+    <h2>Управлявайте профила си</h2>
+    <h4>Променете настройките на профила</h4>
+    <div class="profile-settings-nav">
+        <div class="profile-nav">
             <partial name="_ManageNav" />
         </div>
-        <div class="col-md-9">
+        <div class="profile-settings">
             @RenderBody()
         </div>
     </div>
 </div>
 
 @section Scripts {
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 }

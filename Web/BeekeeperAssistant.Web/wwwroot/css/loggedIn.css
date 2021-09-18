@@ -73,6 +73,7 @@ button::selection {
   --queen-color: #da3c3d;
   --queen-color-hover: #d9695d;
   --black: #000000;
+  --transparent: #ffffff00;
 }
 
 /* Side navigation */

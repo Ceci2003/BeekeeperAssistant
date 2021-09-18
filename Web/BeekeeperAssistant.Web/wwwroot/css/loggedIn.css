@@ -39,9 +39,13 @@ li::selection,
 input::selection,
 select::selection,
 textarea::selection,
+time::selection,
 th::selection,
 td::selection,
-img::selection {
+img::selection,
+strong::selection,
+div::selection,
+button::selection {
   background-color: var(--orange);
   color: var(--white);
 }

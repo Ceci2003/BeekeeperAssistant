@@ -41,6 +41,7 @@
 
 .profile-nav ul a.active {
   color: var(--orange);
+  font-weight: 600;
   border-bottom: 3px solid var(--transparent);
 }
 
@@ -54,27 +55,27 @@
   margin-right: 10px;
 }
 
-.profile::before,
-.email::before,
-.password::before,
-.personal-data::before {
+.profile-icon::before,
+.email-icon::before,
+.password-icon::before,
+.personal-data-icon::before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 
-.profile::before {
+.profile-icon::before {
   content: "\f007";
 }
 
-.email::before {
+.email-icon::before {
   content: "\f1fa";
 }
 
-.password::before {
+.password-icon::before {
   content: "\f084";
 }
 
-.personal-data::before {
+.personal-data-icon::before {
   content: "\f05a";
 }
 
@@ -83,4 +84,52 @@
   width: 70%;
   padding-top: 10px;
   padding-left: 10px;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
 }

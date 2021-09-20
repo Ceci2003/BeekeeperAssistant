@@ -75,6 +75,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IApiaryService, ApiaryService>();
             services.AddTransient<IForecastService, ForecastService>();
+            services.AddTransient<IQuickChartService, QuickChartService>();
             services.AddTransient<IApiaryNumberService, ApiaryNumberService>();
             services.AddTransient<IBeehiveService, BeehiveService>();
             services.AddTransient<IQueenService, QueenService>();

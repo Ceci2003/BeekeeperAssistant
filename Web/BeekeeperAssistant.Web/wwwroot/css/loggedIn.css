@@ -705,8 +705,6 @@ td.queen-red {
   padding: 8px;
 }
 
-
-
 /* All forms */
 
 .form-box {
@@ -785,21 +783,36 @@ textarea {
   border: 2px solid var(--orange);
 }
 
+.form-box form .input-group input[aria-invalid="true"]:focus,
+.form-box form .input-group select[aria-invalid="true"]:focus,
+.form-box form .input-group textarea[aria-invalid="true"]:focus {
+  border: 2px solid var(--orange);
+}
+
 span.error-msg {
   display: block;
   color: var(--red);
   font-size: 18px;
 }
 
-.input-apiary-number span {
+.input-apiary-number .dash {
   display: flex;
   justify-content: center;
   flex-direction: column;
   font-size: 30px;
 }
 
+.input-apiary-number .error-list {
+  display: flex;
+}
+
 .input-apiary-number .city-code input {
   text-align: right;
+}
+
+form input[aria-invalid="true"] {
+  border-color: var(--red);
+  color: var(--red);
 }
 
 textarea {
@@ -1148,6 +1161,61 @@ textarea {
   justify-content: space-around;
   align-items: center;
   padding: 10px 5px;
+}
+
+/* chart card in dashboard */
+.dashboard-chart-card {
+  width: 270px;
+  border: 1px solid var(--lightgray);
+  margin-bottom: 30px;
+}
+
+.dashboard-chart-card img {
+  width: 270px;
+}
+
+.dashboard-chart-card .legend-row {
+  text-align: center;
+  position: relative;
+  height: 20px;
+  border-top: 1px solid var(--lightgray);
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.dashboard-chart-card .legend-color {
+  width: 20px;
+  position: absolute;
+}
+
+.dashboard-chart-card .legend-value {
+  display: inline-block;
+}
+
+.dashboard-chart-card .count {
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dashboard-chart-card .count a {
+  color: var(--blue-hover);
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.dashboard-chart-card .count a div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-chart-card .count a div p:first-child {
+  font-size: 30px;
 }
 
 /* Breadcrumb */

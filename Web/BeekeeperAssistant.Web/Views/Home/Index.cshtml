@@ -2,6 +2,7 @@
 @model BeekeeperAssistant.Web.ViewModels.Home.IndexViewModel
 @{
     this.ViewData["Title"] = "Табло";
+    int apiaryColorsCounter = 0;
 }
 
 @*TODO: Separate these into two view components*@
@@ -128,6 +129,33 @@ else
                         </div>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dashboard-cards-list">
+        <div class="dashboard-chart-card">
+            <img src="@Model.ApiariesCountChartUrl" alt="...диаграма">
+            <div class="legend">
+                @foreach (var ac in Model.ApiariesCountByType.Keys)
+                {
+                    <div class="legend-row">
+                        <div class="legend-color"
+                    style="background: @GlobalConstants.ApiaryChartColors[apiaryColorsCounter].Remove(0, 1).Remove(7);">
+                            @Model.ApiariesCountByType[ac]</div>
+                        <div class="legend-value">@Html.DisplayFor(x => ac)</div>
+                    </div>
+                    apiaryColorsCounter++;
+                }
+            </div>
+            <div class="count">
+                <a asp-controller="Apiary" asp-action="All">
+                    <div>
+                        <p>@Model.ApiariesCount</p>
+                        <p>Създадени пчелина</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

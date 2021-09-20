@@ -281,6 +281,7 @@ body {
 
 .form-box input:invalid {
   border-color: var(--red);
+  color: var(--red);
 }
 
 .form-box .input-box.check {
@@ -300,6 +301,11 @@ body {
   border: 1px;
   color: var(--white);
   min-width: 100px;
+}
+
+form input[aria-invalid="true"]{
+  border-color: var(--red);
+  color: var(--red);
 }
 
 .link-group {

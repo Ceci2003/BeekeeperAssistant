@@ -6,6 +6,6 @@
 
     public interface IQuickChartService
     {
-        string ImageUrl(string chartType, List<int> data, int height, int width);
+        string ImageUrl(string chartType, List<int> data, string[] colors, int height = 300, int width = 500);
     }
 }

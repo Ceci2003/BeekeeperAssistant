@@ -1174,11 +1174,27 @@ textarea {
   width: 270px;
 }
 
-.dashboard-chart-card .legend-row {
+/* .dashboard-chart-card .legend-row {
   text-align: center;
   position: relative;
   height: 20px;
   border-top: 1px solid var(--lightgray);
+  border-bottom: 1px solid var(--lightgray);
+} */
+
+.dashboard-chart-card .legend-row {
+  text-align: center;
+  position: relative;
+  height: 20px;
+}
+
+.dashboard-chart-card .legend-row {
+  border-top: 1px solid var(--lightgray);
+  /* border-bottom: 1px solid var(--lightgray); */
+}
+
+.dashboard-chart-card .legend-row:last-child {
+  /* border-top: 1px solid var(--lightgray); */
   border-bottom: 1px solid var(--lightgray);
 }
 

@@ -15,8 +15,13 @@
         public const string FarmNumberRequiredErrorMessage = "Въведете номер животновъден обект";
         public const string ApiaryExistsErrorMessage = "Вече съществува пчелин с въведения номер";
         public const string ApiaryTypeRequiredErrorMessage = "Въведете вид на пчелина";
-        //public static string[] ApiaryChartColors = new string[] { "'#008995'", "'#009386'", "'#139a67'", "'#579e3e'", "'#8d9b00'", "'#c69000'", "'#ff7800'" };
-        public static string[] ApiaryChartColors = new string[] { "'#558b2f'", "'#8faa4a'", "'#c8c96b'", "'#ffe891'", "'#f7b560'", "'#ec7d44'", "'#da3c3d'" };
+        public static readonly string[] ApiaryTypeChartColors = new string[] { "'#ffffd4'", "'#fee391'", "'#fec44f'", "'#fe9929'", "'#ec7014'", "'#cc4c02'", "'#8c2d04'" };
+        public static readonly string[] BeehivePowerChartColors = new string[] { "'#1a5918'", "'#fead34'", "'#8c0712'" };
+        public static readonly string[] QueenYearChartColors = new string[] { "'#0A0ABF'", "'#FFFFFF'", "'#FFCD00'", "'#BF0A0A'", "'#007F0E'" };
+
+        //public static string[] ApiaryTypeChartColors = vs;
+        //public static string[] BeehivePowerChartColors = vs;
+        //public static string[] ApiaryChartColors = new string[] { "'#558b2f'", "'#8faa4a'", "'#c8c96b'", "'#ffe891'", "'#f7b560'", "'#ec7d44'", "'#da3c3d'" };
 
         // Pagination values
         public const int ApiariesPerPage = 10;

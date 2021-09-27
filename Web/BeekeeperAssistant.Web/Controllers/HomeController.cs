@@ -1,5 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,7 +12,9 @@
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Home;
+    using BeekeeperAssistant.Web.ViewModels.Queens;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -20,6 +24,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
+        private readonly IQueenService queenService;
         private readonly ITreatmentService treatmentService;
         private readonly IInspectionService inspectionService;
         private readonly IHarvestService harvestService;
@@ -29,6 +34,7 @@
             UserManager<ApplicationUser> userManager,
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
+            IQueenService queenService,
             ITreatmentService treatmentService,
             IInspectionService inspectionService,
             IHarvestService harvestService,
@@ -37,6 +43,7 @@
             this.userManager = userManager;
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
+            this.queenService = queenService;
             this.treatmentService = treatmentService;
             this.inspectionService = inspectionService;
             this.harvestService = harvestService;
@@ -62,18 +69,75 @@
             viewModel.InspectionsCount = inspectionsCount;
             viewModel.HarvestsCount = harvestsCount;
 
-            var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id);
+            // ToDo: Make services
 
+            // apiaries chart
+            var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id);
             viewModel.ApiariesCount = apiaries.Count();
 
-            var apiariesCountByType = apiaries.ToList().GroupBy(a => a.ApiaryType).ToDictionary(k => k.Key, v => v.ToList().Count);
+            var apiariesCountByType = apiaries.ToList().GroupBy(a => a.ApiaryType).ToDictionary(k => k.Key, v => v.Count());
             viewModel.ApiariesCountByType = apiariesCountByType;
 
             var apiariesCountChartUrl = this.quickChartService.ImageUrl(
                 "pie",
                 apiariesCountByType.Values.ToList(),
-                GlobalConstants.ApiaryChartColors.Take(apiariesCountByType.Values.Count).ToArray());
+                GlobalConstants.ApiaryTypeChartColors.Take(apiariesCountByType.Values.Count).ToArray());
             viewModel.ApiariesCountChartUrl = apiariesCountChartUrl;
+
+            // beehives chart
+            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id);
+            viewModel.BeehivesCount = beehives.Count();
+
+            var beehivesCountByPower = new Dictionary<BeehivePower, int>(); //beehives.ToList().GroupBy(b => b.BeehivePower).ToDictionary(k => k.Key, v => v.Count());
+            beehivesCountByPower.Add(BeehivePower.Strong, beehives.Where(b => b.BeehivePower == BeehivePower.Strong).Count());
+            beehivesCountByPower.Add(BeehivePower.Medium, beehives.Where(b => b.BeehivePower == BeehivePower.Medium).Count());
+            beehivesCountByPower.Add(BeehivePower.Weak, beehives.Where(b => b.BeehivePower == BeehivePower.Weak).Count());
+            viewModel.BeehivesCountByPower = beehivesCountByPower;
+
+            var beehivesCountChartUrl = this.quickChartService.ImageUrl(
+                "pie",
+                beehivesCountByPower.Values.ToList(),
+                GlobalConstants.BeehivePowerChartColors);
+            viewModel.BeehivesCountChartUrl = beehivesCountChartUrl;
+
+            // queens chart
+            var queens = this.queenService.GetAllUserQueens<QueenViewModel>(currentUser.Id);
+            viewModel.QueensCount = queens.Count();
+
+            var queensCountByGivingDate = queens.ToList().OrderBy(q => q.GivingDate).GroupBy(q => q.GivingDate.Year).ToDictionary(k => k.Key, v => v.Count());
+
+            var queenColors = new List<string>();
+
+            foreach (var year in queensCountByGivingDate.Keys.OrderBy(k => k))
+            {
+                switch (year % 10)
+                {
+                    case 0:
+                    case 5: queenColors.Add("'#0A0ABF'"); break;
+                    case 1:
+                    case 6: queenColors.Add("'#FFFFFF'"); break;
+                    case 2:
+                    case 7: queenColors.Add("'#FFCD00'"); break;
+                    case 3:
+                    case 8: queenColors.Add("'#BF0A0A'"); break;
+                    case 4:
+                    case 9: queenColors.Add("'#007F0E'"); break;
+                }
+            }
+
+            if (beehives.Count() - queens.Count() > 0)
+            {
+                queensCountByGivingDate.Add(0, beehives.Count() - queens.Count());
+                queenColors.Add("'#7B7B7B'");
+            }
+
+            var queensCountByGivingDateChart = this.quickChartService.ImageUrl(
+                "pie",
+                queensCountByGivingDate.Values.ToList(),
+                queenColors.ToArray());
+            viewModel.QueenChartColors = queenColors;
+            viewModel.QueensCountByGivingDate = queensCountByGivingDate;
+            viewModel.QueensCountByGivingDateChartUrl = queensCountByGivingDateChart;
 
             return this.View(viewModel);
         }

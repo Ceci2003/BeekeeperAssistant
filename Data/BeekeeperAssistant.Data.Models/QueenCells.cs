@@ -6,11 +6,11 @@
     {
         [Display(Name = "Няма")]
         None = 1,
-        [Display(Name = "Свищеви")]
+        [Display(Name = "Роеви")]
         Swarm = 2,
-        [Display(Name = "")]
+        [Display(Name = "Самосмяна")]
         Surersedure = 3,
-        [Display(Name = "")]
+        [Display(Name = "Свищеви")]
         Emergency = 4,
     }
 }

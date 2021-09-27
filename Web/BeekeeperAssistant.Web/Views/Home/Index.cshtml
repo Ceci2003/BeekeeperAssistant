@@ -2,7 +2,7 @@
 @model BeekeeperAssistant.Web.ViewModels.Home.IndexViewModel
 @{
     this.ViewData["Title"] = "Табло";
-    int apiaryColorsCounter = 0;
+    int colorsCounter = 0;
 }
 
 @*TODO: Separate these into two view components*@
@@ -23,7 +23,7 @@ else
         </ul>
         <div class="breadcrumb-leave">
             <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+                  asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
                 <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
             </form>
         </div>
@@ -131,32 +131,98 @@ else
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <div class="dashboard-cards-list">
-        <div class="dashboard-chart-card">
-            <img src="@Model.ApiariesCountChartUrl" alt="...диаграма">
-            <div class="legend">
-                @foreach (var ac in Model.ApiariesCountByType.Keys)
-                {
-                    <div class="legend-row">
-                        <div class="legend-color"
-                    style="background: @GlobalConstants.ApiaryChartColors[apiaryColorsCounter].Remove(0, 1).Remove(7);">
-                            @Model.ApiariesCountByType[ac]</div>
-                        <div class="legend-value">@Html.DisplayFor(x => ac)</div>
+        <div class="dashboard-cards-list">
+            @if (Model.ApiariesCount > 0)
+            {
+                <div class="dashboard-chart-card">
+                    <img src="@Model.ApiariesCountChartUrl" alt="...диаграма">
+                    <div class="legend">
+                        @foreach (var ac in Model.ApiariesCountByType.Keys)
+                        {
+                            <div class="legend-row">
+                                <div class="legend-color"
+                                     style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                                    @Model.ApiariesCountByType[ac]
+                                </div>
+                                <div class="legend-value">@Html.DisplayFor(x => ac)</div>
+                            </div>
+                            colorsCounter++;
+                        }
+                        @{
+                            colorsCounter = 0;
+                        }
                     </div>
-                    apiaryColorsCounter++;
-                }
-            </div>
-            <div class="count">
-                <a asp-controller="Apiary" asp-action="All">
-                    <div>
-                        <p>@Model.ApiariesCount</p>
-                        <p>Създадени пчелина</p>
+                    <div class="count">
+                        <a asp-controller="Apiary" asp-action="All">
+                            <div>
+                                <p>@Model.ApiariesCount</p>
+                                <p>Пчелини</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
+                </div>
+            }
+            @if (Model.BeehivesCount > 0)
+            {
+                <div class="dashboard-chart-card">
+                    <img src="@Model.BeehivesCountChartUrl" alt="...диаграма">
+                    <div class="legend">
+                        @foreach (var bc in Model.BeehivesCountByPower.Keys)
+                        {
+                            <div class="legend-row">
+                                <div class="legend-color"
+                                     style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                                    @Model.BeehivesCountByPower[bc]
+                                </div>
+                                <div class="legend-value">@Html.DisplayFor(x => bc)</div>
+                            </div>
+                            colorsCounter++;
+                        }
+                        @{
+                            colorsCounter = 0;
+                        }
+                    </div>
+                    <div class="count">
+                        <a asp-controller="Beehive" asp-action="All">
+                            <div>
+                                <p>@Model.BeehivesCount</p>
+                                <p>Кошери</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            @if (Model.QueensCount > 0)
+            {
+                <div class="dashboard-chart-card">
+                    <img src="@Model.QueensCountByGivingDateChartUrl" alt="...диаграма">
+                    <div class="legend">
+                        @foreach (var bc in Model.QueensCountByGivingDate.Keys)
+                        {
+                            <div class="legend-row">
+                                <div class="legend-color"
+                                     style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                                    @Model.QueensCountByGivingDate[bc]
+                                </div>
+                                <div class="legend-value">@Html.DisplayFor(x => bc)</div>
+                            </div>
+                            colorsCounter++;
+                        }
+                        @{
+                            colorsCounter = 0;
+                        }
+                    </div>
+                    <div class="count">
+                        <a asp-controller="Queen" asp-action="All">
+                            <div>
+                                <p>@Model.QueensCount</p>
+                                <p>Кошери</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 }

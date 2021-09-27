@@ -63,6 +63,7 @@ button::selection {
   --blue: #0d6493;
   --blue-hover: #1287c6;
   --main-background: #110400;
+  --expand-row-background: #f1f1f1;
   --gray-background: #f1f2f3;
   --white: #ffffff;
   --lightgray: #d3d3d3;
@@ -701,8 +702,49 @@ td.queen-red {
   border-top: none;
 }
 
-.data-table-expand td div {
+.data-table-expand td .note {
   padding: 8px;
+}
+
+.data-table-expand td .note i {
+  color: var(--orange);
+}
+
+.data-table-expand {
+  background-color: var(--expand-row-background);
+}
+
+.expand-data-tables {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 8px;
+}
+
+.expand-data-tables .section {
+  width: 45%;
+  margin-bottom: 15px;
+}
+
+.expand-data-tables .section h3 {
+  border-bottom: 3px solid var(--orange);
+}
+
+.expand-data-tables .section tr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.expand-data-tables .section tr td:first-child {
+  font-weight: 600;
+}
+
+.expand-data-tables th,
+.expand-data-tables td {
+  border: none;
+  padding: 8px 0;
 }
 
 /* All forms */
@@ -811,6 +853,11 @@ span.error-msg {
 }
 
 form input[aria-invalid="true"] {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+form input[aria-invalid="true"]:focus {
   border-color: var(--red);
   color: var(--red);
 }

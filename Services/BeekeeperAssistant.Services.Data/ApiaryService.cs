@@ -47,6 +47,18 @@
 
         public async Task DeleteApiaryByIdAsync(int apiaryId)
         {
+            var apiaryBeehives = this.beehiveRepository.All()
+                .Where(b => b.ApiaryId == apiaryId)
+                .ToList();
+
+            if (apiaryBeehives.Any())
+            {
+                foreach (var beehive in apiaryBeehives)
+                {
+                    this.beehiveRepository.Delete(beehive);
+                }
+            }
+
             var apiary = this.apiaryRepository
                 .All()
                 .FirstOrDefault(a => a.Id == apiaryId);

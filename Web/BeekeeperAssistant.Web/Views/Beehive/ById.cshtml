@@ -265,29 +265,35 @@
                         </tr>
                         <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
                             <td colspan="5">
-                                <div>
-                                    <table class="expand-data-table">
-                                        <tbody>
+                                <div class="expand-data-tables">
+                                    <div class="section">
+                                        <h3>Основна информация</h3>
+                                        <table>
                                             <tr>
-                                                <th></th>
+                                                <td>Предприети действия:</td>
                                                 <td>@Html.DisplayFor(x => inspection.BeehiveAction)</td>
                                             </tr>
                                             <tr>
-                                                <th></th>
+                                                <td>Маса на кошера(кг.):</td>
                                                 <td>@inspection.Weight</td>
                                             </tr>
                                             <tr>
-                                                <th></th>
+                                                <td>Температура на кошера(t°):</td>
                                                 <td>@inspection.HiveTemperature</td>
                                             </tr>
                                             <tr>
-                                                <th></th>
+                                                <td>Влажност на кошера(%):</td>
                                                 <td>@inspection.HiveHumidity</td>
                                             </tr>
-                                            @if (inspection.IncludeQueenSection)
-                                            {
+                                        </table>
+                                    </div>
+                                    @if (inspection.IncludeQueenSection)
+                                    {
+                                        <div class="section">
+                                            <h3>Основна майка</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Забелязана майка:</td>
                                                     <td>
                                                         @if (inspection.QueenSeen)
                                                         {
@@ -300,122 +306,182 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Маточници:</td>
                                                     <td>@Html.DisplayFor(x => inspection.QueenCells)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Работен статус на майката:</td>
                                                     <td>@Html.DisplayFor(x => inspection.QueenWorkingStatus)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Сила на майката:</td>
                                                     <td>@Html.DisplayFor(x => inspection.QueenPowerStatus)</td>
                                                 </tr>
-                                            }
-                                            @if (inspection.IncludeBrood)
-                                            {
+                                            </table>
+                                        </div>
+                                    }
+                                    @if (inspection.IncludeBrood)
+                                    {
+                                        <div class="section">
+                                            <h3>Секция пило</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
-                                                    <td>@inspection.Eggs</td>
+                                                    <td>Яйца:</td>
+                                                    <td>
+                                                        @if (inspection.Eggs)
+                                                        {
+                                                            <strong>@yesNo[1]</strong>
+                                                        }
+                                                        else
+                                                        {
+                                                            @yesNo[0]
+                                                        }
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
-                                                    <td>@inspection.ClappedBrood</td>
+                                                    <td>Запечатано пило:</td>
+                                                    <td>
+                                                        @if (inspection.ClappedBrood)
+                                                        {
+                                                            <strong>@yesNo[1]</strong>
+                                                        }
+                                                        else
+                                                        {
+                                                            @yesNo[0]
+                                                        }
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
-                                                    <td>@inspection.UnclappedBrood</td>
+                                                    <td>Излюпващо се пило:</td>
+                                                    <td>
+                                                        @if (inspection.UnclappedBrood)
+                                                        {
+                                                            <strong>@yesNo[1]</strong>
+                                                        }
+                                                        else
+                                                        {
+                                                            @yesNo[0]
+                                                        }
+                                                    </td>
                                                 </tr>
-                                            }
-                                            @if (inspection.IncludeFramesWith)
-                                            {
+                                            </table>
+                                        </div>
+                                    }
+                                    @if (inspection.IncludeFramesWith)
+                                    {
+                                        <div class="section">
+                                            <h3>Секция пити</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Пити с пчели:</td>
                                                     <td>@inspection.FramesWithBees</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Пити с пило:</td>
                                                     <td>@inspection.FramesWithBrood</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Пити с мед:</td>
                                                     <td>@inspection.FramesWithHoney</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Пити с прашец:</td>
                                                     <td>@inspection.FramesWithPollen</td>
                                                 </tr>
-                                            }
-                                            @if (inspection.IncludeActivity)
-                                            {
+                                            </table>
+                                        </div>
+                                    }
+                                    @if (inspection.IncludeActivity)
+                                    {
+                                        <div class="section">
+                                            <h3>Секция активност</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Активност на пчелите:</td>
                                                     <td>@Html.DisplayFor(x => inspection.BeeActivity)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Oриентационни полети:</td>
                                                     <td>@Html.DisplayFor(x => inspection.OrientationActivity)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Принос на прашец:</td>
                                                     <td>@Html.DisplayFor(x => inspection.PollenActivity)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Принос на мед:</td>
                                                     <td>@Html.DisplayFor(x => inspection.ForragingActivity)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Пчели в минута:</td>
                                                     <td>@inspection.BeesPerMinute</td>
                                                 </tr>
-                                            }
-                                            @if (inspection.IncludeStorage)
-                                            {
+                                            </table>
+                                        </div>
+                                    }
+                                    @if (inspection.IncludeStorage)
+                                    {
+                                        <div class="section">
+                                            <h3>Секция запаси</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Запаси от мед:</td>
                                                     <td>@Html.DisplayFor(x => inspection.StoredHoney)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Запаси от прашец:</td>
                                                     <td>@Html.DisplayFor(x => inspection.StoredPollen)</td>
                                                 </tr>
-                                            }
-                                            @if (inspection.IncludeSpottedProblem)
-                                            {
+                                            </table>
+                                        </div>
+                                    }
+                                    @if (inspection.IncludeSpottedProblem)
+                                    {
+                                        <div class="section">
+                                            <h3>Секция проблеми</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Заболяване:</td>
                                                     <td>@inspection.Disease</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Третиране с:</td>
                                                     <td>@inspection.Treatment</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Вредители:</td>
                                                     <td>@inspection.Pests</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Хищници:</td>
                                                     <td>@inspection.Predators</td>
                                                 </tr>
-                                            }
-                                            @if (inspection.IncludeWeatherInfo)
-                                            {
+                                            </table>
+                                        </div>
+                                    }
+                                    @if (inspection.IncludeWeatherInfo)
+                                    {
+                                        <div class="section">
+                                            <h3>Секция метеорологични</h3>
+                                            <table>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Условия:</td>
                                                     <td>@inspection.Conditions</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Температура(t°):</td>
                                                     <td>@inspection.WeatherTemperature</td>
                                                 </tr>
                                                 <tr>
-                                                    <th></th>
+                                                    <td>Влажност(%):</td>
                                                     <td>@inspection.WeatherHumidity</td>
                                                 </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                            </table>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="note">
+                                    <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @inspection.Note
                                 </div>
                             </td>
                         </tr>
@@ -493,8 +559,8 @@
                         </tr>
                         <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
                             <td colspan="8">
-                                <div>
-                                    <strong>Бележка:</strong> @treatment.Note
+                                <div class="note">
+                                    <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @treatment.Note
                                 </div>
                             </td>
                         </tr>
@@ -550,7 +616,8 @@
                             </td>
                             <td class="edit">
                                 <div>
-                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                    asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
@@ -564,8 +631,8 @@
                         </tr>
                         <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
                             <td colspan="8">
-                                <div>
-                                    <strong>Бележка:</strong> @harvest.Note
+                                <div class="note">
+                                    <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @harvest.Note
                                 </div>
                             </td>
                         </tr>

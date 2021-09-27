@@ -145,14 +145,17 @@ function formSection(btn) {
 // expand table row
 function expandTable(element, tab) {
     var masterId = element.id;
+    var masterRow = document.getElementById(masterId);
     var expandId = masterId.replace("Master", "Expand");
     var expandRow = document.getElementById(expandId);
 
     // expand selected
     if (expandRow.style.display == "none") {
         expandRow.style.display = "";
+        masterRow.classList.add("expanded");
     } else {
         expandRow.style.display = "none";
+        masterRow.classList.remove("expanded");
     }
     
     // hide expanded

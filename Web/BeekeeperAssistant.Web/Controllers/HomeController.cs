@@ -161,7 +161,7 @@
         {
             if (string.IsNullOrEmpty(message))
             {
-                message = "Не успяхме да намерим стряницата която търсите";
+                message = "Не успяхме да намерим стрaницата която търсите";
             }
 
             var viewModel = new HttpErrorViewModel

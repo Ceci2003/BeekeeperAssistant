@@ -6,7 +6,13 @@
 
     public class QuickChartService : IQuickChartService
     {
-        public string ImageUrl(string chartType, List<int> data, string[] colors, int height = 300, int width = 500)
+        public string ImageUrl(
+            string chartType,
+            List<int> data,
+            string[] colors,
+            string borderColor = "'#110400'",
+            int height = 300,
+            int width = 500)
         {
             Chart chart = new Chart();
 
@@ -20,7 +26,8 @@
                                         $"data: [{string.Join(", ", data)}], " +
                                         //"backgroundColor:['#4e73df', '#0f3dc4']" +
                                         //$"backgroundColor:['#008995', '#009386', '#139a67', '#579e3e', '#8d9b00', '#c69000', '#ff7800']" +
-                                        $"backgroundColor:[{string.Join(", ", colors)}]" +
+                                        $"backgroundColor:[{string.Join(", ", colors)}]," +
+                                        $"borderColor: {borderColor}, " +
                                     "}] " +
                                 "}, " +
                                 "options: { " +

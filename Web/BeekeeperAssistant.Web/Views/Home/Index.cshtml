@@ -205,7 +205,9 @@ else
                                      style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.QueensCountByGivingDate[bc]
                                 </div>
-                                <div class="legend-value">@Html.DisplayFor(x => bc)</div>
+                                <div class="legend-value">
+                                    @Html.DisplayFor(x => bc)
+                                </div>
                             </div>
                             colorsCounter++;
                         }

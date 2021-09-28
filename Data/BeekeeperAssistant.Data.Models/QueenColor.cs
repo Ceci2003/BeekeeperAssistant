@@ -14,5 +14,7 @@
         Green = 4,
         [Display(Name = "Син")]
         Blue = 5,
+        [Display(Name = "Немаркирана")]
+        Unmarked = 6,
     }
 }

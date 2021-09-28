@@ -36,7 +36,7 @@
             @foreach (var queen in Model.AllQueens)
             {
                 <tr>
-                    <td class="queen-@queen.Color.ToString().ToLower()">@queen.Color</td>
+                    <td class="queen-@queen.Color.ToString().ToLower()">@Html.DisplayFor(q => queen.Color)</td>
                     <td class="number">
                         <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
                         asp-route-tabPage="Queen">@queen.BeehiveNumber</a>

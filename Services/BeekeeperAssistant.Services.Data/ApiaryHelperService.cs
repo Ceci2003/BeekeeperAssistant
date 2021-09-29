@@ -1,9 +1,11 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
-    using System;
-    using System.Threading.Tasks;
 
     public class ApiaryHelperService : IApiaryHelperService
     {
@@ -25,6 +27,18 @@
 
             await this.apiaryHelperRepository.AddAsync(newApiaryHelper);
             await this.apiaryHelperRepository.SaveChangesAsync();
+        }
+
+        public bool IsAnApiaryHelper(string userId, int apiaryId)
+        {
+            var apiaryHelper = this.apiaryHelperRepository.All().FirstOrDefault(x => x.UserId == userId && x.ApiaryId == apiaryId);
+
+            if (apiaryHelper == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

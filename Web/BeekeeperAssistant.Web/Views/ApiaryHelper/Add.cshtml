@@ -1,6 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.AddUserToApiaryInputModel
 
-<form method="post">
+<form asp-controller="ApiaryHelper" asp-action="Add" method="post">
     <div>
         <label asp-for="UserName"></label>
         <input asp-for="UserName" />

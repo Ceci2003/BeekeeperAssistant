@@ -8,5 +8,7 @@
     public interface IApiaryHelperService
     {
         Task Add(string userId, int apiaryId);
+
+        bool IsAnApiaryHelper(string userId, int apiaryId);
     }
 }

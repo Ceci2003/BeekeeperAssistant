@@ -33,6 +33,7 @@
                 errorList.Add(new ValidationResult("Не съществува такъв потребител!", new List<string> { "UserName" }));
             }
 
+
             return errorList;
         }
     }

@@ -36,18 +36,25 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
             if (currentUser.UserName == inputModel.UserName)
             {
                 this.ModelState.AddModelError("UserName", "Не може да добавите себе си!");
                 return this.View(inputModel);
             }
 
-            if (!this.ModelState.IsValid)
+            var user = await this.userManager.FindByNameAsync(inputModel.UserName);
+            if (this.apiaryHelperService.IsAnApiaryHelper(user.Id, id))
             {
+                this.ModelState.AddModelError("UserName", "Потребителят вече е помошник!");
                 return this.View(inputModel);
             }
 
-            await this.apiaryHelperService.Add(currentUser.Id, id);
+            await this.apiaryHelperService.Add(user.Id, id);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
 

@@ -28,7 +28,7 @@
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h2>@ViewData["Title"]</h2>
-            <div asp-validation-summary="All"></div>
+            <div class="error-msg" asp-validation-summary="All"></div>
             <div class="input-apiary-number row-form-group">
                 <div class="input-group city-code">
                     <label asp-for="@Model.CityCode"></label>
@@ -39,21 +39,19 @@
                     <label asp-for="@Model.FarmNumber"></label>
                     <input type="text" asp-for="@Model.FarmNumber" />
                 </div>
-                <div class="error-list">
+                @* <div class="error-list">
                     <span class="error-msg" asp-validation-for="@Model.CityCode"></span>
                     <span class="error-msg" asp-validation-for="@Model.FarmNumber"></span>
-                </div>
+                </div> *@
             </div>
             <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Name"></label>
                     <input type="text" asp-for="@Model.Name" />
-                    <span class="error-msg" asp-validation-for="@Model.Name"></span>
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.Adress"></label>
                     <input type="text" asp-for="@Model.Adress" />
-                    <span class="error-msg" asp-validation-for="@Model.Adress"></span>
                 </div>
             </div>
             <div class="row-form-group">
@@ -61,7 +59,6 @@
                     <label asp-for="@Model.ApiaryType"></label>
                     <select asp-for="@Model.ApiaryType"
                         asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
-                    <span class="error-msg" asp-validation-for="@Model.ApiaryType"></span>
                 </div>
             </div>
             <div class="btn-group">

@@ -321,6 +321,10 @@ form input[aria-invalid="true"]{
   color: var(--beehive-color-hover);
 }
 
+.link-group a:visited {
+  color: var(--white);
+}
+
 span.error-msg {
   display: block;
   color: var(--red);

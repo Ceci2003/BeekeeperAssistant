@@ -10,7 +10,7 @@
     using BeekeeperAssistant.Web.Infrastructure.ValidationAttributes.Apiaries;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class CreateApiaryInputModel
+    public class CreateApiaryInputModel : IValidatableObject
     {
         [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]

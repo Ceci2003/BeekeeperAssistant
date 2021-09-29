@@ -1219,6 +1219,7 @@ textarea {
 
 .dashboard-chart-card img {
   width: 270px;
+  padding: 5px;
 }
 
 /* .dashboard-chart-card .legend-row {

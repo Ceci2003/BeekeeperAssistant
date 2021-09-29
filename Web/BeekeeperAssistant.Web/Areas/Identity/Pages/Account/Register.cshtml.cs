@@ -59,7 +59,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account
 
             [DataType(DataType.Password)]
             [Display(Name = "Потвърдете паролата")]
-            [Compare("Password", ErrorMessage = "Двете пароли не съвпадат.")]
+            [Compare("Password", ErrorMessage = "Пароли се различават.")]
             public string ConfirmPassword { get; set; }
         }
 

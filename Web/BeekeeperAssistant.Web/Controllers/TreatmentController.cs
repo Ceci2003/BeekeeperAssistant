@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using OfficeOpenXml;
 
     [Authorize]
     public class TreatmentController : BaseController
@@ -180,6 +181,47 @@
             await this.treatmentService.DeleteTreatmentAsync(id);
 
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Treatments" });
+        }
+
+        public async Task<IActionResult> ExportToExcel(int id)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
+            var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id);
+
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+            ws.Cells["A1:B1"].Merge = true;
+            ws.Cells["A1"].Value = $"Доклад - Добиви";
+
+            ws.Cells["A2"].Value = $"Пчелин №:";
+            ws.Cells["B2"].Value = $"{beehive.ApiaryNumber}";
+            ws.Cells["A3"].Value = $"Кошер №:";
+            ws.Cells["B3"].Value = $"{beehive.Number}";
+
+            ws.Cells["A4:B4"].Merge = true;
+            ws.Cells["A4"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
+
+            ws.Cells[$"A6"].Value = $"Име";
+            ws.Cells[$"B6"].Value = $"Дата";
+            ws.Cells[$"C6"].Value = $"Добит продукт";
+            ws.Cells[$"D6"].Value = $"Вид мед";
+            ws.Cells[$"E6"].Value = $"Количество";
+            ws.Cells[$"F6"].Value = $"Еденица";
+            ws.Cells[$"G6"].Value = $"Бележка";
+
+            int rowsCounter = 7;
+            foreach (var harvest in treatments)
+            {
+               
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+
+            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

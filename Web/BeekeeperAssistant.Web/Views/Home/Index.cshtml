@@ -78,7 +78,7 @@ else
         <div class="dashboard-cards-list">
             <div class="count-add-card">
                 <div class="count-add-card-body">
-                    <a asp-controller="Treatment" asp-action="All">
+                    <a asp-controller="Treatment" asp-action="All" style="pointer-events: none;">
                         <div>
                             <p>@Model.TreatmentsCount</p>
                             <p>Третирания за сезона</p>
@@ -96,7 +96,7 @@ else
             </div>
             <div class="count-add-card">
                 <div class="count-add-card-body">
-                    <a asp-controller="Inspection" asp-action="All">
+                    <a asp-controller="Inspection" asp-action="All" style="pointer-events: none;">
                         <div>
                             <p>@Model.InspectionsCount</p>
                             <p>Прегледа за сезона</p>
@@ -114,7 +114,7 @@ else
             </div>
             <div class="count-add-card">
                 <div class="count-add-card-body">
-                    <a asp-controller="Harvest" asp-action="All">
+                    <a asp-controller="Harvest" asp-action="All" style="pointer-events: none;">
                         <div>
                             <p>@Model.HarvestsCount</p>
                             <p>Добива за сезона</p>

@@ -679,6 +679,10 @@ td.queen-red {
   border-collapse: collapse;
 }
 
+[id*="trMaster"] {
+  cursor: pointer;
+}
+
 .table-sdate,
 .table-amount {
   width: 150px;
@@ -1222,37 +1226,33 @@ textarea {
   padding: 5px;
 }
 
-/* .dashboard-chart-card .legend-row {
-  text-align: center;
-  position: relative;
-  height: 20px;
-  border-top: 1px solid var(--lightgray);
-  border-bottom: 1px solid var(--lightgray);
-} */
-
 .dashboard-chart-card .legend-row {
-  text-align: center;
-  position: relative;
-  height: 20px;
-}
-
-.dashboard-chart-card .legend-row {
-  border-top: 1px solid var(--lightgray);
-  /* border-bottom: 1px solid var(--lightgray); */
+  display: flex;
+  justify-content: flex-start;
+  height: 25px;
+  border-top: 1px solid lightgray;
 }
 
 .dashboard-chart-card .legend-row:last-child {
-  /* border-top: 1px solid var(--lightgray); */
-  border-bottom: 1px solid var(--lightgray);
+  border-bottom: 1px solid lightgray;
 }
 
 .dashboard-chart-card .legend-color {
-  width: 20px;
-  position: absolute;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dashboard-chart-card .legend-value {
-  display: inline-block;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-chart-card .legend-value:before {
+  content: "-";
+  padding: 0 5px;
 }
 
 .dashboard-chart-card .count {

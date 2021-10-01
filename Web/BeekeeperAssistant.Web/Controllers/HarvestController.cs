@@ -166,78 +166,105 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
+            var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id);
 
             ExcelPackage pck = new ExcelPackage();
             ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
 
             ws.Cells["A1:B1"].Merge = true;
-            ws.Cells["A1"].Value = $"Доклад - Добиви кошер";
-            ws.Cells["A2:B2"].Merge = true;
-            ws.Cells["A2"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
+            ws.Cells["A1"].Value = $"Доклад - Добиви";
 
-            ws.Cells["A3"].Value = "Номер:";
-            ws.Cells["A4"].Value = "Пчелин:";
-            ws.Cells["A5"].Value = "Дата на създаване:";
-            ws.Cells["A6"].Value = "Сила:";
-            ws.Cells["A7"].Value = "Система:";
-            ws.Cells["A8"].Value = "Вид:";
-            ws.Cells["A9"].Value = "Апарат за майки:";
-            ws.Cells["A10"].Value = "Прашецоуловител:";
-            ws.Cells["A11"].Value = "Решетка за прополис:";
-            ws.Cells["A12"].Value = "Кралица:";
-            ws.Cells["A13"].Value = "Цвят:";
-            ws.Cells["A14"].Value = "Вид";
-            ws.Cells["A15"].Value = "Дата на придаване:";
-            ws.Cells["A16"].Value = "Произход:";
+            ws.Cells["A2"].Value = $"Пчелин №:";
+            ws.Cells["B2"].Value = $"{beehive.ApiaryNumber}";
+            ws.Cells["A3"].Value = $"Кошер №:";
+            ws.Cells["B3"].Value = $"{beehive.Number}";
 
-            ws.Cells["B3"].Value = beehive.Number;
-            ws.Cells["B4"].Value = beehive.ApiaryNumber;
-            ws.Cells["B5"].Value = beehive.Date;
-            ws.Cells["B6"].Value = beehive.BeehivePower;
-            ws.Cells["B7"].Value = beehive.BeehiveSystem;
-            ws.Cells["B8"].Value = beehive.BeehiveType;
-            ws.Cells["B9"].Value = beehive.HasDevice == true ? "Има" : "Няма";
-            ws.Cells["B10"].Value = beehive.HasPolenCatcher == true ? "Има" : "Няма";
-            ws.Cells["B11"].Value = beehive.HasPropolisCatcher == true ? "Има" : "Няма";
-            if (beehive.HasQueen)
+            ws.Cells["A4:B4"].Merge = true;
+            ws.Cells["A4"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
+
+            ws.Cells[$"A6"].Value = $"Име";
+            ws.Cells[$"B6"].Value = $"Дата";
+            ws.Cells[$"C6"].Value = $"Добит продукт";
+            ws.Cells[$"D6"].Value = $"Вид мед";
+            ws.Cells[$"E6"].Value = $"Количество";
+            ws.Cells[$"F6"].Value = $"Еденица";
+            ws.Cells[$"G6"].Value = $"Бележка";
+
+            int rowsCounter = 7;
+            foreach (var harvest in harvests)
             {
-                ws.Cells["B12"].Value = "Нама";
-                ws.Cells["B12"].Style.Font.Bold = true;
-                ws.Cells["B13"].Value = "-";
-                ws.Cells["B14"].Value = "-";
-                ws.Cells["B15"].Value = "-";
-                ws.Cells["B16"].Value = "-";
-            }
-            else
-            {
-                ws.Cells["B12"].Value = beehive.HasQueen;
-                ws.Cells["B13"].Value = beehive.Queen.Color;
-                ws.Cells["B14"].Value = beehive.Queen.QueenType;
-                ws.Cells["B15"].Value = beehive.Queen.GivingDate;
-                ws.Cells["B16"].Value = beehive.Queen.Origin;
-            }
+                ws.Cells[$"A{rowsCounter}"].Value = harvest.HarvestName;
+                ws.Cells[$"B{rowsCounter}"].Value = harvest.DateOfHarves.ToString("dd-MM-yyyy");
 
-            ws.Cells["A18"].Value = "Име";
-            ws.Cells["B18"].Value = "Дата";
-            ws.Cells["C18"].Value = "Продукт";
-            ws.Cells["D18"].Value = "Количество";
-            ws.Cells["E18"].Value = "Бележка";
+                var harvestedProduct = "мед";
+                switch (harvest.HarvestProductType)
+                {
+                    case HarvestProductType.Pollen:
+                        harvestedProduct = "прашец";
+                        break;
+                    case HarvestProductType.Wax:
+                        harvestedProduct = "восък";
+                        break;
+                    case HarvestProductType.Propolis:
+                        harvestedProduct = "прополис";
+                        break;
+                    case HarvestProductType.RoyalJelly:
+                        harvestedProduct = "млечице";
+                        break;
+                    case HarvestProductType.BeeVenom:
+                        harvestedProduct = "отрова";
+                        break;
+                }
 
-            ws.Cells["A18:E18"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            ws.Cells["A18:E18"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-            ws.Cells["A18:E18"].Style.Font.Color.SetColor(Color.White);
+                ws.Cells[$"C{rowsCounter}"].Value = harvestedProduct;
 
-            int rowIndex = 19;
-            foreach (var harvest in beehive.Harvests)
-            {
-                ws.Cells[$"A{rowIndex}"].Value = harvest.HarvestName;
-                ws.Cells[$"B{rowIndex}"].Value = harvest.DateOfHarves;
-                ws.Cells[$"C{rowIndex}"].Value = harvest.HarvestProductType.ToString();
-                ws.Cells[$"D{rowIndex}"].Value = harvest.Quantity;
-                ws.Cells[$"E{rowIndex}"].Value = harvest.Note;
+                var honeyType = string.Empty;
+                if (harvest.HarvestProductType == HarvestProductType.Honey)
+                {
+                    switch (harvest.HoneyType)
+                    {
+                        case HoneyType.Acacia:
+                            honeyType = "акация";
+                            break;
+                        case HoneyType.Wildflower:
+                            honeyType = "билков";
+                            break;
+                        case HoneyType.Sunflower:
+                            honeyType = "слънчогледов";
+                            break;
+                        case HoneyType.Clover:
+                            honeyType = "от детелина";
+                            break;
+                        case HoneyType.Alfalfa:
+                            honeyType = "от люцерна";
+                            break;
+                        case HoneyType.Other:
+                            honeyType = "друг";
+                            break;
+                    }
+                }
 
-                rowIndex++;
+                ws.Cells[$"D{rowsCounter}"].Value = honeyType;
+                ws.Cells[$"E{rowsCounter}"].Value = harvest.Quantity;
+
+                var unit = "";
+                switch (harvest.Unit)
+                {
+                    case Unit.Kilograms:
+                        break;
+                    case Unit.Grams:
+                        break;
+                    case Unit.Milligrams:
+                        break;
+                    case Unit.Litres:
+                        break;
+                    case Unit.Millilitres:
+                        break;
+                }
+
+                ws.Cells[$"F{rowsCounter}"].Value = unit;
+                ws.Cells[$"G{rowsCounter}"].Value = harvest.Note;
             }
 
             ws.Cells["A:AZ"].AutoFitColumns();

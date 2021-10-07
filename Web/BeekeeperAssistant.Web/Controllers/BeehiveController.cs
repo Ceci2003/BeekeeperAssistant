@@ -242,6 +242,7 @@
             ws.Cells["A4:Q4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["A4:Q4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
             ws.Cells["A4:Q4"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["A4:Q4"].Style.Font.Bold = true;
 
             int rowIndex = 5;
             foreach (var beehive in beehives)
@@ -249,7 +250,7 @@
                 ws.Cells[$"A{rowIndex}"].Value = beehive.Number;
                 ws.Cells[$"B{rowIndex}"].Value = beehive.Date.ToString("dd-MM-yyyy");
                 ws.Cells[$"C{rowIndex}"].Value = beehive.ApiaryNumber;
-                ws.Cells[$"D{rowIndex}"].Value = beehive.IsItMovable == true ? "✓	" : "";
+                ws.Cells[$"D{rowIndex}"].Value = beehive.IsItMovable == true ? "✓	" : string.Empty;
 
                 ws.Cells[$"D{rowIndex}"].Style.Font.Bold = true;
 

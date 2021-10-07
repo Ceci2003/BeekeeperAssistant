@@ -22,7 +22,7 @@
         public string Note { get; set; }
 
         [Required]
-        [Display(Name = "Заболяване")]
+        [Display(Name = "Превенция на")]
         public string Disease { get; set; }
 
         [Required]

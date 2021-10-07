@@ -164,8 +164,6 @@
 
         public async Task<IActionResult> ExportToExcel(int id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-
             var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
             var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id);
 
@@ -190,6 +188,11 @@
             ws.Cells[$"E6"].Value = $"Количество";
             ws.Cells[$"F6"].Value = $"Еденица";
             ws.Cells[$"G6"].Value = $"Бележка";
+
+            ws.Cells["A6:G6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["A6:G6"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
+            ws.Cells["A6:G6"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["A6:G6"].Style.Font.Bold = true;
 
             int rowsCounter = 7;
             foreach (var harvest in harvests)
@@ -252,24 +255,31 @@
                 switch (harvest.Unit)
                 {
                     case Unit.Kilograms:
+                        unit = "кг";
                         break;
                     case Unit.Grams:
+                        unit = "г";
                         break;
                     case Unit.Milligrams:
+                        unit = "мг";
                         break;
                     case Unit.Litres:
+                        unit = "л";
                         break;
                     case Unit.Millilitres:
+                        unit = "мл";
                         break;
                 }
 
                 ws.Cells[$"F{rowsCounter}"].Value = unit;
                 ws.Cells[$"G{rowsCounter}"].Value = harvest.Note;
+
+                rowsCounter++;
             }
 
             ws.Cells["A:AZ"].AutoFitColumns();
 
-            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            this.Response.Headers.Add("content-disposition", "attachment: filename=" + $"{beehive.Number}_{beehive.ApiaryNumber}_Harvests.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }

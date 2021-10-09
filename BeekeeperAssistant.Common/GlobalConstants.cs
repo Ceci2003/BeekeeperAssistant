@@ -19,13 +19,25 @@
         public static readonly string[] BeehivePowerChartColors = new string[] { "'#1a5918'", "'#fead34'", "'#8c0712'" };
         public static readonly string[] QueenYearChartColors = new string[] { "'#0A0ABF'", "'#FFFFFF'", "'#FFCD00'", "'#BF0A0A'", "'#007F0E'" };
 
-        //public static string[] ApiaryTypeChartColors = vs;
-        //public static string[] BeehivePowerChartColors = vs;
-        //public static string[] ApiaryChartColors = new string[] { "'#558b2f'", "'#8faa4a'", "'#c8c96b'", "'#ffe891'", "'#f7b560'", "'#ec7d44'", "'#da3c3d'" };
-
         // Pagination values
         public const int ApiariesPerPage = 10;
         public const int BeehivesPerPage = 25;
         public const int QueensPerPage = 15;
+
+        public const string ConfirmEmailHtml = "<tr style=\" display: flex; align-items: center; justify-content: center; font-family: Helvetica, Arial, sans-serif; height: 200px; \" >" +
+                                                    "<a href = \" https://localhost:44302 \" style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: #110400;\">" +
+                                                        "<img src = \" https://localhost:44302/img/BA_demoLogo.png \" alt=\"BeekeeperAssistant\" >" +
+                                                        "<h1>BeekeeperAssistant</h1>" +
+                                                    "</a>" +
+                                                "</tr>" +
+                                                "<tr style = \"display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #110400; color: #ffffff; font-family: Helvetica, Arial, sans-serif; height: 250px;\" > " +
+                                                    "<img src = \" https://localhost:44302/img/check_white.png \" alt= \"check \" style= \"margin: 0; height: 50px; background: #ff7800; border-radius: 30px;\">" +
+                                                    "<h2 style = \"margin: 0; margin: 30px 0;\" > Регистрацията е успешна!</h2>" +
+                                                    "<h3 style = \"margin: 0;\" > Натиснете бутона по-долу, за да потвърдите имейла си.</h3>" +
+                                                "</tr>"
+                                            ;
+
+
+            
     }
 }

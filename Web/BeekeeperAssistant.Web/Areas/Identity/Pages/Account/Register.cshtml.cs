@@ -64,7 +64,7 @@
 
             [DataType(DataType.Password)]
             [Display(Name = "Потвърдете паролата")]
-            [Compare("Password", ErrorMessage = "Пароли се различават.")]
+            [Compare("Password", ErrorMessage = "Паролите не съвпадат.")]
             public string ConfirmPassword { get; set; }
         }
 

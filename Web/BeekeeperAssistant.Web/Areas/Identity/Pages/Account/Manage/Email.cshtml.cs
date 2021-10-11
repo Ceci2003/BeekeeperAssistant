@@ -110,7 +110,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 await _emailSender.SendEmailAsync(
                     this.configuration["SendGrid:SenderEmail"],
                     GlobalConstants.SystemName,
-                    user.Email,
+                    Input.NewEmail,
                     "Потвърждване на имейла",
                     $"Регистрацията е успешна!<br>ПоследваЙте линка за да потвърдете имейл адреса си: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'><strong>Потвърди имейл</strong></a>.");
 
@@ -149,7 +149,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
             await _emailSender.SendEmailAsync(
                 this.configuration["SendGrid:SenderEmail"],
                 GlobalConstants.SystemName,
-                user.Email,
+                email,
                 "Потвърждване на имейла",
                 $"Регистрацията е успешна!<br>ПоследваЙте линка за да потвърдете имейл адреса си: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'><strong>Потвърди имейл</strong></a>.");
 

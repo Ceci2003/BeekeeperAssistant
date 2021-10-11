@@ -1495,11 +1495,14 @@ textarea {
   display: block;
 }
 
-.confirm-email-result {
+.center-screen-parent {
   position: absolute;
   top: 40%;
   left: 40%;
   text-align: center;
+}
+
+.center-screen-parent.border {
   font-size: 20px;
   border: 3px solid orange;
   border-radius: 5px;

@@ -32,16 +32,15 @@
                 <input class="btn" type="submit" value="Вход" />
             </div>
             <div class="link-group">
-                @* <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p> *@
                 <p>
-                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Ако нямате профил регистрирайте
-                        се </a>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Забравена парола?</a>
                 </p>
-                @* <p>
-                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p> *@
+                <p>
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+                        Ако нямате профил регистрирайте
+                        се
+                    </a>
+                </p>
             </div>
         </form>
         @* <section>

@@ -65,7 +65,7 @@
                     <form asp-controller="Apiary" asp-action="Delete" asp-route-id="@Model.Id">
                         <input class="btn delete" type="submit" value="Изтрий" />
                     </form>
-                    <a class="btn btn-primary" asp-controller="ApiaryHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
+                    <a class="btn btn-primary" asp-controller="ApiaryHelper" asp-action="Add" asp-route-apiaryId="@Model.Id">Добави помощник</a>
                 </div>
             </div>
             <div class="weather">

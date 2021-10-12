@@ -8,7 +8,7 @@
     <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
     <title>@GlobalConstants.SystemName - @this.ViewData["Title"]</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 </head>
 
@@ -29,7 +29,7 @@
                 <ul>
                     @*<li><a asp-area="" asp-controller="Home" asp-action="About">За нас</a></li>*@
                     @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакти</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Запитвания</a></li>*@
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Запитвания</a></li>*@
                     <!-- <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Лични данни</a></li> -->
                 </ul>
             </div>
@@ -38,18 +38,20 @@
                 <ul>
                     <li><a href="#"><i class="fab fa-facebook" target="popup"></i></a></li>
                     <li><a href="#"><i class="fab fa-instagram" target="popup"></i></a></li>
-                    <li><a href="https://github.com/Ceci2003/BeekeeperAssistant" target="popup"><i
-                                class="fab fa-github"></i></a></li>
+                    <li>
+                        <a href="https://github.com/Ceci2003/BeekeeperAssistant" target="popup">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
         <p class="footer-copyright">&copy; @DateTime.Now.Year - @GlobalConstants.SystemName</p>
     </footer>
-
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
-        asp-append-version="true"></script>
+            asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)

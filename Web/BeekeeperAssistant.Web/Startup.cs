@@ -65,6 +65,7 @@
             });
 
             services.AddSingleton(this.configuration);
+            services.AddServerSideBlazor();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -83,7 +84,7 @@
             services.AddTransient<ITreatmentService, TreatmentService>();
             services.AddTransient<IInspectionService, InspectionService>();
             services.AddTransient<IApiaryHelperService, ApiaryHelperService>();
-
+            services.AddTransient<IEnumerationMethodsService, EnumerationMethodsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,10 +120,11 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapBlazorHub();
                         endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber:apiaryNumber}", new { controller = "Apiary", action = "ByNumber" });
                         endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}", new { controller = "Beehive", action = "ById" });
                         endpoints.MapControllerRoute("beehiveTreatmentRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}#tabPage={tabPage}", new { controller = "Beehive", action = "ById", tabPage = "" });

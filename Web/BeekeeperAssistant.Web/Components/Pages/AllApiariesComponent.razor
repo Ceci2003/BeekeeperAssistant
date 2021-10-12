@@ -1,0 +1,55 @@
+﻿<div class="content">
+    <h1 class="title-1">Всички пчелини</h1>
+    <div class="page-controls">
+        <a class="export-file excel" href="Apiary/ExportToExcel"><i class="fas fa-file-download"></i> Excel</a>
+        <a class="btn apiary-create" href="Apiary/Create">
+            <i class="fas fa-plus-square pr-2"></i>
+            Създайте нов пчелин
+        </a>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Име</th>
+                <th>Адрес</th>
+                <th>Вид</th>
+                <th>Бр. кошери</th>
+                <th>Редактиране</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var apiary in AllUserApiaries)
+            {
+                <tr>
+                    <td class="number">
+                        <a href="/Apiary/@apiary.Number">@apiary.Number</a>
+                    </td>
+                    <td>@apiary.Name</td>
+                    <td>@apiary.Adress</td>
+                    <td>@EnumerationMethodsService.GetDisplayName(@apiary.ApiaryType)</td>
+                    <td>@apiary.BeehivesCount</td>
+                    <td class="edit">
+                        <div>
+                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="edit" href="/Apiary/Edit/@apiary.Id">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <form id="form-@apiary.Id" method="post" action="/Apiary/Delete/@apiary.Id">
+                                <input name="__RequestVerificationToken" type="hidden" value="@AntiforgeryToken">
+                                <button type="submit" class="delete">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!AllUserApiaries.Any())
+    {
+        <p class="empty-row">няма добавени пчелини</p>
+    }
+</div>
+

@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
-    using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.ApiaryHelpers;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -27,18 +26,13 @@
             this.apiaryHelperService = apiaryHelperService;
         }
 
-        public IActionResult Add(int apiaryId)
+        public IActionResult Add()
         {
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
-            var viewModel = new AddUserToApiaryInputModel
-            {
-                ApiaryNumber = apiaryNumber,
-            };
-            return this.View(viewModel);
+            return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(int apiaryId, AddUserToApiaryInputModel inputModel)
+        public async Task<IActionResult> Add(int id, AddUserToApiaryInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -54,15 +48,15 @@
             }
 
             var user = await this.userManager.FindByNameAsync(inputModel.UserName);
-            if (this.apiaryHelperService.IsAnApiaryHelper(user.Id, apiaryId))
+            if (this.apiaryHelperService.IsAnApiaryHelper(user.Id, id))
             {
                 this.ModelState.AddModelError("UserName", "Потребителят вече е помошник!");
                 return this.View(inputModel);
             }
 
-            await this.apiaryHelperService.Add(user.Id, apiaryId);
+            await this.apiaryHelperService.Add(user.Id, id);
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
 
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }

@@ -1,29 +1,8 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Home.HttpErrorViewModel
+
 @{
-    this.ViewData["Title"] = "Упс...";
+    this.ViewData["Title"] = "Oooп...";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <div class="breadcrumb">
-        <ul class="breadcrumb-list">
-            <li class="breadcrumb-item">
-                <a asp-controller="Home" asp-action="Index" asp-area="">Начало</a>
-            </li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ul>
-        <div class="breadcrumb-leave">
-            <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-            </form>
-        </div>
-    </div>
-}
-
-<div class="content">
-    <div class="center-screen-parent border">
-        <h3>@this.ViewData["Title"]</h3>
-        <p>@Model.Message</p>
-    </div>
-</div>
+<h3>Код на проблема: @Model.StatusCode</h3>
+<h3>@Model.Message!</h3>

@@ -9,10 +9,10 @@
 
     public class AllApiariesViewModel
     {
-       public IEnumerable<ApiaryViewModel> AllUserApiaries { get; set; }
+        public IEnumerable<ApiaryViewModel> AllUserApiaries { get; set; }
 
-       public int CurrentPage { get; set; }
+        public int CurrentPage { get; set; }
 
-       public int PagesCount { get; set; }
+        public int PagesCount { get; set; }
     }
 }

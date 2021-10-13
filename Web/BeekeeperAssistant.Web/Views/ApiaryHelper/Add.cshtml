@@ -1,42 +1,11 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.AddUserToApiaryInputModel
-@{
-    this.ViewData["Title"] = "Добавяне на помощник";
-}
 
-
-<div class="breadcrumb">
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index" asp-area="">Начало</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.ApiaryNumber">Пчелин №@Model.ApiaryNumber</a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <div class="breadcrumb-leave">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
+<form asp-controller="ApiaryHelper" asp-action="Add" method="post">
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
     </div>
-</div>
 
-<div class="content">
-    <div class="center-screen-parent border">
-        <div class="form-submit">
-            <h3>@ViewData["Title"]</h3>
-            <h5>Въведете потребителското имен на помощник пчеларя.</h5>
-            <form asp-controller="ApiaryHelper" asp-action="Add" method="post">
-                <div class="form-group">
-                    <div class="input-group">
-                        <label asp-for="UserName"></label>
-                        <input asp-for="UserName" />
-                    </div>
-                    <span asp-validation-for="UserName"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Добави</button>
-            </form>
-        </div>
-    </div>
-</div>
+    <input type="submit" value="Добави" />
+</form>

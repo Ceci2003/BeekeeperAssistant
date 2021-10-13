@@ -181,11 +181,11 @@ body {
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(/img/banner.jpg);
-  height: 600px;
+  height: 500px;
   background-size: cover;
   background-position-y: top;
   color: wheat;
-  /* border-bottom: 5px solid var(--beehive-color); */
+  border-bottom: 5px solid var(--beehive-color);
 }
 
 .banner-text h1 {
@@ -436,13 +436,13 @@ footer h1 {
   border: 3px solid orange;
   border-radius: 5px;
   padding: 50px;
-  margin: 200px;
+  margin: 170px;
   font-size: 16px;
 }
 
 .form-submit {
   text-align: center;
-  border: 3px solid var(--orange);
+  border: 3px solid orange;
   border-radius: 5px;
   padding: 50px;
   margin: 170px;
@@ -508,5 +508,3 @@ footer h1 {
 .active-link:hover {
   color: var(--orange);
 }
-
-

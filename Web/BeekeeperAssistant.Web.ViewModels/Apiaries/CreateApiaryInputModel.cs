@@ -34,7 +34,7 @@
         [Display(Name = "Вид на пчелина")]
         public ApiaryType ApiaryType { get; set; }
 
-        [Required(ErrorMessage = GlobalConstants.AddressRequiredErrorMessage)]
+        [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [Display(Name = "Населено място")]
         public string Adress { get; set; }
 

@@ -83,7 +83,7 @@
             services.AddTransient<ITreatmentService, TreatmentService>();
             services.AddTransient<IInspectionService, InspectionService>();
             services.AddTransient<IApiaryHelperService, ApiaryHelperService>();
-
+            services.AddTransient<IEnumerationMethodsService, EnumerationMethodsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,7 +119,7 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(
                 endpoints =>
                     {

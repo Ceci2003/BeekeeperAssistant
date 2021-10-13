@@ -27,6 +27,7 @@
         private readonly IApiaryNumberService apiaryNumberService;
         private readonly IConfiguration configuration;
         private readonly IForecastService forecastService;
+        private readonly IApiaryHelperService apiaryHelperService;
 
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
@@ -34,7 +35,8 @@
             IBeehiveService beehiveService,
             IApiaryNumberService apiaryNumberService,
             IConfiguration configuration,
-            IForecastService forecastService)
+            IForecastService forecastService,
+            IApiaryHelperService apiaryHelperService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -42,36 +44,63 @@
             this.apiaryNumberService = apiaryNumberService;
             this.configuration = configuration;
             this.forecastService = forecastService;
+            this.apiaryHelperService = apiaryHelperService;
         }
 
-        public async Task<IActionResult> All(int page = 1)
+        public async Task<IActionResult> All(int pageAllApiaries = 1, int pageHelperApiaries = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var apiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
-            var pagesCount = (int)Math.Ceiling((double)apiariesCount / GlobalConstants.ApiariesPerPage);
+            var apiariesUserCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var pagesApiaryCount = (int)Math.Ceiling((double)apiariesUserCount / GlobalConstants.ApiariesPerPage);
 
-            if (page <= 0)
+            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
+            var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
+
+            if (pageAllApiaries <= 0)
             {
-                page = 1;
+                pageAllApiaries = 1;
             }
-            else if (page > pagesCount)
+            else if (pageAllApiaries > pagesApiaryCount)
             {
-                page = pagesCount;
+                pageAllApiaries = pagesApiaryCount == 0 ? 1 : pagesApiaryCount;
+            }
+
+            if (pageHelperApiaries <= 0)
+            {
+                pageHelperApiaries = 1;
+            }
+            else if (pageHelperApiaries > pagesApiaryHelperCount)
+            {
+                pageAllApiaries = pagesApiaryHelperCount == 0 ? 1 : pagesApiaryHelperCount;
             }
 
             var viewModel = new AllApiariesViewModel
             {
-                AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
-                PagesCount = pagesCount,
+                UserApiaries = new AllUserApiariesViewModel
+                {
+                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiariesPerPage, (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
+                    PagesCount = pagesApiaryCount,
+                },
+                UserHelperApiaries = new AllHelperApiariesViewModel
+                {
+                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiaryHelpersApiaryPerPage, (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
+                    PagesCount = pagesApiaryHelperCount,
+                },
             };
 
-            if (viewModel.PagesCount == 0)
+            if (viewModel.UserApiaries.PagesCount == 0)
             {
-                viewModel.PagesCount = 1;
+                viewModel.UserApiaries.PagesCount = 1;
             }
 
-            viewModel.CurrentPage = page;
+            if (viewModel.UserHelperApiaries.PagesCount == 0)
+            {
+                viewModel.UserHelperApiaries.PagesCount = 1;
+            }
+
+            viewModel.UserApiaries.CurrentPage = pageAllApiaries;
+            viewModel.UserHelperApiaries.CurrentPage = pageHelperApiaries;
 
             return this.View(viewModel);
         }

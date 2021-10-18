@@ -72,7 +72,7 @@
             }
             else if (pageHelperApiaries > pagesApiaryHelperCount)
             {
-                pageAllApiaries = pagesApiaryHelperCount == 0 ? 1 : pagesApiaryHelperCount;
+                pageHelperApiaries = pagesApiaryHelperCount == 0 ? 1 : pagesApiaryHelperCount;
             }
 
             var viewModel = new AllApiariesViewModel
@@ -108,14 +108,10 @@
         public async Task<IActionResult> ByNumber(string apiaryNumber, int pageOne = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var viewModel = this.apiaryService.GetUserApiaryByNumber<ApiaryDataViewModel>(currentUser.Id, apiaryNumber);
+            var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
 
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
-            if (viewModel.CreatorId != currentUser.Id)
+            if (viewModel.CreatorId != currentUser.Id &&
+                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id))
             {
                 return this.BadRequest();
             }
@@ -123,7 +119,7 @@
             ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
             viewModel.ForecastResult = forecastResult;
 
-            viewModel.Beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (pageOne - 1) * GlobalConstants.BeehivesPerPage);
+            viewModel.Beehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (pageOne - 1) * GlobalConstants.BeehivesPerPage);
             var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 

@@ -79,7 +79,7 @@
 
             if (id == null)
             {
-                var apiaryBeehives = this.beehiveService.GetApiaryBeehivesById<BeehiveViewModel>(inputModel.ApiaryId).ToList();
+                var apiaryBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveViewModel>(inputModel.ApiaryId).ToList();
                 if (inputModel.AllBeehives)
                 {
                     var beehivesIds = apiaryBeehives.Select(b => b.Id).ToList();

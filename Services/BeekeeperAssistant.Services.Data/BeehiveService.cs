@@ -12,6 +12,8 @@
 
     public class BeehiveService : IBeehiveService
     {
+        private readonly IRepository<BeehiveHelper> beehiveHelperRepository;
+        private readonly IRepository<ApiaryHelper> apiaryHelperRepository;
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
         private readonly IDeletableEntityRepository<Queen> queenRepository;
         private readonly IDeletableEntityRepository<Inspection> inspectionRepository;
@@ -21,6 +23,8 @@
         private readonly IRepository<HarvestedBeehive> harvestedBeehiveRepository;
 
         public BeehiveService(
+            IRepository<BeehiveHelper> beehiveHelperRepository,
+            IRepository<ApiaryHelper> apiaryHelperRepository,
             IDeletableEntityRepository<Beehive> beehiveRepository,
             IDeletableEntityRepository<Queen> queenRepository,
             IDeletableEntityRepository<Inspection> inspectionRepository,
@@ -29,6 +33,8 @@
             IDeletableEntityRepository<Harvest> harvestRepository,
             IRepository<HarvestedBeehive> harvestedBeehiveRepository)
         {
+            this.beehiveHelperRepository = beehiveHelperRepository;
+            this.apiaryHelperRepository = apiaryHelperRepository;
             this.beehiveRepository = beehiveRepository;
             this.queenRepository = queenRepository;
             this.inspectionRepository = inspectionRepository;
@@ -68,6 +74,23 @@
 
             await this.beehiveRepository.AddAsync(beehive);
             await this.beehiveRepository.SaveChangesAsync();
+
+            var allApiaryHelpersIds = this.apiaryHelperRepository.All()
+                .Where(x => x.ApiaryId == apiaryId)
+                .Select(x => x.UserId);
+
+            foreach (var helperId in allApiaryHelpersIds)
+            {
+                var helper = new BeehiveHelper
+                {
+                    UserId = helperId,
+                    BeehiveId = beehive.Id,
+                };
+
+                await this.beehiveHelperRepository.AddAsync(helper);
+            }
+
+            await this.beehiveHelperRepository.SaveChangesAsync();
 
             return beehive.Id;
         }
@@ -194,9 +217,9 @@
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Count();
 
-        public IEnumerable<T> GetApiaryBeehivesById<T>(int apiaryId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
         {
-            var query = this.beehiveRepository.AllAsNoTracking()
+            var query = this.beehiveRepository.All()
                 .OrderBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId).Skip(skip);
 

@@ -25,6 +25,7 @@
     public class BeehiveController : BaseController
     {
         private readonly IApiaryService apiaryService;
+        private readonly IApiaryHelperService apiaryHelperService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
         private readonly IHarvestService harvestService;
@@ -33,6 +34,7 @@
 
         public BeehiveController(
             IApiaryService apiaryService,
+            IApiaryHelperService apiaryHelperService,
             UserManager<ApplicationUser> userManager,
             IBeehiveService beehiveService,
             IHarvestService harvestService,
@@ -40,6 +42,7 @@
             IInspectionService inspectionService)
         {
             this.apiaryService = apiaryService;
+            this.apiaryHelperService = apiaryHelperService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
             this.harvestService = harvestService;
@@ -75,12 +78,10 @@
             var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
+            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
 
-            if (viewModel.CreatorId != currentUser.Id)
+            if (viewModel.CreatorId != currentUser.Id &&
+                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId))
             {
                 return this.BadRequest();
             }
@@ -209,7 +210,7 @@
 
             if (id != null)
             {
-                beehives = this.beehiveService.GetApiaryBeehivesById<BeehiveDataViewModel>(id.Value);
+                beehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataViewModel>(id.Value);
             }
 
             ExcelPackage pck = new ExcelPackage();

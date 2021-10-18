@@ -11,13 +11,19 @@
 
     public class QueenService : IQueenService
     {
+        private readonly IRepository<ApiaryHelper> apiaryHelperRepository;
+        private readonly IRepository<QueenHelper> queenHelperRepository;
         private readonly IDeletableEntityRepository<Queen> queenRepository;
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
 
         public QueenService(
+            IRepository<ApiaryHelper> apiaryHelperRepository,
+            IRepository<QueenHelper> queenHelperRepository,
             IDeletableEntityRepository<Queen> queenRepository,
             IDeletableEntityRepository<Beehive> beehiveRepository)
         {
+            this.apiaryHelperRepository = apiaryHelperRepository;
+            this.queenHelperRepository = queenHelperRepository;
             this.queenRepository = queenRepository;
             this.beehiveRepository = beehiveRepository;
         }
@@ -51,9 +57,36 @@
             await this.queenRepository.AddAsync(queen);
             await this.queenRepository.SaveChangesAsync();
 
-            var beehive = this.beehiveRepository.All().Where(b => b.Id == beehiveId).FirstOrDefault();
+            var beehive = this.beehiveRepository
+                .All()
+                .Where(b => b.Id == beehiveId)
+                .FirstOrDefault();
+
             beehive.QueenId = queen.Id;
             await this.queenRepository.SaveChangesAsync();
+
+            var apiaryId = this.beehiveRepository
+                .All()
+                .Where(b => b.Id == beehiveId)
+                .Select(b => b.ApiaryId)
+                .FirstOrDefault();
+
+            var allApiaryHelpersIds = this.apiaryHelperRepository.All()
+               .Where(x => x.ApiaryId == apiaryId)
+               .Select(x => x.UserId);
+
+            foreach (var helperId in allApiaryHelpersIds)
+            {
+                var helper = new QueenHelper
+                {
+                    UserId = helperId,
+                    QueenId = queen.Id,
+                };
+
+                await this.queenHelperRepository.AddAsync(helper);
+            }
+
+            await this.queenHelperRepository.SaveChangesAsync();
 
             return queen.BeehiveId;
         }

@@ -23,6 +23,8 @@
 
         T GetApiaryById<T>(int apiaryId);
 
+        T GetApiaryByNumber<T>(string apiaryNumber);
+
         Task<string> CreateUserApiaryAsync(
             string userId,
             string number,

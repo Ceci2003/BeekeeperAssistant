@@ -48,7 +48,7 @@
             }
 
             var user = await this.userManager.FindByNameAsync(inputModel.UserName);
-            if (this.apiaryHelperService.IsAnApiaryHelper(user.Id, id))
+            if (this.apiaryHelperService.IsApiaryHelper(user.Id, id))
             {
                 this.ModelState.AddModelError("UserName", "Потребителят вече е помошник!");
                 return this.View(inputModel);

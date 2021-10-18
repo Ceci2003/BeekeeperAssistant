@@ -161,5 +161,16 @@
                 .Select(b => b.Apiary)
                 .To<T>()
                 .FirstOrDefault();
+
+        public T GetApiaryByNumber<T>(string apiaryNumber)
+        {
+            var apiary = this.apiaryRepository
+                .All()
+                .Where(a => a.Number == apiaryNumber)
+                .To<T>()
+                .FirstOrDefault();
+
+            return apiary;
+        }
     }
 }

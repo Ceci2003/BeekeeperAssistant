@@ -9,7 +9,7 @@
     {
         Task Add(string userId, int apiaryId);
 
-        bool IsAnApiaryHelper(string userId, int apiaryId);
+        bool IsApiaryHelper(string userId, int apiaryId);
 
         IEnumerable<T> GetUserHelperApiaries<T>(string userId, int? take = null, int skip = 0);
 

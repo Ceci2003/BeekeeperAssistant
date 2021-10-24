@@ -5,11 +5,11 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Services.Messaging;
     using BeekeeperAssistant.Web.ViewModels;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
@@ -18,6 +18,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
 
     public class HomeController : BaseController
     {
@@ -29,6 +30,8 @@
         private readonly IInspectionService inspectionService;
         private readonly IHarvestService harvestService;
         private readonly IQuickChartService quickChartService;
+        private readonly IEmailSender emailSender;
+        private readonly IConfiguration configuration;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
@@ -38,7 +41,9 @@
             ITreatmentService treatmentService,
             IInspectionService inspectionService,
             IHarvestService harvestService,
-            IQuickChartService quickChartService)
+            IQuickChartService quickChartService,
+            IEmailSender emailSender,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -48,6 +53,8 @@
             this.inspectionService = inspectionService;
             this.harvestService = harvestService;
             this.quickChartService = quickChartService;
+            this.emailSender = emailSender;
+            this.configuration = configuration;
         }
 
         public async Task<ActionResult> Index()
@@ -156,6 +163,19 @@
         public IActionResult Contact()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Contact(ConntactFormInputModel inputModel)
+        {
+            await this.emailSender.SendEmailAsync(
+                  inputModel.Email,
+                  "",
+                  this.configuration["SendGrid:RecipientEmail"],
+                  inputModel.Subject,
+                  inputModel.Content);
+
+            return this.View("Index");
         }
 
         public IActionResult HttpError(int statusCode, string message)

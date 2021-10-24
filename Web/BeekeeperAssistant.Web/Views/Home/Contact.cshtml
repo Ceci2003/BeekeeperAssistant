@@ -1,7 +1,28 @@
-﻿@{
+﻿@model BeekeeperAssistant.Web.ViewModels.Home.ConntactFormInputModel;
+@{
     this.ViewData["Title"] = "Контакти";
 }
 
-
-
-<h1>@ViewData["Title"]</h1>
+<div class="contact-page">
+    <div class="form-box">
+        <form asp-controller="Home" asp-action="Contact">
+            <h4>Свържете се с нас</h4>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="Subject"></label>
+                    <input asp-for="Subject" />
+                </div>
+            </div>
+            <div class="input-group max">
+                <label asp-for="Content"></label>
+                <textarea asp-for="Content" cols="30" rows="10"></textarea>
+            </div>
+            <input type="submit" value="Изпрати">
+        </form>
+    </div>
+</div>

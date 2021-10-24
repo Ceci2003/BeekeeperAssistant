@@ -2,7 +2,7 @@
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
 @{
     ViewData["Title"] = "Пчелини-всички";
-    ViewData["HelperApiaries"] = "Пчелини помощници";
+    ViewData["HelperApiaries"] = "Пчелини с достъп";
     var token = antiforgery.GetAndStoreTokens(this.Context).RequestToken;
 }
 

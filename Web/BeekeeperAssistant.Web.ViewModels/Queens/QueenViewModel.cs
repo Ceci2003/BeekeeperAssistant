@@ -22,5 +22,7 @@
         public string Origin { get; set; }
 
         public QueenBreed Breed { get; set; }
+
+        public bool IsBookMarked { get; set; }
     }
 }

@@ -28,6 +28,19 @@
             this.beehiveRepository = beehiveRepository;
         }
 
+        public async Task BookmarkQueenAsync(int queenId)
+        {
+            var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
+
+            if (queen == null)
+            {
+                return;
+            }
+
+            queen.IsBookMarked = !queen.IsBookMarked;
+            await this.queenRepository.SaveChangesAsync();
+        }
+
         public async Task<int> CreateUserQueenAsync(
             string userId,
             int beehiveId,
@@ -128,6 +141,7 @@
         public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)
         {
             var query = this.queenRepository.AllAsNoTracking()
+                .OrderByDescending(q => q.IsBookMarked)
                 .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Skip(skip);
 
             if (take.HasValue)

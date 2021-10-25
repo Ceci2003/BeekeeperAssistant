@@ -119,5 +119,11 @@
 
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
+
+        public async Task<IActionResult> Bookmark(int id)
+        {
+            await this.queenService.BookmarkQueenAsync(id);
+            return this.Redirect("/Queen/All");
+        }
     }
 }

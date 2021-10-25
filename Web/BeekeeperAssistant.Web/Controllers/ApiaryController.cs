@@ -202,8 +202,8 @@
             ws.Cells["B4"].Value = "Адрес";
             ws.Cells["C4"].Value = "Име";
             ws.Cells["D4"].Value = "Вид";
-            // ws.Cells["E4"].Value = "Брой кошери";
 
+            // ws.Cells["E4"].Value = "Брой кошери";
             ws.Cells["A4:E4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["A4:E4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
             ws.Cells["A4:E4"].Style.Font.Color.SetColor(Color.White);
@@ -215,8 +215,8 @@
                 ws.Cells[$"B{rowIndex}"].Value = apiary.Adress;
                 ws.Cells[$"C{rowIndex}"].Value = apiary.Name == null ? "-" : apiary.Name;
                 ws.Cells[$"D{rowIndex}"].Value = apiary.ApiaryType;
-                // ws.Cells[$"D{rowIndex}"].Value = apiary.Beehives.ToList().Count();
 
+                // ws.Cells[$"D{rowIndex}"].Value = apiary.Beehives.ToList().Count();
                 rowIndex++;
             }
 

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeekeeperAssistant.Data.Models
+﻿namespace BeekeeperAssistant.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class BeehiveHelper
     {
         public int BeehiveId { get; set; }

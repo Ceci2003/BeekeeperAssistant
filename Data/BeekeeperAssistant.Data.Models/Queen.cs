@@ -30,6 +30,8 @@
 
         public string Temperament { get; set; }
 
+        public bool IsBookMarked { get; set; }
+
         public QueenColor Color { get; set; }
 
         public QueenBreed Breed { get; set; }

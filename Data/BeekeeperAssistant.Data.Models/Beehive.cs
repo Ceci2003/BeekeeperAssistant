@@ -37,7 +37,6 @@
 
         public bool IsItMovable { get; set; }
 
-
         [ForeignKey(nameof(Queen))]
         public int? QueenId { get; set; }
 

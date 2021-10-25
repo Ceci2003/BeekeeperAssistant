@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
@@ -70,8 +71,7 @@
 
             await this.apiaryHelperService.Add(user.Id, id);
 
-            //var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
-
+            // var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
             var helper = await this.userManager.FindByNameAsync(inputModel.UserName);
             await this.emailSender.SendEmailAsync(
                   this.configuration["SendGrid:RecipientEmail"],

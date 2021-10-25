@@ -183,6 +183,16 @@ function checkFormSection(hiddenElementId) {
     }
 }
 
+function markRequiredFields(){
+    var fields = document.querySelectorAll('input[data-val-required]');
+    fields.forEach(field => {
+        var label = field.parentElement.children[0];
+        if (!label.classList.contains('back-arrow')) {
+            label.classList.add("field-required");
+        }
+    });
+}
+
 function allBeehives() {
     var allBeehives = document.getElementById("AllBeehives");
     var beehiveNumbersSpaceSeparated = document.getElementById(

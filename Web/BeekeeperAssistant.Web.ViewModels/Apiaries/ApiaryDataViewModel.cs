@@ -21,6 +21,8 @@
         [Display(Name = "Вид")]
         public ApiaryType ApiaryType { get; set; }
 
+        public ApplicationUser Creator { get; set; }
+
         public string CreatorId { get; set; }
 
         [Display(Name = "Адрес")]

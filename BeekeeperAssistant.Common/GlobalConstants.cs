@@ -6,6 +6,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string RequiredMessage = "Полетата с * са задължителни!";
+
+        public const string RequiredMessageWithParam = "Полето {0} е задължителн0!";
+
         // Pagination values
         public const int ApiariesPerPage = 5;
         public const int ApiaryHelpersApiaryPerPage = 5;

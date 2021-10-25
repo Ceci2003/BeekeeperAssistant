@@ -247,7 +247,8 @@ button::selection {
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  border: 1px solid var(--main-background);
+  /* border: 1px solid var(--main-background); */
+  border: none;
   border-radius: 5px;
   /* margin-bottom: 10px; */
   font-size: 16px;
@@ -1496,15 +1497,63 @@ textarea {
 }
 
 .center-screen-parent {
-  position: absolute;
-  top: 40%;
-  left: 40%;
   text-align: center;
+  margin: 200px auto;
+  max-width: 500px;
+}
+
+.center-screen-parent a {
+  text-decoration: underline;
 }
 
 .center-screen-parent.border {
-  font-size: 20px;
-  border: 3px solid orange;
+  font-size: 16px;
+  border: 3px solid var(--orange);
   border-radius: 5px;
   padding: 50px;
+}
+
+.form-submit form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-submit .form-group {
+  margin: 10px 0;
+}
+
+.form-submit button {
+  border-radius: 3px;
+  font-size: 16px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: var(--orange);
+  border: 3px solid var(--orange);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.form-submit button:hover {
+  background: var(--white);
+  color: var(--orange);
+}
+
+.field-validation-error {
+  color: var(--red);
+}
+
+.field-validation-error::before {
+  content: "*";
+  color: var(--red);
+}
+
+input.input-validation-error {
+  color: var(--red);
+}
+
+.field-required::before {
+  content: "*";
+  color: var(--red);
+  font-size: 16px;
+  font-weight: bold;
 }

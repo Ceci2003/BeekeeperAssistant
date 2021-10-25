@@ -181,7 +181,7 @@ body {
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(/img/banner.jpg);
-  height: 500px;
+  height: 600px;
   background-size: cover;
   background-position-y: top;
   color: wheat;
@@ -221,6 +221,7 @@ body {
   box-shadow: 0px 0px 20px rgba(242, 148, 34, 0.3);
   color: var(--white);
   width: 450px;
+  margin: 0 auto;
 }
 
 .form-box.login-register form {
@@ -442,7 +443,7 @@ footer h1 {
 
 .form-submit {
   text-align: center;
-  border: 3px solid orange;
+  border: 3px solid var(--orange);
   border-radius: 5px;
   padding: 50px;
   margin: 170px;
@@ -507,4 +508,74 @@ footer h1 {
 
 .active-link:hover {
   color: var(--orange);
+}
+
+.about-page,
+.contact-page {
+  padding: 50px 200px;
+}
+
+.about-page h2,
+.contact-page h4 {
+  text-align: center;
+}
+
+.about-page .par {
+  margin: 20px 0;
+  padding-left: 10px;
+}
+
+.about-page .par p {
+  margin: 10px 0;
+  padding-left: 10px;
+}
+
+.about-page .par ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.contact-page .form-box {
+  padding: 40px;
+  background: none;
+  box-shadow: 0px 0px 20px rgba(242, 148, 34, 0.3);
+  border: 3px solid var(--orange);
+  color: var(--main-background);
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.contact-page .form-box form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  color: var(--white);
+  background: var(--orange);
+  border: none;
+}
+
+.contact-page .form-box form input[type="submit"]:hover {
+  border: 3px solid var(--white);
+  box-shadow: 0 0 10px rgb(242 148 34, 4);
+  padding: 7px;
+}
+
+.contact-page .form-box form input,
+.contact-page .form-box form textarea {
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.contact-page .form-box form .input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.contact-page .form-box form .input-group {
+  caret-color: var(--orange);
+}
+
+.form-box form .input-group.max {
+  width: 100%;
 }

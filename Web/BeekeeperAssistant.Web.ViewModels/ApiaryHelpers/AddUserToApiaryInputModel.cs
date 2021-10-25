@@ -2,17 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
     public class AddUserToApiaryInputModel : IValidatableObject
     {
+        public string ApiaryNumber { get; set; }
+
         [Display(Name = "Потребителско име")]
         [Required]
         public string UserName { get; set; }
@@ -32,7 +35,6 @@
             {
                 errorList.Add(new ValidationResult("Не съществува такъв потребител!", new List<string> { "UserName" }));
             }
-
 
             return errorList;
         }

@@ -99,7 +99,7 @@
                         GlobalConstants.SystemName,
                         user.Email,
                         "Потвърждване на имейла",
-                        $"Регистрацията е успешна!<br>Последвайте линка за да потвърдете имейл адреса си: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'><strong>Потвърди имейл</strong></a>.");
+                        $"Регистрацията е успешна!<br>Последвайте линка за да потвърдите имейл адреса си: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'><strong>Потвърди имейл</strong></a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

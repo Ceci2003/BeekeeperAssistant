@@ -61,6 +61,8 @@
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
 
                 var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id.Value);
+
                 ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
                 if (forecastResult != null)
                 {
@@ -69,6 +71,10 @@
                     inputModel.WeatherTemperatureString = forecastResult.Temp;
                     inputModel.WeatherHumidityString = forecastResult.Humidity;
                 }
+
+                inputModel.BeehiveId = id.Value;
+                inputModel.ApiaryNumber = apiary.Number;
+                inputModel.BeehiveNumber = beehive.Number;
             }
 
             return this.View(inputModel);
@@ -163,11 +169,18 @@
             }
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, int beehiveId)
         {
             var inputModel = this.inspectionService.GetInspectionById<EditInspectionInputModel>(id);
             inputModel.WeatherHumidityString = inputModel.WeatherHumidity.ToString();
             inputModel.WeatherTemperatureString = inputModel.WeatherTemperature.ToString();
+
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+            inputModel.BeehiveId = beehiveId;
+            inputModel.ApiaryNumber = apiary.Number;
+            inputModel.BeehiveNumber = beehive.Number;
+
             return this.View(inputModel);
         }
 

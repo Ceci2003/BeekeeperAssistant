@@ -38,6 +38,7 @@
 
         public IEnumerable<KeyValuePair<int, string>> Apiaries { get; set; }
 
+        [Display(Name = "Пчелин")]
         public int ApiaryId { get; set; }
 
         [Display(Name = "Кошери")]
@@ -47,6 +48,10 @@
         public bool AllBeehives { get; set; }
 
         public int? BeehiveId { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -78,6 +83,18 @@
                 {
                     errorList.Add(new ValidationResult($"Изберете кошери!"));
                 }
+            }
+
+            if (double.TryParse(this.QuantityText, out double quantity))
+            {
+                if (quantity <= 0.00)
+                {
+                    errorList.Add(new ValidationResult($"Невалидно количество! - въведете положително число."));
+                }
+            }
+            else
+            {
+                errorList.Add(new ValidationResult($"Невалидно количество!"));
             }
 
             return errorList;

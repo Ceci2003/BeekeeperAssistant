@@ -6,7 +6,7 @@
 <div class="breadcrumb">
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Начало</a>
+            <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -55,7 +55,7 @@
                             <a class="mark" asp-controller="Queen" asp-action="Bookmark" asp-route-id="@queen.Id">
                                 <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id">
+                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id" asp-route-beehiveId="@queen.BeehiveId">
                                 <i class="far fa-edit"></i>
                             </a>
                             <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">

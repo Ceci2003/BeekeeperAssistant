@@ -159,6 +159,12 @@
         [Display(Name = "Въведете номер на кошера")]
         public int SelectedBeehiveNumber { get; set; }
 
+        public int? BeehiveId { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

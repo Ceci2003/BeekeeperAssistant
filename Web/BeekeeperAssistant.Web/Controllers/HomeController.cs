@@ -61,7 +61,7 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!this.User.Identity.IsAuthenticated)
+            if (!this.User.Identity.IsAuthenticated || currentUser.Id == null)
             {
                 return this.View();
             }

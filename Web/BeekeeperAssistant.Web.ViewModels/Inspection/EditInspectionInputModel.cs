@@ -150,5 +150,9 @@
 
         [Display(Name = "Влажност(%)")]
         public string WeatherHumidityString { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
     }
 }

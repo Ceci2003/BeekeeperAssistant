@@ -7,6 +7,8 @@
     {
         public string UserUserName { get; set; }
 
+        public string UserId { get; set; }
+
         public Access Access { get; set; }
     }
 }

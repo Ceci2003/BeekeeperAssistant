@@ -3,6 +3,14 @@
 @foreach (var apiaryHelper in Model.AllHelpers)
 {
     <div>
-        @apiaryHelper.UserUserName - @Html.DisplayFor(x => apiaryHelper.Access)
+        <div>
+            @apiaryHelper.UserUserName - @Html.DisplayFor(x => apiaryHelper.Access)
+        </div>
+        <div>
+            <form asp-controller="ApiaryHelper" asp-action="Delete" asp-route-userId="@apiaryHelper.UserId" method="post">
+                <input type="submit" value="Премахни"/>
+            </form>
+            <a asp-controller="ApiaryHelper" asp-action="Edit">Редактирай</a>
+        </div>
     </div>
 }

@@ -92,5 +92,16 @@
 
             return this.View(viewModel);
         }
+
+        [HttpPost]
+        public IActionResult Delete(string userId)
+        {
+            return this.Json($"Todo: Delete - {userId}");
+        }
+
+        public IActionResult Edit(string userId)
+        {
+            return this.View();
+        }
     }
 }

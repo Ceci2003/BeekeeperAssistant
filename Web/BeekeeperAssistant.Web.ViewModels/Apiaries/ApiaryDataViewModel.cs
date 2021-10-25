@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Text;
 
     using AutoMapper;
@@ -11,7 +12,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
 
-    public class ApiaryDataViewModel : IMapFrom<Apiary>
+    public class ApiaryDataViewModel : IMapFrom<Apiary>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -37,7 +38,17 @@
 
         public int PagesCount { get; set; }
 
+        public bool HasHelpers { get; set; }
+
         [IgnoreMap]
         public IEnumerable<BeehiveViewModel> Beehives { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Apiary, ApiaryDataViewModel>()
+                .ForMember(
+                    vm => vm.HasHelpers,
+                    opt => opt.MapFrom(src => src.ApiaryHelpers.Any()));
+        }
     }
 }

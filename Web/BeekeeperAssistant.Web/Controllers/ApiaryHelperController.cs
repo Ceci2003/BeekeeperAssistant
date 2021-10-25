@@ -82,5 +82,15 @@
 
             return this.Redirect($"/Apiary/{inputModel.ApiaryNumber}");
         }
+
+        public IActionResult All(int id)
+        {
+            var viewModel = new AllApiaryHelpersViewModel
+            {
+                AllHelpers = this.apiaryHelperService.GetAllApiaryHelpersByApiaryId<ApiaryHelperViewModel>(id),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

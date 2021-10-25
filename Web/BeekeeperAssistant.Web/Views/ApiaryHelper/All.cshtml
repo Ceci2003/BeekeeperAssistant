@@ -1,0 +1,8 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.AllApiaryHelpersViewModel
+
+@foreach (var apiaryHelper in Model.AllHelpers)
+{
+    <div>
+        @apiaryHelper.UserUserName - @Html.DisplayFor(x => apiaryHelper.Access)
+    </div>
+}

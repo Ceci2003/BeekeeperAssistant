@@ -69,6 +69,11 @@
                     {
                         <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
                     }
+
+                    @if (Model.HasHelpers)
+                    {
+                        <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
+                    }
                 </div>
             </div>
             <div class="weather">

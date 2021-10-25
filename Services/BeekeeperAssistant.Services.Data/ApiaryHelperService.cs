@@ -78,6 +78,21 @@
             await this.queenHelperRepository.SaveChangesAsync();
         }
 
+        public IEnumerable<T> GetAllApiaryHelpersByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
+        {
+            var qurey = this.apiaryHelperRepository
+                .AllAsNoTracking()
+                .Where(ah => ah.ApiaryId == apiaryId)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                qurey = qurey.Take(take.Value);
+            }
+
+            return qurey.To<T>().ToList();
+        }
+
         public IEnumerable<T> GetUserHelperApiaries<T>(string userId, int? take = null, int skip = 0)
         {
             var qurey = this.apiaryHelperRepository

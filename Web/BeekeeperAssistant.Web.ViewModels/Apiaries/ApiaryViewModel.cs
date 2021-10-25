@@ -19,6 +19,8 @@
 
         public string CreatorId { get; set; }
 
+        public ApplicationUser Creator { get; set; }
+
         public string Adress { get; set; }
 
         public int Id { get; set; }

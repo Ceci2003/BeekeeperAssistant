@@ -8,6 +8,8 @@
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Queens;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -16,15 +18,18 @@
     {
         private readonly IQueenService queenService;
         private readonly IApiaryService apiaryService;
+        private readonly IBeehiveService beehiveService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public QueenController(
             IQueenService queenService,
             IApiaryService apiaryService,
+            IBeehiveService beehiveService,
             UserManager<ApplicationUser> userManager)
         {
             this.queenService = queenService;
             this.apiaryService = apiaryService;
+            this.beehiveService = beehiveService;
             this.userManager = userManager;
         }
 
@@ -68,6 +73,12 @@
                 GivingDate = DateTime.UtcNow.Date,
             };
 
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
+
+            inputModel.ApiaryNumber = apiary.Number;
+            inputModel.BeehiveNumber = beehive.Number;
+
             return this.View(inputModel);
         }
 
@@ -106,9 +117,17 @@
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, int beehiveId)
         {
             var inputModel = this.queenService.GetQueenById<EditQueenInutModel>(id);
+
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+
+            inputModel.BeehiveId = beehiveId;
+            inputModel.ApiaryNumber = apiary.Number;
+            inputModel.BeehiveNumber = beehive.Number;
+
             return this.View(inputModel);
         }
 

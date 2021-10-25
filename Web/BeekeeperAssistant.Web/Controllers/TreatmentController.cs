@@ -52,8 +52,13 @@
             }
             else
             {
-                inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id.Value);
+
+                inputModel.ApiaryId = apiary.Id;
                 inputModel.BeehiveId = id.Value;
+                inputModel.ApiaryNumber = apiary.Number;
+                inputModel.BeehiveNumber = beehive.Number;
             }
 
             return this.View(inputModel);
@@ -141,9 +146,16 @@
             }
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, int beehiveId)
         {
             var inputModel = this.treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
+
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+
+            inputModel.BeehiveId = beehiveId;
+            inputModel.ApiaryNumber = apiary.Number;
+            inputModel.BeehiveNumber = beehive.Number;
 
             return this.View(inputModel);
         }

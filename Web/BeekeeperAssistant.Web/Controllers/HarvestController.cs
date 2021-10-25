@@ -8,6 +8,7 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
     using Microsoft.AspNetCore.Identity;
@@ -72,8 +73,13 @@
             }
             else
             {
+                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId.Value);
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId.Value);
+
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId.Value);
                 inputModel.BeehiveId = beehiveId.Value;
+                inputModel.ApiaryNumber = apiary.Number;
+                inputModel.BeehiveNumber = beehive.Number;
             }
 
             return this.View(inputModel);
@@ -133,6 +139,14 @@
         {
             var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
             inputModel.QuantityText = inputModel.Quantity.ToString();
+
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+
+            inputModel.BeehiveId = beehiveId;
+            inputModel.ApiaryNumber = apiary.Number;
+            inputModel.BeehiveNumber = beehive.Number;
+
             return this.View(inputModel);
         }
 

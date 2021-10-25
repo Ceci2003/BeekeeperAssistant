@@ -43,6 +43,7 @@
 
         public IEnumerable<KeyValuePair<int, string>> Apiaries { get; set; }
 
+        [Display(Name = "Пчелин")]
         public int ApiaryId { get; set; }
 
         [Display(Name = "Кошери")]
@@ -52,6 +53,10 @@
         public bool AllBeehives { get; set; }
 
         public int? BeehiveId { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

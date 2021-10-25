@@ -43,5 +43,9 @@
 
         [Display(Name = "Нрав")]
         public string Temperament { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
     }
 }

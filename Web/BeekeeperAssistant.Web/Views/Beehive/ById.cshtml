@@ -19,7 +19,7 @@
 <div class="breadcrumb">
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Начало</a>
+            <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
             <a href="/Apiary/@Model.ApiaryNumber">Пчелин: @Model.ApiaryNumber</a>
@@ -187,7 +187,7 @@
                         <td>@Model.Queen.HygenicHabits</td>
                     </tr>
                 </table>
-                <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId">
+                <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId" asp-route-beehiveId="@Model.Id">
                     Редактирайте кралицата
                 </a>
                 <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
@@ -251,7 +251,7 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Inspection" asp-action="Edit"
-                                    asp-route-id="@inspection.Id">
+                                    asp-route-id="@inspection.Id"  asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"

@@ -17,16 +17,19 @@
 <div class="breadcrumb">
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Начало</a>
+            <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="All">Кошери-всички</a>
+            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -35,7 +38,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Treatment" asp-action="Edit">
-            <a class="back-arrow" asp-controller="Beehive" asp-action="All">
+            <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h2>@ViewData["Title"]</h2>

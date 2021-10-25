@@ -19,7 +19,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -30,8 +30,9 @@
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
     <div class="page-controls">
-        <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel"><i
-                class="fas fa-file-download"></i> Excel</a>
+        <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel">
+            <i class="fas fa-file-download"></i> Excel
+        </a>
         <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create">
             <i class="fas fa-plus-square pr-2"></i>
             Създайте нов кошер
@@ -76,13 +77,14 @@
                     </td>
                     <td class="edit">
                         <div>
-                            @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
-                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id">
+                                <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                            </a>
                             <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                 <i class="far fa-edit"></i>
                             </a>
                             <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
-                            asp-route-id="@beehive.Id">
+                                  asp-route-id="@beehive.Id">
                                 <button type="submit" class="delete">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
@@ -111,7 +113,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Beehive" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage - 1)">
+                       asp-route-page="@(this.Model.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -143,7 +145,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Beehive" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage + 1)">
+                       asp-route-page="@(this.Model.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

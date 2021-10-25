@@ -21,6 +21,8 @@
 
         public BeehiveType BeehiveType { get; set; }
 
+        public bool IsBookMarked { get; set; }
+
         public bool HasDevice { get; set; }
 
         public bool IsItMovable { get; set; }

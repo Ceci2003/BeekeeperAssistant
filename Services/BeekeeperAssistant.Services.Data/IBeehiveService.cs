@@ -47,5 +47,7 @@
         T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber);
 
         int GetAllUserBeehivesCount(string userId);
+
+        Task<int?> BookmarkBeehiveAsync(int id);
     }
 }

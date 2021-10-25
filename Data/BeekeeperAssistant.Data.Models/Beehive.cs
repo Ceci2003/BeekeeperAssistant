@@ -33,6 +33,8 @@
 
         public bool HasPropolisCatcher { get; set; }
 
+        public bool IsBookMarked { get; set; }
+
         public bool IsItMovable { get; set; }
 
         [ForeignKey(nameof(Queen))]

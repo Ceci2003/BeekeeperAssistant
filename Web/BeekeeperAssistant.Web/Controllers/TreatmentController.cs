@@ -165,7 +165,6 @@
         {
             // ToDo: make quantity string
             // var quantity = Convert.ToDouble(inputModel.Quantity);
-
             await this.treatmentService.EditTreatment(
                 id,
                 inputModel.BeehiveId.Value,
@@ -197,7 +196,7 @@
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Treatments" });
         }
 
-        public async Task<IActionResult> ExportToExcel(int id)
+        public IActionResult ExportToExcel(int id)
         {
             var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
             var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id);

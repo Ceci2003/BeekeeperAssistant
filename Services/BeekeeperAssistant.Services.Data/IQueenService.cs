@@ -40,5 +40,7 @@
             string temperament,
             QueenColor queenColor,
             QueenBreed queenBreed);
+
+        Task BookmarkQueenAsync(int queenId);
     }
 }

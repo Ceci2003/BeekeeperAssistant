@@ -13,6 +13,8 @@
 
         public string Name { get; set; }
 
+        public bool IsBookMarked { get; set; }
+
         public ApiaryType ApiaryType { get; set; }
 
         public string CreatorId { get; set; }

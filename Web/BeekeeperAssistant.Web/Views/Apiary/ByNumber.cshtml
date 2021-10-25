@@ -75,7 +75,7 @@
                 @if (@Model.ForecastResult == null)
                 {
                     <div>
-                        <p style="font-size: 18px; color: red; text-aline: center;">Населеното място <br>не е намерено</p>
+                        <p style="font-size: 18px; color: red; text-align: center;">Населеното място <br>не е намерено</p>
                     </div>
                 }
                 else
@@ -124,8 +124,9 @@
                         beehive.BeehivePower)</td>
                         <td class="edit">
                             <div>
-                                @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
-                                <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                                <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id">
+                                    <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                                </a>
                                 <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                     <i class="far fa-edit"></i>
                                 </a>

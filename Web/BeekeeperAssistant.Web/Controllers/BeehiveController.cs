@@ -73,7 +73,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ById(int beehiveId, string? tabPage)
+        public async Task<IActionResult> ById(int beehiveId, string tabPage)
         {
             var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -81,7 +81,8 @@
             var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
 
             if (viewModel.CreatorId != currentUser.Id &&
-                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId))
+                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId) &&
+                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId))
             {
                 return this.BadRequest();
             }
@@ -262,9 +263,9 @@
                 ws.Cells[$"I{rowIndex}"].Value = beehive.HasPropolisCatcher == true ? "Да" : "Не";
                 if (beehive.HasQueen)
                 {
-                    //Color color = Color.White;
-                    //if (beehive.Queen.Color != )
-                    //{
+                    // Color color = Color.White;
+                    // if (beehive.Queen.Color != )
+                    // {
                     //    switch (beehive.Queen.Color)
                     //    {
                     //        case QueenColor.White: color = Color.White; break;
@@ -274,11 +275,10 @@
                     //        case QueenColor.Blue: color = Color.Blue; break;
                     //        default: color = Color.White; break;
                     //    }
-                    //}
+                    // }
 
-                    //ws.Cells[$"J{rowIndex}"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    //ws.Cells[$"J{rowIndex}"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-
+                    // ws.Cells[$"J{rowIndex}"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    // ws.Cells[$"J{rowIndex}"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
                     ws.Cells[$"J{rowIndex}"].Value = beehive.HasQueen == true ? "Да" : "Не";
                     ws.Cells[$"K{rowIndex}"].Value = beehive.Queen.Color.ToString();
                     ws.Cells[$"L{rowIndex}"].Value = beehive.Queen.GivingDate.ToString("dd-MM-yyyy");
@@ -296,6 +296,20 @@
 
             this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+        public async Task<IActionResult> Bookmark(int id)
+        {
+            var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);
+
+            if (!apiaryId.HasValue)
+            {
+                return this.BadRequest();
+            }
+
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
+
+            return this.Redirect($"/Apiary/{apiaryNumber}");
         }
     }
 }

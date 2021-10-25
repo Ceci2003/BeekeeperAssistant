@@ -197,7 +197,8 @@
         {
             var query = this.beehiveRepository
                 .AllAsNoTracking()
-                .OrderBy(b => b.Apiary.Number)
+                .OrderByDescending(b => b.IsBookMarked)
+                .ThenBy(b => b.Apiary.Number)
                 .ThenBy(b => b.Number)
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Skip(skip);
@@ -220,7 +221,8 @@
         public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
         {
             var query = this.beehiveRepository.All()
-                .OrderBy(b => b.Number)
+                .OrderByDescending(b => b.IsBookMarked)
+                .ThenBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId).Skip(skip);
 
             if (take.HasValue)
@@ -242,5 +244,21 @@
                 .Where(b => b.Apiary.Number == apiaryNumber && b.Number == beehiveNumber)
                 .To<T>()
                 .FirstOrDefault();
+
+        public async Task<int?> BookmarkBeehiveAsync(int id)
+        {
+            var beehive = this.beehiveRepository.All().FirstOrDefault(b => b.Id == id);
+
+            if (beehive == null)
+            {
+                return null;
+            }
+
+            beehive.IsBookMarked = !beehive.IsBookMarked;
+
+            await this.beehiveRepository.SaveChangesAsync();
+
+            return beehive.ApiaryId;
+        }
     }
 }

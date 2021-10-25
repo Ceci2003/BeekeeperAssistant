@@ -47,13 +47,15 @@
                     <td class="table-sdate">
                         <time datetime="@queen.GivingDate.ToString("O")"></time>
                     </td>
+
                     <td>@queen.Origin</td>
                     <td>@Html.DisplayFor(x => queen.Breed)</td>
                     <td class="edit">
                         <div>
-                            @*TODO: Make Web api that bookmarks and use templating engine to generate html*@
-                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
-                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id" asp-route-beehiveId="@queen.BeehiveId">
+                            <a class="mark" asp-controller="Queen" asp-action="Bookmark" asp-route-id="@queen.Id">
+                                <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                            </a>
+                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id">
                                 <i class="far fa-edit"></i>
                             </a>
                             <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">

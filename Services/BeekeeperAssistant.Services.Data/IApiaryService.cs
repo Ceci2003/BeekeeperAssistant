@@ -13,6 +13,8 @@
 
         string GetApiaryNumberByApiaryId(int apiaryId);
 
+        bool IsApiaryCreator(string userId, int apiaryNumber);
+
         int GetApiaryIdByBeehiveId(int beehiveId);
 
         int GetUserApiaryIdByNumber(string userId, string apiaryNumber);
@@ -24,6 +26,8 @@
         T GetApiaryById<T>(int apiaryId);
 
         T GetApiaryByNumber<T>(string apiaryNumber);
+
+        Task BookmarkApiaryAsync(int apiaryId);
 
         Task<string> CreateUserApiaryAsync(
             string userId,

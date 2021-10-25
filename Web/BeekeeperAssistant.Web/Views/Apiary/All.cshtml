@@ -54,7 +54,9 @@
                     <td>@apiary.BeehivesCount</td>
                     <td class="edit">
                         <div>
-                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
+                                <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                            </a>
                             <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
                                 <i class="far fa-edit"></i>
                             </a>
@@ -157,7 +159,9 @@
                     <td>@apiary.BeehivesCount</td>
                     <td class="edit">
                         <div>
-                            <a class="mark" href="#"><i class="far fa-bookmark"></i></a>
+                            <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
+                                <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                            </a>
                             <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
                                 <i class="far fa-edit"></i>
                             </a>

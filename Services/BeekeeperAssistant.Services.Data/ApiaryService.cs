@@ -97,7 +97,8 @@
         {
             var qurey = this.apiaryRepository
                 .AllAsNoTracking()
-                .OrderByDescending(x => x.CreatedOn)
+                .OrderByDescending(x => x.IsBookMarked)
+                .ThenByDescending(x => x.CreatedOn)
                 .Where(a => a.CreatorId == userId)
                 .Skip(skip);
 
@@ -171,6 +172,33 @@
                 .FirstOrDefault();
 
             return apiary;
+        }
+
+        public bool IsApiaryCreator(string userId, int apiaryId)
+        {
+            var apiary = this.apiaryRepository.All().FirstOrDefault(a => a.Id == apiaryId);
+
+            if (apiary == null)
+            {
+                return false;
+            }
+
+            return apiary.CreatorId == userId;
+        }
+
+        public async Task BookmarkApiaryAsync(int apiaryId)
+        {
+            var apiary = this.apiaryRepository.All()
+                .FirstOrDefault(a => a.Id == apiaryId);
+
+            if (apiary == null)
+            {
+                return;
+            }
+
+            apiary.IsBookMarked = !apiary.IsBookMarked;
+
+            await this.apiaryRepository.SaveChangesAsync();
         }
     }
 }

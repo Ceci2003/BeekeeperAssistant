@@ -81,7 +81,8 @@
             var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
 
             if (viewModel.CreatorId != currentUser.Id &&
-                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId))
+                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId) &&
+                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId))
             {
                 return this.BadRequest();
             }
@@ -296,6 +297,20 @@
 
             this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+        public async Task<IActionResult> Bookmark(int id)
+        {
+            var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);
+
+            if (!apiaryId.HasValue)
+            {
+                return this.BadRequest();
+            }
+
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
+
+            return this.Redirect($"/Apiary/{apiaryNumber}");
         }
     }
 }

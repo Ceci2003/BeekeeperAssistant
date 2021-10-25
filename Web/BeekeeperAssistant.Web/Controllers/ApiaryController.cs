@@ -225,5 +225,11 @@
             this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+
+        public async Task<IActionResult> Bookmark(int id)
+        {
+            await this.apiaryService.BookmarkApiaryAsync(id);
+            return this.Redirect("/Apiary/All");
+        }
     }
 }

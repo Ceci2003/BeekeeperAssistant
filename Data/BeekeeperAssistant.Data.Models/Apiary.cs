@@ -26,6 +26,8 @@
 
         public string Adress { get; set; }
 
+        public bool IsBookMarked { get; set; }
+
         public virtual ICollection<Beehive> Beehives { get; set; }
 
         public virtual ICollection<ApiaryHelper> ApiaryHelpers { get; set; }

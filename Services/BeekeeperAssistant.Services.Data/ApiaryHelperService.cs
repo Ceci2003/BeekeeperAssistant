@@ -85,6 +85,26 @@
 
             this.apiaryHelperRepository.Delete(apiary);
             await this.apiaryHelperRepository.SaveChangesAsync();
+
+            var allBeehiveHelpers = this.beehiveHelperRepository.All()
+                .Where(b => b.Beehive.ApiaryId == apiaryId && b.UserId == userId);
+
+            foreach (var beehiveHelper in allBeehiveHelpers)
+            {
+                this.beehiveHelperRepository.Delete(beehiveHelper);
+            }
+
+            await this.beehiveHelperRepository.SaveChangesAsync();
+
+            var allQueenHelpers = this.queenHelperRepository.All()
+                .Where(q => q.Queen.Beehive.ApiaryId == apiaryId && q.UserId == userId);
+
+            foreach (var queenHelper in allQueenHelpers)
+            {
+                this.queenHelperRepository.Delete(queenHelper);
+            }
+
+            await this.queenHelperRepository.SaveChangesAsync();
         }
 
         public async Task Edit(string userId, int apiaryId, Access access)

@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.ApiaryHelpers
+﻿namespace BeekeeperAssistant.Web.ViewModels.BeehiveHelpers
 {
     using System;
     using System.Collections.Generic;
@@ -8,15 +8,14 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class EditBeehiveHelperInputModel : IMapFrom<ApiaryHelper>
+    public class BeehiveHelperViewModel : IMapFrom<BeehiveHelper>
     {
-        public int ApiaryId { get; set; }
+        public string UserUserName { get; set; }
 
         public string UserId { get; set; }
 
-        public string UserUserName { get; set; }
+        public int BeehiveId { get; set; }
 
         public Access Access { get; set; }
     }

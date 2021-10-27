@@ -45,5 +45,7 @@
         public ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
 
         public ICollection<TreatedBeehive> TreatedBeehives { get; set; }
+
+        public ICollection<BeehiveHelper> BeehiveHelpers { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.EditBeehiveHelperInputModel
-@{ 
+﻿@model BeekeeperAssistant.Web.ViewModels.BeehiveHelpers.EditBeehiveHelperInputModel
+@{
 
 }
 
-<form asp-controller="ApiaryHelper" asp-action="Edit" asp-route-userId="@Model.UserId" asp-route-apiaryId="@Model.ApiaryId">
+<form asp-controller="BeehiveHelper" asp-action="Edit" asp-route-userId="@Model.UserId" asp-route-beehiveId="@Model.BeehiveId">
     <div asp-validation-summary="All"></div>
     <div>
         @Model.UserUserName

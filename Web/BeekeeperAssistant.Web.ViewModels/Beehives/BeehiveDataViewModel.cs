@@ -47,6 +47,8 @@
 
         public string TabPage { get; set; }
 
+        public virtual ApplicationUser Creator { get; set; }
+
         [IgnoreMap]
         public IEnumerable<HarvestDatavVewModel> Harvests { get; set; }
 
@@ -56,10 +58,17 @@
         [IgnoreMap]
         public IEnumerable<InspectionDataViewModel> Inspections { get; set; }
 
+        public bool HasHelpers { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Beehive, BeehiveDataViewModel>()
                 .ForMember(x => x.HasQueen, y => y.MapFrom(x => x.Queen != null));
+
+            configuration.CreateMap<Beehive, BeehiveDataViewModel>()
+                .ForMember(
+                    vm => vm.HasHelpers,
+                    opt => opt.MapFrom(src => src.BeehiveHelpers.Any()));
         }
     }
 }

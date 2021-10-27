@@ -137,10 +137,19 @@
                 </table>
                 <div class="data-edit">
                     <a class="btn edit" asp-controller="Beehive" asp-action="Edit"
-                        asp-route-id="@Model.Id">Редактирай</a>
+                       asp-route-id="@Model.Id">Редактирай</a>
                     <form asp-controller="Beehive" asp-action="Delete" asp-route-id="@Model.Id">
                         <input class="btn delete" type="submit" value="Изтрий" />
                     </form>
+                    @if (Model.Creator.UserName == this.User.Identity.Name)
+                    {
+                        <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
+
+                        @if (Model.HasHelpers)
+                        {
+                            <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
+                        }
+                    }
                 </div>
             </div>
         </div>

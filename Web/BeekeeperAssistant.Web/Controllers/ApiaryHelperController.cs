@@ -94,14 +94,32 @@
         }
 
         [HttpPost]
-        public IActionResult Delete(string userId)
+        public async Task<IActionResult> Delete(string userId, int apiaryId)
         {
-            return this.Json($"Todo: Delete - {userId}");
+            await this.apiaryHelperService.Delete(userId, apiaryId);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
+            return this.Redirect($"/ApiaryHelper/All/{apiaryNumber}");
         }
 
-        public IActionResult Edit(string userId)
+        public IActionResult Edit(string userId, int apiaryId)
         {
-            return this.View();
+            var inputModel = this.apiaryHelperService.GetApiaryHelper<EditApiaryHelperInputModel>(userId, apiaryId);
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditApiaryHelperInputModel inputModel, string userId, int apiaryId)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var user = await this.userManager.FindByIdAsync(userId);
+                inputModel.UserUserName = user.UserName;
+                return this.View(inputModel);
+            }
+
+            await this.apiaryHelperService.Edit(userId, apiaryId, inputModel.Access);
+
+            return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
         }
     }
 }

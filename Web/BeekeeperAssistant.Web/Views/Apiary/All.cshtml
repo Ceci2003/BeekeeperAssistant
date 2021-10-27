@@ -23,6 +23,7 @@
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
+
     <div class="page-controls">
         <a class="export-file excel" asp-controller="Apiary" asp-action="ExportToExcel"><i class="fas fa-file-download"></i> Excel</a>
         <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
@@ -30,6 +31,7 @@
             Създайте нов пчелин
         </a>
     </div>
+
     <table class="data-table">
         <thead>
             <tr>
@@ -52,6 +54,7 @@
                     <td>@apiary.Adress</td>
                     <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
                     <td>@apiary.BeehivesCount</td>
+
                     <td class="edit">
                         <div>
                             <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
@@ -68,6 +71,7 @@
                             </form>
                         </div>
                     </td>
+
                 </tr>
             }
         </tbody>

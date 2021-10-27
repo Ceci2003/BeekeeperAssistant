@@ -78,6 +78,26 @@
             await this.queenHelperRepository.SaveChangesAsync();
         }
 
+        public async Task Delete(string userId, int apiaryId)
+        {
+            var apiary = this.apiaryHelperRepository.All()
+                .FirstOrDefault(x => x.UserId == userId && x.ApiaryId == apiaryId);
+
+            this.apiaryHelperRepository.Delete(apiary);
+            await this.apiaryHelperRepository.SaveChangesAsync();
+        }
+
+        public async Task Edit(string userId, int apiaryId, Access access)
+        {
+            var apiaryHelper = this.apiaryHelperRepository.All()
+                .FirstOrDefault(x => x.UserId == userId && x.ApiaryId == apiaryId);
+
+            apiaryHelper.Access = access;
+
+            this.apiaryHelperRepository.Update(apiaryHelper);
+            await this.apiaryHelperRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAllApiaryHelpersByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
         {
             var qurey = this.apiaryHelperRepository
@@ -91,6 +111,36 @@
             }
 
             return qurey.To<T>().ToList();
+        }
+
+        public T GetApiaryHelper<T>(string userId, int apiaryId)
+        {
+            var apiaryHelper = this.apiaryHelperRepository.All()
+                .Where(x => x.UserId == userId && x.ApiaryId == apiaryId)
+                .To<T>()
+                .FirstOrDefault();
+
+            return apiaryHelper;
+        }
+
+        public Access GetUserApiaryAccess(string userId, int apiaryId)
+        {
+            var apiaryInfo = this.apiaryHelperRepository.All()
+                .Select(a => new
+                {
+                    CreatorId = a.Apiary.CreatorId,
+                    HelperId = a.UserId,
+                    ApiaryId = a.ApiaryId,
+                    ApiaryAccess = a.Access,
+                })
+                .FirstOrDefault(a => a.HelperId == userId && a.ApiaryId == apiaryId);
+
+            if (apiaryInfo.CreatorId == userId)
+            {
+                return Access.ReadWrite;
+            }
+
+            return apiaryInfo.ApiaryAccess;
         }
 
         public IEnumerable<T> GetUserHelperApiaries<T>(string userId, int? take = null, int skip = 0)

@@ -12,5 +12,6 @@
         public AllUserApiariesViewModel UserApiaries { get; set; }
 
         public AllHelperApiariesViewModel UserHelperApiaries { get; set; }
+
     }
 }

@@ -9,6 +9,8 @@
 
         public string UserId { get; set; }
 
+        public int ApiaryId { get; set; }
+
         public Access Access { get; set; }
     }
 }

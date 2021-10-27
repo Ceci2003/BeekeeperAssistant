@@ -1,5 +1,17 @@
-﻿@{ 
+﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.EditApiaryHelperInputModel
+@{ 
 
 }
 
-<h1>TODO: Add edit form!</h1>
+<form asp-controller="ApiaryHelper" asp-action="Edit" asp-route-userId="@Model.UserId" asp-route-apiaryId="@Model.ApiaryId">
+    <div asp-validation-summary="All"></div>
+    <div>
+        @Model.UserUserName
+    </div>
+
+    <div>
+        <select asp-for="Access" asp-items="Html.GetEnumSelectList<Access>()"></select>
+    </div>
+
+    <input type="submit" value="Потвърди" />
+</form>

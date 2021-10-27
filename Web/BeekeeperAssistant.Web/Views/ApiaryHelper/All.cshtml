@@ -7,10 +7,10 @@
             @apiaryHelper.UserUserName - @Html.DisplayFor(x => apiaryHelper.Access)
         </div>
         <div>
-            <form asp-controller="ApiaryHelper" asp-action="Delete" asp-route-userId="@apiaryHelper.UserId" method="post">
+            <form asp-controller="ApiaryHelper" asp-action="Delete" asp-route-apiaryId="@apiaryHelper.ApiaryId" asp-route-userId="@apiaryHelper.UserId" method="post">
                 <input type="submit" value="Премахни"/>
             </form>
-            <a asp-controller="ApiaryHelper" asp-action="Edit">Редактирай</a>
+            <a asp-controller="ApiaryHelper" asp-action="Edit" asp-route-apiaryId="@apiaryHelper.ApiaryId" asp-route-userId="@apiaryHelper.UserId">Редактирай</a>
         </div>
     </div>
 }

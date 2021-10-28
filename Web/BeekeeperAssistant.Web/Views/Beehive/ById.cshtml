@@ -158,7 +158,7 @@
     </div>
     <div id="Queen" class="tabcontent" style="display: @if(Model.TabPage == "Queen") {@block}; else {@none}">
         <div class="queen-preview">
-            @if (Model.Queen != null)
+            @if (Model.HasQueen)
             {
                 string imgPath = "queen" + Model.Queen.Color + ".png";
                 <img src="~/img/queen/@imgPath">

@@ -64,8 +64,11 @@
         {
             configuration.CreateMap<Beehive, BeehiveDataViewModel>()
                 .ForMember(
-                    vm => vm.HasHelpers,
-                    opt => opt.MapFrom(src => src.BeehiveHelpers.Any()));
+                vm => vm.HasQueen,
+                opt => opt.MapFrom(src => src.Queen != null))
+                .ForMember(
+                vm => vm.HasHelpers,
+                opt => opt.MapFrom(src => src.BeehiveHelpers.Any()));
         }
     }
 }

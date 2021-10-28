@@ -22,56 +22,60 @@
 </div>
 
 <h2 class="title-1">Кралица</h2>
-    <div class="queen-preview">
-        @if (Model != null)
+<div class="queen-preview">
+    @if (Model != null)
+    {
+        string imgPath = "queen" + Model.Color + ".png";
+        <img src="~/img/queen/@imgPath">
+        <table>
+            <tr>
+                <th scope="row">Цвят:</th>
+                <td>@Html.DisplayFor(x => Model.Color)</td>
+            </tr>
+            <tr>
+                <th scope="row">Датана оплождане:</th>
+                <td>@Model.FertilizationDate.ToString("dd.mm.yyyy")</td>
+            </tr>
+            <tr>
+                <th scope="row">Дата на придаване:</th>
+                <td>@Model.GivingDate.ToString("dd.mm.yyyy")</td>
+            </tr>
+            <tr>
+                <th scope="row">Вид:</th>
+                <td>@Html.DisplayFor(x => Model.QueenType)</td>
+            </tr>
+            <tr>
+                <th scope="row">Порода:</th>
+                <td>@Html.DisplayFor(x => Model.Breed)</td>
+            </tr>
+            <tr>
+                <th scope="row">Произход:</th>
+                <td>@Model.Origin</td>
+            </tr>
+            <tr>
+                <th scope="row">Нрав:</th>
+                <td>@Model.Temperament</td>
+            </tr>
+            <tr>
+                <th scope="row">Хигиенни навици:</th>
+                <td>@Model.HygenicHabits</td>
+            </tr>
+        </table>
+        <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.Id">
+            Редактирайте кралицата
+        </a>
+        @if (Model.User.UserName == this.User.Identity.Name && Model.HasHelpers)
         {
-            string imgPath = "queen" + Model.Color + ".png";
-            <img src="~/img/queen/@imgPath">
-            <table>
-                <tr>
-                    <th scope="row">Цвят:</th>
-                    <td>@Html.DisplayFor(x => Model.Color)</td>
-                </tr>
-                <tr>
-                    <th scope="row">Датана оплождане:</th>
-                    <td>@Model.FertilizationDate.ToString("dd.mm.yyyy")</td>
-                </tr>
-                <tr>
-                    <th scope="row">Дата на придаване:</th>
-                    <td>@Model.GivingDate.ToString("dd.mm.yyyy")</td>
-                </tr>
-                <tr>
-                    <th scope="row">Вид:</th>
-                    <td>@Html.DisplayFor(x => Model.QueenType)</td>
-                </tr>
-                <tr>
-                    <th scope="row">Порода:</th>
-                    <td>@Html.DisplayFor(x => Model.Breed)</td>
-                </tr>
-                <tr>
-                    <th scope="row">Произход:</th>
-                    <td>@Model.Origin</td>
-                </tr>
-                <tr>
-                    <th scope="row">Нрав:</th>
-                    <td>@Model.Temperament</td>
-                </tr>
-                <tr>
-                    <th scope="row">Хигиенни навици:</th>
-                    <td>@Model.HygenicHabits</td>
-                </tr>
-            </table>
-            <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.Id">
-                Редактирайте кралицата
-            </a>
+            <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
+        }
 
-        }
-        else
-        {
-            <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
-                <i class="fas fa-plus-square pr-2"></i>
-                Добавете кралица
-            </a>
-        }
-    </div>
+    }
+    else
+    {
+        <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
+            <i class="fas fa-plus-square pr-2"></i>
+            Добавете кралица
+        </a>
+    }
+</div>
 

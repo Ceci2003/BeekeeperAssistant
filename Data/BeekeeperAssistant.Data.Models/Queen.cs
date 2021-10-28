@@ -35,5 +35,7 @@
         public QueenColor Color { get; set; }
 
         public QueenBreed Breed { get; set; }
+
+        public ICollection<QueenHelper> QueenHelpers { get; set; }
     }
 }

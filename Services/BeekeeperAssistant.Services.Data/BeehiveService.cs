@@ -235,6 +235,7 @@
 
         public T GetBeehiveById<T>(int beehiveId) =>
             this.beehiveRepository.AllAsNoTracking()
+                .Include(x => x.Queen.User)
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();

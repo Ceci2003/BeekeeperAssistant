@@ -1,0 +1,13 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.QueenHelpers.AllQueenHelpersViewModel
+
+@foreach (var queenHelper in Model.AllHelpers)
+{
+    <div>
+        <div>
+            @queenHelper.UserUserName - @Html.DisplayFor(x => queenHelper.Access)
+        </div>
+        <div>
+            <a asp-controller="QueenHelper" asp-action="Edit" asp-route-queenId="@queenHelper.QueenId" asp-route-userId="@queenHelper.UserId">Редактирай</a>
+        </div>
+    </div>
+}

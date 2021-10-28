@@ -39,8 +39,6 @@
 
         public string CreatorId { get; set; }
 
-        public bool HasQueen { get; set; }
-
         public int QueenId { get; set; }
 
         public Queen Queen { get; set; }
@@ -60,11 +58,10 @@
 
         public bool HasHelpers { get; set; }
 
+        public bool HasQueen { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Beehive, BeehiveDataViewModel>()
-                .ForMember(x => x.HasQueen, y => y.MapFrom(x => x.Queen != null));
-
             configuration.CreateMap<Beehive, BeehiveDataViewModel>()
                 .ForMember(
                     vm => vm.HasHelpers,

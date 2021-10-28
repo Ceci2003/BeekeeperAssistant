@@ -14,6 +14,7 @@
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
     using BeekeeperAssistant.Web.ViewModels.Inspection;
+    using BeekeeperAssistant.Web.ViewModels.Queens;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,7 @@
         private readonly IApiaryHelperService apiaryHelperService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveService beehiveService;
+        private readonly IQueenService queenService;
         private readonly IHarvestService harvestService;
         private readonly ITreatmentService treatmentService;
         private readonly IInspectionService inspectionService;
@@ -37,6 +39,7 @@
             IApiaryHelperService apiaryHelperService,
             UserManager<ApplicationUser> userManager,
             IBeehiveService beehiveService,
+            IQueenService queenService,
             IHarvestService harvestService,
             ITreatmentService treatmentService,
             IInspectionService inspectionService)
@@ -45,6 +48,7 @@
             this.apiaryHelperService = apiaryHelperService;
             this.userManager = userManager;
             this.beehiveService = beehiveService;
+            this.queenService = queenService;
             this.harvestService = harvestService;
             this.treatmentService = treatmentService;
             this.inspectionService = inspectionService;
@@ -77,7 +81,6 @@
         {
             var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
-
             var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
 
             if (viewModel.CreatorId != currentUser.Id &&
@@ -261,7 +264,7 @@
                 ws.Cells[$"G{rowIndex}"].Value = beehive.BeehiveType;
                 ws.Cells[$"H{rowIndex}"].Value = beehive.HasPolenCatcher == true ? "Да" : "Не";
                 ws.Cells[$"I{rowIndex}"].Value = beehive.HasPropolisCatcher == true ? "Да" : "Не";
-                if (beehive.HasQueen)
+                if (beehive.Queen != null)
                 {
                     // Color color = Color.White;
                     // if (beehive.Queen.Color != )
@@ -279,7 +282,7 @@
 
                     // ws.Cells[$"J{rowIndex}"].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     // ws.Cells[$"J{rowIndex}"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-                    ws.Cells[$"J{rowIndex}"].Value = beehive.HasQueen == true ? "Да" : "Не";
+                    ws.Cells[$"J{rowIndex}"].Value = beehive.Queen != null ? "Да" : "Не";
                     ws.Cells[$"K{rowIndex}"].Value = beehive.Queen.Color.ToString();
                     ws.Cells[$"L{rowIndex}"].Value = beehive.Queen.GivingDate.ToString("dd-MM-yyyy");
                     ws.Cells[$"M{rowIndex}"].Value = beehive.Queen.Origin;

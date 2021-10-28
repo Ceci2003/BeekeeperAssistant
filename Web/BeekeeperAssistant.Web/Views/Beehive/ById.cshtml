@@ -28,7 +28,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -37,16 +37,23 @@
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
     <button class="tablinks @if(Model.TabPage == "Beehive") {@activeClass}" onclick="openTab(event, 'Beehive')"
-        id="defaultOpen"><i class="fas fa-archive"></i>Кошер
-        №@Model.Number</button>
-    <button class="tablinks @if(Model.TabPage == "Queen") {@activeClass}" onclick="openTab(event, 'Queen')"><i
-            class="fas fa-crown"></i>Майка</button>
+            id="defaultOpen">
+        <i class="fas fa-archive"></i>Кошер
+        №@Model.Number
+    </button>
+    <button class="tablinks @if(Model.TabPage == "Queen") {@activeClass}" onclick="openTab(event, 'Queen')">
+        <i class="fas fa-crown"></i>Майка
+    </button>
     <button class="tablinks @if(Model.TabPage == "Inspections") {@activeClass}"
-        onclick="openTab(event, 'Inspections')"><i class="far fa-calendar-check"></i>Прегледи</button>
-    <button class="tablinks @if(Model.TabPage == "Treatments") {@activeClass}" onclick="openTab(event, 'Treatments')"><i
-            class="fas fa-notes-medical"></i>Третирания</button>
-    <button class="tablinks @if(Model.TabPage == "Harvests") {@activeClass}" onclick="openTab(event, 'Harvests')"><i
-            class="fas fa-box"></i>Добиви</button>
+            onclick="openTab(event, 'Inspections')">
+        <i class="far fa-calendar-check"></i>Прегледи
+    </button>
+    <button class="tablinks @if(Model.TabPage == "Treatments") {@activeClass}" onclick="openTab(event, 'Treatments')">
+        <i class="fas fa-notes-medical"></i>Третирания
+    </button>
+    <button class="tablinks @if(Model.TabPage == "Harvests") {@activeClass}" onclick="openTab(event, 'Harvests')">
+        <i class="fas fa-box"></i>Добиви
+    </button>
 </div>
 
 <div class="tabs-body">
@@ -54,7 +61,7 @@
         <div class="data-view">
             <div class="qr-code">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255"
-                    alt="W3Schools" width="250" height="250">
+                     alt="W3Schools" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
@@ -141,14 +148,9 @@
                     <form asp-controller="Beehive" asp-action="Delete" asp-route-id="@Model.Id">
                         <input class="btn delete" type="submit" value="Изтрий" />
                     </form>
-                    @if (Model.Creator.UserName == this.User.Identity.Name)
+                    @if (Model.Creator.UserName == this.User.Identity.Name && Model.HasHelpers)
                     {
-                        <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
-
-                        @if (Model.HasHelpers)
-                        {
-                            <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
-                        }
+                        <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
                     }
                 </div>
             </div>
@@ -156,7 +158,7 @@
     </div>
     <div id="Queen" class="tabcontent" style="display: @if(Model.TabPage == "Queen") {@block}; else {@none}">
         <div class="queen-preview">
-            @if (Model.HasQueen)
+            @if (Model.Queen != null)
             {
                 string imgPath = "queen" + Model.Queen.Color + ".png";
                 <img src="~/img/queen/@imgPath">
@@ -202,6 +204,10 @@
                 <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
                     <input class="btn delete" type="submit" value="Изтрий" />
                 </form>
+                @if (Model.Queen.User.UserName == this.User.Identity.Name && Model.HasHelpers)
+                {
+                    <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All" asp-route-id="@Model.QueenId">Всички помощници</a>
+                }
 
             }
             else
@@ -214,11 +220,11 @@
         </div>
     </div>
     <div id="Inspections" class="tabcontent"
-        style="display: @if(Model.TabPage == "Inspections") {@block}; else {@none}">
+         style="display: @if(Model.TabPage == "Inspections") {@block}; else {@none}">
         <div class="harvests-data">
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
-                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                 <a class="btn create-data" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
                     <i class="fas fa-notes-medical"></i>
                     Добавете преглед
@@ -226,11 +232,11 @@
             </div>
             <table>
                 <thead>
-                    <th>Дата на прегледа</th>
-                    <th>Вид на прегледа</th>
-                    <th>Роил ли се е</th>
-                    <th>Сила на кошера</th>
-                    <th>Редактиране</th>
+                <th>Дата на прегледа</th>
+                <th>Вид на прегледа</th>
+                <th>Роил ли се е</th>
+                <th>Сила на кошера</th>
+                <th>Редактиране</th>
                 </thead>
                 <tbody>
                     @foreach (var inspection in Model.Inspections)
@@ -260,11 +266,11 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Inspection" asp-action="Edit"
-                                    asp-route-id="@inspection.Id"  asp-route-beehiveId="@Model.Id">
+                                       asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"
-                                    asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
+                                          asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
@@ -507,7 +513,7 @@
         <div class="harvests-data">
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
-                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                 <a class="btn create-data" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
                     <i class="fas fa-notes-medical"></i>
                     Добавете третиране
@@ -515,14 +521,14 @@
             </div>
             <table id="TreatmentsTable">
                 <thead>
-                    <th>Дата на третирането</th>
-                    <th>Име на третирането</th>
-                    <th>Превенция на</th>
-                    <th>Препарат</th>
-                    <th>Въведен като</th>
-                    <th>Количество</th>
-                    <th>Дозировка</th>
-                    <th>Редактиране</th>
+                <th>Дата на третирането</th>
+                <th>Име на третирането</th>
+                <th>Превенция на</th>
+                <th>Препарат</th>
+                <th>Въведен като</th>
+                <th>Количество</th>
+                <th>Дозировка</th>
+                <th>Редактиране</th>
                 </thead>
                 <tbody>
                     @foreach (var treatment in Model.Treatments)
@@ -554,11 +560,11 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Treatment" asp-action="Edit"
-                                    asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                       asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
-                                    asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                          asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
@@ -586,7 +592,7 @@
         <div class="harvests-data">
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
-                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                 <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-beehiveId="@Model.Id">
                     <i class="fas fa-box"></i>
                     Добавете добивs
@@ -594,11 +600,11 @@
             </div>
             <table>
                 <thead>
-                    <th>Име</th>
-                    <th class="table-sdate">Дата</th>
-                    <th>Продукт</th>
-                    <th class="table-amount">Количество</th>
-                    <th>Редактиране</th>
+                <th>Име</th>
+                <th class="table-sdate">Дата</th>
+                <th>Продукт</th>
+                <th class="table-amount">Количество</th>
+                <th>Редактиране</th>
                 </thead>
                 <tbody>
                     @foreach (var harvest in Model.Harvests)
@@ -626,11 +632,11 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
-                                    asp-route-beehiveId="@Model.Id">
+                                       asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                    asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                          asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>

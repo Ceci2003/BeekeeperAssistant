@@ -1,0 +1,17 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.QueenHelpers.EditQueenHelperInputModel
+@{
+
+}
+
+<form asp-controller="QueenHelper" asp-action="Edit" asp-route-userId="@Model.UserId" asp-route-queenId="@Model.QueenId">
+    <div asp-validation-summary="All"></div>
+    <div>
+        @Model.UserUserName
+    </div>
+
+    <div>
+        <select asp-for="Access" asp-items="Html.GetEnumSelectList<Access>()"></select>
+    </div>
+
+    <input type="submit" value="Потвърди" />
+</form>

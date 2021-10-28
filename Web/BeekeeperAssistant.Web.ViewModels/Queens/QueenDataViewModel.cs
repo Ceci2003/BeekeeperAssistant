@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-
+    using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class QueenDataViewModel : IMapFrom<Queen>
+    public class QueenDataViewModel : IMapFrom<Queen>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -34,5 +34,18 @@
         public QueenColor Color { get; set; }
 
         public QueenBreed Breed { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
+        public bool HasHelpers { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Queen, QueenDataViewModel>()
+                .ForMember(
+                    vm => vm.HasHelpers,
+                    opt => opt.MapFrom(src => src.QueenHelpers.Any()));
+        }
+
     }
 }

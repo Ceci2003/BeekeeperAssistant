@@ -46,6 +46,10 @@
 
         T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber);
 
+        int GetBeehiveIdByQueen(int queenId);
+
+        T GetBeehiveByQueen<T>(int queenId);
+
         int GetAllUserBeehivesCount(string userId);
 
         Task<int?> BookmarkBeehiveAsync(int id);

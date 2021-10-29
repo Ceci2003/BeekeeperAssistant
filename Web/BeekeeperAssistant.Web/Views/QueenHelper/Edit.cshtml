@@ -1,17 +1,56 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.QueenHelpers.EditQueenHelperInputModel
 @{
-
+    this.ViewData["Title"] = "Редактиране на помощник";
 }
 
-<form asp-controller="QueenHelper" asp-action="Edit" asp-route-userId="@Model.UserId" asp-route-queenId="@Model.QueenId">
-    <div asp-validation-summary="All"></div>
-    <div>
-        @Model.UserUserName
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId"
+                asp-route-tabPage="Beehive">@Model.BeehiveNumber</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId"
+                asp-route-tabPage="Queen">Майка</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="QueenHelper" asp-action="All" asp-route-id="@Model.QueenId">Помощници</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
     </div>
+</div>
 
-    <div>
-        <select asp-for="Access" asp-items="Html.GetEnumSelectList<Access>()"></select>
+<div class="content">
+    <div class="center-screen-parent border">
+        <div class="form-submit">
+            <a class="back-arrow" asp-controller="QueenHelper" asp-action="All" asp-route-id="@Model.QueenId">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h3>@ViewData["Title"]</h3>
+            <form asp-controller="QueenHelper" asp-action="Edit" asp-route-userId="@Model.UserId"
+                asp-route-queenId="@Model.QueenId">
+                <div class="form-group">
+                    <div class="input-group">
+                        <label asp-for="UserUserName"></label>
+                        <input asp-for="UserUserName" readonly />
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="Access"></label>
+                        <select asp-for="Access" asp-items="Html.GetEnumSelectList<Access>()"></select>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="ApiaryNumber" />
+                <button type="submit" class="btn btn-edit">Потвърди</button>
+            </form>
+        </div>
     </div>
-
-    <input type="submit" value="Потвърди" />
-</form>
+</div>

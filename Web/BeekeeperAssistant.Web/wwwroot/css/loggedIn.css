@@ -339,7 +339,7 @@ button::selection {
 }
 
 .btn.delete {
-  width: 135px;
+  width: 100%;
   font-size: 16px;
   color: var(--white);
   background-color: var(--red-hover);
@@ -416,11 +416,10 @@ button::selection {
 .data-edit {
   display: grid;
   align-items: center;
-  padding: 10px;
 }
 
 .date-edit .btn {
-  margin: 0px;
+  margin: 3px 0;
 }
 
 .data-table {
@@ -595,6 +594,10 @@ td.queen-red {
 
 .apiary-info {
   display: flex;
+}
+
+.apiary-info table {
+  margin-right: 10px;
 }
 
 .apiary-info td {
@@ -1547,11 +1550,11 @@ textarea {
   width: 100%;
   display: block;
   text-align: left;
-  color: var(--red);;
+  color: var(--red);
 }
 
 .form-submit .back-arrow:hover {
-  color: var(--red-hover);;
+  color: var(--red-hover);
 }
 
 .form-submit .form-group {

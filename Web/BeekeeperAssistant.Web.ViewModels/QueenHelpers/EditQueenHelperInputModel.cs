@@ -18,5 +18,11 @@
         public int QueenId { get; set; }
 
         public Access Access { get; set; }
+
+        public int BeehiveId { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
     }
 }

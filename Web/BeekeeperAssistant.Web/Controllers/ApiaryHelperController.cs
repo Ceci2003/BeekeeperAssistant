@@ -42,6 +42,7 @@
             var viewModel = new AddUserToApiaryInputModel
             {
                 ApiaryNumber = apiaryNumber,
+                ApiaryId = id,
             };
             return this.View(viewModel);
         }
@@ -88,6 +89,8 @@
             var viewModel = new AllApiaryHelpersViewModel
             {
                 AllHelpers = this.apiaryHelperService.GetAllApiaryHelpersByApiaryId<ApiaryHelperViewModel>(id),
+                ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id),
+                ApiaryId = id,
             };
 
             return this.View(viewModel);
@@ -104,6 +107,7 @@
         public IActionResult Edit(string userId, int apiaryId)
         {
             var inputModel = this.apiaryHelperService.GetApiaryHelper<EditBeehiveHelperInputModel>(userId, apiaryId);
+            inputModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
             return this.View(inputModel);
         }
 
@@ -114,6 +118,7 @@
             {
                 var user = await this.userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
+                inputModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
                 return this.View(inputModel);
             }
 

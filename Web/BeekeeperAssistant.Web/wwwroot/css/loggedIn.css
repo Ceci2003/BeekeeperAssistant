@@ -1498,7 +1498,7 @@ textarea {
 
 .center-screen-parent {
   text-align: center;
-  margin: 200px auto;
+  margin: 150px auto;
   max-width: 500px;
 }
 
@@ -1513,13 +1513,60 @@ textarea {
   padding: 50px;
 }
 
+.center-screen-parent.helpers-all {
+  max-width: 700px;
+}
+
+.center-screen-parent.helpers-all a {
+  text-decoration: none;
+}
+
+.page-controls.bottom {
+  margin-top: 10px;
+}
+
+.access-read,
+.access-read-write {
+  font-weight: bold;
+}
+
+.access-read {
+  color: var(--queen-color-hover);
+}
+
+.access-read-write {
+  color: var(--orange);
+}
+
 .form-submit form {
   display: flex;
   flex-direction: column;
 }
 
+.form-submit .back-arrow {
+  width: 100%;
+  display: block;
+  text-align: left;
+  color: var(--red);;
+}
+
+.form-submit .back-arrow:hover {
+  color: var(--red-hover);;
+}
+
 .form-submit .form-group {
   margin: 10px 0;
+}
+
+.form-submit .form-group {
+  margin: 10px 0;
+}
+
+.form-submit .form-group .input-group {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .form-submit button {
@@ -1551,6 +1598,9 @@ input.input-validation-error {
   color: var(--red);
 }
 
+input[readonly] {
+  background-color: var(--gray-background);
+}
 .field-required::before {
   content: "*";
   color: var(--red);

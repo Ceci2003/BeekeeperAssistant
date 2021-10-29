@@ -9,5 +9,9 @@
     public class AllApiaryHelpersViewModel
     {
         public IEnumerable<ApiaryHelperViewModel> AllHelpers { get; set; }
+
+        public int ApiaryId { get; set; }
+
+        public string ApiaryNumber { get; set; }
     }
 }

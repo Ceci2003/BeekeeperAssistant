@@ -1574,15 +1574,29 @@ textarea {
   font-size: 16px;
   margin-top: 10px;
   padding: 5px 10px;
-  background: var(--orange);
-  border: 3px solid var(--orange);
-  color: var(--white);
   cursor: pointer;
 }
 
-.form-submit button:hover {
+.form-submit button.btn-add {
+  background: var(--orange);
+  border: 3px solid var(--orange);
+  color: var(--white);
+}
+
+.form-submit button.btn-add:hover {
   background: var(--white);
   color: var(--orange);
+}
+
+.form-submit button.btn-edit {
+  background: var(--green-hover);
+  border: 3px solid var(--green-hover);
+  color: var(--white);
+}
+
+.form-submit button.btn-edit:hover {
+  background: var(--white);
+  color: var(--green-hover);
 }
 
 .field-validation-error {

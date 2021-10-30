@@ -155,29 +155,33 @@
             {
                 <tr>
                     <td class="number">
-                        <a href="/Apiary/@apiary.Number">@apiary.Number</a>
+                        <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryNumber</a>
                     </td>
-                    <td>@apiary.Name</td>
-                    <td>@apiary.Adress</td>
-                    <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
-                    <td>@apiary.BeehivesCount</td>
+                    <td>@apiary.ApiaryName</td>
+                    <td>@apiary.ApiaryAdress</td>
+                    <td>@Html.DisplayFor(x => apiary.ApiaryApiaryType)</td>
+                    <td>@apiary.ApiaryBeehivesCount</td>
                     <td class="edit">
+                        
                         <div>
-                            @if (apiary.Creator.UserName == this.User.Identity.Name)
+                            @if (apiary.ApiaryCreatorUserName == this.User.Identity.Name)
                             {
-                                <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
-                                    <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                                <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.ApiaryId">
+                                    <i class="@(apiary.ApiaryIsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                 </a>
                             }
-                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
-                                  asp-route-id="@apiary.Id">
-                                <button type="submit" class="delete">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </form>
+                            @if (apiary.Access == Access.ReadWrite)
+                            {
+                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.ApiaryId">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
+                                      asp-route-id="@apiary.ApiaryId">
+                                    <button type="submit" class="delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            }
                         </div>
                     </td>
                 </tr>

@@ -28,30 +28,36 @@
         private readonly IApiaryService apiaryService;
         private readonly IApiaryHelperService apiaryHelperService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IBeehiveHelperService beehiveHelperService;
         private readonly IBeehiveService beehiveService;
         private readonly IQueenService queenService;
         private readonly IHarvestService harvestService;
         private readonly ITreatmentService treatmentService;
         private readonly IInspectionService inspectionService;
+        private readonly IQueenHelperService queenHelperService;
 
         public BeehiveController(
             IApiaryService apiaryService,
             IApiaryHelperService apiaryHelperService,
             UserManager<ApplicationUser> userManager,
+            IBeehiveHelperService beehiveHelperService,
             IBeehiveService beehiveService,
             IQueenService queenService,
             IHarvestService harvestService,
             ITreatmentService treatmentService,
-            IInspectionService inspectionService)
+            IInspectionService inspectionService,
+            IQueenHelperService queenHelperService)
         {
             this.apiaryService = apiaryService;
             this.apiaryHelperService = apiaryHelperService;
             this.userManager = userManager;
+            this.beehiveHelperService = beehiveHelperService;
             this.beehiveService = beehiveService;
             this.queenService = queenService;
             this.harvestService = harvestService;
             this.treatmentService = treatmentService;
             this.inspectionService = inspectionService;
+            this.queenHelperService = queenHelperService;
         }
 
         public async Task<IActionResult> All(int page = 1)
@@ -89,6 +95,9 @@
             {
                 return this.BadRequest();
             }
+
+            viewModel.BeehiveAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite : this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, viewModel.Id);
+            viewModel.QueenAccess = currentUser.Id == viewModel.Queen.UserId ? Access.ReadWrite : this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
 
             var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(beehiveId);
             viewModel.Harvests = harvests;
@@ -131,9 +140,9 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || !id.HasValue)
             {
-                if (id == null)
+                if (!id.HasValue)
                 {
                     inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
                 }
@@ -141,9 +150,11 @@
                 return this.View(inputModel);
             }
 
+            var apiaryCreatorId = this.apiaryService.GetApiaryCreatorIdByApiaryId(id.Value);
+
             var beehiveId = await this.beehiveService
                 .CreateUserBeehiveAsync(
-                currentUser.Id,
+                apiaryCreatorId,
                 inputModel.Number,
                 inputModel.BeehiveSystem,
                 inputModel.BeehiveType,

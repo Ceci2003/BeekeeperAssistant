@@ -223,7 +223,8 @@
             var query = this.beehiveRepository.All()
                 .OrderByDescending(b => b.IsBookMarked)
                 .ThenBy(b => b.Number)
-                .Where(b => b.ApiaryId == apiaryId).Skip(skip);
+                .Where(b => b.ApiaryId == apiaryId)
+                .Skip(skip);
 
             if (take.HasValue)
             {

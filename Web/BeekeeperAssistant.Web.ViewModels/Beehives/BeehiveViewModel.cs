@@ -26,5 +26,9 @@
         public bool HasDevice { get; set; }
 
         public bool IsItMovable { get; set; }
+
+        public Access BeehiveAccess { get; set; }
+
+        public string CreatorId { get; set; }
     }
 }

@@ -40,6 +40,8 @@
 
         public bool HasHelpers { get; set; }
 
+        public Access ApiaryAccess { get; set; }
+
         [IgnoreMap]
         public IEnumerable<BeehiveViewModel> Beehives { get; set; }
 

@@ -47,6 +47,10 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
+        public Access BeehiveAccess { get; set; }
+
+        public Access QueenAccess { get; set; }
+
         [IgnoreMap]
         public IEnumerable<HarvestDatavVewModel> Harvests { get; set; }
 

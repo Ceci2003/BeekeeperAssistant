@@ -10,6 +10,7 @@
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.ApiaryHelpers;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,7 @@
         private readonly IConfiguration configuration;
         private readonly IForecastService forecastService;
         private readonly IApiaryHelperService apiaryHelperService;
+        private readonly IBeehiveHelperService beehiveHelperService;
 
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
@@ -36,7 +38,8 @@
             IApiaryNumberService apiaryNumberService,
             IConfiguration configuration,
             IForecastService forecastService,
-            IApiaryHelperService apiaryHelperService)
+            IApiaryHelperService apiaryHelperService,
+            IBeehiveHelperService beehiveHelperService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -45,6 +48,7 @@
             this.configuration = configuration;
             this.forecastService = forecastService;
             this.apiaryHelperService = apiaryHelperService;
+            this.beehiveHelperService = beehiveHelperService;
         }
 
         public async Task<IActionResult> All(int pageAllApiaries = 1, int pageHelperApiaries = 1)
@@ -84,7 +88,7 @@
                 },
                 UserHelperApiaries = new AllHelperApiariesViewModel
                 {
-                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiaryHelpersApiaryPerPage, (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
+                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryHelperApiaryDataViewModel>(currentUser.Id, GlobalConstants.ApiaryHelpersApiaryPerPage, (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
                     PagesCount = pagesApiaryHelperCount,
                 },
             };
@@ -116,10 +120,19 @@
                 return this.BadRequest();
             }
 
+            viewModel.ApiaryAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite : this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, viewModel.Id);
+
             ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
             viewModel.ForecastResult = forecastResult;
 
-            viewModel.Beehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (pageOne - 1) * GlobalConstants.BeehivesPerPage);
+            viewModel.Beehives = this.beehiveService
+                .GetBeehivesByApiaryId<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (pageOne - 1) * GlobalConstants.BeehivesPerPage);
+
+            foreach (var beehive in viewModel.Beehives)
+            {
+                beehive.BeehiveAccess = beehive.CreatorId == currentUser.Id ? Access.ReadWrite : this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
+            }
+
             var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 

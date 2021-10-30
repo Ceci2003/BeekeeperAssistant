@@ -19,6 +19,23 @@
             this.beehiveHelperRepository = beehiveHelperRepository;
         }
 
+        public async Task Add(string userId, int beehiveId)
+        {
+            var beehiveHelper = new BeehiveHelper()
+            {
+                Access = Access.Read,
+                BeehiveId = beehiveId,
+                UserId = userId,
+            };
+
+            await this.beehiveHelperRepository.AddAsync(beehiveHelper);
+        }
+
+        public Task Delete(string userId, int beehiveId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task Edit(string userId, int beehiveId, Access access)
         {
             var beehiveHelper = this.beehiveHelperRepository.All()
@@ -53,6 +70,19 @@
                 .FirstOrDefault();
 
             return beehiveHelper;
+        }
+
+        public Access GetUserBeehiveAccess(string userId, int beehiveId)
+        {
+            var access = this.beehiveHelperRepository.All()
+                .FirstOrDefault(x => x.BeehiveId == beehiveId && x.UserId == userId);
+
+            return access.Access;
+        }
+
+        public bool IsBeehiveHelper(string userId, int beehiveId)
+        {
+            return this.beehiveHelperRepository.All().Any(x => x.UserId == userId && x.BeehiveId == beehiveId);
         }
     }
 }

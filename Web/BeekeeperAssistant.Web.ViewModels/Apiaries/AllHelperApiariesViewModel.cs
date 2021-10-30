@@ -1,14 +1,12 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Web.ViewModels.ApiaryHelpers;
 
     public class AllHelperApiariesViewModel
     {
-        public IEnumerable<ApiaryViewModel> AllUserHelperApiaries { get; set; }
+        public IEnumerable<ApiaryHelperApiaryDataViewModel> AllUserHelperApiaries { get; set; }
 
         public int CurrentPage { get; set; }
 

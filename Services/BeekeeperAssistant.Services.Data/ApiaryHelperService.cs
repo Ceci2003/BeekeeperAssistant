@@ -145,6 +145,8 @@
 
         public Access GetUserApiaryAccess(string userId, int apiaryId)
         {
+
+            // TODO: Make everywhere like this!!!
             var apiaryInfo = this.apiaryHelperRepository.All()
                 .Select(a => new
                 {
@@ -168,7 +170,6 @@
             var qurey = this.apiaryHelperRepository
                 .AllAsNoTracking()
                 .Where(ah => ah.UserId == userId)
-                .Select(ah => ah.Apiary)
                 .Skip(skip);
 
             if (take.HasValue)

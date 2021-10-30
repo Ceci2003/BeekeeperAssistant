@@ -48,5 +48,7 @@
         public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 
         int GetAllUserApiariesCount(string userId);
+
+        string GetApiaryCreatorIdByApiaryId(int apiaryId);
     }
 }

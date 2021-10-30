@@ -19,7 +19,7 @@
 
         public string CreatorId { get; set; }
 
-        public ApplicationUser Creator { get; set; }
+        public string CreatorUserName { get; set; }
 
         public string Adress { get; set; }
 

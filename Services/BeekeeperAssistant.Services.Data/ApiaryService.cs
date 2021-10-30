@@ -200,5 +200,10 @@
 
             await this.apiaryRepository.SaveChangesAsync();
         }
+
+        public string GetApiaryCreatorIdByApiaryId(int apiaryId)
+        {
+            return this.apiaryRepository.All().FirstOrDefault(x => x.Id == apiaryId).CreatorId;
+        }
     }
 }

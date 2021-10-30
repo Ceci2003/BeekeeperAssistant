@@ -556,7 +556,7 @@ footer h1 {
 
 .contact-page .form-box form input[type="submit"]:hover {
   border: 3px solid var(--white);
-  box-shadow: 0 0 10px rgb(242, 148, 34, 4);
+  box-shadow: 0 0 10px rgb(242, 148, 34);
   padding: 7px;
 }
 

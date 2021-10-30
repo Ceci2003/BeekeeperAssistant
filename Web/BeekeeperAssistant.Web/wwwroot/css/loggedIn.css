@@ -339,7 +339,7 @@ button::selection {
 }
 
 .btn.delete {
-  width: 135px;
+  width: 100%;
   font-size: 16px;
   color: var(--white);
   background-color: var(--red-hover);
@@ -416,11 +416,10 @@ button::selection {
 .data-edit {
   display: grid;
   align-items: center;
-  padding: 10px;
 }
 
 .date-edit .btn {
-  margin: 0px;
+  margin: 3px 0;
 }
 
 .data-table {
@@ -595,6 +594,10 @@ td.queen-red {
 
 .apiary-info {
   display: flex;
+}
+
+.apiary-info table {
+  margin-right: 10px;
 }
 
 .apiary-info td {
@@ -1498,7 +1501,7 @@ textarea {
 
 .center-screen-parent {
   text-align: center;
-  margin: 200px auto;
+  margin: 150px auto;
   max-width: 500px;
 }
 
@@ -1513,13 +1516,60 @@ textarea {
   padding: 50px;
 }
 
+.center-screen-parent.helpers-all {
+  max-width: 700px;
+}
+
+.center-screen-parent.helpers-all a {
+  text-decoration: none;
+}
+
+.page-controls.bottom {
+  margin-top: 10px;
+}
+
+.access-read,
+.access-read-write {
+  font-weight: bold;
+}
+
+.access-read {
+  color: var(--queen-color-hover);
+}
+
+.access-read-write {
+  color: var(--orange);
+}
+
 .form-submit form {
   display: flex;
   flex-direction: column;
 }
 
+.form-submit .back-arrow {
+  width: 100%;
+  display: block;
+  text-align: left;
+  color: var(--red);
+}
+
+.form-submit .back-arrow:hover {
+  color: var(--red-hover);
+}
+
 .form-submit .form-group {
   margin: 10px 0;
+}
+
+.form-submit .form-group {
+  margin: 10px 0;
+}
+
+.form-submit .form-group .input-group {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .form-submit button {
@@ -1527,15 +1577,29 @@ textarea {
   font-size: 16px;
   margin-top: 10px;
   padding: 5px 10px;
-  background: var(--orange);
-  border: 3px solid var(--orange);
-  color: var(--white);
   cursor: pointer;
 }
 
-.form-submit button:hover {
+.form-submit button.btn-add {
+  background: var(--orange);
+  border: 3px solid var(--orange);
+  color: var(--white);
+}
+
+.form-submit button.btn-add:hover {
   background: var(--white);
   color: var(--orange);
+}
+
+.form-submit button.btn-edit {
+  background: var(--green-hover);
+  border: 3px solid var(--green-hover);
+  color: var(--white);
+}
+
+.form-submit button.btn-edit:hover {
+  background: var(--white);
+  color: var(--green-hover);
 }
 
 .field-validation-error {
@@ -1551,6 +1615,9 @@ input.input-validation-error {
   color: var(--red);
 }
 
+input[readonly] {
+  background-color: var(--gray-background);
+}
 .field-required::before {
   content: "*";
   color: var(--red);

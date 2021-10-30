@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -14,10 +15,14 @@
     {
         public int ApiaryId { get; set; }
 
+        public string ApiaryNumber { get; set; }
+
         public string UserId { get; set; }
 
+        [Display(Name = "Потребителско име")]
         public string UserUserName { get; set; }
 
+        [Display(Name = "Достъпност")]
         public Access Access { get; set; }
     }
 }

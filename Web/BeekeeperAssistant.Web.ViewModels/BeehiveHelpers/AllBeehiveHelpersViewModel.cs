@@ -9,9 +9,14 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class AllBeehiveHelpersViewModel 
+    public class AllBeehiveHelpersViewModel
     {
         public IEnumerable<BeehiveHelperViewModel> AllHelpers { get; set; }
 
+        public int BeehiveId { get; set; }
+
+        public int BeehiveNumber { get; set; }
+
+        public string ApiaryNumber { get; set; }
     }
 }

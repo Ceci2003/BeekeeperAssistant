@@ -14,11 +14,12 @@
     {
         public int BeehiveId { get; set; }
 
+        public int BeehiveNumber { get; set; }
+
         public string UserId { get; set; }
 
         public string UserUserName { get; set; }
 
         public Access Access { get; set; }
-
     }
 }

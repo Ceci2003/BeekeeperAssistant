@@ -241,6 +241,27 @@
                 .To<T>()
                 .FirstOrDefault();
 
+        public int GetBeehiveIdByQueen(int queenId) =>
+            this.queenRepository.AllAsNoTracking()
+                .Include(x => x.User)
+                .Where(q => q.Id == queenId)
+                .FirstOrDefault().BeehiveId;
+
+        public T GetBeehiveByQueen<T>(int queenId)
+        {
+            var id = this.queenRepository.AllAsNoTracking()
+                .Include(x => x.User)
+                .Where(q => q.Id == queenId)
+                .FirstOrDefault().BeehiveId;
+
+            var beehive = this.beehiveRepository.AllAsNoTracking()
+                .Where(b => b.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            return beehive;
+        }
+
         public T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber) =>
             this.beehiveRepository.AllAsNoTracking()
                 .Where(b => b.Apiary.Number == apiaryNumber && b.Number == beehiveNumber)

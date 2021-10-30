@@ -13,15 +13,19 @@
     public class InspectionService : IInspectionService
     {
         private readonly IDeletableEntityRepository<Inspection> inspectionRepository;
+        private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
 
-        public InspectionService(IDeletableEntityRepository<Inspection> inspectionRepository)
+        public InspectionService(
+            IDeletableEntityRepository<Inspection> inspectionRepository,
+            IDeletableEntityRepository<Beehive> beehiveRepository)
         {
             this.inspectionRepository = inspectionRepository;
+            this.beehiveRepository = beehiveRepository;
         }
 
         public async Task<int> CreateUserInspectionAsync(string userId, int beehiveId, CreateInspectionInputModel inputModel)
         {
-            var inspection = new Inspection 
+            var inspection = new Inspection
             {
                 CreatorId = userId,
                 BeehiveId = beehiveId,
@@ -71,6 +75,15 @@
 
             await this.inspectionRepository.AddAsync(inspection);
             await this.inspectionRepository.SaveChangesAsync();
+
+            // Update beehive power
+            var beehive = this.beehiveRepository
+                .All()
+                .FirstOrDefault(b => b.Id == beehiveId);
+
+            beehive.BeehivePower = inspection.BeehivePower;
+
+            await this.beehiveRepository.SaveChangesAsync();
 
             return inspection.Id;
         }

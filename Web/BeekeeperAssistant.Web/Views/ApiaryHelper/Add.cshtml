@@ -7,10 +7,13 @@
 <div class="breadcrumb">
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index" asp-area="">Табло</a>
+            <a asp-controller="Home" asp-action="Index" asp-area="">...</a>
         </li>
         <li class="breadcrumb-item">
             <a href="/Apiary/@Model.ApiaryNumber">Пчелин №@Model.ApiaryNumber</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="ApiaryHelper" asp-action="All" asp-route-id="@Model.ApiaryId">Помощници</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -25,6 +28,9 @@
 <div class="content">
     <div class="center-screen-parent border">
         <div class="form-submit">
+            <a class="back-arrow" asp-controller="ApiaryHelper" asp-action="All" asp-route-id="@Model.ApiaryId">
+                <i class="fas fa-arrow-left"></i>
+            </a>
             <h3>@ViewData["Title"]</h3>
             <h5>Въведете потребителското имен на помощник пчеларя.</h5>
             <form asp-controller="ApiaryHelper" asp-action="Add" method="post">
@@ -36,7 +42,7 @@
                     <span asp-validation-for="UserName"></span>
                 </div>
                 <input type="hidden" asp-for="ApiaryNumber" />
-                <button type="submit" class="btn btn-primary">Добави</button>
+                <button type="submit" class="btn btn-add">Добави</button>
             </form>
         </div>
     </div>

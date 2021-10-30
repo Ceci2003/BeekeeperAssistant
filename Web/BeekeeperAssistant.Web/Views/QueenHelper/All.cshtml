@@ -1,13 +1,71 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.QueenHelpers.AllQueenHelpersViewModel
-
-@foreach (var queenHelper in Model.AllHelpers)
-{
-    <div>
-        <div>
-            @queenHelper.UserUserName - @Html.DisplayFor(x => queenHelper.Access)
-        </div>
-        <div>
-            <a asp-controller="QueenHelper" asp-action="Edit" asp-route-queenId="@queenHelper.QueenId" asp-route-userId="@queenHelper.UserId">Редактирай</a>
-        </div>
-    </div>
+@{
+    this.ViewData["Title"] = "Помощници";
 }
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Beehive">@Model.BeehiveNumber</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Queen">Майка</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <div class="center-screen-parent border helpers-all">
+        <h1 class="title-1">@ViewData["Title"]</h1>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Помощник</th>
+                    <th>Достъпност</th>
+                    <th>Редактиране</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var queenHelper in Model.AllHelpers)
+                {
+                    string style = "access-";
+                    if (queenHelper.Access == Access.Read)
+                    {
+                        style += "read";
+                    }
+                    else if (queenHelper.Access == Access.ReadWrite)
+                    {
+                        style += "read-write";
+                    }
+                    <tr>
+                        <td>
+                            @queenHelper.UserUserName
+                        </td>
+                        <td class="@style">
+                            @Html.DisplayFor(x => queenHelper.Access)
+                        </td>
+                        <td class="edit">
+                            <div>
+                                <a class="edit" asp-controller="QueenHelper" asp-action="Edit" asp-route-queenId="@queenHelper.QueenId"
+                                asp-route-userId="@queenHelper.UserId"><i class="far fa-edit"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

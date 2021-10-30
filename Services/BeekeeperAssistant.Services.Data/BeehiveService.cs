@@ -14,6 +14,7 @@
     {
         private readonly IRepository<BeehiveHelper> beehiveHelperRepository;
         private readonly IRepository<ApiaryHelper> apiaryHelperRepository;
+        private readonly IRepository<QueenHelper> queenHelperRepository;
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
         private readonly IDeletableEntityRepository<Queen> queenRepository;
         private readonly IDeletableEntityRepository<Inspection> inspectionRepository;
@@ -25,6 +26,7 @@
         public BeehiveService(
             IRepository<BeehiveHelper> beehiveHelperRepository,
             IRepository<ApiaryHelper> apiaryHelperRepository,
+            IRepository<QueenHelper> queenHelperRepository,
             IDeletableEntityRepository<Beehive> beehiveRepository,
             IDeletableEntityRepository<Queen> queenRepository,
             IDeletableEntityRepository<Inspection> inspectionRepository,
@@ -35,6 +37,7 @@
         {
             this.beehiveHelperRepository = beehiveHelperRepository;
             this.apiaryHelperRepository = apiaryHelperRepository;
+            this.queenHelperRepository = queenHelperRepository;
             this.beehiveRepository = beehiveRepository;
             this.queenRepository = queenRepository;
             this.inspectionRepository = inspectionRepository;
@@ -141,6 +144,29 @@
                 {
                     this.harvestRepository.Delete(harvest);
                 }
+            }
+
+            var allBeehiveHelpersToDelete = this.beehiveHelperRepository.All()
+                .Where(x => x.BeehiveId == beehiveId);
+
+            foreach (var beehiveHelper in allBeehiveHelpersToDelete)
+            {
+                this.beehiveHelperRepository.Delete(beehiveHelper);
+            }
+
+            await this.beehiveHelperRepository.SaveChangesAsync();
+
+            if (queen != null)
+            {
+                var allQueenHelpersToDelete = this.queenHelperRepository.All()
+                .Where(x => x.QueenId == queen.Id);
+
+                foreach (var queenHelper in allQueenHelpersToDelete)
+                {
+                    this.queenHelperRepository.Delete(queenHelper);
+                }
+
+                await this.queenHelperRepository.SaveChangesAsync();
             }
 
             var beehive = this.beehiveRepository

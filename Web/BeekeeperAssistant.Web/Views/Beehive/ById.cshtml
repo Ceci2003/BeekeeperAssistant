@@ -41,12 +41,9 @@
         <i class="fas fa-archive"></i>Кошер
         №@Model.Number
     </button>
-    @if (Model.QueenAccess == Access.ReadWrite)
-    {
-        <button class="tablinks @if(Model.TabPage == "Queen") {@activeClass}" onclick="openTab(event, 'Queen')">
-            <i class="fas fa-crown"></i>Майка
-        </button>
-    }
+    <button class="tablinks @if(Model.TabPage == "Queen") {@activeClass}" onclick="openTab(event, 'Queen')">
+        <i class="fas fa-crown"></i>Майка
+    </button>
 
     <button class="tablinks @if(Model.TabPage == "Inspections") {@activeClass}"
             onclick="openTab(event, 'Inspections')">

@@ -106,6 +106,16 @@
 
         public async Task<int> DeleteQueenAsync(int queenId)
         {
+            var allQueenHelpersToDelete = this.queenHelperRepository.All()
+                .Where(x => x.QueenId == queenId);
+
+            foreach (var queenHelpers in allQueenHelpersToDelete)
+            {
+                this.queenHelperRepository.Delete(queenHelpers);
+            }
+
+            await this.queenHelperRepository.SaveChangesAsync();
+
             var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
             this.queenRepository.HardDelete(queen);
             await this.queenRepository.SaveChangesAsync();

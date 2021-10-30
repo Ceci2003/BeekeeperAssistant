@@ -13,13 +13,22 @@
     {
         private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
+        private readonly IRepository<ApiaryHelper> apiaryHelpersReposiitory;
+        private readonly IRepository<BeehiveHelper> beehiveHelpersReposiitory;
+        private readonly IRepository<QueenHelper> queenHelpersReposiitory;
 
         public ApiaryService(
             IDeletableEntityRepository<Apiary> apiaryRepository,
-            IDeletableEntityRepository<Beehive> beehiveRepository)
+            IDeletableEntityRepository<Beehive> beehiveRepository,
+            IRepository<ApiaryHelper> apiaryHelpersReposiitory,
+            IRepository<BeehiveHelper> beehiveHelpersReposiitory,
+            IRepository<QueenHelper> queenHelpersReposiitory)
         {
             this.apiaryRepository = apiaryRepository;
             this.beehiveRepository = beehiveRepository;
+            this.apiaryHelpersReposiitory = apiaryHelpersReposiitory;
+            this.beehiveHelpersReposiitory = beehiveHelpersReposiitory;
+            this.queenHelpersReposiitory = queenHelpersReposiitory;
         }
 
         public async Task<string> CreateUserApiaryAsync(
@@ -47,18 +56,58 @@
 
         public async Task DeleteApiaryByIdAsync(int apiaryId)
         {
+            // Delete all apiaryHelpers
+            var allApiaryHelpers = this.apiaryHelpersReposiitory.All()
+                .Where(x => x.ApiaryId == apiaryId);
+
+            foreach (var apiaryHelper in allApiaryHelpers)
+            {
+                this.apiaryHelpersReposiitory.Delete(apiaryHelper);
+            }
+
+            await this.apiaryHelpersReposiitory.SaveChangesAsync();
+
+            // Delete all beehiveHelpers
+            var allBeehiveHeleprs = this.apiaryRepository
+                .All()
+                .Where(x => x.Id == apiaryId)
+                .SelectMany(x => x.Beehives)
+                .SelectMany(x => x.BeehiveHelpers);
+
+            foreach (var beehiveHelper in allBeehiveHeleprs)
+            {
+                this.beehiveHelpersReposiitory.Delete(beehiveHelper);
+            }
+
+            await this.beehiveHelpersReposiitory.SaveChangesAsync();
+
+            // Delete all queenHelpers
+            var allQueenHelpers = this.apiaryRepository.All()
+                .Where(x => x.Id == apiaryId)
+                .SelectMany(x => x.Beehives)
+                .Select(x => x.Queen)
+                .SelectMany(x => x.QueenHelpers);
+
+            foreach (var queenHelper in allQueenHelpers)
+            {
+                this.queenHelpersReposiitory.Delete(queenHelper);
+            }
+
+            await this.queenHelpersReposiitory.SaveChangesAsync();
+
+            // Delete all beehives
             var apiaryBeehives = this.beehiveRepository.All()
                 .Where(b => b.ApiaryId == apiaryId)
                 .ToList();
 
-            if (apiaryBeehives.Any())
+            foreach (var beehive in apiaryBeehives)
             {
-                foreach (var beehive in apiaryBeehives)
-                {
-                    this.beehiveRepository.Delete(beehive);
-                }
+                this.beehiveRepository.Delete(beehive);
             }
 
+            await this.beehiveRepository.SaveChangesAsync();
+
+            // Delete apiary
             var apiary = this.apiaryRepository
                 .All()
                 .FirstOrDefault(a => a.Id == apiaryId);
@@ -204,6 +253,15 @@
         public string GetApiaryCreatorIdByApiaryId(int apiaryId)
         {
             return this.apiaryRepository.All().FirstOrDefault(x => x.Id == apiaryId).CreatorId;
+        }
+
+        public int GetApiaryIdByNumber(string apiaryNumber)
+        {
+            var apiaryId = this.apiaryRepository.All()
+                .FirstOrDefault(x => x.Number == apiaryNumber)
+                .Id;
+
+            return apiaryId;
         }
     }
 }

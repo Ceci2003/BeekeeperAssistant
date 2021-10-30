@@ -97,7 +97,11 @@
             }
 
             viewModel.BeehiveAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite : this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, viewModel.Id);
-            viewModel.QueenAccess = currentUser.Id == viewModel.Queen.UserId ? Access.ReadWrite : this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
+
+            if (viewModel.Queen != null)
+            {
+                viewModel.QueenAccess = currentUser.Id == viewModel.Queen.UserId ? Access.ReadWrite : this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
+            }
 
             var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(beehiveId);
             viewModel.Harvests = harvests;
@@ -140,7 +144,7 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!this.ModelState.IsValid || !id.HasValue)
+            if (!this.ModelState.IsValid)
             {
                 if (!id.HasValue)
                 {
@@ -150,7 +154,7 @@
                 return this.View(inputModel);
             }
 
-            var apiaryCreatorId = this.apiaryService.GetApiaryCreatorIdByApiaryId(id.Value);
+            var apiaryCreatorId = this.apiaryService.GetApiaryCreatorIdByApiaryId(inputModel.ApiaryId);
 
             var beehiveId = await this.beehiveService
                 .CreateUserBeehiveAsync(

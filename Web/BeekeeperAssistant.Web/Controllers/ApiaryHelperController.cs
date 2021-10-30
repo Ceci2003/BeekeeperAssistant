@@ -119,6 +119,7 @@
                 var user = await this.userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
                 inputModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
+                inputModel.ApiaryId = apiaryId;
                 return this.View(inputModel);
             }
 

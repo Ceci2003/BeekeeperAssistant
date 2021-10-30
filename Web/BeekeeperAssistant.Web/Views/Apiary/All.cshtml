@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Пчелини-всички";
     ViewData["HelperApiaries"] = "Пчелини с достъп";
-    var token = antiforgery.GetAndStoreTokens(this.Context).RequestToken;
+    var onlyReadMsg = "нямате достъп";
 }
 
 <div class="breadcrumb">
@@ -146,7 +146,7 @@
                 <th>Име</th>
                 <th>Адрес</th>
                 <th>Вид</th>
-                <th>Бр. кошери</th>
+                <th>Собственик</th>
                 <th>Редактиране</th>
             </tr>
         </thead>
@@ -160,7 +160,7 @@
                     <td>@apiary.ApiaryName</td>
                     <td>@apiary.ApiaryAdress</td>
                     <td>@Html.DisplayFor(x => apiary.ApiaryApiaryType)</td>
-                    <td>@apiary.ApiaryBeehivesCount</td>
+                    <td>@apiary.ApiaryCreatorUserName</td>
                     <td class="edit">
                         
                         <div>
@@ -181,6 +181,10 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
+                            }
+                            else
+                            {
+                                @onlyReadMsg
                             }
                         </div>
                     </td>

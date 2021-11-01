@@ -10,6 +10,7 @@
     string block = "block";
     string none = "none";
     string[] yesNo = new string[] { "Не", "Да" };
+    var onlyReadMsg = "нямате достъп";
 }
 
 <script>
@@ -217,24 +218,34 @@
             }
             else
             {
-                <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
-                    <i class="fas fa-crown"></i>
-                    Добавете майка
-                </a>
+                @if (Model.BeehiveAccess == Access.ReadWrite)
+                {
+                    <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.Id">
+                        <i class="fas fa-crown"></i>
+                        Добавете майка
+                    </a>
+                }
+                else
+                {
+                    @onlyReadMsg
+                }
             }
         </div>
     </div>
     <div id="Inspections" class="tabcontent"
          style="display: @if(Model.TabPage == "Inspections") {@block}">
         <div class="harvests-data">
-            <div class="page-controls">
-                <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
-                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn create-data" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
-                    <i class="fas fa-notes-medical"></i>
-                    Добавете преглед
-                </a>
-            </div>
+            @if (Model.BeehiveAccess == Access.ReadWrite)
+            {
+                <div class="page-controls">
+                    <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
+                       asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                    <a class="btn create-data" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
+                        <i class="fas fa-notes-medical"></i>
+                        Добавете преглед
+                    </a>
+                </div>
+            }
             <table>
                 <thead>
                 <th>Дата на прегледа</th>
@@ -516,14 +527,17 @@
     </div>
     <div id="Treatments" class="tabcontent" style="display: @if(Model.TabPage == "Treatments") {@block}">
         <div class="harvests-data">
-            <div class="page-controls">
-                <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
-                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn create-data" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
-                    <i class="fas fa-notes-medical"></i>
-                    Добавете третиране
-                </a>
-            </div>
+            @if (Model.BeehiveAccess == Access.ReadWrite)
+            {
+                <div class="page-controls">
+                    <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
+                       asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                    <a class="btn create-data" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
+                        <i class="fas fa-notes-medical"></i>
+                        Добавете третиране
+                    </a>
+                </div>
+            }
             <table id="TreatmentsTable">
                 <thead>
                 <th>Дата на третирането</th>
@@ -595,14 +609,17 @@
     </div>
     <div id="Harvests" class="tabcontent" style="display: @if(Model.TabPage == "Harvests") {@block}">
         <div class="harvests-data">
-            <div class="page-controls">
-                <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
-                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
-                <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-beehiveId="@Model.Id">
-                    <i class="fas fa-box"></i>
-                    Добавете добивs
-                </a>
-            </div>
+            @if (Model.BeehiveAccess == Access.ReadWrite)
+            {
+                <div class="page-controls">
+                    <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
+                       asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                    <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-beehiveId="@Model.Id">
+                        <i class="fas fa-box"></i>
+                        Добавете добивs
+                    </a>
+                </div>
+            }
             <table>
                 <thead>
                 <th>Име</th>

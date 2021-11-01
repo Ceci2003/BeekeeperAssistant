@@ -6,6 +6,8 @@
     powerClasses.Add("weak", "td-weak");
     powerClasses.Add("medium", "td-medium");
     powerClasses.Add("strong", "td-strong");
+    string activeClass = "active";
+    string block = "block";
 }
 
 <div class="breadcrumb">
@@ -28,12 +30,12 @@
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
-    <button class="tablinks active" onclick="openTab(event, 'Apiary')" id="defaultOpen">Пчелин №@Model.Number</button>
-    <button class="tablinks" onclick="openTab(event, 'Beehives')">Кошери</button>
+    <button class="tablinks @if(Model.TabPage == "Apiary") {@activeClass}" onclick="openTab(event, 'Apiary')" id="defaultOpen">Пчелин №@Model.Number</button>
+    <button class="tablinks @if(Model.TabPage == "Beehives") {@activeClass}" onclick="openTab(event, 'Beehives')">Кошери</button>
 </div>
 
 <div class="tabs-body">
-    <div id="Apiary" class="tabcontent" style="display: block;">
+    <div id="Apiary" class="tabcontent" style="display: @if(Model.TabPage == "Apiary") {@block}">
         <div class="data-view">
             <div class="qr-code">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44302/Apiary/@Model.Number&size=255x255"
@@ -102,7 +104,7 @@
             </div>
         </div>
     </div>
-    <div id="Beehives" class="tabcontent">
+    <div id="Beehives" class="tabcontent" style="display: @if(Model.TabPage == "Beehives") {@block}">
         <div class="page-controls">
             <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel" asp-route-id="@Model.Id">
                 <i class="fas fa-file-download"></i> Excel
@@ -179,8 +181,11 @@ beehive.BeehivePower)
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
+                        @*<a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
                            asp-route-page="@(this.Model.CurrentPage - 1)">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>*@
+                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Id" asp-route-page="@(this.Model.CurrentPage - 1)">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -195,9 +200,12 @@ beehive.BeehivePower)
                     }
                     else
                     {
-                        <li class="page-item">
+                        @*<li class="page-item">
                             <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
                                asp-route-page="@i">@i</a>
+                        </li>*@
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@i">@i</a>
                         </li>
                     }
                 }
@@ -212,8 +220,7 @@ beehive.BeehivePower)
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                           asp-route-page="@(this.Model.CurrentPage + 1)">
+                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@(this.Model.CurrentPage + 1)">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>

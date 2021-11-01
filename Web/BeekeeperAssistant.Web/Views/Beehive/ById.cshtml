@@ -58,7 +58,7 @@
 </div>
 
 <div class="tabs-body">
-    <div id="Beehive" class="tabcontent" style="display: @if(Model.TabPage == "Beehive") {@block}; else {@none}">
+    <div id="Beehive" class="tabcontent" style="display: @if(Model.TabPage == "Beehive") {@block}">
         <div class="data-view">
             <div class="qr-code">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255"
@@ -161,7 +161,7 @@
             </div>
         </div>
     </div>
-    <div id="Queen" class="tabcontent" style="display: @if(Model.TabPage == "Queen") {@block}; else {@none}">
+    <div id="Queen" class="tabcontent" style="display: @if(Model.TabPage == "Queen") {@block}">
         <div class="queen-preview">
             @if (Model.HasQueen)
             {
@@ -225,7 +225,7 @@
         </div>
     </div>
     <div id="Inspections" class="tabcontent"
-         style="display: @if(Model.TabPage == "Inspections") {@block}; else {@none}">
+         style="display: @if(Model.TabPage == "Inspections") {@block}">
         <div class="harvests-data">
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
@@ -514,7 +514,7 @@
             }
         </div>
     </div>
-    <div id="Treatments" class="tabcontent" style="display: @if(Model.TabPage == "Treatments") {@block}; else {@none}">
+    <div id="Treatments" class="tabcontent" style="display: @if(Model.TabPage == "Treatments") {@block}">
         <div class="harvests-data">
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
@@ -593,7 +593,7 @@
             }
         </div>
     </div>
-    <div id="Harvests" class="tabcontent" style="display: @if(Model.TabPage == "Harvests") {@block}; else {@none}">
+    <div id="Harvests" class="tabcontent" style="display: @if(Model.TabPage == "Harvests") {@block}">
         <div class="harvests-data">
             <div class="page-controls">
                 <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"

@@ -109,7 +109,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ByNumber(string apiaryNumber, int pageOne = 1)
+        public async Task<IActionResult> ByNumber(string apiaryNumber, string tabPage, int page = 1)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
@@ -126,7 +126,7 @@
             viewModel.ForecastResult = forecastResult;
 
             viewModel.Beehives = this.beehiveService
-                .GetBeehivesByApiaryId<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (pageOne - 1) * GlobalConstants.BeehivesPerPage);
+                .GetBeehivesByApiaryId<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
 
             foreach (var beehive in viewModel.Beehives)
             {
@@ -141,7 +141,19 @@
                 viewModel.PagesCount = 1;
             }
 
-            viewModel.CurrentPage = pageOne;
+            viewModel.CurrentPage = page;
+
+            if (string.IsNullOrEmpty(tabPage))
+            {
+                tabPage = "Apiary";
+            }
+
+            if (page > 1)
+            {
+                tabPage = "Beehives";
+            }
+
+            viewModel.TabPage = tabPage;
 
             return this.View(viewModel);
         }

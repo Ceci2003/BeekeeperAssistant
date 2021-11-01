@@ -217,7 +217,8 @@
             }
 
             var apiaryNumber = await this.beehiveService.DeleteBeehiveByIdAsync(id);
-            return this.Redirect($"/Apiary/{apiaryNumber}");
+            //return this.Redirect($"/Apiary/{apiaryNumber}");
+            return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
         }
 
         public async Task<IActionResult> ExportToExcel(int? id)

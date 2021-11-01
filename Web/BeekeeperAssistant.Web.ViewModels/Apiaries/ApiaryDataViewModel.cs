@@ -34,6 +34,8 @@
 
         public ForecastResult ForecastResult { get; set; }
 
+        public string TabPage { get; set; }
+
         public int CurrentPage { get; set; }
 
         public int PagesCount { get; set; }

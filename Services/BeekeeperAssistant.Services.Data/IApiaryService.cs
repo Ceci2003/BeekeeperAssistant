@@ -17,8 +17,6 @@
 
         int GetApiaryIdByBeehiveId(int beehiveId);
 
-        int GetUserApiaryIdByNumber(string userId, string apiaryNumber);
-
         int GetApiaryIdByNumber(string apiaryNumber);
 
         T GetUserApiaryByNumber<T>(string userId, string number);

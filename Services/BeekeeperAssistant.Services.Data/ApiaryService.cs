@@ -192,10 +192,10 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetUserApiaryIdByNumber(string userId, string apiaryNumber) =>
+        public int GetApiaryIdByNumber(string apiaryNumber) =>
             this.apiaryRepository
                 .AllAsNoTracking()
-                .FirstOrDefault(a => a.CreatorId == userId && a.Number == apiaryNumber)
+                .FirstOrDefault(a => a.Number == apiaryNumber)
                 .Id;
 
         public string GetApiaryNumberByApiaryId(int apiaryId)
@@ -253,15 +253,6 @@
         public string GetApiaryCreatorIdByApiaryId(int apiaryId)
         {
             return this.apiaryRepository.All().FirstOrDefault(x => x.Id == apiaryId).CreatorId;
-        }
-
-        public int GetApiaryIdByNumber(string apiaryNumber)
-        {
-            var apiaryId = this.apiaryRepository.All()
-                .FirstOrDefault(x => x.Number == apiaryNumber)
-                .Id;
-
-            return apiaryId;
         }
     }
 }

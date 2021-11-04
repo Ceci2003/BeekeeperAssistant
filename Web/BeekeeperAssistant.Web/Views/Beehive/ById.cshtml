@@ -255,7 +255,7 @@
                 <th>Редактиране</th>
                 </thead>
                 <tbody>
-                    @foreach (var inspection in Model.Inspections)
+                    @foreach (var inspection in Model.Inspections.AllInspections)
                     {
                         string rowMasterId = "trMasterInspection" + inspection.Id;
                         string rowExpandId = "trExpandInspection" + inspection.Id;
@@ -519,10 +519,70 @@
                     }
                 </tbody>
             </table>
-            @if (!Model.Inspections.Any())
+            @if (!Model.Inspections.AllInspections.Any())
             {
                 <p>няма добавени прегледи</p>
             }
+        </div>
+
+        <div class="pagination">
+            <ul>
+                @if (this.Model.Inspections.CurrentPage == 1)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-beehiveId="@Model.Id"
+                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                           asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
+                           asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage - 1)">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= this.Model.Inspections.PagesCount; i++)
+                {
+                    @if (i == this.Model.Inspections.CurrentPage)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@i</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@i" asp-route-pageAllTreatments="@Model.Treatments.CurrentPage" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
+                        </li>
+                    }
+                }
+                @if (this.Model.Inspections.CurrentPage == this.Model.Inspections.PagesCount)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-beehiveId="@Model.Id"
+                           asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
+                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                           asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage + 1)">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
     <div id="Treatments" class="tabcontent" style="display: @if(Model.TabPage == "Treatments") {@block}">
@@ -550,7 +610,7 @@
                 <th>Редактиране</th>
                 </thead>
                 <tbody>
-                    @foreach (var treatment in Model.Treatments)
+                    @foreach (var treatment in Model.Treatments.AllTreatements)
                     {
                         string rowMasterId = "trMasterTreatment" + treatment.Id;
                         string rowExpandId = "trExpandTreatment" + treatment.Id;
@@ -601,10 +661,70 @@
                     }
                 </tbody>
             </table>
-            @if (!Model.Treatments.Any())
+            @if (!Model.Treatments.AllTreatements.Any())
             {
                 <p>няма добавени третирания</p>
             }
+        </div>
+
+        <div class="pagination">
+            <ul>
+                @if (this.Model.Treatments.CurrentPage == 1)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-beehiveId="@Model.Id"
+                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                           asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
+                           asp-route-pageAllInspections="@(Model.Inspections.CurrentPage)">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= this.Model.Treatments.PagesCount; i++)
+                {
+                    @if (i == this.Model.Treatments.CurrentPage)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@i</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link"  asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Inspections.CurrentPage" asp-route-pageAllTreatments="@i" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
+                        </li>
+                    }
+                }
+                @if (this.Model.Treatments.CurrentPage == this.Model.Treatments.PagesCount)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-beehiveId="@Model.Id"
+                           asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
+                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                           asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage)">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
     <div id="Harvests" class="tabcontent" style="display: @if(Model.TabPage == "Harvests") {@block}">
@@ -629,7 +749,7 @@
                 <th>Редактиране</th>
                 </thead>
                 <tbody>
-                    @foreach (var harvest in Model.Harvests)
+                    @foreach (var harvest in Model.Harvests.AllHarvests)
                     {
                         string rowMasterId = "trMasterHarvest" + harvest.Id;
                         string rowExpandId = "trExpandHarvest" + harvest.Id;
@@ -676,10 +796,70 @@
                     }
                 </tbody>
             </table>
-            @if (!Model.Harvests.Any())
+            @if (!Model.Harvests.AllHarvests.Any())
             {
                 <p>няма добавени добиви</p>
             }
+        </div>
+
+        <div class="pagination">
+            <ul>
+                @if (this.Model.Harvests.CurrentPage == 1)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-beehiveId="@Model.Id"
+                           asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
+                           asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
+                           asp-route-pageAllInspections="@(Model.Harvests.CurrentPage)">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </li>
+                }
+                @for (int i = 1; i <= this.Model.Harvests.PagesCount; i++)
+                {
+                    @if (i == this.Model.Harvests.CurrentPage)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@i</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Harvests.CurrentPage" asp-route-pageAllTreatments="@Model.Harvests.CurrentPage" asp-route-pageAllHarvests="@i">@i</a>
+                        </li>
+                    }
+                }
+                @if (this.Model.Harvests.CurrentPage == this.Model.Harvests.PagesCount)
+                {
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-beehiveId="@Model.Id"
+                           asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
+                           asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
+                           asp-route-pageAllInspections="@(this.Model.Harvests.CurrentPage)">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>

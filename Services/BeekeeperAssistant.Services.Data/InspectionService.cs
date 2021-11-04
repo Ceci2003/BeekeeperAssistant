@@ -181,5 +181,11 @@
                .AllAsNoTracking()
                .Where(t => t.CreatorId == userId)
                .Count();
+
+        public int GetAllBeehiveInspectionsCountByBeehiveId(int beehiveId)
+            => this.inspectionRepository
+            .All()
+            .Where(i => i.BeehiveId == beehiveId)
+            .Count();
     }
 }

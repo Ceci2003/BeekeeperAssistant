@@ -24,8 +24,10 @@
 
         int GetAllUserHarvestsForLastYearCount(string userId);
 
+        int GetAllBeehiveHarvestsCountByBeehiveId(int beehiveId);
+
         IEnumerable<T> GetAllUserHarvests<T>(string userId);
 
-        IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId);
+        IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0);
     }
 }

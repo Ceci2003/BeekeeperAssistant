@@ -138,5 +138,11 @@
                 .AllAsNoTracking()
                 .Where(t => t.CreatorId == userId && (DateTime.UtcNow.Year - t.DateOfTreatment.Year) <= 1)
                 .Count();
+
+        public int GetBeehiveTreatmentsCountByBeehiveId(int beehiveId)
+            => this.treatedBeehivesRepository
+            .All()
+            .Where(t => t.BeehiveId == beehiveId)
+            .Count();
     }
 }

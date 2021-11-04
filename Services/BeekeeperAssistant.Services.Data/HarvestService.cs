@@ -107,13 +107,27 @@
             .Where(h => h.CreatorId == userId)
             .Count();
 
-        public IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId) =>
-            this.harvestedBeehiveRepository
-            .AllAsNoTracking()
+        public IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0)
+        {
+            var query = this.harvestedBeehiveRepository
+            .All()
             .Where(hb => hb.BeehiveId == beehiveId)
             .OrderByDescending(hb => hb.Harvest.DateOfHarves)
             .Select(hb => hb.Harvest)
-            .To<T>()
-            .ToList();
+            .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
+        public int GetAllBeehiveHarvestsCountByBeehiveId(int beehiveId)
+            => this.harvestedBeehiveRepository
+            .All()
+            .Where(hb => hb.BeehiveId == beehiveId)
+            .Count();
     }
 }

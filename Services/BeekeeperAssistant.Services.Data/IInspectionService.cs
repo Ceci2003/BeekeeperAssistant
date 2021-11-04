@@ -70,6 +70,8 @@
 
         int GetAllUserInspectionsForLastYearCount(string userId);
 
+        int GetAllBeehiveInspectionsCountByBeehiveId(int beehiveId);
+
         IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0);
     }
 }

@@ -78,7 +78,12 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ById(int beehiveId, string tabPage)
+        public async Task<IActionResult> ById(
+            int beehiveId,
+            string tabPage,
+            int pageAllHarvests = 1,
+            int pageAllTreatments = 1,
+            int pageAllInspections = 1)
         {
             var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -98,13 +103,88 @@
                 viewModel.QueenAccess = currentUser.Id == viewModel.Queen.UserId ? Access.ReadWrite : this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
             }
 
-            var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(beehiveId);
-            viewModel.Harvests = harvests;
-            var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId);
-            viewModel.Treatments = treatments;
-            var inspections = this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(beehiveId);
-            viewModel.Inspections = inspections;
+            // ----------------------------------
+            viewModel.Harvests = new AllHarvestsViewModel();
 
+            var allHarvestsCount = this.harvestService.GetAllBeehiveHarvestsCountByBeehiveId(beehiveId);
+            var pagesHarvestsCount = (int)Math.Ceiling((double)allHarvestsCount / GlobalConstants.ApiariesPerPage);
+
+            if (pageAllHarvests <= 0)
+            {
+                pageAllHarvests = 0;
+            }
+            else if (pageAllHarvests > pagesHarvestsCount)
+            {
+                pageAllHarvests = pagesHarvestsCount == 0 ? 1 : pagesHarvestsCount;
+            }
+
+            viewModel.Harvests.PagesCount = pagesHarvestsCount;
+
+            if (viewModel.Harvests.PagesCount == 0)
+            {
+                viewModel.Harvests.PagesCount = 0;
+            }
+
+            viewModel.Harvests.CurrentPage = pageAllHarvests;
+
+            var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(beehiveId, GlobalConstants.ApiariesPerPage, (pageAllHarvests - 1) * GlobalConstants.ApiariesPerPage);
+            viewModel.Harvests.AllHarvests = harvests;
+
+            // ----------------------------------
+            viewModel.Treatments = new AllTreatementsViewModel();
+
+            var allTreatemetsCount = this.treatmentService.GetBeehiveTreatmentsCountByBeehiveId(beehiveId);
+            var pagesTreatementsCount = (int)Math.Ceiling((double)allTreatemetsCount / GlobalConstants.ApiariesPerPage);
+
+            if (pageAllTreatments <= 0)
+            {
+                pageAllTreatments = 0;
+            }
+            else if (pageAllTreatments > pagesTreatementsCount)
+            {
+                pageAllTreatments = pageAllTreatments == 0 ? 1 : pagesTreatementsCount;
+            }
+
+            viewModel.Treatments.PagesCount = pagesTreatementsCount;
+
+            if (viewModel.Treatments.PagesCount == 0)
+            {
+                viewModel.Treatments.PagesCount = 1;
+            }
+
+            viewModel.Treatments.CurrentPage = pageAllTreatments;
+
+            var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId, GlobalConstants.ApiariesPerPage, (pageAllTreatments - 1) * GlobalConstants.ApiariesPerPage);
+            viewModel.Treatments.AllTreatements = treatments;
+
+            // ----------------------------------
+            viewModel.Inspections = new AllInspectionsViewModel();
+
+            var allinspectionsCount = this.inspectionService.GetAllBeehiveInspectionsCountByBeehiveId(beehiveId);
+            var pagesInspectionsCount = (int)Math.Ceiling((double)allinspectionsCount / GlobalConstants.ApiariesPerPage);
+
+            if (pageAllInspections <= 0)
+            {
+                pageAllInspections = 0;
+            }
+            else if (pageAllInspections > pagesInspectionsCount)
+            {
+                pageAllInspections = pageAllInspections == 0 ? 1 : pagesInspectionsCount;
+            }
+
+            viewModel.Inspections.PagesCount = pagesInspectionsCount;
+
+            if (viewModel.Inspections.PagesCount == 0)
+            {
+                viewModel.Inspections.PagesCount = 1;
+            }
+
+            viewModel.Inspections.CurrentPage = pageAllInspections;
+
+            var inspections = this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(beehiveId, GlobalConstants.ApiariesPerPage, (pageAllInspections - 1) * GlobalConstants.ApiariesPerPage);
+            viewModel.Inspections.AllInspections = inspections;
+
+            // ----------------------------------
             if (string.IsNullOrEmpty(tabPage))
             {
                 tabPage = "Beehive";

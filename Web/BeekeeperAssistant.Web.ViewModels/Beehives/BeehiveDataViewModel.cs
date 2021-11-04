@@ -51,14 +51,11 @@
 
         public Access QueenAccess { get; set; }
 
-        [IgnoreMap]
-        public IEnumerable<HarvestDatavVewModel> Harvests { get; set; }
+        public AllHarvestsViewModel Harvests { get; set; }
 
-        [IgnoreMap]
-        public IEnumerable<TreatmentDataViewModel> Treatments { get; set; }
+        public AllTreatementsViewModel Treatments { get; set; }
 
-        [IgnoreMap]
-        public IEnumerable<InspectionDataViewModel> Inspections { get; set; }
+        public AllInspectionsViewModel Inspections { get; set; }
 
         public bool HasHelpers { get; set; }
 

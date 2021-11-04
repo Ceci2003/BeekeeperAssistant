@@ -56,11 +56,8 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var apiariesUserCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
-            var pagesApiaryCount = (int)Math.Ceiling((double)apiariesUserCount / GlobalConstants.ApiariesPerPage);
-
-            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
-            var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
+            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
 
             if (pageAllApiaries <= 0)
             {
@@ -70,6 +67,9 @@
             {
                 pageAllApiaries = pagesApiaryCount == 0 ? 1 : pagesApiaryCount;
             }
+
+            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
+            var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
 
             if (pageHelperApiaries <= 0)
             {

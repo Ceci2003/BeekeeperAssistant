@@ -111,7 +111,7 @@
 
             if (pageAllHarvests <= 0)
             {
-                pageAllHarvests = 0;
+                pageAllHarvests = 1;
             }
             else if (pageAllHarvests > pagesHarvestsCount)
             {
@@ -122,7 +122,7 @@
 
             if (viewModel.Harvests.PagesCount == 0)
             {
-                viewModel.Harvests.PagesCount = 0;
+                viewModel.Harvests.PagesCount = 1;
             }
 
             viewModel.Harvests.CurrentPage = pageAllHarvests;
@@ -138,11 +138,11 @@
 
             if (pageAllTreatments <= 0)
             {
-                pageAllTreatments = 0;
+                pageAllTreatments = 1;
             }
             else if (pageAllTreatments > pagesTreatementsCount)
             {
-                pageAllTreatments = pageAllTreatments == 0 ? 1 : pagesTreatementsCount;
+                pageAllTreatments = pagesTreatementsCount == 0 ? 1 : pagesTreatementsCount;
             }
 
             viewModel.Treatments.PagesCount = pagesTreatementsCount;
@@ -161,18 +161,18 @@
             viewModel.Inspections = new AllInspectionsViewModel();
 
             var allinspectionsCount = this.inspectionService.GetAllBeehiveInspectionsCountByBeehiveId(beehiveId);
-            var pagesInspectionsCount = (int)Math.Ceiling((double)allinspectionsCount / GlobalConstants.ApiariesPerPage);
+            var pageInspectionsCount = (int)Math.Ceiling((double)allinspectionsCount / GlobalConstants.ApiariesPerPage);
 
             if (pageAllInspections <= 0)
             {
-                pageAllInspections = 0;
+                pageAllInspections = 1;
             }
-            else if (pageAllInspections > pagesInspectionsCount)
+            else if (pageAllInspections > pageInspectionsCount)
             {
-                pageAllInspections = pageAllInspections == 0 ? 1 : pagesInspectionsCount;
+                pageAllInspections = pageInspectionsCount == 0 ? 1 : pageInspectionsCount;
             }
 
-            viewModel.Inspections.PagesCount = pagesInspectionsCount;
+            viewModel.Inspections.PagesCount = pageInspectionsCount;
 
             if (viewModel.Inspections.PagesCount == 0)
             {

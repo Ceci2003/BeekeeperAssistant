@@ -9,7 +9,7 @@
 
     public interface IInspectionService
     {
-        //Task<int> CreateUserInspectionAsync(
+        // Task<int> CreateUserInspectionAsync(
         //    string userId,
         //    int beehiveId,
         //    DateTime dateOfInspection,

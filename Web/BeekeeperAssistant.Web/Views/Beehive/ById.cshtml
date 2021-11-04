@@ -540,6 +540,7 @@
                     <li class="page-item">
                         <a class="page-link" asp-controller="Beehive" asp-action="ById"
                            asp-route-beehiveId="@Model.Id"
+                           asp-route-tabPage="Inspections"
                            asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
                            asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
                            asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage - 1)">
@@ -558,7 +559,7 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@i" asp-route-pageAllTreatments="@Model.Treatments.CurrentPage" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Inspections" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@i" asp-route-pageAllTreatments="@Model.Treatments.CurrentPage" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
                         </li>
                     }
                 }
@@ -574,6 +575,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-tabPage="Inspections"
                            asp-route-beehiveId="@Model.Id"
                            asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
                            asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
@@ -682,6 +684,7 @@
                     <li class="page-item">
                         <a class="page-link" asp-controller="Beehive" asp-action="ById"
                            asp-route-beehiveId="@Model.Id"
+                           asp-route-tabPage="Treatments"
                            asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
                            asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
                            asp-route-pageAllInspections="@(Model.Inspections.CurrentPage)">
@@ -700,7 +703,7 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link"  asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Inspections.CurrentPage" asp-route-pageAllTreatments="@i" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Treatments" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Inspections.CurrentPage" asp-route-pageAllTreatments="@i" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
                         </li>
                     }
                 }
@@ -717,6 +720,7 @@
                     <li class="page-item">
                         <a class="page-link" asp-controller="Beehive" asp-action="ById"
                            asp-route-beehiveId="@Model.Id"
+                           asp-route-tabPage="Treatments"
                            asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
                            asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
                            asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage)">
@@ -817,6 +821,7 @@
                     <li class="page-item">
                         <a class="page-link" asp-controller="Beehive" asp-action="ById"
                            asp-route-beehiveId="@Model.Id"
+                           asp-route-tabPage="Harvests"
                            asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
                            asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
                            asp-route-pageAllInspections="@(Model.Harvests.CurrentPage)">
@@ -835,7 +840,7 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Harvests.CurrentPage" asp-route-pageAllTreatments="@Model.Harvests.CurrentPage" asp-route-pageAllHarvests="@i">@i</a>
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Harvests" asp-route-beehiveId="@Model.Id" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Harvests.CurrentPage" asp-route-pageAllTreatments="@Model.Harvests.CurrentPage" asp-route-pageAllHarvests="@i">@i</a>
                         </li>
                     }
                 }
@@ -851,6 +856,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" asp-controller="Beehive" asp-action="ById"
+                           asp-route-tabPage="Harvests"
                            asp-route-beehiveId="@Model.Id"
                            asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
                            asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"

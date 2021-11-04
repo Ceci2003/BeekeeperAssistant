@@ -27,7 +27,7 @@
                                         //"backgroundColor:['#4e73df', '#0f3dc4']" +
                                         //$"backgroundColor:['#008995', '#009386', '#139a67', '#579e3e', '#8d9b00', '#c69000', '#ff7800']" +
                                         $"backgroundColor:[{string.Join(", ", colors)}]," +
-                                        $"borderColor: {borderColor}, " +
+                                        $"borderColor: '#7B7B7B', " +
                                     "}] " +
                                 "}, " +
                                 "options: { " +

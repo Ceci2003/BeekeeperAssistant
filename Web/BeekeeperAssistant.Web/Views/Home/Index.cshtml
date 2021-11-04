@@ -1,7 +1,14 @@
 ﻿@using BeekeeperAssistant.Common
 @model BeekeeperAssistant.Web.ViewModels.Home.IndexViewModel
 @{
-    this.ViewData["Title"] = "Табло";
+    if (this.User.Identity.IsAuthenticated)
+    {
+        this.ViewData["Title"] = "Табло";
+    }
+    else
+    {
+        this.ViewData["Title"] = "Начало";
+    }
     int colorsCounter = 0;
 }
 

@@ -35,7 +35,7 @@
         public ApiaryType ApiaryType { get; set; }
 
         [Required(ErrorMessage = GlobalConstants.AddressRequiredErrorMessage)]
-        [Display(Name = "Населено място")]
+        [Display(Name = "Местоположение")]
         public string Adress { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

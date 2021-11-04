@@ -71,6 +71,7 @@
             {
                 BeehiveId = id,
                 GivingDate = DateTime.UtcNow.Date,
+                FertilizationDate = DateTime.UtcNow.Date,
             };
 
             var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id);
@@ -87,7 +88,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View(inputModel);
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
@@ -134,6 +135,11 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditQueenInutModel inputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
             var beehiveId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
 
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });

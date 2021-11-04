@@ -317,7 +317,7 @@
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        public async Task<IActionResult> Bookmark(int id)
+        public async Task<IActionResult> Bookmark(int id, string page)
         {
             var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);
 
@@ -326,9 +326,18 @@
                 return this.BadRequest();
             }
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
+            if (page == "Apiary")
+            {
+                var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
 
-            return this.Redirect($"/Apiary/{apiaryNumber}");
+                return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
+            }
+            else if (page == "All")
+            {
+                return this.RedirectToAction("All");
+            }
+
+            return this.RedirectToAction("All");
         }
     }
 }

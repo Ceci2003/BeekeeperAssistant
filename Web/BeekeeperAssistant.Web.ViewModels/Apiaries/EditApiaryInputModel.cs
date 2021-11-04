@@ -31,7 +31,7 @@
         [Display(Name = "Вид на пчелина")]
         public ApiaryType ApiaryType { get; set; }
 
-        [Display(Name = "Населено място")]
+        [Display(Name = "Местоположение")]
         public string Adress { get; set; }
     }
 }

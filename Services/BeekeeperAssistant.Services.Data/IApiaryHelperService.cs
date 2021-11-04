@@ -9,11 +9,11 @@
 
     public interface IApiaryHelperService
     {
-        Task Add(string userId, int apiaryId);
+        Task AddAsync(string userId, int apiaryId);
 
-        Task Delete(string userId, int apiaryId);
+        Task DeleteAsync(string userId, int apiaryId);
 
-        Task Edit(string userId, int apiaryId, Access access);
+        Task EditAsync(string userId, int apiaryId, Access access);
 
         T GetApiaryHelper<T>(string userId, int apiaryId);
 

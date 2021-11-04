@@ -26,7 +26,7 @@
             this.treatedBeehivesRepository = treatedBeehivesRepository;
         }
 
-        public async Task<int> CreateTreatment(
+        public async Task<int> CreateTreatmentAsync(
             string creatorId,
             DateTime dateOfTreatment,
             string name,
@@ -134,9 +134,9 @@
             .FirstOrDefault();
 
         public int GetAllUserTreatmentsForLastYearCount(string userId) =>
-           this.treatmentRepository
-               .AllAsNoTracking()
-               .Where(t => t.CreatorId == userId && (DateTime.UtcNow.Year - t.DateOfTreatment.Year) <= 1)
-               .Count();
+            this.treatmentRepository
+                .AllAsNoTracking()
+                .Where(t => t.CreatorId == userId && (DateTime.UtcNow.Year - t.DateOfTreatment.Year) <= 1)
+                .Count();
     }
 }

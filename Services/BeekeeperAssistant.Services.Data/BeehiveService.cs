@@ -78,7 +78,8 @@
             await this.beehiveRepository.AddAsync(beehive);
             await this.beehiveRepository.SaveChangesAsync();
 
-            var allApiaryHelpersIds = this.apiaryHelperRepository.All()
+            var allApiaryHelpersIds = this.apiaryHelperRepository
+                .All()
                 .Where(x => x.ApiaryId == apiaryId)
                 .Select(x => x.UserId);
 
@@ -100,53 +101,49 @@
 
         public async Task<string> DeleteBeehiveByIdAsync(int beehiveId)
         {
-            var queen = this.queenRepository.AllAsNoTracking()
+            var queen = this.queenRepository
+                .All()
                 .FirstOrDefault(q => q.BeehiveId == beehiveId);
 
             if (queen != null)
             {
-                this.queenRepository.Delete(queen);
+                this.queenRepository.HardDelete(queen);
             }
 
-            var inspections = this.inspectionRepository.All()
+            var inspections = this.inspectionRepository
+                .All()
                 .Where(i => i.BeehiveId == beehiveId)
                 .ToList();
 
-            if (inspections.Any())
+            foreach (var inspection in inspections)
             {
-                foreach (var inspection in inspections)
-                {
-                    this.inspectionRepository.Delete(inspection);
-                }
+                this.inspectionRepository.Delete(inspection);
             }
 
-            var treatments = this.treatedBeehiveRepository.All()
+            var treatments = this.treatedBeehiveRepository
+                .All()
                 .Where(tb => tb.BeehiveId == beehiveId)
                 .Select(tb => tb.Treatment)
                 .ToList();
 
-            if (treatments.Any())
+            foreach (var treatment in treatments)
             {
-                foreach (var treatment in treatments)
-                {
-                    this.treatmentRepository.Delete(treatment);
-                }
+                this.treatmentRepository.Delete(treatment);
             }
 
-            var harvests = this.harvestedBeehiveRepository.All()
+            var harvests = this.harvestedBeehiveRepository
+                .All()
                 .Where(hb => hb.BeehiveId == beehiveId)
                 .Select(hb => hb.Harvest)
                 .ToList();
 
-            if (harvests.Any())
+            foreach (var harvest in harvests)
             {
-                foreach (var harvest in harvests)
-                {
-                    this.harvestRepository.Delete(harvest);
-                }
+                this.harvestRepository.Delete(harvest);
             }
 
-            var allBeehiveHelpersToDelete = this.beehiveHelperRepository.All()
+            var allBeehiveHelpersToDelete = this.beehiveHelperRepository
+                .All()
                 .Where(x => x.BeehiveId == beehiveId);
 
             foreach (var beehiveHelper in allBeehiveHelpersToDelete)
@@ -158,8 +155,9 @@
 
             if (queen != null)
             {
-                var allQueenHelpersToDelete = this.queenHelperRepository.All()
-                .Where(x => x.QueenId == queen.Id);
+                var allQueenHelpersToDelete = this.queenHelperRepository
+                    .All()
+                    .Where(x => x.QueenId == queen.Id);
 
                 foreach (var queenHelper in allQueenHelpersToDelete)
                 {
@@ -215,21 +213,19 @@
 
         public int GetAllBeehivesCountByApiaryId(int apiaryId) =>
             this.beehiveRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(b => b.ApiaryId == apiaryId)
                 .Count();
 
         public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0)
         {
             var query = this.beehiveRepository
-                .AllAsNoTracking()
+                .All()
                 .OrderByDescending(b => b.IsBookMarked)
                 .ThenBy(b => b.Apiary.Number)
                 .ThenBy(b => b.Number)
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Skip(skip);
-
-            var queryAsList = query.ToList();
 
             if (take.HasValue)
             {
@@ -242,13 +238,14 @@
 
         public int GetAllUserBeehivesCount(string userId) =>
             this.beehiveRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Count();
 
         public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
         {
-            var query = this.beehiveRepository.All()
+            var query = this.beehiveRepository
+                .All()
                 .OrderByDescending(b => b.IsBookMarked)
                 .ThenBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId)
@@ -263,42 +260,49 @@
         }
 
         public T GetBeehiveById<T>(int beehiveId) =>
-            this.beehiveRepository.AllAsNoTracking()
+            this.beehiveRepository
+                .All()
                 .Include(x => x.Queen.User)
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetBeehiveIdByQueen(int queenId) =>
-            this.queenRepository.AllAsNoTracking()
+            this.queenRepository
+                .All()
                 .Include(x => x.User)
                 .Where(q => q.Id == queenId)
                 .FirstOrDefault().BeehiveId;
 
-        public T GetBeehiveByQueen<T>(int queenId)
+        public T GetBeehiveByQueenId<T>(int queenId)
         {
-            var id = this.queenRepository.AllAsNoTracking()
+            var beehiveId = this.queenRepository
+                .All()
                 .Include(x => x.User)
                 .Where(q => q.Id == queenId)
                 .FirstOrDefault().BeehiveId;
 
-            var beehive = this.beehiveRepository.AllAsNoTracking()
-                .Where(b => b.Id == id)
+            var beehive = this.beehiveRepository
+                .All()
+                .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
 
             return beehive;
         }
 
-        public T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber) =>
-            this.beehiveRepository.AllAsNoTracking()
+        public T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber)
+            => this.beehiveRepository
+                .All()
                 .Where(b => b.Apiary.Number == apiaryNumber && b.Number == beehiveNumber)
                 .To<T>()
                 .FirstOrDefault();
 
         public async Task<int?> BookmarkBeehiveAsync(int id)
         {
-            var beehive = this.beehiveRepository.All().FirstOrDefault(b => b.Id == id);
+            var beehive = this.beehiveRepository
+                .All()
+                .FirstOrDefault(b => b.Id == id);
 
             if (beehive == null)
             {

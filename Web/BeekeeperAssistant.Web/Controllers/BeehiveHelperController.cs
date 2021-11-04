@@ -63,7 +63,7 @@
                 return this.View(inputModel);
             }
 
-            await this.beehiveHelperService.Edit(userId, beehiveId, inputModel.Access);
+            await this.beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
 
             return this.Redirect($"/BeehiveHelper/All/{beehiveId}");
         }

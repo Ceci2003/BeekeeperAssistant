@@ -19,7 +19,7 @@
             this.beehiveHelperRepository = beehiveHelperRepository;
         }
 
-        public async Task Add(string userId, int beehiveId)
+        public async Task AddAsync(string userId, int beehiveId)
         {
             var beehiveHelper = new BeehiveHelper()
             {
@@ -31,14 +31,10 @@
             await this.beehiveHelperRepository.AddAsync(beehiveHelper);
         }
 
-        public Task Delete(string userId, int beehiveId)
+        public async Task EditAsync(string userId, int beehiveId, Access access)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task Edit(string userId, int beehiveId, Access access)
-        {
-            var beehiveHelper = this.beehiveHelperRepository.All()
+            var beehiveHelper = this.beehiveHelperRepository
+                .All()
                 .FirstOrDefault(x => x.UserId == userId && x.BeehiveId == beehiveId);
 
             beehiveHelper.Access = access;
@@ -50,7 +46,7 @@
         public IEnumerable<T> GetAllBeehiveHelpersByBeehiveId<T>(int beehiveId, int? take = null, int skip = 0)
         {
             var qurey = this.beehiveHelperRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(bh => bh.BeehiveId == beehiveId)
                 .Skip(skip);
 
@@ -63,26 +59,21 @@
         }
 
         public T GetBeehiveHelper<T>(string userId, int beehiveId)
-        {
-            var beehiveHelper = this.beehiveHelperRepository.All()
+            => this.beehiveHelperRepository
+                .All()
                 .Where(x => x.UserId == userId && x.BeehiveId == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
 
-            return beehiveHelper;
-        }
-
         public Access GetUserBeehiveAccess(string userId, int beehiveId)
-        {
-            var access = this.beehiveHelperRepository.All()
-                .FirstOrDefault(x => x.BeehiveId == beehiveId && x.UserId == userId);
-
-            return access.Access;
-        }
+            => this.beehiveHelperRepository
+                .All()
+                .FirstOrDefault(x => x.BeehiveId == beehiveId && x.UserId == userId)
+                .Access;
 
         public bool IsBeehiveHelper(string userId, int beehiveId)
-        {
-            return this.beehiveHelperRepository.All().Any(x => x.UserId == userId && x.BeehiveId == beehiveId);
-        }
+            => this.beehiveHelperRepository
+                .All()
+                .Any(x => x.UserId == userId && x.BeehiveId == beehiveId);
     }
 }

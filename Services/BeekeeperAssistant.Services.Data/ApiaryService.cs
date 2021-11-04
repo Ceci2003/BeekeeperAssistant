@@ -13,6 +13,7 @@
     {
         private readonly IDeletableEntityRepository<Apiary> apiaryRepository;
         private readonly IDeletableEntityRepository<Beehive> beehiveRepository;
+        private readonly IDeletableEntityRepository<Queen> queenRepository;
         private readonly IRepository<ApiaryHelper> apiaryHelpersReposiitory;
         private readonly IRepository<BeehiveHelper> beehiveHelpersReposiitory;
         private readonly IRepository<QueenHelper> queenHelpersReposiitory;
@@ -20,12 +21,14 @@
         public ApiaryService(
             IDeletableEntityRepository<Apiary> apiaryRepository,
             IDeletableEntityRepository<Beehive> beehiveRepository,
+            IDeletableEntityRepository<Queen> queenRepository,
             IRepository<ApiaryHelper> apiaryHelpersReposiitory,
             IRepository<BeehiveHelper> beehiveHelpersReposiitory,
             IRepository<QueenHelper> queenHelpersReposiitory)
         {
             this.apiaryRepository = apiaryRepository;
             this.beehiveRepository = beehiveRepository;
+            this.queenRepository = queenRepository;
             this.apiaryHelpersReposiitory = apiaryHelpersReposiitory;
             this.beehiveHelpersReposiitory = beehiveHelpersReposiitory;
             this.queenHelpersReposiitory = queenHelpersReposiitory;
@@ -57,7 +60,8 @@
         public async Task DeleteApiaryByIdAsync(int apiaryId)
         {
             // Delete all apiaryHelpers
-            var allApiaryHelpers = this.apiaryHelpersReposiitory.All()
+            var allApiaryHelpers = this.apiaryHelpersReposiitory
+                .All()
                 .Where(x => x.ApiaryId == apiaryId);
 
             foreach (var apiaryHelper in allApiaryHelpers)
@@ -82,7 +86,8 @@
             await this.beehiveHelpersReposiitory.SaveChangesAsync();
 
             // Delete all queenHelpers
-            var allQueenHelpers = this.apiaryRepository.All()
+            var allQueenHelpers = this.apiaryRepository
+                .All()
                 .Where(x => x.Id == apiaryId)
                 .SelectMany(x => x.Beehives)
                 .Select(x => x.Queen)
@@ -96,13 +101,20 @@
             await this.queenHelpersReposiitory.SaveChangesAsync();
 
             // Delete all beehives
-            var apiaryBeehives = this.beehiveRepository.All()
+            var apiaryBeehives = this.beehiveRepository
+                .All()
+                .Include(b => b.Queen)
                 .Where(b => b.ApiaryId == apiaryId)
                 .ToList();
 
             foreach (var beehive in apiaryBeehives)
             {
                 this.beehiveRepository.Delete(beehive);
+
+                if (beehive.QueenId.HasValue)
+                {
+                    this.queenRepository.HardDelete(beehive.Queen);
+                }
             }
 
             await this.beehiveRepository.SaveChangesAsync();
@@ -123,7 +135,8 @@
             ApiaryType apiaryType,
             string address)
         {
-            var apiary = this.apiaryRepository.All()
+            var apiary = this.apiaryRepository
+                .All()
                 .FirstOrDefault(a => a.Id == apiaryId);
 
             apiary.Number = number;
@@ -138,14 +151,14 @@
 
         public int GetAllUserApiariesCount(string userId) =>
             this.apiaryRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(a => a.CreatorId == userId)
                 .Count();
 
         public IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0)
         {
             var qurey = this.apiaryRepository
-                .AllAsNoTracking()
+                .All()
                 .OrderByDescending(x => x.IsBookMarked)
                 .ThenByDescending(x => x.CreatedOn)
                 .Where(a => a.CreatorId == userId)
@@ -160,41 +173,46 @@
         }
 
         public T GetApiaryById<T>(int apiaryId) =>
-            this.apiaryRepository.AllAsNoTracking()
+            this.apiaryRepository
+                .All()
                 .Where(a => a.Id == apiaryId)
                 .To<T>()
                 .FirstOrDefault();
 
         public string GetApiaryNumberByBeehiveId(int beehiveId) =>
-            this.beehiveRepository.AllAsNoTracking()
+            this.beehiveRepository
+                .All()
                 .Include(a => a.Apiary)
                 .FirstOrDefault(b => b.Id == beehiveId)
                 .Apiary
                 .Number;
 
         public int GetApiaryIdByBeehiveId(int beehiveId) =>
-            this.beehiveRepository.AllAsNoTracking()
+            this.beehiveRepository
+                .All()
                 .Include(a => a.Apiary)
                 .FirstOrDefault(b => b.Id == beehiveId)
                 .Apiary
                 .Id;
 
-        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId) =>
-            this.apiaryRepository.AllAsNoTracking()
+        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId)
+            => this.apiaryRepository
+                .All()
                 .Where(a => a.CreatorId == userId)
                 .OrderByDescending(a => a.CreatedOn)
                 .Select(a => new KeyValuePair<int, string>(a.Id, a.Number))
                 .ToList();
 
-        public T GetUserApiaryByNumber<T>(string userId, string number) =>
-            this.apiaryRepository.AllAsNoTracking()
+        public T GetUserApiaryByNumber<T>(string userId, string number)
+            => this.apiaryRepository
+                .All()
                 .Where(a => a.Number == number && a.CreatorId == userId)
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetApiaryIdByNumber(string apiaryNumber) =>
-            this.apiaryRepository
-                .AllAsNoTracking()
+        public int GetApiaryIdByNumber(string apiaryNumber)
+            => this.apiaryRepository
+                .All()
                 .FirstOrDefault(a => a.Number == apiaryNumber)
                 .Id;
 
@@ -204,8 +222,9 @@
                .FirstOrDefault(a => a.Id == apiaryId)
                .Number;
 
-        public T GetUserApiaryByBeehiveId<T>(int beehiveId) =>
-            this.beehiveRepository.AllAsNoTracking()
+        public T GetUserApiaryByBeehiveId<T>(int beehiveId)
+            => this.beehiveRepository
+                .All()
                 .Include(a => a.Apiary)
                 .Where(b => b.Id == beehiveId)
                 .Select(b => b.Apiary)
@@ -213,19 +232,17 @@
                 .FirstOrDefault();
 
         public T GetApiaryByNumber<T>(string apiaryNumber)
-        {
-            var apiary = this.apiaryRepository
+            => this.apiaryRepository
                 .All()
                 .Where(a => a.Number == apiaryNumber)
                 .To<T>()
                 .FirstOrDefault();
 
-            return apiary;
-        }
-
         public bool IsApiaryCreator(string userId, int apiaryId)
         {
-            var apiary = this.apiaryRepository.All().FirstOrDefault(a => a.Id == apiaryId);
+            var apiary = this.apiaryRepository
+                .All()
+                .FirstOrDefault(a => a.Id == apiaryId);
 
             if (apiary == null)
             {
@@ -237,7 +254,8 @@
 
         public async Task BookmarkApiaryAsync(int apiaryId)
         {
-            var apiary = this.apiaryRepository.All()
+            var apiary = this.apiaryRepository
+                .All()
                 .FirstOrDefault(a => a.Id == apiaryId);
 
             if (apiary == null)
@@ -251,8 +269,8 @@
         }
 
         public string GetApiaryCreatorIdByApiaryId(int apiaryId)
-        {
-            return this.apiaryRepository.All().FirstOrDefault(x => x.Id == apiaryId).CreatorId;
-        }
+            => this.apiaryRepository
+                .All()
+                .FirstOrDefault(x => x.Id == apiaryId).CreatorId;
     }
 }

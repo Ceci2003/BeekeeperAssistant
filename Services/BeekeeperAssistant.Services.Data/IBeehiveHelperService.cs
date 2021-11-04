@@ -7,11 +7,9 @@
 
     public interface IBeehiveHelperService
     {
-        Task Add(string userId, int beehiveId);
+        Task AddAsync(string userId, int beehiveId);
 
-        Task Delete(string userId, int beehiveId);
-
-        Task Edit(string userId, int beehiveId, Access access);
+        Task EditAsync(string userId, int beehiveId, Access access);
 
         T GetBeehiveHelper<T>(string userId, int beehiveId);
 

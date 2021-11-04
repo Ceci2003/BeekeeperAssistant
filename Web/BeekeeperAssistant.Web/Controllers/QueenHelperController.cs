@@ -30,7 +30,7 @@
 
         public IActionResult All(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveByQueen<BeehiveViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(id);
 
             var viewModel = new AllQueenHelpersViewModel
             {
@@ -49,7 +49,7 @@
             var inputModel = this.queenHelperService.GetQueenHelper<EditQueenHelperInputModel>(userId, queenId);
             inputModel.QueenId = queenId;
 
-            var beehive = this.beehiveService.GetBeehiveByQueen<BeehiveViewModel>(queenId);
+            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(queenId);
             inputModel.BeehiveId = beehive.Id;
             inputModel.BeehiveNumber = beehive.Number;
             inputModel.ApiaryNumber = beehive.ApiaryNumber;
@@ -66,7 +66,7 @@
                 inputModel.UserUserName = user.UserName;
                 inputModel.QueenId = queenId;
 
-                var beehive = this.beehiveService.GetBeehiveByQueen<BeehiveViewModel>(queenId);
+                var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(queenId);
                 inputModel.BeehiveId = beehive.Id;
                 inputModel.BeehiveNumber = beehive.Number;
                 inputModel.ApiaryNumber = beehive.ApiaryNumber;
@@ -74,7 +74,7 @@
                 return this.View(inputModel);
             }
 
-            await this.queenHelperService.Edit(userId, queenId, inputModel.Access);
+            await this.queenHelperService.EditAsync(userId, queenId, inputModel.Access);
 
             return this.Redirect($"/QueenHelper/All/{queenId}");
         }

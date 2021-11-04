@@ -1,12 +1,13 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
-    using BeekeeperAssistant.Data.Common.Repositories;
-    using BeekeeperAssistant.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using BeekeeperAssistant.Services.Mapping;
     using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
 
     public class QueenHelperService : IQueenHelperService
     {
@@ -17,9 +18,10 @@
             this.queenHelperRepository = queenHelperRepository;
         }
 
-        public async Task Edit(string userId, int queenId, Access access)
+        public async Task EditAsync(string userId, int queenId, Access access)
         {
-            var queenHelper = this.queenHelperRepository.All()
+            var queenHelper = this.queenHelperRepository
+                .All()
                 .FirstOrDefault(x => x.UserId == userId && x.QueenId == queenId);
 
             queenHelper.Access = access;
@@ -31,7 +33,7 @@
         public IEnumerable<T> GetAllQueenByQueenId<T>(int queenId, int? take = null, int skip = 0)
         {
             var qurey = this.queenHelperRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(bh => bh.QueenId == queenId)
                 .Skip(skip);
 
@@ -45,7 +47,8 @@
 
         public T GetQueenHelper<T>(string userId, int queenId)
         {
-            var queenHelper = this.queenHelperRepository.All()
+            var queenHelper = this.queenHelperRepository
+                .All()
                 .Where(x => x.UserId == userId && x.QueenId == queenId)
                 .To<T>()
                 .FirstOrDefault();
@@ -55,7 +58,8 @@
 
         public Access GetUserQueenAccess(string userId, int queenId)
         {
-            var access = this.queenHelperRepository.All()
+            var access = this.queenHelperRepository
+                .All()
                 .FirstOrDefault(x => x.QueenId == queenId && x.UserId == userId);
 
             return access.Access;

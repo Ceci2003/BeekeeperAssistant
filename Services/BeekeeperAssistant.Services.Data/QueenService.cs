@@ -30,7 +30,9 @@
 
         public async Task BookmarkQueenAsync(int queenId)
         {
-            var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
+            var queen = this.queenRepository
+                .All()
+                .FirstOrDefault(q => q.Id == queenId);
 
             if (queen == null)
             {
@@ -84,9 +86,10 @@
                 .Select(b => b.ApiaryId)
                 .FirstOrDefault();
 
-            var allApiaryHelpersIds = this.apiaryHelperRepository.All()
-               .Where(x => x.ApiaryId == apiaryId)
-               .Select(x => x.UserId);
+            var allApiaryHelpersIds = this.apiaryHelperRepository
+                .All()
+                .Where(x => x.ApiaryId == apiaryId)
+                .Select(x => x.UserId);
 
             foreach (var helperId in allApiaryHelpersIds)
             {
@@ -106,7 +109,8 @@
 
         public async Task<int> DeleteQueenAsync(int queenId)
         {
-            var allQueenHelpersToDelete = this.queenHelperRepository.All()
+            var allQueenHelpersToDelete = this.queenHelperRepository
+                .All()
                 .Where(x => x.QueenId == queenId);
 
             foreach (var queenHelpers in allQueenHelpersToDelete)
@@ -116,9 +120,13 @@
 
             await this.queenHelperRepository.SaveChangesAsync();
 
-            var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
+            var queen = this.queenRepository
+                .All()
+                .FirstOrDefault(q => q.Id == queenId);
+
             this.queenRepository.HardDelete(queen);
             await this.queenRepository.SaveChangesAsync();
+
             return queen.BeehiveId;
         }
 
@@ -133,7 +141,9 @@
             QueenColor queenColor,
             QueenBreed queenBreed)
         {
-            var queen = this.queenRepository.All().FirstOrDefault(q => q.Id == queenId);
+            var queen = this.queenRepository
+                .All()
+                .FirstOrDefault(q => q.Id == queenId);
 
             queen.FertilizationDate = fertilizationDate;
             queen.GivingDate = givingDate;
@@ -150,7 +160,8 @@
 
         public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)
         {
-            var query = this.queenRepository.AllAsNoTracking()
+            var query = this.queenRepository
+                .All()
                 .OrderByDescending(q => q.IsBookMarked)
                 .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Skip(skip);
 
@@ -163,19 +174,21 @@
         }
 
         public int GetAllUserQueensCount(string userId)
-        {
-            var count = this.queenRepository.AllAsNoTracking().Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Count();
-            return count;
-        }
+            => this.queenRepository
+                .All()
+                .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false)
+                .Count();
 
         public T GetQueenByBeehiveId<T>(int beehiveId) =>
-            this.queenRepository.AllAsNoTracking()
+            this.queenRepository
+                .All()
                 .Where(q => q.BeehiveId == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
 
         public T GetQueenById<T>(int queenId) =>
-            this.queenRepository.AllAsNoTracking()
+            this.queenRepository
+                .AllAsNoTracking()
                 .Where(q => q.Id == queenId)
                 .To<T>()
                 .FirstOrDefault();

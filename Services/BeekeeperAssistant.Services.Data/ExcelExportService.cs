@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+
     using BeekeeperAssistant.Services.Data.Models;
     using OfficeOpenXml;
     using OfficeOpenXml.Style;

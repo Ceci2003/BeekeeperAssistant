@@ -9,8 +9,7 @@
 
     public interface IQueenHelperService
     {
-
-        Task Edit(string userId, int queenId, Access access);
+        Task EditAsync(string userId, int queenId, Access access);
 
         T GetQueenHelper<T>(string userId, int queenId);
 

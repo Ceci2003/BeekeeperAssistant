@@ -242,10 +242,14 @@
             ws.Cells["A6:B6"].Style.Font.Bold = true;
             ws.Cells["A6:B6"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A6"].Value = "Основна информация:";
-            ws.Cells["A7"].Value = "Предприети действия:"; ws.Cells["B7"].Value = inspection.BeeActivity;
-            ws.Cells["A8"].Value = "Маса на кошера(кг.):"; ws.Cells["B8"].Value = inspection.Weight;
-            ws.Cells["A9"].Value = "Температура на кошера(t°):"; ws.Cells["B9"].Value = inspection.HiveTemperature;
-            ws.Cells["A10"].Value = "Влажност на кошера(%):"; ws.Cells["B10"].Value = inspection.HiveHumidity;
+            ws.Cells["A7"].Value = "Предприети действия:";
+            ws.Cells["B7"].Value = inspection.BeeActivity;
+            ws.Cells["A8"].Value = "Маса на кошера(кг.):";
+            ws.Cells["B8"].Value = inspection.Weight;
+            ws.Cells["A9"].Value = "Температура на кошера(t°):";
+            ws.Cells["B9"].Value = inspection.HiveTemperature;
+            ws.Cells["A10"].Value = "Влажност на кошера(%):";
+            ws.Cells["B10"].Value = inspection.HiveHumidity;
 
             if (!inspection.IncludeQueenSection)
             {
@@ -259,10 +263,14 @@
             ws.Cells["A12:B12"].Style.Font.Bold = true;
             ws.Cells["A12:B12"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A12"].Value = "Секция майка";
-            ws.Cells["A13"].Value = "Забелязана майка:"; ws.Cells["B13"].Value = inspection.QueenSeen;
-            ws.Cells["A14"].Value = "Маточници:"; ws.Cells["B14"].Value = inspection.QueenCells;
-            ws.Cells["A15"].Value = "Работен статус на майката:"; ws.Cells["B15"].Value = inspection.QueenWorkingStatus;
-            ws.Cells["A16"].Value = "Сила на майката:"; ws.Cells["B16"].Value = inspection.QueenPowerStatus;
+            ws.Cells["A13"].Value = "Забелязана майка:";
+            ws.Cells["B13"].Value = inspection.QueenSeen;
+            ws.Cells["A14"].Value = "Маточници:";
+            ws.Cells["B14"].Value = inspection.QueenCells;
+            ws.Cells["A15"].Value = "Работен статус на майката:";
+            ws.Cells["B15"].Value = inspection.QueenWorkingStatus;
+            ws.Cells["A16"].Value = "Сила на майката:";
+            ws.Cells["B16"].Value = inspection.QueenPowerStatus;
 
             if (!inspection.IncludeBrood)
             {
@@ -276,9 +284,12 @@
             ws.Cells["A18:B18"].Style.Font.Bold = true;
             ws.Cells["A18:B18"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A18"].Value = "Секция пило";
-            ws.Cells["A19"].Value = "Яйца:"; ws.Cells["B19"].Value = inspection.Eggs;
-            ws.Cells["A20"].Value = "Запечатано:"; ws.Cells["B20"].Value = inspection.ClappedBrood;
-            ws.Cells["A21"].Value = "Излюпващо се:"; ws.Cells["B21"].Value = inspection.UnclappedBrood;
+            ws.Cells["A19"].Value = "Яйца:";
+            ws.Cells["B19"].Value = inspection.Eggs;
+            ws.Cells["A20"].Value = "Запечатано:";
+            ws.Cells["B20"].Value = inspection.ClappedBrood;
+            ws.Cells["A21"].Value = "Излюпващо се:";
+            ws.Cells["B21"].Value = inspection.UnclappedBrood;
 
             if (!inspection.IncludeFramesWith)
             {
@@ -292,10 +303,14 @@
             ws.Cells["A23:B23"].Style.Font.Bold = true;
             ws.Cells["A23:B23"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A23"].Value = "Секция пити";
-            ws.Cells["A24"].Value = "С пчели:"; ws.Cells["B24"].Value = inspection.FramesWithBees;
-            ws.Cells["A25"].Value = "С пило:"; ws.Cells["B25"].Value = inspection.FramesWithBrood;
-            ws.Cells["A26"].Value = "С мед:"; ws.Cells["B26"].Value = inspection.FramesWithHoney;
-            ws.Cells["A27"].Value = "С Прашец:"; ws.Cells["B27"].Value = inspection.FramesWithPollen;
+            ws.Cells["A24"].Value = "С пчели:";
+            ws.Cells["B24"].Value = inspection.FramesWithBees;
+            ws.Cells["A25"].Value = "С пило:";
+            ws.Cells["B25"].Value = inspection.FramesWithBrood;
+            ws.Cells["A26"].Value = "С мед:";
+            ws.Cells["B26"].Value = inspection.FramesWithHoney;
+            ws.Cells["A27"].Value = "С Прашец:";
+            ws.Cells["B27"].Value = inspection.FramesWithPollen;
 
             if (!inspection.IncludeActivity)
             {
@@ -359,9 +374,12 @@
             ws.Cells["A46:B46"].Style.Font.Bold = true;
             ws.Cells["A46:B46"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A46"].Value = "Секция метеорологични";
-            ws.Cells["A47"].Value = "Условия"; ws.Cells["B47"].Value = inspection.Conditions;
-            ws.Cells["A48"].Value = "Температура(t°):"; ws.Cells["B48"].Value = inspection.WeatherTemperature;
-            ws.Cells["A49"].Value = "Влажност(%):"; ws.Cells["B49"].Value = inspection.WeatherHumidity;
+            ws.Cells["A47"].Value = "Условия";
+            ws.Cells["B47"].Value = inspection.Conditions;
+            ws.Cells["A48"].Value = "Температура(t°):";
+            ws.Cells["B48"].Value = inspection.WeatherTemperature;
+            ws.Cells["A49"].Value = "Влажност(%):";
+            ws.Cells["B49"].Value = inspection.WeatherHumidity;
 
             ws.Cells["A51:B51"].Merge = true;
             ws.Cells["A51:B51"].Style.Font.Bold = true;

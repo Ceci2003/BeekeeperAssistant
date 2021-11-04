@@ -12,6 +12,7 @@
     using BeekeeperAssistant.Data.Seeding;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Services.Messaging;
     using BeekeeperAssistant.Web.Infrastructure.RouteConstraints;
@@ -87,12 +88,15 @@
             services.AddTransient<IEnumerationMethodsService, EnumerationMethodsService>();
             services.AddTransient<IBeehiveHelperService, BeehiveHelperService>();
             services.AddTransient<IQueenHelperService, QueenHelperService>();
+            services.AddTransient<IExcelExportService, ExcelExportService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(ApiaryDataExcelExportModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

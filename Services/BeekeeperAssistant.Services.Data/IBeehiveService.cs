@@ -48,7 +48,7 @@
 
         int GetBeehiveIdByQueen(int queenId);
 
-        T GetBeehiveByQueen<T>(int queenId);
+        T GetBeehiveByQueenId<T>(int queenId);
 
         int GetAllUserBeehivesCount(string userId);
 

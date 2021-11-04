@@ -13,12 +13,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.8.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="QuickChart" Version="2.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.312" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\BeekeeperAssistant.Data.Models\BeekeeperAssistant.Data.Models.csproj" />
+    <ProjectReference Include="..\BeekeeperAssistant.Services.Mapping\BeekeeperAssistant.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

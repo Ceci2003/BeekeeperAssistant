@@ -88,7 +88,7 @@
                 if (inputModel.AllBeehives)
                 {
                     var beehivesIds = apiaryBeehives.Select(b => b.Id).ToList();
-                    await this.treatmentService.CreateTreatment(
+                    await this.treatmentService.CreateTreatmentAsync(
                     currentUser.Id,
                     inputModel.DateOfTreatment,
                     inputModel.Name,
@@ -113,7 +113,7 @@
                         }
                     }
 
-                    await this.treatmentService.CreateTreatment(
+                    await this.treatmentService.CreateTreatmentAsync(
                             currentUser.Id,
                             inputModel.DateOfTreatment,
                             inputModel.Name,
@@ -130,7 +130,7 @@
             }
             else
             {
-                await this.treatmentService.CreateTreatment(
+                await this.treatmentService.CreateTreatmentAsync(
                 currentUser.Id,
                 inputModel.DateOfTreatment,
                 inputModel.Name,

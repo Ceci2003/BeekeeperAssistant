@@ -70,7 +70,7 @@
                 return this.View(inputModel);
             }
 
-            await this.apiaryHelperService.Add(user.Id, id);
+            await this.apiaryHelperService.AddAsync(user.Id, id);
 
             // var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
             var helper = await this.userManager.FindByNameAsync(inputModel.UserName);
@@ -99,7 +99,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(string userId, int apiaryId)
         {
-            await this.apiaryHelperService.Delete(userId, apiaryId);
+            await this.apiaryHelperService.DeleteAsync(userId, apiaryId);
             var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
             return this.Redirect($"/ApiaryHelper/All/{apiaryNumber}");
         }
@@ -123,7 +123,7 @@
                 return this.View(inputModel);
             }
 
-            await this.apiaryHelperService.Edit(userId, apiaryId, inputModel.Access);
+            await this.apiaryHelperService.EditAsync(userId, apiaryId, inputModel.Access);
 
             return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
         }

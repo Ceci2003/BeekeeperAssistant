@@ -13,7 +13,7 @@
     {
         [Required]
         [Display(Name = "Номер")]
-        public int Number { get; set; }
+        public int Number { get; set; } = 1;
 
         [Required]
         [Display(Name = "Система")]

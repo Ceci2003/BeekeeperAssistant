@@ -145,7 +145,6 @@
 
         public Access GetUserApiaryAccess(string userId, int apiaryId)
         {
-
             // TODO: Make everywhere like this!!!
             var apiaryInfo = this.apiaryHelperRepository.All()
                 .Select(a => new

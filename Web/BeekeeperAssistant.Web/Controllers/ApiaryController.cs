@@ -16,8 +16,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
-    using OfficeOpenXml;
-    using OfficeOpenXml.Style;
 
     [Authorize]
     public class ApiaryController : BaseController
@@ -30,6 +28,7 @@
         private readonly IForecastService forecastService;
         private readonly IApiaryHelperService apiaryHelperService;
         private readonly IBeehiveHelperService beehiveHelperService;
+        private readonly IExcelExportService excelExportService;
 
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
@@ -39,7 +38,8 @@
             IConfiguration configuration,
             IForecastService forecastService,
             IApiaryHelperService apiaryHelperService,
-            IBeehiveHelperService beehiveHelperService)
+            IBeehiveHelperService beehiveHelperService,
+            IExcelExportService excelExportService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -49,6 +49,7 @@
             this.forecastService = forecastService;
             this.apiaryHelperService = apiaryHelperService;
             this.beehiveHelperService = beehiveHelperService;
+            this.excelExportService = excelExportService;
         }
 
         public async Task<IActionResult> All(int pageAllApiaries = 1, int pageHelperApiaries = 1)
@@ -111,8 +112,9 @@
 
         public async Task<IActionResult> ByNumber(string apiaryNumber, string tabPage, int page = 1)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
+
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             if (viewModel.CreatorId != currentUser.Id &&
                 !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id))
@@ -120,17 +122,24 @@
                 return this.BadRequest();
             }
 
-            viewModel.ApiaryAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite : this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, viewModel.Id);
+            viewModel.ApiaryAccess =
+                currentUser.Id == viewModel.CreatorId ?
+                Access.ReadWrite :
+                this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, viewModel.Id);
 
-            ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
-            viewModel.ForecastResult = forecastResult;
+            viewModel.ForecastResult =
+                await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
 
             viewModel.Beehives = this.beehiveService
-                .GetBeehivesByApiaryId<BeehiveViewModel>(viewModel.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+                .GetBeehivesByApiaryId<BeehiveViewModel>(
+                viewModel.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
 
             foreach (var beehive in viewModel.Beehives)
             {
-                beehive.BeehiveAccess = beehive.CreatorId == currentUser.Id ? Access.ReadWrite : this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
+                beehive.BeehiveAccess =
+                    beehive.CreatorId == currentUser.Id ?
+                    Access.ReadWrite :
+                    this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
             }
 
             var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
@@ -172,7 +181,14 @@
             }
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiaryNumber = await this.apiaryService.CreateUserApiaryAsync(currentUser.Id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
+
+            var apiaryNumber =
+                await this.apiaryService.CreateUserApiaryAsync(
+                    currentUser.Id,
+                    inputModel.Number,
+                    inputModel.Name,
+                    inputModel.ApiaryType,
+                    inputModel.Adress);
 
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
@@ -197,7 +213,13 @@
 
             inputModel.Number = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
 
-            var apiaryNumber = await this.apiaryService.EditApiaryByIdAsync(id, inputModel.Number, inputModel.Name, inputModel.ApiaryType, inputModel.Adress);
+            var apiaryNumber =
+                await this.apiaryService.EditApiaryByIdAsync(
+                    id,
+                    inputModel.Number,
+                    inputModel.Name,
+                    inputModel.ApiaryType,
+                    inputModel.Adress);
 
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
@@ -213,42 +235,10 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryDataViewModel>(currentUser.Id);
+            var exportResult = this.excelExportService.ExportAsExcelApiary(currentUser.Id);
 
-            ExcelPackage pck = new ExcelPackage();
-            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
-
-            ws.Cells["A1:B1"].Merge = true;
-            ws.Cells["A1"].Value = "Доклад - Кошери";
-            ws.Cells["A2:B2"].Merge = true;
-            ws.Cells["A2"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
-
-            ws.Cells["A4"].Value = "Номер";
-            ws.Cells["B4"].Value = "Адрес";
-            ws.Cells["C4"].Value = "Име";
-            ws.Cells["D4"].Value = "Вид";
-
-            // ws.Cells["E4"].Value = "Брой кошери";
-            ws.Cells["A4:E4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            ws.Cells["A4:E4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-            ws.Cells["A4:E4"].Style.Font.Color.SetColor(Color.White);
-
-            int rowIndex = 5;
-            foreach (var apiary in apiaries)
-            {
-                ws.Cells[$"A{rowIndex}"].Value = apiary.Number;
-                ws.Cells[$"B{rowIndex}"].Value = apiary.Adress;
-                ws.Cells[$"C{rowIndex}"].Value = apiary.Name == null ? "-" : apiary.Name;
-                ws.Cells[$"D{rowIndex}"].Value = apiary.ApiaryType;
-
-                // ws.Cells[$"D{rowIndex}"].Value = apiary.Beehives.ToList().Count();
-                rowIndex++;
-            }
-
-            ws.Cells["A:AZ"].AutoFitColumns();
-
-            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
-            return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            this.Response.Headers.Add("content-disposition", "attachment: filename=ExcelReport.xlsx");
+            return new FileContentResult(exportResult.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> Bookmark(int id)

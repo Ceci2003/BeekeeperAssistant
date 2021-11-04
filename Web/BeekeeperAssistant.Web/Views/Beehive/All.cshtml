@@ -77,7 +77,7 @@
                     </td>
                     <td class="edit">
                         <div>
-                            <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id">
+                            <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
                                 <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
                             <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">

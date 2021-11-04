@@ -229,6 +229,8 @@
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Skip(skip);
 
+            var queryAsList = query.ToList();
+
             if (take.HasValue)
             {
                 query = query.Take(take.Value);

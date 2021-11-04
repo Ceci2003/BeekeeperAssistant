@@ -1,8 +1,6 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
@@ -22,6 +20,5 @@
         IEnumerable<T> GetAllBeehiveHelpersByBeehiveId<T>(int beehiveId, int? take = null, int skip = 0);
 
         Access GetUserBeehiveAccess(string userId, int beehiveId);
-
     }
 }

@@ -10,9 +10,9 @@
         Requeened = 2,
         [Display(Name = "Разместени пити с пило")]
         SwapedBroodFrames = 3,
-        [Display(Name = "")]
+        [Display(Name = "Добавен мишепредпазител")]
         AddedEntranceReducer = 4,
-        [Display(Name = "")]
+        [Display(Name = "Премахнат мишепредпазител")]
         RemovedEntranceReducer = 5,
         [Display(Name = "Добавен магазин/корпус с пило")]
         AddedBroodSuper = 6,
@@ -38,9 +38,9 @@
         SplitHive = 16,
         [Display(Name = "Почистване на кошера")]
         CleanedHive = 17,
-        [Display(Name = "")]
+        [Display(Name = "Добавена табла")]
         AddedInnerCover = 18,
-        [Display(Name = "")]
+        [Display(Name = "Премахната табла")]
         RemovedInnerCover = 19,
         [Display(Name = "Добавена хранилка")]
         AddedFeeder = 20,
@@ -56,5 +56,7 @@
         AddedFrames = 25,
         [Display(Name = "Премахнати пити")]
         RemovedFrames = 26,
+        [Display(Name = "Няма")]
+        None = 27,
     }
 }

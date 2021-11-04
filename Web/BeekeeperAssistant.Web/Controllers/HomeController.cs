@@ -120,7 +120,7 @@
                 switch (year % 10)
                 {
                     case 0:
-                    case 5: queenColors.Add("'#4E79A7'"); break;
+                    case 5: queenColors.Add("'#689dd6'"); break;
                     case 1:
                     case 6: queenColors.Add("'#FFFFFF'"); break;
                     case 2:
@@ -135,14 +135,14 @@
             if (beehives.Count() - queens.Count() > 0)
             {
                 queensCountByGivingDate.Add(0, beehives.Count() - queens.Count());
-                queenColors.Add("'#7B7B7B'");
+                queenColors.Add("'#d3d3d3'");
             }
 
             var queensCountByGivingDateChart = this.quickChartService.ImageUrl(
                 "pie",
                 queensCountByGivingDate.Values.ToList(),
                 queenColors.ToArray(),
-                "'#110400'");
+                "'#7B7B7B'");
             viewModel.QueenChartColors = queenColors;
             viewModel.QueensCountByGivingDate = queensCountByGivingDate;
             viewModel.QueensCountByGivingDateChartUrl = queensCountByGivingDateChart;

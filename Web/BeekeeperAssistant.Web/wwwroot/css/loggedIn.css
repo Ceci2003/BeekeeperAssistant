@@ -67,6 +67,7 @@ button::selection {
   --gray-background: #f1f2f3;
   --white: #ffffff;
   --lightgray: #d3d3d3;
+  --darkgray: #615b5b;
   --apiary-color: #17a2b8;
   --apiary-color-hover: #6ce7e3;
   --beehive-color: #f29422;
@@ -896,6 +897,28 @@ textarea {
   background-color: var(--queen-color);
 }
 
+.group-box {
+  border: 2px solid var(--lightgray);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.group-box h1 {
+  position: absolute;
+  top: 112px;
+  font-size: 16px;
+  font-weight: 500;
+  background: var(--white);
+  padding: 0 8px;
+  margin-left: -8px;
+}
+
+.form-box form .group-box .input-group {
+  width: 290px;
+  margin-top: 5px;
+}
+
 /* Form sections animation */
 .open-section {
   background-color: var(--white);
@@ -1235,6 +1258,7 @@ textarea {
   justify-content: flex-start;
   height: 25px;
   border-top: 1px solid lightgray;
+  color: var(--darkgray);
 }
 
 .dashboard-chart-card .legend-row:last-child {
@@ -1618,9 +1642,21 @@ input.input-validation-error {
 input[readonly] {
   background-color: var(--gray-background);
 }
+
 .field-required::before {
   content: "*";
   color: var(--red);
   font-size: 16px;
   font-weight: bold;
+}
+
+.field-required-checkbox::before {
+  content: "*";
+  color: var(--red);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.field-required-checkbox .field-required::before {
+  content: none;
 }

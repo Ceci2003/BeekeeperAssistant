@@ -24,7 +24,8 @@
                 <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
             </li>
             <li class="breadcrumb-item">
-                <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
+                <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId"
+                asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
             </li>
             <li class="breadcrumb-item active">@ViewData["Title"]</li>
         </ul>
@@ -40,7 +41,7 @@
     }
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -51,7 +52,8 @@
         <form asp-controller="Inspection" asp-action="Create">
             @if (Model.BeehiveId != null)
             {
-                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Inspections">
+                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId"
+                asp-route-tabPage="Inspections">
                     <i class="fas fa-arrow-left"></i>
                 </a>
             }
@@ -92,8 +94,8 @@
             </div>
 
             <div class="input-group form-checkbox">
-                <label>
-                    <input asp-for="Swarmed" /> @Html.DisplayNameFor(model => model.Swarmed)
+                <label class="field-required-checkbox">
+                    @Html.DisplayNameFor(model => model.Swarmed) <input asp-for="Swarmed" />
                 </label>
             </div>
             <div class="row-form-group">
@@ -104,7 +106,7 @@
                 <div class="input-group">
                     <label asp-for="BeehiveTemperament"></label>
                     <select asp-for="BeehiveTemperament"
-                            asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
+                        asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
                 </div>
             </div>
             <div class="input-group max">
@@ -129,9 +131,8 @@
             <div class="section-button" id="btnQueenSectionSection" onclick="formSection(event)">Майка</div>
             <div id="QueenSectionSection" class="form-check-section row-form-group" style="display: none;">
                 <div class="input-group form-checkbox">
-                    <label>
-                        <input asp-for="QueenSeen" /> @Html.DisplayNameFor(model =>
-model.QueenSeen)
+                    <label class="field-required-checkbox">
+                        @Html.DisplayNameFor(model => model.QueenSeen) <input asp-for="QueenSeen" />
                     </label>
                 </div>
                 <div class="input-group">
@@ -141,7 +142,7 @@ model.QueenSeen)
                 <div class="input-group">
                     <label asp-for="QueenWorkingStatus"></label>
                     <select asp-for="QueenWorkingStatus"
-                            asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
+                        asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
                 </div>
                 <div class="input-group">
                     <label asp-for="QueenPowerStatus"></label>
@@ -152,20 +153,18 @@ model.QueenSeen)
             <div class="section-button" id="btnBroodSection" onclick="formSection(event)">Пило</div>
             <div id="BroodSection" class="form-check-section row-form-group" style="display: none;">
                 <div class="input-group form-checkbox">
-                    <label>
-                        <input asp-for="Eggs" /> @Html.DisplayNameFor(model => model.Eggs)
+                    <label class="field-required-checkbox">
+                        @Html.DisplayNameFor(model => model.Eggs) <input asp-for="Eggs" />
                     </label>
                 </div>
                 <div class="input-group form-checkbox">
-                    <label>
-                        <input asp-for="ClappedBrood" /> @Html.DisplayNameFor(model =>
-model.ClappedBrood)
+                    <label class="field-required-checkbox">
+                        @Html.DisplayNameFor(model => model.ClappedBrood) <input asp-for="ClappedBrood" />
                     </label>
                 </div>
                 <div class="input-group form-checkbox">
-                    <label>
-                        <input asp-for="UnclappedBrood" /> @Html.DisplayNameFor(model =>
-model.UnclappedBrood)
+                    <label class="field-required-checkbox">
+                        @Html.DisplayNameFor(model => model.UnclappedBrood) <input asp-for="UnclappedBrood" />
                     </label>
                 </div>
             </div>

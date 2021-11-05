@@ -3,12 +3,13 @@
     public static class GlobalConstants
     {
         public const string SystemName = "BeekeeperAssistant";
-
         public const string AdministratorRoleName = "Administrator";
-
         public const string RequiredMessage = "Полетата с * са задължителни!";
-
         public const string RequiredMessageWithParam = "Полето {0} е задължителн0!";
+
+        // Creation status messages
+        public const string SuccessMessage = "SuccessMessage";
+        public const string ErrorMessage = "ErrorMessage";
 
         // Pagination values
         public const int ApiariesPerPage = 5;
@@ -30,5 +31,7 @@
         public static readonly string[] ApiaryTypeChartColors = new string[] { "'#ffffd4'", "'#fee391'", "'#fec44f'", "'#fe9929'", "'#ec7014'", "'#cc4c02'", "'#8c2d04'" };
         public static readonly string[] BeehivePowerChartColors = new string[] { "'#59A14F'", "'#fead34'", "'#DA3C3D'" };
         public static readonly string[] QueenYearChartColors = new string[] { "'#689dd6'", "'#FFFFFF'", "'#FFCD00'", "'#BF0A0A'", "'#007F0E'" };
+
+        
     }
 }

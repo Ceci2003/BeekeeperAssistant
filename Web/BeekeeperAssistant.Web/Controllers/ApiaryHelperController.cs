@@ -81,7 +81,8 @@
                   "Успешно добавен помощник",
                   $"Успешно добавихте <strong>{helper.UserName}</strong> като помощник на пчелин <strong>{inputModel.ApiaryNumber}</strong>.");
 
-            return this.Redirect($"/Apiary/{inputModel.ApiaryNumber}");
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен помощник!";
+            return this.Redirect($"/ApiaryHelper/All/{id}");
         }
 
         public IActionResult All(int id)
@@ -100,8 +101,10 @@
         public async Task<IActionResult> Delete(string userId, int apiaryId)
         {
             await this.apiaryHelperService.DeleteAsync(userId, apiaryId);
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
-            return this.Redirect($"/ApiaryHelper/All/{apiaryNumber}");
+            // var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
+
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрит помощник!";
+            return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
         }
 
         public IActionResult Edit(string userId, int apiaryId)
@@ -125,6 +128,7 @@
 
             await this.apiaryHelperService.EditAsync(userId, apiaryId, inputModel.Access);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
             return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
         }
     }

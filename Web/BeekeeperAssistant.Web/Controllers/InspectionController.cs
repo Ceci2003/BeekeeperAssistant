@@ -5,7 +5,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
@@ -159,12 +159,14 @@
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, beehive.Id, inputModel);
 
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създадена инспекция!";
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehive.Id, tabPage = "Inspections" });
             }
             else
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, id.Value, inputModel);
 
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създадена инспекция!";
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = id.Value, tabPage = "Inspections" });
             }
         }
@@ -192,6 +194,7 @@
 
             await this.inspectionService.EditUserInspectionAsync(id, inputModel);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактирана инспекция!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Inspections" });
         }
 
@@ -208,6 +211,7 @@
 
             await this.inspectionService.DeleteInspectionAsync(id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрита инспекция!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inspection.BeehiveId, tabPage = "Inspections" });
         }
 

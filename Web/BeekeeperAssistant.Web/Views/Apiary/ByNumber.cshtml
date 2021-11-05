@@ -36,6 +36,13 @@
 
 <div class="tabs-body">
     <div id="Apiary" class="tabcontent" style="display: @if(Model.TabPage == "Apiary") {@block}">
+
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success fade-out" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="data-view">
             <div class="qr-code">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44302/Apiary/@Model.Number&size=255x255"
@@ -105,6 +112,12 @@
         </div>
     </div>
     <div id="Beehives" class="tabcontent" style="display: @if(Model.TabPage == "Beehives") {@block}">
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="page-controls">
             <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel" asp-route-id="@Model.Id">
                 <i class="fas fa-file-download"></i> Excel

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.BeehiveHelpers;
@@ -65,6 +65,7 @@
 
             await this.beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран помощник!";
             return this.Redirect($"/BeehiveHelper/All/{beehiveId}");
         }
     }

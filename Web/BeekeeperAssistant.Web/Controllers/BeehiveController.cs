@@ -246,6 +246,7 @@
                 inputModel.IsItMovable);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
@@ -277,6 +278,7 @@
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран кошер!";
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
@@ -292,6 +294,8 @@
             }
 
             var apiaryNumber = await this.beehiveService.DeleteBeehiveByIdAsync(id);
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
             return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
         }
 
@@ -323,7 +327,7 @@
             }
             else
             {
-                return this.RedirectToAction("All");
+                return this.RedirectToAction(nameof(this.All));
             }
         }
     }

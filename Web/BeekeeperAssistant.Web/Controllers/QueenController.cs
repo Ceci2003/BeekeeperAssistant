@@ -107,6 +107,7 @@
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно създадена майка!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
 
@@ -115,6 +116,7 @@
         {
             var beehiveId = await this.queenService.DeleteQueenAsync(id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрита майка!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
 
@@ -142,6 +144,7 @@
 
             var beehiveId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактирана майка!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
         }
 

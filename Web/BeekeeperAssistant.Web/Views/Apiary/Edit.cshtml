@@ -29,17 +29,16 @@
             </a>
             <h2>@ViewData["Title"]</h2>
             <div asp-validation-summary="All"></div>
-            <div class="input-apiary-number row-form-group">
+            <div class="input-apiary-number row-form-group group-box">
+                <h1>Номер на пчелин</h1>
                 <div class="input-group city-code">
                     <label asp-for="@Model.CityCode"></label>
                     <input type="text" asp-for="@Model.CityCode" />
-                    <span class="error-msg" asp-validation-for="@Model.CityCode"></span>
                 </div>
                 <span class="dash">-</span>
                 <div class="input-group">
                     <label asp-for="@Model.FarmNumber"></label>
                     <input type="text" asp-for="@Model.FarmNumber" />
-                    <span class="error-msg" asp-validation-for="@Model.FarmNumber"></span>
                 </div>
             </div>
             <div class="row-form-group">

@@ -79,7 +79,13 @@
                   GlobalConstants.SystemName,
                   currentUser.Email,
                   "Успешно добавен помощник",
-                  $"Успешно добавихте <strong>{helper.UserName}</strong> като помощник на пчелин <strong>{inputModel.ApiaryNumber}</strong>.");
+                  $"Успешно добавихте <strong>{helper.UserName}</strong>, като помощник на пчелин: <strong>{inputModel.ApiaryNumber}</strong>.");
+            await this.emailSender.SendEmailAsync(
+                  this.configuration["SendGrid:RecipientEmail"],
+                  GlobalConstants.SystemName,
+                  helper.Email,
+                  "Успешно добавен помощник",
+                  $"Успешно бяхте добавени, като помощник на пчелин: <strong>{inputModel.ApiaryNumber}</strong> от <strong>{currentUser.Email}</strong>.");
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен помощник!";
             return this.Redirect($"/ApiaryHelper/All/{id}");

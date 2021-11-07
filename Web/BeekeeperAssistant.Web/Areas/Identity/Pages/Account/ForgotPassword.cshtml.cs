@@ -38,7 +38,7 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Полето 'Имейл' е задължително!")]
             [EmailAddress]
             [Display(Name = "Имейл")]
             public string Email { get; set; }

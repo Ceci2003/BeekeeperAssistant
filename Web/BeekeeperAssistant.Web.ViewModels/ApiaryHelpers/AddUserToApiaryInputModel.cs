@@ -14,10 +14,6 @@
 
     public class AddUserToApiaryInputModel : IValidatableObject
     {
-        public int ApiaryId { get; set; }
-
-        public string ApiaryNumber { get; set; }
-
         [Display(Name = "Потребителско име")]
         [Required]
         public string UserName { get; set; }

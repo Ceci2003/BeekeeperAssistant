@@ -60,6 +60,12 @@
 
 <div class="tabs-body">
     <div id="Beehive" class="tabcontent" style="display: @if(Model.TabPage == "Beehive") {@block}">
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="data-view">
             <div class="qr-code">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255"
@@ -163,6 +169,12 @@
         </div>
     </div>
     <div id="Queen" class="tabcontent" style="display: @if(Model.TabPage == "Queen") {@block}">
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="queen-preview">
             @if (Model.HasQueen)
             {
@@ -232,8 +244,13 @@
             }
         </div>
     </div>
-    <div id="Inspections" class="tabcontent"
-         style="display: @if(Model.TabPage == "Inspections") {@block}">
+    <div id="Inspections" class="tabcontent" style="display: @if(Model.TabPage == "Inspections") {@block}">
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="harvests-data">
             @if (Model.BeehiveAccess == Access.ReadWrite)
             {
@@ -588,6 +605,12 @@
         </div>
     </div>
     <div id="Treatments" class="tabcontent" style="display: @if(Model.TabPage == "Treatments") {@block}">
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="harvests-data">
             @if (Model.BeehiveAccess == Access.ReadWrite)
             {
@@ -732,6 +755,12 @@
         </div>
     </div>
     <div id="Harvests" class="tabcontent" style="display: @if(Model.TabPage == "Harvests") {@block}">
+        @if (TempData[GlobalConstants.SuccessMessage] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData[GlobalConstants.SuccessMessage]
+            </div>
+        }
         <div class="harvests-data">
             @if (Model.BeehiveAccess == Access.ReadWrite)
             {

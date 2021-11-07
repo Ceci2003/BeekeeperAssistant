@@ -5,7 +5,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
@@ -125,12 +125,14 @@
                     await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, selectedIds);
                 }
 
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
                 return this.RedirectToAction("Index", "Home");
             }
             else
             {
                 await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
 
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
             }
         }
@@ -157,6 +159,7 @@
 
             await this.harvestService.EditHarvestAsync(id, inputModel);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран добив!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
         }
 
@@ -173,6 +176,7 @@
 
             await this.harvestService.DeleteHarvestAsync(id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит добив!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Harvests" });
         }
 

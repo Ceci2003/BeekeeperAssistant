@@ -5,7 +5,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
@@ -142,11 +142,12 @@
                 inputModel.Dose,
                 new List<int> { id.Value });
 
+                this.TempData[GlobalConstants.SuccessMessage] = "Успешно създадено третиране!";
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = id.Value, tabPage = "Treatments" });
             }
         }
 
-        public async Task<IActionResult> Edit(int id, int beehiveId)
+        public IActionResult Edit(int id, int beehiveId)
         {
             var inputModel = this.treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
 
@@ -177,6 +178,7 @@
                 inputModel.Quantity,
                 inputModel.Dose);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактирано третиране!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Treatments" });
         }
 
@@ -193,6 +195,7 @@
 
             await this.treatmentService.DeleteTreatmentAsync(id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрито третиране!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Treatments" });
         }
 

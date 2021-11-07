@@ -190,6 +190,8 @@
                     inputModel.ApiaryType,
                     inputModel.Adress);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
+
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
@@ -221,6 +223,7 @@
                     inputModel.ApiaryType,
                     inputModel.Adress);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
@@ -228,6 +231,8 @@
         public async Task<IActionResult> Delete(int id)
         {
             await this.apiaryService.DeleteApiaryByIdAsync(id);
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
             return this.RedirectToAction(nameof(this.All));
         }
 

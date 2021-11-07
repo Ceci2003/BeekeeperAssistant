@@ -127,6 +127,14 @@
             this.queenRepository.HardDelete(queen);
             await this.queenRepository.SaveChangesAsync();
 
+            var beehive = this.beehiveRepository.All()
+                .FirstOrDefault(b => b.Id == queen.BeehiveId);
+
+            beehive.QueenId = null;
+
+            this.beehiveRepository.Update(beehive);
+            await this.beehiveRepository.SaveChangesAsync();
+
             return queen.BeehiveId;
         }
 

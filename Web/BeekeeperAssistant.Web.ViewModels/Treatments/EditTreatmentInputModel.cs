@@ -12,7 +12,7 @@
 
     public class EditTreatmentInputModel : IMapFrom<Treatment>
     {
-        [Required]
+        [Required(ErrorMessage = "Полето 'Дата на третиране' е задължително!")]
         [Display(Name = "Дата на третиране")]
         public DateTime DateOfTreatment { get; set; }
 
@@ -22,23 +22,23 @@
         [Display(Name = "Бележка")]
         public string Note { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Превенция на' е задължително!")]
         [Display(Name = "Превенция на")]
         public string Disease { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Препарат' е задължително!")]
         [Display(Name = "Препарат")]
         public string Medication { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Въведете като' е задължително!")]
         [Display(Name = "Въведете като")]
         public InputAs InputAs { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Количество' е задължително!")]
         [Display(Name = "Количество")]
         public double Quantity { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Дозировка' е задължително!")]
         [Display(Name = "Дозировка")]
         public Dose Dose { get; set; }
 

@@ -15,23 +15,23 @@
         [Required]
         public int BeehiveId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Цвят' е задължително!")]
         [Display(Name = "Цвят")]
         public QueenColor Color { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Порода' е задължително!")]
         [Display(Name = "Порода")]
         public QueenBreed Breed { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Дата на олождане' е задължително!")]
         [Display(Name = "Дата на олождане")]
         public DateTime FertilizationDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Дата на придаване' е задължително!")]
         [Display(Name = "Дата на придаване")]
         public DateTime GivingDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Вид' е задължително!")]
         [Display(Name = "Вид")]
         public QueenType QueenType { get; set; }
 

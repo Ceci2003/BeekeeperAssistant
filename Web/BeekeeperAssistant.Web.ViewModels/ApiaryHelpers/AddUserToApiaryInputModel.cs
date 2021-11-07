@@ -18,8 +18,8 @@
 
         public string ApiaryNumber { get; set; }
 
+        [Required(ErrorMessage = "Полето 'Потребителско име' е задължително!")]
         [Display(Name = "Потребителско име")]
-        [Required]
         public string UserName { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

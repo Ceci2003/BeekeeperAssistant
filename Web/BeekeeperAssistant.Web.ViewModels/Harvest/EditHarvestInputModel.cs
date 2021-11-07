@@ -12,21 +12,21 @@
         [Display(Name = "Име")]
         public string HarvestName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Дата на добива' е задължително!")]
         [Display(Name = "Дата на добива")]
         public DateTime DateOfHarves { get; set; }
 
         [Display(Name = "Бележка")]
         public string Note { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Добит продукт' е задължително!")]
         [Display(Name = "Добит продукт")]
         public HarvestProductType HarvestProductType { get; set; }
 
         [Display(Name = "Вид мед")]
         public HoneyType HoneyType { get; set; }
 
-        [Display(Name = "Количество")]
+        [Required(ErrorMessage = "Полето 'Количество' е задължително!")]
         public string QuantityText { get; set; }
 
         public double Quantity { get; set; }

@@ -272,5 +272,8 @@
             => this.apiaryRepository
                 .All()
                 .FirstOrDefault(x => x.Id == apiaryId).CreatorId;
+
+        public int Count()
+            => this.apiaryRepository.All().Count();
     }
 }

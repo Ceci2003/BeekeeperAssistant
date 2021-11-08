@@ -76,6 +76,7 @@
             // Application services
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiId"]));
             services.AddTransient<IApiaryService, ApiaryService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IForecastService, ForecastService>();
             services.AddTransient<IQuickChartService, QuickChartService>();
             services.AddTransient<IApiaryNumberService, ApiaryNumberService>();

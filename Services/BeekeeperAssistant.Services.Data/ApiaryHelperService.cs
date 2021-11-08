@@ -189,6 +189,9 @@
                 .Where(ah => ah.UserId == userId)
                 .Count();
 
+        public int Count()
+            => this.apiaryHelperRepository.All().Count();
+
         public bool IsApiaryHelper(string userId, int apiaryId)
         {
             var apiaryHelper = this.apiaryHelperRepository

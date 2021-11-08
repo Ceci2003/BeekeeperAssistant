@@ -1,4 +1,7 @@
 ﻿@using BeekeeperAssistant.Common
+@{ 
+    string startClass = " start";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,31 @@
             </a>
         </section>
         <section class="navigations">
-            <section class="sidebar-dropdown start">
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <section class="sidebar-dropdown">
+                    <div class="primary apiaries-drop-btn">
+                        <span>Администрация</span>
+                        <i class="fas fa-angle-left"></i>
+                    </div>
+                    <div class="api-options hide">
+                        <a class="secondary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                            Табло
+                        </a>
+                        <a class="secondary" asp-area="Administration" asp-controller="" asp-action="">
+                            Пчелини
+                        </a>
+                        <a class="secondary" asp-area="Administration" asp-controller="" asp-action="">
+                            Кошери
+                        </a>
+                        <a class="secondary" asp-area="Administration" asp-controller="" asp-action="">
+                            Потребители
+                        </a>
+                    </div>
+                </section>
+
+            }
+            <section class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
                 <a class="primary" asp-area="" asp-controller="Home" asp-action="Index">
                     Табло
                 </a>

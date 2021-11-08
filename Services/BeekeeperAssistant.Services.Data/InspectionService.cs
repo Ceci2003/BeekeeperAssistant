@@ -36,9 +36,9 @@
                 BeehivePower = inputModel.BeehivePower,
                 BeehiveTemperament = inputModel.BeehiveTemperament,
                 BeehiveAction = inputModel.BeehiveAction,
-                Weight = inputModel.Weight,
-                HiveTemperature = inputModel.HiveTemperature,
-                HiveHumidity = inputModel.HiveHumidity,
+                Weight = inputModel.Weight ?? 0,
+                HiveTemperature = inputModel.HiveTemperature ?? 0,
+                HiveHumidity = inputModel.HiveHumidity ?? 0,
                 IncludeQueenSection = inputModel.IncludeQueenSection,
                 QueenSeen = inputModel.QueenSeen,
                 QueenCells = inputModel.QueenCells,
@@ -101,9 +101,9 @@
             inspection.BeehivePower = inputModel.BeehivePower;
             inspection.BeehiveTemperament = inputModel.BeehiveTemperament;
             inspection.BeehiveAction = inputModel.BeehiveAction;
-            inspection.Weight = inputModel.Weight;
-            inspection.HiveTemperature = inputModel.HiveTemperature;
-            inspection.HiveHumidity = inputModel.HiveHumidity;
+            inspection.Weight = inputModel.Weight ?? 0;
+            inspection.HiveTemperature = inputModel.HiveTemperature ?? 0;
+            inspection.HiveHumidity = inputModel.HiveHumidity ?? 0;
             inspection.IncludeQueenSection = inputModel.IncludeQueenSection;
             inspection.QueenSeen = inputModel.QueenSeen;
             inspection.QueenCells = inputModel.QueenCells;

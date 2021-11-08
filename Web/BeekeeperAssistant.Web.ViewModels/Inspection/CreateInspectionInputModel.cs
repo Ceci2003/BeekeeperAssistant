@@ -11,11 +11,11 @@
 
     public class CreateInspectionInputModel
     {
-        [Required]
-        [Display(Name="Дата на прегледа")]
+        [Required(ErrorMessage = "Полето 'Дата на прегледа' е задължително!")]
+        [Display(Name = "Дата на прегледа")]
         public DateTime DateOfInspection { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Полето 'Вид на прегледа' е задължително!")]
         [Display(Name = "Вид на прегледа")]
         public InspectionType InspectionType { get; set; }
 
@@ -36,13 +36,13 @@
         public BeehiveAction BeehiveAction { get; set; }
 
         [Display(Name = "Маса на кошера(кг.)")]
-        public double Weight { get; set; }
+        public double? Weight { get; set; }
 
         [Display(Name = "Температура на кошера(t°)")]
-        public double HiveTemperature { get; set; }
+        public double? HiveTemperature { get; set; }
 
         [Display(Name = "Влажност на кошера(%)")]
-        public double HiveHumidity { get; set; }
+        public double? HiveHumidity { get; set; }
 
         // Queen section
         [Display(Name = "Секция майка")]

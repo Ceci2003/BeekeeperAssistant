@@ -53,5 +53,7 @@
         int GetAllUserBeehivesCount(string userId);
 
         Task<int?> BookmarkBeehiveAsync(int id);
+
+        public int Count();
     }
 }

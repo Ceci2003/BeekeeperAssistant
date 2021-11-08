@@ -298,6 +298,9 @@
                 .To<T>()
                 .FirstOrDefault();
 
+        public int Count()
+            => this.beehiveRepository.All().Count();
+
         public async Task<int?> BookmarkBeehiveAsync(int id)
         {
             var beehive = this.beehiveRepository

@@ -51,12 +51,12 @@
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Полето 'Имейл' е задължително!")]
+            [EmailAddress(ErrorMessage = "Невалиден имейл")]
             [Display(Name = "Имейл")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Полето 'Парола' е задължително!")]
             [StringLength(100, ErrorMessage = "Паролата трябва да бъде от {2} до {1} символа.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Парола")]

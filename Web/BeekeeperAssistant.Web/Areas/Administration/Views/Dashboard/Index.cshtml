@@ -1,3 +1,75 @@
-﻿@{
-    this.ViewData["Title"] = "Admin dashboard";
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Dashboard.IndexViewModel
+@{
+    this.ViewData["Title"] = "Администрация";
 }
+
+<p>admin</p>
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <div class="dashboard-cards-list">
+        <div class="count-card">
+            <div class="count-card-body">
+                <a asp-controller="" asp-action="">
+                    <div>
+                        <p>@Model.AllUsersCount</p>
+                        <p>Регистрирани потребителя</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="count-card">
+            <div class="count-card-body">
+                <a asp-controller="Inspection" asp-action="All" style="pointer-events: none;">
+                    <div>
+                        <p>@Model.AllHelpersCount</p>
+                        <p>Добавени помощника</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="count-card">
+            <div class="count-card-body">
+                <a asp-controller="Harvest" asp-action="All" style="pointer-events: none;">
+                    <div>
+                        <p>@Model.AllAdministratorsCount</p>
+                        <p>Администратора</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-cards-list">
+        <div class="count-card">
+            <div class="count-card-body">
+                <a asp-controller="" asp-action="">
+                    <div>
+                        <p>@Model.AllApiariesCount</p>
+                        <p>Създадени пчелина</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="count-card">
+            <div class="count-card-body">
+                <a asp-controller="Inspection" asp-action="All" style="pointer-events: none;">
+                    <div>
+                        <p>@Model.AllBeehivesCount</p>
+                        <p>Създадени кошера</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

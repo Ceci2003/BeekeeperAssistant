@@ -52,7 +52,7 @@
         public class InputModel
         {
             [Required(ErrorMessage = "Полето 'Имейл' е задължително!")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Невалиден имейл")]
             [Display(Name = "Имейл")]
             public string Email { get; set; }
 

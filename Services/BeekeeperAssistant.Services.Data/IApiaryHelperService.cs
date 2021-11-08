@@ -27,5 +27,6 @@
 
         Access GetUserApiaryAccess(string userId, int apiaryId);
 
+        int Count();
     }
 }

@@ -191,7 +191,7 @@ button::selection {
 .sidebar-dropdown .primary {
   text-decoration: none;
   color: var(--white);
-  cursor: default;
+  cursor: pointer;
 }
 
 .sidebar-dropdown .primary a {
@@ -1191,14 +1191,16 @@ textarea {
 }
 
 /* count-add */
-.count-add-card {
+.count-add-card,
+.count-card {
   width: 270px;
   height: 140px;
   border: 1px solid var(--lightgray);
   margin-bottom: 30px;
 }
 
-.count-add-card-body {
+.count-add-card-body,
+.count-card-body {
   height: 100px;
   display: flex;
   justify-content: center;
@@ -1206,7 +1208,8 @@ textarea {
   flex-direction: column;
 }
 
-.count-add-card-body a {
+.count-add-card-body a,
+.count-card-body a {
   color: var(--blue-hover);
   display: inline-block;
   width: 100%;
@@ -1215,13 +1218,15 @@ textarea {
   padding: 20px 0;
 }
 
-.count-add-card-body a div {
+.count-add-card-body a div,
+.count-card-body a div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.count-add-card-body a div p:first-child {
+.count-add-card-body a div p:first-child,
+.count-card-body a div p:first-child {
   font-size: 30px;
 }
 
@@ -1239,6 +1244,13 @@ textarea {
   justify-content: space-around;
   align-items: center;
   padding: 10px 5px;
+}
+
+.count-card {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 /* chart card in dashboard */
@@ -1662,16 +1674,16 @@ input[readonly] {
 }
 
 .alert {
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
 }
 
 .alert-success {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }

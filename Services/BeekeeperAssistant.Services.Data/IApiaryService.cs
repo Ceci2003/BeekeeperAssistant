@@ -50,5 +50,7 @@
         int GetAllUserApiariesCount(string userId);
 
         string GetApiaryCreatorIdByApiaryId(int apiaryId);
+
+        public int Count();
     }
 }

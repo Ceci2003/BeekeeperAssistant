@@ -120,13 +120,13 @@
 
         public IActionResult Edit(string userId, int apiaryId)
         {
-            var inputModel = this.apiaryHelperService.GetApiaryHelper<EditBeehiveHelperInputModel>(userId, apiaryId);
+            var inputModel = this.apiaryHelperService.GetApiaryHelper<EditApiaryHelperInputModel>(userId, apiaryId);
             inputModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
             return this.View(inputModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditBeehiveHelperInputModel inputModel, string userId, int apiaryId)
+        public async Task<IActionResult> Edit(EditApiaryHelperInputModel inputModel, string userId, int apiaryId)
         {
             if (!this.ModelState.IsValid)
             {

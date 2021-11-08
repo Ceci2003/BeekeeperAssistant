@@ -11,7 +11,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class EditBeehiveHelperInputModel : IMapFrom<ApiaryHelper>
+    public class EditApiaryHelperInputModel : IMapFrom<ApiaryHelper>
     {
         public int ApiaryId { get; set; }
 

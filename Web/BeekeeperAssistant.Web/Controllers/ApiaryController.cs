@@ -167,11 +167,13 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         public IActionResult Create()
         {
             return this.View();
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
@@ -195,6 +197,7 @@
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
+        // DONE []
         public IActionResult Edit(int id)
         {
             var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
@@ -205,6 +208,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
@@ -227,6 +231,7 @@
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -236,6 +241,7 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        // DONE []
         public async Task<IActionResult> ExportToExcel()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);

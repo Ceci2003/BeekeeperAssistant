@@ -74,7 +74,7 @@ administrationButton.addEventListener("click", (e) => {
 
 function showHideMenu(addOrRemove, list, arrow) {
     // backgroundToBase();
-    removeClass([beehiveList, queenList, apiList], "show");
+    removeClass([beehiveList, queenList, apiList, administrationList], "show");
     removeClass(sidebarArrows, "rotate-270");
 
     if (addOrRemove) {

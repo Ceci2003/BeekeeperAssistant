@@ -21,30 +21,30 @@
     <div class="dashboard-cards-list">
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="" asp-action="">
+                <a asp-area="Administration" asp-controller="User" asp-action="All">
                     <div>
                         <p>@Model.AllUsersCount</p>
-                        <p>Регистрирани потребителя</p>
+                        <p>Регистрирани потребители</p>
                     </div>
                 </a>
             </div>
         </div>
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="Inspection" asp-action="All" style="pointer-events: none;">
+                <a asp-controller="" asp-action="" style="pointer-events: none;">
                     <div>
                         <p>@Model.AllHelpersCount</p>
-                        <p>Добавени помощника</p>
+                        <p>Добавени помощници</p>
                     </div>
                 </a>
             </div>
         </div>
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="Harvest" asp-action="All" style="pointer-events: none;">
+                <a asp-controller="" asp-action="" style="pointer-events: none;">
                     <div>
                         <p>@Model.AllAdministratorsCount</p>
-                        <p>Администратора</p>
+                        <p>Администратори</p>
                     </div>
                 </a>
             </div>

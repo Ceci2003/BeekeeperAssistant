@@ -40,12 +40,17 @@
         <section class="navigations">
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <section class="sidebar-dropdown">
-                    <div class="primary apiaries-drop-btn">
+                @*<section class="primary sidebar-dropdown start">
+                    <a class="primary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                        Администрация
+                    </a>
+                </section>*@
+                <section class="sidebar-dropdown start">
+                    <div class="primary administration-drop-btn">
                         <span>Администрация</span>
                         <i class="fas fa-angle-left"></i>
                     </div>
-                    <div class="api-options hide">
+                    <div class="administration-options hide">
                         <a class="secondary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
                             Табло
                         </a>

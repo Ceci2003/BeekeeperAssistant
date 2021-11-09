@@ -1,6 +1,7 @@
 ﻿const apiList = document.querySelector(".api-options");
 const beehiveList = document.querySelector(".beehive-options");
 const queenList = document.querySelector(".queen-options");
+const administrationList = document.querySelector(".administration-options");
 const sidebarArrows = document.querySelectorAll(".primary .fas.fa-angle-left");
 
 const apiButton = document.querySelector(".apiaries-drop-btn");
@@ -50,6 +51,23 @@ queensButton.addEventListener("click", (e) => {
             false,
             queenList,
             document.querySelector(".queens-drop-btn .fa-angle-left")
+        );
+    }
+});
+
+const administrationButton = document.querySelector(".administration-drop-btn");
+administrationButton.addEventListener("click", (e) => {
+    if (administrationList.classList.contains("show")) {
+        showHideMenu(
+            true,
+            administrationList,
+            document.querySelector(".administration-drop-btn .fa-angle-left")
+        );
+    } else {
+        showHideMenu(
+            false,
+            administrationList,
+            document.querySelector(".administration-drop-btn .fa-angle-left")
         );
     }
 });

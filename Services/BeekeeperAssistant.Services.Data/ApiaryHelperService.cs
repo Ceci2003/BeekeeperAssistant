@@ -147,26 +147,10 @@
                 .FirstOrDefault();
 
         public Access GetUserApiaryAccess(string userId, int apiaryId)
-        {
-            // TODO: Make everywhere like this!!!
-            var apiaryInfo = this.apiaryHelperRepository
+        => this.apiaryHelperRepository
                 .All()
-                .Select(a => new
-                {
-                    CreatorId = a.Apiary.CreatorId,
-                    HelperId = a.UserId,
-                    ApiaryId = a.ApiaryId,
-                    ApiaryAccess = a.Access,
-                })
-                .FirstOrDefault(a => a.HelperId == userId && a.ApiaryId == apiaryId);
-
-            if (apiaryInfo.CreatorId == userId)
-            {
-                return Access.ReadWrite;
-            }
-
-            return apiaryInfo.ApiaryAccess;
-        }
+                .FirstOrDefault(a => (a.UserId == userId && a.ApiaryId == apiaryId))
+                .Access;
 
         public IEnumerable<T> GetUserHelperApiaries<T>(string userId, int? take = null, int skip = 0)
         {

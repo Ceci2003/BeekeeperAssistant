@@ -66,9 +66,9 @@
                 .FirstOrDefault();
 
         public Access GetUserBeehiveAccess(string userId, int beehiveId)
-            => this.beehiveHelperRepository
+        => this.beehiveHelperRepository
                 .All()
-                .FirstOrDefault(x => x.BeehiveId == beehiveId && x.UserId == userId)
+                .FirstOrDefault(b => (b.UserId == userId && b.BeehiveId == beehiveId))
                 .Access;
 
         public bool IsBeehiveHelper(string userId, int beehiveId)

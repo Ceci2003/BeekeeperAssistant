@@ -28,6 +28,7 @@
             this.userManager = userManager;
         }
 
+        // DONE []
         public IActionResult All(int id)
         {
             var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
@@ -43,6 +44,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         public IActionResult Edit(string userId, int beehiveId)
         {
             var inputModel = this.beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
@@ -51,6 +53,7 @@
             return this.View(inputModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(EditBeehiveHelperInputModel inputModel, string userId, int beehiveId)
         {

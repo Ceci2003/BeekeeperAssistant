@@ -6,8 +6,7 @@
     {
         [Display(Name = "Четене")]
         Read = 0,
-
         [Display(Name = "Четене и писане")]
-        ReadWrite = 2,
+        ReadWrite = 1,
     }
 }

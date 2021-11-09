@@ -10,5 +10,11 @@
         ExcelPackage ExportAsExcelApiary(string userId);
 
         ExcelPackage ExportAsExcelBeehive(string userId, int? id);
+
+        ExcelPackage ExportAsExcelHarvest(int id);
+
+        ExcelPackage ExportAsExcelInspection(int id);
+
+        ExcelPackage ExportAsExcelTreatment(int id);
     }
 }

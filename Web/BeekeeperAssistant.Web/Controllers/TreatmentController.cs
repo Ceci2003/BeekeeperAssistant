@@ -24,17 +24,20 @@
         private readonly ITreatmentService treatmentService;
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
+        private readonly IExcelExportService excelExportService;
 
         public TreatmentController(
             UserManager<ApplicationUser> userManager,
             ITreatmentService treatmentService,
             IApiaryService apiaryService,
-            IBeehiveService beehiveService)
+            IBeehiveService beehiveService,
+            IExcelExportService excelExportService)
         {
             this.userManager = userManager;
             this.treatmentService = treatmentService;
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
+            this.excelExportService = excelExportService;
         }
 
         public async Task<IActionResult> Create(int? id)
@@ -201,87 +204,7 @@
 
         public IActionResult ExportToExcel(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
-            var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id);
-
-            ExcelPackage pck = new ExcelPackage();
-            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
-
-            ws.Cells["A1:B1"].Merge = true;
-            ws.Cells["A1"].Value = $"Доклад - Третирания";
-
-            ws.Cells["A2"].Value = $"Пчелин №:";
-            ws.Cells["B2"].Value = $"{beehive.ApiaryNumber}";
-            ws.Cells["A3"].Value = $"Кошер №:";
-            ws.Cells["B3"].Value = $"{beehive.Number}";
-
-            ws.Cells["A4:B4"].Merge = true;
-            ws.Cells["A4"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
-
-            ws.Cells[$"A6"].Value = $"Име";
-            ws.Cells[$"B6"].Value = $"Дата";
-            ws.Cells[$"C6"].Value = $"Превенция на";
-            ws.Cells[$"D6"].Value = $"Препарат";
-            ws.Cells[$"E6"].Value = $"Въведен като";
-            ws.Cells[$"F6"].Value = $"Количество";
-            ws.Cells[$"G6"].Value = $"Дозировка";
-
-            ws.Cells["A6:G6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            ws.Cells["A6:G6"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-            ws.Cells["A6:G6"].Style.Font.Color.SetColor(Color.White);
-            ws.Cells["A6:G6"].Style.Font.Bold = true;
-
-            int rowsCounter = 7;
-            foreach (var treatment in treatments)
-            {
-                ws.Cells[$"A{rowsCounter}"].Value = treatment.Name;
-                ws.Cells[$"B{rowsCounter}"].Value = treatment.DateOfTreatment.ToString("dd-MM-yyyy");
-                ws.Cells[$"C{rowsCounter}"].Value = treatment.Disease;
-                ws.Cells[$"D{rowsCounter}"].Value = treatment.Medication;
-
-                var inputAs = treatment.InputAs.ToString();
-                switch (treatment.InputAs)
-                {
-                    case InputAs.PerHive:
-                        inputAs = "на кошер";
-                        break;
-                    case InputAs.Total:
-                        inputAs = "общо";
-                        break;
-                }
-
-                ws.Cells[$"E{rowsCounter}"].Value = inputAs;
-                ws.Cells[$"F{rowsCounter}"].Value = treatment.Quantity;
-
-                var dose = treatment.Dose.ToString();
-                switch (treatment.Dose)
-                {
-                    case Dose.Strips:
-                        dose = "ленти";
-                        break;
-                    case Dose.Drops:
-                        dose = "капки";
-                        break;
-                    case Dose.Grams:
-                        dose = "г";
-                        break;
-                    case Dose.Kilograms:
-                        dose = "кг";
-                        break;
-                    case Dose.Millilitres:
-                        dose = "мл";
-                        break;
-                    case Dose.Litres:
-                        dose = "л";
-                        break;
-                }
-
-                ws.Cells[$"G{rowsCounter}"].Value = dose;
-
-                rowsCounter++;
-            }
-
-            ws.Cells["A:AZ"].AutoFitColumns();
+            var pck = this.excelExportService.ExportAsExcelTreatment(id);
 
             this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

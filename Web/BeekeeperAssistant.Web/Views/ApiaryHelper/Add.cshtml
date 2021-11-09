@@ -1,4 +1,4 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.AddUserToApiaryViewModel
+﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryHelpers.AddUserToApiaryInputModel
 @{
     this.ViewData["Title"] = "Добавяне на помощник";
 }
@@ -36,10 +36,10 @@
             <form asp-controller="ApiaryHelper" asp-action="Add" method="post">
                 <div class="form-group">
                     <div class="input-group">
-                        <label asp-for="InputModel.UserName"></label>
-                        <input asp-for="InputModel.UserName" />
+                        <label asp-for="UserName"></label>
+                        <input asp-for="UserName" />
                     </div>
-                    <span asp-validation-for="InputModel.UserName"></span>
+                    <span asp-validation-for="UserName"></span>
                 </div>
                 <button type="submit" class="btn btn-add">Добави</button>
             </form>

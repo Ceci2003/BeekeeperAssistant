@@ -100,7 +100,8 @@
 
             if (viewModel.Queen != null)
             {
-                viewModel.QueenAccess = currentUser.Id == viewModel.Queen.UserId ? Access.ReadWrite : this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
+                viewModel.QueenAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite :
+                    this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
             }
 
             // ----------------------------------
@@ -195,6 +196,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         public async Task<IActionResult> Create(int? id)
         {
             var inputModel = new CreateBeehiveInputModel();
@@ -214,6 +216,7 @@
             return this.View(inputModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Create(int? id, CreateBeehiveInputModel inputModel)
         {
@@ -250,6 +253,7 @@
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
+        // DONE []
         public async Task<IActionResult> Edit(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -260,6 +264,7 @@
             return this.View(inputModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditBeehiveInputModel inputModel)
         {
@@ -282,6 +287,7 @@
             return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -299,18 +305,19 @@
             return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
         }
 
+        // DONE []
         public async Task<IActionResult> ExportToExcel(int? id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            // ToDo: Fix this
             var result = this.excelExportService.ExportAsExcelBeehive(currentUser.Id, id);
 
             this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(result.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        public async Task<IActionResult> Bookmark(int id, string page)
+        // DONE []
+        public async Task<IActionResult> Bookmark(int id, string returnController, string returnAction)
         {
             var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);
 
@@ -319,16 +326,17 @@
                 return this.BadRequest();
             }
 
-            if (page == "Apiary")
+            if (returnController != null && returnAction != null)
             {
-                var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
+                if (returnController == "Apiary" && returnAction == "ByNumber")
+                {
+                    var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
 
-                return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
+                    return this.RedirectToAction(returnAction, returnController, new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
+                }
             }
-            else
-            {
-                return this.RedirectToAction(nameof(this.All));
-            }
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

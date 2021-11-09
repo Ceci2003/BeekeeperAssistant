@@ -199,7 +199,6 @@
         {
             return this.View(
                 new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-            //return this.HttpError(404, string.Empty);
         }
     }
 }

@@ -36,20 +36,21 @@
             this.configuration = configuration;
         }
 
+        // DONE []
         public IActionResult Add(int id)
         {
             var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
-            var viewModel = new AddUserToApiaryViewModel
+            var viewModel = new AddUserToApiaryInputModel
             {
                 ApiaryNumber = apiaryNumber,
                 ApiaryId = id,
-                InputModel = new AddUserToApiaryInputModel(),
             };
             return this.View(viewModel);
         }
 
+        // DONE []
         [HttpPost]
-        public async Task<IActionResult> Add(int id, AddUserToApiaryViewModel viewModel)
+        public async Task<IActionResult> Add(int id, AddUserToApiaryInputModel viewModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -61,23 +62,22 @@
                 return this.View(viewModel);
             }
 
-            if (currentUser.UserName == viewModel.InputModel.UserName)
+            if (currentUser.UserName == viewModel.UserName)
             {
-                this.ModelState.AddModelError("InputModel.UserName", "Не може да добавите себе си!");
+                this.ModelState.AddModelError("UserName", "Не може да добавите себе си!");
                 return this.View(viewModel);
             }
 
-            var user = await this.userManager.FindByNameAsync(viewModel.InputModel.UserName);
+            var user = await this.userManager.FindByNameAsync(viewModel.UserName);
             if (this.apiaryHelperService.IsApiaryHelper(user.Id, id))
             {
-                this.ModelState.AddModelError("InputModel.UserName", "Потребителят вече е помощник!");
+                this.ModelState.AddModelError("UserName", "Потребителят вече е помощник!");
                 return this.View(viewModel);
             }
 
             await this.apiaryHelperService.AddAsync(user.Id, id);
 
-            // var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
-            var helper = await this.userManager.FindByNameAsync(viewModel.InputModel.UserName);
+            var helper = await this.userManager.FindByNameAsync(viewModel.UserName);
             await this.emailSender.SendEmailAsync(
                   this.configuration["SendGrid:RecipientEmail"],
                   GlobalConstants.SystemName,
@@ -96,6 +96,7 @@
             return this.Redirect($"/ApiaryHelper/All/{id}");
         }
 
+        // DONE []
         public IActionResult All(int id)
         {
             var viewModel = new AllApiaryHelpersViewModel
@@ -108,6 +109,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(string userId, int apiaryId)
         {
@@ -118,6 +120,7 @@
             return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
         }
 
+        // DONE []
         public IActionResult Edit(string userId, int apiaryId)
         {
             var inputModel = this.apiaryHelperService.GetApiaryHelper<EditApiaryHelperInputModel>(userId, apiaryId);
@@ -125,6 +128,7 @@
             return this.View(inputModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(EditApiaryHelperInputModel inputModel, string userId, int apiaryId)
         {

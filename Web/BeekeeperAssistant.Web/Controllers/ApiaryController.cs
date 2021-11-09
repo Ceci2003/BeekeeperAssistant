@@ -84,12 +84,18 @@
             {
                 UserApiaries = new AllUserApiariesViewModel
                 {
-                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id, GlobalConstants.ApiariesPerPage, (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
+                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(
+                        currentUser.Id,
+                        GlobalConstants.ApiariesPerPage,
+                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
                     PagesCount = pagesApiaryCount,
                 },
                 UserHelperApiaries = new AllHelperApiariesViewModel
                 {
-                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryHelperApiaryDataViewModel>(currentUser.Id, GlobalConstants.ApiaryHelpersApiaryPerPage, (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
+                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryHelperApiaryDataViewModel>(
+                        currentUser.Id,
+                        GlobalConstants.ApiaryHelpersApiaryPerPage,
+                        (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
                     PagesCount = pagesApiaryHelperCount,
                 },
             };
@@ -110,6 +116,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         public async Task<IActionResult> ByNumber(string apiaryNumber, string tabPage, int page = 1)
         {
             var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
@@ -123,8 +130,7 @@
             }
 
             viewModel.ApiaryAccess =
-                currentUser.Id == viewModel.CreatorId ?
-                Access.ReadWrite :
+                currentUser.Id == viewModel.CreatorId ? Access.ReadWrite :
                 this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, viewModel.Id);
 
             viewModel.ForecastResult =
@@ -137,8 +143,7 @@
             foreach (var beehive in viewModel.Beehives)
             {
                 beehive.BeehiveAccess =
-                    beehive.CreatorId == currentUser.Id ?
-                    Access.ReadWrite :
+                    currentUser.Id == viewModel.CreatorId ? Access.ReadWrite :
                     this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
             }
 
@@ -252,6 +257,7 @@
             return new FileContentResult(exportResult.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
+        // DONE []
         public async Task<IActionResult> Bookmark(int id)
         {
             await this.apiaryService.BookmarkApiaryAsync(id);

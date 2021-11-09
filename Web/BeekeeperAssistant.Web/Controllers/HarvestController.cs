@@ -23,17 +23,20 @@
         private readonly IHarvestService harvestService;
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
+        private readonly IExcelExportService excelExportService;
 
         public HarvestController(
             UserManager<ApplicationUser> userManager,
             IHarvestService harvestService,
             IApiaryService apiaryService,
-            IBeehiveService beehiveService)
+            IBeehiveService beehiveService,
+            IExcelExportService excelExportService)
         {
             this.userManager = userManager;
             this.harvestService = harvestService;
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
+            this.excelExportService = excelExportService;
         }
 
         public async Task<IActionResult> All()
@@ -47,6 +50,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         public IActionResult ById(int id)
         {
             var viewModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
@@ -59,6 +63,7 @@
             return this.View(viewModel);
         }
 
+        // DONE []
         public async Task<IActionResult> Create(int? beehiveId)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -86,6 +91,7 @@
             return this.View(inputModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Create(CreateHarvestInputModel inputModel)
         {
@@ -138,6 +144,7 @@
             }
         }
 
+        // DONE []
         public IActionResult Edit(int id, int beehiveId)
         {
             var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
@@ -153,6 +160,7 @@
             return this.View(inputModel);
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditHarvestInputModel inputModel)
         {
@@ -164,6 +172,7 @@
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
         }
 
+        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id, int beehiveId)
         {
@@ -181,124 +190,14 @@
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Harvests" });
         }
 
-        public async Task<IActionResult> ExportToExcel(int id)
+        // DONE []
+        public IActionResult ExportToExcel(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
-            var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id);
+            var pck = this.excelExportService.ExportAsExcelHarvest(id);
 
-            ExcelPackage pck = new ExcelPackage();
-            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
-
-            ws.Cells["A1:B1"].Merge = true;
-            ws.Cells["A1"].Value = $"Доклад - Добиви";
-
-            ws.Cells["A2"].Value = $"Пчелин №:";
-            ws.Cells["B2"].Value = $"{beehive.ApiaryNumber}";
-            ws.Cells["A3"].Value = $"Кошер №:";
-            ws.Cells["B3"].Value = $"{beehive.Number}";
-
-            ws.Cells["A4:B4"].Merge = true;
-            ws.Cells["A4"].Value = $"Дата: {string.Format("{0:dd-MM-yyyy} {0:H:mm}", DateTimeOffset.Now)}";
-
-            ws.Cells[$"A6"].Value = $"Име";
-            ws.Cells[$"B6"].Value = $"Дата";
-            ws.Cells[$"C6"].Value = $"Добит продукт";
-            ws.Cells[$"D6"].Value = $"Вид мед";
-            ws.Cells[$"E6"].Value = $"Количество";
-            ws.Cells[$"F6"].Value = $"Еденица";
-            ws.Cells[$"G6"].Value = $"Бележка";
-
-            ws.Cells["A6:G6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            ws.Cells["A6:G6"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
-            ws.Cells["A6:G6"].Style.Font.Color.SetColor(Color.White);
-            ws.Cells["A6:G6"].Style.Font.Bold = true;
-
-            int rowsCounter = 7;
-            foreach (var harvest in harvests)
-            {
-                ws.Cells[$"A{rowsCounter}"].Value = harvest.HarvestName;
-                ws.Cells[$"B{rowsCounter}"].Value = harvest.DateOfHarves.ToString("dd-MM-yyyy");
-
-                var harvestedProduct = "мед";
-                switch (harvest.HarvestProductType)
-                {
-                    case HarvestProductType.Pollen:
-                        harvestedProduct = "прашец";
-                        break;
-                    case HarvestProductType.Wax:
-                        harvestedProduct = "восък";
-                        break;
-                    case HarvestProductType.Propolis:
-                        harvestedProduct = "прополис";
-                        break;
-                    case HarvestProductType.RoyalJelly:
-                        harvestedProduct = "млечице";
-                        break;
-                    case HarvestProductType.BeeVenom:
-                        harvestedProduct = "отрова";
-                        break;
-                }
-
-                ws.Cells[$"C{rowsCounter}"].Value = harvestedProduct;
-
-                var honeyType = string.Empty;
-                if (harvest.HarvestProductType == HarvestProductType.Honey)
-                {
-                    switch (harvest.HoneyType)
-                    {
-                        case HoneyType.Acacia:
-                            honeyType = "акация";
-                            break;
-                        case HoneyType.Wildflower:
-                            honeyType = "билков";
-                            break;
-                        case HoneyType.Sunflower:
-                            honeyType = "слънчогледов";
-                            break;
-                        case HoneyType.Clover:
-                            honeyType = "от детелина";
-                            break;
-                        case HoneyType.Alfalfa:
-                            honeyType = "от люцерна";
-                            break;
-                        case HoneyType.Other:
-                            honeyType = "друг";
-                            break;
-                    }
-                }
-
-                ws.Cells[$"D{rowsCounter}"].Value = honeyType;
-                ws.Cells[$"E{rowsCounter}"].Value = harvest.Quantity;
-
-                var unit = "";
-                switch (harvest.Unit)
-                {
-                    case Unit.Kilograms:
-                        unit = "кг";
-                        break;
-                    case Unit.Grams:
-                        unit = "г";
-                        break;
-                    case Unit.Milligrams:
-                        unit = "мг";
-                        break;
-                    case Unit.Litres:
-                        unit = "л";
-                        break;
-                    case Unit.Millilitres:
-                        unit = "мл";
-                        break;
-                }
-
-                ws.Cells[$"F{rowsCounter}"].Value = unit;
-                ws.Cells[$"G{rowsCounter}"].Value = harvest.Note;
-
-                rowsCounter++;
-            }
-
-            ws.Cells["A:AZ"].AutoFitColumns();
-
-            this.Response.Headers.Add("content-disposition", "attachment: filename=" + $"{beehive.Number}_{beehive.ApiaryNumber}_Harvests.xlsx");
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            this.Response.Headers.Add("content-disposition", "attachment: filename=" + $"{beehive.Number}_{apiaryNumber}_Harvests.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }

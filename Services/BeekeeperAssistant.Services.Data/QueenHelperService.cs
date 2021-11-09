@@ -57,12 +57,9 @@
         }
 
         public Access GetUserQueenAccess(string userId, int queenId)
-        {
-            var access = this.queenHelperRepository
+        => this.queenHelperRepository
                 .All()
-                .FirstOrDefault(x => x.QueenId == queenId && x.UserId == userId);
-
-            return access.Access;
-        }
+                .FirstOrDefault(q => (q.UserId == userId && q.QueenId == queenId))
+                .Access;
     }
 }

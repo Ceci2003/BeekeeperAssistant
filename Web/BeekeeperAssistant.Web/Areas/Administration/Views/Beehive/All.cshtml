@@ -68,7 +68,7 @@
                         }
                         else
                         {
-                            <form method="post" asp-area="" asp-controller="Beehive" asp-action="Undelete"
+                            <form method="post" asp-area="Administration" asp-controller="Beehive" asp-action="Undelete"
                         asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
                                 <button type="submit" class="btn edit">Възстанови</button>
                             </form>

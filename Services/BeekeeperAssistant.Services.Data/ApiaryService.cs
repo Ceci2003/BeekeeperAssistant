@@ -289,5 +289,18 @@
                 .AllWithDeleted()
                 .To<T>()
                 .ToList();
+
+        public async Task UndeleteAsync(int apiaryId)
+        {
+            var apiary = this.apiaryRepository
+                .AllWithDeleted()
+                .FirstOrDefault(a => a.Id == apiaryId);
+
+            apiary.IsDeleted = false;
+            apiary.DeletedOn = null;
+
+            this.apiaryRepository.Update(apiary);
+            await this.apiaryRepository.SaveChangesAsync();
+        }
     }
 }

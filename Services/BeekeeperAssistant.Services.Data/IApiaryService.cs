@@ -45,16 +45,18 @@
             ApiaryType apiaryType,
             string address);
 
-        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
+        IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 
         int GetAllUserApiariesCount(string userId);
 
         string GetApiaryCreatorIdByApiaryId(int apiaryId);
 
-        public IEnumerable<T> GetAllApiaries<T>();
+        IEnumerable<T> GetAllApiaries<T>();
 
-        public IEnumerable<T> GetAllApiariesWithDeleted<T>();
+        IEnumerable<T> GetAllApiariesWithDeleted<T>();
 
-        public int AllApiariesCount();
+        int AllApiariesCount();
+
+        Task UndeleteAsync(int apiaryId);
     }
 }

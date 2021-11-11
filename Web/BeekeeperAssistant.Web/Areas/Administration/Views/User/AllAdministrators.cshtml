@@ -1,0 +1,21 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Users.AllUsersViewModel
+@{ 
+
+}
+<div class="content">
+    @foreach (var user in Model.AllUsers)
+    {
+        <div>
+            @(user.Username) - @user.PhoneNumber
+            @if (!(user.Username == this.User.Identity.Name))
+            {
+                if (!user.IsDeleted)
+                {
+                    <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">
+                        <button type="submit">Изтрий</button>
+                    </form>
+                }
+            }
+        </div>
+    }
+</div>

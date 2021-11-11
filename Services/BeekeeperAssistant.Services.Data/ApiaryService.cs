@@ -273,7 +273,21 @@
                 .All()
                 .FirstOrDefault(x => x.Id == apiaryId).CreatorId;
 
-        public int Count()
-            => this.apiaryRepository.All().Count();
+        public int AllApiariesCount()
+            => this.apiaryRepository
+                .All()
+                .Count();
+
+        public IEnumerable<T> GetAllApiaries<T>()
+            => this.apiaryRepository
+                .All()
+                .To<T>()
+                .ToList();
+
+        public IEnumerable<T> GetAllApiariesWithDeleted<T>()
+        => this.apiaryRepository
+                .AllWithDeleted()
+                .To<T>()
+                .ToList();
     }
 }

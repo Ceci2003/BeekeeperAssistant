@@ -29,11 +29,11 @@
         {
             var viewModel = new IndexViewModel()
             {
-                AllUsersCount = this.userService.Count(),
-                AllHelpersCount = this.apiaryHelperService.Count(),
-                AllAdministratorsCount = await this.userService.AdministratorsCount(),
-                AllApiariesCount = this.apiaryHelperService.Count(),
-                AllBeehivesCount = this.beehiveService.Count(),
+                AllUsersCount = this.userService.AllUsersCount(),
+                AllHelpersCount = this.apiaryHelperService.AllApiaryHelpersCount(),
+                AllAdministratorsCount = await this.userService.AllAdministratorsCountAsync(),
+                AllApiariesCount = this.apiaryService.AllApiariesCount(),
+                AllBeehivesCount = this.beehiveService.AllBeehivesCount(),
             };
 
             return this.View(viewModel);

@@ -80,6 +80,14 @@
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                var applicationUser = await this._userManager.FindByNameAsync(Input.Email);
+
+                if (applicationUser == null)
+                {
+                    this.ModelState.AddModelError("Email", "Потребителското име е заето!");
+                    return this.Page();
+                }
+
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

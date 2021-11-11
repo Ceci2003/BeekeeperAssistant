@@ -1,0 +1,15 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.ApiaryHelpers.AllApiaryHelpersAdministrationViewModel
+@{
+    ViewData["Title"] = "Всички пчелини";
+}
+
+<div class="content">
+    @foreach (var helper in Model.AllApiariesHelpers)
+    {
+        @(helper.UserUsername) @(helper.ApiaryName) <a asp-area="" asp-controller="Apiary" asp-action="ByNumber" asp-route-apiaryNumber="@(helper.ApiaryNumber)">@(helper.ApiaryNumber)</a> @(helper.ApiaryAdress)
+
+        <form method="post" asp-area="" asp-controller="ApiaryHelper" asp-action="Delete" asp-route-userId="@(helper.UserId)" asp-route-apiaryId="@(helper.ApiaryId)" asp-route-returnUrl="@this.Context.Request.Path">
+            <button type="submit">Изтрий</button>
+        </form>
+    }
+</div>

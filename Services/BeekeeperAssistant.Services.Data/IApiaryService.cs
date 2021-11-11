@@ -51,6 +51,10 @@
 
         string GetApiaryCreatorIdByApiaryId(int apiaryId);
 
-        public int Count();
+        public IEnumerable<T> GetAllApiaries<T>();
+
+        public IEnumerable<T> GetAllApiariesWithDeleted<T>();
+
+        public int AllApiariesCount();
     }
 }

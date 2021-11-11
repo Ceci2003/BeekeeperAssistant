@@ -2,16 +2,16 @@
 {
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class UserViewModel : IMapFrom<ApplicationUser>
     {
+        public string Id { get; set; }
+
         public string Username { get; set; }
 
-        public string PhoneNUmber { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public bool IsDeleted { get; set; }
+
     }
 }

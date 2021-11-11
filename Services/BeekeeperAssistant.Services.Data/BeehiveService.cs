@@ -298,7 +298,7 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public int Count()
+        public int AllBeehivesCount()
             => this.beehiveRepository.All().Count();
 
         public async Task<int?> BookmarkBeehiveAsync(int id)
@@ -318,5 +318,17 @@
 
             return beehive.ApiaryId;
         }
+
+        public IEnumerable<T> GetAllBeehives<T>()
+            => this.beehiveRepository
+                .All()
+                .To<T>()
+                .ToList();
+
+        public IEnumerable<T> GetAllBeehivesWithDeleted<T>()
+            => this.beehiveRepository
+                .AllWithDeleted()
+                .To<T>()
+                .ToList();
     }
 }

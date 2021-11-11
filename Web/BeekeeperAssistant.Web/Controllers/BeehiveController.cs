@@ -91,16 +91,22 @@
 
             if (viewModel.CreatorId != currentUser.Id &&
                 !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId) &&
-                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId))
+                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId) &&
+                !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.BadRequest();
             }
 
-            viewModel.BeehiveAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite : this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, viewModel.Id);
+            viewModel.BeehiveAccess =
+                currentUser.Id == viewModel.CreatorId ||
+                await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ?
+                Access.ReadWrite :
+                this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, viewModel.Id);
 
             if (viewModel.Queen != null)
             {
-                viewModel.QueenAccess = currentUser.Id == viewModel.CreatorId ? Access.ReadWrite :
+                viewModel.QueenAccess = currentUser.Id == viewModel.CreatorId || 
+                    await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
                     this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
             }
 
@@ -294,7 +300,12 @@
             var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (beehive.CreatorId != currentUser.Id)
+            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehive.Id);
+
+            if (beehive.CreatorId != currentUser.Id && 
+                !this.beehiveHelperService.IsBeehiveHelper(currentUser.Id, beehive.Id) &&
+                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId) &&
+                !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.BadRequest();
             }

@@ -1,0 +1,19 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Beehives.AllBeehivesAdministrationViewModel
+@{ 
+
+}
+
+<div class="content">
+    @foreach (var beehive in Model.AllBeehives)
+    {
+    <div>
+        @(beehive.Number) @(beehive.ApiaryNumber) @(beehive.IsDeleted ? "Да" : "Не")
+        @if (!beehive.IsDeleted)
+        {
+            <form method="post" asp-area="" asp-controller="Beehive" asp-action="Delete" asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                <button type="submit">Изтрий</button>
+            </form>
+        }
+    </div>
+    }
+</div>

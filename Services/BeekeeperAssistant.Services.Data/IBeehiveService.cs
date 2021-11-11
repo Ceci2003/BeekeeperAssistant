@@ -54,6 +54,11 @@
 
         Task<int?> BookmarkBeehiveAsync(int id);
 
-        public int Count();
+        int AllBeehivesCount();
+
+        IEnumerable<T> GetAllBeehives<T>();
+
+        IEnumerable<T> GetAllBeehivesWithDeleted<T>();
+
     }
 }

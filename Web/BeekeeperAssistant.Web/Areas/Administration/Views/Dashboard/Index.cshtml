@@ -31,7 +31,7 @@
         </div>
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="" asp-action="" style="pointer-events: none;">
+                <a asp-area="Administration" asp-controller="ApiaryHelpers" asp-action="All">
                     <div>
                         <p>@Model.AllHelpersCount</p>
                         <p>Добавени помощници</p>
@@ -41,7 +41,7 @@
         </div>
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="" asp-action="" style="pointer-events: none;">
+                <a asp-area="Administration" asp-controller="User" asp-action="AllAdministrators">
                     <div>
                         <p>@Model.AllAdministratorsCount</p>
                         <p>Администратори</p>
@@ -53,7 +53,7 @@
     <div class="dashboard-cards-list">
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="" asp-action="">
+                <a asp-area="Administration" asp-controller="Apiary" asp-action="All">
                     <div>
                         <p>@Model.AllApiariesCount</p>
                         <p>Създадени пчелина</p>
@@ -63,7 +63,7 @@
         </div>
         <div class="count-card">
             <div class="count-card-body">
-                <a asp-controller="Inspection" asp-action="All" style="pointer-events: none;">
+                <a asp-area="Administration" asp-controller="Beehive" asp-action="All">
                     <div>
                         <p>@Model.AllBeehivesCount</p>
                         <p>Създадени кошера</p>

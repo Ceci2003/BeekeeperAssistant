@@ -121,16 +121,22 @@
         {
             var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
 
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             if (viewModel.CreatorId != currentUser.Id &&
-                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id))
+                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id) &&
+                !await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName))
             {
                 return this.BadRequest();
             }
 
             viewModel.ApiaryAccess =
-                currentUser.Id == viewModel.CreatorId ? Access.ReadWrite :
+                currentUser.Id == viewModel.CreatorId || await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
                 this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, viewModel.Id);
 
             viewModel.ForecastResult =
@@ -143,7 +149,7 @@
             foreach (var beehive in viewModel.Beehives)
             {
                 beehive.BeehiveAccess =
-                    currentUser.Id == viewModel.CreatorId ? Access.ReadWrite :
+                    currentUser.Id == viewModel.CreatorId || await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
                     this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
             }
 
@@ -238,11 +244,17 @@
 
         // DONE []
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, string returnUrl)
         {
             await this.apiaryService.DeleteApiaryByIdAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
+
+            if (returnUrl != null)
+            {
+                return this.Redirect(returnUrl);
+            }
+
             return this.RedirectToAction(nameof(this.All));
         }
 

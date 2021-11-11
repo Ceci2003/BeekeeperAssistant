@@ -60,5 +60,6 @@
 
         IEnumerable<T> GetAllBeehivesWithDeleted<T>();
 
+        Task UndeleteAsync(int beehiveId);
     }
 }

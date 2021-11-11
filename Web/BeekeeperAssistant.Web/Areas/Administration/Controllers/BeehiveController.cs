@@ -26,5 +26,13 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 
             return this.View(viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Undelete(int id)
+        {
+            await this.beehiveService.UndeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

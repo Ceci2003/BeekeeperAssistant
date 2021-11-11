@@ -330,5 +330,18 @@
                 .AllWithDeleted()
                 .To<T>()
                 .ToList();
+
+        public async Task UndeleteAsync(int beehiveId)
+        {
+            var beehive = this.beehiveRepository
+                .AllWithDeleted()
+                .FirstOrDefault(b => b.Id == beehiveId);
+
+            beehive.IsDeleted = false;
+            beehive.DeletedOn = null;
+
+            this.beehiveRepository.Update(beehive);
+            await this.beehiveRepository.SaveChangesAsync();
+        }
     }
 }

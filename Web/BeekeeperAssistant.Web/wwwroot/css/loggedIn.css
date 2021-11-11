@@ -160,7 +160,10 @@ button::selection {
 }
 
 .sidebar-navigation .navigations {
+  overflow-y: scroll;
+  height: 300px;
   margin-bottom: 50px;
+  padding: 0 4px;
 }
 
 /* Side navigation dropdowns */
@@ -200,7 +203,7 @@ button::selection {
 
 .sidebar-dropdown .primary .fas.fa-angle-left {
   position: absolute;
-  left: 250px;
+  left: 240px;
 }
 
 .sidebar-dropdown .secondary {
@@ -330,7 +333,6 @@ button::selection {
 }
 
 .btn.edit {
-  /* width: 135px; */
   color: var(--white);
   background-color: var(--green);
 }
@@ -1508,7 +1510,7 @@ textarea {
 /* Track */
 
 ::-webkit-scrollbar-track {
-  background: #110400;
+  background: #290b02;
 }
 
 /* Handle */
@@ -1686,4 +1688,8 @@ input[readonly] {
   color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
+}
+
+.data-table.administration .edit-delete form .btn {
+  width: 100%;
 }

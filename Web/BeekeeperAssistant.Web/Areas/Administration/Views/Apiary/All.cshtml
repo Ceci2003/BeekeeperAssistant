@@ -1,25 +1,81 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Apiaries.AllApiariesAdministrationViewModel
 @{
-    ViewData["Title"] = "Всички пчелини";
+    ViewData["Title"] = "Създадени пчелини";
 }
 
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Dashboard" asp-action="Index">Администрация</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
 <div class="content">
-    @foreach (var apiary in Model.AllApiaries)
-    {
-        <div>
-            @(apiary.Name) <a asp-controller="Apiary" asp-action="ByNumber" asp-route-apiaryNumber="@apiary.Number">@(apiary.Number)</a> @(apiary.CreatorUserName) @(apiary.IsDeleted ? "Да" : "Не")
-        </div>
-        @if (!apiary.IsDeleted)
-        {
-            <form method="post" asp-area="" asp-controller="Apiary" asp-action="Delete" asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
-                <button type="submit">Изтрий</button>
-            </form>
-        }
-        else
-        {
-            <form method="post" asp-area="Administration" asp-controller="Apiary" asp-action="Undelete" asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
-                <button type="submit">Възвърни</button>
-            </form>
-        }
-    }
+    <h1 class="title-1">@ViewData["Title"]</h1>
+    <table class="data-table administration">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Собственик</th>
+                <th>Статус</th>
+                <th>Опция</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var apiary in Model.AllApiaries)
+            {
+                <tr>
+                    <td class="number">
+                        @if (!apiary.IsDeleted)
+                        {
+                            <a asp-controller="Apiary" asp-action="ByNumber"
+                        asp-route-apiaryNumber="@apiary.Number">@(apiary.Number)</a>
+                        }
+                        else
+                        {
+                            <a style="pointer-events: none; color: #110400;" asp-controller="Apiary" asp-action="ByNumber"
+                        asp-route-apiaryNumber="@apiary.Number">@(apiary.Number)</a>
+                        }
+                    </td>
+                    <td>
+                        @(apiary.CreatorUserName)
+                    </td>
+                    <td>
+                        @if (!apiary.IsDeleted)
+                        {
+                            <div style="font-weight: 500;">Съществува</div>
+                        }
+                        else
+                        {
+                            @("Изтрит")
+                        }
+                    </td>
+                    <td class="edit-delete" style="padding: 4px;">
+                        @if (!apiary.IsDeleted)
+                        {
+                            <form method="post" asp-area="" asp-controller="Apiary" asp-action="Delete"
+                        asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                <button type="submit" class="btn delete">Изтрий</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-area="Administration" asp-controller="Apiary" asp-action="Undelete"
+                        asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                <button type="submit" class="btn edit">Възстанови</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

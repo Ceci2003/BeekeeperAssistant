@@ -1,27 +1,85 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Users.AllUsersViewModel
-@{ 
-
+@{
+    ViewData["Title"] = "Администратори";
 }
-<div class="content">
-    @foreach (var user in Model.AllUsers)
-    {
-    <div>
-        @(user.Username) - @user.PhoneNumber
-        @if (!(user.Username == this.User.Identity.Name))
-        {
-            if (!user.IsDeleted)
-            {
-                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">
-                    <button type="submit">Изтрий</button>
-                </form>
-            }
-            else
-            {
-                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete" asp-route-id="@user.Id">
-                    <button type="submit">Възобнови</button>
-                </form>
-            }
-        }
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Dashboard" asp-action="Index">Администрация</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
     </div>
-    }
+</div>
+
+<div class="content">
+    <h1 class="title-1">@ViewData["Title"]</h1>
+    <table class="data-table administration">
+        <thead>
+            <tr>
+                <th>Администратор</th>
+                <th>Тел.</th>
+                <th>Статус</th>
+                <th>Опция</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.AllUsers)
+            {
+                <tr>
+                    <td class="number" style="padding: 8px;">
+                        @(user.Username)
+                    </td>
+                    <td style="text-align: center;">
+                        @if (string.IsNullOrEmpty(user.PhoneNumber))
+                        {
+                            @("-")
+                        }
+                        else
+                        {
+                            @(user.PhoneNumber)
+                        }
+                    </td>
+                    <td>
+                        @if (!(user.Username == this.User.Identity.Name))
+                        {
+                            if (!user.IsDeleted)
+                            {
+                                <div style="font-weight: 500;">Активен</div>
+                            }
+                            else
+                            {
+                                @("Изтрит")
+                            }
+                        }
+                    </td>
+                    <td class="edit-delete" style="padding: 4px;">
+                        @if (!(user.Username == this.User.Identity.Name))
+                        {
+                            if (!user.IsDeleted)
+                            {
+                                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete"
+                        asp-route-id="@user.Id">
+                                    <button type="submit" class="btn delete">Изтрий</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete"
+                        asp-route-id="@user.Id">
+                                    <button type="submit" class="btn edit">Възстанови</button>
+                                </form>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

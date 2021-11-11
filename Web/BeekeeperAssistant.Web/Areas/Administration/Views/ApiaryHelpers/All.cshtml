@@ -1,15 +1,53 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Administration.ApiaryHelpers.AllApiaryHelpersAdministrationViewModel
 @{
-    ViewData["Title"] = "Всички пчелини";
+    ViewData["Title"] = "Добавени помощници";
 }
 
-<div class="content">
-    @foreach (var helper in Model.AllApiariesHelpers)
-    {
-        @(helper.UserUsername) @(helper.ApiaryName) <a asp-area="" asp-controller="Apiary" asp-action="ByNumber" asp-route-apiaryNumber="@(helper.ApiaryNumber)">@(helper.ApiaryNumber)</a> @(helper.ApiaryAdress)
-
-        <form method="post" asp-area="" asp-controller="ApiaryHelper" asp-action="Delete" asp-route-userId="@(helper.UserId)" asp-route-apiaryId="@(helper.ApiaryId)" asp-route-returnUrl="@this.Context.Request.Path">
-            <button type="submit">Изтрий</button>
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Dashboard" asp-action="Index">Администрация</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
-    }
+    </div>
+</div>
+
+<div class="content">
+    <h1 class="title-1">@ViewData["Title"]</h1>
+    <table class="data-table administration">
+        <thead>
+            <tr>
+                <th>Пчелин</th>
+                <th>Помощник</th>
+                <th>Опция</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var helper in Model.AllApiariesHelpers)
+            {
+                <tr>
+                    <td class="number">
+                        <a asp-area="" asp-controller="Apiary" asp-action="ByNumber"
+        asp-route-apiaryNumber="@(helper.ApiaryNumber)">@(helper.ApiaryNumber)</a>
+                    </td>
+                    <td>
+                        @(helper.UserUsername)
+                    </td>
+                    <td class="edit-delete" style="padding: 4px;">
+                        <form method="post" asp-area="" asp-controller="ApiaryHelper" asp-action="Delete"
+                        asp-route-userId="@(helper.UserId)" asp-route-apiaryId="@(helper.ApiaryId)"
+                        asp-route-returnUrl="@this.Context.Request.Path">
+                            <button type="submit" class="btn delete">Изтрий</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

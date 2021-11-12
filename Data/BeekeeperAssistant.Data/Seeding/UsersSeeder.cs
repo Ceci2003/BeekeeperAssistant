@@ -16,17 +16,16 @@
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await SeedUserAsync(userManager, dbContext, "i_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
-            await SeedUserAsync(userManager, dbContext, "c_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
+            await SeedUserAsync(userManager, "i_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
+            await SeedUserAsync(userManager, "c_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
         }
 
         private static async Task SeedUserAsync(
             UserManager<ApplicationUser> userManager,
-            ApplicationDbContext dbContext,
             string username,
             string roleName)
         {
-            var user = dbContext.Users
+            var user = userManager.Users
                 .IgnoreQueryFilters()
                 .Where(x => x.UserName == username)
                 .FirstOrDefault();

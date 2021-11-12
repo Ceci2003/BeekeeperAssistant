@@ -1,11 +1,13 @@
 ﻿namespace BeekeeperAssistant.Data.Seeding
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
 
     internal class UsersSeeder : ISeeder
@@ -14,13 +16,21 @@
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await SeedUserAsync(userManager, "i_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
-            await SeedUserAsync(userManager, "c_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
+            await SeedUserAsync(userManager, dbContext, "i_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
+            await SeedUserAsync(userManager, dbContext, "c_admin@beekeeperassistant.com", GlobalConstants.AdministratorRoleName);
         }
 
-        private static async Task SeedUserAsync(UserManager<ApplicationUser> userManager, string username, string roleName)
+        private static async Task SeedUserAsync(
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext dbContext,
+            string username,
+            string roleName)
         {
-            var user = await userManager.FindByNameAsync(username);
+            var user = dbContext.Users
+                .IgnoreQueryFilters()
+                .Where(x => x.UserName == username)
+                .FirstOrDefault();
+
             if (user == null)
             {
                 var appUser = new ApplicationUser();
@@ -31,12 +41,12 @@
 
                 if (roleName == GlobalConstants.AdministratorRoleName)
                 {
-                    result = userManager.CreateAsync(appUser, "admin123").Result;
+                    result = await userManager.CreateAsync(appUser, "admin123");
                 }
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(appUser, roleName).Wait();
+                    await userManager.AddToRoleAsync(appUser, roleName);
                 }
             }
         }

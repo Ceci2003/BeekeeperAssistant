@@ -14,6 +14,5 @@
         public string CreatorId { get; set; }
 
         public bool IsDeleted { get; set; }
-
     }
 }

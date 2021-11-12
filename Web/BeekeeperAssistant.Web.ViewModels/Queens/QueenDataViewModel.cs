@@ -46,6 +46,5 @@
                     vm => vm.HasHelpers,
                     opt => opt.MapFrom(src => src.QueenHelpers.Any()));
         }
-
     }
 }

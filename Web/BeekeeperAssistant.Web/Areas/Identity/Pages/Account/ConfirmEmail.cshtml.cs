@@ -19,7 +19,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account
 
         public ConfirmEmailModel(UserManager<ApplicationUser> userManager)
         {
-            _userManager = userManager;
+            this._userManager = userManager;
         }
 
         [TempData]
@@ -29,19 +29,19 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account
         {
             if (userId == null || code == null)
             {
-                return RedirectToPage("/Index");
+                return this.RedirectToPage("/Index");
             }
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await this._userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return NotFound($"Не успяхме да намерим потребител с ID - '{userId}'.");
+                return this.NotFound($"Не успяхме да намерим потребител с ID - '{userId}'.");
             }
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Благодарим ви, че потвърдихте имейла си." : "Проблем с потвърждаването на имейла.";
-            return Page();
+            var result = await this._userManager.ConfirmEmailAsync(user, code);
+            this.StatusMessage = result.Succeeded ? "Благодарим ви, че потвърдихте имейла си." : "Проблем с потвърждаването на имейла.";
+            return this.Page();
         }
     }
 }

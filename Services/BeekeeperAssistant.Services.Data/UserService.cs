@@ -5,11 +5,12 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
-    using Microsoft.AspNetCore.Identity;
     using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.AspNetCore.Identity;
 
     public class UserService : IUserService
     {

@@ -1,13 +1,14 @@
-﻿using BeekeeperAssistant.Data.Models;
-using BeekeeperAssistant.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Services.Data.Models
+﻿namespace BeekeeperAssistant.Services.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+
     public class TreatmentDataExcelExportModel : IMapFrom<Treatment>
     {
         public string CreatorId { get; set; }

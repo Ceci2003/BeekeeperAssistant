@@ -11,7 +11,6 @@
 
     public class HarvestDataExcelExportModel : IMapFrom<Harvest>
     {
-
         public string HarvestName { get; set; }
 
         public DateTime DateOfHarves { get; set; }

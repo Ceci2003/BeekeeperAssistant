@@ -23,9 +23,9 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
             SignInManager<ApplicationUser> signInManager,
             ILogger<TwoFactorAuthenticationModel> logger)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._logger = logger;
         }
 
         public bool HasAuthenticator { get; set; }
@@ -42,31 +42,31 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGet()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await this._userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
             }
 
-            HasAuthenticator = await _userManager.GetAuthenticatorKeyAsync(user) != null;
-            Is2faEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
-            IsMachineRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user);
-            RecoveryCodesLeft = await _userManager.CountRecoveryCodesAsync(user);
+            this.HasAuthenticator = await this._userManager.GetAuthenticatorKeyAsync(user) != null;
+            this.Is2faEnabled = await this._userManager.GetTwoFactorEnabledAsync(user);
+            this.IsMachineRemembered = await this._signInManager.IsTwoFactorClientRememberedAsync(user);
+            this.RecoveryCodesLeft = await this._userManager.CountRecoveryCodesAsync(user);
 
-            return Page();
+            return this.Page();
         }
 
         public async Task<IActionResult> OnPost()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await this._userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
             }
 
-            await _signInManager.ForgetTwoFactorClientAsync();
-            StatusMessage = "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
-            return RedirectToPage();
+            await this._signInManager.ForgetTwoFactorClientAsync();
+            this.StatusMessage = "The current browser has been forgotten. When you login again from this browser you will be prompted for your 2fa code.";
+            return this.RedirectToPage();
         }
     }
 }

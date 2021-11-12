@@ -755,62 +755,62 @@
                     </a>
                 </div>
             }
-            <table>
-                <thead>
+        <table>
+            <thead>
                 <th>Име</th>
                 <th class="table-sdate">Дата</th>
                 <th>Продукт</th>
                 <th class="table-amount">Количество</th>
                 <th>Редактиране</th>
-                </thead>
-                <tbody>
-                    @foreach (var harvest in Model.Harvests.AllHarvests)
-                    {
-                        string rowMasterId = "trMasterHarvest" + harvest.Id;
-                        string rowExpandId = "trExpandHarvest" + harvest.Id;
-                        <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
-                            <td>
-                                @harvest.HarvestName
-                            </td>
-                            <td class="table-sdate">
-                                <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(x => harvest.HarvestProductType)
-                                @if (harvest.HarvestProductType == HarvestProductType.Honey)
-                                {
-                                    <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
-                                }
-                            </td>
-                            <td class="table-amount">
-                                @harvest.Quantity
-                                <span>@Html.DisplayFor(x => harvest.Unit)</span>
-                            </td>
-                            <td class="edit">
-                                <div>
-                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
-                                       asp-route-beehiveId="@Model.Id">
-                                        <i class="far fa-edit"></i>
-                                    </a>
-                                    <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                          asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
-                                        <button type="submit" class="delete">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
-                            <td colspan="8">
-                                <div class="note">
-                                    <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @harvest.Note
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            </thead>
+            <tbody>
+                @foreach (var harvest in Model.Harvests.AllHarvests)
+                {
+                    string rowMasterId = "trMasterHarvest" + harvest.Id;
+                    string rowExpandId = "trExpandHarvest" + harvest.Id;
+                    <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
+                        <td>
+                            @harvest.HarvestName
+                        </td>
+                        <td class="table-sdate">
+                            <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => harvest.HarvestProductType)
+                            @if (harvest.HarvestProductType == HarvestProductType.Honey)
+                            {
+                                <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                            }
+                        </td>
+                        <td class="table-amount">
+                            @harvest.Quantity
+                            <span>@Html.DisplayFor(x => harvest.Unit)</span>
+                        </td>
+                        <td class="edit">
+                            <div>
+                                <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                   asp-route-beehiveId="@Model.Id">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                      asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                    <button type="submit" class="delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
+                        <td colspan="8">
+                            <div class="note">
+                                <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @harvest.Note
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
             @if (!Model.Harvests.AllHarvests.Any())
             {
                 <p>няма добавени добиви</p>
@@ -851,7 +851,14 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Harvests" asp-route-beehiveId="@Model.Id" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Harvests.CurrentPage" asp-route-pageAllTreatments="@Model.Harvests.CurrentPage" asp-route-pageAllHarvests="@i">@i</a>
+                            <a class="page-link"
+                               asp-controller="Beehive"
+                               asp-action="ById"
+                               asp-route-tabPage="Harvests" 
+                               asp-route-beehiveId="@Model.Id"
+                               asp-route-pageAllInspections="@Model.Harvests.CurrentPage"
+                               asp-route-pageAllTreatments="@Model.Harvests.CurrentPage"
+                               asp-route-pageAllHarvests="@i">@i</a>
                         </li>
                     }
                 }

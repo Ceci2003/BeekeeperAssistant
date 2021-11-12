@@ -409,8 +409,10 @@
             ws.Cells["A36:B36"].Style.Font.Bold = true;
             ws.Cells["A36:B36"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A36"].Value = "Секция запаси";
-            ws.Cells["A37"].Value = "От мед:"; ws.Cells["B37"].Value = inspection.StoredHoney;
-            ws.Cells["A38"].Value = "От прашец:"; ws.Cells["B38"].Value = inspection.StoredPollen;
+            ws.Cells["A37"].Value = "От мед:";
+            ws.Cells["B37"].Value = inspection.StoredHoney;
+            ws.Cells["A38"].Value = "От прашец:";
+            ws.Cells["B38"].Value = inspection.StoredPollen;
 
             if (!inspection.IncludeSpottedProblem)
             {
@@ -424,10 +426,14 @@
             ws.Cells["A40:B40"].Style.Font.Bold = true;
             ws.Cells["A40:B40"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A40"].Value = "Секция проблеми";
-            ws.Cells["A41"].Value = "Проблем:"; ws.Cells["B41"].Value = inspection.Disease;
-            ws.Cells["A42"].Value = "Третиране с:"; ws.Cells["B42"].Value = inspection.Treatment;
-            ws.Cells["A43"].Value = "Вредители:"; ws.Cells["B43"].Value = inspection.Pests;
-            ws.Cells["A44"].Value = "Хищници:"; ws.Cells["B44"].Value = inspection.Predators;
+            ws.Cells["A41"].Value = "Проблем:"; 
+            ws.Cells["B41"].Value = inspection.Disease;
+            ws.Cells["A42"].Value = "Третиране с:"; 
+            ws.Cells["B42"].Value = inspection.Treatment;
+            ws.Cells["A43"].Value = "Вредители:";
+            ws.Cells["B43"].Value = inspection.Pests;
+            ws.Cells["A44"].Value = "Хищници:"; 
+            ws.Cells["B44"].Value = inspection.Predators;
 
             if (!inspection.IncludeWeatherInfo)
             {

@@ -11,7 +11,6 @@
 
     public class InspectionDataExcelExportModel : IMapFrom<Inspection>
     {
-
         public InspectionType InspectionType { get; set; }
 
         public string Note { get; set; }

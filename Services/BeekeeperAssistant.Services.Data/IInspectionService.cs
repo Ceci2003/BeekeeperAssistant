@@ -54,7 +54,6 @@
         //    string conditions,
         //    double weatherTemperature,
         //    double weatherHumidity);
-
         Task<int> CreateUserInspectionAsync(
             string userId,
             int beehiveId,

@@ -152,7 +152,7 @@
 
             if (!inputModel.IncludeWeatherInfo)
             {
-                if (inputModel.Conditions != null || inputModel.WeatherTemperature != null || inputModel.WeatherHumidity != null)
+                if (inputModel.Conditions != null)
                 {
                     inputModel.IncludeWeatherInfo = true;
                 }

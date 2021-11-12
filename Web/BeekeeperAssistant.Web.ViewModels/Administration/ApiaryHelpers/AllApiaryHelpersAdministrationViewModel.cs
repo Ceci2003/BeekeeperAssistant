@@ -9,6 +9,5 @@
     public class AllApiaryHelpersAdministrationViewModel
     {
         public IEnumerable<ApiaryHelperAdministrationViewModel> AllApiariesHelpers { get; set; }
-
     }
 }

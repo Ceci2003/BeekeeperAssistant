@@ -72,6 +72,8 @@
 
         int GetAllBeehiveInspectionsCountByBeehiveId(int beehiveId);
 
+        IEnumerable<Inspection> GetAllInspectionsByBeehiveId(int beehiveId);
+
         IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0);
     }
 }

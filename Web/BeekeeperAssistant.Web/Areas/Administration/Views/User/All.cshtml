@@ -18,6 +18,8 @@
     </div>
 </div>
 <div class="content">
+    <partial name="_StatusMessagePartial" />
+
     <h1 class="title-1">@ViewData["Title"]</h1>
     <table class="data-table administration">
         <thead>
@@ -60,22 +62,22 @@
                     </td>
                     <td class="edit-delete" style="padding: 4px;">
                         @if (!(user.Username == this.User.Identity.Name))
-                    {
-                        if (!user.IsDeleted)
                         {
-                            <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete"
-                    asp-route-id="@user.Id">
-                                <button type="submit" class="btn delete">Изтрий</button>
-                            </form>
+                            if (!user.IsDeleted)
+                            {
+                                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete"
+                                      asp-route-id="@user.Id">
+                                    <button type="submit" class="btn delete">Изтрий</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete"
+                                      asp-route-id="@user.Id">
+                                    <button type="submit" class="btn edit">Възстанови</button>
+                                </form>
+                            }
                         }
-                        else
-                        {
-                            <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete"
-                    asp-route-id="@user.Id">
-                                <button type="submit" class="btn edit">Възстанови</button>
-                            </form>
-                        }
-                    }
                     </td>
                 </tr>
             }

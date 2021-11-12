@@ -45,6 +45,8 @@
 
             await this.userService.DeleteAsync(user);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрит потребител!";
+
             return this.RedirectToAction(nameof(this.All));
         }
 
@@ -65,6 +67,7 @@
 
             await this.userService.UndeleteAsync(user);
 
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно възтановен потребител!";
             return this.RedirectToAction(nameof(this.All));
         }
     }

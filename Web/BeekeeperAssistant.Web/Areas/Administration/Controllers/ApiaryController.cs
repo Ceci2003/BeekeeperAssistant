@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Administration.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
@@ -30,9 +30,30 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Undelete(int id)
+        public async Task<IActionResult> Undelete(int id, string returnUrl)
         {
             await this.apiaryService.UndeleteAsync(id);
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно възтановен пчелин!";
+
+            if (returnUrl != null)
+            {
+                return this.Redirect(returnUrl);
+            }
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, string returnUrl)
+        {
+            await this.apiaryService.DeleteApiaryByIdAsync(id);
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
+
+            if (returnUrl != null)
+            {
+                return this.Redirect(returnUrl);
+            }
 
             return this.RedirectToAction(nameof(this.All));
         }

@@ -30,6 +30,5 @@
         int AllApiaryHelpersCount();
 
         IEnumerable<T> GetAllApiaryHelpers<T>();
-
     }
 }

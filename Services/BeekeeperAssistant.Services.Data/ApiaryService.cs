@@ -17,6 +17,7 @@
         private readonly IRepository<ApiaryHelper> apiaryHelpersReposiitory;
         private readonly IRepository<BeehiveHelper> beehiveHelpersReposiitory;
         private readonly IRepository<QueenHelper> queenHelpersReposiitory;
+        private readonly IBeehiveService beehiveService;
 
         public ApiaryService(
             IDeletableEntityRepository<Apiary> apiaryRepository,
@@ -24,7 +25,8 @@
             IDeletableEntityRepository<Queen> queenRepository,
             IRepository<ApiaryHelper> apiaryHelpersReposiitory,
             IRepository<BeehiveHelper> beehiveHelpersReposiitory,
-            IRepository<QueenHelper> queenHelpersReposiitory)
+            IRepository<QueenHelper> queenHelpersReposiitory,
+            IBeehiveService beehiveService)
         {
             this.apiaryRepository = apiaryRepository;
             this.beehiveRepository = beehiveRepository;
@@ -32,6 +34,7 @@
             this.apiaryHelpersReposiitory = apiaryHelpersReposiitory;
             this.beehiveHelpersReposiitory = beehiveHelpersReposiitory;
             this.queenHelpersReposiitory = queenHelpersReposiitory;
+            this.beehiveService = beehiveService;
         }
 
         public async Task<string> CreateUserApiaryAsync(
@@ -59,69 +62,9 @@
 
         public async Task DeleteApiaryByIdAsync(int apiaryId)
         {
-            // Delete all apiaryHelpers
-            var allApiaryHelpers = this.apiaryHelpersReposiitory
-                .All()
-                .Where(x => x.ApiaryId == apiaryId);
-
-            foreach (var apiaryHelper in allApiaryHelpers)
-            {
-                this.apiaryHelpersReposiitory.Delete(apiaryHelper);
-            }
-
-            await this.apiaryHelpersReposiitory.SaveChangesAsync();
-
-            // Delete all beehiveHelpers
-            var allBeehiveHeleprs = this.apiaryRepository
-                .All()
-                .Where(x => x.Id == apiaryId)
-                .SelectMany(x => x.Beehives)
-                .SelectMany(x => x.BeehiveHelpers);
-
-            foreach (var beehiveHelper in allBeehiveHeleprs)
-            {
-                this.beehiveHelpersReposiitory.Delete(beehiveHelper);
-            }
-
-            await this.beehiveHelpersReposiitory.SaveChangesAsync();
-
-            // Delete all queenHelpers
-            var allQueenHelpers = this.apiaryRepository
-                .All()
-                .Where(x => x.Id == apiaryId)
-                .SelectMany(x => x.Beehives)
-                .Select(x => x.Queen)
-                .SelectMany(x => x.QueenHelpers);
-
-            foreach (var queenHelper in allQueenHelpers)
-            {
-                this.queenHelpersReposiitory.Delete(queenHelper);
-            }
-
-            await this.queenHelpersReposiitory.SaveChangesAsync();
-
-            // Delete all beehives
-            var apiaryBeehives = this.beehiveRepository
-                .All()
-                .Include(b => b.Queen)
-                .Where(b => b.ApiaryId == apiaryId)
-                .ToList();
-
-            foreach (var beehive in apiaryBeehives)
-            {
-                this.beehiveRepository.Delete(beehive);
-
-                if (beehive.QueenId.HasValue)
-                {
-                    this.queenRepository.HardDelete(beehive.Queen);
-                }
-            }
-
-            await this.beehiveRepository.SaveChangesAsync();
-
-            // Delete apiary
             var apiary = this.apiaryRepository
                 .All()
+                .Include(a => a.Beehives)
                 .FirstOrDefault(a => a.Id == apiaryId);
 
             this.apiaryRepository.Delete(apiary);
@@ -296,10 +239,7 @@
                 .AllWithDeleted()
                 .FirstOrDefault(a => a.Id == apiaryId);
 
-            apiary.IsDeleted = false;
-            apiary.DeletedOn = null;
-
-            this.apiaryRepository.Update(apiary);
+            this.apiaryRepository.Undelete(apiary);
             await this.apiaryRepository.SaveChangesAsync();
         }
     }

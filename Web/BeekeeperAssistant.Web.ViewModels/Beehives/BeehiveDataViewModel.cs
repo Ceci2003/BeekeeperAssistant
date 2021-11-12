@@ -51,10 +51,13 @@
 
         public Access QueenAccess { get; set; }
 
+        [IgnoreMap]
         public AllHarvestsViewModel Harvests { get; set; }
 
+        [IgnoreMap]
         public AllTreatementsViewModel Treatments { get; set; }
 
+        [IgnoreMap]
         public AllInspectionsViewModel Inspections { get; set; }
 
         public bool HasHelpers { get; set; }

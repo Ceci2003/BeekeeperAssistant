@@ -19,6 +19,8 @@
 </div>
 
 <div class="content">
+    <partial name="_StatusMessagePartial" />
+
     <h1 class="title-1">@ViewData["Title"]</h1>
     <table class="data-table administration">
         <thead>
@@ -40,12 +42,12 @@
                         @if (!beehive.IsDeleted)
                         {
                             <a asp-controller="Apiary" asp-action="ByNumber"
-                        asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
+                               asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
                         }
                         else
                         {
                             <a style="pointer-events: none; color: #110400;" asp-controller="Apiary" asp-action="ByNumber"
-                        asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
+                               asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
                         }
                     </td>
                     <td>
@@ -61,15 +63,15 @@
                     <td class="edit-delete" style="padding: 4px;">
                         @if (!beehive.IsDeleted)
                         {
-                            <form method="post" asp-area="" asp-controller="Beehive" asp-action="Delete"
-                        asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                            <form method="post" asp-area="Administration" asp-controller="Beehive" asp-action="Delete"
+                                  asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
                                 <button type="submit" class="btn delete">Изтрий</button>
                             </form>
                         }
                         else
                         {
                             <form method="post" asp-area="Administration" asp-controller="Beehive" asp-action="Undelete"
-                        asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                  asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
                                 <button type="submit" class="btn edit">Възстанови</button>
                             </form>
                         }

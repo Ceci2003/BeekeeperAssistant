@@ -42,6 +42,8 @@
 
         public Queen Queen { get; set; }
 
+        public ICollection<Inspection> Inspections { get; set; }
+
         public ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
 
         public ICollection<TreatedBeehive> TreatedBeehives { get; set; }

@@ -178,8 +178,8 @@
 
         public int GetAllUserInspectionsForLastYearCount(string userId) =>
            this.inspectionRepository
-               .AllAsNoTracking()
-               .Where(t => t.CreatorId == userId)
+               .All()
+               .Where(t => !t.Beehive.IsDeleted && t.CreatorId == userId)
                .Count();
 
         public int GetAllBeehiveInspectionsCountByBeehiveId(int beehiveId)
@@ -187,5 +187,11 @@
             .All()
             .Where(i => i.BeehiveId == beehiveId)
             .Count();
+
+        public IEnumerable<Inspection> GetAllInspectionsByBeehiveId(int beehiveId)
+            => this.inspectionRepository
+            .All()
+            .Where(i => i.BeehiveId == beehiveId)
+            .ToList();
     }
 }

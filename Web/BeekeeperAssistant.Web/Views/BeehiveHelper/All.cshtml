@@ -26,6 +26,8 @@
 </div>
 
 <div class="content">
+    <partial name="_StatusMessagePartial" />
+
     <div class="center-screen-parent border helpers-all">
         <h1 class="title-1">@ViewData["Title"]</h1>
         <table class="data-table">
@@ -58,8 +60,8 @@
                         <td class="edit">
                             <div>
                                 <a class="edit" asp-controller="BeehiveHelper" asp-action="Edit"
-                                asp-route-beehiveId="@beehiveHelper.BeehiveId"
-                                asp-route-userId="@beehiveHelper.UserId"><i class="far fa-edit"></i></a>
+                                   asp-route-beehiveId="@beehiveHelper.BeehiveId"
+                                   asp-route-userId="@beehiveHelper.UserId"><i class="far fa-edit"></i></a>
                             </div>
                         </td>
                     </tr>

@@ -43,12 +43,8 @@
     @block
 }">
 
-        @if (TempData[GlobalConstants.SuccessMessage] != null)
-        {
-                <div class="alert alert-success fade-out" role="alert">
-                @TempData[GlobalConstants.SuccessMessage]
-                </div>
-        }
+        <partial name="_StatusMessagePartial" />
+
         <div class="data-view">
             <div class="qr-code">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44302/Apiary/@Model.Number&size=255x255"
@@ -78,19 +74,19 @@
                 <div class="data-edit">
                     @if (Model.ApiaryAccess == Access.ReadWrite)
                     {
-                            <a class="btn edit" asp-action="Edit" asp-route-id="@Model.Id">Редактирай</a>
-                            <form asp-controller="Apiary" asp-action="Delete" asp-route-id="@Model.Id">
-                                <input class="btn delete" type="submit" value="Изтрий" />
-                            </form>
+                        <a class="btn edit" asp-action="Edit" asp-route-id="@Model.Id">Редактирай</a>
+                        <form asp-controller="Apiary" asp-action="Delete" asp-route-id="@Model.Id">
+                            <input class="btn delete" type="submit" value="Изтрий" />
+                        </form>
                     }
 
                     @if (Model.Creator.UserName == this.User.Identity.Name)
                     {
-                            <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
+                        <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
 
                         @if (Model.HasHelpers)
                         {
-                                    <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
+                            <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
                         }
                     }
 
@@ -99,20 +95,20 @@
             <div class="weather">
                 @if (@Model.ForecastResult == null)
                 {
-                        <div>
-                            <p style="font-size: 18px; color: red; text-align: center;">Населеното място <br>не е намерено</p>
-                        </div>
+                    <div>
+                        <p style="font-size: 18px; color: red; text-align: center;">Населеното място <br>не е намерено</p>
+                    </div>
                 }
                 else
                 {
                     string imgPath = Model.ForecastResult.WeatherIcon + ".png";
+                    <div>
+                        <img src="~/img/weather/@imgPath" alt="">
                         <div>
-                            <img src="~/img/weather/@imgPath" alt="">
-                            <div>
-                                <p>Температура: @Model.ForecastResult.Temp°</p>
-                                <p>Влажност: @Model.ForecastResult.Humidity%</p>
-                            </div>
+                            <p>Температура: @Model.ForecastResult.Temp°</p>
+                            <p>Влажност: @Model.ForecastResult.Humidity%</p>
                         </div>
+                    </div>
                 }
             </div>
         </div>
@@ -120,22 +116,18 @@
     <div id="Beehives" class="tabcontent" style="display: @if(Model.TabPage == "Beehives") {
     @block
 }">
-        @if (TempData[GlobalConstants.SuccessMessage] != null)
-        {
-                <div class="alert alert-success" role="alert">
-                @TempData[GlobalConstants.SuccessMessage]
-                </div>
-        }
+        <partial name="_StatusMessagePartial" />
+
         <div class="page-controls">
             <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel" asp-route-id="@Model.Id">
                 <i class="fas fa-file-download"></i> Excel
             </a>
             @if (Model.ApiaryAccess == Access.ReadWrite)
             {
-                    <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">
-                        <i class="fas fa-plus-square pr-2"></i>
-                        Създайте нов кошер
-                    </a>
+                <a class="btn beehive-create" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.Id">
+                    <i class="fas fa-plus-square pr-2"></i>
+                    Създайте нов кошер
+                </a>
             }
         </div>
         <table class="data-table">
@@ -151,101 +143,101 @@
             <tbody>
                 @foreach (var beehive in Model.Beehives)
                 {
-                        <tr class="@if (beehive.HasDevice == true) {
+                    <tr class="@if (beehive.HasDevice == true) {
                 @hasDevice
  }">
-                            <td class="number">
-                                <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
-                            </td>
-                            <td>@Html.DisplayFor(x => beehive.BeehiveType)</td>
-                            <td>@Html.DisplayFor(x => beehive.BeehiveSystem)</td>
-                            <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">
+                        <td class="number">
+                            <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                        </td>
+                        <td>@Html.DisplayFor(x => beehive.BeehiveType)</td>
+                        <td>@Html.DisplayFor(x => beehive.BeehiveSystem)</td>
+                        <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">
                             @Html.DisplayFor(x => beehive.BeehivePower)
-                            </td>
-                            <td class="edit">
-                                <div>
+                        </td>
+                        <td class="edit">
+                            <div>
                                 @if (beehive.BeehiveAccess == Access.ReadWrite)
                                 {
-                                            <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id" asp-route-returnController="Apiary" asp-route-returnAction="ByNumber">
-                                                <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                                            </a>
-                                            <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                            <form method="post" id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
+                                    <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id" asp-route-returnController="Apiary" asp-route-returnAction="ByNumber">
+                                        <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                                    </a>
+                                    <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <form method="post" id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
                                           asp-route-id="@beehive.Id">
-                                                <button type="submit" class="delete">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </form>
+                                        <button type="submit" class="delete">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 }
 
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
         @if (!Model.Beehives.Any())
         {
-                <p class="empty-row">пчелинът няма добавени кошери</p>
+            <p class="empty-row">пчелинът няма добавени кошери</p>
         }
         <div class="pagination">
             <ul>
                 @if (this.Model.CurrentPage == 1)
                 {
-                        <li class="page-item disabled">
-                            <span class="page-link">
-                                <i class="fas fa-arrow-left"></i>
-                            </span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                    </li>
                 }
                 else
                 {
-                        <li class="page-item">
+                    <li class="page-item">
                         @*<a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
-                            asp-route-page="@(this.Model.CurrentPage - 1)">
+                        asp-route-page="@(this.Model.CurrentPage - 1)">
+                        <i class="fas fa-arrow-left"></i>
+                        </a>*@
+                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Id" asp-route-page="@(this.Model.CurrentPage - 1)">
                             <i class="fas fa-arrow-left"></i>
-                            </a>*@
-                            <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Id" asp-route-page="@(this.Model.CurrentPage - 1)">
-                                <i class="fas fa-arrow-left"></i>
-                            </a>
-                        </li>
+                        </a>
+                    </li>
                 }
                 @for (int i = 1; i <= this.Model.PagesCount; i++)
                 {
                     @if (i == this.Model.CurrentPage)
                     {
-                                <li class="page-item active">
-                                    <span class="page-link">@i</span>
-                                </li>
+                        <li class="page-item active">
+                            <span class="page-link">@i</span>
+                        </li>
                     }
                     else
                     {
                         @*<li class="page-item">
-                            <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                            asp-route-page="@i">@i</a>
-                            </li>*@
-                                <li class="page-item">
-                                    <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@i">@i</a>
-                                </li>
+                        <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                        asp-route-page="@i">@i</a>
+                        </li>*@
+                        <li class="page-item">
+                            <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@i">@i</a>
+                        </li>
                     }
                 }
                 @if (this.Model.CurrentPage == this.Model.PagesCount)
                 {
-                        <li class="page-item disabled">
-                            <span class="page-link">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                        </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </li>
                 }
                 else
                 {
-                        <li class="page-item">
-                            <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@(this.Model.CurrentPage + 1)">
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@(this.Model.CurrentPage + 1)">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
                 }
             </ul>
         </div>

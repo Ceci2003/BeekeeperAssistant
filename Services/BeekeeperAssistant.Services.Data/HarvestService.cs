@@ -104,7 +104,8 @@
         public int GetAllUserHarvestsForLastYearCount(string userId) =>
             this.harvestRepository
             .All()
-            .Where(h => h.CreatorId == userId)
+            .SelectMany(x => x.HarvestedBeehives)
+            .Where(h => !h.Beehive.IsDeleted && h.Harvest.CreatorId == userId)
             .Count();
 
         public IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0)

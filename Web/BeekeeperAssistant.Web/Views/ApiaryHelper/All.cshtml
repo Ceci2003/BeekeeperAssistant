@@ -25,12 +25,8 @@
 </div>
 
 <div class="content">
-    @if (TempData[GlobalConstants.SuccessMessage] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            @TempData[GlobalConstants.SuccessMessage]
-        </div>
-    }
+    <partial name="_StatusMessagePartial" />
+
     <div class="center-screen-parent border helpers-all">
         <h1 class="title-1">@ViewData["Title"]</h1>
         <table class="data-table">

@@ -302,7 +302,7 @@
 
             var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehive.Id);
 
-            if (beehive.CreatorId != currentUser.Id && 
+            if (beehive.CreatorId != currentUser.Id &&
                 !this.beehiveHelperService.IsBeehiveHelper(currentUser.Id, beehive.Id) &&
                 !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId) &&
                 !this.User.IsInRole(GlobalConstants.AdministratorRoleName))

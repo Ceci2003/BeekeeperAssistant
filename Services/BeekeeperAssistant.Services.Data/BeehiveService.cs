@@ -22,6 +22,10 @@
         private readonly IRepository<TreatedBeehive> treatedBeehiveRepository;
         private readonly IDeletableEntityRepository<Harvest> harvestRepository;
         private readonly IRepository<HarvestedBeehive> harvestedBeehiveRepository;
+        private readonly IQueenService queenService;
+        private readonly IInspectionService inspectionService;
+        private readonly ITreatmentService treatmentService;
+        private readonly IHarvestService harvestService;
 
         public BeehiveService(
             IRepository<BeehiveHelper> beehiveHelperRepository,
@@ -33,7 +37,11 @@
             IDeletableEntityRepository<Treatment> treatmentRepository,
             IRepository<TreatedBeehive> treatedBeehiveRepository,
             IDeletableEntityRepository<Harvest> harvestRepository,
-            IRepository<HarvestedBeehive> harvestedBeehiveRepository)
+            IRepository<HarvestedBeehive> harvestedBeehiveRepository,
+            IQueenService queenService,
+            IInspectionService inspectionService,
+            ITreatmentService treatmentService,
+            IHarvestService harvestService)
         {
             this.beehiveHelperRepository = beehiveHelperRepository;
             this.apiaryHelperRepository = apiaryHelperRepository;
@@ -45,6 +53,10 @@
             this.treatedBeehiveRepository = treatedBeehiveRepository;
             this.harvestRepository = harvestRepository;
             this.harvestedBeehiveRepository = harvestedBeehiveRepository;
+            this.queenService = queenService;
+            this.inspectionService = inspectionService;
+            this.treatmentService = treatmentService;
+            this.harvestService = harvestService;
         }
 
         public async Task<int> CreateUserBeehiveAsync(
@@ -101,72 +113,6 @@
 
         public async Task<string> DeleteBeehiveByIdAsync(int beehiveId)
         {
-            var queen = this.queenRepository
-                .All()
-                .FirstOrDefault(q => q.BeehiveId == beehiveId);
-
-            if (queen != null)
-            {
-                this.queenRepository.HardDelete(queen);
-            }
-
-            var inspections = this.inspectionRepository
-                .All()
-                .Where(i => i.BeehiveId == beehiveId)
-                .ToList();
-
-            foreach (var inspection in inspections)
-            {
-                this.inspectionRepository.Delete(inspection);
-            }
-
-            var treatments = this.treatedBeehiveRepository
-                .All()
-                .Where(tb => tb.BeehiveId == beehiveId)
-                .Select(tb => tb.Treatment)
-                .ToList();
-
-            foreach (var treatment in treatments)
-            {
-                this.treatmentRepository.Delete(treatment);
-            }
-
-            var harvests = this.harvestedBeehiveRepository
-                .All()
-                .Where(hb => hb.BeehiveId == beehiveId)
-                .Select(hb => hb.Harvest)
-                .ToList();
-
-            foreach (var harvest in harvests)
-            {
-                this.harvestRepository.Delete(harvest);
-            }
-
-            var allBeehiveHelpersToDelete = this.beehiveHelperRepository
-                .All()
-                .Where(x => x.BeehiveId == beehiveId);
-
-            foreach (var beehiveHelper in allBeehiveHelpersToDelete)
-            {
-                this.beehiveHelperRepository.Delete(beehiveHelper);
-            }
-
-            await this.beehiveHelperRepository.SaveChangesAsync();
-
-            if (queen != null)
-            {
-                var allQueenHelpersToDelete = this.queenHelperRepository
-                    .All()
-                    .Where(x => x.QueenId == queen.Id);
-
-                foreach (var queenHelper in allQueenHelpersToDelete)
-                {
-                    this.queenHelperRepository.Delete(queenHelper);
-                }
-
-                await this.queenHelperRepository.SaveChangesAsync();
-            }
-
             var beehive = this.beehiveRepository
                 .All()
                 .Include(b => b.Apiary)
@@ -224,7 +170,7 @@
                 .OrderByDescending(b => b.IsBookMarked)
                 .ThenBy(b => b.Apiary.Number)
                 .ThenBy(b => b.Number)
-                .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
+                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted)
                 .Skip(skip);
 
             if (take.HasValue)
@@ -328,6 +274,7 @@
         public IEnumerable<T> GetAllBeehivesWithDeleted<T>()
             => this.beehiveRepository
                 .AllWithDeleted()
+                .Where(b => !b.Apiary.IsDeleted)
                 .To<T>()
                 .ToList();
 
@@ -337,10 +284,7 @@
                 .AllWithDeleted()
                 .FirstOrDefault(b => b.Id == beehiveId);
 
-            beehive.IsDeleted = false;
-            beehive.DeletedOn = null;
-
-            this.beehiveRepository.Update(beehive);
+            this.beehiveRepository.Undelete(beehive);
             await this.beehiveRepository.SaveChangesAsync();
         }
     }

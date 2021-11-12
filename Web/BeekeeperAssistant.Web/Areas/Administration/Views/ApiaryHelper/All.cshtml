@@ -19,6 +19,8 @@
 </div>
 
 <div class="content">
+    <partial name="_StatusMessagePartial" />
+
     <h1 class="title-1">@ViewData["Title"]</h1>
     <table class="data-table administration">
         <thead>
@@ -34,15 +36,15 @@
                 <tr>
                     <td class="number">
                         <a asp-area="" asp-controller="Apiary" asp-action="ByNumber"
-        asp-route-apiaryNumber="@(helper.ApiaryNumber)">@(helper.ApiaryNumber)</a>
+                           asp-route-apiaryNumber="@(helper.ApiaryNumber)">@(helper.ApiaryNumber)</a>
                     </td>
                     <td>
                         @(helper.UserUsername)
                     </td>
                     <td class="edit-delete" style="padding: 4px;">
-                        <form method="post" asp-area="" asp-controller="ApiaryHelper" asp-action="Delete"
-                        asp-route-userId="@(helper.UserId)" asp-route-apiaryId="@(helper.ApiaryId)"
-                        asp-route-returnUrl="@this.Context.Request.Path">
+                        <form method="post" asp-area="Administration" asp-controller="ApiaryHelper" asp-action="Delete"
+                              asp-route-userId="@(helper.UserId)" asp-route-apiaryId="@(helper.ApiaryId)"
+                              asp-route-returnUrl="@this.Context.Request.Path">
                             <button type="submit" class="btn delete">Изтрий</button>
                         </form>
                     </td>

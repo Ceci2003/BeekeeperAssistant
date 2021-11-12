@@ -174,7 +174,10 @@
                 .Count();
 
         public int AllApiaryHelpersCount()
-            => this.apiaryHelperRepository.All().Count();
+            => this.apiaryHelperRepository
+            .All()
+            .Where(x => !x.Apiary.IsDeleted)
+            .Count();
 
         public bool IsApiaryHelper(string userId, int apiaryId)
         {

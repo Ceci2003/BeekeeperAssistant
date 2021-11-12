@@ -28,6 +28,8 @@
 </div>
 
 <div class="content">
+    <partial name="_StatusMessagePartial" />
+
     <div class="center-screen-parent border helpers-all">
         <h1 class="title-1">@ViewData["Title"]</h1>
         <table class="data-table">
@@ -60,7 +62,7 @@
                         <td class="edit">
                             <div>
                                 <a class="edit" asp-controller="QueenHelper" asp-action="Edit" asp-route-queenId="@queenHelper.QueenId"
-                                asp-route-userId="@queenHelper.UserId"><i class="far fa-edit"></i></a>
+                                   asp-route-userId="@queenHelper.UserId"><i class="far fa-edit"></i></a>
                             </div>
                         </td>
                     </tr>

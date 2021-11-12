@@ -109,33 +109,23 @@
 
         public async Task<int> DeleteQueenAsync(int queenId)
         {
-            var allQueenHelpersToDelete = this.queenHelperRepository
-                .All()
-                .Where(x => x.QueenId == queenId);
-
-            foreach (var queenHelpers in allQueenHelpersToDelete)
-            {
-                this.queenHelperRepository.Delete(queenHelpers);
-            }
-
-            await this.queenHelperRepository.SaveChangesAsync();
-
             var queen = this.queenRepository
                 .All()
                 .FirstOrDefault(q => q.Id == queenId);
 
-            this.queenRepository.HardDelete(queen);
-            await this.queenRepository.SaveChangesAsync();
-
-            var beehive = this.beehiveRepository.All()
-                .FirstOrDefault(b => b.Id == queen.BeehiveId);
+            var beehive = this.beehiveRepository
+                .All()
+                .FirstOrDefault(b => b.QueenId == queen.Id);
 
             beehive.QueenId = null;
 
             this.beehiveRepository.Update(beehive);
+            this.queenRepository.HardDelete(queen);
+
+            await this.queenRepository.SaveChangesAsync();
             await this.beehiveRepository.SaveChangesAsync();
 
-            return queen.BeehiveId;
+            return beehive.Id;
         }
 
         public async Task<int> EditQueenAsync(
@@ -171,7 +161,8 @@
             var query = this.queenRepository
                 .All()
                 .OrderByDescending(q => q.IsBookMarked)
-                .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false).Skip(skip);
+                .Where(q => q.UserId == userId && !q.Beehive.IsDeleted)
+                .Skip(skip);
 
             if (take.HasValue)
             {

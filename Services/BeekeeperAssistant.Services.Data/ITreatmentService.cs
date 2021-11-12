@@ -41,5 +41,6 @@
         int GetBeehiveTreatmentsCountByBeehiveId(int beehiveId);
 
         IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0);
+
     }
 }

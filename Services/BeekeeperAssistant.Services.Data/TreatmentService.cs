@@ -135,8 +135,11 @@
 
         public int GetAllUserTreatmentsForLastYearCount(string userId) =>
             this.treatmentRepository
-                .AllAsNoTracking()
-                .Where(t => t.CreatorId == userId && (DateTime.UtcNow.Year - t.DateOfTreatment.Year) <= 1)
+                .All()
+                .SelectMany(x => x.TreatedBeehives)
+                .Where(t => !t.Beehive.IsDeleted &&
+                    t.Treatment.CreatorId == userId &&
+                    (DateTime.UtcNow.Year - t.Treatment.DateOfTreatment.Year) <= 1)
                 .Count();
 
         public int GetBeehiveTreatmentsCountByBeehiveId(int beehiveId)

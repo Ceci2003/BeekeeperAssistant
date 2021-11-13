@@ -36,7 +36,7 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
         {
             await this.beehiveService.UndeleteAsync(id);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно възтановен кошер!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно възстановен кошер!";
 
             if (returnUrl != null)
             {

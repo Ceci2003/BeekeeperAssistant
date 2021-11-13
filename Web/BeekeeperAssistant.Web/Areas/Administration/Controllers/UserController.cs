@@ -67,7 +67,7 @@
 
             await this.userService.UndeleteAsync(user);
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно възтановен потребител!";
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно възстановен потребител!";
             return this.RedirectToAction(nameof(this.All));
         }
     }

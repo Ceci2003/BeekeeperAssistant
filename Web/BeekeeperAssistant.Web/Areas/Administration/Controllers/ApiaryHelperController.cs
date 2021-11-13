@@ -21,14 +21,21 @@
 
         public IActionResult All(int page = 1)
         {
-            var allCount = this.apiaryHelperService.GetAllApiaryHelpersCount();
+            var allCount = this.apiaryHelperService.GetAllApiaryHelpersWithDeletedCount();
             var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            else if (page > pagesCount)
+            {
+                page = pagesCount == 0 ? 1 : pagesCount;
+            }
 
             var viewModel = new AllApiaryHelpersAdministrationViewModel
             {
-                AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(
-                GlobalConstants.ApiariesPerPageAdministration,
-                (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
+                AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(GlobalConstants.ApiariesPerPageAdministration, (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
                 PagesCount = pagesCount,
             };
 

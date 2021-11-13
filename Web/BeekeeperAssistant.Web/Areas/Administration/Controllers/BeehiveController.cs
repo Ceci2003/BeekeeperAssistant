@@ -23,10 +23,32 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 
         public IActionResult All(int page = 1)
         {
+            var allCount = this.beehiveService.GetAllBeehivesWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            else if (page > pagesCount)
+            {
+                page = pagesCount == 0 ? 1 : pagesCount;
+            }
+
             var viewModel = new AllBeehivesAdministrationViewModel
             {
-                AllBeehives = this.beehiveService.GetAllBeehivesWithDeleted<BeehivesAdministrationViewModel>(),
+                AllBeehives = this.beehiveService.GetAllBeehivesWithDeleted<BeehivesAdministrationViewModel>(
+                    GlobalConstants.ApiariesPerPageAdministration,
+                    (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
+                PagesCount = pagesCount,
             };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

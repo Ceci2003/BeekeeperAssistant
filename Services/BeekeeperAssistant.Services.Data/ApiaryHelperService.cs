@@ -204,7 +204,7 @@
 
             if (take.HasValue)
             {
-                query.Take(take.Value);
+                query = query.Take(take.Value);
             }
 
             return query.To<T>().ToList();

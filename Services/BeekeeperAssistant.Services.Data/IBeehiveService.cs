@@ -58,8 +58,10 @@
 
         IEnumerable<T> GetAllBeehives<T>();
 
-        IEnumerable<T> GetAllBeehivesWithDeleted<T>();
+        IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0);
 
         Task UndeleteAsync(int beehiveId);
+
+        int GetAllBeehivesWithDeletedCount();
     }
 }

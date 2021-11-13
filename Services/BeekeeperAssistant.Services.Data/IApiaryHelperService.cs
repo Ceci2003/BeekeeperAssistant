@@ -30,5 +30,7 @@
         int GetAllApiaryHelpersCount();
 
         IEnumerable<T> GetAllApiaryHelpers<T>(int? take = null, int skip = 0);
+
+        int GetAllApiaryHelpersWithDeletedCount();
     }
 }

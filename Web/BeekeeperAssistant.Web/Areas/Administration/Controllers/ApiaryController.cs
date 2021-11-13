@@ -63,6 +63,7 @@
             {
                 return this.Redirect(returnUrl);
             }
+
             return this.RedirectToAction(nameof(this.All));
         }
 

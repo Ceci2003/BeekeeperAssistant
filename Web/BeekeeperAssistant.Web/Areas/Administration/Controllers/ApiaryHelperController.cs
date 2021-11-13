@@ -22,7 +22,7 @@
         public IActionResult All(int page = 1)
         {
             var allCount = this.apiaryHelperService.GetAllApiaryHelpersWithDeletedCount();
-            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiaryHelpersPerPageAdministration);
 
             if (page <= 0)
             {
@@ -35,7 +35,9 @@
 
             var viewModel = new AllApiaryHelpersAdministrationViewModel
             {
-                AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(GlobalConstants.ApiariesPerPageAdministration, (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
+                AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(
+                    GlobalConstants.ApiaryHelpersPerPageAdministration,
+                    (page - 1) * GlobalConstants.ApiaryHelpersPerPageAdministration),
                 PagesCount = pagesCount,
             };
 

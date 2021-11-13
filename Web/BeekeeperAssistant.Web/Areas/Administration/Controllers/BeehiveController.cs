@@ -24,7 +24,7 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
         public IActionResult All(int page = 1)
         {
             var allCount = this.beehiveService.GetAllBeehivesWithDeletedCount();
-            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.BeehivesPerPageAdministration);
 
             if (page <= 0)
             {
@@ -38,8 +38,8 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
             var viewModel = new AllBeehivesAdministrationViewModel
             {
                 AllBeehives = this.beehiveService.GetAllBeehivesWithDeleted<BeehivesAdministrationViewModel>(
-                    GlobalConstants.ApiariesPerPageAdministration,
-                    (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
+                    GlobalConstants.BeehivesPerPageAdministration,
+                    (page - 1) * GlobalConstants.BeehivesPerPageAdministration),
                 PagesCount = pagesCount,
             };
 

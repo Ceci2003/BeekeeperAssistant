@@ -27,8 +27,8 @@
 
         Access GetUserApiaryAccess(string userId, int apiaryId);
 
-        int AllApiaryHelpersCount();
+        int GetAllApiaryHelpersCount();
 
-        IEnumerable<T> GetAllApiaryHelpers<T>();
+        IEnumerable<T> GetAllApiaryHelpers<T>(int? take = null, int skip = 0);
     }
 }

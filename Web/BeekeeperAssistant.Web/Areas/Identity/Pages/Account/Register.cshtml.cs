@@ -16,6 +16,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
@@ -80,9 +81,11 @@
             this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
-                var applicationUser = await this._userManager.FindByNameAsync(this.Input.Email);
+                var applicationUser = this._userManager.Users
+                    .IgnoreQueryFilters()
+                    .FirstOrDefault(u => u.UserName == this.Input.Email);
 
-                if (applicationUser == null)
+                if (applicationUser != null)
                 {
                     this.ModelState.AddModelError("Email", "Потребителското име е заето!");
                     return this.Page();

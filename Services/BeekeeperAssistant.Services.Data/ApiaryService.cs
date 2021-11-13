@@ -227,11 +227,19 @@
                 .To<T>()
                 .ToList();
 
-        public IEnumerable<T> GetAllApiariesWithDeleted<T>()
-        => this.apiaryRepository
+        public IEnumerable<T> GetAllApiariesWithDeleted<T>(int? take = null, int skip = 0)
+        {
+            var query = this.apiaryRepository
                 .AllWithDeleted()
-                .To<T>()
-                .ToList();
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
 
         public async Task UndeleteAsync(int apiaryId)
         {
@@ -242,5 +250,10 @@
             this.apiaryRepository.Undelete(apiary);
             await this.apiaryRepository.SaveChangesAsync();
         }
+
+        public int GetAllApiariesWithDeletedCount()
+        => this.apiaryRepository
+                .AllWithDeleted()
+                .Count();
     }
 }

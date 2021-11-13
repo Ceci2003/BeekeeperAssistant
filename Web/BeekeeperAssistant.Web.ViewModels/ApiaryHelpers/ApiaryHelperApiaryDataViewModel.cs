@@ -22,5 +22,7 @@
         public int ApiaryBeehivesCount { get; set; }
 
         public Access Access { get; set; }
+
+        public string ApiaryCreatorId { get; set; }
     }
 }

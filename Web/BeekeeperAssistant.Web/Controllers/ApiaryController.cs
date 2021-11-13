@@ -100,6 +100,15 @@
                 },
             };
 
+            foreach (var apiary in viewModel.UserHelperApiaries.AllUserHelperApiaries)
+            {
+                apiary.Access =
+                    currentUser.Id == apiary.ApiaryCreatorId ||
+                    await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ?
+                    Access.ReadWrite :
+                    this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, apiary.ApiaryId);
+            }
+
             if (viewModel.UserApiaries.PagesCount == 0)
             {
                 viewModel.UserApiaries.PagesCount = 1;

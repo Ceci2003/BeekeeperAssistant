@@ -22,7 +22,7 @@
             this.userService = userService;
         }
 
-        public IActionResult All()
+        public IActionResult All(int page = 1)
         {
             var viewModel = new AllUsersViewModel
             {
@@ -50,7 +50,7 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult AllAdministrators()
+        public IActionResult AllAdministrators(int page = 1)
         {
             var viewModel = new AllUsersViewModel
             {

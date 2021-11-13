@@ -53,7 +53,9 @@
 
         IEnumerable<T> GetAllApiaries<T>();
 
-        IEnumerable<T> GetAllApiariesWithDeleted<T>();
+        IEnumerable<T> GetAllApiariesWithDeleted<T>(int? take = null, int skip = 0);
+
+        int GetAllApiariesWithDeletedCount();
 
         int AllApiariesCount();
 

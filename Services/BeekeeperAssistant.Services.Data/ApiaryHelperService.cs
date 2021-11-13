@@ -8,6 +8,7 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class ApiaryHelperService : IApiaryHelperService
     {
@@ -156,7 +157,9 @@
         {
             var qurey = this.apiaryHelperRepository
                 .All()
-                .Where(ah => ah.UserId == userId)
+                .Include(x => x.Apiary)
+                .ThenInclude(x => x.Creator)
+                .Where(ah => ah.UserId == userId && !ah.Apiary.Creator.IsDeleted)
                 .Skip(skip);
 
             if (take.HasValue)
@@ -173,7 +176,7 @@
                 .Where(ah => ah.UserId == userId)
                 .Count();
 
-        public int AllApiaryHelpersCount()
+        public int GetAllApiaryHelpersCount()
             => this.apiaryHelperRepository
             .All()
             .Where(x => !x.Apiary.IsDeleted)
@@ -193,10 +196,23 @@
             return true;
         }
 
-        public IEnumerable<T> GetAllApiaryHelpers<T>()
+        public IEnumerable<T> GetAllApiaryHelpers<T>(int? take = null, int skip = 0)
+        {
+            var query = this.apiaryHelperRepository
+                .All()
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
+        public int GetAllApiaryHelpersWithDeletedCount()
             => this.apiaryHelperRepository
                 .All()
-                .To<T>()
-                .ToList();
+                .Count();
     }
 }

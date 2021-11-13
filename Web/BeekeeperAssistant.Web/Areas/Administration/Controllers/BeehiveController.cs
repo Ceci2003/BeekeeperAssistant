@@ -21,7 +21,7 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
             this.apiaryService = apiaryService;
         }
 
-        public IActionResult All()
+        public IActionResult All(int page = 1)
         {
             var viewModel = new AllBeehivesAdministrationViewModel
             {

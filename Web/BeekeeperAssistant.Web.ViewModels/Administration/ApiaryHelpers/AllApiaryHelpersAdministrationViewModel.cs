@@ -9,5 +9,9 @@
     public class AllApiaryHelpersAdministrationViewModel
     {
         public IEnumerable<ApiaryHelperAdministrationViewModel> AllApiariesHelpers { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
     }
 }

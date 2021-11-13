@@ -16,6 +16,7 @@
         public const int ApiaryHelpersApiaryPerPage = 5;
         public const int BeehivesPerPage = 25;
         public const int QueensPerPage = 15;
+        public const int ApiariesPerPageAdministration = 3;
 
         // Apiary Constants
         public const string ApiaryPartNumberRegex = @"\d{4}";

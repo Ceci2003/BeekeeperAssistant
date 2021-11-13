@@ -30,7 +30,7 @@
             var viewModel = new IndexViewModel()
             {
                 AllUsersCount = this.userService.AllUsersCount(),
-                AllHelpersCount = this.apiaryHelperService.AllApiaryHelpersCount(),
+                AllHelpersCount = this.apiaryHelperService.GetAllApiaryHelpersCount(),
                 AllAdministratorsCount = await this.userService.AllAdministratorsCountAsync(),
                 AllApiariesCount = this.apiaryService.AllApiariesCount(),
                 AllBeehivesCount = this.beehiveService.AllBeehivesCount(),

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Administration.Apiaries;
@@ -19,12 +20,34 @@
             this.apiaryService = apiaryService;
         }
 
-        public IActionResult All()
+        public IActionResult All(int page = 1)
         {
+            var allCount = this.apiaryService.GetAllApiariesWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            else if (page > pagesCount)
+            {
+                page = pagesCount == 0 ? 1 : pagesCount;
+            }
+
             var viewModel = new AllApiariesAdministrationViewModel
             {
-                AllApiaries = this.apiaryService.GetAllApiariesWithDeleted<ApiaryViewModel>(),
+                AllApiaries = this.apiaryService.GetAllApiariesWithDeleted<ApiaryViewModel>(
+                    GlobalConstants.ApiariesPerPageAdministration,
+                    (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
+                PagesCount = pagesCount,
             };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

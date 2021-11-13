@@ -245,7 +245,10 @@
                 .FirstOrDefault();
 
         public int AllBeehivesCount()
-            => this.beehiveRepository.All().Count();
+            => this.beehiveRepository
+                .AllWithDeleted()
+                .Where(b => !b.Apiary.IsDeleted)
+                .Count();
 
         public async Task<int?> BookmarkBeehiveAsync(int id)
         {

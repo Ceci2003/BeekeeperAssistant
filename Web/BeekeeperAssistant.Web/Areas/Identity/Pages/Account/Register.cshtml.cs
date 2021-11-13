@@ -87,7 +87,7 @@
 
                 if (applicationUser != null)
                 {
-                    this.ModelState.AddModelError("Email", "Потребителското име е заето!");
+                    this.ModelState.AddModelError("Email", "Имейлът вече се използва!");
                     return this.Page();
                 }
 

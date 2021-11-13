@@ -57,7 +57,7 @@
         {
             await this.apiaryService.UndeleteAsync(id);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно възтановен пчелин!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно възстановен пчелин!";
 
             if (returnUrl != null)
             {

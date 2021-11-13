@@ -195,6 +195,8 @@ button::selection {
   text-decoration: none;
   color: var(--white);
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sidebar-dropdown .primary a {
@@ -202,7 +204,7 @@ button::selection {
 }
 
 .sidebar-dropdown .primary .fas.fa-angle-left {
-  position: absolute;
+  /* position: absolute; */
   left: 240px;
 }
 

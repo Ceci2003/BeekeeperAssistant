@@ -56,21 +56,23 @@ queensButton.addEventListener("click", (e) => {
 });
 
 const administrationButton = document.querySelector(".administration-drop-btn");
-administrationButton.addEventListener("click", (e) => {
-    if (administrationList.classList.contains("show")) {
-        showHideMenu(
-            true,
-            administrationList,
-            document.querySelector(".administration-drop-btn .fa-angle-left")
-        );
-    } else {
-        showHideMenu(
-            false,
-            administrationList,
-            document.querySelector(".administration-drop-btn .fa-angle-left")
-        );
-    }
-});
+if (administrationButton != null) {
+    administrationButton.addEventListener("click", (e) => {
+        if (administrationList.classList.contains("show")) {
+            showHideMenu(
+                true,
+                administrationList,
+                document.querySelector(".administration-drop-btn .fa-angle-left")
+            );
+        } else {
+            showHideMenu(
+                false,
+                administrationList,
+                document.querySelector(".administration-drop-btn .fa-angle-left")
+            );
+        }
+    });
+}
 
 function showHideMenu(addOrRemove, list, arrow) {
     // backgroundToBase();
@@ -92,7 +94,9 @@ function removeClass(elements, className) {
         elements.classList.remove(className);
     } else {
         elements.forEach((element) => {
-            element.classList.remove(className);
+            if (element != null) {
+                element.classList.remove(className);
+            }
         });
     }
 }

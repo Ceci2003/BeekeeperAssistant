@@ -1667,10 +1667,7 @@ input[readonly] {
 }
 
 .field-required-checkbox::before {
-  content: "*";
-  color: var(--red);
-  font-size: 16px;
-  font-weight: bold;
+  content: "";
 }
 
 .field-required-checkbox .field-required::before {

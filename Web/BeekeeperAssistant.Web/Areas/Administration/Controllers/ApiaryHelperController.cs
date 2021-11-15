@@ -19,12 +19,34 @@
             this.apiaryHelperService = apiaryHelperService;
         }
 
-        public IActionResult All()
+        public IActionResult All(int page = 1)
         {
+            var allCount = this.apiaryHelperService.GetAllApiaryHelpersWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiaryHelpersPerPageAdministration);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            else if (page > pagesCount)
+            {
+                page = pagesCount == 0 ? 1 : pagesCount;
+            }
+
             var viewModel = new AllApiaryHelpersAdministrationViewModel
             {
-                AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(),
+                AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(
+                    GlobalConstants.ApiaryHelpersPerPageAdministration,
+                    (page - 1) * GlobalConstants.ApiaryHelpersPerPageAdministration),
+                PagesCount = pagesCount,
             };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

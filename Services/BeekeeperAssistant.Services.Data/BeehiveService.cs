@@ -274,12 +274,25 @@
                 .To<T>()
                 .ToList();
 
-        public IEnumerable<T> GetAllBeehivesWithDeleted<T>()
-            => this.beehiveRepository
+        public IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0)
+        {
+            var query = this.beehiveRepository
                 .AllWithDeleted()
                 .Where(b => !b.Apiary.IsDeleted)
-                .To<T>()
-                .ToList();
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+        // => this.beehiveRepository
+        //     .AllWithDeleted()
+        //     .Where(b => !b.Apiary.IsDeleted)
+        //     .To<T>()
+        //     .ToList();
 
         public async Task UndeleteAsync(int beehiveId)
         {
@@ -290,5 +303,11 @@
             this.beehiveRepository.Undelete(beehive);
             await this.beehiveRepository.SaveChangesAsync();
         }
+
+        public int GetAllBeehivesWithDeletedCount()
+        => this.beehiveRepository
+                .AllWithDeleted()
+                .Where(b => !b.Apiary.IsDeleted)
+                .Count();
     }
 }

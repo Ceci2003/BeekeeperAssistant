@@ -7,6 +7,7 @@
     using BeekeeperAssistant.Web.ViewModels.Administration.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Threading.Tasks;
 
     public class UserController : AdministrationController
@@ -22,12 +23,34 @@
             this.userService = userService;
         }
 
-        public IActionResult All()
+        public IActionResult All(int page = 1)
         {
+            var allCount = this.userService.GetAllUsersWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.UsersPerPageAdministration);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            else if (page > pagesCount)
+            {
+                page = pagesCount == 0 ? 1 : pagesCount;
+            }
+
             var viewModel = new AllUsersViewModel
             {
-                AllUsers = this.userService.GetAllUsersWithDeleted<UserViewModel>(),
+                AllUsers = this.userService.GetAllUsersWithDeleted<UserViewModel>(
+                GlobalConstants.UsersPerPageAdministration,
+                (page - 1) * GlobalConstants.UsersPerPageAdministration),
+                PagesCount = pagesCount,
             };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }
@@ -50,12 +73,35 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult AllAdministrators()
+        public IActionResult AllAdministrators(int page = 1)
         {
+            var allCount = this.userService.GetAllUsersInRoleWithDeletedCount(GlobalConstants.AdministratorRoleName);
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.UsersPerPageAdministration);
+
+            if (page <= 0)
+            {
+                page = 1;
+            }
+            else if (page > pagesCount)
+            {
+                page = pagesCount == 0 ? 1 : pagesCount;
+            }
+
             var viewModel = new AllUsersViewModel
             {
-                AllUsers = this.userService.GetAllUsersInRole<UserViewModel>(GlobalConstants.AdministratorRoleName),
+                AllUsers = this.userService.GetAllUsersInRoleWithDeleted<UserViewModel>(
+                GlobalConstants.AdministratorRoleName,
+                GlobalConstants.UsersPerPageAdministration,
+                (page - 1) * GlobalConstants.UsersPerPageAdministration),
+                PagesCount = pagesCount,
             };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

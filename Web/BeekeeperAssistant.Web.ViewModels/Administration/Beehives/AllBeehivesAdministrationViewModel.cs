@@ -9,5 +9,9 @@
     public class AllBeehivesAdministrationViewModel
     {
         public IEnumerable<BeehivesAdministrationViewModel> AllBeehives { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PagesCount { get; set; }
     }
 }

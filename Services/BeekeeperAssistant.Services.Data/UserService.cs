@@ -11,6 +11,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
 
     public class UserService : IUserService
     {
@@ -50,7 +51,7 @@
             .To<T>()
             .ToList();
 
-        public IEnumerable<T> GetAllUsersInRole<T>(string role)
+        public IEnumerable<T> GetAllUsersInRole<T>(string role, int? take = null, int skip = 0)
         {
             var roleId = this.roleRepository.All()
                 .FirstOrDefault(x => x.NormalizedName == role.ToUpper())
@@ -65,11 +66,73 @@
             return allUsers;
         }
 
-        public IEnumerable<T> GetAllUsersWithDeleted<T>()
-            => this.userRepository
+        public int GetAllUsersInRoleCount(string role)
+        {
+            var roleId = this.roleRepository.All()
+                .FirstOrDefault(x => x.NormalizedName == role.ToUpper())
+                .Id;
+
+            var count = this.userManager.Users
+                .Where(x => x.Roles
+                .Any(y => y.RoleId == roleId))
+                .Count();
+
+            return count;
+        }
+
+        public int GetAllUsersInRoleWithDeletedCount(string role)
+        {
+            var roleId = this.roleRepository.All()
+                .FirstOrDefault(x => x.NormalizedName == role.ToUpper())
+                .Id;
+
+            var count = this.userManager.Users
+                .IgnoreQueryFilters()
+                .Where(x => x.Roles
+                .Any(y => y.RoleId == roleId))
+                .Count();
+
+            return count;
+        }
+
+        public IEnumerable<T> GetAllUsersInRoleWithDeleted<T>(string role, int? take = null, int skip = 0)
+        {
+            var roleId = this.roleRepository.All()
+                .FirstOrDefault(x => x.NormalizedName == role.ToUpper())
+                .Id;
+
+            var query = this.userManager.Users
+                .IgnoreQueryFilters()
+                .Where(x => x.Roles
+                .Any(y => y.RoleId == roleId))
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllUsersWithDeleted<T>(int? take = null, int skip = 0)
+        {
+            var query = this.userRepository
                 .AllWithDeleted()
-                .To<T>()
-                .ToList();
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList();
+        }
+
+        public int GetAllUsersWithDeletedCount()
+         => this.userRepository
+                .AllWithDeleted()
+                .Count();
 
         public ApplicationUser GetUserByIdWithUndeleted(string userId)
             => this.userRepository

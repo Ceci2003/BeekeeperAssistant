@@ -217,12 +217,37 @@ function markRequiredFields(){
 
 function allBeehives() {
     var allBeehives = document.getElementById("AllBeehives");
-    var beehiveNumbersSpaceSeparated = document.getElementById(
-        "BeehiveNumbersSpaceSeparated"
-    );
+    var beehiveNumbersSpaceSeparated = document.getElementById("BeehiveNumbersSpaceSeparated");
     if (allBeehives.value == true) {
         beehiveNumbersSpaceSeparated.style.display = "none";
     } else {
         beehiveNumbersSpaceSeparated.style.display = "block";
     }
+}
+
+function printQRCode() {
+    var divContents = document.getElementById("qr-code-img").outerHTML;
+    var a = window.open('', '', 'height=500, width=500');
+    a.document.write('<html>');
+    a.document.write('<body>');
+    a.document.write('<div style="display: flex; flex-direction: column; align-items: center;">');
+    a.document.write(divContents);
+    a.document.write('<div>');
+
+    var apiaryNumber = document.getElementById('apiary-num');
+    if(apiaryNumber != null){
+        a.document.write('Пчелин №' + apiaryNumber.innerText);
+    }
+
+    var beehiveNumber = document.getElementById('beehive-num');
+    if(beehiveNumber != null){
+        a.document.write(' / Кошер №' + beehiveNumber.innerText);
+    }
+    
+    a.document.write('</div>');
+    // a.document.write('<div>Пчелин №' + apiaryNumber +' / Кошер №' + 25 + '</div>');
+    a.document.write('</div>');
+    a.document.write('</body></html>');
+    a.document.close();
+    a.print();
 }

@@ -22,7 +22,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -47,15 +47,18 @@
 
         <div class="data-view">
             <div class="qr-code">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44302/Apiary/@Model.Number&size=255x255"
-                     alt="W3Schools" width="250" height="250">
+                <a class="qr-code-print" href="javascript:printQRCode();">
+                    <i class="fas fa-print"></i>
+                </a>
+                <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44302/Apiary/@Model.Number&size=255x255"
+                    alt="W3Schools" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
                     <tbody>
                         <tr>
                             <th scope="row">Номер:</th>
-                            <td>@Model.Number</td>
+                            <td id="apiary-num">@Model.Number</td>
                         </tr>
                         <tr>
                             <th scope="row">Име:</th>
@@ -89,11 +92,13 @@
 
                     @if (Model.Creator.UserName == this.User.Identity.Name)
                     {
-                        <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add" asp-route-id="@Model.Id">Добави помощник</a>
+                        <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add"
+                        asp-route-id="@Model.Id">Добави помощник</a>
 
                         @if (Model.HasHelpers)
                         {
-                            <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
+                            <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All"
+                        asp-route-id="@Model.Id">Всички помощници</a>
                         }
                     }
 
@@ -165,14 +170,15 @@
                             <div>
                                 @if (beehive.BeehiveAccess == Access.ReadWrite)
                                 {
-                                    <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id" asp-route-returnController="Apiary" asp-route-returnAction="ByNumber">
+                                    <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
+                                asp-route-returnController="Apiary" asp-route-returnAction="ByNumber">
                                         <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                     </a>
                                     <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form method="post" id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
-                                          asp-route-id="@beehive.Id">
+                                asp-route-id="@beehive.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
@@ -203,10 +209,11 @@
                 {
                     <li class="page-item">
                         @*<a class="page-link" asp-route-apiaryNumber="@Model.Number" asp-route="apiaryRoute"
-                        asp-route-page="@(this.Model.CurrentPage - 1)">
-                        <i class="fas fa-arrow-left"></i>
-                        </a>*@
-                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Id" asp-route-page="@(this.Model.CurrentPage - 1)">
+                            asp-route-page="@(this.Model.CurrentPage - 1)">
+                            <i class="fas fa-arrow-left"></i>
+                            </a>*@
+                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives"
+                        asp-route-apiaryNumber="@Model.Id" asp-route-page="@(this.Model.CurrentPage - 1)">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -222,11 +229,12 @@
                     else
                     {
                         @*<li class="page-item">
-                        <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                        asp-route-page="@i">@i</a>
-                        </li>*@
+                            <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                            asp-route-page="@i">@i</a>
+                            </li>*@
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@i">@i</a>
+                            <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives"
+                        asp-route-apiaryNumber="@Model.Number" asp-route-page="@i">@i</a>
                         </li>
                     }
                 }
@@ -241,7 +249,8 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives" asp-route-apiaryNumber="@Model.Number" asp-route-page="@(this.Model.CurrentPage + 1)">
+                        <a class="page-link" asp-controller="Apiary" asp-action="ByNumber" asp-route-tabPage="Beehives"
+                        asp-route-apiaryNumber="@Model.Number" asp-route-page="@(this.Model.CurrentPage + 1)">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>

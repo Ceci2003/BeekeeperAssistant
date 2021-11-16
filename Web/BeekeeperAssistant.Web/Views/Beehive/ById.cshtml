@@ -29,7 +29,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -38,7 +38,7 @@
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
     <button class="tablinks @if(Model.TabPage == "Beehive") {@activeClass}" onclick="openTab(event, 'Beehive')"
-            id="defaultOpen">
+        id="defaultOpen">
         <i class="fas fa-archive"></i>Кошер
         №@Model.Number
     </button>
@@ -46,8 +46,7 @@
         <i class="fas fa-crown"></i>Майка
     </button>
 
-    <button class="tablinks @if(Model.TabPage == "Inspections") {@activeClass}"
-            onclick="openTab(event, 'Inspections')">
+    <button class="tablinks @if(Model.TabPage == "Inspections") {@activeClass}" onclick="openTab(event, 'Inspections')">
         <i class="far fa-calendar-check"></i>Прегледи
     </button>
     <button class="tablinks @if(Model.TabPage == "Treatments") {@activeClass}" onclick="openTab(event, 'Treatments')">
@@ -64,20 +63,24 @@
 
         <div class="data-view">
             <div class="qr-code">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255"
-                     alt="W3Schools" width="250" height="250">
+                <a class="qr-code-print" href="javascript:printQRCode();">
+                    <i class="fas fa-print"></i>
+                </a>
+                <img id="qr-code-img"
+                    src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44319/Beehive/@Model.ApiaryNumber/@Model.Id&size=255x255"
+                    alt="W3Schools" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
                     <tbody>
                         <tr>
                             <th scope="row">Номер:</th>
-                            <td><strong>@Model.Number</strong></td>
+                            <td id="beehive-num"><strong>@Model.Number</strong></td>
                         </tr>
                         <tr>
                             <th scope="row">Пчелин:</th>
                             <td class="beehive-apiary-num">
-                                <a href="/Apiary/@Model.ApiaryNumber"><strong>@Model.ApiaryNumber</strong></a>
+                                <a href="/Apiary/@Model.ApiaryNumber" id="apiary-num"><strong>@Model.ApiaryNumber</strong></a>
                             </td>
                         </tr>
                         <tr>
@@ -150,7 +153,7 @@
                     @if (Model.BeehiveAccess == Access.ReadWrite)
                     {
                         <a class="btn edit" asp-controller="Beehive" asp-action="Edit"
-                           asp-route-id="@Model.Id">Редактирай</a>
+                        asp-route-id="@Model.Id">Редактирай</a>
                         <form asp-controller="Beehive" asp-action="Delete" asp-route-id="@Model.Id">
                             <input class="btn delete" type="submit" value="Изтрий" />
                         </form>
@@ -158,7 +161,8 @@
 
                     @if (Model.Creator.UserName == this.User.Identity.Name && Model.HasHelpers)
                     {
-                        <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="All" asp-route-id="@Model.Id">Всички помощници</a>
+                        <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="All"
+                        asp-route-id="@Model.Id">Всички помощници</a>
                     }
                 </div>
             </div>
@@ -207,15 +211,24 @@
                         <td>@Model.Queen.HygenicHabits</td>
                     </tr>
                 </table>
-                <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId" asp-route-beehiveId="@Model.Id">
-                    Редактирайте кралицата
-                </a>
-                <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
-                    <input class="btn delete" type="submit" value="Изтрий" />
-                </form>
+                @if (Model.BeehiveAccess == Access.ReadWrite)
+                {
+                    <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId"
+                    asp-route-beehiveId="@Model.Id">
+                        Редактирайте кралицата
+                    </a>
+                    <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
+                        <input class="btn delete" type="submit" value="Изтрий" />
+                    </form>
+                }
+                else
+                {
+                    @onlyReadMsg
+                }
                 @if (Model.Queen.User.UserName == this.User.Identity.Name && Model.HasHelpers)
                 {
-                    <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All" asp-route-id="@Model.QueenId">Всички помощници</a>
+                    <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All"
+                asp-route-id="@Model.QueenId">Всички помощници</a>
                 }
 
             }
@@ -245,7 +258,7 @@
                     @if (Model.Inspections.AllInspections.Any())
                     {
                         <a class="export-file excel" asp-controller="Inspection" asp-action="ExportToExcel"
-                           asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                     }
                     <a class="btn create-data" asp-controller="Inspection" asp-action="Create" asp-route-id="@Model.Id">
                         <i class="fas fa-notes-medical"></i>
@@ -255,11 +268,11 @@
             }
             <table>
                 <thead>
-                <th>Дата на прегледа</th>
-                <th>Вид на прегледа</th>
-                <th>Роил ли се е</th>
-                <th>Сила на кошера</th>
-                <th>Редактиране</th>
+                    <th>Дата на прегледа</th>
+                    <th>Вид на прегледа</th>
+                    <th>Роил ли се е</th>
+                    <th>Сила на кошера</th>
+                    <th>Редактиране</th>
                 </thead>
                 <tbody>
                     @foreach (var inspection in Model.Inspections.AllInspections)
@@ -289,11 +302,11 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Inspection" asp-action="Edit"
-                                       asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
+                                    asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"
-                                          asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
+                                    asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
@@ -545,12 +558,10 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
-                           asp-route-beehiveId="@Model.Id"
-                           asp-route-tabPage="Inspections"
-                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
-                           asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
-                           asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage - 1)">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id"
+                        asp-route-tabPage="Inspections" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                        asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
+                        asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage - 1)">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -566,7 +577,10 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Inspections" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@i" asp-route-pageAllTreatments="@Model.Treatments.CurrentPage" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Inspections"
+                        asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@i"
+                        asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
+                        asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
                         </li>
                     }
                 }
@@ -581,12 +595,10 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
-                           asp-route-tabPage="Inspections"
-                           asp-route-beehiveId="@Model.Id"
-                           asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
-                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
-                           asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage + 1)">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Inspections"
+                        asp-route-beehiveId="@Model.Id" asp-route-pageAllTreatments="@Model.Treatments.CurrentPage"
+                        asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                        asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage + 1)">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
@@ -602,7 +614,7 @@
             {
                 <div class="page-controls">
                     <a class="export-file excel" asp-controller="Treatment" asp-action="ExportToExcel"
-                       asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                     <a class="btn create-data" asp-controller="Treatment" asp-action="Create" asp-route-id="@Model.Id">
                         <i class="fas fa-notes-medical"></i>
                         Добавете третиране
@@ -611,14 +623,14 @@
             }
             <table id="TreatmentsTable">
                 <thead>
-                <th>Дата на третирането</th>
-                <th>Име на третирането</th>
-                <th>Превенция на</th>
-                <th>Препарат</th>
-                <th>Въведен като</th>
-                <th>Количество</th>
-                <th>Дозировка</th>
-                <th>Редактиране</th>
+                    <th>Дата на третирането</th>
+                    <th>Име на третирането</th>
+                    <th>Превенция на</th>
+                    <th>Препарат</th>
+                    <th>Въведен като</th>
+                    <th>Количество</th>
+                    <th>Дозировка</th>
+                    <th>Редактиране</th>
                 </thead>
                 <tbody>
                     @foreach (var treatment in Model.Treatments.AllTreatements)
@@ -650,11 +662,11 @@
                             <td class="edit">
                                 <div>
                                     <a class="edit" asp-controller="Treatment" asp-action="Edit"
-                                       asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                    asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
-                                          asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                    asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
                                         <button type="submit" class="delete">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
@@ -691,12 +703,10 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
-                           asp-route-beehiveId="@Model.Id"
-                           asp-route-tabPage="Treatments"
-                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
-                           asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
-                           asp-route-pageAllInspections="@(Model.Inspections.CurrentPage)">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id"
+                        asp-route-tabPage="Treatments" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                        asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
+                        asp-route-pageAllInspections="@(Model.Inspections.CurrentPage)">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -712,7 +722,9 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Treatments" asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Inspections.CurrentPage" asp-route-pageAllTreatments="@i" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Treatments"
+                        asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Inspections.CurrentPage"
+                        asp-route-pageAllTreatments="@i" asp-route-pageAllHarvests="@Model.Harvests.CurrentPage">@i</a>
                         </li>
                     }
                 }
@@ -727,12 +739,10 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
-                           asp-route-beehiveId="@Model.Id"
-                           asp-route-tabPage="Treatments"
-                           asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
-                           asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
-                           asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage)">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id"
+                        asp-route-tabPage="Treatments" asp-route-pageAllTreatments="@(Model.Treatments.CurrentPage + 1)"
+                        asp-route-pageAllHarvests="@Model.Harvests.CurrentPage"
+                        asp-route-pageAllInspections="@(this.Model.Inspections.CurrentPage)">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
@@ -748,69 +758,69 @@
             {
                 <div class="page-controls">
                     <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
-                       asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                    asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
                     <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-beehiveId="@Model.Id">
                         <i class="fas fa-box"></i>
                         Добавете добивs
                     </a>
                 </div>
             }
-        <table>
-            <thead>
-                <th>Име</th>
-                <th class="table-sdate">Дата</th>
-                <th>Продукт</th>
-                <th class="table-amount">Количество</th>
-                <th>Редактиране</th>
-            </thead>
-            <tbody>
-                @foreach (var harvest in Model.Harvests.AllHarvests)
-                {
-                    string rowMasterId = "trMasterHarvest" + harvest.Id;
-                    string rowExpandId = "trExpandHarvest" + harvest.Id;
-                    <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
-                        <td>
-                            @harvest.HarvestName
-                        </td>
-                        <td class="table-sdate">
-                            <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(x => harvest.HarvestProductType)
-                            @if (harvest.HarvestProductType == HarvestProductType.Honey)
-                            {
-                                <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
-                            }
-                        </td>
-                        <td class="table-amount">
-                            @harvest.Quantity
-                            <span>@Html.DisplayFor(x => harvest.Unit)</span>
-                        </td>
-                        <td class="edit">
-                            <div>
-                                <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
-                                   asp-route-beehiveId="@Model.Id">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                      asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
-                                    <button type="submit" class="delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
-                        <td colspan="8">
-                            <div class="note">
-                                <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @harvest.Note
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            <table>
+                <thead>
+                    <th>Име</th>
+                    <th class="table-sdate">Дата</th>
+                    <th>Продукт</th>
+                    <th class="table-amount">Количество</th>
+                    <th>Редактиране</th>
+                </thead>
+                <tbody>
+                    @foreach (var harvest in Model.Harvests.AllHarvests)
+                    {
+                        string rowMasterId = "trMasterHarvest" + harvest.Id;
+                        string rowExpandId = "trExpandHarvest" + harvest.Id;
+                        <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
+                            <td>
+                                @harvest.HarvestName
+                            </td>
+                            <td class="table-sdate">
+                                <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => harvest.HarvestProductType)
+                                @if (harvest.HarvestProductType == HarvestProductType.Honey)
+                                {
+                                    <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                                }
+                            </td>
+                            <td class="table-amount">
+                                @harvest.Quantity
+                                <span>@Html.DisplayFor(x => harvest.Unit)</span>
+                            </td>
+                            <td class="edit">
+                                <div>
+                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                    asp-route-beehiveId="@Model.Id">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                    asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                        <button type="submit" class="delete">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
+                            <td colspan="8">
+                                <div class="note">
+                                    <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @harvest.Note
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
             @if (!Model.Harvests.AllHarvests.Any())
             {
                 <p>няма добавени добиви</p>
@@ -830,12 +840,10 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
-                           asp-route-beehiveId="@Model.Id"
-                           asp-route-tabPage="Harvests"
-                           asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
-                           asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
-                           asp-route-pageAllInspections="@(Model.Harvests.CurrentPage)">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id"
+                        asp-route-tabPage="Harvests" asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
+                        asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
+                        asp-route-pageAllInspections="@(Model.Harvests.CurrentPage)">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -851,14 +859,9 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link"
-                               asp-controller="Beehive"
-                               asp-action="ById"
-                               asp-route-tabPage="Harvests" 
-                               asp-route-beehiveId="@Model.Id"
-                               asp-route-pageAllInspections="@Model.Harvests.CurrentPage"
-                               asp-route-pageAllTreatments="@Model.Harvests.CurrentPage"
-                               asp-route-pageAllHarvests="@i">@i</a>
+                            <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Harvests"
+                        asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Harvests.CurrentPage"
+                        asp-route-pageAllTreatments="@Model.Harvests.CurrentPage" asp-route-pageAllHarvests="@i">@i</a>
                         </li>
                     }
                 }
@@ -873,12 +876,10 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="ById"
-                           asp-route-tabPage="Harvests"
-                           asp-route-beehiveId="@Model.Id"
-                           asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
-                           asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
-                           asp-route-pageAllInspections="@(this.Model.Harvests.CurrentPage)">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Harvests"
+                        asp-route-beehiveId="@Model.Id" asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
+                        asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
+                        asp-route-pageAllInspections="@(this.Model.Harvests.CurrentPage)">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>

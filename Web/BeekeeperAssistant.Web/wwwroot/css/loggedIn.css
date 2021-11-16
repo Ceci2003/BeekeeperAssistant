@@ -597,6 +597,28 @@ td.queen-red {
   margin-right: 10px;
 }
 
+.qr-code {
+  display: flex;
+  flex-direction: column;
+}
+
+.qr-code .qr-code-print {
+  color: var(--apiary-color);
+  background: var(--white);
+  border: 3px solid var(--apiary-color);
+  border-radius: 3px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-code .qr-code-print:hover {
+  color: var(--white);
+  background: var(--apiary-color);
+}
+
 .apiary-info {
   display: flex;
 }

@@ -16,17 +16,23 @@
         private readonly IRepository<BeehiveHelper> beehiveHelperRepository;
         private readonly IRepository<QueenHelper> queenHelperRepository;
         private readonly IDeletableEntityRepository<Beehive> beeheiveRepository;
+        private readonly IBeehiveHelperService beehiveHelperService;
+        private readonly IQueenHelperService queenHelperService;
 
         public ApiaryHelperService(
             IRepository<ApiaryHelper> apiaryHelperRepository,
             IRepository<BeehiveHelper> beehiveHelperRepository,
             IRepository<QueenHelper> queenHelperRepository,
-            IDeletableEntityRepository<Beehive> beeheiveRepository)
+            IDeletableEntityRepository<Beehive> beeheiveRepository,
+            IBeehiveHelperService beehiveHelperService,
+            IQueenHelperService queenHelperService)
         {
             this.apiaryHelperRepository = apiaryHelperRepository;
             this.beehiveHelperRepository = beehiveHelperRepository;
             this.queenHelperRepository = queenHelperRepository;
             this.beeheiveRepository = beeheiveRepository;
+            this.beehiveHelperService = beehiveHelperService;
+            this.queenHelperService = queenHelperService;
         }
 
         public async Task AddAsync(string userId, int apiaryId)
@@ -120,6 +126,21 @@
                 .FirstOrDefault(x => x.UserId == userId && x.ApiaryId == apiaryId);
 
             apiaryHelper.Access = access;
+
+            var apiaryBeehives = this.beeheiveRepository
+                .All()
+                .Where(b => b.ApiaryId == apiaryId)
+                .ToList();
+
+            foreach (var beehive in apiaryBeehives)
+            {
+                await this.beehiveHelperService.EditAsync(userId, beehive.Id, access);
+
+                if (beehive.QueenId.HasValue)
+                {
+                    await this.queenHelperService.EditAsync(userId, beehive.QueenId.Value, access);
+                }
+            }
 
             this.apiaryHelperRepository.Update(apiaryHelper);
             await this.apiaryHelperRepository.SaveChangesAsync();

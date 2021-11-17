@@ -107,9 +107,10 @@
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
+            app.UseDeveloperExceptionPage();
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
             else

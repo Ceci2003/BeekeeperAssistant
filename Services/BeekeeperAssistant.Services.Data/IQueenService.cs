@@ -28,6 +28,8 @@
 
         Task<int> DeleteQueenAsync(int queenId);
 
+        Task DeleteAllQueenHelpersByQueenIdAsync(int queenId);
+
         int GetAllUserQueensCount(string userId);
 
         Task<int> EditQueenAsync(

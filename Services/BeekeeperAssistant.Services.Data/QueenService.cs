@@ -109,6 +109,8 @@
 
         public async Task<int> DeleteQueenAsync(int queenId)
         {
+            await this.DeleteAllQueenHelpersByQueenIdAsync(queenId);
+
             var queen = this.queenRepository
                 .All()
                 .FirstOrDefault(q => q.Id == queenId);
@@ -126,6 +128,19 @@
             await this.beehiveRepository.SaveChangesAsync();
 
             return beehive.Id;
+        }
+
+        public async Task DeleteAllQueenHelpersByQueenIdAsync(int queenId)
+        {
+            var allQueenHelper = this.queenHelperRepository.All()
+                .Where(q => q.QueenId == queenId);
+
+            foreach (var helper in allQueenHelper)
+            {
+                this.queenHelperRepository.Delete(helper);
+            }
+
+            await this.queenHelperRepository.SaveChangesAsync();
         }
 
         public async Task<int> EditQueenAsync(

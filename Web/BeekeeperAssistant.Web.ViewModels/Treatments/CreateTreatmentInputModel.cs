@@ -81,7 +81,7 @@
                     }
                     catch (Exception)
                     {
-                        errorList.Add(new ValidationResult($"Номерата на кошерите не са въведени правилно!"));
+                        errorList.Add(new ValidationResult($"Номерата трябва да бъдата разделени с интервал! Пример: '12 5 34'"));
                     }
                 }
                 else

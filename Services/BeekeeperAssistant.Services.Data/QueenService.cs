@@ -176,6 +176,7 @@
             var query = this.queenRepository
                 .All()
                 .OrderByDescending(q => q.IsBookMarked)
+                .ThenByDescending(q => q.GivingDate)
                 .Where(q => q.UserId == userId && !q.Beehive.IsDeleted)
                 .Skip(skip);
 

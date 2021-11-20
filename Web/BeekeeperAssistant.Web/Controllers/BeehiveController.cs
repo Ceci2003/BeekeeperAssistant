@@ -105,7 +105,7 @@
 
             if (viewModel.Queen != null)
             {
-                viewModel.QueenAccess = currentUser.Id == viewModel.CreatorId || 
+                viewModel.QueenAccess = currentUser.Id == viewModel.CreatorId ||
                     await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
                     this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
             }
@@ -328,7 +328,7 @@
         }
 
         // DONE []
-        public async Task<IActionResult> Bookmark(int id, string returnController, string returnAction)
+        public async Task<IActionResult> Bookmark(int id, string returnUrl)
         {
             var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);
 
@@ -337,14 +337,9 @@
                 return this.BadRequest();
             }
 
-            if (returnController != null && returnAction != null)
+            if (returnUrl != null)
             {
-                if (returnController == "Apiary" && returnAction == "ByNumber")
-                {
-                    var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId.Value);
-
-                    return this.RedirectToAction(returnAction, returnController, new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
-                }
+                return this.Redirect(returnUrl);
             }
 
             return this.RedirectToAction(nameof(this.All));

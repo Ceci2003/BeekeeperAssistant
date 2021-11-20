@@ -105,11 +105,11 @@ var greetMessageElement = document.getElementById("greet-message");
 var currentDateTime = new Date();
 
 if (currentDateTime.getHours() < 12) {
-    greetMessageElement.innerText = "Добро утро";
+    greetMessageElement.innerText = "Добро утро,";
 } else if (currentDateTime.getHours() < 18) {
-    greetMessageElement.innerText = "Добър ден";
+    greetMessageElement.innerText = "Добър ден,";
 } else {
-    greetMessageElement.innerText = "Добър вечер";
+    greetMessageElement.innerText = "Добър вечер,";
 }
 
 const dataPicker = Array.from(document.querySelectorAll("#date-picker"));

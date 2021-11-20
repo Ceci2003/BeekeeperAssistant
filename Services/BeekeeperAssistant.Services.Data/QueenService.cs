@@ -177,6 +177,8 @@
                 .All()
                 .OrderByDescending(q => q.IsBookMarked)
                 .ThenByDescending(q => q.GivingDate)
+                .ThenBy(q => q.Beehive.Apiary.Number)
+                .ThenBy(q => q.Beehive.Number)
                 .Where(q => q.UserId == userId && !q.Beehive.IsDeleted)
                 .Skip(skip);
 

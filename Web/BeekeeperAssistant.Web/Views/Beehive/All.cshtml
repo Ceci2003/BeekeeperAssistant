@@ -41,8 +41,8 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th>Номер</th>
                 <th>Номер на пчелин</th>
+                <th>Номер</th>
                 <th>Подвижен</th>
                 <th>Вид</th>
                 <th>Система</th>
@@ -55,10 +55,10 @@
             {
                 <tr class="@if (beehive.HasDevice == true) { @hasDevice }">
                     <td class="number">
-                        <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                        <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
                     </td>
                     <td class="number">
-                        <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
+                        <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
                     </td>
                     <td>
                         @if (beehive.IsItMovable)
@@ -84,7 +84,7 @@
                                 <i class="far fa-edit"></i>
                             </a>
                             <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
-                                    asp-route-id="@beehive.Id">
+                                  asp-route-id="@beehive.Id">
                                 <button type="submit" class="delete">
                                     <i class="far fa-trash-alt"></i>
                                 </button>

@@ -24,9 +24,9 @@
         <thead>
             <tr>
                 <th>Цвят</th>
-                <th>Номер на кошер</th>
-                <th>Номер на пчелин</th>
                 <th>Дата на придаване</th>
+                <th>Номер на пчелин</th>
+                <th>Номер на кошер</th>
                 <th>Произход</th>
                 <th>Порода</th>
                 <th>Редактиране</th>
@@ -37,15 +37,15 @@
             {
                 <tr>
                     <td class="queen-@queen.Color.ToString().ToLower()">@Html.DisplayFor(q => queen.Color)</td>
-                    <td class="number">
-                        <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
-                        asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
+                    <td class="table-sdate">
+                        <time datetime="@queen.GivingDate.ToString("O")"></time>
                     </td>
                     <td class="number">
                         <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
                     </td>
-                    <td class="table-sdate">
-                        <time datetime="@queen.GivingDate.ToString("O")"></time>
+                    <td class="number">
+                        <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
+                           asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
                     </td>
 
                     <td>@queen.Origin</td>

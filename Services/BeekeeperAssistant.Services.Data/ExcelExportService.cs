@@ -237,7 +237,7 @@
             ws.Cells["A7"].Value = "Предприети действия:";
             ws.Cells["B7"].Value = this.enumerationMethodsService.GetDisplayName(inspection.BeeActivity);
             ws.Cells["A8"].Value = "Маса на кошера(кг.):";
-            ws.Cells["B8"].Value = this.enumerationMethodsService.GetDisplayName(inspection.Weight);
+            ws.Cells["B8"].Value = inspection.Weight;
             ws.Cells["A9"].Value = "Температура на кошера(t°):";
             ws.Cells["B9"].Value = inspection.HiveTemperature;
             ws.Cells["A10"].Value = "Влажност на кошера(%):";

@@ -119,7 +119,7 @@
                 else
                 {
                     var selectedIds = new List<int>();
-                    var selectedBeehivesNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+                    var selectedBeehivesNumbers = inputModel.BeehiveNumbersSpaceSeparated.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => Convert.ToInt32(n)).ToList();
                     foreach (var number in selectedBeehivesNumbers)
                     {
                         var beehive = apiaryBeehives.FirstOrDefault(b => b.Number == number);

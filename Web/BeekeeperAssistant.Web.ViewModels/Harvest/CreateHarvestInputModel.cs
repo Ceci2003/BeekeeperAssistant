@@ -65,7 +65,7 @@
                     {
                         var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
                         var apiaryBeehivesNumbers = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId).Select(b => b.Number);
-                        var selectedBeehiveNumbers = this.BeehiveNumbersSpaceSeparated.Split(' ').Select(n => Convert.ToInt32(n)).ToList();
+                        var selectedBeehiveNumbers = this.BeehiveNumbersSpaceSeparated.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => Convert.ToInt32(n)).ToList();
 
                         foreach (var number in selectedBeehiveNumbers)
                         {

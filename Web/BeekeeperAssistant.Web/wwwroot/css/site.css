@@ -510,9 +510,19 @@ footer h1 {
   color: var(--orange);
 }
 
+.contact-page {
+  background: red;
+}
+
+main {
+}
+
 .about-page,
 .contact-page {
   padding: 50px 200px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(/img/banner.jpg);
+  color: wheat;
 }
 
 .about-page h2,
@@ -540,7 +550,7 @@ footer h1 {
   background: none;
   box-shadow: 0px 0px 20px rgba(242, 148, 34, 0.3);
   border: 3px solid var(--orange);
-  color: var(--main-background);
+  color: var(--white);
   width: 500px;
   margin: 0 auto;
   border-radius: 10px;

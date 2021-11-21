@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data.Models;
     using OfficeOpenXml;
@@ -16,19 +17,22 @@
         private readonly IHarvestService harvestService;
         private readonly IInspectionService inspectionService;
         private readonly ITreatmentService treatmentService;
+        private readonly IEnumerationMethodsService enumerationMethodsService;
 
         public ExcelExportService(
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
             IHarvestService harvestService,
             IInspectionService inspectionService,
-            ITreatmentService treatmentService)
+            ITreatmentService treatmentService,
+            IEnumerationMethodsService enumerationMethodsService)
         {
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
             this.harvestService = harvestService;
             this.inspectionService = inspectionService;
             this.treatmentService = treatmentService;
+            this.enumerationMethodsService = enumerationMethodsService;
         }
 
         public ExcelPackage ExportAsExcelApiary(string userId)
@@ -47,8 +51,6 @@
             ws.Cells["B4"].Value = "Адрес";
             ws.Cells["C4"].Value = "Име";
             ws.Cells["D4"].Value = "Вид";
-
-            // ws.Cells["E4"].Value = "Брой кошери";
             ws.Cells["A4:E4"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["A4:E4"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
             ws.Cells["A4:E4"].Style.Font.Color.SetColor(Color.White);
@@ -59,9 +61,7 @@
                 ws.Cells[$"A{rowIndex}"].Value = apiary.Number;
                 ws.Cells[$"B{rowIndex}"].Value = apiary.Adress;
                 ws.Cells[$"C{rowIndex}"].Value = apiary.Name == null ? "-" : apiary.Name;
-                ws.Cells[$"D{rowIndex}"].Value = apiary.ApiaryType;
-
-                // ws.Cells[$"D{rowIndex}"].Value = apiary.Beehives.ToList().Count();
+                ws.Cells[$"D{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(apiary.ApiaryType);
                 rowIndex++;
             }
 
@@ -119,35 +119,20 @@
 
                 ws.Cells[$"D{rowIndex}"].Style.Font.Bold = true;
 
-                ws.Cells[$"E{rowIndex}"].Value = beehive.BeehivePower;
-                ws.Cells[$"F{rowIndex}"].Value = beehive.BeehiveSystem;
-                ws.Cells[$"G{rowIndex}"].Value = beehive.BeehiveType;
+                ws.Cells[$"E{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(beehive.BeehivePower);
+                ws.Cells[$"F{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(beehive.BeehiveSystem);
+                ws.Cells[$"G{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(beehive.BeehiveType);
                 ws.Cells[$"H{rowIndex}"].Value = beehive.HasPolenCatcher == true ? "Да" : "Не";
                 ws.Cells[$"I{rowIndex}"].Value = beehive.HasPropolisCatcher == true ? "Да" : "Не";
                 if (beehive.HasQueen)
                 {
-                    // Color color = Color.White;
-                    // if (beehive.Queen.Color != )
-                    // {
-                    //    switch (beehive.Queen.Color)
-                    //    {
-                    //        case QueenColor.White: color = Color.White; break;
-                    //        case QueenColor.Yellow: color = Color.Yellow; break;
-                    //        case QueenColor.Red: color = Color.Red; break;
-                    //        case QueenColor.Green: color = Color.Green; break;
-                    //        case QueenColor.Blue: color = Color.Blue; break;
-                    //        default: color = Color.White; break;
-                    //    }
-                    // }
-
-                    // ws.Cells[$"J{rowIndex}"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    // ws.Cells[$"J{rowIndex}"].Style.Fill.BackgroundColor.SetColor(1, 183, 225, 205);
                     ws.Cells[$"J{rowIndex}"].Value = beehive.HasQueen ? "Да" : "Не";
-                    ws.Cells[$"K{rowIndex}"].Value = beehive.QueenColor.ToString();
+                    ws.Cells[$"K{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(beehive.QueenColor);
+
                     ws.Cells[$"L{rowIndex}"].Value = beehive.QueenGivingDate.Value.ToString("dd-MM-yyyy");
                     ws.Cells[$"M{rowIndex}"].Value = beehive.QueenOrigin;
-                    ws.Cells[$"N{rowIndex}"].Value = beehive.QueenQueenType;
-                    ws.Cells[$"O{rowIndex}"].Value = beehive.QueenBreed;
+                    ws.Cells[$"N{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(beehive.QueenQueenType);
+                    ws.Cells[$"O{rowIndex}"].Value = this.enumerationMethodsService.GetDisplayName(beehive.QueenBreed);
                     ws.Cells[$"P{rowIndex}"].Value = beehive.QueenTemperament;
                     ws.Cells[$"Q{rowIndex}"].Value = beehive.QueenHygenicHabits;
                 }
@@ -198,78 +183,18 @@
                 ws.Cells[$"A{rowsCounter}"].Value = harvest.HarvestName;
                 ws.Cells[$"B{rowsCounter}"].Value = harvest.DateOfHarves.ToString("dd-MM-yyyy");
 
-                var harvestedProduct = "мед";
-                switch (harvest.HarvestProductType)
-                {
-                    case HarvestProductType.Pollen:
-                        harvestedProduct = "прашец";
-                        break;
-                    case HarvestProductType.Wax:
-                        harvestedProduct = "восък";
-                        break;
-                    case HarvestProductType.Propolis:
-                        harvestedProduct = "прополис";
-                        break;
-                    case HarvestProductType.RoyalJelly:
-                        harvestedProduct = "млечице";
-                        break;
-                    case HarvestProductType.BeeVenom:
-                        harvestedProduct = "отрова";
-                        break;
-                }
-
-                ws.Cells[$"C{rowsCounter}"].Value = harvestedProduct;
+                ws.Cells[$"C{rowsCounter}"].Value = this.enumerationMethodsService.GetDisplayName(harvest.HarvestProductType);
 
                 var honeyType = string.Empty;
                 if (harvest.HarvestProductType == HarvestProductType.Honey)
                 {
-                    switch (harvest.HoneyType)
-                    {
-                        case HoneyType.Acacia:
-                            honeyType = "акация";
-                            break;
-                        case HoneyType.Wildflower:
-                            honeyType = "билков";
-                            break;
-                        case HoneyType.Sunflower:
-                            honeyType = "слънчогледов";
-                            break;
-                        case HoneyType.Clover:
-                            honeyType = "от детелина";
-                            break;
-                        case HoneyType.Alfalfa:
-                            honeyType = "от люцерна";
-                            break;
-                        case HoneyType.Other:
-                            honeyType = "друг";
-                            break;
-                    }
+                    honeyType = this.enumerationMethodsService.GetDisplayName(harvest.HoneyType);
                 }
 
                 ws.Cells[$"D{rowsCounter}"].Value = honeyType;
                 ws.Cells[$"E{rowsCounter}"].Value = harvest.Quantity;
 
-                var unit = "";
-                switch (harvest.Unit)
-                {
-                    case Unit.Kilograms:
-                        unit = "кг";
-                        break;
-                    case Unit.Grams:
-                        unit = "г";
-                        break;
-                    case Unit.Milligrams:
-                        unit = "мг";
-                        break;
-                    case Unit.Litres:
-                        unit = "л";
-                        break;
-                    case Unit.Millilitres:
-                        unit = "мл";
-                        break;
-                }
-
-                ws.Cells[$"F{rowsCounter}"].Value = unit;
+                ws.Cells[$"F{rowsCounter}"].Value = this.enumerationMethodsService.GetDisplayName(harvest.Unit);
                 ws.Cells[$"G{rowsCounter}"].Value = harvest.Note;
 
                 rowsCounter++;
@@ -310,9 +235,9 @@
             ws.Cells["A6:B6"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A6"].Value = "Основна информация:";
             ws.Cells["A7"].Value = "Предприети действия:";
-            ws.Cells["B7"].Value = inspection.BeeActivity;
+            ws.Cells["B7"].Value = this.enumerationMethodsService.GetDisplayName(inspection.BeeActivity);
             ws.Cells["A8"].Value = "Маса на кошера(кг.):";
-            ws.Cells["B8"].Value = inspection.Weight;
+            ws.Cells["B8"].Value = this.enumerationMethodsService.GetDisplayName(inspection.Weight);
             ws.Cells["A9"].Value = "Температура на кошера(t°):";
             ws.Cells["B9"].Value = inspection.HiveTemperature;
             ws.Cells["A10"].Value = "Влажност на кошера(%):";
@@ -333,11 +258,11 @@
             ws.Cells["A13"].Value = "Забелязана майка:";
             ws.Cells["B13"].Value = inspection.QueenSeen;
             ws.Cells["A14"].Value = "Маточници:";
-            ws.Cells["B14"].Value = inspection.QueenCells;
+            ws.Cells["B14"].Value = this.enumerationMethodsService.GetDisplayName(inspection.QueenCells);
             ws.Cells["A15"].Value = "Работен статус на майката:";
-            ws.Cells["B15"].Value = inspection.QueenWorkingStatus;
+            ws.Cells["B15"].Value = this.enumerationMethodsService.GetDisplayName(inspection.QueenWorkingStatus);
             ws.Cells["A16"].Value = "Сила на майката:";
-            ws.Cells["B16"].Value = inspection.QueenPowerStatus;
+            ws.Cells["B16"].Value = this.enumerationMethodsService.GetDisplayName(inspection.QueenPowerStatus);
 
             if (!inspection.IncludeBrood)
             {
@@ -391,11 +316,16 @@
             ws.Cells["A29:B29"].Style.Font.Bold = true;
             ws.Cells["A29:B29"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A29"].Value = "Секция активност";
-            ws.Cells["A30"].Value = "Активност на пчелите:"; ws.Cells["B30"].Value = inspection.BeeActivity;
-            ws.Cells["A31"].Value = "Ориентационни полети:"; ws.Cells["B31"].Value = inspection.OrientationActivity;
-            ws.Cells["A32"].Value = "Принос на прашец:"; ws.Cells["B32"].Value = inspection.PollenActivity;
-            ws.Cells["A33"].Value = "Принос на мед:"; ws.Cells["B33"].Value = inspection.ForragingActivity;
-            ws.Cells["A34"].Value = "Пчели в минута:"; ws.Cells["B34"].Value = inspection.BeesPerMinute;
+            ws.Cells["A30"].Value = "Активност на пчелите:";
+            ws.Cells["B30"].Value = this.enumerationMethodsService.GetDisplayName(inspection.BeeActivity);
+            ws.Cells["A31"].Value = "Ориентационни полети:";
+            ws.Cells["B31"].Value = this.enumerationMethodsService.GetDisplayName(inspection.OrientationActivity);
+            ws.Cells["A32"].Value = "Принос на прашец:";
+            ws.Cells["B32"].Value = this.enumerationMethodsService.GetDisplayName(inspection.PollenActivity);
+            ws.Cells["A33"].Value = "Принос на мед:";
+            ws.Cells["B33"].Value = this.enumerationMethodsService.GetDisplayName(inspection.ForragingActivity);
+            ws.Cells["A34"].Value = "Пчели в минута:";
+            ws.Cells["B34"].Value = inspection.BeesPerMinute;
 
             if (!inspection.IncludeStorage)
             {
@@ -410,9 +340,9 @@
             ws.Cells["A36:B36"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A36"].Value = "Секция запаси";
             ws.Cells["A37"].Value = "От мед:";
-            ws.Cells["B37"].Value = inspection.StoredHoney;
+            ws.Cells["B37"].Value = this.enumerationMethodsService.GetDisplayName(inspection.StoredHoney);
             ws.Cells["A38"].Value = "От прашец:";
-            ws.Cells["B38"].Value = inspection.StoredPollen;
+            ws.Cells["B38"].Value = this.enumerationMethodsService.GetDisplayName(inspection.StoredPollen);
 
             if (!inspection.IncludeSpottedProblem)
             {
@@ -511,44 +441,10 @@
                 ws.Cells[$"C{rowsCounter}"].Value = treatment.Disease;
                 ws.Cells[$"D{rowsCounter}"].Value = treatment.Medication;
 
-                var inputAs = treatment.InputAs.ToString();
-                switch (treatment.InputAs)
-                {
-                    case InputAs.PerHive:
-                        inputAs = "на кошер";
-                        break;
-                    case InputAs.Total:
-                        inputAs = "общо";
-                        break;
-                }
-
-                ws.Cells[$"E{rowsCounter}"].Value = inputAs;
+                ws.Cells[$"E{rowsCounter}"].Value = this.enumerationMethodsService.GetDisplayName(treatment.InputAs);
                 ws.Cells[$"F{rowsCounter}"].Value = treatment.Quantity;
 
-                var dose = treatment.Dose.ToString();
-                switch (treatment.Dose)
-                {
-                    case Dose.Strips:
-                        dose = "ленти";
-                        break;
-                    case Dose.Drops:
-                        dose = "капки";
-                        break;
-                    case Dose.Grams:
-                        dose = "г";
-                        break;
-                    case Dose.Kilograms:
-                        dose = "кг";
-                        break;
-                    case Dose.Millilitres:
-                        dose = "мл";
-                        break;
-                    case Dose.Litres:
-                        dose = "л";
-                        break;
-                }
-
-                ws.Cells[$"G{rowsCounter}"].Value = dose;
+                ws.Cells[$"G{rowsCounter}"].Value = this.enumerationMethodsService.GetDisplayName(treatment.Dose);
 
                 rowsCounter++;
             }

@@ -8,6 +8,8 @@
     powerClasses.Add("strong", "td-strong");
     string activeClass = "active";
     string block = "block";
+
+    string website = $"{this.Context.Request.Scheme}://{this.Context.Request.Host}{this.Context.Request.Path}";
 }
 
 <div class="breadcrumb">
@@ -44,15 +46,14 @@
 }">
 
         <partial name="_StatusMessagePartial" />
-
         <div class="data-view">
             <div class="qr-code">
                 <a class="qr-code-print" href="javascript:printQRCode();">
                     <i class="fas fa-print"></i>
                     отпечатай кода
                 </a>
-                <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=https://localhost:44302/Apiary/@Model.Number&size=255x255"
-                    alt="W3Schools" width="250" height="250">
+                <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=@website&size=255x255"
+                     alt="QR Code" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
@@ -94,12 +95,12 @@
                     @if (Model.Creator.UserName == this.User.Identity.Name)
                     {
                         <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add"
-                        asp-route-id="@Model.Id">Добави помощник</a>
+                           asp-route-id="@Model.Id">Добави помощник</a>
 
                         @if (Model.HasHelpers)
                         {
                             <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All"
-                        asp-route-id="@Model.Id">Всички помощници</a>
+                               asp-route-id="@Model.Id">Всички помощници</a>
                         }
                     }
 

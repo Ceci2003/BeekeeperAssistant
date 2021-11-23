@@ -216,11 +216,11 @@
             ws.Cells["A1"].Value = $"Дата на прегледа:";
             ws.Cells["B1"].Value = DateTime.Now.ToString("dd-MM-yyyy");
             ws.Cells["A2"].Value = "Вид на прегледа:";
-            ws.Cells["B2"].Value = inspection.InspectionType;
+            ws.Cells["B2"].Value = this.enumerationMethodsService.GetDisplayName(inspection.InspectionType);
             ws.Cells["A3"].Value = "Роил ли се е:";
-            ws.Cells["B3"].Value = inspection.Swarmed;
+            ws.Cells["B3"].Value = inspection.Swarmed ? "Да" : "Не";
             ws.Cells["A4"].Value = "Сила на кошера:";
-            ws.Cells["B4"].Value = inspection.BeehivePower;
+            ws.Cells["B4"].Value = this.enumerationMethodsService.GetDisplayName(inspection.BeehivePower);
 
             ws.Cells["D2"].Value = $"Пчелин №:";
             ws.Cells["E2"].Value = $"{beehive.ApiaryNumber}";

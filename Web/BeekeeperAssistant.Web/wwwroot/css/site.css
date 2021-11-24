@@ -514,15 +514,25 @@ footer h1 {
   background: red;
 }
 
-main {
-}
-
 .about-page,
 .contact-page {
   padding: 50px 200px;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(/img/banner.jpg);
   color: wheat;
+  background-size: cover;
+  background-position-y: top;
+}
+
+.about-page .iframe-container {
+  display: flex;
+  justify-content: center;
+}
+
+.about-page .iframe-container iframe {
+  width: 830px;
+  height: 500px;
+  margin-top: 15px;
 }
 
 .about-page h2,

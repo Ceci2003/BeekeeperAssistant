@@ -15,7 +15,7 @@
             @foreach (var feedback in Model.Feedbacks.AllFeedbacks)
             {
                 <tr>
-                    <td>@feedback.Title</td>
+                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a></td>
                     <td>@feedback.UserUsername</td>
                 </tr>
             }
@@ -95,7 +95,7 @@
             @foreach (var feedback in Model.Helps.AllFeedbacks)
             {
                 <tr>
-                    <td>@feedback.Title</td>
+                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a></td>
                     <td>@feedback.UserUsername</td>
                 </tr>
             }

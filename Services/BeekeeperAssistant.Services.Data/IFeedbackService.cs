@@ -20,5 +20,7 @@
         int GetAllHelpFeedbacksCount();
 
         int GetAllFeedbackFeedbacksCount();
+
+        T GetFeedbackById<T>(int id);
     }
 }

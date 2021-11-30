@@ -37,7 +37,9 @@
 
             viewModel.Feedbacks.CurrentPage = pageFeedbacks;
 
-            var feedbacks = this.feedbackService.GetAllFeedbackFeedbacks<FeedbackDataAdministrationViewModel>(GlobalConstants.ApiariesPerPage, (pageFeedbacks - 1) * GlobalConstants.ApiariesPerPage);
+            var feedbacks = this.feedbackService.GetAllFeedbackFeedbacks<FeedbackDataAdministrationViewModel>(
+                GlobalConstants.ApiariesPerPage,
+                (pageFeedbacks - 1) * GlobalConstants.ApiariesPerPage);
             viewModel.Feedbacks.AllFeedbacks = feedbacks;
 
             // -------------------------------------------------
@@ -58,11 +60,20 @@
             viewModel.Helps.PagesCount = pagesHelpsCount == 0 ? 1 : pagesHelpsCount;
 
             viewModel.Helps.CurrentPage = pageHelps;
-            var helps = this.feedbackService.GetAllHelpFeedbacks<FeedbackDataAdministrationViewModel>(GlobalConstants.ApiariesPerPage, (pageHelps - 1) * GlobalConstants.ApiariesPerPage);
+            var helps = this.feedbackService.GetAllHelpFeedbacks<FeedbackDataAdministrationViewModel>(
+                GlobalConstants.ApiariesPerPage,
+                (pageHelps - 1) * GlobalConstants.ApiariesPerPage);
+
             viewModel.Helps.AllFeedbacks = helps;
 
             return this.View(viewModel);
         }
 
+        public IActionResult ById(int id)
+        {
+            var viewModel = this.feedbackService.GetFeedbackById<FeedbackViewModel>(id);
+
+            return this.View(viewModel);
+        }
     }
 }

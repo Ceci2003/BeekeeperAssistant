@@ -9,14 +9,16 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class FeedbackDataAdministrationViewModel : IMapFrom<Feedback>
+    public class FeedbackViewModel : IMapFrom<Feedback>
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
 
         public string Body { get; set; }
 
-        public string UserUsername { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public FeedbackType FeedbackType { get; set; }
+
+        public string UserUserName { get; set; }
     }
 }

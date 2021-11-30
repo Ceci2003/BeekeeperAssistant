@@ -1,0 +1,11 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Feedbacks.FeedbackViewModel
+@{ 
+
+}
+
+<h1>@Model.Title</h1>
+<div>@Html.DisplayFor(x => Model.FeedbackType)</div>
+<span>@Model.UserUserName</span> - <time datetime="@Model.CreatedOn.ToString("O")"></time>
+<div>
+    @Model.Body
+</div>

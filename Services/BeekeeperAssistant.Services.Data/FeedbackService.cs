@@ -82,5 +82,12 @@
             => this.feedbackRepository.All()
                 .Where(f => f.FeedbackType == FeedbackType.Help)
                 .Count();
+
+        public T GetFeedbackById<T>(int id)
+            => this.feedbackRepository
+                .All()
+                .Where(f => f.Id == id)
+                .To<T>()
+                .FirstOrDefault();
     }
 }

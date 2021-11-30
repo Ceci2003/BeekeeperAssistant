@@ -78,16 +78,26 @@ body {
   align-items: center;
 }
 
+.navbar .navbar-brand a {
+  text-decoration: none;
+}
+
 .navbar .navbar-brand .logo {
   width: 50px;
 }
 
 .navbar .navbar-brand .logo-link {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: var(--beehive-color);
-  margin-left: 20px;
   font-weight: 500;
   font-size: 20px;
+  margin: 0;
+}
+
+.navbar .navbar-brand .logo-link p {
+  margin-left: 10px;
 }
 
 .navbar ul {

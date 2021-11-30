@@ -42,4 +42,10 @@
     <ProjectReference Include="..\BeekeeperAssistant.Web.Infrastructure\BeekeeperAssistant.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BeekeeperAssistant.Web.ViewModels\BeekeeperAssistant.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\loggedIn - Copy.min.css">
+      <DependentUpon>loggedIn.min.css</DependentUpon>
+    </Content>
+  </ItemGroup>
 </Project>

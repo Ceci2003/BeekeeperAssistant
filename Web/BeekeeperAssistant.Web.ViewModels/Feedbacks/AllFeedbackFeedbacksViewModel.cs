@@ -8,7 +8,7 @@
 
     public class AllFeedbackFeedbacksViewModel
     {
-        public ICollection<FeedbackDataAdministrationViewModel> AllFeedbackFeedbacks { get; set; }
+        public IEnumerable<FeedbackDataAdministrationViewModel> AllFeedbacks { get; set; }
 
         public int CurrentPage { get; set; }
 

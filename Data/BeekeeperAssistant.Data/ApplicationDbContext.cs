@@ -40,6 +40,8 @@
 
         public DbSet<Duty> Duties { get; set; }
 
+        public DbSet<Feedback> Feedbacks { get; set; }
+
         public DbSet<Queen> Queens { get; set; }
 
         public DbSet<ApiaryHelper> ApiaryHelpers { get; set; }

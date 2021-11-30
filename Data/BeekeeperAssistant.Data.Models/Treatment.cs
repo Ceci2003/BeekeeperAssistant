@@ -27,6 +27,6 @@
 
         public Dose Dose { get; set; }
 
-        public ICollection<TreatedBeehive> TreatedBeehives { get; set; }
+        public virtual ICollection<TreatedBeehive> TreatedBeehives { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Feedback
+﻿namespace BeekeeperAssistant.Web.ViewModels.Feedbacks
 {
     using System.ComponentModel.DataAnnotations;
 

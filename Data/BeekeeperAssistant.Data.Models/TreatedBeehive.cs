@@ -7,11 +7,11 @@
         [ForeignKey(nameof(Beehive))]
         public int BeehiveId { get; set; }
 
-        public Beehive Beehive { get; set; }
+        public virtual Beehive Beehive { get; set; }
 
         [ForeignKey(nameof(Treatment))]
         public int TreatmentId { get; set; }
 
-        public Treatment Treatment { get; set; }
+        public virtual Treatment Treatment { get; set; }
     }
 }

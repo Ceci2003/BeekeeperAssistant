@@ -194,6 +194,7 @@ body {
   height: 600px;
   background-size: cover;
   background-position-y: top;
+  background-position-x: center;
   color: wheat;
   border-bottom: 5px solid var(--beehive-color);
 }

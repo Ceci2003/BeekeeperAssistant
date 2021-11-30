@@ -1,0 +1,26 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Feedback.CreateFeedbackInputModel
+@{
+    ViewData["Title"] = "Създай отзив";
+}
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    @if (ViewData["FeedbackType"] == null)
+    {
+        <div>
+            <label asp-for="FeedbackType"></label>
+            <select asp-for="FeedbackType" asp-items="Html.GetEnumSelectList<FeedbackType>()"></select>
+            <span asp-validation-for="FeedbackType"></span>
+        </div>
+    }
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label asp-for="Body"></label>
+        <textarea asp-for="Body" ></textarea>
+        <span asp-validation-for="Body"></span>
+    </div>
+    <input type="submit" value="Изпрати" />
+</form>

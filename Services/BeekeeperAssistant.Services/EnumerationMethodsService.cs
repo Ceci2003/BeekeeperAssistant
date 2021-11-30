@@ -26,5 +26,15 @@
             }
             return list;
         }
+
+        public bool IsEnumerationDefined(Enum @enum)
+        {
+            if (Enum.IsDefined(@enum.GetType(), @enum))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

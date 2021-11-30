@@ -20,6 +20,60 @@
             <p>Дневникът на съвременния пчелар</p>
         </div>
     </div>
+    <div class="app-benefits-cards">
+        <h1>Ползи на @GlobalConstants.SystemName</h1>
+        <hr>
+        <div class="app-benefits-cards-collection">
+            <div class="app-benefits-card">
+                <div class="app-benefits-card-inner">
+                    <div class="app-benefits-card-front">
+                        <div class="app-benefits-card-body">
+                            <i class="fas fa-laptop-house"></i>
+                            <h3>лесен за работа</h3>
+                        </div>
+                    </div>
+                    <div class="app-benefits-card-back">
+                        <div class="app-benefits-card-body">
+                            <h3>лесен за работа</h3>
+                            <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-benefits-card">
+                <div class="app-benefits-card-inner">
+                    <div class="app-benefits-card-front">
+                        <div class="app-benefits-card-body">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3>лесен за работа</h3>
+                        </div>
+                    </div>
+                    <div class="app-benefits-card-back">
+                        <div class="app-benefits-card-body">
+                            <h3>лесен за работа</h3>
+                            <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-benefits-card">
+                <div class="app-benefits-card-inner">
+                    <div class="app-benefits-card-front">
+                        <div class="app-benefits-card-body">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>лесен за работа</h3>
+                        </div>
+                    </div>
+                    <div class="app-benefits-card-back">
+                        <div class="app-benefits-card-body">
+                            <h3>лесен за работа</h3>
+                            <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 else
 {
@@ -29,7 +83,7 @@ else
         </ul>
         <div class="breadcrumb-leave">
             <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+                  asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
                 <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
             </form>
         </div>
@@ -148,7 +202,7 @@ else
                         {
                             <div class="legend-row">
                                 <div class="legend-color"
-                        style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                                     style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.ApiariesCountByType[ac]
                                 </div>
                                 <div class="legend-value">@Html.DisplayFor(x => ac)</div>
@@ -178,7 +232,7 @@ else
                         {
                             <div class="legend-row">
                                 <div class="legend-color"
-                        style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                                     style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.BeehivesCountByPower[bc]
                                 </div>
                                 <div class="legend-value">@Html.DisplayFor(x => bc)</div>
@@ -208,7 +262,7 @@ else
                         {
                             <div class="legend-row">
                                 <div class="legend-color"
-                        style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                                     style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.QueensCountByGivingDate[bc]
                                 </div>
                                 @if (bc == 0)

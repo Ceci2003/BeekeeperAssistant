@@ -41,10 +41,10 @@
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 @*<section class="primary sidebar-dropdown start">
-                    <a class="primary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
-                        Администрация
-                    </a>
-                </section>*@
+                <a class="primary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                    Администрация
+                </a>
+            </section>*@
                 <section class="sidebar-dropdown start">
                     <div class="primary administration-drop-btn">
                         <span>Администрация</span>
@@ -116,6 +116,11 @@
                         Всички
                     </a>
                 </div>
+            </section>
+            <section class="sidebar-dropdown">
+                <a class="primary" asp-area="" asp-controller="Feedback" asp-action="Index">
+                    Помощ
+                </a>
             </section>
         </section>
     </aside>

@@ -1,34 +1,44 @@
 ﻿// Configure bundling and minification for the project.
 // More info at https://go.microsoft.com/fwlink/?LinkId=808241
 [
+  // LoggedOut css files
   {
-    "outputFileName": "wwwroot/css/site.min.css",
+    "outputFileName": "wwwroot/css/loggedOut/site.min.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/site.css"
+      "wwwroot/css/loggedOut/site.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/css/loggedIn.min.css",
+    "outputFileName": "wwwroot/css/loggedOut/responsive.min.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/loggedIn.css"
+      "wwwroot/css/loggedOut/responsive.css"
+    ]
+  },
+  // LoggedIn css files
+  {
+    "outputFileName": "wwwroot/css/loggedOut/site.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/loggedOut/site.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/css/profile.min.css",
+    "outputFileName": "wwwroot/css/loggedIn/responsive.min.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/profile.css"
+      "wwwroot/css/loggedIn/responsive.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/css/responsive.min.css",
+    "outputFileName": "wwwroot/css/loggedOut/profile.min.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/responsive.css"
+      "wwwroot/css/loggedOut/profile.css"
     ]
   },
+
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [

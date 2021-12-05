@@ -1,0 +1,121 @@
+﻿/* Global variables */
+:root {
+  --orange: #ff7800;
+  /* --red: #AB0000; */
+  --red: #bf0a0a;
+  --red-hover: #8c0712;
+  --green: #014017;
+  --green-2: #558b2f;
+  --green-hover: #1a5918;
+  --blue: #0d6493;
+  --blue-hover: #1287c6;
+  --main-background: #110400;
+  --expand-row-background: #f1f1f1;
+  --gray-background: #f1f2f3;
+  --white: #ffffff;
+  --lightgray: #d3d3d3;
+  --darkgray: #615b5b;
+  --apiary-color: #17a2b8;
+  --apiary-color-hover: #6ce7e3;
+  --beehive-color: #f29422;
+  --beehive-color-hover: #fead34;
+  --queen-color: #da3c3d;
+  --queen-color-hover: #d9695d;
+  --black: #000000;
+  --transparent: #ffffff00;
+}
+
+@media only screen and (min-width: 1024px) {
+  .aside-icon {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  main {
+    margin: 0;
+  }
+
+  .sidebar-navigation {
+    display: none;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .breadcrumb .aside-icon {
+    display: block;
+    color: var(--white);
+  }
+
+  .aside-content-cover {
+    display: none;
+    background: #11040087;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 40px;
+    left: 270px;
+  }
+
+  .breadcrumb .aside-icon i {
+    font-size: 18px;
+  }
+
+  .breadcrumb .aside-icon:hover {
+    color: var(--orange);
+  }
+
+  .breadcrumb .aside-icon:active {
+    color: var(--orange);
+  }
+
+  .breadcrumb .breadcrumb-leave {
+    margin: 0;
+  }
+
+  .sidebar-navigation {
+    overflow-y: auto;
+  }
+
+  /* sidebar scroller */
+  .sidebar-navigation {
+    overflow-y: scroll;
+  }
+
+  .sidebar-navigation::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .sidebar-navigation::-webkit-scrollbar-track {
+    -webkit-box-shadow: #110400;
+  }
+
+  .sidebar-navigation::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: #110400;
+  }
+
+
+  /* sidebar navigations scroller */
+  .sidebar-navigation .navigations {
+    overflow-y: scroll;
+  }
+
+  .sidebar-navigation .navigations::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .sidebar-navigation .navigations::-webkit-scrollbar-track {
+    -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: 5px;
+  }
+
+  .sidebar-navigation .navigations::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
+  }
+}

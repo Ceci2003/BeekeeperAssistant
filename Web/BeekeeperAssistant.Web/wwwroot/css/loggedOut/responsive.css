@@ -1,0 +1,136 @@
+﻿/*Responsive*/
+@media only screen and (max-width: 1023px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar .navbar-brand .logo-link .link {
+    padding: 20px 0;
+  }
+
+  .navbar .ul-out {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar .ul-out li {
+    width: 100%;
+  }
+
+  .navbar .ul-out li a {
+    width: 100%;
+    text-align: center;
+    border-top: none;
+  }
+
+  .navbar .ul-out li a {
+    text-decoration: none;
+    color: var(--beehive-color);
+    font-weight: 500;
+  }
+
+  .navbar .ul-out li a {
+    padding: 20px;
+    border: none;
+  }
+
+  .navbar .ul-out li a:hover {
+    color: var(--orange);
+    text-decoration: underline;
+    border: none;
+    border-left: 5px solid var(--orange);
+    border-right: 5px solid var(--orange);
+  }
+
+  .navbar .ul-out li .active {
+    color: var(--white);
+    border: none;
+    border-left: 5px solid var(--white);
+    border-right: 5px solid var(--white);
+  }
+
+  .navbar .ul-login-register {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .about-page,
+  .contact-page {
+    padding: 50px 20px;
+  }
+
+  .contact-page .form-box {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .banner-text h1 {
+    font-size: 7vw;
+  }
+
+  .banner-text p {
+    font-size: 2vw;
+  }
+
+  .form-box {
+    width: 90%;
+  }
+
+  .form-box .input-box input,
+  .form-box .input-box select {
+    font-size: 16px;
+  }
+
+  .form-submit,
+  .center-screen-parent {
+    width: 90%;
+    margin: 0;
+    padding: 30px;
+  }
+}
+
+/* For banner min-width: 768px and max-width: 1023px */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .banner {
+    /* height: 500px; */
+    height: 100vh;
+  }
+
+  .banner-text h1 {
+    font-size: 7vw;
+  }
+
+  .banner-text p {
+    font-size: 2vw;
+  }
+
+  .about-page .iframe-container iframe {
+    width: 500px;
+  }
+}
+
+/* For banner max-width: 767px */
+@media only screen and (max-width: 767px) {
+  .banner {
+    /* height: 400px; */
+    height: 100vh;
+  }
+
+  .banner-text h1 {
+    font-size: 8vw;
+  }
+
+  .banner-text p {
+    font-size: 3.5vw;
+  }
+
+  .about-page .iframe-container iframe {
+    width: 100%;
+  }
+}

@@ -15,7 +15,7 @@
 @if (!User.Identity.IsAuthenticated)
 {
     <div class="banner">
-        <div class="banner-text">
+        <div class="banner-text .ml2">
             <h1>@GlobalConstants.SystemName</h1>
             <p>Дневникът на съвременния пчелар</p>
         </div>
@@ -24,7 +24,7 @@
 else
 {
     <div class="breadcrumb">
-        <div class="aside-icon"> @* style="display: none;" *@
+        <div class="aside-icon" onclick="asideBurgerMenuClick();"> @* style="display: none;" *@
             <i class="fas fa-bars"></i>
         </div>
         <ul class="breadcrumb-list">

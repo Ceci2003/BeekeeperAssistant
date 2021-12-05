@@ -205,7 +205,7 @@ function checkFormSection(hiddenElementId) {
     }
 }
 
-function markRequiredFields(){
+function markRequiredFields() {
     var fields = document.querySelectorAll('input[data-val-required]');
     fields.forEach(field => {
         var label = field.parentElement.children[0];
@@ -250,4 +250,28 @@ function printQRCode() {
     a.document.write('</body></html>');
     a.document.close();
     a.print();
+}
+
+var isAsideOpen = false;
+function asideBurgerMenuClick() {
+    var div = document.querySelector('.aside-icon');
+    var i = document.querySelector('.aside-icon i');
+    var aside = document.querySelector('.sidebar-navigation');
+    var contentCover = document.querySelector('.aside-content-cover');
+    
+    if (isAsideOpen) {
+        aside.style.display = "none";
+        contentCover.style.display = "none";
+        div.innerHTML = '<i class="fas fa-bars"></i>';
+        isAsideOpen = false;
+    } else {
+        aside.style.display = "block";
+        contentCover.style.display = "block";
+        div.innerHTML = '<i class="fas fa-times"></i>';
+        isAsideOpen = true;
+    }
+}
+
+function closeAside(){ 
+    asideBurgerMenuClick();
 }

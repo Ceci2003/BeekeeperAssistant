@@ -26,8 +26,8 @@
             <tr>
                 <th>Потребител</th>
                 <th>Тел.</th>
-                <th>Статус</th>
                 <th>Създаден на</th>
+                <th>Статус</th>
                 <th>Опция</th>
             </tr>
         </thead>
@@ -48,21 +48,21 @@
                         @(user.PhoneNumber)
                     }
                 </td>
+                <td>
+                    @(user.CreatedOn.ToString("ddd dd-MMMM-yyyy"))
+                </td>
                 <td style="color: @if (user.IsDeleted) @("#d9695d") else @("#558b2f");">
                     @if (!(user.Username == this.User.Identity.Name))
                     {
-                        if (!user.IsDeleted)
-                        {
-                            <div>Активен</div>
-                        }
-                        else
+                        if (user.IsDeleted)
                         {
                             <div style="font-weight: 500;">@("Изтрит")</div>
                         }
+                        else
+                        {
+                            <div>Активен</div>
+                        }
                     }
-                </td>
-                <td>
-                    @(user.CreatedOn.ToString("ddd dd-MMMM-yyyy"))
                 </td>
                 <td class="edit-delete" style="padding: 4px;">
                     @if (!(user.Username == this.User.Identity.Name))

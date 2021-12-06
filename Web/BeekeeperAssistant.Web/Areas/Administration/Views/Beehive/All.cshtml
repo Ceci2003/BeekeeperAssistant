@@ -50,14 +50,14 @@
                                asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
                         }
                     </td>
-                    <td>
-                        @if (!beehive.IsDeleted)
+                    <td style="color: @if (beehive.IsDeleted) @("#d9695d") else @("#558b2f");">
+                        @if (beehive.IsDeleted)
                         {
-                            <div style="font-weight: 500;">Активен</div>
+                            <div style="font-weight: 500;">Изтрит</div>
                         }
                         else
                         {
-                            @("Изтрит")
+                            <div>Активен</div>
                         }
                     </td>
                     <td class="edit-delete" style="padding: 4px;">

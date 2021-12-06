@@ -27,6 +27,7 @@
             <tr>
                 <th>Номер</th>
                 <th>Собственик</th>
+                <th>Създаден на</th>
                 <th>Статус</th>
                 <th>Опция</th>
             </tr>
@@ -51,13 +52,17 @@
                         @(apiary.CreatorUserName)
                     </td>
                     <td>
-                        @if (!apiary.IsDeleted)
+                        @apiary.CreatedOn.ToString("ddd dd-MMMM-yyyy")
+                    </td>
+                    
+                    <td style="color: @if (apiary.IsDeleted) @("#d9695d") else @("#558b2f");">
+                        @if (apiary.IsDeleted)
                         {
-                            <div style="font-weight: 500;">Активен</div>
+                            <div style="font-weight: 500;">Изтрит</div>
                         }
                         else
                         {
-                            @("Изтрит")
+                            <div>Активен</div>
                         }
                     </td>
                     <td class="edit-delete" style="padding: 4px;">

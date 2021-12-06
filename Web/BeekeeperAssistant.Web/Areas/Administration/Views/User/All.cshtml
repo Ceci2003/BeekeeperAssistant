@@ -27,59 +27,63 @@
                 <th>Потребител</th>
                 <th>Тел.</th>
                 <th>Статус</th>
+                <th>Създаден на</th>
                 <th>Опция</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var user in Model.AllUsers)
             {
-                <tr>
-                    <td class="number" style="padding: 8px;">
-                        @(user.Username)
-                    </td>
-                    <td style="text-align: center;">
-                        @if (string.IsNullOrEmpty(user.PhoneNumber))
+            <tr>
+                <td class="number" style="padding: 8px;">
+                    @(user.Username)
+                </td>
+                <td style="text-align: center;">
+                    @if (string.IsNullOrEmpty(user.PhoneNumber))
+                    {
+                        @("-")
+                    }
+                    else
+                    {
+                        @(user.PhoneNumber)
+                    }
+                </td>
+                <td style="color: @if (user.IsDeleted) @("#d9695d") else @("#558b2f");">
+                    @if (!(user.Username == this.User.Identity.Name))
+                    {
+                        if (!user.IsDeleted)
                         {
-                            @("-")
+                            <div>Активен</div>
                         }
                         else
                         {
-                            @(user.PhoneNumber)
+                            <div style="font-weight: 500;">@("Изтрит")</div>
                         }
-                    </td>
-                    <td>
-                        @if (!(user.Username == this.User.Identity.Name))
+                    }
+                </td>
+                <td>
+                    @(user.CreatedOn.ToString("ddd dd-MMMM-yyyy"))
+                </td>
+                <td class="edit-delete" style="padding: 4px;">
+                    @if (!(user.Username == this.User.Identity.Name))
+                    {
+                        if (!user.IsDeleted)
                         {
-                            if (!user.IsDeleted)
-                            {
-                                <div style="font-weight: 500;">Активен</div>
-                            }
-                            else
-                            {
-                                @("Изтрит")
-                            }
+                            <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete"
+                                  asp-route-id="@user.Id">
+                                <button type="submit" class="btn delete">Изтрий</button>
+                            </form>
                         }
-                    </td>
-                    <td class="edit-delete" style="padding: 4px;">
-                        @if (!(user.Username == this.User.Identity.Name))
+                        else
                         {
-                            if (!user.IsDeleted)
-                            {
-                                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete"
-                                      asp-route-id="@user.Id">
-                                    <button type="submit" class="btn delete">Изтрий</button>
-                                </form>
-                            }
-                            else
-                            {
-                                <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete"
-                                      asp-route-id="@user.Id">
-                                    <button type="submit" class="btn edit">Възстанови</button>
-                                </form>
-                            }
+                            <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete"
+                                  asp-route-id="@user.Id">
+                                <button type="submit" class="btn edit">Възстанови</button>
+                            </form>
                         }
-                    </td>
-                </tr>
+                    }
+                </td>
+            </tr>
             }
         </tbody>
     </table>

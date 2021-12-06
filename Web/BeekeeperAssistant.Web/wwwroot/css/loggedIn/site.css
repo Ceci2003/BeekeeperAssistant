@@ -472,64 +472,58 @@ tr.has-device td.number a:hover {
   color: var(--lightgray);
 }
 
-td.edit {
-  padding: 0;
-}
-
-td.edit div {
+/* td with table data edit controls */
+td.edit .edit-container {
   display: flex;
   justify-content: space-around;
 }
 
-td.edit div a.mark {
+td.edit .edit-container a.mark {
   color: var(--blue);
 }
 
-td.edit div a.mark:hover {
+td.edit .edit-container a.mark:hover {
   color: var(--blue-hover);
 }
 
-td.edit div a.edit {
+td.edit .edit-container a.edit {
   color: var(--green);
 }
 
-td.edit div a.edit:hover {
+td.edit .edit-container a.edit:hover {
   color: var(--green-hover);
 }
 
-td.edit div button.delete {
-  color: var(--red);
-  background: none;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-td.edit div button.delete:hover {
+td.edit .delete {
   color: var(--red-hover);
 }
 
-tr.has-device td.edit div a.mark {
-  color: var(--blue-hover);
-}
-
-tr.has-device td.edit div a.mark:hover {
-  color: var(--blue);
-}
-
-tr.has-device td.edit div a.edit {
-  color: var(--green-2);
-}
-
-tr.has-device td.edit div a.edit:hover {
-  color: var(--green-hover);
-}
-
-tr.has-device td.edit div a.delete {
+td.edit .delete:hover {
   color: var(--red);
 }
 
-tr.has-device td.edit div a.delete:hover {
+td.edit a.mark {
+  color: var(--blue-hover);
+}
+
+td.edit a.mark:hover {
+  color: var(--blue);
+}
+
+td.edit a.edit {
+  color: var(--green-2);
+}
+
+td.edit a.edit:hover {
+  color: var(--green-hover);
+}
+
+td.edit .edit-container a.delete {
+  color: var(--red);
+  cursor: pointer;
+}
+
+td.edit .edit-container a.delete:hover {
   color: var(--queen-color);
 }
 
@@ -1732,5 +1726,121 @@ input[readonly] {
   height: 100%;
   position: fixed;
   top: 40px;
-  left: 270px;
+}
+
+.content-cover {
+  background: #11040087;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 40px;
+}
+
+/* container to hide delete form */
+.delete-form-display {
+  display: none;
+}
+
+.delete-form-display-show {
+  position: fixed;
+  top: 0;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  /* background: #11040087; */
+  width: 100%;
+  height: 100%;
+}
+
+.delete-form-display-show form {
+  z-index: 1;
+  border: 3px solid var(--orange);
+  border-radius: 5px;
+  background-color: var(--white);
+  padding: 10px;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-form-display-show form .close {
+  font-size: 18px;
+  align-self: end;
+}
+
+.delete-form-display-show form p {
+  margin: 25px 0;
+}
+
+.delete-form-display-show form button {
+  background: var(--white);
+  border: 2px solid var(--red-hover);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.delete-form-display-show form button:hover {
+  background: var(--red-hover);
+  color: var(--white) !important;
+}
+
+/* Responsive elements */
+.all-table-responsive table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.all-table-responsive table th {
+  border: 3px solid var(--lightgray);
+  padding: 8px;
+}
+
+.all-table-responsive table tr {
+  border-left: 3px solid var(--lightgray);
+  border-right: 3px solid var(--lightgray);
+}
+
+.all-table-responsive table tr td:first-child {
+  font-weight: 600;
+}
+
+.all-table-responsive table tr td:nth-child(2n) {
+  text-align: center;
+}
+
+.all-table-responsive table tr td:first-child::after {
+  content: ":";
+}
+
+.all-table-responsive table tr:nth-child(6n) {
+  border-bottom: 3px solid var(--lightgray);
+}
+
+.all-table-responsive table td {
+  border: 1px solid var(--lightgray);
+  padding: 8px;
+}
+
+.all-table-responsive table td.number a {
+  padding: 0;
+  font-weight: 600;
+}
+
+.all-table-responsive table td.creator {
+  text-align: center;
+}
+
+.all-table-responsive table td.creator::after {
+  content: "" !important;
+}
+
+.all-table-responsive table td.creator a {
+  /* cursor: pointer; */
+  color: var(--black);
+  font-weight: 400;
 }

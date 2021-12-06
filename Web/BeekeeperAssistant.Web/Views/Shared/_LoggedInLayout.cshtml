@@ -12,11 +12,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/css/loggedIn/site.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/loggedIn/profile.min.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/css/loggedIn/responsive.min.css" asp-append-version="true" />*@
-    <link rel="stylesheet" href="~/css/loggedIn/responsive.css" asp-append-version="true" />
 
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/loggedIn/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/loggedIn/profile.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/loggedIn/responsive.css" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/loggedIn/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/loggedIn/profile.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/loggedIn/responsive.min.css" asp-append-version="true" />
+    </environment>
 </head>
 
 <body>
@@ -114,18 +120,22 @@
             </section>
         </section>
     </aside>
+
     <div class="aside-content-cover" onclick="closeAside();"></div>
+
     <main>
         @this.RenderBody()
     </main>
+
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
-        asp-append-version="true"></script>
+            asp-append-version="true"></script>
     <script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
+    <script src="~/js/responsive.js" asp-append-version="true"></script>
 
     <script>
         window.onload = function () {

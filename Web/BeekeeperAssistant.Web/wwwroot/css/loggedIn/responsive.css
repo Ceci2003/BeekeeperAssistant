@@ -99,7 +99,6 @@
     -webkit-box-shadow: #110400;
   }
 
-
   /* sidebar navigations scroller */
   .sidebar-navigation .navigations {
     overflow-y: scroll;
@@ -117,5 +116,9 @@
   .sidebar-navigation .navigations::-webkit-scrollbar-thumb {
     border-radius: 5px;
     -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
+  }
+
+  .content {
+    padding: 60px 25px 25px 25px;
   }
 }

@@ -15,13 +15,13 @@
         [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
-        [Display(Name = "Номер на населеното място")]
+        [Display(Name = "Код на населеното място")]
         public string CityCode { get; set; }
 
         [Required(ErrorMessage = GlobalConstants.FarmNumberRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
-        [Display(Name = "Номер на обект")]
+        [Display(Name = "Номер на пчелин")]
         public string FarmNumber { get; set; }
 
         [ApiaryExistsValidation(ErrorMessage = GlobalConstants.ApiaryExistsErrorMessage)]

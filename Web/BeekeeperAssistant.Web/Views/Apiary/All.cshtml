@@ -6,6 +6,9 @@
 }
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
@@ -14,7 +17,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -25,14 +28,16 @@
     <partial name="_StatusMessagePartial" />
 
     <div class="page-controls">
-        <a class="export-file excel" asp-controller="Apiary" asp-action="ExportToExcel"><i class="fas fa-file-download"></i> Excel</a>
+        <a class="export-file excel" asp-controller="Apiary" asp-action="ExportToExcel">
+            <i class="fas fa-file-download"></i> Excel
+        </a>
         <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
             <i class="fas fa-plus-square pr-2"></i>
             Добави пчелин
         </a>
     </div>
 
-    <table class="data-table">
+    <table class="data-table all-table">
         <thead>
             <tr>
                 <th>Номер</th>
@@ -54,28 +59,100 @@
                     <td>@apiary.Adress</td>
                     <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
                     <td>@apiary.BeehivesCount</td>
-
                     <td class="edit">
-                        <div>
+                        <div class="edit-container">
                             <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
                                 <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
                             <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
-                                  asp-route-id="@apiary.Id">
-                                <button type="submit" class="delete">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </form>
+                            <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.Number')">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                            <div id="@apiary.Number" class="delete-form-display">
+                                <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
+                                asp-route-id="@apiary.Id">
+                                    <a class="delete close" onclick="HideDeleteApiaryForm('@apiary.Number')">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                    <p>Сигурни ли сте че искате да изтриете пчелин <strong>№@apiary.Number</strong>?</p>
+                                    <button type="submit" class="delete">
+                                        Изтрий <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                                <div id="@apiary.Number-back" class="content-cover"
+                                onclick="HideDeleteApiaryForm('@apiary.Number')"></div>
+                            </div>
                         </div>
                     </td>
-
                 </tr>
             }
         </tbody>
     </table>
+    <div class="all-table-responsive" style="display: none;">
+        <table>
+            <thead>
+                <th>Параметър</th>
+                <th>Стойност</th>
+            </thead>
+            <tbody>
+                @foreach (var apiary in Model.UserApiaries.AllUserApiaries)
+                {
+                    <tr>
+                        <td>Номер</td>
+                        <td class="number"><a href="/Apiary/@apiary.Number">@apiary.Number</a></td>
+                    </tr>
+                    <tr>
+                        <td>Име</td>
+                        <td>@apiary.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Местоположение</td>
+                        <td>@apiary.Adress</td>
+                    </tr>
+                    <tr>
+                        <td>Вид</td>
+                        <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
+                    </tr>
+                    <tr>
+                        <td>Бр. кошери</td>
+                        <td>@apiary.BeehivesCount</td>
+                    </tr>
+                    <tr>
+                        <td>Редактиране</td>
+                        <td class="edit">
+                            <div class="edit-container">
+                                <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
+                                    <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                                </a>
+                                <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.Number-responsive')">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                                <div id="@apiary.Number-responsive" class="delete-form-display">
+                                    <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
+                                    asp-route-id="@apiary.Id">
+                                        <a class="delete close" onclick="HideDeleteApiaryForm('@apiary.Number-responsive')">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <p>Сигурни ли сте че искате да изтриете пчелин <strong>№@apiary.Number</strong>?</p>
+                                        <button type="submit" class="delete">
+                                            Изтрий <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    <div id="@apiary.Number-back" class="content-cover"
+                                    onclick="HideDeleteApiaryForm('@apiary.Number-responsive')"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
     @if (!Model.UserApiaries.AllUserApiaries.Any())
     {
         <p class="empty-row">няма добавени пчелини</p>
@@ -94,8 +171,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="All"
-                       asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
-                       asp-route-pageAllApiaries="@(this.Model.UserApiaries.CurrentPage - 1)">
+                    asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
+                    asp-route-pageAllApiaries="@(this.Model.UserApiaries.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -111,7 +188,9 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="All" asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage" asp-route-pageAllApiaries="@i">@i</a>
+                        <a class="page-link" asp-controller="Apiary" asp-action="All"
+                    asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
+                    asp-route-pageAllApiaries="@i">@i</a>
                     </li>
                 }
             }
@@ -127,17 +206,17 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="All"
-                       asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
-                       asp-route-pageAllApiaries="@(this.Model.UserApiaries.CurrentPage + 1)">
+                    asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
+                    asp-route-pageAllApiaries="@(this.Model.UserApiaries.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>
             }
         </ul>
     </div>
-    
+
     <h1 class="title-1">@ViewData["HelperApiaries"]</h1>
-    <table class="data-table">
+    <table class="data-table all-table">
         <thead>
             <tr>
                 <th>Номер</th>
@@ -160,25 +239,34 @@
                     <td>@Html.DisplayFor(x => apiary.ApiaryApiaryType)</td>
                     <td>@apiary.ApiaryCreatorUserName</td>
                     <td class="edit">
-                        
-                        <div>
-                            @if (apiary.ApiaryCreatorUserName == this.User.Identity.Name)
-                            {
-                                <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.ApiaryId">
-                                    <i class="@(apiary.ApiaryIsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                                </a>
-                            }
+                        <div class="edit-container">
                             @if (apiary.Access == Access.ReadWrite)
                             {
                                 <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.ApiaryId">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
-                                      asp-route-id="@apiary.ApiaryId">
-                                    <button type="submit" class="delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
+
+                                <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.ApiaryNumber-helper')">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                                <div id="@apiary.ApiaryNumber-helper" class="delete-form-display">
+                                    <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
+                                asp-route-id="@apiary.ApiaryId">
+                                        <a class="delete close"
+                                    onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper')">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <p>Сигурни ли сте че искате да изтриете пчелин
+                                            <strong>№@apiary.ApiaryNumber</strong>?
+                                        </p>
+
+                                        <button type="submit" class="delete">
+                                            Изтрий <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    <div id="@apiary.ApiaryNumber-back" class="content-cover"
+                                onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper')"></div>
+                                </div>
                             }
                             else
                             {
@@ -186,10 +274,117 @@
                             }
                         </div>
                     </td>
+                    @* <td class="edit">
+                        <div>
+                        @if (apiary.ApiaryCreatorUserName == this.User.Identity.Name)
+                        {
+                        <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.ApiaryId">
+                        <i class="@(apiary.ApiaryIsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                        </a>
+                        }
+                        @if (apiary.Access == Access.ReadWrite)
+                        {
+                        <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.ApiaryId">
+                        <i class="far fa-edit"></i>
+                        </a>
+                        <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
+                        asp-route-id="@apiary.ApiaryId">
+                        <button type="submit" class="delete">
+                        <i class="far fa-trash-alt"></i>
+                        </button>
+                        </form>
+                        }
+                        else
+                        {
+                        @onlyReadMsg
+                        }
+                        </div>
+                        </td> *@
                 </tr>
             }
         </tbody>
     </table>
+    <div class="all-table-responsive" style="display: none;">
+        <table>
+            <thead>
+                <th>Параметър</th>
+                <th>Стойност</th>
+            </thead>
+            <tbody>
+                @foreach (var apiary in Model.UserHelperApiaries.AllUserHelperApiaries)
+                {
+                    <tr>
+                        <td class="creator" colspan="2">
+                            <p>
+                                Собственик:
+                            </p>
+                            <a href="#to-creator-page" style="pointer-events: none;">
+                                @apiary.ApiaryCreatorUserName
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Номер</td>
+                        <td class="number">
+                            <a href="/Apiary/@apiary.ApiaryNumber">@apiary.ApiaryNumber</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Име</td>
+                        <td>@apiary.ApiaryName</td>
+                    </tr>
+                    <tr>
+                        <td>Местоположение</td>
+                        <td>@apiary.ApiaryAdress</td>
+                    </tr>
+                    <tr>
+                        <td>Вид</td>
+                        <td>@Html.DisplayFor(x => apiary.ApiaryApiaryType)</td>
+                    </tr>
+                    <tr>
+                        <td>Редактиране</td>
+                        <td class="edit">
+                            <div class="edit-container">
+                                @if (apiary.Access == Access.ReadWrite)
+                                {
+                                    <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.ApiaryId">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+
+                                <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.ApiaryNumber-helper-responsive')">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                                <div id="@apiary.ApiaryNumber-helper-responsive" class="delete-form-display">
+                                    <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
+                                asp-route-id="@apiary.ApiaryId">
+                                        <a class="delete close"
+                                    onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper-responsive')">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <p>Сигурни ли сте че искате да изтриете пчелин
+                                            <strong>№@apiary.ApiaryNumber</strong>?
+                                        </p>
+
+                                        <button type="submit" class="delete">
+                                            Изтрий <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    <div id="@apiary.ApiaryNumber-back" class="content-cover"
+                                onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper-responsive')"></div>
+                                </div>
+
+                                }
+                                else
+                                {
+                                    @onlyReadMsg
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
     @if (!Model.UserHelperApiaries.AllUserHelperApiaries.Any())
     {
         <p class="empty-row">няма добавени пчелини</p>
@@ -208,8 +403,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="All"
-                       asp-route-pageAllApiaries="@this.Model.UserApiaries.CurrentPage"
-                       asp-route-pageHelperApiaries="@(this.Model.UserHelperApiaries.CurrentPage - 1)">
+                    asp-route-pageAllApiaries="@this.Model.UserApiaries.CurrentPage"
+                    asp-route-pageHelperApiaries="@(this.Model.UserHelperApiaries.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -225,7 +420,8 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-route-pageAllApiaries="@this.Model.UserApiaries.CurrentPage" asp-controller="Apiary" asp-action="All" asp-route-pageHelperApiaries="@i">@i</a>
+                        <a class="page-link" asp-route-pageAllApiaries="@this.Model.UserApiaries.CurrentPage"
+                    asp-controller="Apiary" asp-action="All" asp-route-pageHelperApiaries="@i">@i</a>
                     </li>
                 }
             }
@@ -241,8 +437,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="All"
-                       asp-route-pageAllApiaries="@this.Model.UserApiaries.CurrentPage"
-                       asp-route-pageHelperApiaries="@(this.Model.UserHelperApiaries.CurrentPage + 1)">
+                    asp-route-pageAllApiaries="@this.Model.UserApiaries.CurrentPage"
+                    asp-route-pageHelperApiaries="@(this.Model.UserHelperApiaries.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

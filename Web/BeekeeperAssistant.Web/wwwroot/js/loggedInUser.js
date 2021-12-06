@@ -275,3 +275,13 @@ function asideBurgerMenuClick() {
 function closeAside(){ 
     asideBurgerMenuClick();
 }
+
+function ShowDeleteApiaryForm(id) {
+    var deleteForm = document.getElementById(id);
+    deleteForm.classList = 'delete-form-display-show';
+}
+
+function HideDeleteApiaryForm(id) {
+    var deleteForm = document.getElementById(id);
+    deleteForm.classList = 'delete-form-display';
+}

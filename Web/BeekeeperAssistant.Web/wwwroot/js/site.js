@@ -1,6 +1,4 @@
-﻿// Write your JavaScript code.
-
-﻿$(function () {
+﻿﻿$(function () {
     $("time").each(function (i, e) {
         const dateTimeValue = $(e).attr("datetime");
         if (!dateTimeValue) {

@@ -119,6 +119,7 @@
         {
             var query = this.userRepository
                 .AllWithDeleted()
+                .OrderByDescending(u => u.CreatedOn)
                 .Skip(skip);
 
             if (take.HasValue)

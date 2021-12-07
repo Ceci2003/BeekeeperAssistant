@@ -8,6 +8,8 @@
     {
         string GetDisplayName(Enum enumValue);
 
+        bool IsEnumerationDefined(Enum @enum);
+
         public List<KeyValuePair<string, int>> GetEnumList<T>();
     }
 }

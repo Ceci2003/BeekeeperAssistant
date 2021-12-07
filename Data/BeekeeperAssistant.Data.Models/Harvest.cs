@@ -26,6 +26,6 @@
 
         public Unit Unit { get; set; }
 
-        public ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
+        public virtual ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
     }
 }

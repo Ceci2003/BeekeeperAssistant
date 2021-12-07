@@ -8,11 +8,11 @@
     {
         public int ApiaryId { get; set; }
 
-        public Apiary Apiary { get; set; }
+        public virtual Apiary Apiary { get; set; }
 
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public Access Access { get; set; }
     }

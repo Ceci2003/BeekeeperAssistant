@@ -1,0 +1,163 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Feedbacks.AllFeedabacksAdministrationViewModel
+@{
+}
+
+<div class="content">
+    <h1 class="title-1">Всички отзиви</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Заглавие</th>
+                <th>От</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var feedback in Model.Feedbacks.AllFeedbacks)
+            {
+                <tr>
+                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a></td>
+                    <td>@feedback.UserUsername</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!Model.Feedbacks.AllFeedbacks.Any())
+    {
+        <p class="empty-row">няма отзиви</p>
+    }
+    <div class="pagination">
+        <ul>
+            @if (this.Model.Feedbacks.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
+                       asp-route-pageHelps="@Model.Helps.CurrentPage"
+                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage - 1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.Feedbacks.PagesCount; i++)
+            {
+                @if (i == this.Model.Feedbacks.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@Model.Helps.CurrentPage" asp-route-pageFeedbacks="@i">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.Feedbacks.CurrentPage == this.Model.Feedbacks.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
+                       asp-route-pageHelps="@Model.Helps.CurrentPage"
+                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage + 1)">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+@*----------------------------------*@
+<div class="content">
+    <h1 class="title-1">Всички искания на помощ</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Заглавие</th>
+                <th>От</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var feedback in Model.Helps.AllFeedbacks)
+            {
+                <tr>
+                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a></td>
+                    <td>@feedback.UserUsername</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!Model.Helps.AllFeedbacks.Any())
+    {
+        <p class="empty-row">няма отзиви</p>
+    }
+    <div class="pagination">
+        <ul>
+            @if (this.Model.Helps.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
+                       asp-route-pageHelps="@(Model.Helps.CurrentPage - 1)"
+                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.Helps.PagesCount; i++)
+            {
+                @if (i == this.Model.Helps.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@i" asp-route-pageFeedbacks="@Model.Feedbacks.CurrentPage">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.Helps.CurrentPage == this.Model.Helps.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
+                       asp-route-pageHelps="@(Model.Helps.CurrentPage + 1)"
+                       asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

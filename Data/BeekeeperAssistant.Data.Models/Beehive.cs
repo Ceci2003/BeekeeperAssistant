@@ -40,14 +40,14 @@
         [ForeignKey(nameof(Queen))]
         public int? QueenId { get; set; }
 
-        public Queen Queen { get; set; }
+        public virtual Queen Queen { get; set; }
 
-        public ICollection<Inspection> Inspections { get; set; }
+        public virtual ICollection<Inspection> Inspections { get; set; }
 
-        public ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
+        public virtual ICollection<HarvestedBeehive> HarvestedBeehives { get; set; }
 
-        public ICollection<TreatedBeehive> TreatedBeehives { get; set; }
+        public virtual ICollection<TreatedBeehive> TreatedBeehives { get; set; }
 
-        public ICollection<BeehiveHelper> BeehiveHelpers { get; set; }
+        public virtual ICollection<BeehiveHelper> BeehiveHelpers { get; set; }
     }
 }

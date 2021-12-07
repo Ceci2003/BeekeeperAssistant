@@ -1,0 +1,12 @@
+﻿@{ 
+    ViewData["Title"] = "Помощ и отзиви";
+}
+
+<div>
+    <div>
+        <a asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Help">Помощ</a>
+    </div>
+    <div>
+        <a asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">Напиши отзив</a>
+    </div>
+</div>

@@ -36,6 +36,6 @@
 
         public QueenBreed Breed { get; set; }
 
-        public ICollection<QueenHelper> QueenHelpers { get; set; }
+        public virtual ICollection<QueenHelper> QueenHelpers { get; set; }
     }
 }

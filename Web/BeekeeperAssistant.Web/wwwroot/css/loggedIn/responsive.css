@@ -38,6 +38,42 @@
 
   .sidebar-navigation {
     display: none;
+    overflow-y: scroll;
+  }
+
+  .sidebar-navigation::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .sidebar-navigation::-webkit-scrollbar-track {
+    -webkit-box-shadow: #110400;
+  }
+
+  .sidebar-navigation::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: #110400;
+  }
+
+  /* sidebar navigations scroller */
+  .sidebar-navigation .navigations {
+    overflow-y: scroll;
+  }
+
+  .sidebar-navigation .navigations::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .sidebar-navigation .navigations::-webkit-scrollbar-track {
+    -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: 5px;
+  }
+
+  .sidebar-navigation .navigations::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
+  }
+
+  .content {
+    padding: 60px 25px 25px 25px;
   }
 
   .breadcrumb {
@@ -78,47 +114,39 @@
     margin: 0;
   }
 
-  .sidebar-navigation {
-    overflow-y: auto;
+  .breadcrumb .breadcrumb-list {
+    display: none;
   }
 
-  /* sidebar scroller */
-  .sidebar-navigation {
-    overflow-y: scroll;
+  .breadcrumb .breadcrumb-list.responsive {
+    display: flex;
   }
 
-  .sidebar-navigation::-webkit-scrollbar {
-    width: 0;
+  .tab-title.title-1 {
+    font-size: 22px;
   }
 
-  .sidebar-navigation::-webkit-scrollbar-track {
-    -webkit-box-shadow: #110400;
+  .data-view {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--lightgray);
+    border-radius: 10px;
   }
 
-  .sidebar-navigation::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: #110400;
+  .data-view .apiary-info {
+    display: flex;
+    flex-direction: column;
   }
 
-  /* sidebar navigations scroller */
-  .sidebar-navigation .navigations {
-    overflow-y: scroll;
-  }
-
-  .sidebar-navigation .navigations::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  .sidebar-navigation .navigations::-webkit-scrollbar-track {
-    -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
-    border-radius: 5px;
-  }
-
-  .sidebar-navigation .navigations::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
-  }
-
-  .content {
-    padding: 60px 25px 25px 25px;
+  .data-view .apiary-info .data-edit {
+    display: grid;
+    align-items: center;
+    align-content: space-between;
+    height: 150px;
   }
 }

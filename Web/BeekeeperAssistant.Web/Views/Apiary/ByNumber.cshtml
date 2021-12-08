@@ -13,6 +13,9 @@
 }
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
@@ -21,6 +24,15 @@
             <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Apiary" asp-action="All">Пчелини</a>
+        </li>
+        <li class="breadcrumb-item active">@Model.Number</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
@@ -41,11 +53,8 @@
 </div>
 
 <div class="tabs-body">
-    <div id="Apiary" class="tabcontent" style="display: @if(Model.TabPage == "Apiary") {
-    @block
-}">
-
-        <partial name="_StatusMessagePartial" />
+    <partial name="_StatusMessagePartial" />
+    <div id="Apiary" class="tabcontent" style="display: @if(Model.TabPage == "Apiary") {@block}">
         <div class="data-view">
             <div class="qr-code">
                 <a class="qr-code-print" href="javascript:printQRCode();">
@@ -53,7 +62,7 @@
                     отпечатай кода
                 </a>
                 <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=@website&size=255x255"
-                     alt="QR Code" width="250" height="250">
+                    alt="QR Code" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
@@ -95,12 +104,12 @@
                     @if (Model.Creator.UserName == this.User.Identity.Name)
                     {
                         <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add"
-                           asp-route-id="@Model.Id">Добави помощник</a>
+                        asp-route-id="@Model.Id">Добави помощник</a>
 
                         @if (Model.HasHelpers)
                         {
                             <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All"
-                               asp-route-id="@Model.Id">Всички помощници</a>
+                        asp-route-id="@Model.Id">Всички помощници</a>
                         }
                     }
 
@@ -127,11 +136,7 @@
             </div>
         </div>
     </div>
-    <div id="Beehives" class="tabcontent" style="display: @if(Model.TabPage == "Beehives") {
-    @block
-}">
-        <partial name="_StatusMessagePartial" />
-
+    <div id="Beehives" class="tabcontent" style="display: @if(Model.TabPage == "Beehives") {@block}">
         <div class="page-controls">
             <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel" asp-route-id="@Model.Id">
                 <i class="fas fa-file-download"></i> Excel
@@ -144,7 +149,7 @@
                 </a>
             }
         </div>
-        <table class="data-table">
+        <table class="data-table all-table">
             <thead>
                 <tr>
                     <th>Номер</th>
@@ -157,9 +162,7 @@
             <tbody>
                 @foreach (var beehive in Model.Beehives)
                 {
-                    <tr class="@if (beehive.HasDevice == true) {
-                @hasDevice
- }">
+                    <tr class="@if (beehive.HasDevice == true) {@hasDevice}">
                         <td class="number">
                             <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
                         </td>
@@ -172,7 +175,8 @@
                             <div>
                                 @if (beehive.BeehiveAccess == Access.ReadWrite)
                                 {
-                                    <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                    <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
+                                asp-route-returnUrl="@this.Context.Request.Path">
                                         <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                     </a>
                                     <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
@@ -192,6 +196,81 @@
                 }
             </tbody>
         </table>
+        <div class="all-table-responsive" style="display: none;">
+            <table>
+                <thead>
+                    <th>Параметър</th>
+                    <th>Стойност</th>
+                </thead>
+                <tbody>
+                    @foreach (var beehive in Model.Beehives)
+                    {
+                        <tr class="@if (beehive.HasDevice == true) {@hasDevice}">
+                            <td>Номер</td>
+                            <td class="number">
+                                <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Вид</td>
+                            <td>@Html.DisplayFor(x => beehive.BeehiveType)</td>
+                        </tr>
+                        <tr>
+                            <td>Система</td>
+                            <td>@Html.DisplayFor(x => beehive.BeehiveSystem)</td>
+                        </tr>
+                        <tr>
+                            <td>Сила</td>
+                            <td class="@powerClasses[beehive.BeehivePower.ToString().ToLower()]">
+                                @Html.DisplayFor(x => beehive.BeehivePower)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Майка</td>
+                            <td>НЕ РАБОТИ</td>
+                        </tr>
+                        <tr>
+                            <td>Редактиране</td>
+                            <td class="edit">
+                                <div class="edit-container">
+                                    @if (beehive.BeehiveAccess == Access.ReadWrite)
+                                    {
+                                        <a class="mark" asp-controller="Beehive" asp-action="Bookmark"
+                                    asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                            <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                                        </a>
+                                        <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <a class="delete" onclick="ShowDeleteApiaryForm('@beehive.Number-responsive')">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                        <div id="@beehive.Number-responsive" class="delete-form-display">
+                                            <form method="post" id="form-@beehive.Id" asp-controller="Beehive"
+                                        asp-action="Delete" asp-route-id="@beehive.Id">
+                                                <a class="delete close"
+                                            onclick="HideDeleteApiaryForm('@beehive.Number-responsive')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    Сигурни ли сте че искате да изтриете кошер
+                                                    <strong>№@beehive.Number</strong>?
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@beehive.Number-back" class="content-cover"
+                                        onclick="HideDeleteApiaryForm('@beehive.Number-responsive')"></div>
+                                        </div>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
         @if (!Model.Beehives.Any())
         {
             <p class="empty-row">пчелинът няма добавени кошери</p>

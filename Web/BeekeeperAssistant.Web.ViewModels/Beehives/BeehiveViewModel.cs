@@ -30,5 +30,7 @@
         public Access BeehiveAccess { get; set; }
 
         public string CreatorId { get; set; }
+
+        public Queen Queen { get; set; }
     }
 }

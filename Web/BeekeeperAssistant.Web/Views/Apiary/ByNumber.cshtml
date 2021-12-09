@@ -227,8 +227,26 @@
                         </tr>
                         <tr>
                             <td>Майка</td>
-                            <td>НЕ РАБОТИ</td>
+                            <td>
+                                @if (beehive.Queen != null)
+                                {
+                                    @Html.DisplayFor(x => beehive.Queen.Color)
+                                }
+                                else
+                                {
+                                    <strong>няма</strong>
+                                }
+                            </td>
                         </tr>
+                        @if (beehive.Queen != null)
+                        {
+                            <tr>
+                                <td>Придадена на</td>
+                                <td>
+                                    @beehive.Queen.GivingDate.ToString("ddd dd - MMM - yyyy")
+                                </td>
+                            </tr>
+                        }
                         <tr>
                             <td>Редактиране</td>
                             <td class="edit">

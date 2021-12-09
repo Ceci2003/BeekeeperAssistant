@@ -162,14 +162,14 @@
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, beehive.Id, inputModel);
 
-                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създадена инспекция!";
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehive.Id, tabPage = "Inspections" });
             }
             else
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, id.Value, inputModel);
 
-                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създадена инспекция!";
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
                 return this.RedirectToAction("ById", "Beehive", new { beehiveId = id.Value, tabPage = "Inspections" });
             }
         }
@@ -197,7 +197,7 @@
 
             await this.inspectionService.EditUserInspectionAsync(id, inputModel);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактирана инспекция!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран преглед!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Inspections" });
         }
 
@@ -214,7 +214,7 @@
 
             await this.inspectionService.DeleteInspectionAsync(id);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрита инспекция!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит преглед!";
             return this.RedirectToAction("ById", "Beehive", new { beehiveId = inspection.BeehiveId, tabPage = "Inspections" });
         }
 

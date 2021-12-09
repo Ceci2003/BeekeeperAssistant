@@ -260,14 +260,14 @@
                                         <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a class="delete" onclick="ShowDeleteApiaryForm('@beehive.Number-responsive')">
+                                        <a class="delete" onclick="ShowDeleteApiaryForm('@beehive.Id-responsive')">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
-                                        <div id="@beehive.Number-responsive" class="delete-form-display">
+                                        <div id="@beehive.Id-responsive" class="delete-form-display">
                                             <form method="post" id="form-@beehive.Id" asp-controller="Beehive"
                                         asp-action="Delete" asp-route-id="@beehive.Id">
                                                 <a class="delete close"
-                                            onclick="HideDeleteApiaryForm('@beehive.Number-responsive')">
+                                            onclick="HideDeleteApiaryForm('@beehive.Id-responsive')">
                                                     <i class="fas fa-times"></i>
                                                 </a>
                                                 <p>
@@ -278,8 +278,8 @@
                                                     Изтрий <i class="far fa-trash-alt"></i>
                                                 </button>
                                             </form>
-                                            <div id="@beehive.Number-back" class="content-cover"
-                                        onclick="HideDeleteApiaryForm('@beehive.Number-responsive')"></div>
+                                            <div id="@beehive.Id-back" class="content-cover"
+                                        onclick="HideDeleteApiaryForm('@beehive.Id-responsive')"></div>
                                         </div>
                                     }
                                 </div>

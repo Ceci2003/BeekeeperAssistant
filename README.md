@@ -13,5 +13,8 @@
 ## Използвани технологии
 Използвани технологии: C#, .NET, ASP.NET MVC, Entity Framework Core, HTML5, CSS3, JavaScript, jQuery, AutoMapper.
 
+## Демо
+Линк към публикувания проект: http://beekeeperassistant.com/
+
 ## Сорс код
 Линк към сорс кода: https://github.com/Ceci2003/BeekeeperAssistant

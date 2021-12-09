@@ -20,6 +20,9 @@
 </script>
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
@@ -28,6 +31,15 @@
             <a href="/Apiary/@Model.ApiaryNumber">Пчелин: @Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+        </li>
+        <li class="breadcrumb-item active">@Model.Number</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
@@ -69,8 +81,7 @@
                     <i class="fas fa-print"></i>
                     отпечатай кода
                 </a>
-                <img id="qr-code-img"
-                    src="https://api.qrserver.com/v1/create-qr-code/?data=@website&size=255x255"
+                <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=@website&size=255x255"
                     alt="W3Schools" width="250" height="250">
             </div>
             <div class="apiary-info">
@@ -83,7 +94,8 @@
                         <tr>
                             <th scope="row">Пчелин:</th>
                             <td class="beehive-apiary-num">
-                                <a href="/Apiary/@Model.ApiaryNumber" id="apiary-num"><strong>@Model.ApiaryNumber</strong></a>
+                                <a href="/Apiary/@Model.ApiaryNumber"
+                                    id="apiary-num"><strong>@Model.ApiaryNumber</strong></a>
                             </td>
                         </tr>
                         <tr>
@@ -214,26 +226,27 @@
                         <td>@Model.Queen.HygenicHabits</td>
                     </tr>
                 </table>
-                @if (Model.BeehiveAccess == Access.ReadWrite)
-                {
-                    <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId"
+                <div class="data-edit beehive-info">
+                    @if (Model.BeehiveAccess == Access.ReadWrite)
+                    {
+                        <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.QueenId"
                     asp-route-beehiveId="@Model.Id">
-                        Редактирайте кралицата
-                    </a>
-                    <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
-                        <input class="btn delete" type="submit" value="Изтрий" />
-                    </form>
-                }
-                else
-                {
-                    @onlyReadMsg
-                }
-                @if (Model.Queen.User.UserName == this.User.Identity.Name && Model.HasHelpers)
-                {
-                    <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All"
-                asp-route-id="@Model.QueenId">Всички помощници</a>
-                }
-
+                            Редактирайте кралицата
+                        </a>
+                        <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.QueenId">
+                            <input class="btn delete" type="submit" value="Изтрий" />
+                        </form>
+                    }
+                    else
+                    {
+                        @onlyReadMsg
+                    }
+                    @if (Model.Queen.User.UserName == this.User.Identity.Name && Model.HasHelpers)
+                    {
+                        <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All"
+                    asp-route-id="@Model.QueenId">Всички помощници</a>
+                    }
+                </div>
             }
             else
             {

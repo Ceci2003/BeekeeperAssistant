@@ -11,24 +11,11 @@ if (screenWidth <= 1023) {
         table.style.display = 'block'
     });
 
-    var tabs = document.querySelectorAll('.tablinks');
-    
-    if (tabs.length > 0) {
-        var tabsWidth = 0;
-        tabs.forEach(tab => {
-            tabsWidth += tab.offsetWidth;
-        });
-
-        if (tabsWidth >= screenWidth) {
-            var tabWidth = screenWidth / tabs.length;
-            tabs.forEach(tab => {
-                var i = tab.children[0];
-                i.classList += ' m0';
-                
-                tab.innerHTML = i.outerHTML;
-                tab.style.width = tabWidth + 'px';
-            });
-        }
+    var breadcrumbList = document.querySelector('.breadcrumb-list');
+    var breadcrumbListResponsive = document.querySelector('.breadcrumb-list.responsive');
+    if (breadcrumbListResponsive != null) {
+        breadcrumbList.style.display = 'none';
+        breadcrumbListResponsive.style.display = 'flex';
     }
 }
 

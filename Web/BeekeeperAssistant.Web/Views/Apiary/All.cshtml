@@ -15,6 +15,12 @@
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">Пчелини</li>
+    </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
             asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
@@ -119,7 +125,7 @@
                         <td>Бр. кошери</td>
                         <td>@apiary.BeehivesCount</td>
                     </tr>
-                    <tr>
+                    <tr class="edit-row">
                         <td>Редактиране</td>
                         <td class="edit">
                             <div class="edit-container">
@@ -341,7 +347,7 @@
                         <td>Вид</td>
                         <td>@Html.DisplayFor(x => apiary.ApiaryApiaryType)</td>
                     </tr>
-                    <tr>
+                    <tr class="edit-row">
                         <td>Редактиране</td>
                         <td class="edit">
                             <div class="edit-container">

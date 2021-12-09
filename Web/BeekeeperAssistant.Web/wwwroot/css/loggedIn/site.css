@@ -1810,6 +1810,10 @@ input[readonly] {
   border-right: 3px solid var(--lightgray);
 }
 
+.all-table-responsive table tr.edit-row {
+  border-bottom: 3px solid var(--lightgray);
+}
+
 .all-table-responsive table tr td:first-child {
   font-weight: 600;
 }
@@ -1822,7 +1826,7 @@ input[readonly] {
   content: ":";
 }
 
-.all-table-responsive table tr:nth-child(6n) {
+.all-table-responsive.n6 table tr:nth-child(6n) {
   border-bottom: 3px solid var(--lightgray);
 }
 

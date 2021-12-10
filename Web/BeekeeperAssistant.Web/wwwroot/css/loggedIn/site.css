@@ -1840,6 +1840,15 @@ input[readonly] {
   font-weight: 600;
 }
 
+.all-table-responsive table td.summary-content {
+  text-align: center;
+  font-weight: 400 !important;
+}
+
+.all-table-responsive table td.summary-content::after {
+  content: "" !important;
+}
+
 .all-table-responsive table td.creator {
   text-align: center;
 }

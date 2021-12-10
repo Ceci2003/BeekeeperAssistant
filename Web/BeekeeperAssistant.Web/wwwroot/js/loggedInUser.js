@@ -276,12 +276,12 @@ function closeAside(){
     asideBurgerMenuClick();
 }
 
-function ShowDeleteApiaryForm(id) {
+function ShowDeleteForm(id) {
     var deleteForm = document.getElementById(id);
     deleteForm.classList = 'delete-form-display-show';
 }
 
-function HideDeleteApiaryForm(id) {
+function HideDeleteForm(id) {
     var deleteForm = document.getElementById(id);
     deleteForm.classList = 'delete-form-display';
 }

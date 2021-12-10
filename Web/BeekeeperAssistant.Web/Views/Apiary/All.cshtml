@@ -73,13 +73,13 @@
                             <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.Number')">
+                            <a class="delete" onclick="ShowDeleteForm('@apiary.Number')">
                                 <i class="far fa-trash-alt"></i>
                             </a>
                             <div id="@apiary.Number" class="delete-form-display">
                                 <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
                                 asp-route-id="@apiary.Id">
-                                    <a class="delete close" onclick="HideDeleteApiaryForm('@apiary.Number')">
+                                    <a class="delete close" onclick="HideDeleteForm('@apiary.Number')">
                                         <i class="fas fa-times"></i>
                                     </a>
                                     <p>Сигурни ли сте че искате да изтриете пчелин <strong>№@apiary.Number</strong>?</p>
@@ -88,7 +88,7 @@
                                     </button>
                                 </form>
                                 <div id="@apiary.Number-back" class="content-cover"
-                                onclick="HideDeleteApiaryForm('@apiary.Number')"></div>
+                                onclick="HideDeleteForm('@apiary.Number')"></div>
                             </div>
                         </div>
                     </td>
@@ -135,13 +135,13 @@
                                 <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.Number-responsive')">
+                                <a class="delete" onclick="ShowDeleteForm('@apiary.Number-responsive')">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                                 <div id="@apiary.Number-responsive" class="delete-form-display">
                                     <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
                                     asp-route-id="@apiary.Id">
-                                        <a class="delete close" onclick="HideDeleteApiaryForm('@apiary.Number-responsive')">
+                                        <a class="delete close" onclick="HideDeleteForm('@apiary.Number-responsive')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <p>Сигурни ли сте че искате да изтриете пчелин <strong>№@apiary.Number</strong>?</p>
@@ -150,7 +150,7 @@
                                         </button>
                                     </form>
                                     <div id="@apiary.Number-back" class="content-cover"
-                                    onclick="HideDeleteApiaryForm('@apiary.Number-responsive')"></div>
+                                    onclick="HideDeleteForm('@apiary.Number-responsive')"></div>
                                 </div>
                             </div>
                         </td>
@@ -252,14 +252,14 @@
                                     <i class="far fa-edit"></i>
                                 </a>
 
-                                <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.ApiaryNumber-helper')">
+                                <a class="delete" onclick="ShowDeleteForm('@apiary.ApiaryNumber-helper')">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                                 <div id="@apiary.ApiaryNumber-helper" class="delete-form-display">
                                     <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
                                 asp-route-id="@apiary.ApiaryId">
                                         <a class="delete close"
-                                    onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper')">
+                                    onclick="HideDeleteForm('@apiary.ApiaryNumber-helper')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <p>Сигурни ли сте че искате да изтриете пчелин
@@ -271,7 +271,7 @@
                                         </button>
                                     </form>
                                     <div id="@apiary.ApiaryNumber-back" class="content-cover"
-                                onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper')"></div>
+                                onclick="HideDeleteForm('@apiary.ApiaryNumber-helper')"></div>
                                 </div>
                             }
                             else
@@ -280,32 +280,6 @@
                             }
                         </div>
                     </td>
-                    @* <td class="edit">
-                        <div>
-                        @if (apiary.ApiaryCreatorUserName == this.User.Identity.Name)
-                        {
-                        <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.ApiaryId">
-                        <i class="@(apiary.ApiaryIsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                        </a>
-                        }
-                        @if (apiary.Access == Access.ReadWrite)
-                        {
-                        <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.ApiaryId">
-                        <i class="far fa-edit"></i>
-                        </a>
-                        <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
-                        asp-route-id="@apiary.ApiaryId">
-                        <button type="submit" class="delete">
-                        <i class="far fa-trash-alt"></i>
-                        </button>
-                        </form>
-                        }
-                        else
-                        {
-                        @onlyReadMsg
-                        }
-                        </div>
-                        </td> *@
                 </tr>
             }
         </tbody>
@@ -357,14 +331,14 @@
                                         <i class="far fa-edit"></i>
                                     </a>
 
-                                <a class="delete" onclick="ShowDeleteApiaryForm('@apiary.ApiaryNumber-helper-responsive')">
+                                <a class="delete" onclick="ShowDeleteForm('@apiary.ApiaryNumber-helper-responsive')">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                                 <div id="@apiary.ApiaryNumber-helper-responsive" class="delete-form-display">
                                     <form id="form-@apiary.ApiaryId" asp-controller="Apiary" asp-action="Delete"
                                 asp-route-id="@apiary.ApiaryId">
                                         <a class="delete close"
-                                    onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper-responsive')">
+                                    onclick="HideDeleteForm('@apiary.ApiaryNumber-helper-responsive')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <p>Сигурни ли сте че искате да изтриете пчелин
@@ -376,7 +350,7 @@
                                         </button>
                                     </form>
                                     <div id="@apiary.ApiaryNumber-back" class="content-cover"
-                                onclick="HideDeleteApiaryForm('@apiary.ApiaryNumber-helper-responsive')"></div>
+                                onclick="HideDeleteForm('@apiary.ApiaryNumber-helper-responsive')"></div>
                                 </div>
 
                                 }

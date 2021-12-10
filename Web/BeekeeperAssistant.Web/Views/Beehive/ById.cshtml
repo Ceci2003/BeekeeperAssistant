@@ -316,19 +316,35 @@
                                 @Html.DisplayFor(i => inspection.BeehivePower)
                             </td>
                             <td class="edit">
-                                <div>
+                                <div class="edit-container">
                                     @if (Model.BeehiveAccess == Access.ReadWrite)
                                     {
                                         <a class="edit" asp-controller="Inspection" asp-action="Edit"
                                         asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"
+                                        <a class="delete" onclick="ShowDeleteForm('@inspection.Id-inspection')">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+
+                                        <div id="@inspection.Id-inspection" class="delete-form-display">
+                                            <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"
                                         asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
-                                            <button type="submit" class="delete">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                                <a class="delete close"
+                                            onclick="HideDeleteForm('@inspection.Id-inspection')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    Сигурни ли сте че искате да изтриете преглед от 
+                                                    <strong>@inspection.DateOfInspection.ToString("ddd dd-MMM-yyyy")</strong>?
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@inspection.Id-back" class="content-cover"
+                                        onclick="HideDeleteForm('@inspection.Id-inspection')"></div>
+                                        </div>
                                     }
                                     else
                                     {
@@ -573,7 +589,7 @@
                         {
                             <tr>
                                 <td>Дата на прегледа</td>
-                                <td class="table-sdate">
+                                <td class="td-link">
                                     @inspection.DateOfInspection.ToString("ddd dd-MMM-yyyy")
                                 </td>
                             </tr>
@@ -612,16 +628,16 @@
                                         asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                                 <i class="far fa-edit"></i>
                                             </a>
-                                            <a class="delete" onclick="ShowDeleteApiaryForm('@inspection.Id-responsive')">
+                                            <a class="delete" onclick="ShowDeleteForm('@inspection.Id-inspection-responsive')">
                                                 <i class="far fa-trash-alt"></i>
                                             </a>
 
-                                            <div id="@inspection.Id-responsive" class="delete-form-display">
+                                            <div id="@inspection.Id-inspection-responsive" class="delete-form-display">
 
                                                 <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"
                                             asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.Id">
                                                     <a class="delete close"
-                                                onclick="HideDeleteApiaryForm('@inspection.Id-responsive')">
+                                                onclick="HideDeleteForm('@inspection.Id-inspection-responsive')">
                                                         <i class="fas fa-times"></i>
                                                     </a>
                                                     <p>
@@ -633,7 +649,7 @@
                                                     </button>
                                                 </form>
                                                 <div id="@inspection.Id-back" class="content-cover"
-                                            onclick="HideDeleteApiaryForm('@inspection.Id-responsive')"></div>
+                                            onclick="HideDeleteForm('@inspection.Id-inspection-responsive')"></div>
                                             </div>
                                         }
                                         else
@@ -727,7 +743,7 @@
                     </a>
                 </div>
             }
-            <table id="TreatmentsTable">
+            <table id="TreatmentsTable" class="all-table">
                 <thead>
                     <th>Дата на третирането</th>
                     <th>Име на третирането</th>
@@ -766,17 +782,44 @@
                                 @Html.DisplayFor(t => treatment.Dose)
                             </td>
                             <td class="edit">
-                                <div>
-                                    <a class="edit" asp-controller="Treatment" asp-action="Edit"
-                                    asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
-                                        <i class="far fa-edit"></i>
-                                    </a>
-                                    <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
-                                    asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
-                                        <button type="submit" class="delete">
+                                <div class="edit-container">
+                                    @if (Model.BeehiveAccess == Access.ReadWrite)
+                                    {
+                                        <a class="edit" asp-controller="Treatment" asp-action="Edit"
+                                        asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <a class="delete" onclick="ShowDeleteForm('@treatment.Id-treatment')">
                                             <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
+                                        </a>
+
+                                        <div id="@treatment.Id-treatment" class="delete-form-display">
+                                            <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
+                                            asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                                <a class="delete close" onclick="HideDeleteForm('@treatment.Id-treatment')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    Сигурни ли сте че искате да изтриете преглед от 
+                                                    <strong>@treatment.DateOfTreatment.ToString("ddd dd-MMM-yyyy")</strong>?
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@treatment.Id-back" class="content-cover" onclick="HideDeleteForm('@treatment.Id-treatment')"></div>
+                                        </div>
+                                        <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
+                                        asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                            <button type="submit" class="delete">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        @onlyReadMsg
+                                    }
                                 </div>
                             </td>
                         </tr>
@@ -790,12 +833,93 @@
                     }
                 </tbody>
             </table>
+            <div class="all-table-responsive" style="display: none;">
+                <table>
+                    <thead>
+                        <th>Параметър</th>
+                        <th>Стойност</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var treatment in Model.Treatments.AllTreatements)
+                        {
+                            <tr>
+                                <td>Дата на третирането</td>
+                                <td>
+                                    @treatment.DateOfTreatment.ToString("ddd dd-MMM-yyyy")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Име на третирането</td>
+                                <td>
+                                    @treatment.Name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Превенция</td>
+                                <td>
+                                    @treatment.Disease
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Препарат</td>
+                                <td>
+                                    @treatment.Medication
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="summary-content" colspan="2">
+                                    @treatment.Quantity @Html.DisplayFor(t => treatment.Dose)
+                                    <br>
+                                    @Html.DisplayFor(t => treatment.InputAs)
+                                </td>
+                            </tr>
+                            <tr class="edit-row">
+                                <td>Редактиране</td>
+                                <td class="edit">
+                                    <div class="edit-container">
+                                        @if (Model.BeehiveAccess == Access.ReadWrite)
+                                        {
+                                            <a class="edit" asp-controller="Treatment" asp-action="Edit"
+                                            asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            <a class="delete" onclick="ShowDeleteForm('@treatment.Id-treatment-responsive')">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+
+                                            <div id="@treatment.Id-treatment-responsive" class="delete-form-display">
+                                                <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
+                                                asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
+                                                    <a class="delete close" onclick="HideDeleteForm('@treatment.Id-treatment-responsive')">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                    <p>
+                                                        Сигурни ли сте че искате да изтриете преглед от 
+                                                        <strong>@treatment.DateOfTreatment.ToString("ddd dd-MMM-yyyy")</strong>?
+                                                    </p>
+                                                    <button type="submit" class="delete">
+                                                        Изтрий <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                                <div id="@treatment.Id-back" class="content-cover" onclick="HideDeleteForm('@treatment.Id-treatment-responsive')"></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            @onlyReadMsg
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             @if (!Model.Treatments.AllTreatements.Any())
             {
                 <p>няма добавени третирания</p>
             }
         </div>
-
         <div class="pagination">
             <ul>
                 @if (this.Model.Treatments.CurrentPage == 1)
@@ -901,17 +1025,24 @@
                                 <span>@Html.DisplayFor(x => harvest.Unit)</span>
                             </td>
                             <td class="edit">
-                                <div>
-                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
-                                    asp-route-beehiveId="@Model.Id">
-                                        <i class="far fa-edit"></i>
-                                    </a>
-                                    <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                    asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
-                                        <button type="submit" class="delete">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </form>
+                                <div class="edit-container">
+                                    @if (Model.BeehiveAccess == Access.ReadWrite)
+                                    {
+                                        <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                        asp-route-beehiveId="@Model.Id">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                        asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                            <button type="submit" class="delete">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        @onlyReadMsg
+                                    }
                                 </div>
                             </td>
                         </tr>

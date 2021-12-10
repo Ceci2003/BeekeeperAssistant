@@ -27,6 +27,7 @@
         public HoneyType HoneyType { get; set; }
 
         [Required(ErrorMessage = "Полето 'Количество' е задължително!")]
+        [Display(Name = "Количество")]
         public string QuantityText { get; set; }
 
         public double Quantity { get; set; }

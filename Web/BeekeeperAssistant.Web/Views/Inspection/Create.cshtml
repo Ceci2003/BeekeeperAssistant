@@ -14,6 +14,9 @@
 }
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     @if (Model.BeehiveId != null)
     {
         <ul class="breadcrumb-list">
@@ -28,6 +31,19 @@
                 asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
             </li>
             <li class="breadcrumb-item active">@ViewData["Title"]</li>
+        </ul>
+        <ul class="breadcrumb-list responsive">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">...</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId"
+                asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
+            </li>
+            <li class="breadcrumb-item active">Добавяне</li>
         </ul>
     }
     else

@@ -731,7 +731,7 @@ td.queen-red {
   padding: 8px;
 }
 
-.harvests-data p {
+.harvests-data .empty-content {
   text-align: center;
   padding: 8px;
   border: 1px solid var(--lightgray);

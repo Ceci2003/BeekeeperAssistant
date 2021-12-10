@@ -177,8 +177,15 @@
     align-items: center;
     align-content: space-between;
   }
+
+  .form-box form .input-group {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    caret-color: var(--orange);
+    margin-bottom: 10px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-  
 }

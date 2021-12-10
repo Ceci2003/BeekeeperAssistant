@@ -717,7 +717,7 @@ td.queen-red {
 
 .table-sdate,
 .table-amount {
-  width: 150px;
+  /* width: 150px; */
   text-align: center;
 }
 

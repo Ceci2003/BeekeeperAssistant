@@ -800,7 +800,7 @@
                                                     <i class="fas fa-times"></i>
                                                 </a>
                                                 <p>
-                                                    Сигурни ли сте че искате да изтриете преглед от 
+                                                    Сигурни ли сте че искате да изтриете третиране от 
                                                     <strong>@treatment.DateOfTreatment.ToString("ddd dd-MMM-yyyy")</strong>?
                                                 </p>
                                                 <button type="submit" class="delete">
@@ -809,12 +809,6 @@
                                             </form>
                                             <div id="@treatment.Id-back" class="content-cover" onclick="HideDeleteForm('@treatment.Id-treatment')"></div>
                                         </div>
-                                        <form id="form-@treatment.Id" asp-controller="Treatment" asp-action="Delete"
-                                        asp-route-id="@treatment.Id" asp-route-beehiveId="@Model.Id">
-                                            <button type="submit" class="delete">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
-                                        </form>
                                     }
                                     else
                                     {
@@ -993,7 +987,7 @@
                     </a>
                 </div>
             }
-            <table>
+            <table class="all-table">
                 <thead>
                     <th>Име</th>
                     <th class="table-sdate">Дата</th>
@@ -1032,12 +1026,28 @@
                                         asp-route-beehiveId="@Model.Id">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
-                                        asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
-                                            <button type="submit" class="delete">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
-                                        </form>
+                                        <a class="delete" onclick="ShowDeleteForm('@harvest.Id-harvest')">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+
+                                        <div id="@harvest.Id-harvest" class="delete-form-display">
+                                            <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                            asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                                <a class="delete close"
+                                            onclick="HideDeleteForm('@harvest.Id-harvest')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    Сигурни ли сте че искате да изтриете добив от 
+                                                    <strong>@harvest.DateOfHarves.ToString("ddd dd-MMM-yyyy")</strong>?
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@harvest.Id-back" class="content-cover"
+                                        onclick="HideDeleteForm('@harvest.Id-harvest')"></div>
+                                        </div>
                                     }
                                     else
                                     {
@@ -1056,6 +1066,89 @@
                     }
                 </tbody>
             </table>
+            <div class="all-table-responsive" style="display: none;">
+                <table>
+                    <thead>
+                        <th>Параметър</th>
+                        <th>Стойност</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var harvest in Model.Harvests.AllHarvests)
+                        {
+                            <tr>
+                                <td>Име</td>
+                                <td>
+                                    @harvest.HarvestName
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дата</td>
+                                <td>
+                                    @harvest.DateOfHarves.ToString("ddd dd-MMM-yyyy")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Продукт</td>
+                                <td>
+                                    @Html.DisplayFor(x => harvest.HarvestProductType)
+                                    @if (harvest.HarvestProductType == HarvestProductType.Honey)
+                                    {
+                                        <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Количество</td>
+                                <td>
+                                @harvest.Quantity <span>@Html.DisplayFor(x => harvest.Unit)</span>
+                                </td>
+                            </tr>
+                            <tr class="edit-row">
+                                <td>
+                                    Редактиране
+                                </td>
+                                <td class="edit">
+                                    <div class="edit-container">
+                                        @if (Model.BeehiveAccess == Access.ReadWrite)
+                                        {
+                                            <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                            asp-route-beehiveId="@Model.Id">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            <a class="delete" onclick="ShowDeleteForm('@harvest.Id-harvest-responsive')">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+
+                                            <div id="@harvest.Id-harvest-responsive" class="delete-form-display">
+                                                <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                                asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                                    <a class="delete close"
+                                                onclick="HideDeleteForm('@harvest.Id-harvest-responsive')">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                    <p>
+                                                        Сигурни ли сте че искате да изтриете добив от 
+                                                        <strong>@harvest.DateOfHarves.ToString("ddd dd-MMM-yyyy")</strong>?
+                                                    </p>
+                                                    <button type="submit" class="delete">
+                                                        Изтрий <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                                <div id="@harvest.Id-back" class="content-cover"
+                                            onclick="HideDeleteForm('@harvest.Id-harvest-responsive')"></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            @onlyReadMsg
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             @if (!Model.Harvests.AllHarvests.Any())
             {
                 <p>няма добавени добиви</p>

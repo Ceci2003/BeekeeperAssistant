@@ -25,6 +25,18 @@ li {
   padding: 60px 50px 25px 50px;
 }
 
+.content.center {
+  position: fixed;
+  bottom: 0;
+  top: 40px;
+  left: 270px;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 p::selection,
 a::selection,
 h1::selection,
@@ -1350,22 +1362,6 @@ textarea {
 }
 
 /* Feedback cards */
-.content.center {
-  position: fixed;
-  bottom: 0;
-  top: 0;
-  left: 270px;
-  right: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.content.center .dashboard-cards-list {
-
-}
-
 .feedback-content-card {
   height: 100px;
   border: 1px solid var(--lightgray);

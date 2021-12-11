@@ -92,6 +92,26 @@
     color: var(--white);
   }
 
+  /* Sidebar */
+  .sidebar-navigation {
+    position: fixed;
+    top: 40px;
+    z-index: 1;
+  }
+
+  .sidebar-navigation .sidebar-breadcrumb {
+    display: none;
+  }
+
+  .sidebar-navigation .user-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--white);
+    margin: 0 0 50px 0;
+  }
+
   .aside-content-cover {
     display: none;
     background: #11040087;
@@ -100,6 +120,7 @@
     position: fixed;
     top: 40px;
     left: 270px;
+    z-index: 1;
   }
 
   .breadcrumb .aside-icon i {

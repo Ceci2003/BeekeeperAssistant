@@ -10,6 +10,10 @@
         {
             ViewData["Title"] = "Поискай помощ";
         }
+        else if (ViewData["FeedbackType"].ToString() == FeedbackType.Report.ToString())
+        {
+            ViewData["Title"] = "Докладвай грешка";
+        }
         else
         {
             ViewData["Title"] = "Помощ и отзиви";

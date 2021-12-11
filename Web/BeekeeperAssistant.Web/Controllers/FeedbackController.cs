@@ -1,5 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
@@ -7,7 +9,6 @@
     using BeekeeperAssistant.Web.ViewModels.Feedbacks;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class FeedbackController : Controller
     {

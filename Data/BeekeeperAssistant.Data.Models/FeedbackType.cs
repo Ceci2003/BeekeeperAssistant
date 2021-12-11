@@ -8,5 +8,7 @@
         Help = 1,
         [Display(Name = "Отзив")]
         Feedback = 2,
+        [Display(Name = "Забелязан проблем")]
+        Report = 2,
     }
 }

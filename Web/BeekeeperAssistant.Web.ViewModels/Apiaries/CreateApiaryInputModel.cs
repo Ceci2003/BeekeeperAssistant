@@ -15,7 +15,7 @@
         [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
-        [Display(Name = "Код на населеното място")]
+        [Display(Name = "Пощенски код")]
         public string CityCode { get; set; }
 
         [Required(ErrorMessage = GlobalConstants.FarmNumberRequiredErrorMessage)]

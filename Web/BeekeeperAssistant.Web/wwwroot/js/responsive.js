@@ -1,5 +1,4 @@
 ﻿var screenWidth = screen.width;
-    console.log();
 
 var allTable = document.querySelectorAll('.all-table');
 var allResponsiveTable = document.querySelectorAll('.all-table-responsive');
@@ -18,7 +17,6 @@ if (screenWidth <= 1023) {
         breadcrumbListResponsive.style.display = 'flex';
     }
 }
-
 if (screenWidth <= 767) {
 
     // style tab links
@@ -42,3 +40,8 @@ if (screenWidth <= 767) {
         }
     }
 }
+
+// this is for feature responsive updates
+// window.onresize = function (){
+    //responsive updates here
+// }

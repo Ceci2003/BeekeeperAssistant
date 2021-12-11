@@ -35,6 +35,7 @@ li {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 p::selection,
@@ -958,6 +959,30 @@ textarea {
   margin-top: 5px;
 }
 
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.feedback-icon {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.feedback-icon i.help {
+  color: var(--blue-hover);
+}
+
+.feedback-icon i.feed {
+  color: var(--orange);
+}
+
+.feedback-icon i.report {
+  color: var(--red-hover);
+}
+
 /* Form sections animation */
 .open-section {
   background-color: var(--white);
@@ -1388,20 +1413,20 @@ textarea {
   background-color: var(--blue-hover);
 }
 
-.feedback-content-card a.idea {
+.feedback-content-card a.feed {
   color: var(--orange);
 }
 
-.feedback-content-card a.idea:hover {
+.feedback-content-card a.feed:hover {
   color: var(--white);
   background-color: var(--orange);
 }
 
-.feedback-content-card a.err {
+.feedback-content-card a.report {
   color: var(--red-hover);
 }
 
-.feedback-content-card a.err:hover {
+.feedback-content-card a.report:hover {
   color: var(--white);
   background-color: var(--red-hover);
 }

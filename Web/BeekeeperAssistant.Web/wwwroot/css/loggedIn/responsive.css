@@ -139,14 +139,6 @@
     margin: 0;
   }
 
-  /* .breadcrumb .breadcrumb-list {
-    display: none;
-  }
-
-  .breadcrumb .breadcrumb-list.responsive {
-    display: flex;
-  } */
-
   .title-1 {
     font-size: 26px;
   }
@@ -207,12 +199,36 @@
     align-content: space-between;
   }
 
+  /* All create and edit forms */
+  .form-box form .group-box .input-group {
+    width: 100%;
+    margin-top: 5px;
+  }
+
   .form-box form .input-group {
     display: flex;
     width: 100%;
     flex-direction: column;
     caret-color: var(--orange);
     margin-bottom: 10px;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-group input {
+    margin-bottom: 15px;
+  }
+
+  .btn-group input:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Apiary forms */
+  .input-apiary-number .input-group {
+    width: 45% !important;
   }
 }
 

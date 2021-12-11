@@ -1,48 +1,110 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Feedbacks.CreateFeedbackInputModel
 @{
+    ViewData["Title"] = "Помощ и отзиви";
+    string shortName = "";
+    string submitClass = "beehive-create";
+    string feedbackIcon = "far fa-question-circle";
+    string feedbackIconType = "help";
     if (ViewData["FeedbackType"] != null)
     {
         if (ViewData["FeedbackType"].ToString() == FeedbackType.Feedback.ToString())
         {
-            ViewData["Title"] = "Създай отзив";
+            ViewData["Title"] = "Изпрати отзив";
+            shortName = "Отзив";
+            submitClass = "beehive-create";
+            feedbackIcon = "far fa-lightbulb hover-show";
+            feedbackIconType = "feed";
         }
         else if (ViewData["FeedbackType"].ToString() == FeedbackType.Help.ToString())
         {
             ViewData["Title"] = "Поискай помощ";
+            shortName = "Помощ";
+            submitClass = "apiary";
+            feedbackIcon = "far fa-question-circle";
+            feedbackIconType = "help";
         }
         else if (ViewData["FeedbackType"].ToString() == FeedbackType.Report.ToString())
         {
             ViewData["Title"] = "Докладвай грешка";
-        }
-        else
-        {
-            ViewData["Title"] = "Помощ и отзиви";
+            shortName = "Доклад";
+            submitClass = "queen";
+            feedbackIcon = "fas fa-exclamation-triangle";
+            feedbackIconType = "report";
         }
     }
 }
-<form method="post">
-    <a class="back-arrow" asp-controller="Feedback" asp-action="Index">
-        <i class="fas fa-arrow-left"></i>
-    </a>
-    <h2>@ViewData["Title"]</h2>
-    <div asp-validation-summary="All"></div>
-    @if (ViewData["FeedbackType"] == null)
-    {
-        <div>
-            <label asp-for="FeedbackType"></label>
-            <select asp-for="FeedbackType" asp-items="Html.GetEnumSelectList<FeedbackType>()"></select>
-            <span asp-validation-for="FeedbackType"></span>
-        </div>
-    }
-    <div>
-        <label asp-for="Title"></label>
-        <input asp-for="Title" />
-        <span asp-validation-for="Title"></span>
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
     </div>
-    <div>
-        <label asp-for="Body"></label>
-        <textarea asp-for="Body"></textarea>
-        <span asp-validation-for="Body"></span>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Feedback" asp-action="Index">Помощ и отзиви</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Feedback" asp-action="Index">Помощ и отзиви</a>
+        </li>
+        <li class="breadcrumb-item active">@shortName</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
     </div>
-    <input type="submit" value="Изпрати" />
-</form>
+</div>
+
+
+
+<div class="content">
+    <div class="form-box">
+        <form asp-controller="Feedback" asp-action="Create" method="post">
+            <a class="back-arrow" asp-controller="Feedback" asp-action="Index">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="feedback-icon">
+                <i class="@feedbackIcon @feedbackIconType"></i>
+            </div>
+            <h2>@ViewData["Title"]</h2>
+            @* <div class="error-msg" asp-validation-summary="All"></div> *@
+
+            @if (ViewData["FeedbackType"] == null)
+            {
+                <div class="input-group max">
+                    <div class="input-group">
+                        <label asp-for="FeedbackType"></label>
+                        <select asp-for="FeedbackType" asp-items="Html.GetEnumSelectList<FeedbackType>()"></select>
+                        <span asp-validation-for="FeedbackType"></span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <input asp-for="FeedbackType" type="hidden" />
+            }
+            <div class="input-group max">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="input-group max">
+                <label asp-for="Body" class="field-required"></label>
+                <textarea asp-for="Body" cols="30" rows="10"></textarea>
+                <span asp-validation-for="Body"></span>
+            </div>
+            <div class="btn-group">
+                <input class="btn @submitClass" type="submit" value="@this.ViewData["Title"]" />
+            </div>
+        </form>
+    </div>
+</div>

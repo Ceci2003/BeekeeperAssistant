@@ -9,6 +9,6 @@
         [Display(Name = "Отзив")]
         Feedback = 2,
         [Display(Name = "Забелязан проблем")]
-        Report = 2,
+        Report = 3,
     }
 }

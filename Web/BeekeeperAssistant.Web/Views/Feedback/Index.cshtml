@@ -28,20 +28,20 @@
             <a class="help" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Help">
                 <i class="far fa-question-circle hover-show"></i>
                 <i class="fas fa-question-circle hover-hide"></i>
-                <p>Нуждаете се от помощ</p>
+                <p>Нуждаете се от помощ?</p>
             </a>
         </div>
         <div class="feedback-content-card">
-            <a class="idea" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">
+            <a class="feed" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">
                 <i class="far fa-lightbulb hover-show"></i>
                 <i class="fas fa-lightbulb hover-hide"></i>
-                <p>Имате идея! Слушаме ви</p>
+                <p>Имате идея? Слушаме ви!</p>
             </a>
         </div>
         <div class="feedback-content-card">
-            <a class="err" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">
+            <a class="report" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Report">
                 <i class="fas fa-exclamation-triangle"></i>
-                <p>Забелязали сте проблем</p>
+                <p>Забелязали сте проблем?</p>
             </a>
         </div>
     </div>

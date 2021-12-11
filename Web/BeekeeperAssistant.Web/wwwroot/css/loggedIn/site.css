@@ -1349,6 +1349,84 @@ textarea {
   font-size: 30px;
 }
 
+/* Feedback cards */
+.content.center {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 270px;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.content.center .dashboard-cards-list {
+
+}
+
+.feedback-content-card {
+  height: 100px;
+  border: 1px solid var(--lightgray);
+  max-width: 190px;
+  display: flex;
+  margin: 30px;
+}
+
+.feedback-content-card a {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.feedback-content-card a.help {
+  color: var(--blue-hover);
+}
+
+.feedback-content-card a.help:hover {
+  color: var(--white);
+  background-color: var(--blue-hover);
+}
+
+.feedback-content-card a.idea {
+  color: var(--orange);
+}
+
+.feedback-content-card a.idea:hover {
+  color: var(--white);
+  background-color: var(--orange);
+}
+
+.feedback-content-card a.err {
+  color: var(--red-hover);
+}
+
+.feedback-content-card a.err:hover {
+  color: var(--white);
+  background-color: var(--red-hover);
+}
+
+.feedback-content-card a i {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.feedback-content-card a i.hover-hide {
+  display: none;
+}
+
+.feedback-content-card a:hover i.hover-hide {
+  display: block;
+}
+
+.feedback-content-card a:hover i.hover-show {
+  display: none;
+}
+
 /* Breadcrumb */
 
 .breadcrumb {

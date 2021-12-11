@@ -6,6 +6,9 @@
 }
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
@@ -14,6 +17,15 @@
             <a asp-controller="Beehive" asp-action="All">Кошери - всички</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Beehive" asp-action="All">Кошери</a>
+        </li>
+        <li class="breadcrumb-item active">Редактиране</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"

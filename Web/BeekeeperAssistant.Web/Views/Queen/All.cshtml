@@ -4,11 +4,20 @@
 }
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">Майки</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
@@ -20,7 +29,7 @@
 
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
-    <table class="data-table">
+    <table class="data-table all-table">
         <thead>
             <tr>
                 <th>Цвят</th>
@@ -45,30 +54,132 @@
                     </td>
                     <td class="number">
                         <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
-                           asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
+                        asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
                     </td>
 
                     <td>@queen.Origin</td>
                     <td>@Html.DisplayFor(x => queen.Breed)</td>
                     <td class="edit">
-                        <div>
+                        <div class="edit-container">
                             <a class="mark" asp-controller="Queen" asp-action="Bookmark" asp-route-id="@queen.Id">
                                 <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id" asp-route-beehiveId="@queen.BeehiveId">
+                            <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
+                            asp-route-beehiveId="@queen.BeehiveId">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete" asp-route-id="@queen.Id">
-                                <button type="submit" class="delete">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </form>
+                            <a class="delete" onclick="ShowDeleteForm('@queen.Id')">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+
+                            <div id="@queen.Id" class="delete-form-display">
+                                <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete"
+                                asp-route-id="@queen.Id">
+                                    <a class="delete close" onclick="HideDeleteForm('@queen.Id')">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                    <p>
+                                        Сигурни ли сте че искате да изтриете майката от кошер
+                                        <strong>№@queen.BeehiveNumber</strong>
+                                        в пчелин <strong>@queen.BeehiveApiaryNumber</strong>?
+                                    </p>
+
+                                    <button type="submit" class="delete">
+                                        Изтрий <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                                <div class="content-cover" onclick="HideDeleteForm('@queen.Id')"></div>
+                            </div>
                         </div>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <div class="all-table-responsive" style="display: none;">
+        <table>
+            <thead>
+                <th>Параметър</th>
+                <th>Стойност</th>
+            </thead>
+            <tbody>
+                @foreach (var queen in Model.AllQueens)
+                {
+                    <tr>
+                        <td>Цвят</td>
+                        <td class="queen-@queen.Color.ToString().ToLower()">
+                            @Html.DisplayFor(q => queen.Color)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дата на придаване</td>
+                        <td>
+                            @queen.GivingDate.ToString("ddd dd-MMM-yyyy")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Номер на пчелин</td>
+                        <td class="number">
+                            <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
+                            asp-route-tabPage="Queen">
+                                @queen.BeehiveNumber
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Номер на кошер</td>
+                        <td class="number">
+                            <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Произход</td>
+                        <td>@queen.Origin</td>
+                    </tr>
+                    <tr>
+                        <td>Порода</td>
+                        <td>@Html.DisplayFor(x => queen.Breed)</td>
+                    </tr>
+                    <tr class="edit-row">
+                        <td>Редактиране</td>
+                        <td class="edit">
+                            <div class="edit-container">
+                                <a class="mark" asp-controller="Queen" asp-action="Bookmark" asp-route-id="@queen.Id">
+                                    <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
+                                </a>
+                                <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
+                                asp-route-beehiveId="@queen.BeehiveId">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a class="delete" onclick="ShowDeleteForm('@queen.Id-responsive')">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+
+                                <div id="@queen.Id-responsive" class="delete-form-display">
+                                    <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete"
+                                    asp-route-id="@queen.Id">
+                                        <a class="delete close" onclick="HideDeleteForm('@queen.Id-responsive')">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <p>
+                                            Сигурни ли сте че искате да изтриете майката от кошер
+                                            <strong>№@queen.BeehiveNumber</strong>
+                                            в пчелин <strong>@queen.BeehiveApiaryNumber</strong>?
+                                        </p>
+
+                                        <button type="submit" class="delete">
+                                            Изтрий <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                    <div class="content-cover" onclick="HideDeleteForm('@queen.Id-responsive')"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
     @if (!Model.AllQueens.Any())
     {
         <p class="empty-row">няма добавени майки</p>

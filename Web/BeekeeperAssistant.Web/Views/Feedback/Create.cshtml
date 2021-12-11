@@ -10,9 +10,17 @@
         {
             ViewData["Title"] = "Поискай помощ";
         }
+        else
+        {
+            ViewData["Title"] = "Помощ и отзиви";
+        }
     }
 }
 <form method="post">
+    <a class="back-arrow" asp-controller="Feedback" asp-action="Index">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <h2>@ViewData["Title"]</h2>
     <div asp-validation-summary="All"></div>
     @if (ViewData["FeedbackType"] == null)
     {
@@ -29,7 +37,7 @@
     </div>
     <div>
         <label asp-for="Body"></label>
-        <textarea asp-for="Body" ></textarea>
+        <textarea asp-for="Body"></textarea>
         <span asp-validation-for="Body"></span>
     </div>
     <input type="submit" value="Изпрати" />

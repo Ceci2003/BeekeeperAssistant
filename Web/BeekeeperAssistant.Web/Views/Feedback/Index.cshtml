@@ -1,12 +1,48 @@
-﻿@{ 
+﻿@{
     ViewData["Title"] = "Помощ и отзиви";
 }
 
-<div>
-    <div>
-        <a asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Help">Помощ</a>
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
     </div>
-    <div>
-        <a asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">Напиши отзив</a>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content center">
+    @* <partial name="_StatusMessagePartial" /> *@
+
+    <div class="dashboard-cards-list">
+        <div class="feedback-content-card">
+            <a class="help" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Help">
+                <i class="far fa-question-circle hover-show"></i>
+                <i class="fas fa-question-circle hover-hide"></i>
+                <p>Нуждаете се от помощ</p>
+            </a>
+        </div>
+        <div class="feedback-content-card">
+            <a class="idea" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">
+                <i class="far fa-lightbulb hover-show"></i>
+                <i class="fas fa-lightbulb hover-hide"></i>
+                <p>Имате идея! Слушаме ви</p>
+            </a>
+        </div>
+        <div class="feedback-content-card">
+            <a class="err" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Забелязали сте проблем</p>
+            </a>
+        </div>
     </div>
 </div>

@@ -76,6 +76,10 @@
     padding: 60px 25px 25px 25px;
   }
 
+  .content.center {
+    left: 0;
+  }
+
   .breadcrumb {
     display: flex;
     flex-flow: row;
@@ -121,6 +125,10 @@
   .breadcrumb .breadcrumb-list.responsive {
     display: flex;
   } */
+
+  .title-1 {
+    font-size: 26px;
+  }
 
   .tab-title.title-1 {
     font-size: 22px;

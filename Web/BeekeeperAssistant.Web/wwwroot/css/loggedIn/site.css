@@ -229,6 +229,12 @@ button::selection {
   color: var(--white);
 }
 
+/* Version control */
+.sidebar-navigation .version-control {
+  color: var(--white);
+  padding-left: 10px;
+}
+
 /* Combined */
 
 .title-0 {

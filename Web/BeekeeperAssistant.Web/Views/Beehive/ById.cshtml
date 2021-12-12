@@ -177,11 +177,11 @@
                         @onlyReadMsg
                     }
 
-                    @if (Model.Creator.UserName == this.User.Identity.Name && Model.HasHelpers)
+                    @* @if (Model.Creator.UserName == this.User.Identity.Name && Model.HasHelpers)
                     {
                         <a class="btn apiary-create" asp-controller="BeehiveHelper" asp-action="All"
                         asp-route-id="@Model.Id">Всички помощници</a>
-                    }
+                    } *@
                 </div>
             </div>
         </div>
@@ -243,11 +243,11 @@
                     {
                         @onlyReadMsg
                     }
-                    @if (Model.Queen.User.UserName == this.User.Identity.Name && Model.HasHelpers)
+                    @* @if (Model.Queen.User.UserName == this.User.Identity.Name && Model.HasHelpers)
                     {
                         <a class="btn apiary-create" asp-controller="QueenHelper" asp-action="All"
                     asp-route-id="@Model.QueenId">Всички помощници</a>
-                    }
+                    } *@
                 </div>
             }
             else

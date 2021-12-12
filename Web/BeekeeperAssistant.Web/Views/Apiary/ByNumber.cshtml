@@ -102,7 +102,7 @@
                         </form>
                     }
 
-                    @if (Model.Creator.UserName == this.User.Identity.Name)
+                    @* @if (Model.Creator.UserName == this.User.Identity.Name)
                     {
                         <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add"
                         asp-route-id="@Model.Id">Добави помощник</a>
@@ -112,7 +112,7 @@
                             <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All"
                         asp-route-id="@Model.Id">Всички помощници</a>
                         }
-                    }
+                    } *@
 
                 </div>
             </div>

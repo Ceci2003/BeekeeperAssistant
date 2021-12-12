@@ -143,4 +143,10 @@
   .app-benefits-cards-list .card .card-inner .back-page {
     box-shadow: 10px 13px #ff780026;
   }
+
+  .footer-content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }

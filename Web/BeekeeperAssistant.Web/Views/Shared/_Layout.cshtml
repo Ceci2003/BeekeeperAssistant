@@ -8,7 +8,7 @@
     <link rel="icon" src="/BeekeeperAssistant.Web/wwwroot/images/BA_demoLogo.ico" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 
     <environment names="Development">
         <link rel="stylesheet" href="~/css/loggedOut/site.css" asp-append-version="true" />
@@ -44,8 +44,16 @@
             <div class="footer-social">
                 <h1>Социални мрежи</h1>
                 <ul>
-                    <li><a href="#"><i class="fab fa-facebook" target="popup"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram" target="popup"></i></a></li>
+                    <li>
+                        <a href="https://www.facebook.com/BeekeeperAssistant-103264928862989" target="popup">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-instagram" target="popup"></i>
+                        </a>
+                    </li>
                     <li>
                         <a href="https://github.com/Ceci2003/BeekeeperAssistant" target="popup">
                             <i class="fab fa-github"></i>
@@ -60,7 +68,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
-            asp-append-version="true"></script>
+        asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)

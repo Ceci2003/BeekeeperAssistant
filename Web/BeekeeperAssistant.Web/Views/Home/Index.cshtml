@@ -20,55 +20,134 @@
             <p>Дневникът на съвременния пчелар</p>
         </div>
     </div>
-    <div class="app-benefits-cards">
+    @* <div class="app-benefits-cards">
         <h1>Ползи на @GlobalConstants.SystemName</h1>
         <hr>
         <div class="app-benefits-cards-collection">
-            <div class="app-benefits-card">
-                <div class="app-benefits-card-inner">
-                    <div class="app-benefits-card-front">
-                        <div class="app-benefits-card-body">
-                            <i class="fas fa-laptop-house"></i>
-                            <h3>лесен за работа</h3>
-                        </div>
+        <div class="app-benefits-card">
+        <div class="app-benefits-card-inner">
+        <div class="app-benefits-card-front">
+        <div class="app-benefits-card-body">
+        <i class="fas fa-laptop-house"></i>
+        <h3>лесен за работа</h3>
+        </div>
+        </div>
+        <div class="app-benefits-card-back">
+        <div class="app-benefits-card-body">
+        <h3>лесен за работа</h3>
+        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="app-benefits-card">
+        <div class="app-benefits-card-inner">
+        <div class="app-benefits-card-front">
+        <div class="app-benefits-card-body">
+        <i class="fas fa-clipboard-check"></i>
+        <h3>лесен за работа</h3>
+        </div>
+        </div>
+        <div class="app-benefits-card-back">
+        <div class="app-benefits-card-body">
+        <h3>лесен за работа</h3>
+        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="app-benefits-card">
+        <div class="app-benefits-card-inner">
+        <div class="app-benefits-card-front">
+        <div class="app-benefits-card-body">
+        <i class="fas fa-info-circle"></i>
+        <h3>лесен за работа</h3>
+        </div>
+        </div>
+        <div class="app-benefits-card-back">
+        <div class="app-benefits-card-body">
+        <h3>лесен за работа</h3>
+        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div> *@
+
+    <div class="app-benefits-cards">
+        @* <h1>Възможности които предоставя</h1> *@
+        <p class="quote">
+            <span class="quotes">„</span>Пчеларите се грижат за една от основните животоподдържащи системи на планетата - пчелите<span class="quotes">“</span> 
+            <br>
+            <i class="author">- от създателите</i>
+            </p>
+        <p class="author"></p>
+        <p class="after-quote">Затова възможностите които получавате са:</p>
+
+        <div class="app-benefits-cards-list">
+            <div class="card">
+                <div class="card-inner queen">
+                    <div class="front-page">
+                        <img src="~/img/bee-wheat.svg" alt="" width="50px">
+                        <h3>Майки</h3>
                     </div>
-                    <div class="app-benefits-card-back">
-                        <div class="app-benefits-card-body">
-                            <h3>лесен за работа</h3>
-                            <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
-                        </div>
+                    <div class="back-page">
+                        <img src="~/img/bee-wheat.svg" alt="" width="50px">
+                        <h3>Майки</h3>
+                        <p>Информация за всички придадени пчелни майки, по кошери, цветове и години.</p>
                     </div>
                 </div>
             </div>
-            <div class="app-benefits-card">
-                <div class="app-benefits-card-inner">
-                    <div class="app-benefits-card-front">
-                        <div class="app-benefits-card-body">
-                            <i class="fas fa-clipboard-check"></i>
-                            <h3>лесен за работа</h3>
-                        </div>
+            <div class="card">
+                <div class="card-inner helper">
+                    <div class="front-page">
+                        <img src="~/img/helper-wheat.svg" alt="" width="50px">
+                        <h3>Помощници</h3>
                     </div>
-                    <div class="app-benefits-card-back">
-                        <div class="app-benefits-card-body">
-                            <h3>лесен за работа</h3>
-                            <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
-                        </div>
+                    <div class="back-page">
+                        <img src="~/img/helper-wheat.svg" alt="" width="50px">
+                        <h3>Помощници</h3>
+                        <p>Kъм всеки пчелин могат да се добавят помощници, с различни права на достъп.</p>
                     </div>
                 </div>
             </div>
-            <div class="app-benefits-card">
-                <div class="app-benefits-card-inner">
-                    <div class="app-benefits-card-front">
-                        <div class="app-benefits-card-body">
-                            <i class="fas fa-info-circle"></i>
-                            <h3>лесен за работа</h3>
-                        </div>
+            <div class="card">
+                <div class="card-inner qr">
+                    <div class="front-page">
+                        <img src="~/img/qr-wheat.svg" alt="" width="50px">
+                        <h3>QR код</h3>
                     </div>
-                    <div class="app-benefits-card-back">
-                        <div class="app-benefits-card-body">
-                            <h3>лесен за работа</h3>
-                            <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
-                        </div>
+                    <div class="back-page">
+                        <img src="~/img/qr-wheat.svg" alt="" width="50px">
+                        <h3>QR код</h3>
+                        <p>Уникален qr код за всеки пчелин и кошер, улесняващ достъпа до тях.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner apiary">
+                    <div class="front-page">
+                        <img src="~/img/apiary-wheat.svg" alt="" height="30px">
+                        <h3>Пчелини</h3>
+                    </div>
+                    <div class="back-page">
+                        <img src="~/img/apiary-wheat.svg" alt="" height="30px">
+                        <h3>Пчелини</h3>
+                        <p>Извежда списък със създадените пчелини на потребителя, достъп до информацията и кошерите на всеки пчелин.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-inner beehive">
+                    <div class="front-page">
+                        <img src="~/img/beehive-wheat.svg" alt="" height="50px">
+                        <h3>Кошери</h3>
+                    </div>
+                    <div class="back-page">
+                        <img src="~/img/beehive-wheat.svg" alt="" height="50px">
+                        <h3>Кошери</h3>
+                        <p>Списък с кошерите, групирани по пчелини и достъп до информацията за тях. Възможно е добавяне на прегледи, третирания и добиви.</p>
                     </div>
                 </div>
             </div>
@@ -86,7 +165,7 @@ else
         </ul>
         <div class="breadcrumb-leave">
             <form asp-area="Identity" asp-page="/Account/Logout"
-                  asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
                 <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
             </form>
         </div>
@@ -206,7 +285,7 @@ else
                         {
                             <div class="legend-row">
                                 <div class="legend-color"
-                                     style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.ApiariesCountByType[ac]
                                 </div>
                                 <div class="legend-value">@Html.DisplayFor(x => ac)</div>
@@ -236,7 +315,7 @@ else
                         {
                             <div class="legend-row">
                                 <div class="legend-color"
-                                     style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.BeehivesCountByPower[bc]
                                 </div>
                                 <div class="legend-value">@Html.DisplayFor(x => bc)</div>
@@ -266,7 +345,7 @@ else
                         {
                             <div class="legend-row">
                                 <div class="legend-color"
-                                     style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                     @Model.QueensCountByGivingDate[bc]
                                 </div>
                                 @if (bc == 0)

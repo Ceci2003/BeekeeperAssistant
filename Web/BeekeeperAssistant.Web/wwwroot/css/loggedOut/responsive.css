@@ -133,4 +133,14 @@
   .about-page .iframe-container iframe {
     width: 100%;
   }
+
+  .app-benefits-cards-list .card {
+    min-width: 200px;
+    height: 280px;
+  }
+
+  .app-benefits-cards-list .card .card-inner .front-page,
+  .app-benefits-cards-list .card .card-inner .back-page {
+    box-shadow: 10px 13px #ff780026;
+  }
 }

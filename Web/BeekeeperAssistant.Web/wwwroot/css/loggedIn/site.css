@@ -174,8 +174,7 @@ button::selection {
 
 .sidebar-navigation .navigations {
   overflow-y: scroll;
-  height: 300px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   padding: 0 4px;
 }
 
@@ -231,8 +230,13 @@ button::selection {
 
 /* Version control */
 .sidebar-navigation .version-control {
-  color: var(--white);
-  padding-left: 10px;
+  /* color: var(--white);
+  padding-left: 10px; */
+
+  color: #ffffff70;
+  position: fixed;
+  top: 50px;
+  left: 10px;
 }
 
 /* Combined */

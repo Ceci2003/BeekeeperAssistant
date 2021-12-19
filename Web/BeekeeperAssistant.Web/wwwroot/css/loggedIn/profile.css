@@ -86,55 +86,133 @@
   padding-left: 10px;
 }
 
-.profile-settings form {
-  
-}
-
 /* buttons design */
 .btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
 }
 
 .btn-info:hover {
-    color: #fff;
-    background-color: #138496;
-    border-color: #117a8b;
+  color: #fff;
+  background-color: #138496;
+  border-color: #117a8b;
 }
 
 .btn-warning {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
 }
 
 .btn-warning:hover {
-    color: #212529;
-    background-color: #e0a800;
-    border-color: #d39e00;
+  color: #212529;
+  background-color: #e0a800;
+  border-color: #d39e00;
 }
 
 .btn-success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
 .btn-success:hover {
-    color: #fff;
-    background-color: #218838;
-    border-color: #1e7e34;
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
 }
 
 .btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
 .btn-danger:hover {
-    color: #fff;
-    background-color: #c82333;
-    border-color: #bd2130;
+  color: #fff;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+@media only screen and (max-width: 767px) {
+  .profile-content {
+    padding: 60px 25px 25px 25px;
+  }
+
+  .profile-settings-nav {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .profile-nav {
+    width: 100%;
+    border: none;
+  }
+
+  .profile-nav ul {
+    display: flex;
+  }
+
+  .profile-nav ul li {
+    width: 100%;
+  }
+
+  .profile-nav ul a {
+    font-size: 14px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    
+    color: var(--black);
+    border-left: 3px solid var(--transparent);
+    border-right: 3px solid var(--transparent);
+  }
+
+  .profile-nav ul a:hover {
+    color: var(--orange);
+    border-bottom: 3px solid var(--orange);
+    border-left: none;
+    border-right: none;
+  }
+
+  .profile-nav ul a.active {
+    color: var(--orange);
+    font-weight: 600;
+    border-left: 3px solid var(--orange);
+    border-right: 3px solid var(--orange);
+    border-bottom: none;
+  }
+
+  .profile-settings {
+    border-top: 3px solid var(--orange);
+    padding: 10px 0 0 0;
+    width: 100%;
+  }
+
+  .profile-settings h4 {
+    text-align: center;
+  }
+
+  .profile-settings label {
+    margin-bottom: 10px;
+  }
+
+  .profile-settings input {
+    width: 100%;
+  }
+
+  .profile-settings input,
+  .profile-settings button {
+    width: 100%;
+  }
+
+  .profile-settings input {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .profile-settings button {
+    margin-bottom: 10px;
+  }
 }

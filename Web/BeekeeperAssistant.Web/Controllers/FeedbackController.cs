@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class FeedbackController : Controller
+    public class FeedbackController : BaseController
     {
         private readonly IEnumerationMethodsService enumerationMethodsService;
         private readonly IFeedbackService feedbackService;

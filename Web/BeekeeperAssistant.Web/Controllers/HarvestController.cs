@@ -50,7 +50,6 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         public IActionResult ById(int id)
         {
             var viewModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
@@ -63,7 +62,6 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         public async Task<IActionResult> Create(int? beehiveId)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -91,7 +89,6 @@
             return this.View(inputModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Create(CreateHarvestInputModel inputModel)
         {

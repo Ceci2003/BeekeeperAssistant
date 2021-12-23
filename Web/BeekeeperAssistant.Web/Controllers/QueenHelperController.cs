@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class QueenHelperController : Controller
+    public class QueenHelperController : BaseController
     {
         private readonly IQueenHelperService queenHelperService;
         private readonly IBeehiveService beehiveService;

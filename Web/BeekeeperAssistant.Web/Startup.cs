@@ -16,6 +16,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Services.Messaging;
     using BeekeeperAssistant.Web.Infrastructure.RouteConstraints;
+    using BeekeeperAssistant.Web.Routes;
     using BeekeeperAssistant.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -133,9 +134,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("apiaryRoute", "Apiary/{apiaryNumber:apiaryNumber}", new { controller = "Apiary", action = "ByNumber" });
-                        endpoints.MapControllerRoute("beehiveRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}", new { controller = "Beehive", action = "ById" });
-                        endpoints.MapControllerRoute("beehiveTreatmentRoute", "Beehive/{apiaryNumber:apiaryNumber}/{beehiveId}#tabPage={tabPage}", new { controller = "Beehive", action = "ById", tabPage = string.Empty });
+                        endpoints.ConfigureBeekeeperAssistantRoutes();
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

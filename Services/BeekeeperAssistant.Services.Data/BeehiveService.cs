@@ -163,23 +163,32 @@
                 .Where(b => b.ApiaryId == apiaryId)
                 .Count();
 
-        public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0, string orderBy = null)
         {
             var query = this.beehiveRepository
                 .All()
-                .OrderByDescending(b => b.IsBookMarked)
-                .ThenBy(b => b.Apiary.Number)
-                .ThenBy(b => b.Number)
                 .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted)
                 .Skip(skip);
+
+            if (orderBy != null)
+            {
+                query = query.OrderBy(b => EF.Property<Beehive>(b, orderBy));
+            }
+            else
+            {
+                query = query
+                .OrderByDescending(b => b.IsBookMarked)
+                .ThenBy(b => b.Apiary.Number)
+                .ThenBy(b => b.Number);
+            }
 
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
             }
 
-            var result = query.To<T>().ToList();
-            return result;
+            var result = query.To<T>().ToQueryString();
+            return query.To<T>().ToList();
         }
 
         public int GetAllUserBeehivesCount(string userId) =>
@@ -274,11 +283,17 @@
                 .To<T>()
                 .ToList();
 
-        public IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0, string orderBy = null)
         {
             var query = this.beehiveRepository
-                .AllWithDeleted()
-                .Where(b => !b.Apiary.IsDeleted)
+                .AllWithDeleted();
+
+            if (orderBy != null)
+            {
+                query = query.OrderBy(b => b.GetType().GetProperty(orderBy).GetValue(b));
+            }
+
+            query = query.Where(b => !b.Apiary.IsDeleted)
                 .Skip(skip);
 
             if (take.HasValue)

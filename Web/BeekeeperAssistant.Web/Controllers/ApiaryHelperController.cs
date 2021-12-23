@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
 
-    public class ApiaryHelperController : Controller
+    public class ApiaryHelperController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;

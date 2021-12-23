@@ -49,6 +49,9 @@
         [Display(Name = "Подвижен ли е")]
         public bool IsItMovable { get; set; }
 
+        [Display(Name = "Продължи с добавянето")]
+        public bool StayOnThePage { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

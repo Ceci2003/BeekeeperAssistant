@@ -145,7 +145,7 @@
         public int GetBeehiveTreatmentsCountByBeehiveId(int beehiveId)
             => this.treatedBeehivesRepository
             .All()
-            .Where(t => t.BeehiveId == beehiveId)
+            .Where(t => t.BeehiveId == beehiveId && !t.Treatment.IsDeleted)
             .Count();
     }
 }

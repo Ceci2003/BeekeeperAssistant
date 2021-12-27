@@ -223,7 +223,7 @@
             inputModel.WeatherHumidity = Convert.ToDouble(inputModel.WeatherHumidityString);
             inputModel.WeatherTemperature = Convert.ToDouble(inputModel.WeatherTemperatureString);
 
-           var beehiveId = await this.inspectionService.EditUserInspectionAsync(id, inputModel);
+            var beehiveId = await this.inspectionService.EditUserInspectionAsync(id, inputModel);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран преглед!";
             return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = beehiveId });

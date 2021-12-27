@@ -330,5 +330,12 @@
             var beehiveNumber = this.beehiveRepository.All().FirstOrDefault(b => b.Id == id).Number;
             return beehiveNumber;
         }
+
+        public int GetBeehiveIdByTreatmentId(int treatmentId)
+        {
+            var treatment = this.treatedBeehiveRepository.All().FirstOrDefault(t => t.TreatmentId == treatmentId);
+
+            return treatment.BeehiveId;
+        }
     }
 }

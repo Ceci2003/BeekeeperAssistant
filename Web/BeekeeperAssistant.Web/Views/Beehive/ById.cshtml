@@ -50,7 +50,7 @@
 <div class="tab">
     <a class="tablinks active" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.Id">
         <i class="fas fa-archive"></i>
-        Кошер №@Model.Number
+        Кошер №@Model.Id
     </a>
     <a class="tablinks" asp-controller="Queen" asp-action="ByBeehiveId" asp-route-id="@Model.Id">
         <i class="fas fa-crown"></i>
@@ -61,11 +61,11 @@
         <i class="far fa-calendar-check"></i>
         Прегледи
     </a>
-    <a class="tablinks">
+    <a class="tablinks " asp-controller="Treatment" asp-action="AllByBeehiveId" asp-route-id="@Model.Id">
         <i class="fas fa-notes-medical"></i>
         Третирания
     </a>
-    <a class="tablinks">
+    <a class="tablinks" asp-controller="Harvest" asp-action="AllByBeehiveId" asp-route-id="@Model.Id">
         <i class="fas fa-box"></i>
         Добиви
     </a>

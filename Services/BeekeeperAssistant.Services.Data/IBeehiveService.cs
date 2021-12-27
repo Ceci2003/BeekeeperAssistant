@@ -65,5 +65,7 @@
         int GetAllBeehivesWithDeletedCount();
 
         int GetBeehiveNumberById(int id);
+
+        int GetBeehiveIdByTreatmentId(int treatmentId);
     }
 }

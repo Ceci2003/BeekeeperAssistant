@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class BeehiveHelperController : Controller
+    public class BeehiveHelperController : BaseController
     {
         private readonly IBeehiveHelperService beehiveHelperService;
         private readonly IBeehiveService beehiveService;

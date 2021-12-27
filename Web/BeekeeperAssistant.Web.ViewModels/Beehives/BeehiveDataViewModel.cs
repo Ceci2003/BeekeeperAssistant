@@ -39,26 +39,9 @@
 
         public string CreatorId { get; set; }
 
-        public int QueenId { get; set; }
-
-        public Queen Queen { get; set; }
-
-        public string TabPage { get; set; }
-
-        public virtual ApplicationUser Creator { get; set; }
+        public int? QueenId { get; set; }
 
         public Access BeehiveAccess { get; set; }
-
-        public Access QueenAccess { get; set; }
-
-        [IgnoreMap]
-        public AllHarvestsViewModel Harvests { get; set; }
-
-        [IgnoreMap]
-        public AllTreatementsViewModel Treatments { get; set; }
-
-        [IgnoreMap]
-        public AllInspectionsViewModel Inspections { get; set; }
 
         public bool HasHelpers { get; set; }
 

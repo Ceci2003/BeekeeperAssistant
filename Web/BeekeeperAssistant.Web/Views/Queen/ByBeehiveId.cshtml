@@ -1,0 +1,125 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Queens.QueenDataViewModel
+@{
+        this.ViewData["Title"] = "Информация за кошер - №" + Model.BeehiveNumber;
+    string imgpath = "queen" + Model.Color + ".png";
+    var onlyReadMsg = "нямате достъп";
+}
+
+<div class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Queen" asp-action="All">Всички Кралици</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="identity" asp-page="/account/logout"
+              asp-route-returnurl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+
+<h1 class="tab-title title-1">Информация за кошер - №@Model.BeehiveNumber</h1>
+<div class="tab">
+    <a class="tablinks" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">
+        <i class="fas fa-archive"></i>
+        Кошер №@Model.BeehiveNumber
+    </a>
+    <a class="tablinks active" asp-controller="Queen" asp-action="ByBeehiveId" asp-route-id="@Model.BeehiveId">
+        <i class="fas fa-crown"></i>
+        Майка
+    </a>
+    <a class="tablinks" asp-controller="Inspection" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
+        <i class="far fa-calendar-check"></i>
+        Прегледи
+    </a>
+    <a class="tablinks">
+        <i class="fas fa-notes-medical"></i>
+        Третирания
+    </a>
+    <a class="tablinks">
+        <i class="fas fa-box"></i>
+        Добиви
+    </a>
+</div>
+
+<div class="tabs-body">
+    <partial name="_StatusMessagePartial" />
+    <div class="tabcontent">
+
+        <div class="queen-preview">
+            @if (Model.HasQueen)
+            {
+                <img src="~/img/queen/@imgpath">
+                <table>
+                    <tr>
+                        <th scope="row">цвят:</th>
+                        <td>@Html.DisplayFor(x => Model.Color)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">датана оплождане:</th>
+                        <td>
+                            <time datetime="@Model.FertilizationDate.ToString("O")"></time>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">дата на придаване:</th>
+                        <td><time datetime="@Model.GivingDate.ToString("O")"></time></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">вид:</th>
+                        <td>@Html.DisplayFor(x => Model.QueenType)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">порода:</th>
+                        <td>@Html.DisplayFor(x => Model.Breed)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">произход:</th>
+                        <td>@Model.Origin</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">нрав:</th>
+                        <td>@Model.Temperament</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">хигиенни навици:</th>
+                        <td>@Model.HygenicHabits</td>
+                    </tr>
+                </table>
+                <div class="data-edit beehive-info">
+                    @if (Model.BeehiveAccess == Access.ReadWrite)
+                    {
+                        <a class="btn edit" asp-controller="queen" asp-action="edit" asp-route-id="@Model.Id"
+                           asp-route-beehiveid="@Model.Id">
+                            редактирайте кралицата
+                        </a>
+                        <form asp-controller="queen" asp-action="delete" asp-route-id="@Model.Id">
+                            <input class="btn delete" type="submit" value="изтрий" />
+                        </form>
+                    }
+                    else
+                    {
+                        @onlyReadMsg
+
+                    }
+
+                </div>
+            }
+            else
+            {
+                <a class="btn queen-create" asp-controller="Queen" asp-action="Create" asp-route-id="@Model.BeehiveId">
+                    <i class="fas fa-crown"></i>
+                    Добави майка
+                </a>
+            }
+        </div>
+
+    </div>
+</div>
+

@@ -25,7 +25,7 @@
 
         int GetUserHelperApiariesCount(string userId);
 
-        Access GetUserApiaryAccess(string userId, int apiaryId);
+        Task<Access> GetUserApiaryAccessAsync(string userId, int apiaryId);
 
         int GetAllApiaryHelpersCount();
 

@@ -324,5 +324,11 @@
                 .AllWithDeleted()
                 .Where(b => !b.Apiary.IsDeleted)
                 .Count();
+
+        public int GetBeehiveNumberById(int id)
+        {
+            var beehiveNumber = this.beehiveRepository.All().FirstOrDefault(b => b.Id == id).Number;
+            return beehiveNumber;
+        }
     }
 }

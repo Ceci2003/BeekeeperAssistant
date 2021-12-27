@@ -40,6 +40,11 @@
             this.excelExportService = excelExportService;
         }
 
+        public IActionResult AllByBeehiveId(int id)
+        {
+            return this.View();
+        }
+
         public async Task<IActionResult> Create(int? id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);

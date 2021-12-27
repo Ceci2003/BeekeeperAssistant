@@ -1,0 +1,245 @@
+﻿@*@{
+
+}
+
+<div id="Harvests" class="tabcontent" style="display: @if(Model.TabPage == "Harvests") {@block}">
+    <div class="harvests-data">
+        @if (Model.BeehiveAccess == Access.ReadWrite)
+        {
+            <div class="page-controls">
+                <a class="export-file excel" asp-controller="Harvest" asp-action="ExportToExcel"
+                   asp-route-id="@Model.Id"><i class="fas fa-file-download"></i> Excel</a>
+                <a class="btn create-data" asp-controller="Harvest" asp-action="Create" asp-route-beehiveId="@Model.Id">
+                    <i class="fas fa-box"></i>
+                    Добави добив
+                </a>
+            </div>
+        }
+        <table class="all-table">
+            <thead>
+            <th>Име</th>
+            <th class="table-sdate">Дата</th>
+            <th>Продукт</th>
+            <th class="table-amount">Количество</th>
+            <th>Редактиране</th>
+            </thead>
+            <tbody>
+                @foreach (var harvest in Model.Harvests.AllHarvests)
+                {
+                    string rowMasterId = "trMasterHarvest" + harvest.Id;
+                    string rowExpandId = "trExpandHarvest" + harvest.Id;
+                    <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
+                        <td>
+                            @harvest.HarvestName
+                        </td>
+                        <td class="table-sdate">
+                            <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => harvest.HarvestProductType)
+                            @if (harvest.HarvestProductType == HarvestProductType.Honey)
+                            {
+                                <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                            }
+                        </td>
+                        <td class="table-amount">
+                            @harvest.Quantity
+                            <span>@Html.DisplayFor(x => harvest.Unit)</span>
+                        </td>
+                        <td class="edit">
+                            <div class="edit-container">
+                                @if (Model.BeehiveAccess == Access.ReadWrite)
+                                {
+                                    <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                       asp-route-beehiveId="@Model.Id">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="delete" onclick="ShowDeleteForm('@harvest.Id-harvest')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+
+                                    <div id="@harvest.Id-harvest" class="delete-form-display">
+                                        <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                              asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                            <a class="delete close"
+                                               onclick="HideDeleteForm('@harvest.Id-harvest')">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                            <p>
+                                                Сигурни ли сте че искате да изтриете добив от
+                                                <strong>@harvest.DateOfHarves.ToString("ddd dd-MMM-yyyy")</strong>?
+                                            </p>
+                                            <button type="submit" class="delete">
+                                                Изтрий <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                        <div id="@harvest.Id-back" class="content-cover"
+                                             onclick="HideDeleteForm('@harvest.Id-harvest')"></div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    @onlyReadMsg
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="@rowExpandId" class="data-table-expand" style="display: none;">
+                        <td colspan="8">
+                            <div class="note">
+                                <strong><i class="far fa-sticky-note"></i> Бележка:</strong> @harvest.Note
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="all-table-responsive" style="display: none;">
+            <table>
+                <thead>
+                <th>Параметър</th>
+                <th>Стойност</th>
+                </thead>
+                <tbody>
+                    @foreach (var harvest in Model.Harvests.AllHarvests)
+                    {
+                        <tr>
+                            <td>Име</td>
+                            <td>
+                                @harvest.HarvestName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Дата</td>
+                            <td>
+                                @harvest.DateOfHarves.ToString("ddd dd-MMM-yyyy")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Продукт</td>
+                            <td>
+                                @Html.DisplayFor(x => harvest.HarvestProductType)
+                                @if (harvest.HarvestProductType == HarvestProductType.Honey)
+                                {
+                                    <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Количество</td>
+                            <td>
+                                @harvest.Quantity <span>@Html.DisplayFor(x => harvest.Unit)</span>
+                            </td>
+                        </tr>
+                        <tr class="edit-row">
+                            <td>
+                                Редактиране
+                            </td>
+                            <td class="edit">
+                                <div class="edit-container">
+                                    @if (Model.BeehiveAccess == Access.ReadWrite)
+                                    {
+                                        <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id"
+                                           asp-route-beehiveId="@Model.Id">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                        <a class="delete" onclick="ShowDeleteForm('@harvest.Id-harvest-responsive')">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+
+                                        <div id="@harvest.Id-harvest-responsive" class="delete-form-display">
+                                            <form id="form-@harvest.Id" asp-controller="Harvest" asp-action="Delete"
+                                                  asp-route-id="@harvest.Id" asp-route-beehiveId="@Model.Id">
+                                                <a class="delete close"
+                                                   onclick="HideDeleteForm('@harvest.Id-harvest-responsive')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    Сигурни ли сте че искате да изтриете добив от
+                                                    <strong>@harvest.DateOfHarves.ToString("ddd dd-MMM-yyyy")</strong>?
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@harvest.Id-back" class="content-cover"
+                                                 onclick="HideDeleteForm('@harvest.Id-harvest-responsive')"></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @onlyReadMsg
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (!Model.Harvests.AllHarvests.Any())
+        {
+            <p class="empty-content">няма добавени добиви</p>
+        }
+    </div>
+
+    <div class="pagination">
+        <ul>
+            @if (this.Model.Harvests.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.Id"
+                       asp-route-tabPage="Harvests" asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
+                       asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
+                       asp-route-pageAllInspections="@(Model.Harvests.CurrentPage)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.Harvests.PagesCount; i++)
+            {
+                @if (i == this.Model.Harvests.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Harvests"
+                           asp-route-beehiveId="@Model.Id" asp-route-pageAllInspections="@Model.Harvests.CurrentPage"
+                           asp-route-pageAllTreatments="@Model.Harvests.CurrentPage" asp-route-pageAllHarvests="@i">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.Harvests.CurrentPage == this.Model.Harvests.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Beehive" asp-action="ById" asp-route-tabPage="Harvests"
+                       asp-route-beehiveId="@Model.Id" asp-route-pageAllTreatments="@(Model.Harvests.CurrentPage)"
+                       asp-route-pageAllHarvests="@(Model.Harvests.CurrentPage + 1)"
+                       asp-route-pageAllInspections="@(this.Model.Harvests.CurrentPage)">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>*@

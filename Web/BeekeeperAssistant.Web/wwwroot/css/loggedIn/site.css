@@ -1638,7 +1638,6 @@ textarea {
 
 /* Style the tab content */
 .tabcontent {
-  display: none;
   padding: 10px;
 }
 

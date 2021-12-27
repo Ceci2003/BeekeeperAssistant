@@ -15,6 +15,6 @@
 
         IEnumerable<T> GetAllQueenByQueenId<T>(int queenId, int? take = null, int skip = 0);
 
-        Access GetUserQueenAccess(string userId, int queenId);
+        Task<Access> GetUserQueenAccessAsync(string userId, int queenId);
     }
 }

@@ -17,6 +17,8 @@
 
         public int ApiaryId { get; set; }
 
+        public int BeehiveNumber { get; set; }
+
         public Beehive Beehive { get; set; }
 
         public DateTime FertilizationDate { get; set; }
@@ -35,16 +37,23 @@
 
         public QueenBreed Breed { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public string UserUserName { get; set; }
 
         public bool HasHelpers { get; set; }
+
+        public bool HasQueen { get; set; }
+
+        public Access BeehiveAccess { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Queen, QueenDataViewModel>()
                 .ForMember(
                     vm => vm.HasHelpers,
-                    opt => opt.MapFrom(src => src.QueenHelpers.Any()));
+                    opt => opt.MapFrom(src => src.QueenHelpers.Any()))
+                .ForMember(
+                    vm => vm.HasQueen,
+                    opt => opt.MapFrom(src => src.Beehive.QueenId.HasValue));
         }
     }
 }

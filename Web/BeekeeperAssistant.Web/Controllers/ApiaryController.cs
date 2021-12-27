@@ -102,11 +102,7 @@
 
             foreach (var apiary in viewModel.UserHelperApiaries.AllUserHelperApiaries)
             {
-                apiary.Access =
-                    currentUser.Id == apiary.ApiaryCreatorId ||
-                    await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ?
-                    Access.ReadWrite :
-                    this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, apiary.ApiaryId);
+                apiary.Access = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiary.ApiaryId);
             }
 
             if (viewModel.UserApiaries.PagesCount == 0)
@@ -125,8 +121,7 @@
             return this.View(viewModel);
         }
 
-        // DONE []
-        public async Task<IActionResult> ByNumber(string apiaryNumber, string tabPage, int page = 1)
+        public async Task<IActionResult> ByNumber(string apiaryNumber)
         {
             var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
 
@@ -144,45 +139,10 @@
                 return this.BadRequest();
             }
 
-            viewModel.ApiaryAccess =
-                currentUser.Id == viewModel.CreatorId || await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
-                this.apiaryHelperService.GetUserApiaryAccess(currentUser.Id, viewModel.Id);
+            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
 
             viewModel.ForecastResult =
                 await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
-
-            viewModel.Beehives = this.beehiveService
-                .GetBeehivesByApiaryId<BeehiveViewModel>(
-                viewModel.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
-
-            foreach (var beehive in viewModel.Beehives)
-            {
-                beehive.BeehiveAccess =
-                    currentUser.Id == viewModel.CreatorId || await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
-                    this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
-            }
-
-            var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
-
-            if (viewModel.PagesCount == 0)
-            {
-                viewModel.PagesCount = 1;
-            }
-
-            viewModel.CurrentPage = page;
-
-            if (string.IsNullOrEmpty(tabPage))
-            {
-                tabPage = "Apiary";
-            }
-
-            if (page > 1)
-            {
-                tabPage = "Beehives";
-            }
-
-            viewModel.TabPage = tabPage;
 
             return this.View(viewModel);
         }

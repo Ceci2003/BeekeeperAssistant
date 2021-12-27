@@ -39,27 +39,9 @@
             this.excelExportService = excelExportService;
         }
 
-        public async Task<IActionResult> All()
+        public IActionResult AllByBeehiveId(int id)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            var viewModel = new AllHarvestsViewModel
-            {
-                AllHarvests = this.harvestService.GetAllUserHarvests<HarvestDatavVewModel>(user.Id),
-            };
-
-            return this.View(viewModel);
-        }
-
-        public IActionResult ById(int id)
-        {
-            var viewModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
-
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(viewModel);
+            return this.View();
         }
 
         public async Task<IActionResult> Create(int? beehiveId)

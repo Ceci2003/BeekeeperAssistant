@@ -19,17 +19,20 @@
         private readonly IQueenService queenService;
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
+        private readonly IQueenHelperService queenHelperService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public QueenController(
             IQueenService queenService,
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
+            IQueenHelperService queenHelperService,
             UserManager<ApplicationUser> userManager)
         {
             this.queenService = queenService;
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
+            this.queenHelperService = queenHelperService;
             this.userManager = userManager;
         }
 
@@ -53,16 +56,25 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ById(int id)
+        public async Task<IActionResult> ByBeehiveId(int id)
         {
-            var viewModel = this.queenService.GetQueenById<QueenDataViewModel>(id);
+            var viewModel = this.queenService.GetQueenByBeehiveId<QueenDataViewModel>(id);
 
             if (viewModel == null)
             {
-                return this.NotFound();
+                viewModel = new QueenDataViewModel
+                {
+                    BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id),
+                    BeehiveId = id,
+                };
+
+                return this.View(viewModel);
             }
 
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = viewModel.BeehiveId, tabPage = "Queen" });
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            viewModel.BeehiveAccess = await this.queenHelperService.GetUserQueenAccessAsync(currentUser.Id, id);
+
+            return this.View(viewModel);
         }
 
         public IActionResult Create(int id)
@@ -108,7 +120,7 @@
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно създадена майка!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
+            return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
         }
 
         [HttpPost]
@@ -117,7 +129,7 @@
             var beehiveId = await this.queenService.DeleteQueenAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрита майка!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
+            return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
         }
 
         public IActionResult Edit(int id, int beehiveId)
@@ -145,7 +157,7 @@
             var beehiveId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактирана майка!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Queen" });
+            return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
         }
 
         public async Task<IActionResult> Bookmark(int id)

@@ -209,5 +209,6 @@
                 .Where(q => q.Id == queenId)
                 .To<T>()
                 .FirstOrDefault();
+
     }
 }

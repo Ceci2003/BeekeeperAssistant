@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
@@ -167,12 +169,12 @@
         {
             var query = this.beehiveRepository
                 .All()
-                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted)
-                .Skip(skip);
+                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted);
 
             if (orderBy != null)
             {
-                query = query.OrderBy(b => EF.Property<Beehive>(b, orderBy));
+                var parts = orderBy.Split("-");
+                query = query.OrderByProeprtyDescending(parts);
             }
             else
             {
@@ -181,6 +183,8 @@
                 .ThenBy(b => b.Apiary.Number)
                 .ThenBy(b => b.Number);
             }
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {

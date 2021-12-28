@@ -1971,3 +1971,8 @@ input[readonly] {
   color: var(--black);
   font-weight: 400;
 }
+
+.ordered {
+    background-color: #D4D4D4;
+    border: 1px solid red;
+}

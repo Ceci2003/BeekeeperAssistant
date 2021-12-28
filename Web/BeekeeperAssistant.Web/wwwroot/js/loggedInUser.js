@@ -270,3 +270,10 @@ function HideDeleteForm(id) {
     var deleteForm = document.getElementById(id);
     deleteForm.classList = 'delete-form-display';
 }
+
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+var property = params["orderBy"];
+if (property) {
+    document.getElementById(property).classList.add("ordered");
+}

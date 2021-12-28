@@ -25,19 +25,15 @@
 
         public IActionResult All(int page = 1)
         {
-            var allCount = this.userService.GetAllUsersWithDeletedCount();
-            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.UsersPerPageAdministration);
-
             if (page <= 0)
             {
                 page = 1;
             }
-            else if (page > pagesCount)
-            {
-                page = pagesCount == 0 ? 1 : pagesCount;
-            }
 
-            var viewModel = new AllUsersViewModel
+            var allCount = this.userService.GetAllUsersWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.UsersPerPageAdministration);
+
+            var viewModel = new AdministrationAllUserViewModel
             {
                 AllUsers = this.userService.GetAllUsersWithDeleted<UserViewModel>(
                 GlobalConstants.UsersPerPageAdministration,
@@ -87,7 +83,7 @@
                 page = pagesCount == 0 ? 1 : pagesCount;
             }
 
-            var viewModel = new AllUsersViewModel
+            var viewModel = new AdministrationAllUserViewModel
             {
                 AllUsers = this.userService.GetAllUsersInRoleWithDeleted<UserViewModel>(
                 GlobalConstants.AdministratorRoleName,

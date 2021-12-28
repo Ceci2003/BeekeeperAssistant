@@ -66,7 +66,7 @@
                 return this.View();
             }
 
-            var viewModel = new IndexViewModel();
+            var viewModel = new IndexHomeViewModel();
 
             var treatmentsCount = this.treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id);
             var inspectionsCount = this.inspectionService.GetAllUserInspectionsForLastYearCount(currentUser.Id);
@@ -166,11 +166,11 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Contact(ConntactFormInputModel inputModel)
+        public async Task<IActionResult> Contact(ContactHomeInputModel inputModel)
         {
             await this.emailSender.SendEmailAsync(
                   inputModel.Email,
-                  "",
+                  string.Empty,
                   this.configuration["SendGrid:RecipientEmail"],
                   inputModel.Subject,
                   inputModel.Content);

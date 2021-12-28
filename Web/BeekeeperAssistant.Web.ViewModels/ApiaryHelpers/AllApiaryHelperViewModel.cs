@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class AllApiaryHelpersViewModel
+    public class AllApiaryHelperViewModel
     {
         public IEnumerable<ApiaryHelperViewModel> AllHelpers { get; set; }
 

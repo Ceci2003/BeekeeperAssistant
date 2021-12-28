@@ -41,8 +41,13 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var user = await this.userManager.GetUserAsync(this.User);
-            var viewModel = new AllQueensViewModel
+            var viewModel = new AllQueenViewModel
             {
                 AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage),
             };
@@ -61,11 +66,11 @@
 
         public async Task<IActionResult> ByBeehiveId(int id)
         {
-            var viewModel = this.queenService.GetQueenByBeehiveId<QueenDataViewModel>(id);
+            var viewModel = this.queenService.GetQueenByBeehiveId<ByBeehiveIdQueenViewModel>(id);
 
             if (viewModel == null)
             {
-                viewModel = new QueenDataViewModel
+                viewModel = new ByBeehiveIdQueenViewModel
                 {
                     BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id),
                     BeehiveId = id,
@@ -137,7 +142,7 @@
 
         public IActionResult Edit(int id)
         {
-            var inputModel = this.queenService.GetQueenById<EditQueenInutModel>(id);
+            var inputModel = this.queenService.GetQueenById<EditQueenInputModel>(id);
 
             var beehiveId = this.beehiveService.GetBeehiveIdByQueen(id);
 
@@ -152,7 +157,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditQueenInutModel inputModel)
+        public async Task<IActionResult> Edit(int id, EditQueenInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {

@@ -54,35 +54,27 @@
 
         public async Task<IActionResult> All(int pageAllApiaries = 1, int pageHelperApiaries = 1)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-
-            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
-            var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
-
             if (pageAllApiaries <= 0)
             {
                 pageAllApiaries = 1;
             }
-            else if (pageAllApiaries > pagesApiaryCount)
-            {
-                pageAllApiaries = pagesApiaryCount == 0 ? 1 : pagesApiaryCount;
-            }
-
-            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
-            var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
 
             if (pageHelperApiaries <= 0)
             {
                 pageHelperApiaries = 1;
             }
-            else if (pageHelperApiaries > pagesApiaryHelperCount)
-            {
-                pageHelperApiaries = pagesApiaryHelperCount == 0 ? 1 : pagesApiaryHelperCount;
-            }
 
-            var viewModel = new AllApiariesViewModel
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
+
+            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
+            var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
+
+            var viewModel = new AllApiaryViewModel
             {
-                UserApiaries = new AllUserApiariesViewModel
+                UserApiaries = new AllApiaryUserApiariesViewModel
                 {
                     AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(
                         currentUser.Id,
@@ -90,7 +82,7 @@
                         (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
                     PagesCount = pagesApiaryCount,
                 },
-                UserHelperApiaries = new AllHelperApiariesViewModel
+                UserHelperApiaries = new AllApiaryUserHelperApiariesViewModel
                 {
                     AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryHelperApiaryDataViewModel>(
                         currentUser.Id,
@@ -123,7 +115,7 @@
 
         public async Task<IActionResult> ByNumber(string apiaryNumber)
         {
-            var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
+            var viewModel = this.apiaryService.GetApiaryByNumber<ByNumberApiaryViewModel>(apiaryNumber);
 
             if (viewModel == null)
             {
@@ -147,13 +139,11 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         public IActionResult Create()
         {
             return this.View();
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
         {
@@ -177,7 +167,6 @@
             return this.Redirect($"/Apiary/{apiaryNumber}");
         }
 
-        // DONE []
         public IActionResult Edit(int id)
         {
             var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
@@ -188,7 +177,6 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
@@ -238,7 +226,6 @@
             return new FileContentResult(exportResult.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        // DONE []
         public async Task<IActionResult> Bookmark(int id)
         {
             await this.apiaryService.BookmarkApiaryAsync(id);

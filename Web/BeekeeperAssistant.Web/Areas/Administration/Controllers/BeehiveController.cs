@@ -23,19 +23,15 @@ namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 
         public IActionResult All(string orderBy = null, int page = 1)
         {
-            var allCount = this.beehiveService.GetAllBeehivesWithDeletedCount();
-            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.BeehivesPerPageAdministration);
-
             if (page <= 0)
             {
                 page = 1;
             }
-            else if (page > pagesCount)
-            {
-                page = pagesCount == 0 ? 1 : pagesCount;
-            }
 
-            var viewModel = new AllBeehivesAdministrationViewModel
+            var allCount = this.beehiveService.GetAllBeehivesWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.BeehivesPerPageAdministration);
+
+            var viewModel = new AdministrationAllBeehiveViewModel
             {
                 AllBeehives = this.beehiveService.GetAllBeehivesWithDeleted<BeehivesAdministrationViewModel>(
                     GlobalConstants.BeehivesPerPageAdministration,

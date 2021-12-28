@@ -31,9 +31,9 @@
         // DONE []
         public IActionResult All(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
 
-            var viewModel = new AllBeehiveHelpersViewModel
+            var viewModel = new AllBeehiveHelperViewModel
             {
                 AllHelpers = this.beehiveHelperService.GetAllBeehiveHelpersByBeehiveId<BeehiveHelperViewModel>(id),
                 BeehiveId = id,
@@ -49,7 +49,7 @@
         {
             var inputModel = this.beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
             inputModel.BeehiveId = beehiveId;
-            inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId).Number;
+            inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
             return this.View(inputModel);
         }
 
@@ -62,7 +62,7 @@
                 var user = await this.userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
                 inputModel.BeehiveId = beehiveId;
-                inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId).Number;
+                inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
                 return this.View(inputModel);
             }
 

@@ -27,7 +27,7 @@
 
         public async Task<ActionResult> Index()
         {
-            var viewModel = new IndexViewModel()
+            var viewModel = new AdministrationIndexDashboardViewModel()
             {
                 AllUsersCount = this.userService.AllUsersCount(),
                 AllHelpersCount = this.apiaryHelperService.GetAllApiaryHelpersCount(),

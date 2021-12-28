@@ -45,7 +45,12 @@
 
         public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
         {
-            var viewModel = new AllTreatementsViewModel()
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var viewModel = new AllByBeehiveIdTreatementViewModel()
             {
                 AllTreatements =
                     this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
@@ -198,8 +203,6 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTreatmentInputModel inputModel)
         {
-            // ToDo: make quantity string
-            // var quantity = Convert.ToDouble(inputModel.Quantity);
             await this.treatmentService.EditTreatment(
                 id,
                 inputModel.BeehiveId.Value,

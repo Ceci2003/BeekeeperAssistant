@@ -10,7 +10,9 @@
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class AllApiariesAdministrationViewModel
+    // {area}{action}{controller}{FieldName?}ViewModel
+
+    public class AdministrationAllApiaryViewModel
     {
         public IEnumerable<ApiaryViewModel> AllApiaries { get; set; }
 

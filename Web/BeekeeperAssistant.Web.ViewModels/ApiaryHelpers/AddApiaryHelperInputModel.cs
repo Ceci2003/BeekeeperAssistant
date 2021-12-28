@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class AddUserToApiaryInputModel : IValidatableObject
+    public class AddApiaryHelperInputModel : IValidatableObject
     {
         [BindNever]
         public int ApiaryId { get; set; }

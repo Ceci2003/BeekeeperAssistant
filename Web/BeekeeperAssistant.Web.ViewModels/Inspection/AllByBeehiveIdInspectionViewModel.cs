@@ -4,7 +4,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using System.Collections.Generic;
 
-    public class AllInspectionsViewModel
+    public class AllByBeehiveIdInspectionViewModel
     {
         public IEnumerable<InspectionDataViewModel> AllInspections { get; set; }
 

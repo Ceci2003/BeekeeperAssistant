@@ -9,7 +9,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class FeedbackViewModel : IMapFrom<Feedback>
+    public class AdministrationByIdFeedbackViewModel : IMapFrom<Feedback>
     {
         public string Title { get; set; }
 

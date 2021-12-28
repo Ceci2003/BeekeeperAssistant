@@ -44,9 +44,14 @@
 
         public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
         {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var viewModel = new AllHarvestsViewModel()
+            var viewModel = new AllByBeehiveIdHarvestViewModel()
             {
                 AllHarvests =
                     this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
@@ -208,7 +213,7 @@
             var pck = this.excelExportService.ExportAsExcelHarvest(id);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
             this.Response.Headers.Add("content-disposition", "attachment: filename=" + $"{beehive.Number}_{apiaryNumber}_Harvests.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }

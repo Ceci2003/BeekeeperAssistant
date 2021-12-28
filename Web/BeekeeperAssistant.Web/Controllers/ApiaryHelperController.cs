@@ -36,11 +36,10 @@
             this.configuration = configuration;
         }
 
-        // DONE []
         public IActionResult Add(int id)
         {
             var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
-            var viewModel = new AddUserToApiaryInputModel
+            var viewModel = new AddApiaryHelperInputModel
             {
                 ApiaryNumber = apiaryNumber,
                 ApiaryId = id,
@@ -50,7 +49,7 @@
 
         // DONE []
         [HttpPost]
-        public async Task<IActionResult> Add(int id, AddUserToApiaryInputModel viewModel)
+        public async Task<IActionResult> Add(int id, AddApiaryHelperInputModel viewModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -96,10 +95,9 @@
             return this.Redirect($"/ApiaryHelper/All/{id}");
         }
 
-        // DONE []
         public IActionResult All(int id)
         {
-            var viewModel = new AllApiaryHelpersViewModel
+            var viewModel = new AllApiaryHelperViewModel
             {
                 AllHelpers = this.apiaryHelperService.GetAllApiaryHelpersByApiaryId<ApiaryHelperViewModel>(id),
                 ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id),
@@ -109,18 +107,15 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(string userId, int apiaryId)
         {
             await this.apiaryHelperService.DeleteAsync(userId, apiaryId);
-            // var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрит помощник!";
             return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
         }
 
-        // DONE []
         public IActionResult Edit(string userId, int apiaryId)
         {
             var inputModel = this.apiaryHelperService.GetApiaryHelper<EditApiaryHelperInputModel>(userId, apiaryId);
@@ -128,7 +123,6 @@
             return this.View(inputModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(EditApiaryHelperInputModel inputModel, string userId, int apiaryId)
         {

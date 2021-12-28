@@ -57,11 +57,16 @@
 
         public async Task<IActionResult> All(int page = 1, string orderBy = null)
         {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
 
-            var viewModel = new AllBeehivesViewModel
+            var viewModel = new AllBeehiveViewModel
             {
                 AllBeehives = allBehhives,
             };
@@ -81,7 +86,12 @@
 
         public async Task<IActionResult> AllByApiaryId(int id, int page = 1)
         {
-            var viewModel = this.apiaryService.GetApiaryById<AllBeehivesByApiaryIdViewModel>(id);
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var viewModel = this.apiaryService.GetApiaryById<AllByApiaryIdBeehiveViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveByApiaryIdViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
@@ -107,7 +117,7 @@
 
         public async Task<IActionResult> ById(int id)
         {
-            var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var viewModel = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -210,7 +220,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehive.Id);

@@ -5,7 +5,7 @@
 
     using BeekeeperAssistant.Data.Models;
 
-    public class IndexViewModel
+    public class IndexHomeViewModel
     {
         public int TreatmentsCount { get; set; }
 

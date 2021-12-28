@@ -1,6 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Administration.Dashboard
 {
-    public class IndexViewModel
+    public class AdministrationIndexDashboardViewModel
     {
         public int AllUsersCount { get; set; }
 

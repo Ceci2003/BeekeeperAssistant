@@ -51,9 +51,14 @@
 
         public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
         {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var viewModel = new AllInspectionsViewModel()
+            var viewModel = new AllByBeehiveIdInspectionViewModel()
             {
                 AllInspections =
                     this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),

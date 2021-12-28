@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ConntactFormInputModel
+    public class ContactHomeInputModel
     {
         [Required(ErrorMessage = "Полето 'Имейл' е задължително!")]
         [EmailAddress]

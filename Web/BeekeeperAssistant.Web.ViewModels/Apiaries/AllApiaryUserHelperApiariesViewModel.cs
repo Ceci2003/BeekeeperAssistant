@@ -4,7 +4,7 @@
 
     using BeekeeperAssistant.Web.ViewModels.ApiaryHelpers;
 
-    public class AllHelperApiariesViewModel
+    public class AllApiaryUserHelperApiariesViewModel
     {
         public IEnumerable<ApiaryHelperApiaryDataViewModel> AllUserHelperApiaries { get; set; }
 

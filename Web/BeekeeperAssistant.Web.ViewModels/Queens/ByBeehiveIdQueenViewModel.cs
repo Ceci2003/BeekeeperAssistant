@@ -9,7 +9,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class QueenDataViewModel : IMapFrom<Queen>, IHaveCustomMappings
+    public class ByBeehiveIdQueenViewModel : IMapFrom<Queen>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -49,7 +49,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Queen, QueenDataViewModel>()
+            configuration.CreateMap<Queen, ByBeehiveIdQueenViewModel>()
                 .ForMember(
                     vm => vm.HasHelpers,
                     opt => opt.MapFrom(src => src.QueenHelpers.Any()))

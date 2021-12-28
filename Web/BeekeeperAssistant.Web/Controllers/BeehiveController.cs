@@ -127,7 +127,7 @@
         }
 
         // DONE []
-        public async Task<IActionResult> Create(int? id, bool stayOnThePage, string statusMsg = null)
+        public async Task<IActionResult> Create(int? id, bool stayOnPage = false)
         {
             var inputModel = new CreateBeehiveInputModel();
 
@@ -142,12 +142,9 @@
             }
 
             inputModel.Date = DateTime.UtcNow.Date;
-            inputModel.StayOnThePage = stayOnThePage;
+            inputModel.StayOnThePage = stayOnPage;
 
-            if (statusMsg != null)
-            {
-                this.TempData[GlobalConstants.SuccessMessage] = statusMsg;
-            }
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен кошер!";
 
             return this.View(inputModel);
         }
@@ -183,7 +180,15 @@
                 inputModel.HasPropolisCatcher,
                 inputModel.IsItMovable);
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
+
+            if (inputModel.StayOnThePage)
+            {
+                return this.RedirectToAction("Create", "Beehive", new { id = id, stayOnPage = inputModel.StayOnThePage });
+            }
+
+            return this.RedirectToAction("ById", "Beehive", new { id = beehiveId });
         }
 
         // DONE []
@@ -240,7 +245,7 @@
             await this.beehiveService.DeleteBeehiveByIdAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
-            return this.RedirectToAction("AllByApiaryId", "Beehive", new { id = apiaryId});
+            return this.RedirectToAction("AllByApiaryId", "Beehive", new { id = apiaryId });
         }
 
         // DONE []

@@ -6,18 +6,30 @@
 }
 
 <div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Queen" asp-action="All">Всички Кралици</a>
+            <a href="/Apiary/@Model.BeehiveApiaryNumber">Пчелин: @Model.BeehiveApiaryNumber</a>
         </li>
-        <li class="breadcrumb-item active">@ViewData["title"]</li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/Apiary/@Model.BeehiveApiaryNumber">@Model.BeehiveApiaryNumber</a>
+        </li>
+        <li class="breadcrumb-item active">@Model.BeehiveNumber</li>
     </ul>
     <div class="breadcrumb-leave">
-        <form asp-area="identity" asp-page="/account/logout"
-              asp-route-returnurl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>

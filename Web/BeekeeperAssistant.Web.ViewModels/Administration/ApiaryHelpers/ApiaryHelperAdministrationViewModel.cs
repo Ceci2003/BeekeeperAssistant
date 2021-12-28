@@ -13,8 +13,5 @@
 
         public string ApiaryNumber { get; set; }
 
-        public string ApiaryName { get; set; }
-
-        public string ApiaryAdress { get; set; }
     }
 }

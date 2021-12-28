@@ -17,6 +17,8 @@
 
         public int ApiaryId { get; set; }
 
+        public string BeehiveApiaryNumber { get; set; }
+
         public int BeehiveNumber { get; set; }
 
         public Beehive Beehive { get; set; }

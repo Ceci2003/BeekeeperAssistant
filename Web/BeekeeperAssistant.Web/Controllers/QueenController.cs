@@ -20,6 +20,7 @@
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
         private readonly IQueenHelperService queenHelperService;
+        private readonly IBeehiveHelperService beehiveHelperService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public QueenController(
@@ -27,12 +28,14 @@
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
             IQueenHelperService queenHelperService,
+            IBeehiveHelperService beehiveHelperService,
             UserManager<ApplicationUser> userManager)
         {
             this.queenService = queenService;
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
             this.queenHelperService = queenHelperService;
+            this.beehiveHelperService = beehiveHelperService;
             this.userManager = userManager;
         }
 
@@ -72,7 +75,7 @@
             }
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            viewModel.BeehiveAccess = await this.queenHelperService.GetUserQueenAccessAsync(currentUser.Id, id);
+            viewModel.QueenAccess = await this.queenHelperService.GetUserQueenAccessAsync(currentUser.Id, viewModel.Id);
 
             return this.View(viewModel);
         }
@@ -132,9 +135,11 @@
             return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
         }
 
-        public IActionResult Edit(int id, int beehiveId)
+        public IActionResult Edit(int id)
         {
             var inputModel = this.queenService.GetQueenById<EditQueenInutModel>(id);
+
+            var beehiveId = this.beehiveService.GetBeehiveIdByQueen(id);
 
             var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
             var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);

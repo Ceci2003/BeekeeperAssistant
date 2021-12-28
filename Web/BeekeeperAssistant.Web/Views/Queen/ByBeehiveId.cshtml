@@ -94,14 +94,13 @@
                     </tr>
                 </table>
                 <div class="data-edit beehive-info">
-                    @if (Model.BeehiveAccess == Access.ReadWrite)
+                    @if (Model.QueenAccess == Access.ReadWrite)
                     {
-                        <a class="btn edit" asp-controller="queen" asp-action="edit" asp-route-id="@Model.Id"
-                           asp-route-beehiveid="@Model.Id">
-                            редактирайте кралицата
+                        <a class="btn edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@Model.Id">
+                            Редактирай
                         </a>
-                        <form asp-controller="queen" asp-action="delete" asp-route-id="@Model.Id">
-                            <input class="btn delete" type="submit" value="изтрий" />
+                        <form asp-controller="Queen" asp-action="Delete" asp-route-id="@Model.Id">
+                            <input class="btn delete" type="submit" value="Изтрий" />
                         </form>
                     }
                     else

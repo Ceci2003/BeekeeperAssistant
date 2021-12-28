@@ -43,7 +43,7 @@
 
         public bool HasQueen { get; set; }
 
-        public Access BeehiveAccess { get; set; }
+        public Access QueenAccess { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -223,10 +223,10 @@
                 return this.BadRequest();
             }
 
-            var apiaryNumber = await this.beehiveService.DeleteBeehiveByIdAsync(id);
+            await this.beehiveService.DeleteBeehiveByIdAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
-            return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber});
+            return this.RedirectToAction("AllByApiaryId", "Beehive", new { id = apiaryId});
         }
 
         // DONE []

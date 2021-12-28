@@ -337,5 +337,12 @@
 
             return treatment.BeehiveId;
         }
+
+        public int GetBeehiveIdByHarvesId(int harvestId)
+        {
+            var harvest = this.harvestedBeehiveRepository.All().FirstOrDefault(h => h.HarvestId == harvestId);
+
+            return harvest.BeehiveId;
+        }
     }
 }

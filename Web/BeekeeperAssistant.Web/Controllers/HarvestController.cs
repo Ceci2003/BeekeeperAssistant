@@ -24,27 +24,53 @@
         private readonly IApiaryService apiaryService;
         private readonly IBeehiveService beehiveService;
         private readonly IExcelExportService excelExportService;
+        private readonly IBeehiveHelperService beehiveHelperService;
 
         public HarvestController(
             UserManager<ApplicationUser> userManager,
             IHarvestService harvestService,
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
-            IExcelExportService excelExportService)
+            IExcelExportService excelExportService,
+            IBeehiveHelperService beehiveHelperService)
         {
             this.userManager = userManager;
             this.harvestService = harvestService;
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
             this.excelExportService = excelExportService;
+            this.beehiveHelperService = beehiveHelperService;
         }
 
-        public IActionResult AllByBeehiveId(int id)
+        public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
         {
-            return this.View();
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var viewModel = new AllHarvestsViewModel()
+            {
+                AllHarvests =
+                    this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+            };
+
+            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
+            viewModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
+            viewModel.BeehiveId = id;
+            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+
+            var count = this.harvestService.GetAllBeehiveHarvestsCountByBeehiveId(id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
+
+            return this.View(viewModel);
         }
 
-        public async Task<IActionResult> Create(int? beehiveId)
+        public async Task<IActionResult> Create(int? id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -53,17 +79,17 @@
                 DateOfHarves = DateTime.Now.Date,
             };
 
-            if (beehiveId == null)
+            if (id == null)
             {
                 inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
             }
             else
             {
-                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId.Value);
-                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId.Value);
+                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id.Value);
 
-                inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId.Value);
-                inputModel.BeehiveId = beehiveId.Value;
+                inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                inputModel.BeehiveId = id.Value;
                 inputModel.ApiaryNumber = apiary.Number;
                 inputModel.BeehiveNumber = beehive.Number;
             }
@@ -119,15 +145,17 @@
                 await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
 
                 this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
-                return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
+                return this.RedirectToAction("AllByBeehiveId", "Harvest", new { id = inputModel.BeehiveId.Value });
             }
         }
 
         // DONE []
-        public IActionResult Edit(int id, int beehiveId)
+        public IActionResult Edit(int id)
         {
             var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
             inputModel.QuantityText = inputModel.Quantity.ToString();
+
+            var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
 
             var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
             var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
@@ -147,13 +175,16 @@
 
             await this.harvestService.EditHarvestAsync(id, inputModel);
 
+            var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
+
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран добив!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId.Value, tabPage = "Harvests" });
+            return this.RedirectToAction("AllByBeehiveId", "Harvest", new { id = beehiveId });
+
         }
 
         // DONE []
         [HttpPost]
-        public async Task<IActionResult> Delete(int id, int beehiveId)
+        public async Task<IActionResult> Delete(int id)
         {
             var currentuser = await this.userManager.GetUserAsync(this.User);
             var inputModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
@@ -163,10 +194,12 @@
                 return this.BadRequest();
             }
 
+            var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
+
             await this.harvestService.DeleteHarvestAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит добив!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehiveId, tabPage = "Harvests" });
+            return this.RedirectToAction("AllByBeehiveId", "Harvest", new { id = beehiveId });
         }
 
         // DONE []

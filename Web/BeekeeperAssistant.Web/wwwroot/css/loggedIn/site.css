@@ -237,6 +237,7 @@ button::selection {
   position: fixed;
   top: 50px;
   left: 10px;
+  user-select: none;
 }
 
 /* Combined */

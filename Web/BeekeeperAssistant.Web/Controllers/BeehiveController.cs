@@ -127,7 +127,7 @@
         }
 
         // DONE []
-        public async Task<IActionResult> Create(int? id)
+        public async Task<IActionResult> Create(int? id, bool stayOnThePage, string statusMsg = null)
         {
             var inputModel = new CreateBeehiveInputModel();
 
@@ -142,6 +142,12 @@
             }
 
             inputModel.Date = DateTime.UtcNow.Date;
+            inputModel.StayOnThePage = stayOnThePage;
+
+            if (statusMsg != null)
+            {
+                this.TempData[GlobalConstants.SuccessMessage] = statusMsg;
+            }
 
             return this.View(inputModel);
         }
@@ -178,8 +184,6 @@
                 inputModel.IsItMovable);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
-            return this.RedirectToAction("ById", "Beehive", new { id = beehiveId });
         }
 
         // DONE []

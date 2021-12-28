@@ -14,13 +14,13 @@
     {
         [Required(ErrorMessage = GlobalConstants.CityCodeRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
-        [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
+        [RegularExpression(GlobalConstants.ApiaryPartNumberRegex, ErrorMessage = "Пощенският код не съществува или не е валиден. Трябва да въведете 4 цифри.")]
         [Display(Name = "Пощенски код")]
         public string CityCode { get; set; }
 
         [Required(ErrorMessage = GlobalConstants.FarmNumberRequiredErrorMessage)]
         [MaxLength(GlobalConstants.MaxPartNumberLength)]
-        [RegularExpression(GlobalConstants.ApiaryPartNumberRegex)]
+        [RegularExpression(GlobalConstants.ApiaryPartNumberRegex, ErrorMessage = "Невалиден номер на пчелин. Трябва да въведете 4 цифри.")]
         [Display(Name = "Номер на пчелин")]
         public string FarmNumber { get; set; }
 

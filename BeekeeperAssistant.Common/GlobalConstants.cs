@@ -14,12 +14,12 @@
         // Pagination values
         public const int ApiariesPerPage = 5;
         public const int ApiaryHelpersApiaryPerPage = 5;
-        public const int BeehivesPerPage = 5;
-        public const int QueensPerPage = 5;
-        public const int ApiariesPerPageAdministration = 10;
-        public const int ApiaryHelpersPerPageAdministration = 10;
-        public const int BeehivesPerPageAdministration = 10;
-        public const int UsersPerPageAdministration = 10;
+        public const int BeehivesPerPage = 25;
+        public const int QueensPerPage = 25;
+        public const int ApiariesPerPageAdministration = 25;
+        public const int ApiaryHelpersPerPageAdministration = 25;
+        public const int BeehivesPerPageAdministration = 25;
+        public const int UsersPerPageAdministration = 25;
 
         // Apiary Constants
         public const string ApiaryPartNumberRegex = @"\d{4}";

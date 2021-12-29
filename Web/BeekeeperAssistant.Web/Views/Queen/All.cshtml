@@ -96,7 +96,7 @@
             }
         </tbody>
     </table>
-    <div class="all-table-responsive" style="display: none;">
+    <div class="all-table-responsive">
         <table>
             <thead>
                 <th>Параметър</th>
@@ -126,10 +126,7 @@
                     <tr>
                         <td>Номер на кошер</td>
                         <td class="number">
-                            <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
-                            asp-route-tabPage="Queen">
-                                @queen.BeehiveNumber
-                            </a>
+                            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@queen.BeehiveId">@queen.BeehiveNumber</a>
                         </td>
                     </tr>
                     <tr>

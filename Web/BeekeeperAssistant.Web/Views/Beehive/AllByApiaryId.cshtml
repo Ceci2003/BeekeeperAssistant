@@ -134,7 +134,7 @@
             </tbody>
         </table>
 
-        <div class="all-table-responsive beehive" style="display: none;">
+        <div class="all-table-responsive beehive">
             <table>
                 <thead>
                 <th>Параметър</th>
@@ -146,7 +146,7 @@
                         <tr class="@if (beehive.HasDevice == true) {@hasDevice}">
                             <td>Номер</td>
                             <td class="number">
-                                <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                                <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">@beehive.Number</a>
                             </td>
                         </tr>
                         <tr>

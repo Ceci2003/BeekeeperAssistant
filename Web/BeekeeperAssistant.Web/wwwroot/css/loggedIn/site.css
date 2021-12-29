@@ -1558,6 +1558,10 @@ textarea {
   padding: 0;
 }
 
+.breadcrumb .breadcrumb-list .responsive {
+  display: none;
+}
+
 .breadcrumb .breadcrumb-list.responsive {
   display: none;
   font-size: 16px;

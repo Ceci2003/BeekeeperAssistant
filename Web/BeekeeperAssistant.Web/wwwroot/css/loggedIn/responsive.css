@@ -154,6 +154,14 @@
     margin: 0;
   }
 
+  .breadcrumb .breadcrumb-list {
+    display: none;
+  }
+  
+  .breadcrumb .breadcrumb-list .responsive {
+    display: flex;
+  }
+
   .title-1 {
     font-size: 26px;
   }

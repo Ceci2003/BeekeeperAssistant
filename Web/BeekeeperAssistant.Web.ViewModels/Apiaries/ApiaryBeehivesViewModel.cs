@@ -7,7 +7,7 @@
 
     public class ApiaryBeehivesViewModel
     {
-        public ApiaryDataViewModel Apiary { get; set; }
+        public ByNumberApiaryViewModel Apiary { get; set; }
 
         public IEnumerable<BeehiveViewModel> Beehives { get; set; }
 

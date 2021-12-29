@@ -1,4 +1,4 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.ApiaryDataViewModel;
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.ByNumberApiaryViewModel;
 @{
     var title = "";
     if (!string.IsNullOrEmpty(Model.Number))
@@ -49,8 +49,12 @@
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
-    <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">Пчелин №@Model.Number</a>
-    <a class="tablinks" asp-controller="Apiary" asp-action="Beehives" asp-route-apiaryId="@Model.Id">Кошери</a>
+    <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
+        Пчелин №@Model.Number
+    </a>
+    <a class="tablinks " asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
+        Кошери
+    </a>
 </div>
 
 <div class="tabs-body">

@@ -116,7 +116,7 @@
         // DONE []
         public async Task<IActionResult> ById(int apiaryId)
         {
-            var viewModel = this.apiaryService.GetApiaryById<ApiaryDataViewModel>(apiaryId);
+            var viewModel = this.apiaryService.GetApiaryById<ByNumberApiaryViewModel>(apiaryId);
 
             if (viewModel == null)
             {

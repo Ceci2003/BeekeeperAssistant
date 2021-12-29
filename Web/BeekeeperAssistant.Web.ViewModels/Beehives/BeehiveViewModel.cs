@@ -12,7 +12,7 @@
     {
         public int Id { get; set; }
 
-        public ApiaryDataViewModel Apiary{ get; set; }
+        public ByNumberApiaryViewModel Apiary { get; set; }
 
         public int Number { get; set; }
 

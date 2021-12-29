@@ -34,7 +34,8 @@
             string number,
             string name,
             ApiaryType apiaryType,
-            string address);
+            string address,
+            bool IsRegistered);
 
         Task DeleteApiaryByIdAsync(int apiaryId);
 
@@ -43,7 +44,8 @@
             string number,
             string name,
             ApiaryType apiaryType,
-            string address);
+            string address,
+            bool IsRegistered);
 
         IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 

@@ -42,7 +42,8 @@
             string number,
             string name,
             ApiaryType apiaryType,
-            string adress)
+            string adress,
+            bool IsRegistered)
         {
             var newApiary = new Apiary
             {
@@ -51,6 +52,7 @@
                 Name = name,
                 ApiaryType = apiaryType,
                 Adress = adress,
+                IsRegistered = IsRegistered,
             };
 
             await this.apiaryRepository.AddAsync(newApiary);
@@ -60,23 +62,13 @@
             return apiaryNumber;
         }
 
-        public async Task DeleteApiaryByIdAsync(int apiaryId)
-        {
-            var apiary = this.apiaryRepository
-                .All()
-                .Include(a => a.Beehives)
-                .FirstOrDefault(a => a.Id == apiaryId);
-
-            this.apiaryRepository.Delete(apiary);
-            await this.apiaryRepository.SaveChangesAsync();
-        }
-
         public async Task<string> EditApiaryByIdAsync(
             int apiaryId,
             string number,
             string name,
             ApiaryType apiaryType,
-            string address)
+            string address,
+            bool IsRegistered)
         {
             var apiary = this.apiaryRepository
                 .All()
@@ -90,6 +82,17 @@
             await this.apiaryRepository.SaveChangesAsync();
 
             return apiary.Number;
+        }
+
+        public async Task DeleteApiaryByIdAsync(int apiaryId)
+        {
+            var apiary = this.apiaryRepository
+                .All()
+                .Include(a => a.Beehives)
+                .FirstOrDefault(a => a.Id == apiaryId);
+
+            this.apiaryRepository.Delete(apiary);
+            await this.apiaryRepository.SaveChangesAsync();
         }
 
         public int GetAllUserApiariesCount(string userId) =>

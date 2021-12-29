@@ -64,10 +64,19 @@
             {
                 <tr class="@if (beehive.HasDevice == true) { @hasDevice }">
                     <td class="number">
-                        <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@beehive.Apiary.Id">
+                            @if (beehive.Apiary.Number != null)
+                            {
+                                @beehive.Apiary.Number
+                            }
+                            else
+                            {
+                                @beehive.Apiary.Name
+                            }
+                        </a>
                     </td>
                     <td class="number">
-                        <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                        <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@beehive.Id">@beehive.Number</a>
                     </td>
                     <td>
                         @if (beehive.IsItMovable)
@@ -94,20 +103,20 @@
                                 <i class="far fa-edit"></i>
                             </a>
 
-                            <a class="delete" onclick="ShowDeleteForm('@beehive.Number-@beehive.ApiaryNumber')">
+                            <a class="delete" onclick="ShowDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
                                 <i class="far fa-trash-alt"></i>
                             </a>
-                            <div id="@beehive.Number-@beehive.ApiaryNumber" class="delete-form-display">
+                            <div id="@beehive.Number-@beehive.Apiary.Id" class="delete-form-display">
                                 <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
                                 asp-route-id="@beehive.Id">
                                     <a class="delete close"
-                                    onclick="HideDeleteForm('@beehive.Number-@beehive.ApiaryNumber')">
+                                    onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
                                         <i class="fas fa-times"></i>
                                     </a>
                                     <p>
                                         Сигурни ли сте че искате да изтриете кошер
                                         <strong>№@beehive.Number</strong>
-                                        в пчелин <strong>@beehive.ApiaryNumber</strong>?
+                                        в пчелин <strong>@beehive.Apiary.Number</strong>?
                                     </p>
 
                                     <button type="submit" class="delete">
@@ -115,7 +124,7 @@
                                     </button>
                                 </form>
                                 <div class="content-cover"
-                                onclick="HideDeleteForm('@beehive.Number-@beehive.ApiaryNumber')"></div>
+                                onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id')"></div>
                             </div>
                         </div>
                     </td>
@@ -135,13 +144,22 @@
                     <tr>
                         <td>Номер на пчелин</td>
                         <td class="number">
-                            <a href="/Apiary/@beehive.ApiaryNumber">@beehive.ApiaryNumber</a>
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@beehive.Apiary.Id">
+                                @if (beehive.Apiary.Number != null)
+                                {
+                                    @beehive.Apiary.Number
+                                }
+                                else
+                                {
+                                    @beehive.Apiary.Name
+                                }
+                            </a>
                         </td>
                     </tr>
                     <tr>
                         <td>Номер</td>
                         <td class="number">
-                            <a href="/Beehive/@beehive.ApiaryNumber/@beehive.Id">@beehive.Number</a>
+                            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@beehive.Id">@beehive.Number</a>
                         </td>
                     </tr>
                     <tr>
@@ -183,20 +201,20 @@
                                     <i class="far fa-edit"></i>
                                 </a>
 
-                                <a class="delete" onclick="ShowDeleteForm('@beehive.Number-@beehive.ApiaryNumber-responsive')">
+                                <a class="delete" onclick="ShowDeleteForm('@beehive.Number-@beehive.Apiary.Id-responsive')">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
-                                <div id="@beehive.Number-@beehive.ApiaryNumber-responsive" class="delete-form-display">
+                                <div id="@beehive.Number-@beehive.Apiary.Id-responsive" class="delete-form-display">
                                     <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
                                     asp-route-id="@beehive.Id">
                                         <a class="delete close"
-                                        onclick="HideDeleteForm('@beehive.Number-@beehive.ApiaryNumber-responsive')">
+                                        onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id-responsive')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <p>
                                             Сигурни ли сте че искате да изтриете кошер
                                             <strong>№@beehive.Number</strong>
-                                            в пчелин <strong>@beehive.ApiaryNumber</strong>?
+                                            в пчелин <strong>@beehive.Apiary.Number</strong>?
                                         </p>
 
                                         <button type="submit" class="delete">
@@ -204,7 +222,7 @@
                                         </button>
                                     </form>
                                     <div class="content-cover"
-                                    onclick="HideDeleteForm('@beehive.Number-@beehive.ApiaryNumber-responsive')"></div>
+                                    onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id-responsive')"></div>
                                 </div>
                             </div>
                         </td>

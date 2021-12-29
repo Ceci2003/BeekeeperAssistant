@@ -30,5 +30,7 @@
         public int BeehivesCount { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public bool IsRegistered { get; set; }
     }
 }

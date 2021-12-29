@@ -81,6 +81,7 @@ button::selection {
   --white: #ffffff;
   --lightgray: #d3d3d3;
   --darkgray: #615b5b;
+  --dark-blue-gray: #454857;
   --apiary-color: #17a2b8;
   --apiary-color-hover: #6ce7e3;
   --beehive-color: #f29422;
@@ -471,6 +472,18 @@ td.number {
   padding: 0;
 }
 
+td.number .empty {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+td.number а .empty {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
 td.number a {
   display: inline-block;
   width: 100%;
@@ -806,6 +819,10 @@ td.queen-red {
   border: none;
   padding: 8px 0;
 }
+ 
+.all-table-responsive {
+  display: none;
+}
 
 /* All forms */
 
@@ -897,6 +914,62 @@ span.error-msg {
   font-size: 18px;
 }
 
+.is-apiary-registred-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.is-apiary-registred-box input {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  border: 3px solid var(--transparent);
+  border-radius: 5px;
+  padding: 4px 8px;
+  color: var(--white);
+}
+
+.is-apiary-registred-box input:active {
+  border: 3px solid var(--lightgray);
+}
+
+.is-apiary-registred-box input.registered {
+  background-color: var(--green);
+}
+
+.is-apiary-registred-box input.registered:hover {
+  background-color: var(--green-hover);
+}
+
+.is-apiary-registred-box input.not-registered {
+  background-color: var(--red-hover);
+}
+
+.is-apiary-registred-box input.not-registered:hover {
+  background-color: var(--red);
+}
+
+.is-apiary-registred-box input.registered:checked,
+.is-apiary-registred-box input.not-registered:checked,
+.is-apiary-registred-box input:checked {
+  background-color: var(--dark-blue-gray);
+  border: 3px solid var(--transparent);
+  cursor: default;
+}
+
+.is-apiary-registred-box input:before {
+  content: attr(label);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .input-apiary-number .dash {
   display: flex;
   justify-content: center;
@@ -975,6 +1048,12 @@ textarea {
   justify-content: flex-end;
 }
 
+.form-star-tip {
+  color: var(--darkgray);
+  font-style: italic;
+}
+
+/* Feedback */
 .feedback-icon {
   display: flex;
   justify-content: center;
@@ -1801,6 +1880,7 @@ input[readonly] {
   background-color: var(--gray-background);
 }
 
+.required::before,
 .field-required::before {
   content: "*";
   color: var(--red);

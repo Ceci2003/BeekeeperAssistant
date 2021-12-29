@@ -28,6 +28,8 @@
 
         public bool IsBookMarked { get; set; }
 
+        public bool IsRegistered { get; set; }
+
         public virtual ICollection<Beehive> Beehives { get; set; }
 
         public virtual ICollection<ApiaryHelper> ApiaryHelpers { get; set; }

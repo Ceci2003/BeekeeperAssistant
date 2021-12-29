@@ -4,7 +4,7 @@
     using BeekeeperAssistant.Services.Mapping;
 
     public class ApiaryHelperApiaryDataViewModel : IMapFrom<ApiaryHelper>
-    {
+    {        
         public string ApiaryNumber { get; set; }
 
         public string ApiaryName { get; set; }
@@ -24,5 +24,7 @@
         public Access Access { get; set; }
 
         public string ApiaryCreatorId { get; set; }
+
+        public bool IsRegistered { get; set; }
     }
 }

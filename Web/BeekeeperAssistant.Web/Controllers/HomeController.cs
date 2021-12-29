@@ -76,7 +76,7 @@
             viewModel.InspectionsCount = inspectionsCount;
             viewModel.HarvestsCount = harvestsCount;
 
-            // ToDo: Make services
+            // TODO: Make services
 
             // apiaries chart
             var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id);

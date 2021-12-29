@@ -11,7 +11,7 @@
         Basic = 1,
         [Display(Name = "Стационарен")]
         Stationary = 2,
-        [Display(Name = "Подвижен")]
+        [Display(Name = "Временен / Подвижен")]
         Mobile = 3,
         [Display(Name = "Помощен")]
         Supporting = 4,

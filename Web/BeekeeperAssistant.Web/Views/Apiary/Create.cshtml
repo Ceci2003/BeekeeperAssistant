@@ -41,27 +41,38 @@
             </a>
             <h2>@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
-            <h1 style="font-size: 16px; font-weight:400;">Номер на пчелин</h1>
-            <div class="input-apiary-number row-form-group group-box">
-                <div class="input-group city-code">
-                    <label asp-for="@Model.CityCode"></label>
-                    <input type="text" asp-for="@Model.CityCode" />
-                </div>
-                <span class="dash">-</span>
-                <div class="input-group">
-                    <label asp-for="@Model.FarmNumber"></label>
-                    <input type="text" asp-for="@Model.FarmNumber" />
+            <h3 class="is-apiary-registred-title">Регистриран ли е пчелина?</h3>
+            <div class="group-box">
+                <div class="is-apiary-registred-box">
+                    <input type="radio" checked="true" class="registered" onclick="isRegistered(this);"
+                        label="регистриран" asp-for="@Model.IsRegistered" value="True">
+                    <input type="radio" class="not-registered" onclick="isRegistered(this);" label="без регистрация"
+                        asp-for="@Model.IsRegistered" value="False">
                 </div>
             </div>
-            <div class="row-form-group">
-                <div class="input-group">
-                    <label asp-for="@Model.Name"></label>
-                    <input type="text" asp-for="@Model.Name" />
+            <div id="apiary-number-input" style="display: @if (!Model.IsRegistered) { @("none") } else { @("block") };">
+                <h1 class="required" style="font-size: 16px; font-weight:400;">Номер на пчелин</h1>
+                <div class="input-apiary-number row-form-group group-box">
+                    <div class="input-group city-code">
+                        <label asp-for="@Model.CityCode"></label>
+                        <input type="text" asp-for="@Model.CityCode" />
+                    </div>
+                    <div class="dash">
+                        <span>-</span>
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="@Model.FarmNumber"></label>
+                        <input type="text" asp-for="@Model.FarmNumber" />
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label asp-for="@Model.Adress"></label>
-                    <input type="text" asp-for="@Model.Adress" />
-                </div>
+            </div>
+            <div class="input-group max">
+                <span asp-validation-for="@Model.CityCode"></span>
+                <span asp-validation-for="@Model.FarmNumber"></span>
+            </div>
+            <div id="input-name" class="input-group max">
+                <label class="@if (!Model.IsRegistered) { @("required") }" asp-for="@Model.Name"></label>
+                <input type="text" asp-for="@Model.Name" />
             </div>
             <div class="row-form-group">
                 <div class="input-group">
@@ -69,10 +80,35 @@
                     <select asp-for="@Model.ApiaryType"
                         asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
                 </div>
+                <div class="input-group">
+                    <label asp-for="@Model.Adress"></label>
+                    <input type="text" asp-for="@Model.Adress" />
+                </div>
             </div>
             <div class="btn-group">
                 <input class="btn apiary" type="submit" value="Добави пчелин" />
             </div>
+            <div class="form-star-tip">
+                *Полетата обозначени с
+                '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+                са задължителни.
+            </div>
         </form>
     </div>
 </div>
+
+<script>
+    function isRegistered(element) {
+        var number = document.querySelector("#apiary-number-input");
+        var inputName = document.querySelector("#input-name label");
+
+        if (element.value == "True") {
+            number.style.display = 'block';
+            inputName.classList.remove("required");
+        }
+        else {
+            number.style.display = 'none';
+            inputName.classList.add("required");
+        }
+    }
+</script>

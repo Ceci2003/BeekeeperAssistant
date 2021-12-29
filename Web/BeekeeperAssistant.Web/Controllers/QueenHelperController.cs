@@ -37,7 +37,7 @@
                 AllHelpers = this.queenHelperService.GetAllQueenByQueenId<QueenHelperViewModel>(id),
                 BeehiveId = beehive.Id,
                 BeehiveNumber = beehive.Number,
-                ApiaryNumber = beehive.ApiaryNumber,
+                ApiaryNumber = beehive.Apiary.Number,
                 QueenId = id,
             };
 
@@ -52,7 +52,7 @@
             var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(queenId);
             inputModel.BeehiveId = beehive.Id;
             inputModel.BeehiveNumber = beehive.Number;
-            inputModel.ApiaryNumber = beehive.ApiaryNumber;
+            inputModel.ApiaryNumber = beehive.Apiary.Number;
 
             return this.View(inputModel);
         }
@@ -69,7 +69,7 @@
                 var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(queenId);
                 inputModel.BeehiveId = beehive.Id;
                 inputModel.BeehiveNumber = beehive.Number;
-                inputModel.ApiaryNumber = beehive.ApiaryNumber;
+                inputModel.ApiaryNumber = beehive.Apiary.Number;
 
                 return this.View(inputModel);
             }

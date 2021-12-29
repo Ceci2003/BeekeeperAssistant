@@ -126,9 +126,9 @@
         }
 
         // DONE []
-        public async Task<IActionResult> ByNumber(string apiaryNumber, string tabPage, int page = 1)
+        public async Task<IActionResult> ById(int apiaryId)
         {
-            var viewModel = this.apiaryService.GetApiaryByNumber<ApiaryDataViewModel>(apiaryNumber);
+            var viewModel = this.apiaryService.GetApiaryById<ApiaryDataViewModel>(apiaryId);
 
             if (viewModel == null)
             {
@@ -151,46 +151,16 @@
             viewModel.ForecastResult =
                 await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
 
-            viewModel.Beehives = this.beehiveService
-                .GetBeehivesByApiaryId<BeehiveViewModel>(
-                viewModel.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
-
-            foreach (var beehive in viewModel.Beehives)
-            {
-                beehive.BeehiveAccess =
-                    currentUser.Id == viewModel.CreatorId || await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
-                    this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, beehive.Id);
-            }
-
-            var count = this.beehiveService.GetAllBeehivesCountByApiaryId(viewModel.Id);
-            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
-
-            if (viewModel.PagesCount == 0)
-            {
-                viewModel.PagesCount = 1;
-            }
-
-            viewModel.CurrentPage = page;
-
-            if (string.IsNullOrEmpty(tabPage))
-            {
-                tabPage = "Apiary";
-            }
-
-            if (page > 1)
-            {
-                tabPage = "Beehives";
-            }
-
-            viewModel.TabPage = tabPage;
-
             return this.View(viewModel);
         }
 
         // DONE []
         public IActionResult Create()
         {
-            return this.View();
+            var inputModel = new CreateApiaryInputModel();
+            inputModel.IsRegistered = true;
+
+            return this.View(inputModel);
         }
 
         // DONE []
@@ -210,7 +180,8 @@
                     inputModel.Number,
                     inputModel.Name,
                     inputModel.ApiaryType,
-                    inputModel.Adress);
+                    inputModel.Adress,
+                    inputModel.IsRegistered);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
 
@@ -222,8 +193,11 @@
         {
             var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
 
-            viewModel.CityCode = this.apiaryNumberService.GetCityCode(viewModel.Number);
-            viewModel.FarmNumber = this.apiaryNumberService.GetFarmNumber(viewModel.Number);
+            if (viewModel.IsRegistered)
+            {
+                viewModel.CityCode = this.apiaryNumberService.GetCityCode(viewModel.Number);
+                viewModel.FarmNumber = this.apiaryNumberService.GetFarmNumber(viewModel.Number);
+            }
 
             return this.View(viewModel);
         }
@@ -237,18 +211,23 @@
                 return this.View(inputModel);
             }
 
-            inputModel.Number = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
+            var modelNumber = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
+            if (!inputModel.IsRegistered)
+            {
+                modelNumber = null;
+            }
 
             var apiaryNumber =
                 await this.apiaryService.EditApiaryByIdAsync(
                     id,
-                    inputModel.Number,
+                    modelNumber,
                     inputModel.Name,
                     inputModel.ApiaryType,
-                    inputModel.Adress);
+                    inputModel.Adress,
+                    inputModel.IsRegistered);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
-            return this.Redirect($"/Apiary/{apiaryNumber}");
+            return this.RedirectToAction("ById", "Apiary", new { apiaryId = id });
         }
 
         // DONE []

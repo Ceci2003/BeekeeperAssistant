@@ -6,12 +6,13 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
     public class BeehiveViewModel : IMapFrom<Beehive>
     {
         public int Id { get; set; }
 
-        public string ApiaryNumber { get; set; }
+        public ApiaryDataViewModel Apiary{ get; set; }
 
         public int Number { get; set; }
 

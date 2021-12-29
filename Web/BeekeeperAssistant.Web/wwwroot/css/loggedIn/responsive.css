@@ -87,9 +87,24 @@
     padding: 0 20px;
   }
 
+  .breadcrumb {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
   .breadcrumb .aside-icon {
     display: block;
     color: var(--white);
+  }
+
+  .breadcrumb-list {
+    display: none !important;
+  }
+
+  .breadcrumb-list.responsive {
+    display: flex !important;
   }
 
   /* Sidebar */
@@ -226,9 +241,47 @@
     margin-bottom: 0;
   }
 
+  .form-star-tip {
+    margin-top: 30px;
+    color: var(--darkgray);
+    font-style: italic;
+  }
+
   /* Apiary forms */
   .input-apiary-number .input-group {
     width: 45% !important;
+  }
+
+  .form-box form .input-apiary-number.row-form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .input-apiary-number .dash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+  }
+
+  .is-apiary-registred-box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .is-apiary-registred-box input {
+    width: 47%;
+    text-align: center;
+  }
+
+  .all-table {
+    display: none;
+  }
+  
+  .all-table-responsive {
+    display: block;
   }
 }
 

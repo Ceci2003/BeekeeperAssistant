@@ -34,18 +34,11 @@
 
         public ForecastResult ForecastResult { get; set; }
 
-        public string TabPage { get; set; }
-
-        public int CurrentPage { get; set; }
-
-        public int PagesCount { get; set; }
-
         public bool HasHelpers { get; set; }
 
         public Access ApiaryAccess { get; set; }
 
-        [IgnoreMap]
-        public IEnumerable<BeehiveViewModel> Beehives { get; set; }
+        public bool IsRegistered { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

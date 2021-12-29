@@ -167,7 +167,7 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTreatmentInputModel inputModel)
         {
-            // ToDo: make quantity string
+            // TODO: make quantity string
             // var quantity = Convert.ToDouble(inputModel.Quantity);
             await this.treatmentService.EditTreatment(
                 id,

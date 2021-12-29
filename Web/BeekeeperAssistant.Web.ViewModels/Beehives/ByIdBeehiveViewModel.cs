@@ -13,7 +13,7 @@
     using BeekeeperAssistant.Web.ViewModels.Inspection;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
 
-    public class BeehiveDataViewModel : IMapFrom<Beehive>, IHaveCustomMappings
+    public class ByIdBeehiveViewModel : IMapFrom<Beehive>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -39,26 +39,9 @@
 
         public string CreatorId { get; set; }
 
-        public int QueenId { get; set; }
-
-        public Queen Queen { get; set; }
-
-        public string TabPage { get; set; }
-
-        public virtual ApplicationUser Creator { get; set; }
+        public int? QueenId { get; set; }
 
         public Access BeehiveAccess { get; set; }
-
-        public Access QueenAccess { get; set; }
-
-        [IgnoreMap]
-        public AllHarvestsViewModel Harvests { get; set; }
-
-        [IgnoreMap]
-        public AllTreatementsViewModel Treatments { get; set; }
-
-        [IgnoreMap]
-        public AllInspectionsViewModel Inspections { get; set; }
 
         public bool HasHelpers { get; set; }
 
@@ -66,7 +49,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Beehive, BeehiveDataViewModel>()
+            configuration.CreateMap<Beehive, ByIdBeehiveViewModel>()
                 .ForMember(
                 vm => vm.HasQueen,
                 opt => opt.MapFrom(src => src.Queen != null))

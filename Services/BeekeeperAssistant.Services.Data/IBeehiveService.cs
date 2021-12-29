@@ -63,5 +63,12 @@
         Task UndeleteAsync(int beehiveId);
 
         int GetAllBeehivesWithDeletedCount();
+
+        int GetBeehiveNumberById(int id);
+
+        int GetBeehiveIdByTreatmentId(int treatmentId);
+
+        int GetBeehiveIdByHarvesId(int harvestId);
+
     }
 }

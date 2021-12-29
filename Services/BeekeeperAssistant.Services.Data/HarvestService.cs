@@ -128,7 +128,7 @@
         public int GetAllBeehiveHarvestsCountByBeehiveId(int beehiveId)
             => this.harvestedBeehiveRepository
             .All()
-            .Where(hb => hb.BeehiveId == beehiveId)
+            .Where(hb => hb.BeehiveId == beehiveId && !hb.Harvest.IsDeleted)
             .Count();
     }
 }

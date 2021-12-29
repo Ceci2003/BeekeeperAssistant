@@ -22,19 +22,15 @@
 
         public IActionResult All(int page = 1)
         {
-            var allCount = this.apiaryService.GetAllApiariesWithDeletedCount();
-            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
-
             if (page <= 0)
             {
                 page = 1;
             }
-            else if (page > pagesCount)
-            {
-                page = pagesCount == 0 ? 1 : pagesCount;
-            }
 
-            var viewModel = new AllApiariesAdministrationViewModel
+            var allCount = this.apiaryService.GetAllApiariesWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiariesPerPageAdministration);
+
+            var viewModel = new AdministrationAllApiaryViewModel
             {
                 AllApiaries = this.apiaryService.GetAllApiariesWithDeleted<ApiaryViewModel>(
                     GlobalConstants.ApiariesPerPageAdministration,

@@ -4,10 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     public class ApiaryHelperService : IApiaryHelperService
@@ -18,6 +19,8 @@
         private readonly IDeletableEntityRepository<Beehive> beeheiveRepository;
         private readonly IBeehiveHelperService beehiveHelperService;
         private readonly IQueenHelperService queenHelperService;
+        private readonly IRepository<Apiary> apiaryRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ApiaryHelperService(
             IRepository<ApiaryHelper> apiaryHelperRepository,
@@ -25,7 +28,9 @@
             IRepository<QueenHelper> queenHelperRepository,
             IDeletableEntityRepository<Beehive> beeheiveRepository,
             IBeehiveHelperService beehiveHelperService,
-            IQueenHelperService queenHelperService)
+            IQueenHelperService queenHelperService,
+            IRepository<Apiary> apiaryRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.apiaryHelperRepository = apiaryHelperRepository;
             this.beehiveHelperRepository = beehiveHelperRepository;
@@ -33,6 +38,8 @@
             this.beeheiveRepository = beeheiveRepository;
             this.beehiveHelperService = beehiveHelperService;
             this.queenHelperService = queenHelperService;
+            this.apiaryRepository = apiaryRepository;
+            this.userManager = userManager;
         }
 
         public async Task AddAsync(string userId, int apiaryId)
@@ -168,11 +175,19 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public Access GetUserApiaryAccess(string userId, int apiaryId)
-        => this.apiaryHelperRepository
-                .All()
-                .FirstOrDefault(a => (a.UserId == userId && a.ApiaryId == apiaryId))
-                .Access;
+        public async Task<Access> GetUserApiaryAccessAsync(string userId, int apiaryId)
+        {
+            var user = await this.userManager.FindByIdAsync(userId);
+            var apiary = this.apiaryRepository.All().FirstOrDefault(a => a.Id == apiaryId);
+
+            if (await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName) ||
+                apiary.CreatorId == userId)
+            {
+                return Access.ReadWrite;
+            }
+
+            return this.apiaryHelperRepository.All().FirstOrDefault(ah => ah.UserId == userId && ah.ApiaryId == apiaryId).Access;
+        }
 
         public IEnumerable<T> GetUserHelperApiaries<T>(string userId, int? take = null, int skip = 0)
         {

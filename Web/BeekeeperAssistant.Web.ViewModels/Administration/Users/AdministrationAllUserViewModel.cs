@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
+﻿namespace BeekeeperAssistant.Web.ViewModels.Administration.Users
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,9 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class AllQueensViewModel
+    public class AdministrationAllUserViewModel
     {
-        public IEnumerable<QueenViewModel> AllQueens { get; set; }
+        public IEnumerable<UserViewModel> AllUsers { get; set; }
 
         public int CurrentPage { get; set; }
 

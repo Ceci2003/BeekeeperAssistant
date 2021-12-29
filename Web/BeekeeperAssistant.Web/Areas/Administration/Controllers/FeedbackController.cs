@@ -17,7 +17,17 @@
 
         public IActionResult All(int pageFeedbacks = 1, int pageHelps = 1)
         {
-            var viewModel = new AllFeedabacksAdministrationViewModel();
+            if (pageFeedbacks <= 0)
+            {
+                pageFeedbacks = 1;
+            }
+
+            if (pageHelps <= 0)
+            {
+                pageHelps = 1;
+            }
+
+            var viewModel = new AdministrationAllFeedabackViewModel();
 
             viewModel.Feedbacks = new AllFeedbackFeedbacksViewModel();
 
@@ -71,7 +81,7 @@
 
         public IActionResult ById(int id)
         {
-            var viewModel = this.feedbackService.GetFeedbackById<FeedbackViewModel>(id);
+            var viewModel = this.feedbackService.GetFeedbackById<AdministrationByIdFeedbackViewModel>(id);
 
             return this.View(viewModel);
         }

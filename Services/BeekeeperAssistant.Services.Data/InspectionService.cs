@@ -139,7 +139,7 @@
 
             await this.inspectionRepository.SaveChangesAsync();
 
-            return inspection.Id;
+            return inspection.BeehiveId;
         }
 
         public async Task DeleteInspectionAsync(int inspectionId)

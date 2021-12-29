@@ -26,6 +26,7 @@
         private readonly IForecastService forecastService;
         private readonly IConfiguration configuration;
         private readonly IExcelExportService excelExportService;
+        private readonly IBeehiveHelperService beehiveHelperService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public InspectionController(
@@ -35,6 +36,7 @@
             IForecastService forecastService,
             IConfiguration configuration,
             IExcelExportService excelExportService,
+            IBeehiveHelperService beehiveHelperService,
             UserManager<ApplicationUser> userManager)
         {
             this.inspectionService = inspectionService;
@@ -43,7 +45,41 @@
             this.forecastService = forecastService;
             this.configuration = configuration;
             this.excelExportService = excelExportService;
+            this.beehiveHelperService = beehiveHelperService;
             this.userManager = userManager;
+        }
+
+        public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
+        {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var viewModel = new AllByBeehiveIdInspectionViewModel()
+            {
+                AllInspections =
+                    this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+            };
+
+            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
+            viewModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
+            viewModel.BeehiveId = id;
+            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+
+            var count = this.inspectionService.GetAllBeehiveInspectionsCountByBeehiveId(id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
+
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Create(int? id)
@@ -161,17 +197,14 @@
             if (id == null)
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, beehive.Id, inputModel);
-
-                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
-                return this.RedirectToAction("ById", "Beehive", new { beehiveId = beehive.Id, tabPage = "Inspections" });
             }
             else
             {
                 await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, id.Value, inputModel);
-
-                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
-                return this.RedirectToAction("ById", "Beehive", new { beehiveId = id.Value, tabPage = "Inspections" });
             }
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
+            return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = id.Value });
         }
 
         public IActionResult Edit(int id, int beehiveId)
@@ -195,10 +228,11 @@
             inputModel.WeatherHumidity = Convert.ToDouble(inputModel.WeatherHumidityString);
             inputModel.WeatherTemperature = Convert.ToDouble(inputModel.WeatherTemperatureString);
 
-            await this.inspectionService.EditUserInspectionAsync(id, inputModel);
+            var beehiveId = await this.inspectionService.EditUserInspectionAsync(id, inputModel);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран преглед!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inputModel.BeehiveId, tabPage = "Inspections" });
+            return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = beehiveId });
+
         }
 
         [HttpPost]
@@ -215,7 +249,7 @@
             await this.inspectionService.DeleteInspectionAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит преглед!";
-            return this.RedirectToAction("ById", "Beehive", new { beehiveId = inspection.BeehiveId, tabPage = "Inspections" });
+            return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = inspection.BeehiveId });
         }
 
         public IActionResult ExportToExcel(int id)

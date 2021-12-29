@@ -57,17 +57,23 @@
 
         public async Task<IActionResult> All(int page = 1, string orderBy = null)
         {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
 
-            var viewModel = new AllBeehivesViewModel
+            var viewModel = new AllBeehiveViewModel
             {
                 AllBeehives = allBehhives,
             };
 
             var count = this.beehiveService.GetAllUserBeehivesCount(currentUser.Id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
+
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;
@@ -78,132 +84,50 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> ById(
-            int beehiveId,
-            string tabPage,
-            int pageAllHarvests = 1,
-            int pageAllTreatments = 1,
-            int pageAllInspections = 1)
+        public async Task<IActionResult> AllByApiaryId(int id, int page = 1)
         {
-            var viewModel = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(beehiveId);
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var viewModel = this.apiaryService.GetApiaryById<AllByApiaryIdBeehiveViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
 
-            if (viewModel.CreatorId != currentUser.Id &&
-                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, apiaryId) &&
-                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId) &&
-                !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveByApiaryIdViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
+
+            foreach (var beehive in viewModel.AllBeehives)
             {
-                return this.BadRequest();
+                beehive.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.Id);
             }
 
-            viewModel.BeehiveAccess =
-                currentUser.Id == viewModel.CreatorId ||
-                await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ?
-                Access.ReadWrite :
-                this.beehiveHelperService.GetUserBeehiveAccess(currentUser.Id, viewModel.Id);
+            var count = this.beehiveService.GetAllBeehivesCountByApiaryId(id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 
-            if (viewModel.Queen != null)
+            if (viewModel.PagesCount == 0)
             {
-                viewModel.QueenAccess = currentUser.Id == viewModel.CreatorId ||
-                    await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName) ? Access.ReadWrite :
-                    this.queenHelperService.GetUserQueenAccess(currentUser.Id, viewModel.QueenId);
+                viewModel.PagesCount = 1;
             }
 
-            // ----------------------------------
-            viewModel.Harvests = new AllHarvestsViewModel();
+            viewModel.CurrentPage = page;
 
-            var allHarvestsCount = this.harvestService.GetAllBeehiveHarvestsCountByBeehiveId(beehiveId);
-            var pagesHarvestsCount = (int)Math.Ceiling((double)allHarvestsCount / GlobalConstants.ApiariesPerPage);
+            return this.View(viewModel);
+        }
 
-            if (pageAllHarvests <= 0)
-            {
-                pageAllHarvests = 1;
-            }
-            else if (pageAllHarvests > pagesHarvestsCount)
-            {
-                pageAllHarvests = pagesHarvestsCount == 0 ? 1 : pagesHarvestsCount;
-            }
+        public async Task<IActionResult> ById(int id)
+        {
+            var viewModel = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
 
-            viewModel.Harvests.PagesCount = pagesHarvestsCount;
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (viewModel.Harvests.PagesCount == 0)
-            {
-                viewModel.Harvests.PagesCount = 1;
-            }
-
-            viewModel.Harvests.CurrentPage = pageAllHarvests;
-
-            var harvests = this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(beehiveId, GlobalConstants.ApiariesPerPage, (pageAllHarvests - 1) * GlobalConstants.ApiariesPerPage);
-            viewModel.Harvests.AllHarvests = harvests;
-
-            // ----------------------------------
-            viewModel.Treatments = new AllTreatementsViewModel();
-
-            var allTreatemetsCount = this.treatmentService.GetBeehiveTreatmentsCountByBeehiveId(beehiveId);
-            var pagesTreatementsCount = (int)Math.Ceiling((double)allTreatemetsCount / GlobalConstants.ApiariesPerPage);
-
-            if (pageAllTreatments <= 0)
-            {
-                pageAllTreatments = 1;
-            }
-            else if (pageAllTreatments > pagesTreatementsCount)
-            {
-                pageAllTreatments = pagesTreatementsCount == 0 ? 1 : pagesTreatementsCount;
-            }
-
-            viewModel.Treatments.PagesCount = pagesTreatementsCount;
-
-            if (viewModel.Treatments.PagesCount == 0)
-            {
-                viewModel.Treatments.PagesCount = 1;
-            }
-
-            viewModel.Treatments.CurrentPage = pageAllTreatments;
-
-            var treatments = this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(beehiveId, GlobalConstants.ApiariesPerPage, (pageAllTreatments - 1) * GlobalConstants.ApiariesPerPage);
-            viewModel.Treatments.AllTreatements = treatments;
-
-            // ----------------------------------
-            viewModel.Inspections = new AllInspectionsViewModel();
-
-            var allinspectionsCount = this.inspectionService.GetAllBeehiveInspectionsCountByBeehiveId(beehiveId);
-            var pageInspectionsCount = (int)Math.Ceiling((double)allinspectionsCount / GlobalConstants.ApiariesPerPage);
-
-            if (pageAllInspections <= 0)
-            {
-                pageAllInspections = 1;
-            }
-            else if (pageAllInspections > pageInspectionsCount)
-            {
-                pageAllInspections = pageInspectionsCount == 0 ? 1 : pageInspectionsCount;
-            }
-
-            viewModel.Inspections.PagesCount = pageInspectionsCount;
-
-            if (viewModel.Inspections.PagesCount == 0)
-            {
-                viewModel.Inspections.PagesCount = 1;
-            }
-
-            viewModel.Inspections.CurrentPage = pageAllInspections;
-
-            var inspections = this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(beehiveId, GlobalConstants.ApiariesPerPage, (pageAllInspections - 1) * GlobalConstants.ApiariesPerPage);
-            viewModel.Inspections.AllInspections = inspections;
-
-            // ----------------------------------
-            if (string.IsNullOrEmpty(tabPage))
-            {
-                tabPage = "Beehive";
-            }
-
-            viewModel.TabPage = tabPage;
+            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
             return this.View(viewModel);
         }
 
         // DONE []
-        public async Task<IActionResult> Create(int? id, bool stayOnThePage, string statusMsg = null)
+        public async Task<IActionResult> Create(int? id, bool stayOnPage = false)
         {
             var inputModel = new CreateBeehiveInputModel();
 
@@ -218,17 +142,13 @@
             }
 
             inputModel.Date = DateTime.UtcNow.Date;
-            inputModel.StayOnThePage = stayOnThePage;
+            inputModel.StayOnThePage = stayOnPage;
 
-            if (statusMsg != null)
-            {
-                this.TempData[GlobalConstants.SuccessMessage] = statusMsg;
-            }
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен кошер!";
 
             return this.View(inputModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Create(int? id, CreateBeehiveInputModel inputModel)
         {
@@ -260,18 +180,15 @@
                 inputModel.HasPropolisCatcher,
                 inputModel.IsItMovable);
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            var statusMsg = $"Успешно създаден кошер с номер {inputModel.Number} в пчелин {apiaryNumber}!";
+            this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
 
             if (inputModel.StayOnThePage)
             {
-                return this.RedirectToAction("Create", "Beehive", new { id = id,  stayOnThePage = true, statusMsg = statusMsg });
+                return this.RedirectToAction("Create", "Beehive", new { id = id, stayOnPage = inputModel.StayOnThePage });
             }
-            else
-            {
-                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
-                return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
-            }
+
+            return this.RedirectToAction("ById", "Beehive", new { id = beehiveId });
         }
 
         // DONE []
@@ -305,14 +222,14 @@
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран кошер!";
-            return this.Redirect($"/Beehive/{apiaryNumber}/{beehiveId}");
+            return this.RedirectToAction("ById", "Beehive", new { id = beehiveId });
         }
 
         // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehive.Id);
@@ -325,10 +242,10 @@
                 return this.BadRequest();
             }
 
-            var apiaryNumber = await this.beehiveService.DeleteBeehiveByIdAsync(id);
+            await this.beehiveService.DeleteBeehiveByIdAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
-            return this.RedirectToAction("ByNumber", "Apiary", new { apiaryNumber = apiaryNumber, tabPage = "Beehives" });
+            return this.RedirectToAction("AllByApiaryId", "Beehive", new { id = apiaryId });
         }
 
         // DONE []

@@ -1718,7 +1718,6 @@ textarea {
 
 /* Style the tab content */
 .tabcontent {
-  display: none;
   padding: 10px;
 }
 
@@ -2051,4 +2050,9 @@ input[readonly] {
   /* cursor: pointer; */
   color: var(--black);
   font-weight: 400;
+}
+
+.ordered {
+    background-color: #D4D4D4;
+    border: 1px solid red;
 }

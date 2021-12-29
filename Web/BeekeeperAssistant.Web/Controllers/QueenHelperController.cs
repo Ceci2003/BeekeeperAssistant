@@ -32,7 +32,7 @@
         {
             var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(id);
 
-            var viewModel = new AllQueenHelpersViewModel
+            var viewModel = new AllQueenHelperViewModel
             {
                 AllHelpers = this.queenHelperService.GetAllQueenByQueenId<QueenHelperViewModel>(id),
                 BeehiveId = beehive.Id,

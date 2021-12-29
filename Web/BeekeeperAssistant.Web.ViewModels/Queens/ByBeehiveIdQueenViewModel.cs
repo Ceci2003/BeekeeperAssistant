@@ -9,13 +9,17 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class QueenDataViewModel : IMapFrom<Queen>, IHaveCustomMappings
+    public class ByBeehiveIdQueenViewModel : IMapFrom<Queen>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
         public int BeehiveId { get; set; }
 
         public int ApiaryId { get; set; }
+
+        public string BeehiveApiaryNumber { get; set; }
+
+        public int BeehiveNumber { get; set; }
 
         public Beehive Beehive { get; set; }
 
@@ -35,16 +39,23 @@
 
         public QueenBreed Breed { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public string UserUserName { get; set; }
 
         public bool HasHelpers { get; set; }
 
+        public bool HasQueen { get; set; }
+
+        public Access QueenAccess { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Queen, QueenDataViewModel>()
+            configuration.CreateMap<Queen, ByBeehiveIdQueenViewModel>()
                 .ForMember(
                     vm => vm.HasHelpers,
-                    opt => opt.MapFrom(src => src.QueenHelpers.Any()));
+                    opt => opt.MapFrom(src => src.QueenHelpers.Any()))
+                .ForMember(
+                    vm => vm.HasQueen,
+                    opt => opt.MapFrom(src => src.Beehive.QueenId.HasValue));
         }
     }
 }

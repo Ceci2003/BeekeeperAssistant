@@ -21,19 +21,15 @@
 
         public IActionResult All(int page = 1)
         {
-            var allCount = this.apiaryHelperService.GetAllApiaryHelpersWithDeletedCount();
-            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiaryHelpersPerPageAdministration);
-
             if (page <= 0)
             {
                 page = 1;
             }
-            else if (page > pagesCount)
-            {
-                page = pagesCount == 0 ? 1 : pagesCount;
-            }
 
-            var viewModel = new AllApiaryHelpersAdministrationViewModel
+            var allCount = this.apiaryHelperService.GetAllApiaryHelpersWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.ApiaryHelpersPerPageAdministration);
+
+            var viewModel = new AdministrationAllApiaryHelperViewModel
             {
                 AllApiariesHelpers = this.apiaryHelperService.GetAllApiaryHelpers<ApiaryHelperAdministrationViewModel>(
                     GlobalConstants.ApiaryHelpersPerPageAdministration,

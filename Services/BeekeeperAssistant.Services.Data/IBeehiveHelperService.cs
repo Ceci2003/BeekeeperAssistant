@@ -17,6 +17,6 @@
 
         IEnumerable<T> GetAllBeehiveHelpersByBeehiveId<T>(int beehiveId, int? take = null, int skip = 0);
 
-        Access GetUserBeehiveAccess(string userId, int beehiveId);
+        Task<Access> GetUserBeehiveAccessAsync(string userId, int beehiveId);
     }
 }

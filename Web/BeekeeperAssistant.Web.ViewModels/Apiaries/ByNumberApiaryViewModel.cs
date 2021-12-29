@@ -12,7 +12,8 @@
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
 
-    public class ApiaryDataViewModel : IMapFrom<Apiary>, IHaveCustomMappings
+    // {area}{action}{controller}{FieldName?}ViewModel
+    public class ByNumberApiaryViewModel : IMapFrom<Apiary>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -42,7 +43,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Apiary, ApiaryDataViewModel>()
+            configuration.CreateMap<Apiary, ByNumberApiaryViewModel>()
                 .ForMember(
                     vm => vm.HasHelpers,
                     opt => opt.MapFrom(src => src.ApiaryHelpers.Any()));

@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.BeehiveHelpers
+﻿namespace BeekeeperAssistant.Web.ViewModels.QueenHelpers
 {
     using System;
     using System.Collections.Generic;
@@ -6,17 +6,16 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Services.Mapping;
-
-    public class AllBeehiveHelpersViewModel
+    public class AllQueenHelperViewModel
     {
-        public IEnumerable<BeehiveHelperViewModel> AllHelpers { get; set; }
+        public IEnumerable<QueenHelperViewModel> AllHelpers { get; set; }
 
         public int BeehiveId { get; set; }
 
         public int BeehiveNumber { get; set; }
 
         public string ApiaryNumber { get; set; }
+
+        public int QueenId { get; set; }
     }
 }

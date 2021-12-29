@@ -4,18 +4,26 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using Microsoft.AspNetCore.Identity;
 
     public class QueenHelperService : IQueenHelperService
     {
         private readonly IRepository<QueenHelper> queenHelperRepository;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IRepository<Queen> queenRepository;
 
-        public QueenHelperService(IRepository<QueenHelper> queenHelperRepository)
+        public QueenHelperService(
+            IRepository<QueenHelper> queenHelperRepository,
+            UserManager<ApplicationUser> userManager,
+            IRepository<Queen> queenRepository)
         {
             this.queenHelperRepository = queenHelperRepository;
+            this.userManager = userManager;
+            this.queenRepository = queenRepository;
         }
 
         public async Task EditAsync(string userId, int queenId, Access access)
@@ -56,10 +64,20 @@
             return queenHelper;
         }
 
-        public Access GetUserQueenAccess(string userId, int queenId)
-        => this.queenHelperRepository
-                .All()
-                .FirstOrDefault(q => (q.UserId == userId && q.QueenId == queenId))
-                .Access;
+        public async Task<Access> GetUserQueenAccessAsync(string userId, int queenId)
+        {
+            var user = await this.userManager.FindByIdAsync(userId);
+            var apiaryCreatorId = this.queenRepository.All()
+                .Where(q => q.Id == queenId)
+                .Select(q => q.Beehive.Apiary.CreatorId)
+                .FirstOrDefault();
+
+            if (await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName) || user.Id == apiaryCreatorId)
+            {
+                return Access.ReadWrite;
+            }
+
+            return this.queenHelperRepository.All().FirstOrDefault(qh => qh.UserId == userId && qh.QueenId == queenId).Access;
+        }
     }
 }

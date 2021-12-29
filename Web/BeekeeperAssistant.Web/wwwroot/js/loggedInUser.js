@@ -123,21 +123,6 @@ dataPicker.forEach((date) => {
         ("0" + currentDateTime.getFullYear()).slice(-2);
 });
 
-// Openning tabs
-function openTab(tab, tabBody) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabBody).style.display = "block";
-    tab.currentTarget.className += " active";
-}
-
 // Get the element with id="defaultOpen" and click on it
 // document.getElementById("defaultOpen").click();
 
@@ -284,4 +269,11 @@ function ShowDeleteForm(id) {
 function HideDeleteForm(id) {
     var deleteForm = document.getElementById(id);
     deleteForm.classList = 'delete-form-display';
+}
+
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+var property = params["orderBy"];
+if (property) {
+    document.getElementById(property).classList.add("ordered");
 }

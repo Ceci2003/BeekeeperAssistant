@@ -50,7 +50,16 @@
                         <time datetime="@queen.GivingDate.ToString("O")"></time>
                     </td>
                     <td class="number">
-                        <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@queen.BeehiveApiaryId">
+                            @if (queen.BeehiveApiaryNumber != null)
+                            {
+                                @queen.BeehiveApiaryNumber
+                            }
+                            else
+                            {
+                                @queen.BeehiveApiaryName
+                            }
+                        </a>
                     </td>
                     <td class="number">
                         <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
@@ -74,14 +83,27 @@
 
                             <div id="@queen.Id" class="delete-form-display">
                                 <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete"
-                                asp-route-id="@queen.Id">
+                                      asp-route-id="@queen.Id">
                                     <a class="delete close" onclick="HideDeleteForm('@queen.Id')">
                                         <i class="fas fa-times"></i>
                                     </a>
                                     <p>
                                         Сигурни ли сте че искате да изтриете майката от кошер
-                                        <strong>№@queen.BeehiveNumber</strong>
-                                        в пчелин <strong>@queen.BeehiveApiaryNumber</strong>?
+                                        <strong>
+                                            №@queen.BeehiveNumber
+                                        </strong>
+                                        в пчелин
+                                        <strong>
+                                            @if (queen.BeehiveApiaryNumber != null)
+                                            {
+                                                @queen.BeehiveApiaryNumber
+                                            }
+                                            else
+                                            {
+                                                @queen.BeehiveApiaryName
+                                            }
+                                        </strong>
+                                        ?
                                     </p>
 
                                     <button type="submit" class="delete">
@@ -120,13 +142,23 @@
                     <tr>
                         <td>Номер на пчелин</td>
                         <td class="number">
-                            <a href="/Apiary/@queen.BeehiveApiaryNumber">@queen.BeehiveApiaryNumber</a>
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@queen.BeehiveApiaryId">
+                                @if (queen.BeehiveApiaryNumber != null)
+                                {
+                                    @queen.BeehiveApiaryNumber
+                                }
+                                else
+                                {
+                                    @queen.BeehiveApiaryName
+                                }
+                            </a>
                         </td>
                     </tr>
                     <tr>
                         <td>Номер на кошер</td>
                         <td class="number">
-                            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@queen.BeehiveId">@queen.BeehiveNumber</a>
+                            <a asp-controller="Beehive" asp-action="ById"
+                            asp-route-id="@queen.BeehiveId">@queen.BeehiveNumber</a>
                         </td>
                     </tr>
                     <tr>
@@ -160,8 +192,21 @@
                                         </a>
                                         <p>
                                             Сигурни ли сте че искате да изтриете майката от кошер
-                                            <strong>№@queen.BeehiveNumber</strong>
-                                            в пчелин <strong>@queen.BeehiveApiaryNumber</strong>?
+                                            <strong>
+                                                №@queen.BeehiveNumber
+                                            </strong>
+                                            в пчелин 
+                                            <strong>
+                                                @if (queen.BeehiveApiaryNumber != null)
+                                                {
+                                                    @queen.BeehiveApiaryNumber
+                                                }
+                                                else
+                                                {
+                                                    @queen.BeehiveApiaryName
+                                                }
+                                            </strong>
+                                            ?
                                         </p>
 
                                         <button type="submit" class="delete">

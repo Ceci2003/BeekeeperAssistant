@@ -1,6 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Queens.ByBeehiveIdQueenViewModel
 @{
-        this.ViewData["Title"] = "Информация за кошер - №" + Model.BeehiveNumber;
+    this.ViewData["Title"] = "Информация за кошер - №" + Model.BeehiveNumber;
     string imgpath = "queen" + Model.Color + ".png";
     var onlyReadMsg = "нямате достъп";
 }
@@ -14,7 +14,16 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.BeehiveApiaryNumber">Пчелин: @Model.BeehiveApiaryNumber</a>
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.BeehiveApiaryId">
+                @if (!string.IsNullOrEmpty(Model.BeehiveApiaryNumber))
+                {
+                    @($"Пчелин № {Model.BeehiveApiaryNumber}")
+                }
+                else
+                {
+                    @Model.BeehiveApiaryName
+                }
+            </a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -23,13 +32,22 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.BeehiveApiaryNumber">@Model.BeehiveApiaryNumber</a>
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.BeehiveApiaryId">
+                @if (!string.IsNullOrEmpty(Model.BeehiveApiaryNumber))
+                {
+                    @($"Пчелин № {Model.BeehiveApiaryNumber}")
+                }
+                else
+                {
+                    @Model.BeehiveApiaryName
+                }
+            </a>
         </li>
         <li class="breadcrumb-item active">@Model.BeehiveNumber</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>

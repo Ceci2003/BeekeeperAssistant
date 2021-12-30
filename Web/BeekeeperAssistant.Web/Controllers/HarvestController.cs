@@ -57,10 +57,14 @@
                     this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
-            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
-            viewModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
             viewModel.BeehiveId = id;
+            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
             viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
+            viewModel.ApiaryId = apiary.Id;
+            viewModel.ApiaryNumber = apiary.Number;
+            viewModel.ApiaryName = apiary.Name;
 
             var count = this.harvestService.GetAllBeehiveHarvestsCountByBeehiveId(id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);

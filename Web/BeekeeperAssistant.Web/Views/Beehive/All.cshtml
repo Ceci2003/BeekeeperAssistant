@@ -30,7 +30,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -59,45 +59,39 @@
         <thead>
             <tr>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify("Apiary.Number")">
-                    Номер на пчелин
+                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify("Apiary.Number")">
+                        Номер на пчелин
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.Number))">
-                    Номер
+                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.Number))">
+                        Номер
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))">
-                    Подвижен
+                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))">
+                        Подвижен
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))">
+                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))">
                         Вид
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))">
+                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))">
                         Система
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))">
-                    Сила
+                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))">
+                        Сила
                     </a>
                 </th>
                 <th>Редактиране</th>
@@ -120,7 +114,7 @@
                         </a>
                     </td>
                     <td class="number">
-                        <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@beehive.Id">@beehive.Number</a>
+                        <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">@beehive.Number</a>
                     </td>
                     <td>
                         @if (beehive.IsItMovable)
@@ -140,7 +134,7 @@
                     <td class="edit">
                         <div class="edit-container">
                             <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
-                               asp-route-returnUrl="@this.Context.Request.Path">
+                            asp-route-returnUrl="@this.Context.Request.Path">
                                 <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
                             <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
@@ -152,23 +146,35 @@
                             </a>
                             <div id="@beehive.Number-@beehive.Apiary.Id" class="delete-form-display">
                                 <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
-                                      asp-route-id="@beehive.Id">
-                                    <a class="delete close"
-                                    onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
+                                asp-route-id="@beehive.Id">
+                                    <a class="delete close" onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
                                         <i class="fas fa-times"></i>
                                     </a>
                                     <p>
                                         Сигурни ли сте че искате да изтриете кошер
-                                        <strong>№@beehive.Number</strong>
-                                        в пчелин <strong>@beehive.Apiary.Number</strong>?
+                                        <strong>
+                                            №@beehive.Number
+                                        </strong>
+                                        в пчелин
+                                        <strong>
+                                            @if (beehive.Apiary.Number != null)
+                                            {
+                                                @beehive.Apiary.Number
+                                            }
+                                            else
+                                            {
+                                                @beehive.Apiary.Name
+                                            }
+                                        </strong>
+                                        ?
                                     </p>
 
                                     <button type="submit" class="delete">
                                         Изтрий <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
-                                <div class="content-cover"
-                                onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id')"></div>
+                                <div class="content-cover" onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -240,7 +246,7 @@
                         <td class="edit">
                             <div class="edit-container">
                                 <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
-                                   asp-route-returnUrl="@this.Context.Request.Path">
+                                asp-route-returnUrl="@this.Context.Request.Path">
                                     <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                 </a>
                                 <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
@@ -252,15 +258,28 @@
                                 </a>
                                 <div id="@beehive.Number-@beehive.Apiary.Id-responsive" class="delete-form-display">
                                     <form id="form-@beehive.Id" asp-controller="Beehive" asp-action="Delete"
-                                          asp-route-id="@beehive.Id">
+                                    asp-route-id="@beehive.Id">
                                         <a class="delete close"
                                         onclick="HideDeleteForm('@beehive.Number-@beehive.Apiary.Id-responsive')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <p>
                                             Сигурни ли сте че искате да изтриете кошер
-                                            <strong>№@beehive.Number</strong>
-                                            в пчелин <strong>@beehive.Apiary.Number</strong>?
+                                            <strong>
+                                                №@beehive.Number
+                                            </strong>
+                                            в пчелин
+                                            <strong>
+                                                @if (beehive.Apiary.Number != null)
+                                                {
+                                                    @beehive.Apiary.Number
+                                                }
+                                                else
+                                                {
+                                                    @beehive.Apiary.Name
+                                                }
+                                            </strong>
+                                            ?
                                         </p>
 
                                         <button type="submit" class="delete">
@@ -295,7 +314,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@(this.Model.CurrentPage - 1)" asp-route-orderBy="@orderBy">
+                    asp-route-page="@(this.Model.CurrentPage - 1)" asp-route-orderBy="@orderBy">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -311,7 +330,8 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Beehive" asp-action="All" asp-route-page="@i" asp-route-orderBy="@orderBy">@i</a>
+                        <a class="page-link" asp-controller="Beehive" asp-action="All" asp-route-page="@i"
+                    asp-route-orderBy="@orderBy">@i</a>
                     </li>
                 }
             }
@@ -327,7 +347,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Beehive" asp-action="All"
-                       asp-route-page="@(this.Model.CurrentPage + 1)" asp-route-orderBy="@orderBy">
+                    asp-route-page="@(this.Model.CurrentPage + 1)" asp-route-orderBy="@orderBy">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>
@@ -343,4 +363,3 @@
         </ul>
     </div>
 </div>
-

@@ -17,6 +17,8 @@
 
         public string Number { get; set; }
 
+        public string Name { get; set; }
+
         public Access ApiaryAccess { get; set; }
 
         public int CurrentPage { get; set; }

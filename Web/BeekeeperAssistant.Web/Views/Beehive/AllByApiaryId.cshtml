@@ -1,6 +1,16 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllByApiaryIdBeehiveViewModel
 @{
-    this.ViewData["Title"] = "Информация за пчелин - №" + Model.Number;
+    var title = "";
+    if (!string.IsNullOrEmpty(Model.Number))
+    {
+        title += $"Пчелин № {Model.Number}";
+    }
+    else
+    {
+        title = Model.Name;
+    }
+
+    ViewData["Title"] = title;
     string hasDevice = "has-device";
     var powerClasses = new Dictionary<string, string>
     {
@@ -10,8 +20,6 @@
 
     };
     var onlyReadMsg = "нямате достъп";
-
-    string website = $"{this.Context.Request.Scheme}://{this.Context.Request.Host}{this.Context.Request.Path}";
 }
 
 <div class="breadcrumb">
@@ -47,7 +55,7 @@
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
     <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
-        Пчелин №@Model.Number
+        @ViewData["Title"]
     </a>
     <a class="tablinks " asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
         Кошери

@@ -15,11 +15,13 @@
 
         public int BeehiveId { get; set; }
 
-        public int ApiaryId { get; set; }
+        public int BeehiveNumber { get; set; }
+
+        public int BeehiveApiaryId { get; set; }
 
         public string BeehiveApiaryNumber { get; set; }
 
-        public int BeehiveNumber { get; set; }
+        public string BeehiveApiaryName { get; set; }
 
         public Beehive Beehive { get; set; }
 

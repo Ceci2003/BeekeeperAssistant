@@ -3,8 +3,8 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class ApiaryHelperApiaryDataViewModel : IMapFrom<ApiaryHelper>
-    {        
+    public class AllApiaryUserHelperApiariesDataViewModel : IMapFrom<ApiaryHelper>
+    {
         public string ApiaryNumber { get; set; }
 
         public string ApiaryName { get; set; }

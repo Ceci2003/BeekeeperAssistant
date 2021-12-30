@@ -8,11 +8,11 @@
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class BeehiveViewModel : IMapFrom<Beehive>
+    public class BeehiveDataModel : IMapFrom<Beehive>
     {
         public int Id { get; set; }
 
-        public ByNumberApiaryViewModel Apiary { get; set; }
+        public ApiaryDataModel Apiary { get; set; }
 
         public int Number { get; set; }
 
@@ -31,7 +31,5 @@
         public Access BeehiveAccess { get; set; }
 
         public string CreatorId { get; set; }
-
-        public Queen Queen { get; set; }
     }
 }

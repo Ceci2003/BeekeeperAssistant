@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Inspection
+﻿namespace BeekeeperAssistant.Web.ViewModels.Inspections
 {
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
@@ -6,7 +6,7 @@
 
     public class AllByBeehiveIdInspectionViewModel
     {
-        public IEnumerable<InspectionDataViewModel> AllInspections { get; set; }
+        public IEnumerable<AllByBeehiveIdInspectionAllInspectionsViewModel> AllInspections { get; set; }
 
         public int BeehiveId { get; set; }
 

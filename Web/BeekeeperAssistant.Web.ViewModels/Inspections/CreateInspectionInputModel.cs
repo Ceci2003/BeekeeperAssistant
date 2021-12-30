@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Inspection
+﻿namespace BeekeeperAssistant.Web.ViewModels.Inspections
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@
     using BeekeeperAssistant.Data.Models;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class CreateInspectionInputModel
+    public class CreateInspectionInputModel : IValidatableObject
     {
         [Required(ErrorMessage = "Полето 'Дата на прегледа' е задължително!")]
         [Display(Name = "Дата на прегледа")]
@@ -141,12 +141,12 @@
         [Display(Name = "Условия")]
         public string Conditions { get; set; }
 
-        public double WeatherTemperature => Convert.ToDouble(this.WeatherTemperatureString);
+        public double WeatherTemperature { get; set; }
 
         [Display(Name = "Температура(t°)")]
         public string WeatherTemperatureString { get; set; }
 
-        public double WeatherHumidity => Convert.ToDouble(this.WeatherHumidityString);
+        public double WeatherHumidity { get; set; }
 
         [Display(Name = "Влажност(%)")]
         public string WeatherHumidityString { get; set; }
@@ -172,9 +172,14 @@
             var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
             var beehive = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId && b.Number == this.SelectedBeehiveNumber).FirstOrDefault();
 
-            if (beehive == null)
+            if (!double.TryParse(this.WeatherHumidityString, out _))
             {
-                errorList.Add(new ValidationResult($"Не съществува кошер с номер {this.SelectedBeehiveNumber} в пчелина!"));
+                errorList.Add(new ValidationResult($"Влажност(%) не в във правилен формат!"));
+            }
+
+            if (!double.TryParse(this.WeatherTemperatureString, out _))
+            {
+                errorList.Add(new ValidationResult($"Температура(t°) не в във правилен формат!"));
             }
 
             return errorList;

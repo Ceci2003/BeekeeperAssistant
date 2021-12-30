@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Web.ViewModels.Inspection;
+    using BeekeeperAssistant.Web.ViewModels.Inspections;
 
     public interface IInspectionService
     {

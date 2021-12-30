@@ -8,7 +8,7 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using BeekeeperAssistant.Web.ViewModels.Inspection;
+    using BeekeeperAssistant.Web.ViewModels.Inspections;
 
     public class InspectionService : IInspectionService
     {

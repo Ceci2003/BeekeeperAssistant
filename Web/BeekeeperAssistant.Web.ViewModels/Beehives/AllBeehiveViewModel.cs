@@ -7,7 +7,7 @@
 
     public class AllBeehiveViewModel
     {
-        public IEnumerable<BeehiveViewModel> AllBeehives { get; set; }
+        public IEnumerable<BeehiveDataModel> AllBeehives { get; set; }
 
         public int CurrentPage { get; set; }
 

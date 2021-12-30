@@ -6,9 +6,11 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    //{area?}{action}{controller}{FieldName?...Data}...ViewModel
+
     public class AllApiaryUserApiariesViewModel
     {
-        public IEnumerable<ApiaryViewModel> AllUserApiaries { get; set; }
+        public IEnumerable<AllApiaryUserApiariesDataViewModel> AllUserApiaries { get; set; }
 
         public int CurrentPage { get; set; }
 

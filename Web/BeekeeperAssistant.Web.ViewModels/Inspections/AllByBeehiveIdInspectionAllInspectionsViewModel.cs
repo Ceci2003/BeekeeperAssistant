@@ -1,12 +1,15 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Inspection
+﻿using BeekeeperAssistant.Data.Models;
+using BeekeeperAssistant.Services.Mapping;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BeekeeperAssistant.Web.ViewModels.Inspections
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
-    using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Services.Mapping;
-
-    public class InspectionDataViewModel : IMapFrom<Inspection>
+    public class AllByBeehiveIdInspectionAllInspectionsViewModel : IMapFrom<Inspection>
     {
         public int Id { get; set; }
 

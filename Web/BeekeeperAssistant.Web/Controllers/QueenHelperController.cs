@@ -30,7 +30,7 @@
 
         public IActionResult All(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(id);
 
             var viewModel = new AllQueenHelperViewModel
             {
@@ -49,7 +49,7 @@
             var inputModel = this.queenHelperService.GetQueenHelper<EditQueenHelperInputModel>(userId, queenId);
             inputModel.QueenId = queenId;
 
-            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(queenId);
+            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(queenId);
             inputModel.BeehiveId = beehive.Id;
             inputModel.BeehiveNumber = beehive.Number;
             inputModel.ApiaryNumber = beehive.Apiary.Number;
@@ -66,7 +66,7 @@
                 inputModel.UserUserName = user.UserName;
                 inputModel.QueenId = queenId;
 
-                var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveViewModel>(queenId);
+                var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(queenId);
                 inputModel.BeehiveId = beehive.Id;
                 inputModel.BeehiveNumber = beehive.Number;
                 inputModel.ApiaryNumber = beehive.Apiary.Number;

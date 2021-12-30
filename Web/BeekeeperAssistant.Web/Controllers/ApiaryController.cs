@@ -76,7 +76,7 @@
             {
                 UserApiaries = new AllApiaryUserApiariesViewModel
                 {
-                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(
+                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
                         (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
@@ -84,7 +84,7 @@
                 },
                 UserHelperApiaries = new AllApiaryUserHelperApiariesViewModel
                 {
-                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<ApiaryHelperApiaryDataViewModel>(
+                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<AllApiaryUserHelperApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiaryHelpersApiaryPerPage,
                         (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),

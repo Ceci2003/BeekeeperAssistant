@@ -4,7 +4,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using System;
 
-    public class BeehiveByApiaryIdViewModel : IMapFrom<Beehive>
+    public class ByApiaryIdBeehiveViewModel : IMapFrom<Beehive>
     {
         public int Id { get; set; }
 

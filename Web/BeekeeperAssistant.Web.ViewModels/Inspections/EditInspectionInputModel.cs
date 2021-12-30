@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Inspection
+﻿namespace BeekeeperAssistant.Web.ViewModels.Inspections
 {
     using System;
     using System.Collections.Generic;

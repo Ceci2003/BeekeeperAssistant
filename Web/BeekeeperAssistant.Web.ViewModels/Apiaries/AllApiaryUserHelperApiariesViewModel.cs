@@ -6,7 +6,7 @@
 
     public class AllApiaryUserHelperApiariesViewModel
     {
-        public IEnumerable<ApiaryHelperApiaryDataViewModel> AllUserHelperApiaries { get; set; }
+        public IEnumerable<AllApiaryUserHelperApiariesDataViewModel> AllUserHelperApiaries { get; set; }
 
         public int CurrentPage { get; set; }
 

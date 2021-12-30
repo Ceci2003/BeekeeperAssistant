@@ -32,7 +32,7 @@
 
             var viewModel = new AdministrationAllApiaryViewModel
             {
-                AllApiaries = this.apiaryService.GetAllApiariesWithDeleted<ApiaryViewModel>(
+                AllApiaries = this.apiaryService.GetAllApiariesWithDeleted<AdministrationAllApiaryAllApiariesViewModel>(
                     GlobalConstants.ApiariesPerPageAdministration,
                     (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
                 PagesCount = pagesCount,

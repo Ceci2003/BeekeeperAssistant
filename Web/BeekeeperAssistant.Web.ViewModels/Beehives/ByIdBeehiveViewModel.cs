@@ -10,7 +10,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
-    using BeekeeperAssistant.Web.ViewModels.Inspection;
+    using BeekeeperAssistant.Web.ViewModels.Inspections;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
 
     public class ByIdBeehiveViewModel : IMapFrom<Beehive>, IHaveCustomMappings

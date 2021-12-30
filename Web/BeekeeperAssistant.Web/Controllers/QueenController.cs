@@ -94,11 +94,11 @@
                 FertilizationDate = DateTime.UtcNow.Date,
             };
 
-            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id);
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
+            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
 
-            inputModel.ApiaryNumber = apiary.Number;
-            inputModel.BeehiveNumber = beehive.Number;
+            inputModel.ApiaryNumber = apiaryNumber;
+            inputModel.BeehiveNumber = beehiveNumber;
 
             return this.View(inputModel);
         }
@@ -146,12 +146,12 @@
 
             var beehiveId = this.beehiveService.GetBeehiveIdByQueen(id);
 
-            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
 
             inputModel.BeehiveId = beehiveId;
-            inputModel.ApiaryNumber = apiary.Number;
-            inputModel.BeehiveNumber = beehive.Number;
+            inputModel.ApiaryNumber = apiaryNumber;
+            inputModel.BeehiveNumber = beehiveNumber;
 
             return this.View(inputModel);
         }

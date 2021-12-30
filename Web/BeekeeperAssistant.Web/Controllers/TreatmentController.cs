@@ -90,13 +90,13 @@
             }
             else
             {
-                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
-                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id.Value);
+                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
+                var beehiveNumber = this.beehiveService.GetBeehiveNumberById(id.Value);
 
                 inputModel.ApiaryId = apiary.Id;
                 inputModel.BeehiveId = id.Value;
                 inputModel.ApiaryNumber = apiary.Number;
-                inputModel.BeehiveNumber = beehive.Number;
+                inputModel.BeehiveNumber = beehiveNumber;
             }
 
             return this.View(inputModel);
@@ -118,11 +118,11 @@
                 return this.View(inputModel);
             }
 
-            var apiaryNumber = this.apiaryService.GetApiaryById<ApiaryViewModel>(inputModel.ApiaryId).Number;
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
 
             if (id == null)
             {
-                var apiaryBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveViewModel>(inputModel.ApiaryId).ToList();
+                var apiaryBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataModel>(inputModel.ApiaryId).ToList();
                 if (inputModel.AllBeehives)
                 {
                     var beehivesIds = apiaryBeehives.Select(b => b.Id).ToList();
@@ -190,12 +190,12 @@
             var inputModel = this.treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
 
             var beehiveId = this.beehiveService.GetBeehiveIdByTreatmentId(id);
-            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
 
             inputModel.BeehiveId = beehiveId;
-            inputModel.ApiaryNumber = apiary.Number;
-            inputModel.BeehiveNumber = beehive.Number;
+            inputModel.ApiaryNumber = apiaryNumber;
+            inputModel.BeehiveNumber = beehiveNumber;
 
             return this.View(inputModel);
         }

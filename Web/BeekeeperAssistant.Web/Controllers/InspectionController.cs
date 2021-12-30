@@ -11,7 +11,7 @@
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
-    using BeekeeperAssistant.Web.ViewModels.Inspection;
+    using BeekeeperAssistant.Web.ViewModels.Inspections;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -61,7 +61,7 @@
             var viewModel = new AllByBeehiveIdInspectionViewModel()
             {
                 AllInspections =
-                    this.inspectionService.GetAllBeehiveInspections<InspectionDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    this.inspectionService.GetAllBeehiveInspections<AllByBeehiveIdInspectionAllInspectionsViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
             viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
@@ -99,8 +99,8 @@
             {
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
 
-                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(id.Value);
-                var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(id.Value);
+                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id.Value);
 
                 ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
                 if (forecastResult != null)
@@ -124,8 +124,13 @@
         {
             var currentuser = await this.userManager.GetUserAsync(this.User);
 
-            var apiary = this.apiaryService.GetApiaryById<ApiaryViewModel>(inputModel.ApiaryId);
-            var beehive = this.beehiveService.GetBeehiveByNumber<BeehiveViewModel>(inputModel.SelectedBeehiveNumber, apiary.Number);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
+            var beehive = this.beehiveService.GetBeehiveByNumber<BeehiveDataModel>(inputModel.SelectedBeehiveNumber, apiaryNumber);
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
 
             if (id == null && beehive == null)
             {
@@ -213,11 +218,11 @@
             inputModel.WeatherHumidityString = inputModel.WeatherHumidity.ToString();
             inputModel.WeatherTemperatureString = inputModel.WeatherTemperature.ToString();
 
-            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryViewModel>(beehiveId);
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveViewModel>(beehiveId);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
             inputModel.BeehiveId = beehiveId;
-            inputModel.ApiaryNumber = apiary.Number;
-            inputModel.BeehiveNumber = beehive.Number;
+            inputModel.ApiaryNumber = apiaryNumber;
+            inputModel.BeehiveNumber = beehiveNumber;
 
             return this.View(inputModel);
         }

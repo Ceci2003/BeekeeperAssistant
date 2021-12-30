@@ -24,6 +24,6 @@
         public int PagesCount { get; set; }
 
         [IgnoreMap]
-        public IEnumerable<BeehiveByApiaryIdViewModel> AllBeehives { get; set; }
+        public IEnumerable<ByApiaryIdBeehiveViewModel> AllBeehives { get; set; }
     }
 }

@@ -79,10 +79,10 @@
             // TODO: Make services
 
             // apiaries chart
-            var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryViewModel>(currentUser.Id);
+            var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryDataModel>(currentUser.Id);
             viewModel.ApiariesCount = apiaries.Count();
 
-            var apiariesCountByType = apiaries.ToList().GroupBy(a => a.ApiaryType).ToDictionary(k => k.Key, v => v.Count());
+            var apiariesCountByType = apiaries.GroupBy(a => a.ApiaryType).ToDictionary(k => k.Key, v => v.Count());
             viewModel.ApiariesCountByType = apiariesCountByType;
 
             var apiariesCountChartUrl = this.quickChartService.ImageUrl(
@@ -92,7 +92,7 @@
             viewModel.ApiariesCountChartUrl = apiariesCountChartUrl;
 
             // beehives chart
-            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id);
+            var beehives = this.beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id);
             viewModel.BeehivesCount = beehives.Count();
 
             var beehivesCountByPower = new Dictionary<BeehivePower, int>(); //beehives.ToList().GroupBy(b => b.BeehivePower).ToDictionary(k => k.Key, v => v.Count());

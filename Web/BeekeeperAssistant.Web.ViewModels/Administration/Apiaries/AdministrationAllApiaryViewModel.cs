@@ -11,10 +11,9 @@
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
     // {area}{action}{controller}{FieldName?}ViewModel
-
     public class AdministrationAllApiaryViewModel
     {
-        public IEnumerable<ApiaryViewModel> AllApiaries { get; set; }
+        public IEnumerable<AdministrationAllApiaryAllApiariesViewModel> AllApiaries { get; set; }
 
         public int CurrentPage { get; set; }
 

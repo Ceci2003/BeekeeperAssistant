@@ -50,7 +50,7 @@
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
     <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
-        Пчелин №@Model.Number
+        @ViewData["Title"]
     </a>
     <a class="tablinks " asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
         Кошери
@@ -67,14 +67,23 @@
                     отпечатай кода
                 </a>
                 <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=@website&size=255x255"
-                    alt="QR Code" width="250" height="250">
+                    alt="ApiaryQrCode" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
                     <tbody>
                         <tr>
                             <th scope="row">Номер:</th>
-                            <td id="apiary-num">@Model.Number</td>
+                            <td id="apiary-num">
+                                @if (string.IsNullOrEmpty(Model.Number))
+                                {
+                                    @("-")
+                                }
+                                else
+                                {
+                                    @Model.Number
+                                }
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">Име:</th>

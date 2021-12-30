@@ -24,7 +24,16 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.ApiaryNumber">Пчелин: @Model.ApiaryNumber</a>
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                {
+                    @($"Пчелин № {Model.ApiaryNumber}")
+                }
+                else
+                {
+                    @Model.ApiaryName
+                }
+            </a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -33,7 +42,16 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                {
+                    @($"Пчелин № {Model.ApiaryNumber}")
+                }
+                else
+                {
+                    @Model.ApiaryName
+                }
+            </a>
         </li>
         <li class="breadcrumb-item active">@Model.Number</li>
     </ul>
@@ -81,20 +99,35 @@
                     отпечатай кода
                 </a>
                 <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?data=@website&size=255x255"
-                    alt="W3Schools" width="250" height="250">
+                    alt="BeehiveQrCode" width="250" height="250">
             </div>
             <div class="apiary-info">
                 <table>
                     <tbody>
                         <tr>
                             <th scope="row">Номер:</th>
-                            <td id="beehive-num"><strong>@Model.Number</strong></td>
+                            <td id="beehive-num">
+                                <strong>
+                                    @Model.Number
+                                </strong>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">Пчелин:</th>
                             <td class="beehive-apiary-num">
-                                <a href="/Apiary/@Model.ApiaryNumber"
-                                    id="apiary-num"><strong>@Model.ApiaryNumber</strong></a>
+                                <a class="tablinks active" asp-controller="Apiary" asp-action="ById"
+                                    asp-route-apiaryId="@Model.ApiaryId">
+                                    <strong>
+                                        @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                                        {
+                                            @Model.ApiaryNumber
+                                        }
+                                        else
+                                        {
+                                            @Model.ApiaryName
+                                        }
+                                    </strong>
+                                </a>
                             </td>
                         </tr>
                         <tr>

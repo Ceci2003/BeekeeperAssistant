@@ -4,8 +4,6 @@
     var onlyReadMsg = "нямате достъп";
 }
 
-
-
 <div class="breadcrumb">
     <div class="aside-icon" onclick="asideBurgerMenuClick();">
         <i class="fas fa-bars"></i>
@@ -15,7 +13,16 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.ApiaryNumber">Пчелин: @Model.ApiaryNumber</a>
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                {
+                    @($"Пчелин № {Model.ApiaryNumber}")
+                }
+                else
+                {
+                    @Model.ApiaryName
+                }
+            </a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -24,13 +31,22 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                {
+                    @($"Пчелин № {Model.ApiaryNumber}")
+                }
+                else
+                {
+                    @Model.ApiaryName
+                }
+            </a>
         </li>
         <li class="breadcrumb-item active">@Model.BeehiveNumber</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>

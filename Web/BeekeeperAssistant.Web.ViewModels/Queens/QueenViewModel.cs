@@ -13,7 +13,11 @@
 
         public int BeehiveNumber { get; set; }
 
+        public int BeehiveApiaryId { get; set; }
+
         public string BeehiveApiaryNumber { get; set; }
+
+        public string BeehiveApiaryName { get; set; }
 
         public QueenColor Color { get; set; }
 

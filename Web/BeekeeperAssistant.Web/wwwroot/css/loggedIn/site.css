@@ -1883,6 +1883,11 @@ input[readonly] {
   background-color: var(--gray-background);
 }
 
+.no-required::before,
+.no-required.field-required::before{
+  content: "";
+}
+
 .required::before,
 .field-required::before {
   content: "*";

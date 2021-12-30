@@ -146,7 +146,7 @@
                 .All()
                 .Where(a => a.CreatorId == userId)
                 .OrderByDescending(a => a.CreatedOn)
-                .Select(a => new KeyValuePair<int, string>(a.Id, a.Number))
+                .Select(a => a.IsRegistered ? new KeyValuePair<int, string>(a.Id, a.Number) : new KeyValuePair<int, string>(a.Id, a.Name))
                 .ToList();
 
         public T GetUserApiaryByNumber<T>(string userId, string number)

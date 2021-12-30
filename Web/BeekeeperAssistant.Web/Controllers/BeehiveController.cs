@@ -63,7 +63,6 @@
             }
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
-
             var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveViewModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
 
             var viewModel = new AllBeehiveViewModel

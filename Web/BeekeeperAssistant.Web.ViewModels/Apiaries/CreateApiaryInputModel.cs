@@ -9,6 +9,8 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Web.Infrastructure.ValidationAttributes.Apiaries;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
     public class CreateApiaryInputModel : IValidatableObject
@@ -21,8 +23,7 @@
         [Display(Name = "Номер на пчелин")]
         public string FarmNumber { get; set; }
 
-        [ApiaryExistsValidation(ErrorMessage = GlobalConstants.ApiaryExistsErrorMessage)]
-        public string Number => NumberGenerator();
+        public string Number { get; set; }
 
         [Display(Name = "Име на пчелина")]
         public string Name { get; set; }
@@ -37,32 +38,33 @@
         [Display(Name = "Регистриран ли е пчелина?")]
         public bool IsRegistered { get; set; }
 
-        private string NumberGenerator()
-        {
-            if (this.IsRegistered)
-            {
-                return $"{this.CityCode}-{this.FarmNumber}";
-            }
-            else
-            {
-                return null;
-            }
-        }
-
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();
-            var apiaryRepository = validationContext.GetService<IDeletableEntityRepository<Apiary>>();
-            var apiaryByNumber = apiaryRepository.All().FirstOrDefault(a => a.Number == this.Number);
-            var apiaryByName = apiaryRepository.All().FirstOrDefault(a => a.Name == this.Name); // !TODO make filter by user - Names may be repeated for different users.
-
-            if (apiaryByNumber != null)
-            {
-                errorList.Add(new ValidationResult("Вече съществува пчелин с такъв номер в системата!"));
-            }
 
             if (this.IsRegistered)
             {
+                this.Number = $"{this.CityCode}-{this.FarmNumber}";
+            }
+            else
+            {
+                this.Number = null;
+            }
+            var apiaryRepository = validationContext.GetService<IDeletableEntityRepository<Apiary>>();
+            var apiaryByNumber = apiaryRepository.All().FirstOrDefault(a => a.Number == this.Number);
+
+            var userManager = validationContext.GetService<UserManager<ApplicationUser>>();
+            var httpContext = validationContext.GetService<IHttpContextAccessor>();
+            var currentUserId = userManager.GetUserId(httpContext.HttpContext.User);
+            var apiaryByName = apiaryRepository.All().FirstOrDefault(a => a.Name == this.Name && a.CreatorId == currentUserId);
+
+            if (this.IsRegistered)
+            {
+                if (apiaryByNumber != null)
+                {
+                    errorList.Add(new ValidationResult("Вече съществува пчелин с такъв номер в системата!"));
+                }
+
                 if (string.IsNullOrEmpty(this.CityCode))
                 {
                     errorList.Add(new ValidationResult("Въведете пощенски код. Трябва да въведете 4 цифри."));
@@ -77,7 +79,7 @@
             {
                 if (apiaryByName != null)
                 {
-                    errorList.Add(new ValidationResult("Вече съществува пчелин със зададеното име в системата!"));
+                    errorList.Add(new ValidationResult("Вече имате пчелин със зададеното име!"));
                 }
 
                 if (string.IsNullOrEmpty(this.Name))

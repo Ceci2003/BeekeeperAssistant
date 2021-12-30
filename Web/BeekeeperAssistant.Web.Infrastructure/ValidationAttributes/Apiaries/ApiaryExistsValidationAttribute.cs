@@ -28,7 +28,7 @@
                 .Where(a => a.Number == apiaryNumber)
                 .FirstOrDefault();
 
-            if (doesApiaryExist == null)
+            if (doesApiaryExist == null && !string.IsNullOrEmpty(apiaryNumber))
             {
                 return ValidationResult.Success;
             }

@@ -214,7 +214,7 @@
             await this.apiaryRepository.SaveChangesAsync();
         }
 
-        public string GetApiaryCreatorIdByApiaryId(int apiaryId)
+        public string GetApiaryOwnerIdByApiaryId(int apiaryId)
             => this.apiaryRepository
                 .All()
                 .FirstOrDefault(x => x.Id == apiaryId).CreatorId;

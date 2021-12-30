@@ -51,7 +51,7 @@
 
         int GetAllUserApiariesCount(string userId);
 
-        string GetApiaryCreatorIdByApiaryId(int apiaryId);
+        string GetApiaryOwnerIdByApiaryId(int apiaryId);
 
         IEnumerable<T> GetAllApiaries<T>();
 

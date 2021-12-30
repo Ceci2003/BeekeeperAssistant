@@ -111,10 +111,13 @@
                 return this.View(inputModel);
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(inputModel.BeehiveId);
+            var apiaryOwner = this.apiaryService.GetApiaryOwnerIdByApiaryId(apiaryId);
             var beehiveId = await this.queenService
                 .CreateUserQueenAsync(
-                user.Id,
+                apiaryOwner,
+                currentUser.Id,
                 inputModel.BeehiveId,
                 inputModel.FertilizationDate,
                 inputModel.GivingDate,

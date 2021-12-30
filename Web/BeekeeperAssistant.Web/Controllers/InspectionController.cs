@@ -203,13 +203,15 @@
                 }
             }
 
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+
             if (id == null)
             {
-                await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, beehive.Id, inputModel);
+                await this.inspectionService.CreateUserInspectionAsync(apiaryOwnerId, currentuser.Id, beehive.Id, inputModel);
             }
             else
             {
-                await this.inspectionService.CreateUserInspectionAsync(currentuser.Id, id.Value, inputModel);
+                await this.inspectionService.CreateUserInspectionAsync(apiaryOwnerId, currentuser.Id, id.Value, inputModel);
             }
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";

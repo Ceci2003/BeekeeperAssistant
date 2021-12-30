@@ -61,8 +61,9 @@
             this.harvestService = harvestService;
         }
 
-        public async Task<int> CreateUserBeehiveAsync(
-            string userId,
+        public async Task<int> CreateBeehiveAsync(
+            string ownerId,
+            string creatorId,
             int number,
             BeehiveSystem beehiveSystem,
             BeehiveType beehiveType,
@@ -76,7 +77,8 @@
         {
             var beehive = new Beehive
             {
-                CreatorId = userId,
+                CreatorId = creatorId,
+                OwnerId = ownerId,
                 Number = number,
                 BeehiveSystem = beehiveSystem,
                 BeehiveType = beehiveType,
@@ -303,12 +305,7 @@
 
             return query.To<T>().ToList();
         }
-        // => this.beehiveRepository
-        //     .AllWithDeleted()
-        //     .Where(b => !b.Apiary.IsDeleted)
-        //     .To<T>()
-        //     .ToList();
-
+        
         public async Task UndeleteAsync(int beehiveId)
         {
             var beehive = this.beehiveRepository

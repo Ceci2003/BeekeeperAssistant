@@ -27,6 +27,7 @@
         }
 
         public async Task<int> CreateTreatmentAsync(
+            string ownerId,
             string creatorId,
             DateTime dateOfTreatment,
             string name,
@@ -41,6 +42,7 @@
             var treatment = new Treatment
             {
                 CreatorId = creatorId,
+                OwnerId = ownerId,
                 DateOfTreatment = dateOfTreatment,
                 Name = name,
                 Note = note,

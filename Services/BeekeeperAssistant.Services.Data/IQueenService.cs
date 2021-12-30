@@ -9,6 +9,7 @@
     public interface IQueenService
     {
         Task<int> CreateUserQueenAsync(
+            string ownerId,
             string creatorId,
             int beehiveId,
             DateTime fertilizationDate,

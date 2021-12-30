@@ -163,11 +163,12 @@
                 return this.View(inputModel);
             }
 
-            var apiaryCreatorId = this.apiaryService.GetApiaryCreatorIdByApiaryId(inputModel.ApiaryId);
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
 
             var beehiveId = await this.beehiveService
-                .CreateUserBeehiveAsync(
-                apiaryCreatorId,
+                .CreateBeehiveAsync(
+                apiaryOwnerId,
+                currentUser.Id,
                 inputModel.Number,
                 inputModel.BeehiveSystem,
                 inputModel.BeehiveType,

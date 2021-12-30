@@ -23,11 +23,12 @@
             this.beehiveRepository = beehiveRepository;
         }
 
-        public async Task<int> CreateUserInspectionAsync(string userId, int beehiveId, CreateInspectionInputModel inputModel)
+        public async Task<int> CreateUserInspectionAsync(string ownerId, string userId, int beehiveId, CreateInspectionInputModel inputModel)
         {
             var inspection = new Inspection
             {
                 CreatorId = userId,
+                OwnerId = ownerId,
                 BeehiveId = beehiveId,
                 DateOfInspection = inputModel.DateOfInspection,
                 InspectionType = inputModel.InspectionType,

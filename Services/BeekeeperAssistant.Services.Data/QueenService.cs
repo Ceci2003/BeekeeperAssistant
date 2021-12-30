@@ -44,7 +44,7 @@
         }
 
         public async Task<int> CreateUserQueenAsync(
-            string userId,
+            string creatorId,
             int beehiveId,
             DateTime fertilizationDate,
             DateTime givingDate,
@@ -64,7 +64,7 @@
                 GivingDate = givingDate,
                 HygenicHabits = hygenicHabits,
                 Origin = origin,
-                UserId = userId,
+                CreatorId = creatorId,
                 QueenType = queenType,
                 Temperament = temperament,
             };
@@ -171,7 +171,7 @@
             return queen.BeehiveId;
         }
 
-        public IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0)
         {
             var query = this.queenRepository
                 .All()
@@ -179,7 +179,7 @@
                 .ThenByDescending(q => q.GivingDate)
                 .ThenBy(q => q.Beehive.Apiary.Number)
                 .ThenBy(q => q.Beehive.Number)
-                .Where(q => q.UserId == userId && !q.Beehive.IsDeleted)
+                .Where(q => q.OwnerId == ownerId && !q.Beehive.IsDeleted)
                 .Skip(skip);
 
             if (take.HasValue)
@@ -190,10 +190,10 @@
             return query.To<T>().ToList();
         }
 
-        public int GetAllUserQueensCount(string userId)
+        public int GetAllUserQueensCount(string ownerId)
             => this.queenRepository
                 .All()
-                .Where(q => q.UserId == userId && q.Beehive.IsDeleted == false)
+                .Where(q => q.OwnerId == ownerId && q.Beehive.IsDeleted == false)
                 .Count();
 
         public T GetQueenByBeehiveId<T>(int beehiveId) =>

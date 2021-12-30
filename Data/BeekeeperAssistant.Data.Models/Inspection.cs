@@ -10,6 +10,10 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
+        public string OwnerId { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
+
         public int BeehiveId { get; set; }
 
         public virtual Beehive Beehive { get; set; }

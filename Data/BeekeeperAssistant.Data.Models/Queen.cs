@@ -14,9 +14,13 @@
 
         public virtual Beehive Beehive { get; set; }
 
-        public string UserId { get; set; }
+        public string CreatorId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser Creator { get; set; }
+
+        public string OwnerId { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
 
         public DateTime FertilizationDate { get; set; }
 

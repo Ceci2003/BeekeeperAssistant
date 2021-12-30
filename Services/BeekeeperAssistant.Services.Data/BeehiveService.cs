@@ -221,7 +221,7 @@
         public T GetBeehiveById<T>(int beehiveId) =>
             this.beehiveRepository
                 .All()
-                .Include(x => x.Queen.User)
+                .Include(x => x.Queen.OwnerId)
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
@@ -229,7 +229,7 @@
         public int GetBeehiveIdByQueen(int queenId) =>
             this.queenRepository
                 .All()
-                .Include(x => x.User)
+                .Include(x => x.OwnerId)
                 .Where(q => q.Id == queenId)
                 .FirstOrDefault().BeehiveId;
 
@@ -237,7 +237,7 @@
         {
             var beehiveId = this.queenRepository
                 .All()
-                .Include(x => x.User)
+                .Include(x => x.OwnerId)
                 .Where(q => q.Id == queenId)
                 .FirstOrDefault().BeehiveId;
 

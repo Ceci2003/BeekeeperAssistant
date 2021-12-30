@@ -11,6 +11,10 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
+        public string OwnerId { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
+
         public DateTime DateOfTreatment { get; set; }
 
         public string Name { get; set; }

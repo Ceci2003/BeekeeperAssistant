@@ -50,6 +50,8 @@
 
         public DbSet<QueenHelper> QueensHelpers { get; set; }
 
+        public DbSet<BeehiveNote> BeehiveNotes { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -75,6 +77,31 @@
                 .HasOne(b => b.Queen)
                 .WithOne(q => q.Beehive)
                 .HasForeignKey<Queen>(q => q.BeehiveId);
+
+            builder.Entity<Beehive>()
+                .HasOne(b => b.Owner)
+                .WithMany(o => o.Beehives)
+                .HasForeignKey(b => b.OwnerId);
+
+            builder.Entity<Inspection>()
+                .HasOne(i => i.Owner)
+                .WithMany(o => o.Inspections)
+                .HasForeignKey(i => i.OwnerId);
+
+            builder.Entity<Treatment>()
+                .HasOne(t => t.Owner)
+                .WithMany(o => o.Treatments)
+                .HasForeignKey(t => t.OwnerId);
+
+            builder.Entity<Harvest>()
+                .HasOne(h => h.Owner)
+                .WithMany(o => o.Harvests)
+                .HasForeignKey(h => h.OwnerId);
+
+            builder.Entity<Queen>()
+                .HasOne(q => q.Owner)
+                .WithMany(o => o.Queens)
+                .HasForeignKey(q => q.OwnerId);
 
             builder.Entity<TreatedBeehive>()
                 .HasKey(tb => new { tb.BeehiveId, tb.TreatmentId });

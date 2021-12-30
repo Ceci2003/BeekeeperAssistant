@@ -17,6 +17,10 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
+        public string OwnerId { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
+
         public int Number { get; set; }
 
         public BeehiveSystem BeehiveSystem { get; set; }
@@ -49,5 +53,7 @@
         public virtual ICollection<TreatedBeehive> TreatedBeehives { get; set; }
 
         public virtual ICollection<BeehiveHelper> BeehiveHelpers { get; set; }
+
+        public virtual ICollection<BeehiveNote> BeehiveNotes { get; set; }
     }
 }

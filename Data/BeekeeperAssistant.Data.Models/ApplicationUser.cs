@@ -20,6 +20,8 @@ namespace BeekeeperAssistant.Data.Models
             this.Beehives = new HashSet<Beehive>();
             this.Tasks = new HashSet<Duty>();
             this.Harvests = new HashSet<Harvest>();
+            this.Inspections = new HashSet<Inspection>();
+            this.Treatments = new HashSet<Treatment>();
             this.ApiaryHelpers = new HashSet<ApiaryHelper>();
             this.Feedbacks = new HashSet<Feedback>();
         }
@@ -49,6 +51,10 @@ namespace BeekeeperAssistant.Data.Models
         public virtual ICollection<Duty> Tasks { get; set; }
 
         public virtual ICollection<Harvest> Harvests { get; set; }
+
+        public virtual ICollection<Treatment> Treatments { get; set; }
+
+        public virtual ICollection<Inspection> Inspections { get; set; }
 
         public virtual ICollection<ApiaryHelper> ApiaryHelpers { get; set; }
 

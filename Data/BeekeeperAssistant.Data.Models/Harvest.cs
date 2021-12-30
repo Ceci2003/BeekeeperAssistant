@@ -12,6 +12,10 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
+        public string OwnerId { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
+
         public string HarvestName { get; set; }
 
         public DateTime DateOfHarves { get; set; }

@@ -9,7 +9,7 @@
     public interface IQueenService
     {
         Task<int> CreateUserQueenAsync(
-            string userId,
+            string creatorId,
             int beehiveId,
             DateTime fertilizationDate,
             DateTime givingDate,
@@ -24,13 +24,13 @@
 
         T GetQueenByBeehiveId<T>(int beehiveId);
 
-        IEnumerable<T> GetAllUserQueens<T>(string userId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0);
 
         Task<int> DeleteQueenAsync(int queenId);
 
         Task DeleteAllQueenHelpersByQueenIdAsync(int queenId);
 
-        int GetAllUserQueensCount(string userId);
+        int GetAllUserQueensCount(string ownerId);
 
         Task<int> EditQueenAsync(
             int queenId,
@@ -44,6 +44,5 @@
             QueenBreed queenBreed);
 
         Task BookmarkQueenAsync(int queenId);
-
     }
 }

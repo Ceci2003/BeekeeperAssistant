@@ -172,14 +172,20 @@
             var beehiveRepository = validationContext.GetService<IDeletableEntityRepository<Beehive>>();
             var beehive = beehiveRepository.All().Where(b => b.ApiaryId == this.ApiaryId && b.Number == this.SelectedBeehiveNumber).FirstOrDefault();
 
-            if (!double.TryParse(this.WeatherHumidityString, out _))
+            if (!string.IsNullOrEmpty(this.WeatherHumidityString))
             {
-                errorList.Add(new ValidationResult($"Влажност(%) не в във правилен формат!"));
+                if (!double.TryParse(this.WeatherHumidityString, out _))
+                {
+                    errorList.Add(new ValidationResult($"Влажност(%) не в във правилен формат!"));
+                }
             }
 
-            if (!double.TryParse(this.WeatherTemperatureString, out _))
+            if (!string.IsNullOrEmpty(this.WeatherTemperatureString))
             {
-                errorList.Add(new ValidationResult($"Температура(t°) не в във правилен формат!"));
+                if (!double.TryParse(this.WeatherTemperatureString, out _))
+                {
+                    errorList.Add(new ValidationResult($"Температура(t°) не в във правилен формат!"));
+                }
             }
 
             return errorList;

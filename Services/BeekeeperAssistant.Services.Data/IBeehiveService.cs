@@ -8,8 +8,9 @@
 
     public interface IBeehiveService
     {
-        Task<int> CreateUserBeehiveAsync(
-            string userId,
+        Task<int> CreateBeehiveAsync(
+            string ownerId,
+            string creatorId,
             int number,
             BeehiveSystem beehiveSystem,
             BeehiveType beehiveType,

@@ -55,6 +55,7 @@
         //    double weatherTemperature,
         //    double weatherHumidity);
         Task<int> CreateUserInspectionAsync(
+            string ownerId,
             string userId,
             int beehiveId,
             CreateInspectionInputModel inputModel);

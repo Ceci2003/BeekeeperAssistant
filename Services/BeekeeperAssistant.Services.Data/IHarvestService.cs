@@ -10,6 +10,7 @@
     public interface IHarvestService
     {
         Task<int> CreateUserHarvestAsync(
+            string ownerId,
             string creatorId,
             CreateHarvestInputModel inputModel,
             List<int> beehiveIds);

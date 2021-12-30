@@ -9,6 +9,7 @@
     public interface ITreatmentService
     {
         Task<int> CreateTreatmentAsync(
+            string ownerId,
             string creatorId,
             DateTime dateOfTreatment,
             string name,

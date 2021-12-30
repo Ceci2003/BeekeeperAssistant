@@ -61,8 +61,9 @@
             this.harvestService = harvestService;
         }
 
-        public async Task<int> CreateUserBeehiveAsync(
-            string userId,
+        public async Task<int> CreateBeehiveAsync(
+            string ownerId,
+            string creatorId,
             int number,
             BeehiveSystem beehiveSystem,
             BeehiveType beehiveType,
@@ -76,7 +77,8 @@
         {
             var beehive = new Beehive
             {
-                CreatorId = userId,
+                CreatorId = creatorId,
+                OwnerId = ownerId,
                 Number = number,
                 BeehiveSystem = beehiveSystem,
                 BeehiveType = beehiveType,
@@ -117,7 +119,6 @@
         {
             var beehive = this.beehiveRepository
                 .All()
-                .Include(b => b.Apiary)
                 .FirstOrDefault(b => b.Id == beehiveId);
 
             this.beehiveRepository.Delete(beehive);
@@ -221,7 +222,6 @@
         public T GetBeehiveById<T>(int beehiveId) =>
             this.beehiveRepository
                 .All()
-                .Include(x => x.Queen.OwnerId)
                 .Where(b => b.Id == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
@@ -229,7 +229,6 @@
         public int GetBeehiveIdByQueen(int queenId) =>
             this.queenRepository
                 .All()
-                .Include(x => x.OwnerId)
                 .Where(q => q.Id == queenId)
                 .FirstOrDefault().BeehiveId;
 
@@ -237,7 +236,6 @@
         {
             var beehiveId = this.queenRepository
                 .All()
-                .Include(x => x.OwnerId)
                 .Where(q => q.Id == queenId)
                 .FirstOrDefault().BeehiveId;
 
@@ -307,12 +305,7 @@
 
             return query.To<T>().ToList();
         }
-        // => this.beehiveRepository
-        //     .AllWithDeleted()
-        //     .Where(b => !b.Apiary.IsDeleted)
-        //     .To<T>()
-        //     .ToList();
-
+        
         public async Task UndeleteAsync(int beehiveId)
         {
             var beehive = this.beehiveRepository

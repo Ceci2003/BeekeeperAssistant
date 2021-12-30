@@ -45,6 +45,7 @@
 
         public async Task<int> CreateUserQueenAsync(
             string creatorId,
+            string ownerId,
             int beehiveId,
             DateTime fertilizationDate,
             DateTime givingDate,
@@ -57,6 +58,8 @@
         {
             var queen = new Queen
             {
+                CreatorId = creatorId,
+                OwnerId = ownerId,
                 BeehiveId = beehiveId,
                 Breed = queenBreed,
                 Color = queenColor,
@@ -64,7 +67,6 @@
                 GivingDate = givingDate,
                 HygenicHabits = hygenicHabits,
                 Origin = origin,
-                CreatorId = creatorId,
                 QueenType = queenType,
                 Temperament = temperament,
             };

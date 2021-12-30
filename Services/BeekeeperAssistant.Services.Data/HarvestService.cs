@@ -26,10 +26,11 @@
             this.harvestedBeehiveRepository = harvestedBeehiveRepository;
         }
 
-        public async Task<int> CreateUserHarvestAsync(string creatorId, CreateHarvestInputModel inputModel, List<int> beehiveIds)
+        public async Task<int> CreateUserHarvestAsync(string ownerId, string creatorId, CreateHarvestInputModel inputModel, List<int> beehiveIds)
         {
             var harvest = new Harvest
             {
+                OwnerId = ownerId,
                 CreatorId = creatorId,
                 HarvestName = inputModel.HarvestName,
                 DateOfHarves = inputModel.DateOfHarves,

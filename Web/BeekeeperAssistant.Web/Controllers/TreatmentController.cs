@@ -119,6 +119,7 @@
             }
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
 
             if (id == null)
             {
@@ -127,6 +128,7 @@
                 {
                     var beehivesIds = apiaryBeehives.Select(b => b.Id).ToList();
                     await this.treatmentService.CreateTreatmentAsync(
+                    apiaryOwnerId,
                     currentUser.Id,
                     inputModel.DateOfTreatment,
                     inputModel.Name,
@@ -152,6 +154,7 @@
                     }
 
                     await this.treatmentService.CreateTreatmentAsync(
+                            apiaryOwnerId,
                             currentUser.Id,
                             inputModel.DateOfTreatment,
                             inputModel.Name,
@@ -169,6 +172,7 @@
             else
             {
                 await this.treatmentService.CreateTreatmentAsync(
+                apiaryOwnerId,
                 currentUser.Id,
                 inputModel.DateOfTreatment,
                 inputModel.Name,

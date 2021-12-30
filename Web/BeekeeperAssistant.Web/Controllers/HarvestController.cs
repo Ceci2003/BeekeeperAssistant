@@ -118,13 +118,15 @@
                 return this.View(inputModel);
             }
 
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+
             if (inputModel.BeehiveId == null)
             {
                 var apiaryBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataModel>(inputModel.ApiaryId).ToList();
                 if (inputModel.AllBeehives)
                 {
                     var beehiveIds = apiaryBeehives.Select(b => b.Id).ToList();
-                    await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, beehiveIds);
+                    await this.harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, beehiveIds);
                 }
                 else
                 {
@@ -139,7 +141,7 @@
                         }
                     }
 
-                    await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, selectedIds);
+                    await this.harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, selectedIds);
                 }
 
                 this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
@@ -147,7 +149,7 @@
             }
             else
             {
-                await this.harvestService.CreateUserHarvestAsync(currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
+                await this.harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
 
                 this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
                 return this.RedirectToAction("AllByBeehiveId", "Harvest", new { id = inputModel.BeehiveId.Value });

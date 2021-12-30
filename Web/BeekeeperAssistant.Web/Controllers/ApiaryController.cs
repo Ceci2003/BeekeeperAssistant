@@ -149,7 +149,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateApiaryInputModel inputModel)
+        public async Task<IActionResult> Create(CreateApiaryInputModel inputModel, string returnUrl)
         {
             if (!this.ModelState.IsValid)
             {

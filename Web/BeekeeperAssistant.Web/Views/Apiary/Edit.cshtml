@@ -11,6 +11,8 @@
     }
 
     ViewData["Title"] = "Редактиране на: " + title;
+
+    var returnUrl = this.Context.Request.Query["returnUrl"];
 }
 
 <div class="breadcrumb">
@@ -44,7 +46,7 @@
 </div>
 <div class="content">
     <div class="form-box">
-        <form asp-controller="Apiary" asp-action="Edit">
+        <form asp-controller="Apiary" asp-action="Edit" asp-route-returnUrl="@returnUrl">
             <a class="back-arrow" asp-controller="Apiary" asp-action="All">
                 <i class="fas fa-arrow-left"></i>
             </a>

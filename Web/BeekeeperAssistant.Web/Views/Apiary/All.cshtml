@@ -90,7 +90,7 @@
                             <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
                                 <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id">
+                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id" asp-route-returnUrl="@Context.Request.Path">
                                 <i class="far fa-edit"></i>
                             </a>
                             <a class="delete" onclick="ShowDeleteForm('@apiary.Id')">

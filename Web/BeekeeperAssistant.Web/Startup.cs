@@ -15,6 +15,7 @@
     using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Services.Messaging;
+    using BeekeeperAssistant.Web.Filters;
     using BeekeeperAssistant.Web.Infrastructure.RouteConstraints;
     using BeekeeperAssistant.Web.Routes;
     using BeekeeperAssistant.Web.ViewModels;
@@ -57,6 +58,7 @@
                 options =>
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                        options.Filters.Add(new RedirectActionFilter());
                     }).AddRazorRuntimeCompilation();
 
             services.AddRazorPages();

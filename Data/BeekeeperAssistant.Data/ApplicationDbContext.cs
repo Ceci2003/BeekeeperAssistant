@@ -52,6 +52,8 @@
 
         public DbSet<BeehiveNote> BeehiveNotes { get; set; }
 
+        public DbSet<ApiaryDiary> ApiaryDiaries { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

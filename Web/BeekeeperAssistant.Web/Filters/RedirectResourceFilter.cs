@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BeekeeperAssistant.Web.Filters
 {
-    public class RedirectActionFilter : IActionFilter
+    public class RedirectResourceFilter : IResourceFilter
     {
-        public void OnActionExecuted(ActionExecutedContext context)
+        public void OnResourceExecuted(ResourceExecutedContext context)
         {
             if (context.HttpContext.Request.Query.ContainsKey("returnUrl"))
             {
@@ -21,7 +21,7 @@ namespace BeekeeperAssistant.Web.Filters
             }
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public void OnResourceExecuting(ResourceExecutingContext context)
         {
         }
     }

@@ -58,7 +58,7 @@
                 options =>
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                        options.Filters.Add(new RedirectActionFilter());
+                        options.Filters.Add(new RedirectResourceFilter());
                     }).AddRazorRuntimeCompilation();
 
             services.AddRazorPages();

@@ -95,6 +95,7 @@
             services.AddTransient<IExcelExportService, ExcelExportService>();
             services.AddTransient<IFeedbackService, FeedbackService>();
             services.AddTransient<IStringManipulationService, StringManipulationService>();
+            services.AddTransient<IApiaryDiaryService, ApiaryDiaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

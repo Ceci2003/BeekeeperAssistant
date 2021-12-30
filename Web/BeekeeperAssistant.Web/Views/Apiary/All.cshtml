@@ -3,6 +3,8 @@
     ViewData["Title"] = "Пчелини - всички";
     ViewData["HelperApiaries"] = "Пчелини с достъп";
     var onlyReadMsg = "нямате достъп";
+
+    var returnUrl = Context.Request.Path;
 }
 
 <div class="breadcrumb">
@@ -90,7 +92,7 @@
                             <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
                                 <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id" asp-route-returnUrl="@Context.Request.Path">
+                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id" asp-route-returnUrl="@returnUrl">
                                 <i class="far fa-edit"></i>
                             </a>
                             <a class="delete" onclick="ShowDeleteForm('@apiary.Id')">

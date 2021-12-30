@@ -18,6 +18,8 @@
         private readonly IRepository<BeehiveHelper> beehiveHelpersReposiitory;
         private readonly IRepository<QueenHelper> queenHelpersReposiitory;
         private readonly IBeehiveService beehiveService;
+        private readonly IApiaryDiaryService apiaryDiaryService;
+        private readonly IRepository<ApiaryDiary> apiaryDiaryRepository;
 
         public ApiaryService(
             IDeletableEntityRepository<Apiary> apiaryRepository,
@@ -26,7 +28,9 @@
             IRepository<ApiaryHelper> apiaryHelpersReposiitory,
             IRepository<BeehiveHelper> beehiveHelpersReposiitory,
             IRepository<QueenHelper> queenHelpersReposiitory,
-            IBeehiveService beehiveService)
+            IBeehiveService beehiveService,
+            IApiaryDiaryService apiaryDiaryService,
+            IRepository<ApiaryDiary> apiaryDiaryRepository)
         {
             this.apiaryRepository = apiaryRepository;
             this.beehiveRepository = beehiveRepository;
@@ -35,6 +39,8 @@
             this.beehiveHelpersReposiitory = beehiveHelpersReposiitory;
             this.queenHelpersReposiitory = queenHelpersReposiitory;
             this.beehiveService = beehiveService;
+            this.apiaryDiaryService = apiaryDiaryService;
+            this.apiaryDiaryRepository = apiaryDiaryRepository;
         }
 
         public async Task<string> CreateUserApiaryAsync(
@@ -57,6 +63,8 @@
 
             await this.apiaryRepository.AddAsync(newApiary);
             await this.apiaryRepository.SaveChangesAsync();
+
+            await this.apiaryDiaryService.CreateAsync(newApiary.Id, string.Empty, newApiary.CreatorId);
 
             var apiaryNumber = newApiary.Number;
             return apiaryNumber;
@@ -258,5 +266,10 @@
         => this.apiaryRepository
                 .AllWithDeleted()
                 .Count();
+
+        public bool HasDiary(int apiaryId)
+        {
+            return this.apiaryDiaryRepository.All().Any(ad => ad.ApiaryId == apiaryId);
+        }
     }
 }

@@ -1,0 +1,84 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryDiaries.ByApiaryIdApiaryDiaryViewModel
+@{
+    var title = "";
+    if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+    {
+        title += $"Пчелин № {Model.ApiaryNumber}";
+    }
+    else
+    {
+        title = Model.ApiaryName;
+    }
+
+    ViewData["Title"] = title;
+}
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Apiary" asp-action="All">Пчелини</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<h1 class="tab-title title-1">@ViewData["Title"]</h1>
+<div class="tab">
+    <a class="tablinks " asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+        @ViewData["Title"]
+    </a>
+    <a class="tablinks " asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
+        Кошери
+    </a>
+    <a class="tablinks active" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.ApiaryId">
+        Дневник
+    </a>
+</div>
+
+<div class="tabs-body">
+    <div id="Apiary" class="tabcontent" style="display: block">
+        <form asp-controller="ApiaryDiary" asp-action="Save" asp-route-id="@Model.ApiaryId">
+            <textarea asp-for="@Model.Content" id="tiny">@Model.Content</textarea>
+            <button class="btn beehive-create" type="submit">Запази</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+
+        $('textarea#tiny').tinymce({
+            height: 650,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+        });
+    </script>
+}

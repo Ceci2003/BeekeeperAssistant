@@ -54,11 +54,14 @@
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
-    <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
+    <a class="tablinks " asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
         @ViewData["Title"]
     </a>
-    <a class="tablinks " asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
+    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
         Кошери
+    </a>
+    <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.Id">
+        Дневник
     </a>
 </div>
 

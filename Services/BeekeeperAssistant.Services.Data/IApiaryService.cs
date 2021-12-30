@@ -62,5 +62,7 @@
         int AllApiariesCount();
 
         Task UndeleteAsync(int apiaryId);
+
+        bool HasDiary(int apiaryId);
     }
 }

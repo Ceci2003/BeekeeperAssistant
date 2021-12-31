@@ -1,18 +1,19 @@
-﻿using BeekeeperAssistant.Common;
-using BeekeeperAssistant.Data.Models;
-using BeekeeperAssistant.Services.Data;
-using BeekeeperAssistant.Web.ViewModels.Apiaries;
-using BeekeeperAssistant.Web.ViewModels.ApiaryDiaries;
-using Ganss.XSS;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.ApiaryDiaries;
+    using Ganss.XSS;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ApiaryDiaryController : BaseController
     {
         private readonly IApiaryDiaryService apiaryDiaryService;

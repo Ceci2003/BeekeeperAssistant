@@ -215,7 +215,7 @@
             }
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
-            return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = id.Value });
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = id.Value });
         }
 
         public IActionResult Edit(int id, int beehiveId)
@@ -242,7 +242,7 @@
             var beehiveId = await this.inspectionService.EditUserInspectionAsync(id, inputModel);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран преглед!";
-            return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
 
         }
 
@@ -260,7 +260,7 @@
             await this.inspectionService.DeleteInspectionAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит преглед!";
-            return this.RedirectToAction("AllByBeehiveId", "Inspection", new { id = inspection.BeehiveId });
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = inspection.BeehiveId });
         }
 
         public IActionResult ExportToExcel(int id)

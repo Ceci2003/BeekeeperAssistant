@@ -125,7 +125,6 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         public async Task<IActionResult> Create(int? id, bool stayOnPage = false)
         {
             var inputModel = new CreateBeehiveInputModel();
@@ -143,7 +142,6 @@
             inputModel.Date = DateTime.UtcNow.Date;
             inputModel.StayOnThePage = stayOnPage;
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен кошер!";
 
             return this.View(inputModel);
         }
@@ -185,13 +183,15 @@
 
             if (inputModel.StayOnThePage)
             {
-                return this.RedirectToAction("Create", "Beehive", new { id = id, stayOnPage = inputModel.StayOnThePage });
+                inputModel.Number += 1;
+                // return this.RedirectToAction(nameof(this.Create), new { id = id, stayOnPage = inputModel.StayOnThePage });
+
+                return this.View(inputModel);
             }
 
-            return this.RedirectToAction("ById", "Beehive", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.ById), new { id = beehiveId });
         }
 
-        // DONE []
         public async Task<IActionResult> Edit(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -202,7 +202,6 @@
             return this.View(inputModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditBeehiveInputModel inputModel)
         {
@@ -219,13 +218,10 @@
                 inputModel.HasPropolisCatcher,
                 inputModel.IsItMovable);
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран кошер!";
-            return this.RedirectToAction("ById", "Beehive", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.ById), new { id = beehiveId });
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -245,10 +241,9 @@
             await this.beehiveService.DeleteBeehiveByIdAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
-            return this.RedirectToAction("AllByApiaryId", "Beehive", new { id = apiaryId });
+            return this.RedirectToAction(nameof(this.AllByApiaryId), new { id = apiaryId });
         }
 
-        // DONE []
         public async Task<IActionResult> ExportToExcel(int? id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -259,7 +254,6 @@
             return new FileContentResult(result.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        // DONE []
         public async Task<IActionResult> Bookmark(int id, string returnUrl)
         {
             var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);

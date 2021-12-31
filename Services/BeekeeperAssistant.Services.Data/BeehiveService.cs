@@ -28,6 +28,7 @@
         private readonly IInspectionService inspectionService;
         private readonly ITreatmentService treatmentService;
         private readonly IHarvestService harvestService;
+        private readonly IDeletableEntityRepository<BeehiveDiary> beehiveDiaryRepository;
 
         public BeehiveService(
             IRepository<BeehiveHelper> beehiveHelperRepository,
@@ -43,7 +44,8 @@
             IQueenService queenService,
             IInspectionService inspectionService,
             ITreatmentService treatmentService,
-            IHarvestService harvestService)
+            IHarvestService harvestService,
+            IDeletableEntityRepository<BeehiveDiary> beehiveDiaryRepository)
         {
             this.beehiveHelperRepository = beehiveHelperRepository;
             this.apiaryHelperRepository = apiaryHelperRepository;
@@ -59,6 +61,7 @@
             this.inspectionService = inspectionService;
             this.treatmentService = treatmentService;
             this.harvestService = harvestService;
+            this.beehiveDiaryRepository = beehiveDiaryRepository;
         }
 
         public async Task<int> CreateBeehiveAsync(
@@ -340,6 +343,11 @@
             var harvest = this.harvestedBeehiveRepository.All().FirstOrDefault(h => h.HarvestId == harvestId);
 
             return harvest.BeehiveId;
+        }
+
+        public bool HasDiary(int beehiveId)
+        {
+            return this.beehiveDiaryRepository.All().Any(bd => bd.BeehiveId == beehiveId);
         }
     }
 }

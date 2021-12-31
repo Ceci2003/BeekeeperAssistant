@@ -29,23 +29,23 @@
 
         Task BookmarkApiaryAsync(int apiaryId);
 
-        Task<string> CreateUserApiaryAsync(
+        Task<int> CreateUserApiaryAsync(
             string userId,
             string number,
             string name,
             ApiaryType apiaryType,
             string address,
-            bool IsRegistered);
+            bool isRegistered);
 
         Task DeleteApiaryByIdAsync(int apiaryId);
 
-        Task<string> EditApiaryByIdAsync(
+        Task<int> EditApiaryByIdAsync(
             int apiaryId,
             string number,
             string name,
             ApiaryType apiaryType,
             string address,
-            bool IsRegistered);
+            bool isRegistered);
 
         IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 

@@ -189,7 +189,7 @@
                 new List<int> { id.Value });
 
                 this.TempData[GlobalConstants.SuccessMessage] = "Успешно създадено третиране!";
-                return this.RedirectToAction("AllByBeehiveId", "Treatment", new { id = id.Value });
+                return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = id.Value });
             }
         }
 
@@ -224,7 +224,7 @@
                 inputModel.Dose);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактирано третиране!";
-            return this.RedirectToAction("AllByBeehiveId", "Treatment", new { id = inputModel.BeehiveId.Value });
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = inputModel.BeehiveId.Value });
         }
 
         [HttpPost]
@@ -243,7 +243,7 @@
             var beehiveId = this.beehiveService.GetBeehiveIdByTreatmentId(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрито третиране!";
-            return this.RedirectToAction("AllByBeehiveId", "Treatment", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
         }
 
         public IActionResult ExportToExcel(int id)

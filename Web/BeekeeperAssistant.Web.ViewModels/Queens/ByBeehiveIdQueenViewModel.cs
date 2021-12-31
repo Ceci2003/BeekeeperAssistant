@@ -23,8 +23,6 @@
 
         public string BeehiveApiaryName { get; set; }
 
-        public Beehive Beehive { get; set; }
-
         public DateTime FertilizationDate { get; set; }
 
         public DateTime GivingDate { get; set; }

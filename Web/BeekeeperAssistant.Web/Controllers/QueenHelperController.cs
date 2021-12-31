@@ -77,7 +77,7 @@
             await this.queenHelperService.EditAsync(userId, queenId, inputModel.Access);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
-            return this.Redirect($"/QueenHelper/All/{queenId}");
+            return this.RedirectToAction(nameof(this.All), new { id = queenId });
         }
     }
 }

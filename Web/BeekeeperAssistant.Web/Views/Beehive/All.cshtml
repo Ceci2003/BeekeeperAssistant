@@ -102,7 +102,7 @@
             {
                 <tr class="@if (beehive.HasDevice == true) { @hasDevice }">
                     <td class="number">
-                        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@beehive.Apiary.Id">
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.Apiary.Id">
                             @if (beehive.Apiary.Number != null)
                             {
                                 @beehive.Apiary.Number
@@ -196,7 +196,7 @@
                     <tr>
                         <td>Номер на пчелин</td>
                         <td class="number">
-                            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@beehive.Apiary.Id">
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.Apiary.Id">
                                 @if (beehive.Apiary.Number != null)
                                 {
                                     @beehive.Apiary.Number

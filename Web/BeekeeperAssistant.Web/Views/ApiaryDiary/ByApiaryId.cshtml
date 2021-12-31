@@ -44,7 +44,7 @@
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
-    <a class="tablinks " asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+    <a class="tablinks " asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
         @ViewData["Title"]
     </a>
     <a class="tablinks " asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
@@ -66,7 +66,7 @@
                         Запази
                     </button>
                 </div>
-                <textarea asp-for="@Model.Content" id="tiny">@Model.Content</textarea>
+                <textarea asp-for="@Model.Content" id="tiny">@Model.SanitizedContent</textarea>
             </form>
         </div>
     </div>

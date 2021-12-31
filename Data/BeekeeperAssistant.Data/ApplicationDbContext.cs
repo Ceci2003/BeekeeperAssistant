@@ -52,7 +52,9 @@
 
         public DbSet<BeehiveNote> BeehiveNotes { get; set; }
 
-        public DbSet<ApiaryDiary> ApiaryDiaries { get; set; }
+        public DbSet<ApiaryDiary> ApiariesDiaries { get; set; }
+
+        public DbSet<BeehiveDiary> BeehivesDiaries { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

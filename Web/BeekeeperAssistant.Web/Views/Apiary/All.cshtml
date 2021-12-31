@@ -61,7 +61,7 @@
             {
                 <tr>
                     <td class="number">
-                        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@apiary.Id">
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
                             @if (apiary.IsRegistered)
                             {
                                 @apiary.Number
@@ -73,7 +73,7 @@
                         </a>
                     </td>
                     <td class="number">
-                        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@apiary.Id">
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
                             @if (apiary.Name != null)
                             {
                                 @apiary.Name
@@ -143,7 +143,7 @@
                     <tr>
                         <td>Номер</td>
                         <td class="number">
-                            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@apiary.Id">
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
                                 @if (apiary.IsRegistered)
                                 {
                                     @apiary.Number
@@ -158,7 +158,7 @@
                     <tr>
                         <td>Име</td>
                         <td class="number">
-                            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@apiary.Id">
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
                                 @if (apiary.Name != null)
                                 {
                                     @apiary.Name
@@ -309,12 +309,12 @@
         <tr>
 
         <td class="number">
-        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@apiary.Id">
+        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
         @apiary.ApiaryNumber
         </a>
         </td>
         <td class="number">
-        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@apiary.Id">
+        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
         @apiary.ApiaryName
         </a>
         </td>
@@ -325,7 +325,7 @@
         <div class="edit-container">
         @if (apiary.Access == Access.ReadWrite)
         {
-        <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.ApiaryId">
+        <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.id">
         <i class="far fa-edit"></i>
         </a>
 

@@ -13,7 +13,7 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
                 @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
                 {
                     @($"Пчелин № {Model.ApiaryNumber}")
@@ -31,7 +31,7 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
                 @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
                 {
                     @($"Пчелин № {Model.ApiaryNumber}")
@@ -57,13 +57,12 @@
 <div class="tab">
     <a class="tablinks" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-archive"></i>
-        Кошер №@Model.BeehiveNumber
+        Кошер №@Model.BeehiveId
     </a>
     <a class="tablinks" asp-controller="Queen" asp-action="ByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-crown"></i>
         Майка
     </a>
-
     <a class="tablinks" asp-controller="Inspection" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="far fa-calendar-check"></i>
         Прегледи
@@ -75,6 +74,10 @@
     <a class="tablinks" asp-controller="Harvest" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-box"></i>
         Добиви
+    </a>
+    <a class="tablinks" asp-controller="BeehiveDiary" asp-action="ByBeehiveId" asp-route-id="@Model.BeehiveId">
+        <i class="fas fa-book"></i>
+        Дневник
     </a>
 </div>
 

@@ -1,4 +1,5 @@
-﻿using BeekeeperAssistant.Data.Models;
+﻿using BeekeeperAssistant.Common;
+using BeekeeperAssistant.Data.Models;
 using BeekeeperAssistant.Services.Data;
 using BeekeeperAssistant.Web.ViewModels.Apiaries;
 using BeekeeperAssistant.Web.ViewModels.ApiaryDiaries;
@@ -35,10 +36,10 @@ namespace BeekeeperAssistant.Web.Controllers
             if (viewModel == null)
             {
                 viewModel = new ByApiaryIdApiaryDiaryViewModel();
-
                 var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(id);
                 viewModel.ApiaryId = id;
                 viewModel.ApiaryNumber = apiary.Number;
+                viewModel.ApiaryName = apiary.Name;
             }
 
             return this.View(viewModel);

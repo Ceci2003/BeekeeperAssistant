@@ -36,7 +36,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -56,29 +56,37 @@
 </div>
 
 <div class="tabs-body">
-    <div id="Apiary" class="tabcontent" style="display: block">
-        <form asp-controller="ApiaryDiary" asp-action="Save" asp-route-id="@Model.ApiaryId">
-            <textarea asp-for="@Model.Content" id="tiny">@Model.Content</textarea>
-            <button class="btn beehive-create" type="submit">Запази</button>
-        </form>
+    <partial name="_StatusMessagePartial" />
+    <div class="tabcontent">
+        <div id="Diary" class="tabcontent" style="display: block">
+            <form asp-controller="ApiaryDiary" asp-action="Save" asp-route-id="@Model.ApiaryId">
+                <div class="btn-group">
+                    <button class="btn edit" type="submit">
+                        <i class="far fa-save"></i>
+                        Запази
+                    </button>
+                </div>
+                <textarea asp-for="@Model.Content" id="tiny">@Model.Content</textarea>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts
 {
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+<script>
 
-        $('textarea#tiny').tinymce({
-            height: 650,
-            menubar: false,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
-        });
-    </script>
+    $('textarea#tiny').tinymce({
+        height: 650,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount table'
+        ],
+        toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | table tabledelete | help'
+    });
+</script>
 }

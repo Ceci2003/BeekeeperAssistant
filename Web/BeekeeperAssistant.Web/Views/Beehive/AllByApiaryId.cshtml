@@ -42,7 +42,16 @@
         <li class="breadcrumb-item">
             <a asp-controller="Apiary" asp-action="All">Пчелини</a>
         </li>
-        <li class="breadcrumb-item active">@Model.Number</li>
+        <li class="breadcrumb-item active">
+            if (!string.IsNullOrEmpty(Model.Number))
+            {
+                @Model.Number
+            }
+            else
+            {
+                @Model.Name
+            }
+        </li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
@@ -54,13 +63,20 @@
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <div class="tab">
-    <a class="tablinks " asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
+    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.Id">
+        <i class="fas fa-boxes"></i>
         @ViewData["Title"]
     </a>
     <a class="tablinks active" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
+        <i class="fas fa-border-all"></i>
         Кошери
     </a>
+    <a class="tablinks" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-apiaryId="@Model.Id">
+        <i class="fas fa-sticky-note"></i>
+        Бележки
+    </a>
     <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.Id">
+        <i class="fas fa-book"></i>
         Дневник
     </a>
 </div>

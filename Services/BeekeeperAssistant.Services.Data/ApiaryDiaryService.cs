@@ -1,11 +1,12 @@
-﻿using BeekeeperAssistant.Data.Common.Repositories;
-using BeekeeperAssistant.Data.Models;
-using System.Linq;
-using BeekeeperAssistant.Services.Mapping;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Services.Data
+﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+
     public class ApiaryDiaryService : IApiaryDiaryService
     {
         private readonly IRepository<ApiaryDiary> apiaryDiaryRepository;

@@ -169,6 +169,7 @@ body {
   opacity: 0.9;
   transition: opacity 0.6s;
   bottom: 0;
+  z-index: 1;
 }
 
 .cookies button {

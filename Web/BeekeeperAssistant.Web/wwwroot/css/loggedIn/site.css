@@ -387,6 +387,11 @@ button::selection {
   margin-bottom: 10px;
 }
 
+.page-controls.one {
+  display: flex;
+  justify-content: end;
+}
+
 .export-file {
   display: flex;
   align-items: center;
@@ -819,7 +824,7 @@ td.queen-red {
   border: none;
   padding: 8px 0;
 }
- 
+
 .all-table-responsive {
   display: none;
 }
@@ -1884,7 +1889,7 @@ input[readonly] {
 }
 
 .no-required::before,
-.no-required.field-required::before{
+.no-required.field-required::before {
   content: "";
 }
 
@@ -2061,7 +2066,37 @@ input[readonly] {
   font-weight: 400;
 }
 
+/* Apiary & Beehive notes */
+.empty-custom-notes-list {
+  text-align: center;
+}
+
+.custom-notes-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-note .card-header {
+
+}
+
+.custom-note .card-body {
+  
+}
+
+.custom-note .card-footer {
+  
+}
+
+.custom-note .card-footer .createdon {
+  
+}
+
+.custom-note .card-footer .controls {
+  
+}
+
 .ordered {
-    background-color: #D4D4D4;
-    border: 1px solid red;
+  background-color: #d4d4d4;
+  border: 1px solid #ff0000;
 }

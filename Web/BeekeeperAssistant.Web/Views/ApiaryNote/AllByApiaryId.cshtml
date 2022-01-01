@@ -1,0 +1,141 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.ApiaryNotes.AllByApiaryIdApiaryNoteViewModel
+@{
+    var title = "";
+    if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+    {
+        title += $"Пчелин № {Model.ApiaryNumber}";
+    }
+    else
+    {
+        title = Model.ApiaryName;
+    }
+
+    ViewData["Title"] = title;
+
+    var returnUrl = Context.Request.Path;
+}
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Apiary" asp-action="All">Пчелини</a>
+        </li>
+        <li class="breadcrumb-item active">
+            @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+            {
+                @Model.ApiaryNumber
+            }
+            else
+            {
+                @Model.ApiaryName
+            }
+        </li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<h1 class="tab-title title-1">@ViewData["Title"]</h1>
+<div class="tab">
+    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+        <i class="fas fa-boxes"></i>
+        @ViewData["Title"]
+    </a>
+    <a class="tablinks" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
+        <i class="fas fa-border-all"></i>
+        Кошери
+    </a>
+    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
+        asp-route-apiaryId="@Model.ApiaryId">
+        <i class="fas fa-sticky-note"></i>
+        Бележки
+    </a>
+    <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.ApiaryId">
+        <i class="fas fa-book"></i>
+        Дневник
+    </a>
+</div>
+
+<div class="tabs-body">
+    <partial name="_StatusMessagePartial" />
+    <div id="Notes" class="tabcontent">
+        @if (Model.ApiaryAccess == Access.ReadWrite)
+        {
+            <div class="page-controls one">
+                <a class="btn beehive-create" asp-controller="ApiaryNote" asp-action="Create"
+                asp-route-apiaryId="@Model.ApiaryId" asp-route-returnUrl="@returnUrl">
+                    <i class="far fa-plus-square"></i> Добави бележка
+                </a>
+            </div>
+        }
+        @if (Model.AllNotes.Any())
+        {
+            <div class="custom-notes-list">
+                @foreach (var note in Model.AllNotes)
+                {
+                    <div class="custom-note">
+                        <div class="card-header">
+                            <h3 class="title">
+                                @note.Title
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <textarea name="@note.Id" cols="30" rows="10" disabled>@note.Content</textarea>
+                        </div>
+                        <div class="card-footer">
+                            <div class="createdon">
+                                @note.ModifiedOn.ToString("MMMM dd, yyyy");
+                            </div>
+                            <div class="controls">
+                                @if (Model.ApiaryAccess == Access.ReadWrite)
+                                {
+                                    <a class="edit" asp-controller="ApiaryNote" asp-action="Edit" asp-route-noteId="@note.Id">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="delete" asp-controller="ApiaryNote" asp-action="Delete" asp-route-noteId="@note.Id">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-custom-notes-list">
+                Няма създадени бележки към пчелина.
+                @if (Model.ApiaryAccess == Access.ReadWrite)
+                {
+                    @("Добавете нова от тук:")
+                    <br>
+                    <a asp-controller="ApiaryNote" asp-action="Create" asp-route-apiaryId="@Model.ApiaryId"
+                asp-route-returnUrl="@returnUrl">
+                        <i class="far fa-plus-square"></i> Добави бележка
+                    </a>
+                }
+            </div>
+        }
+    </div>
+</div>

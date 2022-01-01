@@ -9,9 +9,9 @@
 
     public class ApiaryDiaryService : IApiaryDiaryService
     {
-        private readonly IRepository<ApiaryDiary> apiaryDiaryRepository;
+        private readonly IDeletableEntityRepository<ApiaryDiary> apiaryDiaryRepository;
 
-        public ApiaryDiaryService(IRepository<ApiaryDiary> apiaryDiaryRepository)
+        public ApiaryDiaryService(IDeletableEntityRepository<ApiaryDiary> apiaryDiaryRepository)
         {
             this.apiaryDiaryRepository = apiaryDiaryRepository;
         }

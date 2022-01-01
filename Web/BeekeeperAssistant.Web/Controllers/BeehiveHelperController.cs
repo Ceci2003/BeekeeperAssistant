@@ -44,7 +44,6 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         public IActionResult Edit(string userId, int beehiveId)
         {
             var inputModel = this.beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
@@ -53,7 +52,6 @@
             return this.View(inputModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Edit(EditBeehiveHelperInputModel inputModel, string userId, int beehiveId)
         {
@@ -69,7 +67,7 @@
             await this.beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран помощник!";
-            return this.Redirect($"/BeehiveHelper/All/{beehiveId}");
+            return this.RedirectToAction(nameof(this.All), new { id = beehiveId });
         }
     }
 }

@@ -54,7 +54,7 @@
             await this.feedbackService.CreateAsync(currentUser.Id, inputModel.Title, inputModel.Body, inputModel.FeedbackType);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно изпратено запитване!";
-            return this.Redirect("/");
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

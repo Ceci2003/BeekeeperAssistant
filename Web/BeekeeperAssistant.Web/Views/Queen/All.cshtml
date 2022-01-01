@@ -50,7 +50,7 @@
                         <time datetime="@queen.GivingDate.ToString("O")"></time>
                     </td>
                     <td class="number">
-                        <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@queen.BeehiveApiaryId">
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@queen.BeehiveApiaryId">
                             @if (queen.BeehiveApiaryNumber != null)
                             {
                                 @queen.BeehiveApiaryNumber
@@ -142,7 +142,7 @@
                     <tr>
                         <td>Номер на пчелин</td>
                         <td class="number">
-                            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@queen.BeehiveApiaryId">
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@queen.BeehiveApiaryId">
                                 @if (queen.BeehiveApiaryNumber != null)
                                 {
                                     @queen.BeehiveApiaryNumber

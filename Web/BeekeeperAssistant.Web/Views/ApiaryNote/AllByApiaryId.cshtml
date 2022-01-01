@@ -92,24 +92,21 @@
             <div class="custom-notes-list">
                 @foreach (var note in Model.AllNotes)
                 {
-                    <div class="custom-note">
-                        <div class="card-header">
-                            <h3 class="title">
-                                @note.Title
-                            </h3>
-                        </div>
+                    <div class="custom-note" style="background-color: @note.Color;">
                         <div class="card-body">
-                            <textarea name="@note.Id" cols="30" rows="10" disabled>@note.Content</textarea>
+                            <div class="content">
+                                @note.Content
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="createdon">
-                                @note.ModifiedOn.ToString("MMMM dd, yyyy");
+                                @note.ModifiedOn.ToString("MMMM dd, yyyy")
                             </div>
                             <div class="controls">
                                 @if (Model.ApiaryAccess == Access.ReadWrite)
                                 {
                                     <a class="edit" asp-controller="ApiaryNote" asp-action="Edit" asp-route-noteId="@note.Id">
-                                        <i class="far fa-edit"></i>
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a class="delete" asp-controller="ApiaryNote" asp-action="Delete" asp-route-noteId="@note.Id">
                                         <i class="far fa-trash-alt"></i>

@@ -32,7 +32,7 @@
         public const string ApiaryTypeRequiredErrorMessage = "Въведете вид на пчелина";
 
         //Apiary adn beehive constants
-        public static readonly string[] NoteBackgroundColors = new string[] { "'#F36921'", "'#FFC444'", "'#F9EDA1'", "'#ACD369'", "'#96D9EC'" };
+        public static readonly string[] NoteBackgroundColors = new string[] { "#F36921", "#FFC444", "#F9EDA1", "#ACD369", "#96D9EC" };
 
         // Quickchart colors
         public static readonly string[] ApiaryTypeChartColors = new string[] { "'#ffffd4'", "'#fee391'", "'#fec44f'", "'#fe9929'", "'#ec7014'", "'#cc4c02'", "'#8c2d04'" };

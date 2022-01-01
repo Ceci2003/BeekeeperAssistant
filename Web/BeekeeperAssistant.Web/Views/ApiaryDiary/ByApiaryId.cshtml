@@ -82,7 +82,7 @@
                         Запази
                     </button>
                 </div>
-                <textarea asp-for="@Model.Content" id="tiny">@Model.Content</textarea>
+                <textarea asp-for="@Model.Content" id="tiny">@Model.SanitizedContent</textarea>
             </form>
         </div>
     </div>

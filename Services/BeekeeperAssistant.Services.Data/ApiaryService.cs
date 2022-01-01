@@ -43,13 +43,13 @@
             this.apiaryDiaryRepository = apiaryDiaryRepository;
         }
 
-        public async Task<string> CreateUserApiaryAsync(
+        public async Task<int> CreateUserApiaryAsync(
             string userId,
             string number,
             string name,
             ApiaryType apiaryType,
             string adress,
-            bool IsRegistered)
+            bool isRegistered)
         {
             var newApiary = new Apiary
             {
@@ -58,7 +58,7 @@
                 Name = name,
                 ApiaryType = apiaryType,
                 Adress = adress,
-                IsRegistered = IsRegistered,
+                IsRegistered = isRegistered,
             };
 
             await this.apiaryRepository.AddAsync(newApiary);
@@ -66,17 +66,16 @@
 
             await this.apiaryDiaryService.CreateAsync(newApiary.Id, string.Empty, newApiary.CreatorId);
 
-            var apiaryNumber = newApiary.Number;
-            return apiaryNumber;
+            return newApiary.Id;
         }
 
-        public async Task<string> EditApiaryByIdAsync(
+        public async Task<int> EditApiaryByIdAsync(
             int apiaryId,
             string number,
             string name,
             ApiaryType apiaryType,
             string address,
-            bool IsRegistered)
+            bool isRegistered)
         {
             var apiary = this.apiaryRepository
                 .All()
@@ -86,10 +85,11 @@
             apiary.Name = name;
             apiary.ApiaryType = apiaryType;
             apiary.Adress = address;
+            apiary.IsRegistered = isRegistered;
 
             await this.apiaryRepository.SaveChangesAsync();
 
-            return apiary.Number;
+            return apiary.Id;
         }
 
         public async Task DeleteApiaryByIdAsync(int apiaryId)

@@ -70,10 +70,15 @@
 
             if (viewModel == null)
             {
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id);
+
                 viewModel = new ByBeehiveIdQueenViewModel
                 {
-                    BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id),
+                    BeehiveNumber = beehive.Number,
                     BeehiveId = id,
+                    BeehiveApiaryId = beehive.Apiary.Id,
+                    BeehiveApiaryName = beehive.Apiary.Name,
+                    BeehiveApiaryNumber = beehive.Apiary.Number,
                 };
 
                 return this.View(viewModel);
@@ -131,7 +136,7 @@
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно създадена майка!";
-            return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.ByBeehiveId), new { id = beehiveId });
         }
 
         [HttpPost]
@@ -140,7 +145,7 @@
             var beehiveId = await this.queenService.DeleteQueenAsync(id);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрита майка!";
-            return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.ByBeehiveId), new { id = beehiveId });
         }
 
         public IActionResult Edit(int id)
@@ -170,13 +175,13 @@
             var beehiveId = await this.queenService.EditQueenAsync(id, inputModel.FertilizationDate, inputModel.GivingDate, inputModel.QueenType, inputModel.Origin, inputModel.HygenicHabits, inputModel.Temperament, inputModel.Color, inputModel.Breed);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактирана майка!";
-            return this.RedirectToAction("ByBeehiveId", "Queen", new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.ByBeehiveId), new { id = beehiveId });
         }
 
         public async Task<IActionResult> Bookmark(int id)
         {
             await this.queenService.BookmarkQueenAsync(id);
-            return this.Redirect("/Queen/All");
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

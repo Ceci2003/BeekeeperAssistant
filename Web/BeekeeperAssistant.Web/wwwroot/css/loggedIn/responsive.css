@@ -157,7 +157,7 @@
   .breadcrumb .breadcrumb-list {
     display: none;
   }
-  
+
   .breadcrumb .breadcrumb-list .responsive {
     display: flex;
   }
@@ -287,9 +287,16 @@
   .all-table {
     display: none;
   }
-  
+
   .all-table-responsive {
     display: block;
+  }
+
+  /* Apiary & Beehive notes */
+  .custom-notes-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 

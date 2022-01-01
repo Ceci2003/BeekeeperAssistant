@@ -175,7 +175,7 @@
                   inputModel.Subject,
                   inputModel.Content);
 
-            return this.View("Index");
+            return this.RedirectToAction("Index", "Home");
         }
 
         public IActionResult HttpError(int statusCode, string message)

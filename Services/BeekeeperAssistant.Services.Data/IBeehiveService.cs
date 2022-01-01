@@ -71,5 +71,7 @@
 
         int GetBeehiveIdByHarvesId(int harvestId);
 
+        bool HasDiary(int beehiveId);
+
     }
 }

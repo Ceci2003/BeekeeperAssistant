@@ -60,11 +60,11 @@
                         <td class="edit">
                             <div>
                                 <a class="edit" asp-controller="ApiaryHelper" asp-action="Edit"
-                                   asp-route-apiaryId="@apiaryHelper.ApiaryId" asp-route-userId="@apiaryHelper.UserId">
+                                   asp-route-id="@apiaryHelper.ApiaryId" asp-route-userId="@apiaryHelper.UserId">
                                     <i class="far fa-edit"></i>
                                 </a>
                                 <form asp-controller="ApiaryHelper" asp-action="Delete"
-                                      asp-route-apiaryId="@apiaryHelper.ApiaryId" asp-route-userId="@apiaryHelper.UserId"
+                                      asp-route-id="@apiaryHelper.ApiaryId" asp-route-userId="@apiaryHelper.UserId"
                                       method="post">
                                     <button type="submit" class="delete">
                                         <i class="far fa-trash-alt"></i>

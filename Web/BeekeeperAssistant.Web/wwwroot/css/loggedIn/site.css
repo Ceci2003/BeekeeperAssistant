@@ -901,6 +901,27 @@ textarea {
   padding: 5px;
 }
 
+input[type="color"] {
+  padding: 0;
+}
+
+.input-note-background-colors {
+  display: flex;
+}
+
+.input-note-background-colors .custom-note-color {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--dark-blue-gray);
+  margin-right: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.input-note-background-colors .custom-note-color:last-child() {
+  margin-right: 0;
+}
+
 .form-box form .input-group input:focus,
 .form-box form .input-group select:focus,
 .form-box form .input-group textarea:focus {
@@ -2076,24 +2097,89 @@ input[readonly] {
   flex-wrap: wrap;
 }
 
-.custom-note .card-header {
-
+.custom-note {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
 }
 
-.custom-note .card-body {
-  
+.custom-note .card-body .content {
+  padding: 0px;
+  overflow-y: auto;
+  height: 190px;
 }
 
 .custom-note .card-footer {
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .custom-note .card-footer .createdon {
-  
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .custom-note .card-footer .controls {
-  
+  display: flex;
+}
+
+.custom-note .card-footer .controls a {
+  border-radius: 50%;
+  color: white;
+  padding: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.custom-note .card-footer .controls a:nth-child(1) {
+  margin-right: 5px;
+}
+
+.custom-note .card-footer .controls .edit {
+  background: var(--green);
+}
+
+.custom-note .card-footer .controls .edit:hover {
+  background: var(--green-hover);
+}
+
+.custom-note .card-footer .controls .delete {
+  background: var(--red-hover);
+}
+
+.custom-note .card-footer .controls .delete:hover {
+  background: var(--red);
+}
+
+/* Note scrollbar */
+.custom-note .card-body .content::-webkit-scrollbar {
+  border-radius: 50%;
+  width: 5px;
+}
+
+.custom-note .card-body .content::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #290b02;
+}
+
+.custom-note .card-body .content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #6f6968;
+}
+
+.custom-note .card-body .content::-webkit-scrollbar-thumb:hover {
+  background: #5c5655;
 }
 
 .ordered {

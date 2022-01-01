@@ -113,10 +113,9 @@
             return this.View(viewModel);
         }
 
-        // DONE []
-        public async Task<IActionResult> ById(int apiaryId)
+        public async Task<IActionResult> ById(int id)
         {
-            var viewModel = this.apiaryService.GetApiaryById<ByNumberApiaryViewModel>(apiaryId);
+            var viewModel = this.apiaryService.GetApiaryById<ByNumberApiaryViewModel>(id);
 
             if (viewModel == null)
             {
@@ -158,7 +157,7 @@
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var apiaryNumber =
+            var apiaryId =
                 await this.apiaryService.CreateUserApiaryAsync(
                     currentUser.Id,
                     inputModel.Number,
@@ -169,7 +168,7 @@
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
 
-            return this.Redirect($"/Apiary/{apiaryNumber}");
+            return this.RedirectToAction(nameof(this.ById), new { id = apiaryId });
         }
 
         public IActionResult Edit(int id)
@@ -199,7 +198,7 @@
                 modelNumber = null;
             }
 
-            var apiaryNumber =
+            var apiaryId =
                 await this.apiaryService.EditApiaryByIdAsync(
                     id,
                     modelNumber,
@@ -209,10 +208,9 @@
                     inputModel.IsRegistered);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
-            return this.RedirectToAction("ById", "Apiary", new { apiaryId = id });
+            return this.RedirectToAction(nameof(this.ById), new { apiaryId = apiaryId });
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id, string returnUrl)
         {
@@ -228,7 +226,6 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        // DONE []
         public async Task<IActionResult> ExportToExcel()
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -242,7 +239,7 @@
         public async Task<IActionResult> Bookmark(int id)
         {
             await this.apiaryService.BookmarkApiaryAsync(id);
-            return this.Redirect("/Apiary/All");
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

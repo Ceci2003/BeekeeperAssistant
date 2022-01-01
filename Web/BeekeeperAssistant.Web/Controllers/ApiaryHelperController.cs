@@ -47,7 +47,6 @@
             return this.View(viewModel);
         }
 
-        // DONE []
         [HttpPost]
         public async Task<IActionResult> Add(int id, AddApiaryHelperInputModel viewModel)
         {
@@ -92,7 +91,7 @@
                   $"Успешно бяхте добавени, като помощник на пчелин: <strong>{viewModel.ApiaryNumber}</strong> от <strong>{currentUser.Email}</strong>.");
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен помощник!";
-            return this.Redirect($"/ApiaryHelper/All/{id}");
+            return this.RedirectToAction(nameof(this.All), new { id = viewModel.ApiaryId });
         }
 
         public IActionResult All(int id)
@@ -113,7 +112,7 @@
             await this.apiaryHelperService.DeleteAsync(userId, apiaryId);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрит помощник!";
-            return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
+            return this.RedirectToAction(nameof(this.All), new { id = apiaryId });
         }
 
         public IActionResult Edit(string userId, int apiaryId)
@@ -138,7 +137,7 @@
             await this.apiaryHelperService.EditAsync(userId, apiaryId, inputModel.Access);
 
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
-            return this.Redirect($"/ApiaryHelper/All/{apiaryId}");
+            return this.RedirectToAction(nameof(this.All), new { id = apiaryId} );
         }
     }
 }

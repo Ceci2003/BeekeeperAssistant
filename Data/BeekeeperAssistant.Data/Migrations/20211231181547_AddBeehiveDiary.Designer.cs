@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211231181547_AddBeehiveDiary")]
+    partial class AddBeehiveDiary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,51 +140,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ApiaryHelpers");
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.ApiaryNote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("ApiaryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiendById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApiaryId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ModifiendById");
-
-                    b.ToTable("ApiaryNotes");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.ApplicationRole", b =>
@@ -1130,23 +1087,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Apiary");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.ApiaryNote", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Apiary", "Apiary")
-                        .WithMany()
-                        .HasForeignKey("ApiaryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BeekeeperAssistant.Data.Models.ApplicationUser", "ModifiendBy")
-                        .WithMany()
-                        .HasForeignKey("ModifiendById");
-
-                    b.Navigation("Apiary");
-
-                    b.Navigation("ModifiendBy");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.Beehive", b =>

@@ -10,7 +10,8 @@
 
         [Display(Name = "Съдържание")]
         [Required(ErrorMessage = "Съдържанието е задължително.")]
-        [MaxLength(500, ErrorMessage = "Съдържанието не може да бъде повече от 500 символа."), MinLength(5, ErrorMessage = "Съдържанието не може да бъде по-малко от 5 символа.")]
+        [MaxLength(500, ErrorMessage = "Съдържанието не може да бъде повече от 500 символа.")]
+        [MinLength(5, ErrorMessage = "Съдържанието не може да бъде по-малко от 5 символа.")]
 
         public string Content { get; set; }
 

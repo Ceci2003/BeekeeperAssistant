@@ -86,6 +86,10 @@
         <i class="fas fa-box"></i>
         Добиви
     </a>
+    <a class="tablinks" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-beehiveId="@Model.Id">
+        <i class="fas fa-sticky-note"></i>
+        Бележки
+    </a>
     <a class="tablinks" asp-controller="BeehiveDiary" asp-action="ByBeehiveId" asp-route-id="@Model.Id">
         <i class="fas fa-book"></i>
         Дневник

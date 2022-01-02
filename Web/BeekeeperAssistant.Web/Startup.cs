@@ -93,6 +93,7 @@
             services.AddTransient<IBeehiveHelperService, BeehiveHelperService>();
             services.AddTransient<IQueenHelperService, QueenHelperService>();
             services.AddTransient<IApiaryNoteService, ApiaryNoteService>();
+            services.AddTransient<IBeehiveNoteService, BeehiveNoteService>();
             services.AddTransient<IExcelExportService, ExcelExportService>();
             services.AddTransient<IFeedbackService, FeedbackService>();
             services.AddTransient<IStringManipulationService, StringManipulationService>();

@@ -55,23 +55,30 @@
 </div>
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
-<div class="tab">
-    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+<div class="tab apiary">
+    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-boxes"></i>
-        @ViewData["Title"]
+        <span class="text">
+            @ViewData["Title"]
+        </span>
     </a>
     <a class="tablinks" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-border-all"></i>
-        Кошери
+        <span class="text">
+            Кошери
+        </span>
     </a>
-    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
-        asp-route-apiaryId="@Model.ApiaryId">
+    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-apiaryId="@Model.ApiaryId">
         <i class="fas fa-sticky-note"></i>
-        Бележки
+        <span class="text">
+            Бележки
+        </span>
     </a>
     <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-book"></i>
-        Дневник
+        <span class="text">
+            Дневник
+        </span>
     </a>
 </div>
 

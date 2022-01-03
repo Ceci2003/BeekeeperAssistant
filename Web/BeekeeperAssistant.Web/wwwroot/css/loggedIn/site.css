@@ -1718,6 +1718,7 @@ textarea {
   border-left: 3px solid var(--white);
   border-right: 3px solid var(--white);
   color: var(--black);
+  text-align: center;
 }
 
 .tab .tablinks i {

@@ -65,30 +65,38 @@
     }
     - @ViewData["Title"]
 </h1>
-<div class="tab">
-    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+<div class="tab apiary">
+    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-boxes"></i>
-        @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
-        {
-            @Model.ApiaryNumber
-        }
-        else
-        {
-            @Model.ApiaryName
-        }
+        <span class="text">
+            @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+            {
+                @Model.ApiaryNumber
+            }
+            else
+            {
+                @Model.ApiaryName
+            }
+        </span>
     </a>
     <a class="tablinks" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-border-all"></i>
-        Кошери
+        <span class="text">
+            Кошери
+        </span>
     </a>
     <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
         asp-route-apiaryId="@Model.ApiaryId">
         <i class="fas fa-sticky-note"></i>
-        Бележки
+        <span class="text">
+            Бележки
+        </span>
     </a>
     <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-book"></i>
-        Дневник
+        <span class="text">
+            Дневник
+        </span>
     </a>
 </div>
 
@@ -115,7 +123,8 @@
                 </div>
                 <div class="input-group max">
                     <label asp-for="@Model.Content"></label>
-                    <textarea asp-for="@Model.Content" cols="30" rows="15" style="background-color: @GlobalConstants.NoteBackgroundColors[2];"></textarea>
+                    <textarea asp-for="@Model.Content" cols="30" rows="15"
+                        style="background-color: @GlobalConstants.NoteBackgroundColors[2];"></textarea>
                     <span asp-validation-for="Content"></span>
                 </div>
                 <input type="hidden" asp-for="@Model.Color" value="@GlobalConstants.NoteBackgroundColors[2]">

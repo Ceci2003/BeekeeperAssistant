@@ -53,35 +53,48 @@
 </div>
 
 <h1 class="tab-title title-1">Информация за кошер - №@Model.BeehiveNumber</h1>
-
-<div class="tab">
+<div class="tab beehive">
     <a class="tablinks" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-archive"></i>
-        Кошер №@Model.BeehiveId
+        <span class="text">
+            Кошер №@Model.BeehiveNumber
+        </span>
     </a>
     <a class="tablinks" asp-controller="Queen" asp-action="ByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-crown"></i>
-        Майка
+        <span class="text">
+            Майка
+        </span>
     </a>
     <a class="tablinks" asp-controller="Inspection" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="far fa-calendar-check"></i>
-        Прегледи
+        <span class="text">
+            Прегледи
+        </span>
     </a>
     <a class="tablinks active" asp-controller="Treatment" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-notes-medical"></i>
-        Третирания
+        <span class="text">
+            Третирания
+        </span>
     </a>
     <a class="tablinks" asp-controller="Harvest" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-box"></i>
-        Добиви
+        <span class="text">
+            Добиви
+        </span>
     </a>
     <a class="tablinks" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-beehiveId="@Model.BeehiveId">
         <i class="fas fa-sticky-note"></i>
-        Бележки
+        <span class="text">
+            Бележки
+        </span>
     </a>
     <a class="tablinks" asp-controller="BeehiveDiary" asp-action="ByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-book"></i>
-        Дневник
+        <span class="text">
+            Дневник
+        </span>
     </a>
 </div>
 

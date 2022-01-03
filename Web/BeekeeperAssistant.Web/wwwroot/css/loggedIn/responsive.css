@@ -111,7 +111,7 @@
   .sidebar-navigation {
     position: fixed;
     top: 40px;
-    z-index: 1;
+    z-index: 2;
   }
 
   .sidebar-navigation .sidebar-breadcrumb {
@@ -135,7 +135,7 @@
     position: fixed;
     top: 40px;
     left: 270px;
-    z-index: 1;
+    z-index: 2;
   }
 
   .breadcrumb .aside-icon i {
@@ -166,22 +166,30 @@
     font-size: 26px;
   }
 
+  /* Page tab */
   .tab-title.title-1 {
     font-size: 22px;
   }
 
+  .tab .tablinks .text {
+    display: none;
+  }
+
   .tab .tablinks {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 5px;
-    transition: 0.3s;
-    font-size: 17px;
-    border-left: 3px solid var(--white);
-    border-right: 3px solid var(--white);
-    color: var(--black);
+    padding: 15px 0;
+  }
+
+  .tab .tablinks i {
+    margin: 0;
+  }
+
+
+  .tab.apiary .tablinks {
+    width: 25%;
+  }
+
+  .tab.beehive .tablinks {
+    width: 14.28%;
   }
 
   .data-view {

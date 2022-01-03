@@ -4,8 +4,10 @@
     {
         public const string SystemName = "BeekeeperAssistant";
         public const string AdministratorRoleName = "Administrator";
+        public const string SearchKeywords = "BeekeeperAssistant, пчеларство, пчели, дфз, фонд земеделие, държавен фонд земеделие, пчеларски софтуер, пчеларска програма, пчеларски програми, земеделие";
+        public const string SearchDescription = "BeekeeperAssistant е съвременният дневник на пчеларя. Той дава на пчеларите възможност да улеснят работата си, като следят информацията и дейностите по пчелините и кошерите.";
         public const string RequiredMessage = "Полетата с * са задължителни!";
-        public const string RequiredMessageWithParam = "Полето {0} е задължителн0!";
+        public const string RequiredMessageWithParam = "Полето {0} е задължителнo!";
 
         // Creation status messages
         public const string SuccessMessage = "SuccessMessage";

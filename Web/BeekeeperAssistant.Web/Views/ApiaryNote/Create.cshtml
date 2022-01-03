@@ -14,7 +14,7 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
                 @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
                 {
                     @Model.ApiaryNumber
@@ -32,7 +32,7 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
                 @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
                 {
                     @Model.ApiaryNumber
@@ -86,7 +86,7 @@
         </span>
     </a>
     <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
-        asp-route-apiaryId="@Model.ApiaryId">
+        asp-route-id="@Model.ApiaryId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">
             Бележки
@@ -103,9 +103,9 @@
 <div class="tabs-body">
     <div id="Notes" class="tabcontent">
         <div class="form-box">
-            <form asp-controller="ApiaryNote" asp-action="Create" asp-route-apiaryId="@Model.ApiaryId">
+            <form asp-controller="ApiaryNote" asp-action="Create" asp-route-id="@Model.ApiaryId">
                 <a class="back-arrow" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
-                    asp-route-apiaryId="@Model.ApiaryId">
+                    asp-route-id="@Model.ApiaryId">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <h2>@ViewData["Title"]</h2>

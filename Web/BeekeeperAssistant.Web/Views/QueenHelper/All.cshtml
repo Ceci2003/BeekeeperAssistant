@@ -12,10 +12,10 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Beehive">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Beehive">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Queen">Майка</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Queen">Майка</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -61,7 +61,7 @@
                         </td>
                         <td class="edit">
                             <div>
-                                <a class="edit" asp-controller="QueenHelper" asp-action="Edit" asp-route-queenId="@queenHelper.QueenId"
+                                <a class="edit" asp-controller="QueenHelper" asp-action="Edit" asp-route-id="@queenHelper.QueenId"
                                    asp-route-userId="@queenHelper.UserId"><i class="far fa-edit"></i></a>
                             </div>
                         </td>

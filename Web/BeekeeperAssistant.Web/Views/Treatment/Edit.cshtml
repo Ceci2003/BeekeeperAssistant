@@ -10,8 +10,6 @@
         keyValuepairApiaries = Model.Apiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
         textareaRows = 7;
     }
-
-
 }
 
 <div class="breadcrumb">
@@ -26,7 +24,7 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Treatments">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -38,7 +36,7 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Treatments">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">Редактиране</li>
     </ul>
@@ -53,7 +51,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Treatment" asp-action="Edit">
-            <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments">
+            <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Treatments">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h2>@ViewData["Title"]</h2>

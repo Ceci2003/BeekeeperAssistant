@@ -28,16 +28,16 @@
             this.beehiveService = beehiveService;
         }
 
-        public async Task<IActionResult> AllByBeehiveId(int beehiveId)
+        public async Task<IActionResult> AllByBeehiveId(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllByBeehiveIdBeehiveNoteViewModel();
 
-            viewModel.AllNotes = this.beehiveNoteService.GetAllBeehiveNotes<ByBeehiveIdBeehiveNoteViewModel>(beehiveId);
-            viewModel.BeehiveAccess = await this.beehiveHelperServic.GetUserBeehiveAccessAsync(currentUser.Id, beehiveId);
+            viewModel.AllNotes = this.beehiveNoteService.GetAllBeehiveNotes<ByBeehiveIdBeehiveNoteViewModel>(id);
+            viewModel.BeehiveAccess = await this.beehiveHelperServic.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(beehiveId);
-            viewModel.BeehiveId = beehiveId;
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id);
+            viewModel.BeehiveId = id;
             viewModel.Number = beehive.Number;
             viewModel.ApiaryId = beehive.Apiary.Id;
             viewModel.ApiaryName = beehive.Apiary.Name;
@@ -46,11 +46,11 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Create(int beehiveId)
+        public IActionResult Create(int id)
         {
             var viewModel = new CreateBeehiveNoteInputModel();
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(beehiveId);
+            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id);
             viewModel.BeehiveId = beehive.Id;
             viewModel.Number = beehive.Number;
             viewModel.ApiaryId = beehive.Apiary.Id;
@@ -61,7 +61,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int beehiveId, CreateBeehiveNoteInputModel inputModel)
+        public async Task<IActionResult> Create(int id, CreateBeehiveNoteInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -71,18 +71,18 @@
             }
 
             await this.beehiveNoteService.CreateAsync(
-                    beehiveId,
+                    id,
                     inputModel.Title,
                     inputModel.Content,
                     inputModel.Color,
                     currentUser.Id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = beehiveId });
+            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = id });
         }
 
-        public IActionResult Edit(int noteId)
+        public IActionResult Edit(int id)
         {
-            var viewModel = this.beehiveNoteService.GetBeehiveNoteById<EditBeehiveNoteInputModel>(noteId);
+            var viewModel = this.beehiveNoteService.GetBeehiveNoteById<EditBeehiveNoteInputModel>(id);
 
             var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(viewModel.BeehiveId);
             viewModel.Number = beehive.Number;
@@ -94,7 +94,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int noteId, EditBeehiveNoteInputModel inputModel)
+        public async Task<IActionResult> Edit(int id, EditBeehiveNoteInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -104,7 +104,7 @@
             }
 
             var beehiveId = await this.beehiveNoteService.EditAsync(
-                noteId,
+                id,
                 inputModel.Title,
                 inputModel.Content,
                 inputModel.Color,
@@ -113,9 +113,9 @@
             return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = beehiveId });
         }
 
-        public async Task<IActionResult> Delete(int noteId)
+        public async Task<IActionResult> Delete(int id)
         {
-            var beehiveId = await this.beehiveNoteService.DeleteAsync(noteId);
+            var beehiveId = await this.beehiveNoteService.DeleteAsync(id);
 
             return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = beehiveId });
         }

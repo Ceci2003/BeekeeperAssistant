@@ -85,7 +85,7 @@
             Добиви
         </span>
     </a>
-    <a class="tablinks active" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-beehiveId="@Model.BeehiveId">
+    <a class="tablinks active" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">
             Бележки
@@ -106,7 +106,7 @@
         {
             <div class="page-controls one">
                 <a class="btn beehive-create" asp-controller="BeehiveNote" asp-action="Create"
-                   asp-route-beehiveId="@Model.BeehiveId">
+                   asp-route-id="@Model.BeehiveId">
                     <i class="far fa-plus-square"></i> Добави бележка
                 </a>
             </div>
@@ -129,10 +129,10 @@
                             <div class="controls">
                                 @if (Model.BeehiveAccess == Access.ReadWrite)
                                 {
-                                    <a class="edit" asp-controller="BeehiveNote" asp-action="Edit" asp-route-noteId="@note.Id">
+                                    <a class="edit" asp-controller="BeehiveNote" asp-action="Edit" asp-route-id="@note.Id">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a class="delete" asp-controller="BeehiveNote" asp-action="Delete" asp-route-noteId="@note.Id">
+                                    <a class="delete" asp-controller="BeehiveNote" asp-action="Delete" asp-route-id="@note.Id">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 }
@@ -151,7 +151,7 @@
                 {
                     @("Добавете нова от тук:")
                     <br>
-                    <a asp-controller="BeehiveNote" asp-action="Create" asp-route-beehiveId="@Model.BeehiveId">
+                    <a asp-controller="BeehiveNote" asp-action="Create" asp-route-id="@Model.BeehiveId">
                         <i class="far fa-plus-square"></i> Добави бележка
                     </a>
                 }

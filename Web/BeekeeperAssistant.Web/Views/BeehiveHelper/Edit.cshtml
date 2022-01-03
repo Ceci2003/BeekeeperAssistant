@@ -9,7 +9,7 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId"
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId"
                 asp-route-tabPage="Beehive">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item">
@@ -33,7 +33,7 @@
             </a>
             <h3>@ViewData["Title"]</h3>
             <form asp-controller="BeehiveHelper" asp-action="Edit" asp-route-userId="@Model.UserId"
-                asp-route-beehiveId="@Model.BeehiveId">
+                asp-route-id="@Model.BeehiveId">
                 <div class="form-group">
                     <div class="input-group">
                         <label asp-for="UserUserName"></label>

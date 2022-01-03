@@ -14,7 +14,7 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
                 @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
                 {
                     @Model.ApiaryNumber
@@ -32,7 +32,7 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="ById" asp-route-apiaryId="@Model.ApiaryId">
+            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
                 @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
                 {
                     @Model.ApiaryNumber
@@ -87,7 +87,7 @@
             Добиви
         </span>
     </a>
-    <a class="tablinks active" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-beehiveId="@Model.BeehiveId">
+    <a class="tablinks active" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">
             Бележки
@@ -104,9 +104,9 @@
 <div class="tabs-body">
     <div id="Notes" class="tabcontent">
         <div class="form-box">
-            <form asp-controller="BeehiveNote" asp-action="Edit" asp-route-noteId="@Model.Id">
+            <form asp-controller="BeehiveNote" asp-action="Edit" asp-route-id="@Model.Id">
                 <a class="back-arrow" asp-controller="BeehiveNote" asp-action="AllByBeehiveId"
-                   asp-route-beehiveId="@Model.BeehiveId">
+                   asp-route-id="@Model.BeehiveId">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <h2>@ViewData["Title"]</h2>

@@ -62,7 +62,7 @@
                         </a>
                     </td>
                     <td class="number">
-                        <a asp-action="ById" asp-controller="Beehive" asp-route-beehiveId="@queen.BeehiveId"
+                        <a asp-action="ById" asp-controller="Beehive" asp-route-id="@queen.BeehiveId"
                         asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
                     </td>
 
@@ -74,7 +74,7 @@
                                 <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
                             <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
-                            asp-route-beehiveId="@queen.BeehiveId">
+                            asp-route-id="@queen.BeehiveId">
                                 <i class="far fa-edit"></i>
                             </a>
                             <a class="delete" onclick="ShowDeleteForm('@queen.Id')">
@@ -177,7 +177,7 @@
                                     <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                 </a>
                                 <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
-                                asp-route-beehiveId="@queen.BeehiveId">
+                                asp-route-id="@queen.BeehiveId">
                                     <i class="far fa-edit"></i>
                                 </a>
                                 <a class="delete" onclick="ShowDeleteForm('@queen.Id-responsive')">

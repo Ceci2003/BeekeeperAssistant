@@ -26,7 +26,7 @@
                 <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
             </li>
             <li class="breadcrumb-item">
-                <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments" >@Model.BeehiveNumber</a>
+                <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Treatments" >@Model.BeehiveNumber</a>
             </li>
             <li class="breadcrumb-item active">@ViewData["Title"]</li>
         </ul>
@@ -38,7 +38,7 @@
                 <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
             </li>
             <li class="breadcrumb-item">
-                <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments" >@Model.BeehiveNumber</a>
+                <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Treatments" >@Model.BeehiveNumber</a>
             </li>
             <li class="breadcrumb-item active">Добавяне</li>
         </ul>
@@ -65,7 +65,7 @@
         <form asp-controller="Treatment" asp-action="Create">
             @if (Model.BeehiveId != null)
             {
-                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Treatments">
+                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Treatments">
                     <i class="fas fa-arrow-left"></i>
                 </a>
             }

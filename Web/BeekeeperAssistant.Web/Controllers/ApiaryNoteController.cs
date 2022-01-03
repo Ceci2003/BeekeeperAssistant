@@ -31,28 +31,28 @@
             this.apiaryService = apiaryService;
         }
 
-        public async Task<IActionResult> AllByApiaryId(int apiaryId)
+        public async Task<IActionResult> AllByApiaryId(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllByApiaryIdApiaryNoteViewModel();
 
-            viewModel.AllNotes = this.apiaryNoteService.GetAllApiaryNotes<ByApiaryIdApiaryNoteViewModel>(apiaryId);
-            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiaryId);
+            viewModel.AllNotes = this.apiaryNoteService.GetAllApiaryNotes<ByApiaryIdApiaryNoteViewModel>(id);
+            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
 
-            var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(apiaryId);
-            viewModel.ApiaryId = apiaryId;
+            var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(id);
+            viewModel.ApiaryId = id;
             viewModel.ApiaryNumber = apiary.Number;
             viewModel.ApiaryName = apiary.Name;
 
             return this.View(viewModel);
         }
 
-        public IActionResult Create(int apiaryId)
+        public IActionResult Create(int id)
         {
             var viewModel = new CreateApiaryNoteInputModel();
 
-            var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(apiaryId);
-            viewModel.ApiaryId = apiaryId;
+            var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(id);
+            viewModel.ApiaryId = id;
             viewModel.ApiaryNumber = apiary.Number;
             viewModel.ApiaryName = apiary.Name;
 
@@ -60,7 +60,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int apiaryId, CreateApiaryNoteInputModel inputModel)
+        public async Task<IActionResult> Create(int id, CreateApiaryNoteInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -70,24 +70,24 @@
             }
 
             await this.apiaryNoteService.CreateAsync(
-                    apiaryId,
+                    id,
                     inputModel.Title,
                     inputModel.Content,
                     inputModel.Color,
                     currentUser.Id);
 
-            return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId = apiaryId });
+            return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId = id });
         }
 
-        public IActionResult Edit(int noteId)
+        public IActionResult Edit(int id)
         {
-            var viewModel = this.apiaryNoteService.GetApiaryNoteById<EditApiaryNoteInputModel>(noteId);
+            var viewModel = this.apiaryNoteService.GetApiaryNoteById<EditApiaryNoteInputModel>(id);
 
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int noteId, CreateApiaryNoteInputModel inputModel)
+        public async Task<IActionResult> Edit(int id, CreateApiaryNoteInputModel inputModel)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
@@ -97,7 +97,7 @@
             }
 
             var apiaryId = await this.apiaryNoteService.EditAsync(
-                noteId,
+                id,
                 inputModel.Title,
                 inputModel.Content,
                 inputModel.Color,
@@ -106,9 +106,9 @@
             return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId = apiaryId });
         }
 
-        public async Task<IActionResult> Delete(int noteId)
+        public async Task<IActionResult> Delete(int id)
         {
-            var apiaryId = await this.apiaryNoteService.DeleteAsync(noteId);
+            var apiaryId = await this.apiaryNoteService.DeleteAsync(id);
 
             return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId = apiaryId });
         }

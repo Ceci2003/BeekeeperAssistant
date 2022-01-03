@@ -16,7 +16,7 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Queen">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Queen">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -28,7 +28,7 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Queen">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Queen">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">Редактиране</li>
     </ul>
@@ -43,7 +43,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Queen" asp-action="Edit" method="post">
-            <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-beehiveId="@Model.BeehiveId" asp-route-tabPage="Queen">
+            <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Queen">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <h2>@this.ViewData["Title"]</h2>

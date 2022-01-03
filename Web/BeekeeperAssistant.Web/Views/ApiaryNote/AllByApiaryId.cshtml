@@ -68,7 +68,7 @@
             Кошери
         </span>
     </a>
-    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-apiaryId="@Model.ApiaryId">
+    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">
             Бележки
@@ -89,7 +89,7 @@
         {
             <div class="page-controls one">
                 <a class="btn beehive-create" asp-controller="ApiaryNote" asp-action="Create"
-                asp-route-apiaryId="@Model.ApiaryId" asp-route-returnUrl="@returnUrl">
+                asp-route-id="@Model.ApiaryId" asp-route-returnUrl="@returnUrl">
                     <i class="far fa-plus-square"></i> Добави бележка
                 </a>
             </div>
@@ -112,10 +112,10 @@
                             <div class="controls">
                                 @if (Model.ApiaryAccess == Access.ReadWrite)
                                 {
-                                    <a class="edit" asp-controller="ApiaryNote" asp-action="Edit" asp-route-noteId="@note.Id">
+                                    <a class="edit" asp-controller="ApiaryNote" asp-action="Edit" asp-route-id="@note.Id">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a class="delete" asp-controller="ApiaryNote" asp-action="Delete" asp-route-noteId="@note.Id">
+                                    <a class="delete" asp-controller="ApiaryNote" asp-action="Delete" asp-route-id="@note.Id">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 }
@@ -134,7 +134,7 @@
                 {
                     @("Добавете нова от тук:")
                     <br>
-                    <a asp-controller="ApiaryNote" asp-action="Create" asp-route-apiaryId="@Model.ApiaryId"
+                    <a asp-controller="ApiaryNote" asp-action="Create" asp-route-id="@Model.ApiaryId"
                 asp-route-returnUrl="@returnUrl">
                         <i class="far fa-plus-square"></i> Добави бележка
                     </a>

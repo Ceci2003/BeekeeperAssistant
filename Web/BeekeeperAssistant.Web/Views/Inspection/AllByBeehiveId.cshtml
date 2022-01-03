@@ -91,7 +91,7 @@
             Добиви
         </span>
     </a>
-    <a class="tablinks" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-beehiveId="@Model.BeehiveId">
+    <a class="tablinks" asp-controller="BeehiveNote" asp-action="AllByBeehiveId" asp-route-id="@Model.BeehiveId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">
             Бележки
@@ -161,7 +161,7 @@
                                     @if (Model.BeehiveAccess == Access.ReadWrite)
                                     {
                                         <a class="edit" asp-controller="Inspection" asp-action="Edit"
-                                           asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.BeehiveId">
+                                           asp-route-id="@inspection.Id" asp-route-id="@Model.BeehiveId">
                                             <i class="far fa-edit"></i>
                                         </a>
                                         <a class="delete" onclick="ShowDeleteForm('@inspection.Id-inspection')">
@@ -170,7 +170,7 @@
 
                                         <div id="@inspection.Id-inspection" class="delete-form-display">
                                             <form id="form-@inspection.Id" asp-controller="Inspection" asp-action="Delete"
-                                                  asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.BeehiveId">
+                                                  asp-route-id="@inspection.Id" asp-route-id="@Model.BeehiveId">
                                                 <a class="delete close"
                                                    onclick="HideDeleteForm('@inspection.Id-inspection')">
                                                     <i class="fas fa-times"></i>
@@ -466,7 +466,7 @@
                                         @if (Model.BeehiveAccess == Access.ReadWrite)
                                         {
                                             <a class="edit" asp-controller="Inspection" asp-action="Edit"
-                                               asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.BeehiveId">
+                                               asp-route-id="@inspection.Id" asp-route-id="@Model.BeehiveId">
                                                 <i class="far fa-edit"></i>
                                             </a>
                                             <a class="delete" onclick="ShowDeleteForm('@inspection.Id-inspection-responsive')">

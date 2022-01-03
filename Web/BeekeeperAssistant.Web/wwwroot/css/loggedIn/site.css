@@ -1576,6 +1576,7 @@ textarea {
   height: 40px;
   font-size: 16px;
   background-color: var(--main-background);
+  z-index: 2;
 }
 
 .breadcrumb .breadcrumb-list {

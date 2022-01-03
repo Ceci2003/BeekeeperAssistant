@@ -2184,7 +2184,18 @@ input[readonly] {
   background: #5c5655;
 }
 
-.ordered {
-  background-color: #d4d4d4;
-  border: 1px solid #ff0000;
+col.ordered {
+  background-color: var(--gray-background);
+}
+
+th {
+  background-color: var(--white);
+}
+
+th a{
+  color: var(--black);
+}
+
+th a.ordered{
+  color: var(--blue-hover);
 }

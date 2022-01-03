@@ -285,5 +285,9 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 var property = params["orderBy"];
 if (property) {
-  document.getElementById(property).classList.add("ordered");
+  console.log(document.querySelectorAll('.' + property));
+  console.log(property);
+  document.querySelectorAll('.' + property).forEach(element => {
+    element.classList.add("ordered");
+  });
 }

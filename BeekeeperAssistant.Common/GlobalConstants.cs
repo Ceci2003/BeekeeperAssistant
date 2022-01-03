@@ -33,7 +33,7 @@
         public const string ApiaryExistsErrorMessage = "Вече съществува пчелин с въведения номер";
         public const string ApiaryTypeRequiredErrorMessage = "Въведете вид на пчелина";
 
-        //Apiary adn beehive constants
+        // Apiary and beehive constants
         public static readonly string[] NoteBackgroundColors = new string[] { "#F36921", "#FFC444", "#F9EDA1", "#ACD369", "#96D9EC" };
 
         // Quickchart colors

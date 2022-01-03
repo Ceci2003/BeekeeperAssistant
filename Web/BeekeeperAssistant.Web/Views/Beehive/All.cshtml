@@ -49,47 +49,47 @@
     </div>
     <table class="data-table all-table">
         <colgroup>
-            <col id="@stringManipulation.Slugify("Apiary.Number")" />
-            <col id="@stringManipulation.Slugify(nameof(Beehive.Number))" />
-            <col id="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))" />
-            <col id="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))" />
-            <col id="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))" />
-            <col id="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))" />
+            <col class="@stringManipulation.Slugify("Apiary.Number")" />
+            <col class="@stringManipulation.Slugify(nameof(Beehive.Number))" />
+            <col class="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))" />
+            <col class="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))" />
+            <col class="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))" />
+            <col class="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))" />
         </colgroup>
         <thead>
             <tr>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify("Apiary.Number")" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify("Apiary.Number")">
                         Номер на пчелин
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(Beehive.Number))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.Number))">
                         Номер
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))">
                         Подвижен
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))">
                         Вид
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))">
                         Система
                     </a>
                 </th>
                 <th>
-                    <a asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))">
                         Сила
                     </a>

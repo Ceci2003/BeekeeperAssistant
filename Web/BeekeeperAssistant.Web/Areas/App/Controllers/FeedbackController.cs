@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System.Threading.Tasks;
 
@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class FeedbackController : BaseController
+    public class FeedbackController : AppBaseController
     {
         private readonly IEnumerationMethodsService enumerationMethodsService;
         private readonly IFeedbackService feedbackService;
@@ -28,33 +28,33 @@
 
         public IActionResult Index()
         {
-            return this.View();
+            return View();
         }
 
         public IActionResult Create(FeedbackType feedbackType)
         {
-            if (this.enumerationMethodsService.IsEnumerationDefined(feedbackType))
+            if (enumerationMethodsService.IsEnumerationDefined(feedbackType))
             {
-                this.ViewData["FeedbackType"] = feedbackType;
+                ViewData["FeedbackType"] = feedbackType;
             }
 
-            return this.View();
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateFeedbackInputModel inputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
-            await this.feedbackService.CreateAsync(currentUser.Id, inputModel.Title, inputModel.Body, inputModel.FeedbackType);
+            await feedbackService.CreateAsync(currentUser.Id, inputModel.Title, inputModel.Body, inputModel.FeedbackType);
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изпратено запитване!";
-            return this.RedirectToAction("Index", "Home");
+            TempData[GlobalConstants.SuccessMessage] = "Успешно изпратено запитване!";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

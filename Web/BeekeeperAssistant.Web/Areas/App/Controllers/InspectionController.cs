@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@
     using OfficeOpenXml;
     using OfficeOpenXml.Style;
 
-    public class InspectionController : BaseController
+    public class InspectionController : AppBaseController
     {
         private readonly IInspectionService inspectionService;
         private readonly IBeehiveService beehiveService;
@@ -56,24 +56,24 @@
                 page = 1;
             }
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
             var viewModel = new AllByBeehiveIdInspectionViewModel()
             {
                 AllInspections =
-                    this.inspectionService.GetAllBeehiveInspections<AllByBeehiveIdInspectionAllInspectionsViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    inspectionService.GetAllBeehiveInspections<AllByBeehiveIdInspectionAllInspectionsViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
             viewModel.BeehiveId = id;
-            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
-            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+            viewModel.BeehiveNumber = beehiveService.GetBeehiveNumberById(id);
+            viewModel.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
-            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
+            var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
             viewModel.ApiaryId = apiary.Id;
             viewModel.ApiaryNumber = apiary.Number;
             viewModel.ApiaryName = apiary.Name;
 
-            var count = this.inspectionService.GetAllBeehiveInspectionsCountByBeehiveId(id);
+            var count = inspectionService.GetAllBeehiveInspectionsCountByBeehiveId(id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
 
             if (viewModel.PagesCount == 0)
@@ -83,12 +83,12 @@
 
             viewModel.CurrentPage = page;
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create(int? id)
         {
-            var currentuser = await this.userManager.GetUserAsync(this.User);
+            var currentuser = await userManager.GetUserAsync(User);
 
             var inputModel = new CreateInspectionInputModel
             {
@@ -97,16 +97,16 @@
 
             if (id == null)
             {
-                inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentuser.Id);
+                inputModel.Apiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentuser.Id);
             }
             else
             {
-                inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                inputModel.ApiaryId = apiaryService.GetApiaryIdByBeehiveId(id.Value);
 
-                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
-                var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id.Value);
+                var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
+                var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(id.Value);
 
-                ForecastResult forecastResult = await this.forecastService.GetCurrentWeather(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+                ForecastResult forecastResult = await forecastService.GetCurrentWeather(apiary.Adress, configuration["OpenWeatherMap:ApiId"]);
                 if (forecastResult != null)
                 {
                     inputModel.IncludeWeatherInfo = true;
@@ -120,39 +120,39 @@
                 inputModel.BeehiveNumber = beehive.Number;
             }
 
-            return this.View(inputModel);
+            return View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int? id, CreateInspectionInputModel inputModel)
         {
-            var currentuser = await this.userManager.GetUserAsync(this.User);
+            var currentuser = await userManager.GetUserAsync(User);
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
-            var beehive = this.beehiveService.GetBeehiveByNumber<BeehiveDataModel>(inputModel.SelectedBeehiveNumber, apiaryNumber);
+            var apiaryNumber = apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
+            var beehive = beehiveService.GetBeehiveByNumber<BeehiveDataModel>(inputModel.SelectedBeehiveNumber, apiaryNumber);
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
             if (id == null && beehive == null)
             {
-                this.ModelState.AddModelError(string.Empty, $"Не съществува кошер с номер {inputModel.SelectedBeehiveNumber} в пчелина!");
+                ModelState.AddModelError(string.Empty, $"Не съществува кошер с номер {inputModel.SelectedBeehiveNumber} в пчелина!");
             }
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 if (id == null)
                 {
-                    inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentuser.Id);
+                    inputModel.Apiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentuser.Id);
                 }
                 else
                 {
-                    inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                    inputModel.ApiaryId = apiaryService.GetApiaryIdByBeehiveId(id.Value);
                 }
 
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
             if (!inputModel.IncludeQueenSection)
@@ -203,34 +203,34 @@
                 }
             }
 
-            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+            var apiaryOwnerId = apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
 
             if (id == null)
             {
-                await this.inspectionService.CreateUserInspectionAsync(apiaryOwnerId, currentuser.Id, beehive.Id, inputModel);
+                await inspectionService.CreateUserInspectionAsync(apiaryOwnerId, currentuser.Id, beehive.Id, inputModel);
             }
             else
             {
-                await this.inspectionService.CreateUserInspectionAsync(apiaryOwnerId, currentuser.Id, id.Value, inputModel);
+                await inspectionService.CreateUserInspectionAsync(apiaryOwnerId, currentuser.Id, id.Value, inputModel);
             }
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
-            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = id.Value });
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден преглед!";
+            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = id.Value });
         }
 
         public IActionResult Edit(int id, int beehiveId)
         {
-            var inputModel = this.inspectionService.GetInspectionById<EditInspectionInputModel>(id);
+            var inputModel = inspectionService.GetInspectionById<EditInspectionInputModel>(id);
             inputModel.WeatherHumidityString = inputModel.WeatherHumidity.ToString();
             inputModel.WeatherTemperatureString = inputModel.WeatherTemperature.ToString();
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
+            var apiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var beehiveNumber = beehiveService.GetBeehiveNumberById(beehiveId);
             inputModel.BeehiveId = beehiveId;
             inputModel.ApiaryNumber = apiaryNumber;
             inputModel.BeehiveNumber = beehiveNumber;
 
-            return this.View(inputModel);
+            return View(inputModel);
         }
 
         [HttpPost]
@@ -239,35 +239,35 @@
             inputModel.WeatherHumidity = Convert.ToDouble(inputModel.WeatherHumidityString);
             inputModel.WeatherTemperature = Convert.ToDouble(inputModel.WeatherTemperatureString);
 
-            var beehiveId = await this.inspectionService.EditUserInspectionAsync(id, inputModel);
+            var beehiveId = await inspectionService.EditUserInspectionAsync(id, inputModel);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран преглед!";
-            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран преглед!";
+            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
 
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var inspection = this.inspectionService.GetInspectionById<InspectionDataViewModel>(id);
+            var currentUser = await userManager.GetUserAsync(User);
+            var inspection = inspectionService.GetInspectionById<InspectionDataViewModel>(id);
 
             if (inspection.CreatorId != currentUser.Id)
             {
-                return this.BadRequest();
+                return BadRequest();
             }
 
-            await this.inspectionService.DeleteInspectionAsync(id);
+            await inspectionService.DeleteInspectionAsync(id);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит преглед!";
-            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = inspection.BeehiveId });
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит преглед!";
+            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = inspection.BeehiveId });
         }
 
         public IActionResult ExportToExcel(int id)
         {
-            var pck = this.excelExportService.ExportAsExcelInspection(id);
+            var pck = excelExportService.ExportAsExcelInspection(id);
 
-            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }

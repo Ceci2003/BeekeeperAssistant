@@ -1,382 +1,91 @@
 ﻿@using BeekeeperAssistant.Common
 @model BeekeeperAssistant.Web.ViewModels.Home.IndexHomeViewModel
 @{
-    if (this.User.Identity.IsAuthenticated)
-    {
-        this.ViewData["Title"] = "Табло";
-    }
-    else
-    {
-        this.ViewData["Title"] = "Начало";
-    }
+    this.ViewData["Title"] = "Начало";
     int colorsCounter = 0;
 }
 
-@if (!User.Identity.IsAuthenticated)
-{
-    <div class="banner">
-        <div class="banner-text .ml2">
-            <h1>@GlobalConstants.SystemName</h1>
-            <p>Дневникът на съвременния пчелар</p>
-        </div>
+<div class="banner">
+    <div class="banner-text .ml2">
+        <h1>@GlobalConstants.SystemName</h1>
+        <p>Дневникът на съвременния пчелар</p>
     </div>
-    @* <div class="app-benefits-cards">
-        <h1>Ползи на @GlobalConstants.SystemName</h1>
-        <hr>
-        <div class="app-benefits-cards-collection">
-        <div class="app-benefits-card">
-        <div class="app-benefits-card-inner">
-        <div class="app-benefits-card-front">
-        <div class="app-benefits-card-body">
-        <i class="fas fa-laptop-house"></i>
-        <h3>лесен за работа</h3>
-        </div>
-        </div>
-        <div class="app-benefits-card-back">
-        <div class="app-benefits-card-body">
-        <h3>лесен за работа</h3>
-        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div class="app-benefits-card">
-        <div class="app-benefits-card-inner">
-        <div class="app-benefits-card-front">
-        <div class="app-benefits-card-body">
-        <i class="fas fa-clipboard-check"></i>
-        <h3>лесен за работа</h3>
-        </div>
-        </div>
-        <div class="app-benefits-card-back">
-        <div class="app-benefits-card-body">
-        <h3>лесен за работа</h3>
-        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div class="app-benefits-card">
-        <div class="app-benefits-card-inner">
-        <div class="app-benefits-card-front">
-        <div class="app-benefits-card-body">
-        <i class="fas fa-info-circle"></i>
-        <h3>лесен за работа</h3>
-        </div>
-        </div>
-        <div class="app-benefits-card-back">
-        <div class="app-benefits-card-body">
-        <h3>лесен за работа</h3>
-        <p>@GlobalConstants.SystemName е лесен, подреден и удобен за работа</p>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div> *@
+</div>
+<div class="app-benefits-cards">
+    @* <h1>Възможности които предоставя</h1> *@
+    <p class="quote">
+        <span class="quotes">„</span>Пчеларите се грижат за една от основните животоподдържащи системи на планетата - пчелите<span class="quotes">“</span>
+        <br>
+        <i class="author">- от създателите</i>
+    </p>
+    <p class="author"></p>
+    <p class="after-quote">Затова възможностите които получавате са:</p>
 
-    <div class="app-benefits-cards">
-        @* <h1>Възможности които предоставя</h1> *@
-        <p class="quote">
-            <span class="quotes">„</span>Пчеларите се грижат за една от основните животоподдържащи системи на планетата - пчелите<span class="quotes">“</span> 
-            <br>
-            <i class="author">- от създателите</i>
-            </p>
-        <p class="author"></p>
-        <p class="after-quote">Затова възможностите които получавате са:</p>
-
-        <div class="app-benefits-cards-list">
-            <div class="card">
-                <div class="card-inner queen">
-                    <div class="front-page">
-                        <img src="~/img/bee-wheat.svg" alt="" width="50px">
-                        <h3>Майки</h3>
-                    </div>
-                    <div class="back-page">
-                        <img src="~/img/bee-wheat.svg" alt="" width="50px">
-                        <h3>Майки</h3>
-                        <p>Информация за всички придадени пчелни майки, по кошери, цветове и години.</p>
-                    </div>
+    <div class="app-benefits-cards-list">
+        <div class="card">
+            <div class="card-inner queen">
+                <div class="front-page">
+                    <img src="~/img/bee-wheat.svg" alt="" width="50px">
+                    <h3>Майки</h3>
+                </div>
+                <div class="back-page">
+                    <img src="~/img/bee-wheat.svg" alt="" width="50px">
+                    <h3>Майки</h3>
+                    <p>Информация за всички придадени пчелни майки, по кошери, цветове и години.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-inner helper">
-                    <div class="front-page">
-                        <img src="~/img/helper-wheat.svg" alt="" width="50px">
-                        <h3>Помощници</h3>
-                    </div>
-                    <div class="back-page">
-                        <img src="~/img/helper-wheat.svg" alt="" width="50px">
-                        <h3>Помощници</h3>
-                        <p>Kъм всеки пчелин могат да се добавят помощници, с различни права на достъп.</p>
-                    </div>
+        </div>
+        <div class="card">
+            <div class="card-inner helper">
+                <div class="front-page">
+                    <img src="~/img/helper-wheat.svg" alt="" width="50px">
+                    <h3>Помощници</h3>
+                </div>
+                <div class="back-page">
+                    <img src="~/img/helper-wheat.svg" alt="" width="50px">
+                    <h3>Помощници</h3>
+                    <p>Kъм всеки пчелин могат да се добавят помощници, с различни права на достъп.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-inner qr">
-                    <div class="front-page">
-                        <img src="~/img/qr-wheat.svg" alt="" width="50px">
-                        <h3>QR код</h3>
-                    </div>
-                    <div class="back-page">
-                        <img src="~/img/qr-wheat.svg" alt="" width="50px">
-                        <h3>QR код</h3>
-                        <p>Уникален qr код за всеки пчелин и кошер, улесняващ достъпа до тях.</p>
-                    </div>
+        </div>
+        <div class="card">
+            <div class="card-inner qr">
+                <div class="front-page">
+                    <img src="~/img/qr-wheat.svg" alt="" width="50px">
+                    <h3>QR код</h3>
+                </div>
+                <div class="back-page">
+                    <img src="~/img/qr-wheat.svg" alt="" width="50px">
+                    <h3>QR код</h3>
+                    <p>Уникален qr код за всеки пчелин и кошер, улесняващ достъпа до тях.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-inner apiary">
-                    <div class="front-page">
-                        <img src="~/img/apiary-wheat.svg" alt="" height="30px">
-                        <h3>Пчелини</h3>
-                    </div>
-                    <div class="back-page">
-                        <img src="~/img/apiary-wheat.svg" alt="" height="30px">
-                        <h3>Пчелини</h3>
-                        <p>Извежда списък със създадените пчелини на потребителя, достъп до информацията и кошерите на всеки пчелин.</p>
-                    </div>
+        </div>
+        <div class="card">
+            <div class="card-inner apiary">
+                <div class="front-page">
+                    <img src="~/img/apiary-wheat.svg" alt="" height="30px">
+                    <h3>Пчелини</h3>
+                </div>
+                <div class="back-page">
+                    <img src="~/img/apiary-wheat.svg" alt="" height="30px">
+                    <h3>Пчелини</h3>
+                    <p>Извежда списък със създадените пчелини на потребителя, достъп до информацията и кошерите на всеки пчелин.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-inner beehive">
-                    <div class="front-page">
-                        <img src="~/img/beehive-wheat.svg" alt="" height="50px">
-                        <h3>Кошери</h3>
-                    </div>
-                    <div class="back-page">
-                        <img src="~/img/beehive-wheat.svg" alt="" height="50px">
-                        <h3>Кошери</h3>
-                        <p>Списък с кошерите, групирани по пчелини и достъп до информацията за тях. Възможно е добавяне на прегледи, третирания и добиви.</p>
-                    </div>
+        </div>
+        <div class="card">
+            <div class="card-inner beehive">
+                <div class="front-page">
+                    <img src="~/img/beehive-wheat.svg" alt="" height="50px">
+                    <h3>Кошери</h3>
+                </div>
+                <div class="back-page">
+                    <img src="~/img/beehive-wheat.svg" alt="" height="50px">
+                    <h3>Кошери</h3>
+                    <p>Списък с кошерите, групирани по пчелини и достъп до информацията за тях. Възможно е добавяне на прегледи, третирания и добиви.</p>
                 </div>
             </div>
         </div>
     </div>
-}
-else
-{
-    <div class="breadcrumb">
-        <div class="aside-icon" onclick="asideBurgerMenuClick();">
-            <i class="fas fa-bars"></i>
-        </div>
-        <ul class="breadcrumb-list">
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ul>
-        <div class="breadcrumb-leave">
-            <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-            </form>
-        </div>
-    </div>
-
-    <div class="content">
-        <partial name="_StatusMessagePartial" />
-        <div class="dashboard-cards-list">
-            <div class="dashboard-card">
-                <div class="dashboard-card-header apiary">
-                    <img src="~/img/apiaryIcon.png" alt="apiaryIcon.png">
-                    <h1>Достъп до пчелините:</h1>
-                </div>
-                <div class="dashboard-card-body apiary">
-                    <a asp-controller="Apiary" asp-action="All">
-                        <div>
-                            <p>Към списъка</p>
-                            <i class="fas fa-arrow-circle-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <div class="dashboard-card-header beehive">
-                    <img src="~/img/beehiveIcon.png" alt="beehiveIcon.png">
-                    <h1>Достъп до кошерите:</h1>
-                </div>
-                <div class="dashboard-card-body beehive">
-                    <a asp-controller="Beehive" asp-action="All">
-                        <div>
-                            <p>Към списъка</p>
-                            <i class="fas fa-arrow-circle-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <div class="dashboard-card-header queen">
-                    <img src="~/img/queenIcon.png" alt="queenIcon.png">
-                    <h1>Достъп до майките:</h1>
-                </div>
-                <div class="dashboard-card-body queen">
-                    <a asp-controller="Queen" asp-action="All">
-                        <div>
-                            <p>Към списъка</p>
-                            <i class="fas fa-arrow-circle-right"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-cards-list">
-            <div class="count-add-card">
-                <div class="count-add-card-body">
-                    <a asp-controller="Treatment" asp-action="All" style="pointer-events: none;">
-                        <div>
-                            <p>@Model.TreatmentsCount</p>
-                            <p>Третирания за сезона</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="count-add-card-footer">
-                    <a asp-controller="Treatment" asp-action="Create" asp-route-pagePath="Home">
-                        <div>
-                            <i class="fas fa-notes-medical"></i>
-                            <p>Добави третиране</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="count-add-card">
-                <div class="count-add-card-body">
-                    <a asp-controller="Inspection" asp-action="All" style="pointer-events: none;">
-                        <div>
-                            <p>@Model.InspectionsCount</p>
-                            <p>Прегледа за сезона</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="count-add-card-footer">
-                    <a asp-controller="Inspection" asp-action="Create">
-                        <div>
-                            <i class="far fa-calendar-check"></i>
-                            <p>Добави преглед</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="count-add-card">
-                <div class="count-add-card-body">
-                    <a asp-controller="Harvest" asp-action="All" style="pointer-events: none;">
-                        <div>
-                            <p>@Model.HarvestsCount</p>
-                            <p>Добива за сезона</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="count-add-card-footer">
-                    <a asp-controller="Harvest" asp-action="Create">
-                        <div>
-                            <i class="fas fa-box"></i>
-                            <p>Добави добив</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-cards-list">
-            @if (Model.ApiariesCount > 0)
-            {
-                <div class="dashboard-chart-card">
-                    <img src="@Model.ApiariesCountChartUrl" alt="...диаграма">
-                    <div class="legend">
-                        @foreach (var ac in Model.ApiariesCountByType.Keys)
-                        {
-                            <div class="legend-row">
-                                <div class="legend-color"
-                        style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
-                                    @Model.ApiariesCountByType[ac]
-                                </div>
-                                <div class="legend-value">@Html.DisplayFor(x => ac)</div>
-                            </div>
-                            colorsCounter++;
-                        }
-                        @{
-                            colorsCounter = 0;
-                        }
-                    </div>
-                    <div class="count">
-                        <a asp-controller="Apiary" asp-action="All">
-                            <div>
-                                <p>@Model.ApiariesCount</p>
-                                <p>Пчелини</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            }
-            @if (Model.BeehivesCount > 0)
-            {
-                <div class="dashboard-chart-card">
-                    <img src="@Model.BeehivesCountChartUrl" alt="...диаграма">
-                    <div class="legend">
-                        @foreach (var bc in Model.BeehivesCountByPower.Keys)
-                        {
-                            <div class="legend-row">
-                                <div class="legend-color"
-                        style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
-                                    @Model.BeehivesCountByPower[bc]
-                                </div>
-                                <div class="legend-value">@Html.DisplayFor(x => bc)</div>
-                            </div>
-                            colorsCounter++;
-                        }
-                        @{
-                            colorsCounter = 0;
-                        }
-                    </div>
-                    <div class="count">
-                        <a asp-controller="Beehive" asp-action="All">
-                            <div>
-                                <p>@Model.BeehivesCount</p>
-                                <p>Кошери</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            }
-            @if (Model.QueensCount > 0)
-            {
-                <div class="dashboard-chart-card">
-                    <img src="@Model.QueensCountByGivingDateChartUrl" alt="...диаграма">
-                    <div class="legend">
-                        @foreach (var bc in Model.QueensCountByGivingDate.Keys)
-                        {
-                            <div class="legend-row">
-                                <div class="legend-color"
-                        style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
-                                    @Model.QueensCountByGivingDate[bc]
-                                </div>
-                                @if (bc == 0)
-                                {
-                                    <div class="legend-value">
-                                        Без майка
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="legend-value">
-                                        @Html.DisplayFor(x => bc)
-                                    </div>
-                                }
-                            </div>
-                            colorsCounter++;
-                        }
-                        @{
-                            colorsCounter = 0;
-                        }
-                    </div>
-                    <div class="count">
-                        <a asp-controller="Queen" asp-action="All">
-                            <div>
-                                <p>@Model.QueensCount</p>
-                                <p>Майки</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-}
+</div>

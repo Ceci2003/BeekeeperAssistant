@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -17,8 +17,7 @@
     using OfficeOpenXml;
     using OfficeOpenXml.Style;
 
-    [Authorize]
-    public class TreatmentController : BaseController
+    public class TreatmentController : AppBaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITreatmentService treatmentService;
@@ -53,20 +52,20 @@
             var viewModel = new AllByBeehiveIdTreatementViewModel()
             {
                 AllTreatements =
-                    this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+            var currentUser = await userManager.GetUserAsync(User);
+            viewModel.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
             viewModel.BeehiveId = id;
-            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
+            viewModel.BeehiveNumber = beehiveService.GetBeehiveNumberById(id);
 
-            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
+            var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
             viewModel.ApiaryId = apiary.Id;
             viewModel.ApiaryNumber = apiary.Number;
             viewModel.ApiaryName = apiary.Name;
 
-            var count = this.treatmentService.GetBeehiveTreatmentsCountByBeehiveId(id);
+            var count = treatmentService.GetBeehiveTreatmentsCountByBeehiveId(id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
 
             if (viewModel.PagesCount == 0)
@@ -76,12 +75,12 @@
 
             viewModel.CurrentPage = page;
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create(int? id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
             var inputModel = new CreateTreatmentInputModel()
             {
@@ -90,12 +89,12 @@
 
             if (id == null)
             {
-                inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                inputModel.Apiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
             }
             else
             {
-                var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
-                var beehiveNumber = this.beehiveService.GetBeehiveNumberById(id.Value);
+                var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
+                var beehiveNumber = beehiveService.GetBeehiveNumberById(id.Value);
 
                 inputModel.ApiaryId = apiary.Id;
                 inputModel.BeehiveId = id.Value;
@@ -103,35 +102,35 @@
                 inputModel.BeehiveNumber = beehiveNumber;
             }
 
-            return this.View(inputModel);
+            return View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int? id, CreateTreatmentInputModel inputModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 inputModel.DateOfTreatment = DateTime.UtcNow.Date;
                 if (id == null)
                 {
-                    inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                    inputModel.Apiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
                 }
 
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
-            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+            var apiaryNumber = apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
+            var apiaryOwnerId = apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
 
             if (id == null)
             {
-                var apiaryBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataModel>(inputModel.ApiaryId).ToList();
+                var apiaryBeehives = beehiveService.GetBeehivesByApiaryId<BeehiveDataModel>(inputModel.ApiaryId).ToList();
                 if (inputModel.AllBeehives)
                 {
                     var beehivesIds = apiaryBeehives.Select(b => b.Id).ToList();
-                    await this.treatmentService.CreateTreatmentAsync(
+                    await treatmentService.CreateTreatmentAsync(
                     apiaryOwnerId,
                     currentUser.Id,
                     inputModel.DateOfTreatment,
@@ -157,7 +156,7 @@
                         }
                     }
 
-                    await this.treatmentService.CreateTreatmentAsync(
+                    await treatmentService.CreateTreatmentAsync(
                             apiaryOwnerId,
                             currentUser.Id,
                             inputModel.DateOfTreatment,
@@ -171,11 +170,11 @@
                             selectedIds);
                 }
 
-                return this.RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                await this.treatmentService.CreateTreatmentAsync(
+                await treatmentService.CreateTreatmentAsync(
                 apiaryOwnerId,
                 currentUser.Id,
                 inputModel.DateOfTreatment,
@@ -188,30 +187,30 @@
                 inputModel.Dose,
                 new List<int> { id.Value });
 
-                this.TempData[GlobalConstants.SuccessMessage] = "Успешно създадено третиране!";
-                return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = id.Value });
+                TempData[GlobalConstants.SuccessMessage] = "Успешно създадено третиране!";
+                return RedirectToAction(nameof(this.AllByBeehiveId), new { id = id.Value });
             }
         }
 
         public IActionResult Edit(int id)
         {
-            var inputModel = this.treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
+            var inputModel = treatmentService.GetTreatmentById<EditTreatmentInputModel>(id);
 
-            var beehiveId = this.beehiveService.GetBeehiveIdByTreatmentId(id);
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
+            var beehiveId = beehiveService.GetBeehiveIdByTreatmentId(id);
+            var apiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var beehiveNumber = beehiveService.GetBeehiveNumberById(beehiveId);
 
             inputModel.BeehiveId = beehiveId;
             inputModel.ApiaryNumber = apiaryNumber;
             inputModel.BeehiveNumber = beehiveNumber;
 
-            return this.View(inputModel);
+            return View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTreatmentInputModel inputModel)
         {
-            await this.treatmentService.EditTreatment(
+            await treatmentService.EditTreatment(
                 id,
                 inputModel.BeehiveId.Value,
                 inputModel.DateOfTreatment,
@@ -223,34 +222,34 @@
                 inputModel.Quantity,
                 inputModel.Dose);
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактирано третиране!";
-            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = inputModel.BeehiveId.Value });
+            TempData[GlobalConstants.SuccessMessage] = "Успешно редактирано третиране!";
+            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = inputModel.BeehiveId.Value });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var treatment = this.treatmentService.GetTreatmentById<TreatmentDataViewModel>(id);
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var treatment = treatmentService.GetTreatmentById<TreatmentDataViewModel>(id);
+            var currentUser = await userManager.GetUserAsync(User);
 
             if (treatment.CreatorId != currentUser.Id)
             {
-                return this.BadRequest();
+                return BadRequest();
             }
 
-            await this.treatmentService.DeleteTreatmentAsync(id);
+            await treatmentService.DeleteTreatmentAsync(id);
 
-            var beehiveId = this.beehiveService.GetBeehiveIdByTreatmentId(id);
+            var beehiveId = beehiveService.GetBeehiveIdByTreatmentId(id);
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрито третиране!";
-            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
+            TempData[GlobalConstants.SuccessMessage] = "Успешно изтрито третиране!";
+            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
         }
 
         public IActionResult ExportToExcel(int id)
         {
-            var pck = this.excelExportService.ExportAsExcelTreatment(id);
+            var pck = excelExportService.ExportAsExcelTreatment(id);
 
-            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }

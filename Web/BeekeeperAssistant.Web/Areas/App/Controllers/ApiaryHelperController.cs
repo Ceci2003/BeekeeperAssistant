@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
 
-    public class ApiaryHelperController : BaseController
+    public class ApiaryHelperController : AppBaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
@@ -38,106 +38,106 @@
 
         public IActionResult Add(int id)
         {
-            var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
+            var apiaryNumber = apiaryService.GetApiaryNumberByApiaryId(id);
             var viewModel = new AddApiaryHelperInputModel
             {
                 ApiaryNumber = apiaryNumber,
                 ApiaryId = id,
             };
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(int id, AddApiaryHelperInputModel viewModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
             viewModel.ApiaryId = id;
-            viewModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id);
+            viewModel.ApiaryNumber = apiaryService.GetApiaryNumberByApiaryId(id);
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(viewModel);
+                return View(viewModel);
             }
 
             if (currentUser.UserName == viewModel.UserName)
             {
-                this.ModelState.AddModelError("UserName", "Не може да добавите себе си!");
-                return this.View(viewModel);
+                ModelState.AddModelError("UserName", "Не може да добавите себе си!");
+                return View(viewModel);
             }
 
-            var user = await this.userManager.FindByNameAsync(viewModel.UserName);
-            if (this.apiaryHelperService.IsApiaryHelper(user.Id, id))
+            var user = await userManager.FindByNameAsync(viewModel.UserName);
+            if (apiaryHelperService.IsApiaryHelper(user.Id, id))
             {
-                this.ModelState.AddModelError("UserName", "Потребителят вече е помощник!");
-                return this.View(viewModel);
+                ModelState.AddModelError("UserName", "Потребителят вече е помощник!");
+                return View(viewModel);
             }
 
-            await this.apiaryHelperService.AddAsync(user.Id, id);
+            await apiaryHelperService.AddAsync(user.Id, id);
 
-            var helper = await this.userManager.FindByNameAsync(viewModel.UserName);
-            await this.emailSender.SendEmailAsync(
-                  this.configuration["SendGrid:RecipientEmail"],
+            var helper = await userManager.FindByNameAsync(viewModel.UserName);
+            await emailSender.SendEmailAsync(
+                  configuration["SendGrid:RecipientEmail"],
                   GlobalConstants.SystemName,
                   currentUser.Email,
                   "Успешно добавен помощник",
                   $"Успешно добавихте <strong>{helper.UserName}</strong>, като помощник на пчелин: <strong>{viewModel.ApiaryNumber}</strong>.");
 
-            await this.emailSender.SendEmailAsync(
-                  this.configuration["SendGrid:RecipientEmail"],
+            await emailSender.SendEmailAsync(
+                  configuration["SendGrid:RecipientEmail"],
                   GlobalConstants.SystemName,
                   helper.Email,
                   "Успешно добавен помощник",
                   $"Успешно бяхте добавени, като помощник на пчелин: <strong>{viewModel.ApiaryNumber}</strong> от <strong>{currentUser.Email}</strong>.");
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно добавен помощник!";
-            return this.RedirectToAction(nameof(this.All), new { id = viewModel.ApiaryId });
+            TempData[GlobalConstants.SuccessMessage] = "Успешно добавен помощник!";
+            return RedirectToAction(nameof(this.All), new { id = viewModel.ApiaryId });
         }
 
         public IActionResult All(int id)
         {
             var viewModel = new AllApiaryHelperViewModel
             {
-                AllHelpers = this.apiaryHelperService.GetAllApiaryHelpersByApiaryId<ApiaryHelperViewModel>(id),
-                ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id),
+                AllHelpers = apiaryHelperService.GetAllApiaryHelpersByApiaryId<ApiaryHelperViewModel>(id),
+                ApiaryNumber = apiaryService.GetApiaryNumberByApiaryId(id),
                 ApiaryId = id,
             };
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(string userId, int apiaryId)
         {
-            await this.apiaryHelperService.DeleteAsync(userId, apiaryId);
+            await apiaryHelperService.DeleteAsync(userId, apiaryId);
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изтрит помощник!";
-            return this.RedirectToAction(nameof(this.All), new { id = apiaryId });
+            TempData[GlobalConstants.SuccessMessage] = "Успешно изтрит помощник!";
+            return RedirectToAction(nameof(this.All), new { id = apiaryId });
         }
 
         public IActionResult Edit(string userId, int apiaryId)
         {
-            var inputModel = this.apiaryHelperService.GetApiaryHelper<EditApiaryHelperInputModel>(userId, apiaryId);
-            inputModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
-            return this.View(inputModel);
+            var inputModel = apiaryHelperService.GetApiaryHelper<EditApiaryHelperInputModel>(userId, apiaryId);
+            inputModel.ApiaryNumber = apiaryService.GetApiaryNumberByApiaryId(apiaryId);
+            return View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditApiaryHelperInputModel inputModel, string userId, int apiaryId)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await this.userManager.FindByIdAsync(userId);
+                var user = await userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
-                inputModel.ApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(apiaryId);
+                inputModel.ApiaryNumber = apiaryService.GetApiaryNumberByApiaryId(apiaryId);
                 inputModel.ApiaryId = apiaryId;
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            await this.apiaryHelperService.EditAsync(userId, apiaryId, inputModel.Access);
+            await apiaryHelperService.EditAsync(userId, apiaryId, inputModel.Access);
 
-            this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
-            return this.RedirectToAction(nameof(this.All), new { id = apiaryId} );
+            TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
+            return RedirectToAction(nameof(this.All), new { id = apiaryId });
         }
     }
 }

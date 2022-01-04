@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class BeehiveNoteController : BaseController
+    public class BeehiveNoteController : AppBaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IBeehiveNoteService beehiveNoteService;
@@ -30,94 +30,94 @@
 
         public async Task<IActionResult> AllByBeehiveId(int id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
             var viewModel = new AllByBeehiveIdBeehiveNoteViewModel();
 
-            viewModel.AllNotes = this.beehiveNoteService.GetAllBeehiveNotes<ByBeehiveIdBeehiveNoteViewModel>(id);
-            viewModel.BeehiveAccess = await this.beehiveHelperServic.GetUserBeehiveAccessAsync(currentUser.Id, id);
+            viewModel.AllNotes = beehiveNoteService.GetAllBeehiveNotes<ByBeehiveIdBeehiveNoteViewModel>(id);
+            viewModel.BeehiveAccess = await beehiveHelperServic.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id);
+            var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(id);
             viewModel.BeehiveId = id;
             viewModel.Number = beehive.Number;
             viewModel.ApiaryId = beehive.Apiary.Id;
             viewModel.ApiaryName = beehive.Apiary.Name;
             viewModel.ApiaryNumber = beehive.Apiary.Number;
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         public IActionResult Create(int id)
         {
             var viewModel = new CreateBeehiveNoteInputModel();
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id);
+            var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(id);
             viewModel.BeehiveId = beehive.Id;
             viewModel.Number = beehive.Number;
             viewModel.ApiaryId = beehive.Apiary.Id;
             viewModel.ApiaryNumber = beehive.Apiary.Number;
             viewModel.ApiaryName = beehive.Apiary.Name;
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int id, CreateBeehiveNoteInputModel inputModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            await this.beehiveNoteService.CreateAsync(
+            await beehiveNoteService.CreateAsync(
                     id,
                     inputModel.Title,
                     inputModel.Content,
                     inputModel.Color,
                     currentUser.Id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = id });
+            return RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = id });
         }
 
         public IActionResult Edit(int id)
         {
-            var viewModel = this.beehiveNoteService.GetBeehiveNoteById<EditBeehiveNoteInputModel>(id);
+            var viewModel = beehiveNoteService.GetBeehiveNoteById<EditBeehiveNoteInputModel>(id);
 
-            var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(viewModel.BeehiveId);
+            var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(viewModel.BeehiveId);
             viewModel.Number = beehive.Number;
             viewModel.ApiaryId = beehive.Apiary.Id;
             viewModel.ApiaryNumber = beehive.Apiary.Number;
             viewModel.ApiaryName = beehive.Apiary.Name;
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditBeehiveNoteInputModel inputModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var beehiveId = await this.beehiveNoteService.EditAsync(
+            var beehiveId = await beehiveNoteService.EditAsync(
                 id,
                 inputModel.Title,
                 inputModel.Content,
                 inputModel.Color,
                 currentUser.Id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = beehiveId });
+            return RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId });
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var beehiveId = await this.beehiveNoteService.DeleteAsync(id);
+            var beehiveId = await beehiveNoteService.DeleteAsync(id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = beehiveId });
+            return RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId });
         }
     }
 }

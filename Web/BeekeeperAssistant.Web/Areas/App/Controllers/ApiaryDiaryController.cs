@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ApiaryDiaryController : BaseController
+    public class ApiaryDiaryController : AppBaseController
     {
         private readonly IApiaryDiaryService apiaryDiaryService;
         private readonly UserManager<ApplicationUser> userManager;
@@ -32,37 +32,37 @@
 
         public IActionResult ByApiaryId(int id)
         {
-            var viewModel = this.apiaryDiaryService.GetApiaryDiaryByApiaryId<ByApiaryIdApiaryDiaryViewModel>(id);
+            var viewModel = apiaryDiaryService.GetApiaryDiaryByApiaryId<ByApiaryIdApiaryDiaryViewModel>(id);
 
             if (viewModel == null)
             {
                 viewModel = new ByApiaryIdApiaryDiaryViewModel();
-                var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(id);
+                var apiary = apiaryService.GetApiaryById<ApiaryDataModel>(id);
                 viewModel.ApiaryId = id;
                 viewModel.ApiaryNumber = apiary.Number;
                 viewModel.ApiaryName = apiary.Name;
             }
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Save(int id, ByApiaryIdApiaryDiaryViewModel inputModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
             var apiaryId = (int)default;
 
-            if (this.apiaryService.HasDiary(id))
+            if (apiaryService.HasDiary(id))
             {
-                apiaryId = await this.apiaryDiaryService.SaveAsync(id, inputModel.Content, currentUser.Id);
+                apiaryId = await apiaryDiaryService.SaveAsync(id, inputModel.Content, currentUser.Id);
             }
             else
             {
-                apiaryId = await this.apiaryDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
+                apiaryId = await apiaryDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
             }
 
-            return this.RedirectToAction(nameof(this.ByApiaryId), new { id = apiaryId });
+            return RedirectToAction(nameof(this.ByApiaryId), new { id = apiaryId });
         }
     }
 }

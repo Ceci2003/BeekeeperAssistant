@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
     using System.Drawing;
@@ -18,7 +18,7 @@
     using Microsoft.Extensions.Configuration;
 
     [Authorize]
-    public class ApiaryController : BaseController
+    public class ApiaryController : AppBaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IApiaryService apiaryService;
@@ -64,19 +64,19 @@
                 pageHelperApiaries = 1;
             }
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
-            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var userApiariesCount = apiaryService.GetAllUserApiariesCount(currentUser.Id);
             var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
 
-            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
+            var apiaryHelperCount = apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
             var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
 
             var viewModel = new AllApiaryViewModel
             {
                 UserApiaries = new AllApiaryUserApiariesViewModel
                 {
-                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
+                    AllUserApiaries = apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
                         (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
@@ -84,7 +84,7 @@
                 },
                 UserHelperApiaries = new AllApiaryUserHelperApiariesViewModel
                 {
-                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<AllApiaryUserHelperApiariesDataViewModel>(
+                    AllUserHelperApiaries = apiaryHelperService.GetUserHelperApiaries<AllApiaryUserHelperApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiaryHelpersApiaryPerPage,
                         (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
@@ -94,7 +94,7 @@
 
             foreach (var apiary in viewModel.UserHelperApiaries.AllUserHelperApiaries)
             {
-                apiary.Access = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiary.ApiaryId);
+                apiary.Access = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiary.ApiaryId);
             }
 
             if (viewModel.UserApiaries.PagesCount == 0)
@@ -110,33 +110,33 @@
             viewModel.UserApiaries.CurrentPage = pageAllApiaries;
             viewModel.UserHelperApiaries.CurrentPage = pageHelperApiaries;
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> ById(int id)
         {
-            var viewModel = this.apiaryService.GetApiaryById<ByNumberApiaryViewModel>(id);
+            var viewModel = apiaryService.GetApiaryById<ByNumberApiaryViewModel>(id);
 
             if (viewModel == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
             if (viewModel.CreatorId != currentUser.Id &&
-                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id) &&
-                !await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName))
+                !apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id) &&
+                !await userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName))
             {
-                return this.BadRequest();
+                return BadRequest();
             }
 
-            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
+            viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
 
             viewModel.ForecastResult =
-                await this.forecastService.GetCurrentWeather(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
+                await forecastService.GetCurrentWeather(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         public IActionResult Create()
@@ -144,21 +144,21 @@
             var inputModel = new CreateApiaryInputModel();
             inputModel.IsRegistered = true;
 
-            return this.View(inputModel);
+            return View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel, string returnUrl)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
             var apiaryId =
-                await this.apiaryService.CreateUserApiaryAsync(
+                await apiaryService.CreateUserApiaryAsync(
                     currentUser.Id,
                     inputModel.Number,
                     inputModel.Name,
@@ -166,40 +166,40 @@
                     inputModel.Adress,
                     inputModel.IsRegistered);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
 
-            return this.RedirectToAction(nameof(this.ById), new { id = apiaryId });
+            return RedirectToAction(nameof(this.ById), new { id = apiaryId });
         }
 
         public IActionResult Edit(int id)
         {
-            var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
+            var viewModel = apiaryService.GetApiaryById<EditApiaryInputModel>(id);
 
             if (viewModel.IsRegistered)
             {
-                viewModel.CityCode = this.apiaryNumberService.GetCityCode(viewModel.Number);
-                viewModel.FarmNumber = this.apiaryNumberService.GetFarmNumber(viewModel.Number);
+                viewModel.CityCode = apiaryNumberService.GetCityCode(viewModel.Number);
+                viewModel.FarmNumber = apiaryNumberService.GetFarmNumber(viewModel.Number);
             }
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return View(inputModel);
             }
 
-            var modelNumber = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
+            var modelNumber = apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
             if (!inputModel.IsRegistered)
             {
                 modelNumber = null;
             }
 
             var apiaryId =
-                await this.apiaryService.EditApiaryByIdAsync(
+                await apiaryService.EditApiaryByIdAsync(
                     id,
                     modelNumber,
                     inputModel.Name,
@@ -207,39 +207,39 @@
                     inputModel.Adress,
                     inputModel.IsRegistered);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
-            return this.RedirectToAction(nameof(this.ById), new { apiaryId = apiaryId });
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
+            return RedirectToAction(nameof(this.ById), new { apiaryId });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id, string returnUrl)
         {
-            await this.apiaryService.DeleteApiaryByIdAsync(id);
+            await apiaryService.DeleteApiaryByIdAsync(id);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
 
             if (returnUrl != null)
             {
-                return this.Redirect(returnUrl);
+                return Redirect(returnUrl);
             }
 
-            return this.RedirectToAction(nameof(this.All));
+            return RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> ExportToExcel()
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var currentUser = await userManager.GetUserAsync(User);
 
-            var exportResult = this.excelExportService.ExportAsExcelApiary(currentUser.Id);
+            var exportResult = excelExportService.ExportAsExcelApiary(currentUser.Id);
 
-            this.Response.Headers.Add("content-disposition", "attachment: filename=ExcelReport.xlsx");
+            Response.Headers.Add("content-disposition", "attachment: filename=ExcelReport.xlsx");
             return new FileContentResult(exportResult.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> Bookmark(int id)
         {
-            await this.apiaryService.BookmarkApiaryAsync(id);
-            return this.RedirectToAction(nameof(this.All));
+            await apiaryService.BookmarkApiaryAsync(id);
+            return RedirectToAction(nameof(this.All));
         }
     }
 }

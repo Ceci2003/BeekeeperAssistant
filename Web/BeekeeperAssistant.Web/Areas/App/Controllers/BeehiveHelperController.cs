@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class BeehiveHelperController : BaseController
+    public class BeehiveHelperController : AppBaseController
     {
         private readonly IBeehiveHelperService beehiveHelperService;
         private readonly IBeehiveService beehiveService;
@@ -31,43 +31,43 @@
         // DONE []
         public IActionResult All(int id)
         {
-            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
+            var beehive = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
 
             var viewModel = new AllBeehiveHelperViewModel
             {
-                AllHelpers = this.beehiveHelperService.GetAllBeehiveHelpersByBeehiveId<BeehiveHelperViewModel>(id),
+                AllHelpers = beehiveHelperService.GetAllBeehiveHelpersByBeehiveId<BeehiveHelperViewModel>(id),
                 BeehiveId = id,
                 BeehiveNumber = beehive.Number,
                 ApiaryNumber = beehive.ApiaryNumber,
             };
 
-            return this.View(viewModel);
+            return View(viewModel);
         }
 
         public IActionResult Edit(string userId, int beehiveId)
         {
-            var inputModel = this.beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
+            var inputModel = beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
             inputModel.BeehiveId = beehiveId;
-            inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
-            return this.View(inputModel);
+            inputModel.BeehiveNumber = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
+            return View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditBeehiveHelperInputModel inputModel, string userId, int beehiveId)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await this.userManager.FindByIdAsync(userId);
+                var user = await userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
                 inputModel.BeehiveId = beehiveId;
-                inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
-                return this.View(inputModel);
+                inputModel.BeehiveNumber = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
+                return View(inputModel);
             }
 
-            await this.beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
+            await beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
 
-            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран помощник!";
-            return this.RedirectToAction(nameof(this.All), new { id = beehiveId });
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран помощник!";
+            return RedirectToAction(nameof(this.All), new { id = beehiveId });
         }
     }
 }

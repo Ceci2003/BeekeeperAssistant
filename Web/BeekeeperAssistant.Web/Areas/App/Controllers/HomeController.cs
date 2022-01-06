@@ -66,6 +66,11 @@
                 return View();
             }
 
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.RedirectToAction("Index", "Dashboard", new { area = "Administration" });
+            }
+
             var viewModel = new IndexHomeViewModel();
 
             var treatmentsCount = treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id);

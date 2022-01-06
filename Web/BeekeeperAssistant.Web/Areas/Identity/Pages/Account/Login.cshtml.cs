@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -80,7 +80,7 @@
             returnUrl ??= this.Url.Content("~/App");
 
             this.ExternalLogins = (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+
             if (this.ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -89,6 +89,11 @@
                 if (result.Succeeded)
                 {
                     this._logger.LogInformation("User logged in.");
+                    if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        returnUrl = "~/Administration/Dashboard";
+                    }
+
                     return this.LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

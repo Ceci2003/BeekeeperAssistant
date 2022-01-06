@@ -41,6 +41,10 @@
     overflow-y: scroll;
   }
 
+  .sidebar-navigation .navigations {
+    margin-bottom: 50px;
+  }
+
   .sidebar-navigation::-webkit-scrollbar {
     width: 0;
   }
@@ -108,6 +112,13 @@
   }
 
   /* Sidebar */
+  .sidebar-navigation .user-type-icon {
+    color: var(--orange);
+    position: absolute;
+    top: 145px;
+    left: 180px;
+  }
+
   .sidebar-navigation {
     position: fixed;
     top: 40px;
@@ -182,7 +193,6 @@
   .tab .tablinks i {
     margin: 0;
   }
-
 
   .tab.apiary .tablinks {
     width: 25%;

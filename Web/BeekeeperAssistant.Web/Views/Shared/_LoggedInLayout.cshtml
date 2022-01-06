@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 
     <environment names="Development">
         <link rel="stylesheet" href="~/css/loggedIn/site.css" asp-append-version="true" />
@@ -50,39 +50,38 @@
         <section class="navigations">
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <section class="sidebar-dropdown start">
-                    <div class="primary administration-drop-btn">
-                        <span>Администрация</span>
-                        <i class="fas fa-angle-left"></i>
-                    </div>
-                    <div class="administration-options hide">
-                        <a class="secondary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
-                            Табло
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="AllAdministrators">
-                            Администратори
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="All">
-                            Регистрирани потребители
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="ApiaryHelper" asp-action="All">
-                            Създадени помощници
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="Apiary" asp-action="All">
-                            Създадени пчелини
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="Beehive" asp-action="All">
-                            Създадени кошери
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="Feedback" asp-action="All">
-                            Въпроси и отзиви
-                        </a>
-                    </div>
-                </section>
+            <section class="sidebar-dropdown start">
+                <div class="primary administration-drop-btn">
+                    <span>Администрация</span>
+                    <i class="fas fa-angle-left"></i>
+                </div>
+                <div class="administration-options hide">
+                    <a class="secondary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                        Табло
+                    </a>
+                    <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="AllAdministrators">
+                        Администратори
+                    </a>
+                    <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="All">
+                        Регистрирани потребители
+                    </a>
+                    <a class="secondary" asp-area="Administration" asp-controller="ApiaryHelper" asp-action="All">
+                        Създадени помощници
+                    </a>
+                    <a class="secondary" asp-area="Administration" asp-controller="Apiary" asp-action="All">
+                        Създадени пчелини
+                    </a>
+                    <a class="secondary" asp-area="Administration" asp-controller="Beehive" asp-action="All">
+                        Създадени кошери
+                    </a>
+                    <a class="secondary" asp-area="Administration" asp-controller="Feedback" asp-action="All">
+                        Въпроси и отзиви
+                    </a>
+                </div>
+            </section>
 
             }
-            <section
-                class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
+            <section class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
                 <a class="primary" asp-controller="Home" asp-action="Index">
                     Табло
                 </a>
@@ -143,7 +142,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
-        asp-append-version="true"></script>
+            asp-append-version="true"></script>
     <script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

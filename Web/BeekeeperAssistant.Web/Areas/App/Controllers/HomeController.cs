@@ -149,5 +149,21 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult HttpError(int statusCode, string message)
+        {
+            if (string.IsNullOrEmpty(message))
+            {
+                message = "Не успяхме да намерим стрaницата която търсите";
+            }
+
+            var viewModel = new HttpErrorViewModel
+            {
+                StatusCode = statusCode,
+                Message = message,
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

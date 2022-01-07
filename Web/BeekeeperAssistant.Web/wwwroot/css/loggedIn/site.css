@@ -144,6 +144,13 @@ button::selection {
   border: 3px solid var(--orange);
 }
 
+.sidebar-navigation .user-type-icon {
+  color: var(--orange);
+  position: absolute;
+  top: 195px;
+  left: 180px;
+}
+
 .sidebar-navigation .user-greeting {
   margin-top: 15px;
   /* margin-bottom: 15px; */
@@ -173,20 +180,39 @@ button::selection {
   color: var(--white);
 }
 
+/* Side navigations */
 .sidebar-navigation .navigations {
   overflow-y: scroll;
   margin-bottom: 30px;
   padding: 0 4px;
+  height: 300px;
+}
+
+/* Side navigations scroll */
+.sidebar-navigation .navigations::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-navigation .navigations::-webkit-scrollbar-track {
+  -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+.sidebar-navigation .navigations::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
 }
 
 /* Side navigation dropdowns */
-
 .sidebar-dropdown {
   border-top: 2px solid var(--white);
 }
 
 .sidebar-dropdown.start {
   border-top: none;
+}
+
+.sidebar-dropdown.active .primary {
+  color: var(--white);
+  border-left: 3px solid var(--white);
 }
 
 .sidebar-dropdown .primary,
@@ -229,6 +255,24 @@ button::selection {
   color: var(--white);
 }
 
+.sidebar-administration .option a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: var(--white);
+  padding: 10px;
+  border-bottom: 3px solid var(--white);
+}
+
+.sidebar-administration .option:last-child a {
+  border-bottom: none;
+}
+
+.sidebar-administration .option a:hover {
+  color: var(--orange);
+  border-left: 3px solid var(--orange);
+}
+
 /* Version control */
 .sidebar-navigation .version-control {
   /* color: var(--white);
@@ -239,6 +283,14 @@ button::selection {
   top: 50px;
   left: 10px;
   user-select: none;
+}
+
+.sidebar-dropdown.administration {
+  border: none;
+}
+
+.sidebar-dropdown.administration .administration-drop-btn {
+  border-top: 3px solid white;
 }
 
 /* Combined */
@@ -2192,10 +2244,10 @@ th {
   background-color: var(--white);
 }
 
-th a{
+th a {
   color: var(--black);
 }
 
-th a.ordered{
+th a.ordered {
   color: var(--blue-hover);
 }

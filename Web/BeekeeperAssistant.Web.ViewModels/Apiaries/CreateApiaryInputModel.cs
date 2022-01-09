@@ -38,6 +38,15 @@
         [Display(Name = "Регистриран ли е пчелина?")]
         public bool IsRegistered { get; set; }
 
+        [Display(Name = "Отворен ли е пчелина?")]
+        public bool IsClosed { get; set; }
+
+        [Display(Name = "Дата на отваряне")]
+        public DateTime? OpeningDate { get; set; }
+
+        [Display(Name = "Дата на затваряне")]
+        public DateTime? ClosingDate { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

@@ -106,7 +106,7 @@
                 var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
                 var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(id.Value);
 
-                ForecastResult forecastResult = await forecastService.GetCurrentWeather(apiary.Adress, configuration["OpenWeatherMap:ApiId"]);
+                ForecastResult forecastResult = await forecastService.GetApiaryCurrentWeatherByCityName(apiary.Adress, configuration["OpenWeatherMap:ApiId"]);
                 if (forecastResult != null)
                 {
                     inputModel.IncludeWeatherInfo = true;

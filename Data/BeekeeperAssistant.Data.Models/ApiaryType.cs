@@ -12,7 +12,7 @@
         [Display(Name = "Стационарен")]
         Stationary = 2,
         [Display(Name = "Временен / Подвижен")]
-        Mobile = 3,
+        Movable = 3,
         [Display(Name = "Помощен")]
         Supporting = 4,
         [Display(Name = "За майко производство")]

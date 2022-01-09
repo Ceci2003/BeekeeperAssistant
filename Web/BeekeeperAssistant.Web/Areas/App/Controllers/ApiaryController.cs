@@ -134,7 +134,7 @@
             viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
 
             viewModel.ForecastResult =
-                await forecastService.GetCurrentWeather(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
+                await forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
 
             return View(viewModel);
         }
@@ -164,7 +164,10 @@
                     inputModel.Name,
                     inputModel.ApiaryType,
                     inputModel.Adress,
-                    inputModel.IsRegistered);
+                    inputModel.IsRegistered,
+                    inputModel.IsClosed,
+                    inputModel.OpeningDate,
+                    inputModel.ClosingDate);
 
             TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
 

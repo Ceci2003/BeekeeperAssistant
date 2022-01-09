@@ -47,6 +47,9 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Property<int>("ApiaryType")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ClosingDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -57,6 +60,9 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsBookMarked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
@@ -73,6 +79,9 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OpeningDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -888,6 +897,42 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("QueensHelpers");
                 });
 
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.TemporaryApiaryBeehive", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("ApiaryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BeehiveId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApiaryId");
+
+                    b.HasIndex("BeehiveId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("TemporaryApiariesBeehives");
+                });
+
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.TreatedBeehive", b =>
                 {
                     b.Property<int>("BeehiveId")
@@ -1326,6 +1371,25 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Queen");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.TemporaryApiaryBeehive", b =>
+                {
+                    b.HasOne("BeekeeperAssistant.Data.Models.Apiary", "Apiary")
+                        .WithMany()
+                        .HasForeignKey("ApiaryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
+                        .WithMany()
+                        .HasForeignKey("BeehiveId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Apiary");
+
+                    b.Navigation("Beehive");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.TreatedBeehive", b =>

@@ -21,5 +21,9 @@
         public string TempMin { get; set; }
 
         public string WeatherIcon { get; set; }
+
+        public int StatusCode { get; set; }
+
+        public string StatusMesaage { get; set; }
     }
 }

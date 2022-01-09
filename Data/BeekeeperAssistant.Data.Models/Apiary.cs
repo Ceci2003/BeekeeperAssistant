@@ -30,6 +30,12 @@
 
         public bool IsRegistered { get; set; }
 
+        public bool IsClosed { get; set; }
+
+        public DateTime OpeningDate { get; set; }
+
+        public DateTime ClosingDate { get; set; }
+
         public virtual ICollection<Beehive> Beehives { get; set; }
 
         public virtual ICollection<ApiaryHelper> ApiaryHelpers { get; set; }

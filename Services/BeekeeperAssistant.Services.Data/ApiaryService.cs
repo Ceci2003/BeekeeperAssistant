@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -49,7 +50,10 @@
             string name,
             ApiaryType apiaryType,
             string adress,
-            bool isRegistered)
+            bool isRegistered,
+            bool isClosed,
+            DateTime? openingDate,
+            DateTime? closingDate)
         {
             var newApiary = new Apiary
             {
@@ -59,6 +63,9 @@
                 ApiaryType = apiaryType,
                 Adress = adress,
                 IsRegistered = isRegistered,
+                IsClosed = isClosed,
+                OpeningDate = openingDate ?? DateTime.Today,
+                ClosingDate = closingDate ?? DateTime.Today,
             };
 
             await this.apiaryRepository.AddAsync(newApiary);

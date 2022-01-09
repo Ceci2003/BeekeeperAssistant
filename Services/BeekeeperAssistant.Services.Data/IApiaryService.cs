@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -35,7 +36,10 @@
             string name,
             ApiaryType apiaryType,
             string address,
-            bool isRegistered);
+            bool isRegistered,
+            bool isClosed,
+            DateTime? openingDate,
+            DateTime? closingDate);
 
         Task DeleteApiaryByIdAsync(int apiaryId);
 

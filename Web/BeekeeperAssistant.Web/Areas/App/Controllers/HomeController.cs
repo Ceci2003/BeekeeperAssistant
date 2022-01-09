@@ -61,16 +61,6 @@
         {
             var currentUser = await userManager.GetUserAsync(User);
 
-            if (!User.Identity.IsAuthenticated || currentUser?.Id == null)
-            {
-                return View();
-            }
-
-            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                return this.RedirectToAction("Index", "Dashboard", new { area = "Administration" });
-            }
-
             var viewModel = new IndexHomeViewModel();
 
             var treatmentsCount = treatmentService.GetAllUserTreatmentsForLastYearCount(currentUser.Id);
@@ -151,6 +141,22 @@
             viewModel.QueenChartColors = queenColors;
             viewModel.QueensCountByGivingDate = queensCountByGivingDate;
             viewModel.QueensCountByGivingDateChartUrl = queensCountByGivingDateChart;
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult HttpError(int statusCode, string message)
+        {
+            if (string.IsNullOrEmpty(message))
+            {
+                message = "Не успяхме да намерим стрaницата която търсите";
+            }
+
+            var viewModel = new HttpErrorViewModel
+            {
+                StatusCode = statusCode,
+                Message = message,
+            };
 
             return this.View(viewModel);
         }

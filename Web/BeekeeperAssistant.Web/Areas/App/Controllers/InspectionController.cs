@@ -106,7 +106,28 @@
                 var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id.Value);
                 var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(id.Value);
 
+                inputModel.BeehiveId = id.Value;
+                inputModel.ApiaryNumber = apiary.Number;
+                inputModel.BeehiveNumber = beehive.Number;
+                var apiaryAddres = apiary.Adress;
+
                 ForecastResult forecastResult = await forecastService.GetApiaryCurrentWeatherByCityName(apiary.Adress, configuration["OpenWeatherMap:ApiId"]);
+
+                if (inputModel.ApiaryNumber != null)
+                {
+                    var postcode = inputModel.ApiaryNumber.Split('-')[0];
+                    forecastResult = await forecastService.GetApiaryCurrentWeatherByCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]);
+
+                    if (forecastResult == null)
+                    {
+                        forecastResult = await forecastService.GetApiaryCurrentWeatherByCityName(apiaryAddres, configuration["OpenWeatherMap:ApiId"]);
+                    }
+                }
+                else
+                {
+                    forecastResult = await forecastService.GetApiaryCurrentWeatherByCityName(apiaryAddres, configuration["OpenWeatherMap:ApiId"]);
+                }
+
                 if (forecastResult != null)
                 {
                     inputModel.IncludeWeatherInfo = true;
@@ -114,10 +135,6 @@
                     inputModel.WeatherTemperatureString = forecastResult.Temp;
                     inputModel.WeatherHumidityString = forecastResult.Humidity;
                 }
-
-                inputModel.BeehiveId = id.Value;
-                inputModel.ApiaryNumber = apiary.Number;
-                inputModel.BeehiveNumber = beehive.Number;
             }
 
             return View(inputModel);

@@ -23,8 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BeekeeperAssistant.Common\BeekeeperAssistant.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeekeeperAssistant.Data.Models\BeekeeperAssistant.Data.Models.csproj" />
     <ProjectReference Include="..\BeekeeperAssistant.Services.Mapping\BeekeeperAssistant.Services.Mapping.csproj" />
+    <ProjectReference Include="..\BeekeeperAssistant.Services.Messaging\BeekeeperAssistant.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

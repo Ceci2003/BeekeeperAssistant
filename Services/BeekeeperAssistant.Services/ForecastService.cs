@@ -58,11 +58,7 @@
                         var statusCodeInHttpCode = ((HttpWebResponse)ex.Response).StatusCode;
                         ForecastResult forecastResult = new ForecastResult();
 
-                        if (statusCodeInHttpCode == HttpStatusCode.NotFound)
-                        {
-                            forecastResult.StatusCode = (int)statusCodeInHttpCode;
-                        }
-                        else
+                        if (statusCodeInHttpCode != HttpStatusCode.NotFound)
                         {
                             // !TODO make send email to administrators when catch exeption status code different from 404
                             // Also send email to multiple users
@@ -75,7 +71,7 @@
                                   $"System exeption were cathed {(int)statusCodeInHttpCode} - {statusCodeInHttpCode}");
                         }
 
-                        return forecastResult;
+                        return null;
                     }
                 }
                 catch (Exception)
@@ -87,7 +83,7 @@
 
         public async Task<ForecastResult> GetApiaryCurrentWeatherByCityPostcode(string postcode, string apiId)
         {
-            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?q={postcode}&units=metric&cnt=1&APPID={apiId}";
+            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&appid={apiId}";
 
             using (WebClient client = new WebClient())
             {
@@ -120,13 +116,20 @@
                         var statusCodeInHttpCode = ((HttpWebResponse)ex.Response).StatusCode;
                         ForecastResult forecastResult = new ForecastResult();
 
-                        if (statusCodeInHttpCode == HttpStatusCode.NotFound)
+                        if (statusCodeInHttpCode != HttpStatusCode.NotFound)
                         {
-                            forecastResult.StatusCode = (int)statusCodeInHttpCode;
-                            forecastResult.StatusMesaage = "Невалиден пощенски код, населеното място не бе намерено.";
+                            // !TODO make send email to administrators when catch exeption status code different from 404
+                            // Also send email to multiple users
+
+                            await emailSender.SendEmailAsync(
+                                  configuration["SendGrid:RecipientEmail"],
+                                  GlobalConstants.SystemName,
+                                  configuration["SendGrid:RecipientEmail"],
+                                  $"System Exeption - {(int)statusCodeInHttpCode}",
+                                  $"System exeption were cathed {(int)statusCodeInHttpCode} - {statusCodeInHttpCode}");
                         }
 
-                        return forecastResult;
+                        return null;
                     }
                 }
                 catch (Exception)

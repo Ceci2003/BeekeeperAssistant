@@ -8,6 +8,6 @@
 
         Task<ForecastResult> GetApiaryCurrentWeatherByCityPostcode(string postcode, string apiId);
 
-        bool ValidateCityPostcode(string postcode);
+        bool ValidateCityPostcode(string postcode, string apiId);
     }
 }

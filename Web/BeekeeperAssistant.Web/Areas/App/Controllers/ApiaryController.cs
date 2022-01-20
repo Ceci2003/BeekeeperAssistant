@@ -133,8 +133,23 @@
 
             viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
 
-            viewModel.ForecastResult =
-                await forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
+            if (viewModel.Number != null)
+            {
+                var postcode = viewModel.Number.Split('-')[0];
+                viewModel.ForecastResult =
+                    await forecastService.GetApiaryCurrentWeatherByCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]);
+
+                if (viewModel.ForecastResult == null)
+                {
+                    viewModel.ForecastResult =
+                        await forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
+                }
+            }
+            else
+            {
+                viewModel.ForecastResult =
+                    await forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
+            }
 
             return View(viewModel);
         }
@@ -150,6 +165,12 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel, string returnUrl)
         {
+            var postcode = inputModel.CityCode.Split('-')[0];
+            if (!forecastService.ValidateCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]))
+            {
+                ModelState.AddModelError(string.Empty, "Не съществува населено място с въведения пощенски код.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(inputModel);

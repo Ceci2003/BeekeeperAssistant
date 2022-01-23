@@ -38,7 +38,7 @@
         [Display(Name = "Регистриран ли е пчелина?")]
         public bool IsRegistered { get; set; }
 
-        [Display(Name = "Отворен ли е пчелина?")]
+        [Display(Name = "Статус на пчелина")]
         public bool IsClosed { get; set; }
 
         [Display(Name = "Дата на отваряне")]
@@ -59,6 +59,7 @@
             {
                 this.Number = null;
             }
+
             var apiaryRepository = validationContext.GetService<IDeletableEntityRepository<Apiary>>();
             var apiaryByNumber = apiaryRepository.All().FirstOrDefault(a => a.Number == this.Number);
 
@@ -99,9 +100,9 @@
 
             if (this.ApiaryType == ApiaryType.Movable)
             {
-                if (this.OpeningDate <= this.ClosingDate)
+                if (this.OpeningDate >= this.ClosingDate)
                 {
-                    errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-голяма от датата на отваряне!"));
+                    errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-късна от датата на отваряне!"));
                 }
             }
 

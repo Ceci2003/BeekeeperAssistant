@@ -82,7 +82,10 @@
             string name,
             ApiaryType apiaryType,
             string address,
-            bool isRegistered)
+            bool isRegistered,
+            bool isClosed,
+            DateTime openingDate,
+            DateTime closingDate)
         {
             var apiary = this.apiaryRepository
                 .All()
@@ -93,6 +96,9 @@
             apiary.ApiaryType = apiaryType;
             apiary.Adress = address;
             apiary.IsRegistered = isRegistered;
+            apiary.IsClosed = isClosed;
+            apiary.OpeningDate = openingDate;
+            apiary.ClosingDate = closingDate;
 
             await this.apiaryRepository.SaveChangesAsync();
 
@@ -294,6 +300,22 @@
         public bool HasDiary(int apiaryId)
         {
             return this.apiaryDiaryRepository.All().Any(ad => ad.ApiaryId == apiaryId);
+        }
+
+        public async Task UpdateMovableStatus(int apiaryId)
+        {
+            var apiary = this.apiaryRepository
+                .AllWithDeleted()
+                .FirstOrDefault(a => a.Id == apiaryId);
+
+            if (apiary == null)
+            {
+                return;
+            }
+
+            apiary.IsClosed = !apiary.IsClosed;
+
+            await this.apiaryRepository.SaveChangesAsync();
         }
     }
 }

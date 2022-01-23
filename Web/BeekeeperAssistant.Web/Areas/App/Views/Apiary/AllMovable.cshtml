@@ -37,10 +37,6 @@
         <a class="export-file excel" asp-controller="Apiary" asp-action="ExportToExcel">
             <i class="fas fa-file-download"></i> Excel
         </a>
-        <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create">
-            <i class="fas fa-plus-square pr-2"></i>
-            Добави пчелин
-        </a>
     </div>
 
     <table class="data-table all-table">
@@ -49,7 +45,7 @@
                 <th>Номер</th>
                 <th>Име</th>
                 <th>Местоположение</th>
-                <th>Вид</th>
+                <th>Статус</th>
                 <th>Бр. кошери</th>
                 <th>Редактиране</th>
             </tr>
@@ -83,7 +79,16 @@
                         </a>
                     </td>
                     <td>@apiary.Adress</td>
-                    <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
+                    <td class="@if (apiary.IsClosed){@("td-weak")} else{@("td-strong")}">
+                        @if (apiary.IsClosed)
+                        {
+                            @("Завтворен");
+                        }
+                        else
+                        {
+                            @("Отворен");
+                        }
+                    </td>
                     <td>@apiary.BeehivesCount</td>
                     <td class="edit">
                         <div class="edit-container">

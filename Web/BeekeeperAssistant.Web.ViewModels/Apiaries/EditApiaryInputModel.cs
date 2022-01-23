@@ -35,14 +35,14 @@
         [Display(Name = "Регистриран ли е пчелина?")]
         public bool IsRegistered { get; set; }
 
-        [Display(Name = "Отворен ли е пчелина?")]
+        [Display(Name = "Статус на пчелина")]
         public bool IsClosed { get; set; }
 
         [Display(Name = "Дата на отваряне")]
-        public DateTime? OpeningDate { get; set; }
+        public DateTime OpeningDate { get; set; }
 
         [Display(Name = "Дата на затваряне")]
-        public DateTime? ClosingDate { get; set; }
+        public DateTime ClosingDate { get; set; }
 
         private string NumberGenerator()
         {
@@ -95,9 +95,9 @@
 
             if (this.ApiaryType == ApiaryType.Movable)
             {
-                if (this.OpeningDate <= this.ClosingDate)
+                if (this.OpeningDate >= this.ClosingDate)
                 {
-                    errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-голяма от датата на отваряне!"));
+                    errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-късна от датата на отваряне!"));
                 }
             }
 

@@ -196,14 +196,13 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel, string returnUrl)
         {
-            if (inputModel.IsRegistered)
+            if (inputModel.IsRegistered && inputModel.CityCode != null)
             {
                 var postcode = inputModel.CityCode.Split('-')[0];
                 if (!forecastService.ValidateCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]))
                 {
                     ModelState.AddModelError(string.Empty, "Не съществува населено място с въведения пощенски код.");
                 }
-
             }
 
             if (!ModelState.IsValid)
@@ -264,7 +263,10 @@
                     inputModel.Name,
                     inputModel.ApiaryType,
                     inputModel.Adress,
-                    inputModel.IsRegistered);
+                    inputModel.IsRegistered,
+                    inputModel.IsClosed,
+                    inputModel.OpeningDate,
+                    inputModel.ClosingDate);
 
             TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
             return RedirectToAction(nameof(this.ById), new { id = apiaryId });
@@ -299,6 +301,12 @@
         {
             await apiaryService.BookmarkApiaryAsync(id);
             return RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> UpdateMovableStatus(int id)
+        {
+            await this.apiaryService.UpdateMovableStatus(id);
+            return RedirectToAction(nameof(this.ById), new { id = id });
         }
     }
 }

@@ -51,7 +51,10 @@
             string name,
             ApiaryType apiaryType,
             string address,
-            bool isRegistered);
+            bool isRegistered,
+            bool isClosed,
+            DateTime openingDate,
+            DateTime closingDate);
 
         IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 
@@ -70,5 +73,7 @@
         Task UndeleteAsync(int apiaryId);
 
         bool HasDiary(int apiaryId);
+
+        Task UpdateMovableStatus(int apiaryId);
     }
 }

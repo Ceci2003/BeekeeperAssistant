@@ -25,9 +25,18 @@
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
-        </li>
+        @if (Model.ApiaryType == ApiaryType.Movable)
+        {
+            <li class="breadcrumb-item">
+                <a asp-controller="Apiary" asp-action="AllMovable">Пчелини - подвижни</a>
+            </li>
+        }
+        else
+        {
+            <li class="breadcrumb-item">
+                <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
+            </li>
+        }
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
     <ul class="breadcrumb-list responsive">
@@ -86,6 +95,25 @@
 
 <div class="tabs-body">
     <partial name="_StatusMessagePartial" />
+    <div class="page-controls one intab">
+        @if (Model.ApiaryType == ApiaryType.Movable)
+        {
+            @if (Model.IsClosed)
+            {
+                <a class="btn queen" asp-controller="Apiary" asp-action="UpdateMovableStatus" asp-route-id="@Model.Id">
+                    @* <i class="fas fa-plus-square pr-2"></i> *@
+                    Затвори пчелина
+                </a>
+            }
+            else
+            {
+                <a class="btn light-green" asp-controller="Apiary" asp-action="UpdateMovableStatus" asp-route-id="@Model.Id">
+                    @* <i class="fas fa-plus-square pr-2"></i> *@
+                    Отвори пчелина
+                </a>
+            }
+        }
+    </div>
     <div id="Apiary" class="tabcontent" style="display: block">
         <div class="data-view">
             <div class="qr-code">
@@ -173,16 +201,16 @@
                     }
 
                     @* @if (Model.Creator.UserName == this.User.Identity.Name)
-                    {
+                        {
                         <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="Add"
                         asp-route-id="@Model.Id">Добави помощник</a>
 
                         @if (Model.HasHelpers)
                         {
-                            <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All"
+                        <a class="btn apiary-create" asp-controller="ApiaryHelper" asp-action="All"
                         asp-route-id="@Model.Id">Всички помощници</a>
                         }
-                    } *@
+                        } *@
 
                 </div>
             </div>

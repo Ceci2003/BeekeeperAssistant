@@ -56,9 +56,9 @@
             <div class="group-box">
                 <div class="is-apiary-registred-box">
                     <input type="radio" checked="true" class="registered" onclick="isRegistered(this);"
-                        label="регистриран" asp-for="@Model.IsRegistered" value="True">
+                           label="регистриран" asp-for="@Model.IsRegistered" value="True">
                     <input type="radio" class="not-registered" onclick="isRegistered(this);" label="без регистрация"
-                        asp-for="@Model.IsRegistered" value="False">
+                           asp-for="@Model.IsRegistered" value="False">
                 </div>
             </div>
             <div id="apiary-number-input" style="display: @if (!Model.IsRegistered) { @("none") } else { @("block") };">
@@ -89,7 +89,7 @@
                 <div class="input-group">
                     <label asp-for="@Model.ApiaryType"></label>
                     <select asp-for="@Model.ApiaryType"
-                        asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
+                            asp-items="Html.GetEnumSelectList<BeekeeperAssistant.Data.Models.ApiaryType>()"></select>
                 </div>
                 <div class="input-group">
                     <label asp-for="@Model.Adress"></label>
@@ -105,9 +105,16 @@
                     <label asp-for="@Model.ClosingDate"></label>
                     <input type="date" asp-for="@Model.ClosingDate" />
                 </div>
+                <div class="input-group check">
+                    <label asp-for="@Model.IsClosed"></label>
+                    <div class="slider-open-close">
+                        <input asp-for="@Model.IsClosed" />
+                        <label for="IsClosed"></label>
+                    </div>
+                </div>
             </div>
             <div class="btn-group">
-                <input class="btn apiary" type="submit" value="Редактирай" />
+                <input class="btn edit" type="submit" value="Редактирай" />
             </div>
             <div class="form-star-tip">
                 *Полетата обозначени с

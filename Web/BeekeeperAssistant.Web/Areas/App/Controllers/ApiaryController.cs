@@ -113,6 +113,37 @@
             return View(viewModel);
         }
 
+        public async Task<IActionResult> AllMovable(int pageAllApiaries = 1)
+        {
+            if (pageAllApiaries <= 0)
+            {
+                pageAllApiaries = 1;
+            }
+
+            var currentUser = await userManager.GetUserAsync(User);
+
+            var userApiariesCount = apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
+
+            var viewModel = new AllApiaryUserMovableApiariesViewModel
+            {
+                AllUserMovableApiaries = apiaryService.GetAllUserMovableApiaries<AllApiaryUserMovableApiariesDataViewModel>(
+                        currentUser.Id,
+                        GlobalConstants.ApiariesPerPage,
+                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
+                PagesCount = pagesApiaryCount,
+            };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = pageAllApiaries;
+
+            return View(viewModel);
+        }
+
         public async Task<IActionResult> ById(int id)
         {
             var viewModel = apiaryService.GetApiaryById<ByNumberApiaryViewModel>(id);
@@ -165,10 +196,14 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateApiaryInputModel inputModel, string returnUrl)
         {
-            var postcode = inputModel.CityCode.Split('-')[0];
-            if (!forecastService.ValidateCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]))
+            if (inputModel.IsRegistered)
             {
-                ModelState.AddModelError(string.Empty, "Не съществува населено място с въведения пощенски код.");
+                var postcode = inputModel.CityCode.Split('-')[0];
+                if (!forecastService.ValidateCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]))
+                {
+                    ModelState.AddModelError(string.Empty, "Не съществува населено място с въведения пощенски код.");
+                }
+
             }
 
             if (!ModelState.IsValid)
@@ -232,7 +267,7 @@
                     inputModel.IsRegistered);
 
             TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
-            return RedirectToAction(nameof(this.ById), new { apiaryId });
+            return RedirectToAction(nameof(this.ById), new { id = apiaryId });
         }
 
         [HttpPost]

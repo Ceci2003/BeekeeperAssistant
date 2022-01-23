@@ -41,6 +41,12 @@
 
         public bool IsRegistered { get; set; }
 
+        public bool IsClosed { get; set; }
+
+        public DateTime OpeningDate { get; set; }
+
+        public DateTime ClosingDate { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Apiary, ByNumberApiaryViewModel>()

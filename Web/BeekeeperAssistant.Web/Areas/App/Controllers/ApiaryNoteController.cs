@@ -103,14 +103,14 @@
                 inputModel.Color,
                 currentUser.Id);
 
-            return RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId });
+            return RedirectToAction("AllByApiaryId", "ApiaryNote", new { id = apiaryId });
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             var apiaryId = await apiaryNoteService.DeleteAsync(id);
 
-            return RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId });
+            return RedirectToAction("AllByApiaryId", "ApiaryNote", new { id = apiaryId });
         }
     }
 }

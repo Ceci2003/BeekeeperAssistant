@@ -10,6 +10,8 @@
     {
         IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0);
 
+        IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0);
+
         string GetApiaryNumberByBeehiveId(int beehiveId);
 
         string GetApiaryNumberByApiaryId(int apiaryId);

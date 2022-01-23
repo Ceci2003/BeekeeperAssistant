@@ -122,7 +122,24 @@
                 .All()
                 .OrderByDescending(x => x.IsBookMarked)
                 .ThenByDescending(x => x.CreatedOn)
-                .Where(a => a.CreatorId == userId)
+                .Where(a => a.CreatorId == userId && a.ApiaryType != ApiaryType.Movable)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                qurey = qurey.Take(take.Value);
+            }
+
+            return qurey.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0)
+        {
+            var qurey = this.apiaryRepository
+                .All()
+                .OrderByDescending(x => x.IsBookMarked)
+                .ThenByDescending(x => x.CreatedOn)
+                .Where(a => a.CreatorId == userId && a.ApiaryType == ApiaryType.Movable)
                 .Skip(skip);
 
             if (take.HasValue)

@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -33,6 +34,15 @@
 
         [Display(Name = "Регистриран ли е пчелина?")]
         public bool IsRegistered { get; set; }
+
+        [Display(Name = "Отворен ли е пчелина?")]
+        public bool IsClosed { get; set; }
+
+        [Display(Name = "Дата на отваряне")]
+        public DateTime? OpeningDate { get; set; }
+
+        [Display(Name = "Дата на затваряне")]
+        public DateTime? ClosingDate { get; set; }
 
         private string NumberGenerator()
         {
@@ -80,6 +90,14 @@
                 if (string.IsNullOrEmpty(this.Name))
                 {
                     errorList.Add(new ValidationResult("За нерегистриран пчелин трябва да въведете име."));
+                }
+            }
+
+            if (this.ApiaryType == ApiaryType.Movable)
+            {
+                if (this.OpeningDate <= this.ClosingDate)
+                {
+                    errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-голяма от датата на отваряне!"));
                 }
             }
 

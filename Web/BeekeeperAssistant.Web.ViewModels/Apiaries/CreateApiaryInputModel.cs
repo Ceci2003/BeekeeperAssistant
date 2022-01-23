@@ -97,6 +97,14 @@
                 }
             }
 
+            if (this.ApiaryType == ApiaryType.Movable)
+            {
+                if (this.OpeningDate <= this.ClosingDate)
+                {
+                    errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-голяма от датата на отваряне!"));
+                }
+            }
+
             return errorList;
         }
     }

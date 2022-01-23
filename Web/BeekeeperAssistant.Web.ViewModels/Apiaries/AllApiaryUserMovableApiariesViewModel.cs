@@ -6,9 +6,9 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class AllApiaryUserApiariesViewModel
+    public class AllApiaryUserMovableApiariesViewModel
     {
-        public IEnumerable<AllApiaryUserApiariesDataViewModel> AllUserApiaries { get; set; }
+        public IEnumerable<AllApiaryUserMovableApiariesDataViewModel> AllUserMovableApiaries { get; set; }
 
         public int CurrentPage { get; set; }
 

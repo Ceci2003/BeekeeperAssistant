@@ -124,6 +124,32 @@
                             <th scope="row">Местоположение:</th>
                             <td>@Model.Adress</td>
                         </tr>
+                        @if (Model.ApiaryType == ApiaryType.Movable)
+                        {
+                            <tr>
+                                <th scope="row">Статус:</th>
+                                <td>
+                                    @if (Model.IsClosed)
+                                    {
+                                        <strong>
+                                            @("отворен")
+                                        </strong>
+                                    }
+                                    else
+                                    {
+                                        @("затворен")
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Начална дата:</th>
+                                <td>@Model.OpeningDate.ToString("dd-MM-yyyy")</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Крайна дата:</th>
+                                <td>@Model.ClosingDate.ToString("dd-MM-yyyy")</td>
+                            </tr>
+                        }
                         @if (Model.Creator.UserName != this.User.Identity.Name)
                         {
                             <tr>

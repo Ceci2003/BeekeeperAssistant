@@ -142,10 +142,6 @@
                             <div class="edit-container">
                                 @if (beehive.BeehiveAccess == Access.ReadWrite)
                                 {
-                                    <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
-                                       asp-route-returnUrl="@this.Context.Request.Path">
-                                        <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                                    </a>
                                     <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                         <i class="far fa-edit"></i>
                                     </a>
@@ -238,10 +234,6 @@
                                 <div class="edit-container">
                                     @if (beehive.BeehiveAccess == Access.ReadWrite)
                                     {
-                                        <a class="mark" asp-controller="Beehive" asp-action="Bookmark"
-                                           asp-route-id="@beehive.Id" asp-route-returnUrl="@this.Context.Request.Path">
-                                            <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                                        </a>
                                         <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                             <i class="far fa-edit"></i>
                                         </a>

@@ -40,6 +40,22 @@
             await this.temporaryApiaryBeehiveRepository.SaveChangesAsync();
         }
 
+        public async Task AddMultipleBeehiveToApiary(int apiaryId, List<int> beehivesIds)
+        {
+            foreach (var id in beehivesIds)
+            {
+                var temporary = new TemporaryApiaryBeehive
+                {
+                    ApiaryId = apiaryId,
+                    BeehiveId = id,
+                };
+
+                await this.temporaryApiaryBeehiveRepository.AddAsync(temporary);
+            }
+
+            await this.temporaryApiaryBeehiveRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
         {
             var query = this.temporaryApiaryBeehiveRepository
@@ -55,6 +71,30 @@
             }
 
             return query.To<T>().ToList();
+        }
+
+        public bool IsBeehiveInTemporary(int beehiveId)
+        {
+            var beehive = this.temporaryApiaryBeehiveRepository
+                .All()
+                .FirstOrDefault(ab => ab.BeehiveId == beehiveId);
+
+            if (beehive == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task RemoveBeehiveFromTemporaryAsync(int id)
+        {
+            var beehive = this.temporaryApiaryBeehiveRepository
+                .All()
+                .FirstOrDefault(ab => ab.BeehiveId == id);
+
+            this.temporaryApiaryBeehiveRepository.Delete(beehive);
+            await this.temporaryApiaryBeehiveRepository.SaveChangesAsync();
         }
     }
 }

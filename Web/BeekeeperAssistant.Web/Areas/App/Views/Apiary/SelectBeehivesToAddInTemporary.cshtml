@@ -1,12 +1,6 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.SelectBeehivesToAddInTemporaryInputModel;
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.SelectBeehivesToAddInTemporaryInputModel;
 @{
-    this.ViewData["Title"] = "Избиране на пчелин";
-
-    var keyValuePairApiaries = new List<SelectListItem>();
-    if (Model.AllBeehives != null)
-    {
-        keyValuePairApiaries = Model.AllBeehives.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
-    }
+    this.ViewData["Title"] = "Избиране на кошери";
 }
 
 <div class="breadcrumb">
@@ -76,7 +70,8 @@
             Пчелин № @Model.TemporaryNumber
         </span>
     </a>
-    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByMovableApiaryId" asp-route-id="@Model.TemporaryId">
+    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
+        asp-route-id="@Model.TemporaryId">
         <i class="fas fa-border-all"></i>
         <span class="text">
             Кошери
@@ -99,7 +94,39 @@
 <div class="tabs-body">
     <div id="SelectBeehives" class="tabcontent">
         <div class="form-box">
-            
+            <form asp-controller="Apiary" asp-action="SelectBeehivesToAddInTemporary"
+                  asp-route-id="@Model.TemporaryId">
+                <a class="back-arrow" asp-controller="Beehive" asp-action="SelectApiaryToAddBeehiveInTemporary"
+                   asp-route-id="@Model.TemporaryId">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h2>@ViewData["Title"]</h2>
+                @if (Model.Beehives.Count() != 0)
+                {
+                    <p class="form-note">
+                        <span class="star">*</span>
+                        Изберете кошери които да добавите.
+                    </p>
+                    <div class="select-beehive-list">
+                        @for (int i = 0; i < Model.Beehives.Count(); i++)
+                        {
+                            <label asp-for="@Model.Beehives[i].IsChecked">@Model.Beehives[i].Number</label>
+                            <input asp-for="@Model.Beehives[i].IsChecked" />
+                            <input type="hidden" asp-for="@Model.Beehives[i].Id" />
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="form-note">
+                        Няма намерени кошери.
+                    </p>
+                }
+                <input type="hidden" asp-for="@Model.TemporaryId" />
+                <div class="btn-group">
+                    <input class="btn beehive-create" type="submit" value="Избери" />
+                </div>
+            </form>
         </div>
     </div>
 </div>

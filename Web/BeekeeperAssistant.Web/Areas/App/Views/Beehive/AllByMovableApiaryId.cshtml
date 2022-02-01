@@ -164,28 +164,24 @@
                         <div class="edit-container">
                             @if (beehive.BeehiveBeehiveAccess == Access.ReadWrite)
                             {
-                                <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.BeehiveId"
-                                   asp-route-returnUrl="@this.Context.Request.Path">
-                                    <i class="@(beehive.BeehiveIsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                                </a>
                                 <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
                                     <i class="far fa-edit"></i>
                                 </a>
                                 <a class="delete" onclick="ShowDeleteForm('@beehive.BeehiveId')">
-                                    <i class="far fa-trash-alt"></i>
+                                    <i class="fas fa-ban"></i>
                                 </a>
                                 <div id="@beehive.BeehiveId" class="delete-form-display">
-                                    <form method="post" id="form-@beehive.BeehiveId" asp-controller="Beehive" asp-action="Delete"
-                                          asp-route-id="@beehive.BeehiveId">
+                                    <form method="post" id="form-@beehive.BeehiveId" asp-controller="Apiary"
+                                          asp-action="RemoveBeehiveFromTemporary" asp-route-id="@beehive.BeehiveId" asp-route-temporaryId="@Model.ApiaryId">
                                         <a class="delete close" onclick="HideDeleteForm('@beehive.BeehiveId')">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         <p>
-                                            Сигурни ли сте че искате да изтриете кошер
+                                            Сигурни ли сте че искате да премахнете кошер
                                             <strong>№@beehive.BeehiveNumber</strong>?
                                         </p>
                                         <button type="submit" class="delete">
-                                            Изтрий <i class="far fa-trash-alt"></i>
+                                            Изтрий <i class="fas fa-ban"></i>
                                         </button>
                                     </form>
                                     <div id="@beehive.BeehiveId-back" class="content-cover"
@@ -266,10 +262,6 @@
                                 <div class="edit-container">
                                     @if (beehive.BeehiveBeehiveAccess == Access.ReadWrite)
                                     {
-                                        <a class="mark" asp-controller="Beehive" asp-action="Bookmark"
-                                           asp-route-id="@beehive.BeehiveId" asp-route-returnUrl="@this.Context.Request.Path">
-                                            <i class="@(beehive.BeehiveIsBookMarked ? "fas " : "far") fa-bookmark"></i>
-                                        </a>
                                         <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
                                             <i class="far fa-edit"></i>
                                         </a>
@@ -277,18 +269,18 @@
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                         <div id="@beehive.BeehiveId-responsive" class="delete-form-display">
-                                            <form method="post" id="form-@beehive.BeehiveId" asp-controller="Beehive"
-                                                  asp-action="Delete" asp-route-id="@beehive.BeehiveId">
+                                            <form method="post" id="form-@beehive.BeehiveId" asp-controller="Apiary"
+                                                  asp-action="RemoveBeehiveFromTemporary" asp-route-id="@beehive.BeehiveId" asp-route-temporaryId="@Model.ApiaryId">
                                                 <a class="delete close"
                                                    onclick="HideDeleteForm('@beehive.BeehiveId-responsive')">
                                                     <i class="fas fa-times"></i>
                                                 </a>
                                                 <p>
-                                                    Сигурни ли сте че искате да изтриете кошер
+                                                    Сигурни ли сте че искате да премахнете кошер
                                                     <strong>№@beehive.BeehiveNumber</strong>?
                                                 </p>
                                                 <button type="submit" class="delete">
-                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                    Изтрий <i class="fas fa-ban"></i>
                                                 </button>
                                             </form>
                                             <div id="@beehive.BeehiveId-back" class="content-cover"

@@ -28,6 +28,7 @@
         private readonly IForecastService forecastService;
         private readonly IApiaryHelperService apiaryHelperService;
         private readonly IBeehiveHelperService beehiveHelperService;
+        private readonly ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService;
         private readonly IExcelExportService excelExportService;
 
         public ApiaryController(
@@ -39,6 +40,7 @@
             IForecastService forecastService,
             IApiaryHelperService apiaryHelperService,
             IBeehiveHelperService beehiveHelperService,
+            ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService,
             IExcelExportService excelExportService)
         {
             this.userManager = userManager;
@@ -49,6 +51,7 @@
             this.forecastService = forecastService;
             this.apiaryHelperService = apiaryHelperService;
             this.beehiveHelperService = beehiveHelperService;
+            this.temporaryApiaryBeehiveService = temporaryApiaryBeehiveService;
             this.excelExportService = excelExportService;
         }
 
@@ -305,12 +308,41 @@
         [HttpPost]
         public async Task<IActionResult> SelectApiaryToAddBeehiveInTemporary(int id, SelectApiaryToAddBeehiveInTemporaryInputModel inputModel)
         {
-            return RedirectToAction(nameof(this.SelectBeehivesToAddInTemporary), new { id = inputModel.SelectedApiaryId, temporaryId = id });
+            return RedirectToAction(nameof(this.SelectBeehivesToAddInTemporary), new { selectedId = inputModel.SelectedApiaryId, temporaryId = id });
         }
 
-        public async Task<IActionResult> SelectBeehivesToAddInTemporary(int apiaryid, int temporaryId)
+        public async Task<IActionResult> SelectBeehivesToAddInTemporary(int selectedId, int temporaryId)
         {
-            return View();
+            var currentUser = await userManager.GetUserAsync(User);
+
+            var inputModel = new SelectBeehivesToAddInTemporaryInputModel
+            {
+                TemporaryId = temporaryId,
+                TemporaryNumber = apiaryService.GetApiaryNumberByApiaryId(temporaryId),
+                TemporaryName = apiaryService.GetApiaryNameByApiaryId(temporaryId),
+                Beehives = beehiveService.GetBeehivesByApiaryIdWithoutInTemporary<SelectBeehiveToAddInTemporaryModel>(selectedId).ToList(),
+            };
+
+            return View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SelectBeehivesToAddInTemporary(int id, SelectBeehivesToAddInTemporaryInputModel inputModel)
+        {
+            var selectedBeehivesIds = inputModel.Beehives.Where(b => b.IsChecked == true).Select(b => b.Id).ToList();
+
+            await temporaryApiaryBeehiveService.AddMultipleBeehiveToApiary(inputModel.TemporaryId, selectedBeehivesIds);
+
+            return RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = inputModel.TemporaryId });
+        }
+
+        public async Task<IActionResult> RemoveBeehiveFromTemporary(int id, int temporaryId)
+        {
+            await temporaryApiaryBeehiveService.RemoveBeehiveFromTemporaryAsync(id);
+
+            TempData[GlobalConstants.SuccessMessage] = $"Успешно премахнат кошер/и!";
+
+            return RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = temporaryId });
         }
 
         public async Task<IActionResult> ExportToExcel()

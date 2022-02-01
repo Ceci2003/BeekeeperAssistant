@@ -1,10 +1,6 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
+﻿namespace BeekeeperAssistant.Web.ViewModels.Beehives
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class SelectBeehivesToAddInTemporaryInputModel
     {
@@ -14,6 +10,8 @@
 
         public string TemporaryName { get; set; }
 
-        public IEnumerable<KeyValuePair<int, string>> AllBeehives { get; set; }
+        public int SelectedApiaryId { get; set; }
+
+        public IList<SelectBeehiveToAddInTemporaryModel> Beehives { get; set; }
     }
 }

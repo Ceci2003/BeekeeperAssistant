@@ -30,6 +30,7 @@
         private readonly ITreatmentService treatmentService;
         private readonly IHarvestService harvestService;
         private readonly IDeletableEntityRepository<BeehiveDiary> beehiveDiaryRepository;
+        private readonly IDeletableEntityRepository<TemporaryApiaryBeehive> temporaryApiaryBeehiveRepository;
 
         public BeehiveService(
             IRepository<BeehiveHelper> beehiveHelperRepository,
@@ -47,7 +48,8 @@
             IInspectionService inspectionService,
             ITreatmentService treatmentService,
             IHarvestService harvestService,
-            IDeletableEntityRepository<BeehiveDiary> beehiveDiaryRepository)
+            IDeletableEntityRepository<BeehiveDiary> beehiveDiaryRepository,
+            IDeletableEntityRepository<TemporaryApiaryBeehive> temporaryApiaryBeehiveRepository)
         {
             this.beehiveHelperRepository = beehiveHelperRepository;
             this.apiaryHelperRepository = apiaryHelperRepository;
@@ -65,6 +67,7 @@
             this.treatmentService = treatmentService;
             this.harvestService = harvestService;
             this.beehiveDiaryRepository = beehiveDiaryRepository;
+            this.temporaryApiaryBeehiveRepository = temporaryApiaryBeehiveRepository;
         }
 
         public async Task<int> CreateBeehiveAsync(
@@ -230,6 +233,14 @@
             return query.To<T>().ToList();
         }
 
+        public IEnumerable<T> GetBeehivesByApiaryIdWithoutInTemporary<T>(int apiaryId) =>
+            this.beehiveRepository
+                .All()
+                .Where(b => b.ApiaryId == apiaryId && !this.temporaryApiaryBeehiveRepository.All().Any(ab => ab.BeehiveId == b.Id))
+                .OrderBy(b => b.Number)
+                .To<T>()
+                .ToList();
+
         public T GetBeehiveById<T>(int beehiveId) =>
             this.beehiveRepository
                 .All()
@@ -316,7 +327,7 @@
 
             return query.To<T>().ToList();
         }
-        
+
         public async Task UndeleteAsync(int beehiveId)
         {
             var beehive = this.beehiveRepository

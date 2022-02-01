@@ -43,6 +43,8 @@
 
         IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0);
 
+        IEnumerable<T> GetBeehivesByApiaryIdWithoutInTemporary<T>(int apiaryId);
+
         int GetAllBeehivesCountByApiaryId(int apiaryId);
 
         T GetBeehiveByNumber<T>(int beehiveNumber, string apiaryNumber);

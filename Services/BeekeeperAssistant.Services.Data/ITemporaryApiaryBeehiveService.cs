@@ -12,6 +12,12 @@
 
         Task AddBeehiveToApiary(int apiaryId, int beehiveId);
 
+        Task AddMultipleBeehiveToApiary(int apiaryId, List<int> beehivesIds);
+
+        bool IsBeehiveInTemporary(int beehiveId);
+
+        Task RemoveBeehiveFromTemporaryAsync(int id);
+
         IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0);
     }
 }

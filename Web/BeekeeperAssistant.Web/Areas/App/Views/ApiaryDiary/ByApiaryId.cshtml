@@ -20,18 +20,36 @@
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
-        </li>
+        @if (Model.ApiaryApiaryType == ApiaryType.Movable)
+        {
+            <li class="breadcrumb-item">
+                <a asp-controller="Apiary" asp-action="AllMovable">Пчелини - подвижни</a>
+            </li>
+        }
+        else
+        {
+            <li class="breadcrumb-item">
+                <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
+            </li>
+        }
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
     <ul class="breadcrumb-list responsive">
         <li class="breadcrumb-item">
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="All">Пчелини</a>
-        </li>
+        @if (Model.ApiaryApiaryType == ApiaryType.Movable)
+        {
+            <li class="breadcrumb-item">
+                <a asp-controller="Apiary" asp-action="AllMovable">Подвижни</a>
+            </li>
+        }
+        else
+        {
+            <li class="breadcrumb-item">
+                <a asp-controller="Apiary" asp-action="All">Пчелини</a>
+            </li>
+        }
         <li class="breadcrumb-item active">
             @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
             {

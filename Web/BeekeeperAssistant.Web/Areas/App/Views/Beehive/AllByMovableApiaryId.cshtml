@@ -32,7 +32,7 @@
             <a asp-controller="Home" asp-action="Index">Табло</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="All">Пчелини - всички</a>
+            <a asp-controller="Apiary" asp-action="AllMovable">Пчелини - подвижни</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -41,7 +41,7 @@
             <a asp-controller="Home" asp-action="Index">...</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Apiary" asp-action="All">Пчелини</a>
+            <a asp-controller="Apiary" asp-action="AllMovable">Подвижни</a>
         </li>
         <li class="breadcrumb-item active">
             @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
@@ -141,7 +141,7 @@
                 {
                 <tr class="@if (beehive.BeehiveHasDevice == true) {@hasDevice}">
                     <td class="number">
-                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.ApiaryId">
+                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.BeehiveApiaryId">
                             @if (beehive.BeehiveApiaryNumber == null)
                             {
                                 @beehive.BeehiveApiaryName
@@ -211,7 +211,7 @@
                         <tr>
                             <th>Пчелин</th>
                             <td class="number">
-                                <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.ApiaryId">@beehive.BeehiveApiaryNumber</a>
+                                <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.BeehiveApiaryId">@beehive.BeehiveApiaryNumber</a>
                             </td>
                         </tr>
                         <tr class="@if (beehive.BeehiveHasDevice == true) {@hasDevice}">

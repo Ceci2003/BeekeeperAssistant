@@ -16,5 +16,7 @@ namespace BeekeeperAssistant.Web.ViewModels.ApiaryDiaries
 
         public string ApiaryName { get; set; }
 
+        public ApiaryType ApiaryApiaryType { get; set; }
+
     }
 }

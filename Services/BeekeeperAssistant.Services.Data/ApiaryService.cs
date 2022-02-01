@@ -183,7 +183,8 @@
             => this.apiaryRepository
                 .All()
                 .Where(a => a.CreatorId == userId)
-                .OrderByDescending(a => a.CreatedOn)
+                .OrderBy(a => a.Number)
+                .ThenBy(a => a.Name)
                 .Select(a => a.IsRegistered ? new KeyValuePair<int, string>(a.Id, a.Number) : new KeyValuePair<int, string>(a.Id, a.Name))
                 .ToList();
 
@@ -205,6 +206,12 @@
                .All()
                .FirstOrDefault(a => a.Id == apiaryId)
                .Number;
+
+        public string GetApiaryNameByApiaryId(int apiaryId)
+            => this.apiaryRepository
+               .All()
+               .FirstOrDefault(a => a.Id == apiaryId)
+               .Name;
 
         public T GetUserApiaryByBeehiveId<T>(int beehiveId)
             => this.beehiveRepository

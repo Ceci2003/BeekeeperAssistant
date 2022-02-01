@@ -1145,6 +1145,16 @@ textarea {
   font-style: italic;
 }
 
+.form-note {
+  color: var(--darkgray);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.form-note .star {
+  font-weight: bold;
+}
+
 /* Feedback */
 .feedback-icon {
   display: flex;

@@ -287,6 +287,32 @@
             return RedirectToAction(nameof(this.All));
         }
 
+        public async Task<IActionResult> SelectApiaryToAddBeehiveInTemporary(int id)
+        {
+            var currentUser = await userManager.GetUserAsync(User);
+
+            var inputModel = new SelectApiaryToAddBeehiveInTemporaryInputModel
+            {
+                TemporaryId = id,
+                TemporaryNumber = apiaryService.GetApiaryNumberByApiaryId(id),
+                TemporaryName = apiaryService.GetApiaryNameByApiaryId(id),
+                AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id),
+            };
+
+            return View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SelectApiaryToAddBeehiveInTemporary(int id, SelectApiaryToAddBeehiveInTemporaryInputModel inputModel)
+        {
+            return RedirectToAction(nameof(this.SelectBeehivesToAddInTemporary), new { id = inputModel.SelectedApiaryId, temporaryId = id });
+        }
+
+        public async Task<IActionResult> SelectBeehivesToAddInTemporary(int apiaryid, int temporaryId)
+        {
+            return View();
+        }
+
         public async Task<IActionResult> ExportToExcel()
         {
             var currentUser = await userManager.GetUserAsync(User);

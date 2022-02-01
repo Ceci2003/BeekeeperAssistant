@@ -43,6 +43,7 @@
             viewModel.ApiaryId = id;
             viewModel.ApiaryNumber = apiary.Number;
             viewModel.ApiaryName = apiary.Name;
+            viewModel.ApiaryType = apiary.ApiaryType;
 
             return View(viewModel);
         }

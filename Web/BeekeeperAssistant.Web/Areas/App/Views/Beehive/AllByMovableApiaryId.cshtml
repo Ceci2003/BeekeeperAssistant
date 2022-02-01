@@ -70,7 +70,7 @@
             @ViewData["Title"]
         </span>
     </a>
-    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
+    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByMovableApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-border-all"></i>
         <span class="text">
             Кошери
@@ -115,7 +115,7 @@
                                 <i class="fas fa-plus-square pr-2"></i>
                                 Добави нов
                             </a>
-                            <a class="btn light-green add-existing" asp-controller="Beehive" asp-action="AddExistingToApiary" asp-route-id="@Model.ApiaryId">
+                            <a class="btn light-green add-existing" asp-controller="Apiary" asp-action="SelectApiaryToAddBeehiveInTemporary" asp-route-id="@Model.ApiaryId">
                                 <i class="fas fa-archive"></i>
                                 Добави съществуващ
                             </a>

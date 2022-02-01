@@ -16,6 +16,8 @@
 
         string GetApiaryNumberByApiaryId(int apiaryId);
 
+        string GetApiaryNameByApiaryId(int apiaryId);
+
         bool IsApiaryCreator(string userId, int apiaryNumber);
 
         int GetApiaryIdByBeehiveId(int beehiveId);

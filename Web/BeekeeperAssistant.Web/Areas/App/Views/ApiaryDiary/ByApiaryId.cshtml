@@ -59,12 +59,24 @@
             @ViewData["Title"]
         </span>
     </a>
-    <a class="tablinks" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
-        <i class="fas fa-border-all"></i>
-        <span class="text">
-            Кошери
-        </span>
-    </a>
+    @if (Model.ApiaryApiaryType == ApiaryType.Movable)
+    {
+        <a class="tablinks" asp-controller="Beehive" asp-action="AllByMovableApiaryId" asp-route-id="@Model.ApiaryId">
+            <i class="fas fa-border-all"></i>
+            <span class="text">
+                Кошери
+            </span>
+        </a>
+    }
+    else
+    {
+        <a class="tablinks" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
+            <i class="fas fa-border-all"></i>
+            <span class="text">
+                Кошери
+            </span>
+        </a>
+    }
     <a class="tablinks" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">

@@ -17,6 +17,8 @@
 
         public string ApiaryName { get; set; }
 
+        public ApiaryType ApiaryType { get; set; }
+
         public Access ApiaryAccess { get; set; }
 
         [IgnoreMap]

@@ -127,7 +127,7 @@
             var currentUser = await userManager.GetUserAsync(User);
 
             viewModel.AllBeehives = temporaryApiaryBeehiveService.GetBeehivesByApiaryId<ByMovableApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
-            
+
             viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
 
             foreach (var beehive in viewModel.AllBeehives)
@@ -157,19 +157,6 @@
             viewModel.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
             return View(viewModel);
-        }
-
-        public async Task<IActionResult> AddExistingToApiary(int id, bool stayOnPage = false)
-        {
-            var inputModel = new CreateBeehiveInputModel();
-
-            var currentUser = await userManager.GetUserAsync(User);
-            inputModel.AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
-
-            inputModel.Date = DateTime.UtcNow.Date;
-            inputModel.StayOnThePage = stayOnPage;
-
-            return View(inputModel);
         }
 
         public async Task<IActionResult> Create(int? id, bool stayOnPage = false)

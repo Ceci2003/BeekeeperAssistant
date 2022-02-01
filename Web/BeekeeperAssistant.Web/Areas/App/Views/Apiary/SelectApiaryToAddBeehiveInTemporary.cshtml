@@ -1,0 +1,133 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.SelectApiaryToAddBeehiveInTemporaryInputModel;
+@{
+    this.ViewData["Title"] = "Избиране на пчелин";
+
+    var keyValuePairApiaries = new List<SelectListItem>();
+    if (Model.AllApiaries != null)
+    {
+        keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+    }
+}
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.TemporaryId">
+                @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
+                {
+                    @($"Пчелин № {Model.TemporaryNumber}")
+                }
+                else
+                {
+                    @Model.TemporaryName
+                }
+            </a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.TemporaryId">
+                @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
+                {
+                    @Model.TemporaryNumber
+                }
+                else
+                {
+                    @Model.TemporaryName
+                }
+            </a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<h1 class="tab-title title-1">
+    @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
+    {
+        @("Пчелин №")
+        @Model.TemporaryNumber
+    }
+    else
+    {
+        @Model.TemporaryName
+    }
+    - @ViewData["Title"]
+</h1>
+<div class="tab apiary">
+    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.TemporaryId">
+        <i class="fas fa-boxes"></i>
+        <span class="text">
+            Пчелин № @Model.TemporaryNumber
+        </span>
+    </a>
+    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
+        asp-route-id="@Model.TemporaryId">
+        <i class="fas fa-border-all"></i>
+        <span class="text">
+            Кошери
+        </span>
+    </a>
+    <a class="tablinks" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-id="@Model.TemporaryId">
+        <i class="fas fa-sticky-note"></i>
+        <span class="text">
+            Бележки
+        </span>
+    </a>
+    <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.TemporaryId">
+        <i class="fas fa-book"></i>
+        <span class="text">
+            Дневник
+        </span>
+    </a>
+</div>
+
+<div class="tabs-body">
+    <div id="SelectApiary" class="tabcontent">
+        <div class="form-box">
+            <form asp-controller="Apiary" asp-action="SelectApiaryToAddBeehiveInTemporary"
+                asp-route-id="@Model.TemporaryId">
+                <a class="back-arrow" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
+                    asp-route-id="@Model.TemporaryId">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h2>@ViewData["Title"]</h2>
+                @if (Model.AllApiaries != null)
+                {
+                    <p class="form-note">
+                        <span class="star">*</span>
+                        Изберете пчелин, от който да добавите кошери.
+                    </p>
+                    <div class="input-group">
+                        <label asp-for="@Model.SelectedApiaryId"></label>
+                        <select asp-for="@Model.SelectedApiaryId" asp-items="keyValuePairApiaries"></select>
+                    </div>
+                }
+                else
+                {
+                    <p class="form-note">
+                        Не са намерени пчелини.
+                    </p>
+                }
+                <div class="btn-group">
+                    <input class="btn beehive-create" type="submit" value="Избери" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

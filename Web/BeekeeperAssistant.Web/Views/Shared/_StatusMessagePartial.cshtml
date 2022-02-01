@@ -5,3 +5,9 @@
     </div>
 }
 
+@if (TempData[GlobalConstants.ErrorMessage] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData[GlobalConstants.ErrorMessage]
+    </div>
+}

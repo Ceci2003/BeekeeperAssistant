@@ -2089,6 +2089,12 @@ input[readonly] {
   border-color: #c3e6cb;
 }
 
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
 .data-table.administration .edit-delete form .btn {
   width: 100%;
 }
@@ -2403,12 +2409,12 @@ th a.ordered {
   margin: 0 25px 25px 25px;
 }
 
-.add-beehive-type  .input-box .add-new,
-.add-beehive-type  .input-box .add-existing {
+.add-beehive-type .input-box .add-new,
+.add-beehive-type .input-box .add-existing {
   margin-top: 25px;
   width: 100%;
 }
 
-.add-beehive-type  .input-box .add-new {
+.add-beehive-type .input-box .add-new {
   margin-right: 10px;
 }

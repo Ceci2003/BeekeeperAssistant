@@ -363,6 +363,14 @@
 
         public async Task<IActionResult> UpdateMovableStatus(int id)
         {
+            var beehivesCount = this.beehiveService.GetAllBeehivesCountByApiaryId(id);
+
+            if (beehivesCount > 0)
+            {
+                TempData[GlobalConstants.ErrorMessage] = $"В временния/подвижния пчелин има кошери които нямат основен пчелин!";
+                return RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = id });
+            }
+
             await this.apiaryService.UpdateMovableStatus(id);
             return RedirectToAction(nameof(this.ById), new { id = id });
         }

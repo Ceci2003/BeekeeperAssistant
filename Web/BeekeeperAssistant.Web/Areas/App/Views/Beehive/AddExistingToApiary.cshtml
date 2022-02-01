@@ -1,0 +1,75 @@
+﻿@*@model BeekeeperAssistant.Web.ViewModels.Apiaries.AddExistingToApiaryCreateModel;*@
+@{
+    this.ViewData["Title"] = "Добавяне на кошер";
+}
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
+                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                {
+                    @($"Пчелин № {Model.ApiaryNumber}")
+                }
+                else
+                {
+                    @Model.ApiaryName
+                }
+            </a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
+                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+                {
+                    @($"Пчелин № {Model.ApiaryNumber}")
+                }
+                else
+                {
+                    @Model.ApiaryName
+                }
+            </a>
+        </li>
+        <li class="breadcrumb-item active">@Model.Number</li>
+    </ul>
+
+<h1 class="tab-title title-1">@ViewData["Title"]</h1>
+<div class="tab apiary">
+    <a class="tablinks" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.Id">
+        <i class="fas fa-boxes"></i>
+        <span class="text">
+            @ViewData["Title"]
+        </span>
+    </a>
+    <a class="tablinks active" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
+        <i class="fas fa-border-all"></i>
+        <span class="text">
+            Кошери
+        </span>
+    </a>
+    <a class="tablinks" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-id="@Model.Id">
+        <i class="fas fa-sticky-note"></i>
+        <span class="text">
+            Бележки
+        </span>
+    </a>
+    <a class="tablinks" asp-controller="ApiaryDiary" asp-action="ByApiaryId" asp-route-id="@Model.Id">
+        <i class="fas fa-book"></i>
+        <span class="text">
+            Дневник
+        </span>
+    </a>
+</div>
+
+

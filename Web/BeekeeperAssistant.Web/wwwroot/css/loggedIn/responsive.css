@@ -316,6 +316,16 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  /* Choose add beehive for movable apiary */
+  .add-beehive-type .input-box .input-group {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .add-beehive-type .input-box .add-new {
+    margin-right: 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {

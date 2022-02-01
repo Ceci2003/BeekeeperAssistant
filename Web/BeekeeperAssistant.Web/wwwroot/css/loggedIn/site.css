@@ -73,7 +73,7 @@ button::selection {
   --green: #014017;
   --light-green: #558b2f;
   --green-hover: #1a5918;
-  --light-green-hover: #3B7302;
+  --light-green-hover: #3b7302;
   --blue: #0d6493;
   --blue-hover: #1287c6;
   --main-background: #110400;
@@ -1312,7 +1312,7 @@ textarea {
 }
 
 /* Slider Open/Close */
-.slider-open-close input[type="checkbox"]{
+.slider-open-close input[type="checkbox"] {
   visibility: hidden;
 }
 
@@ -2332,4 +2332,73 @@ th a {
 
 th a.ordered {
   color: var(--blue-hover);
+}
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
+
+#input-back {
+  background: #11040087;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 40px;
+  right: 0;
+}
+
+.add-beehive-type {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.add-beehive-type .input-box {
+  z-index: 1;
+  border: 3px solid var(--orange);
+  border-radius: 10px;
+  background-color: var(--white);
+  padding: 10px;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.add-beehive-type .input-box .close {
+  margin-top: 15px;
+  margin-right: 25px;
+  color: var(--red-hover);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.add-beehive-type .input-box .close:hover {
+  color: var(--red);
+}
+
+.add-beehive-type .input-box .input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 25px 25px 25px;
+}
+
+.add-beehive-type  .input-box .add-new,
+.add-beehive-type  .input-box .add-existing {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.add-beehive-type  .input-box .add-new {
+  margin-right: 10px;
 }

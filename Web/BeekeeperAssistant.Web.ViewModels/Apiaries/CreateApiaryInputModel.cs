@@ -104,6 +104,14 @@
                 {
                     errorList.Add(new ValidationResult("Датата на затваряне трябва да бъде по-късна от датата на отваряне!"));
                 }
+                else if (this.OpeningDate == null)
+                {
+                    errorList.Add(new ValidationResult("Въведете дата на отваряне!"));
+                }
+                else if (this.ClosingDate == null)
+                {
+                    errorList.Add(new ValidationResult("Въведете дата на затваряне!"));
+                }
             }
 
             return errorList;

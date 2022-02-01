@@ -27,6 +27,7 @@
         private readonly IInspectionService inspectionService;
         private readonly IQueenHelperService queenHelperService;
         private readonly IExcelExportService excelExportService;
+        private readonly ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService;
 
         public BeehiveController(
             IApiaryService apiaryService,
@@ -39,7 +40,8 @@
             ITreatmentService treatmentService,
             IInspectionService inspectionService,
             IQueenHelperService queenHelperService,
-            IExcelExportService excelExportService)
+            IExcelExportService excelExportService,
+            ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService)
         {
             this.apiaryService = apiaryService;
             this.apiaryHelperService = apiaryHelperService;
@@ -52,6 +54,7 @@
             this.inspectionService = inspectionService;
             this.queenHelperService = queenHelperService;
             this.excelExportService = excelExportService;
+            this.temporaryApiaryBeehiveService = temporaryApiaryBeehiveService;
         }
 
         public async Task<IActionResult> All(int page = 1, string orderBy = null)
@@ -113,6 +116,38 @@
             return View(viewModel);
         }
 
+        public async Task<IActionResult> AllByMovableApiaryId(int id, int page = 1)
+        {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var viewModel = temporaryApiaryBeehiveService.GetApiaryById<AllByMovableApiaryIdBeehiveViewModel>(id);
+            var currentUser = await userManager.GetUserAsync(User);
+
+            viewModel.AllBeehives = temporaryApiaryBeehiveService.GetBeehivesByApiaryId<ByMovableApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+            
+            viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
+
+            foreach (var beehive in viewModel.AllBeehives)
+            {
+                beehive.BeehiveBeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.BeehiveId);
+            }
+
+            var count = beehiveService.GetAllBeehivesCountByApiaryId(id);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
+
+            return View(viewModel);
+        }
+
         public async Task<IActionResult> ById(int id)
         {
             var viewModel = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
@@ -122,6 +157,19 @@
             viewModel.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> AddExistingToApiary(int id, bool stayOnPage = false)
+        {
+            var inputModel = new CreateBeehiveInputModel();
+
+            var currentUser = await userManager.GetUserAsync(User);
+            inputModel.AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+
+            inputModel.Date = DateTime.UtcNow.Date;
+            inputModel.StayOnThePage = stayOnPage;
+
+            return View(inputModel);
         }
 
         public async Task<IActionResult> Create(int? id, bool stayOnPage = false)
@@ -140,7 +188,6 @@
 
             inputModel.Date = DateTime.UtcNow.Date;
             inputModel.StayOnThePage = stayOnPage;
-
 
             return View(inputModel);
         }

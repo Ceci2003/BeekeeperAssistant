@@ -24,6 +24,7 @@
         private readonly IRepository<TreatedBeehive> treatedBeehiveRepository;
         private readonly IDeletableEntityRepository<Harvest> harvestRepository;
         private readonly IRepository<HarvestedBeehive> harvestedBeehiveRepository;
+        private readonly ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService;
         private readonly IQueenService queenService;
         private readonly IInspectionService inspectionService;
         private readonly ITreatmentService treatmentService;
@@ -41,6 +42,7 @@
             IRepository<TreatedBeehive> treatedBeehiveRepository,
             IDeletableEntityRepository<Harvest> harvestRepository,
             IRepository<HarvestedBeehive> harvestedBeehiveRepository,
+            ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService,
             IQueenService queenService,
             IInspectionService inspectionService,
             ITreatmentService treatmentService,
@@ -57,6 +59,7 @@
             this.treatedBeehiveRepository = treatedBeehiveRepository;
             this.harvestRepository = harvestRepository;
             this.harvestedBeehiveRepository = harvestedBeehiveRepository;
+            this.temporaryApiaryBeehiveService = temporaryApiaryBeehiveService;
             this.queenService = queenService;
             this.inspectionService = inspectionService;
             this.treatmentService = treatmentService;
@@ -96,6 +99,11 @@
 
             await this.beehiveRepository.AddAsync(beehive);
             await this.beehiveRepository.SaveChangesAsync();
+
+            if (beehive.Apiary.ApiaryType == ApiaryType.Movable)
+            {
+                await this.temporaryApiaryBeehiveService.AddBeehiveToApiary(apiaryId, beehive.Id);
+            }
 
             var allApiaryHelpersIds = this.apiaryHelperRepository
                 .All()

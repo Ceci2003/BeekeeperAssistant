@@ -196,6 +196,18 @@
             await this.beehiveRepository.SaveChangesAsync();
         }
 
+        public async Task UpdateBeehiveNumberAndApiary(int beehiveId, int beehiveNumber, int apiaryId)
+        {
+            var beehive = this.beehiveRepository
+                .All()
+                .FirstOrDefault(b => b.Id == beehiveId);
+
+            beehive.Number = beehiveNumber;
+            beehive.ApiaryId = apiaryId;
+
+            await this.beehiveRepository.SaveChangesAsync();
+        }
+
         public int GetAllBeehivesCountByApiaryId(int apiaryId) =>
             this.beehiveRepository
                 .All()

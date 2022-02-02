@@ -326,10 +326,10 @@
         {
             var currentUser = await userManager.GetUserAsync(User);
 
-            if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
-            {
-                ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
-            }
+            //if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
+            //{
+            //    ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
+            //}
 
             if (!ModelState.IsValid)
             {
@@ -376,8 +376,7 @@
                 return View(inputModel);
             }
 
-            beehiveService.UpdateBeehiveNumber(id, inputModel.BeehiveNumber);
-            beehiveService.UpdateBeehiveApiary(id, inputModel.BeehiveApiaryId);
+            beehiveService.UpdateBeehiveNumberAndApiary(id, inputModel.BeehiveNumber, inputModel.BeehiveApiaryId);
 
             var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
 

@@ -171,6 +171,14 @@
                 .Apiary
                 .Number;
 
+        public string GetApiaryNameByBeehiveId(int beehiveId) =>
+            this.beehiveRepository
+                .All()
+                .Include(a => a.Apiary)
+                .FirstOrDefault(b => b.Id == beehiveId)
+                .Apiary
+                .Name;
+
         public int GetApiaryIdByBeehiveId(int beehiveId) =>
             this.beehiveRepository
                 .All()
@@ -183,6 +191,15 @@
             => this.apiaryRepository
                 .All()
                 .Where(a => a.CreatorId == userId)
+                .OrderBy(a => a.Number)
+                .ThenBy(a => a.Name)
+                .Select(a => a.IsRegistered ? new KeyValuePair<int, string>(a.Id, a.Number) : new KeyValuePair<int, string>(a.Id, a.Name))
+                .ToList();
+
+        public IEnumerable<KeyValuePair<int, string>> GetUserApiariesWithoutTemporaryAsKeyValuePairs(string userId)
+            => this.apiaryRepository
+                .All()
+                .Where(a => a.CreatorId == userId && a.ApiaryType != ApiaryType.Movable)
                 .OrderBy(a => a.Number)
                 .ThenBy(a => a.Name)
                 .Select(a => a.IsRegistered ? new KeyValuePair<int, string>(a.Id, a.Number) : new KeyValuePair<int, string>(a.Id, a.Name))

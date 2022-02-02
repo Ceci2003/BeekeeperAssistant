@@ -60,7 +60,7 @@
         {
             var query = this.temporaryApiaryBeehiveRepository
                 .All()
-                .OrderByDescending(ab => ab.Apiary.Number)
+                .OrderBy(ab => ab.Apiary.Number)
                 .ThenBy(ab => ab.Beehive.Number)
                 .Where(ab => ab.ApiaryId == apiaryId)
                 .Skip(skip);

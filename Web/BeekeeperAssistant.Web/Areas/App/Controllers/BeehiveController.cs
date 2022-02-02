@@ -326,10 +326,10 @@
         {
             var currentUser = await userManager.GetUserAsync(User);
 
-            if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
-            {
-                ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
-            }
+            //if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
+            //{
+            //    ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
+            //}
 
             if (!ModelState.IsValid)
             {

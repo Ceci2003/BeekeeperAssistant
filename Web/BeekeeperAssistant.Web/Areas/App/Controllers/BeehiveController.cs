@@ -6,6 +6,7 @@
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
@@ -217,7 +218,6 @@
             if (inputModel.StayOnThePage)
             {
                 inputModel.Number += 1;
-                // return this.RedirectToAction(nameof(this.Create), new { id = id, stayOnPage = inputModel.StayOnThePage });
 
                 return View(inputModel);
             }
@@ -302,6 +302,80 @@
             }
 
             return RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> SelectApiaryToMoveBeehive(int id)
+        {
+            var currentUser = await userManager.GetUserAsync(User);
+
+            var inputModel = new SelectApiaryToMoveBeehiveIn
+            {
+                BeehiveId = id,
+                BeehiveNumber = beehiveService.GetBeehiveNumberById(id),
+                BeehiveApiaryId = apiaryService.GetApiaryIdByBeehiveId(id),
+                BeehiveApiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(id),
+                BeehiveApiaryName = apiaryService.GetApiaryNameByBeehiveId(id),
+                AllApiaries = apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id),
+            };
+
+            return View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SelectApiaryToMoveBeehive(int id, SelectApiaryToMoveBeehiveIn inputModel)
+        {
+            if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
+            {
+                TempData[GlobalConstants.ErrorMessage] = "Кошерът вече се намира в избрания пчелин.";
+                return RedirectToAction("ById", "Beehive", new { id = id });
+            }
+
+            if (beehiveService.BeehiveNumberExistsInApiary(inputModel.BeehiveNumber, inputModel.SelectedApiaryId))
+            {
+                return RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId});
+            }
+
+            beehiveService.UpdateBeehiveApiary(id, inputModel.SelectedApiaryId);
+
+            var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
+
+            TempData[GlobalConstants.SuccessMessage] = messageText;
+            return RedirectToAction(nameof(this.ById), new { id = id });
+        }
+
+        public async Task<IActionResult> ChooseNewNumberForBeehive(int id, int selectedApiaryId)
+        {
+            var currentUser = await userManager.GetUserAsync(User);
+
+            var inputModel = new ChooseNewNumberForBeehiveInputModel
+            {
+                BeehiveId = id,
+                BeehiveNumber = beehiveService.GetBeehiveNumberById(id),
+                BeehiveApiaryId = selectedApiaryId,
+                BeehiveApiaryName = apiaryService.GetApiaryNameByApiaryId(selectedApiaryId),
+                BeehiveApiaryNumber = apiaryService.GetApiaryNumberByApiaryId(selectedApiaryId),
+            };
+
+            return View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChooseNewNumberForBeehive(int id, ChooseNewNumberForBeehiveInputModel inputModel)
+        {
+            var currentUser = await userManager.GetUserAsync(User);
+
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.BeehiveApiaryId });
+            }
+
+            beehiveService.UpdateBeehiveNumber(id, inputModel.BeehiveNumber);
+            beehiveService.UpdateBeehiveApiary(id, inputModel.BeehiveApiaryId);
+
+            var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
+
+            TempData[GlobalConstants.SuccessMessage] = messageText;
+            return RedirectToAction(nameof(this.ById), new { id = id });
         }
     }
 }

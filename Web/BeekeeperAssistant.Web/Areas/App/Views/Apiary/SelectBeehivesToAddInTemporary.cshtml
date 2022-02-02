@@ -96,7 +96,7 @@
         <div class="form-box">
             <form asp-controller="Apiary" asp-action="SelectBeehivesToAddInTemporary"
                   asp-route-id="@Model.TemporaryId">
-                <a class="back-arrow" asp-controller="Beehive" asp-action="SelectApiaryToAddBeehiveInTemporary"
+                <a class="back-arrow" asp-controller="Apiary" asp-action="SelectApiaryToAddBeehiveInTemporary"
                    asp-route-id="@Model.TemporaryId">
                     <i class="fas fa-arrow-left"></i>
                 </a>
@@ -115,17 +115,17 @@
                             <input type="hidden" asp-for="@Model.Beehives[i].Id" />
                         }
                     </div>
+                    <div class="btn-group">
+                        <input class="btn beehive-create" type="submit" value="Избери" />
+                    </div>
                 }
                 else
                 {
                     <p class="form-note">
-                        Няма намерени кошери.
+                        Няма свободни семейства за добавяне.
                     </p>
                 }
                 <input type="hidden" asp-for="@Model.TemporaryId" />
-                <div class="btn-group">
-                    <input class="btn beehive-create" type="submit" value="Избери" />
-                </div>
             </form>
         </div>
     </div>

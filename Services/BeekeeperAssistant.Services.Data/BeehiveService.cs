@@ -174,6 +174,28 @@
             return beehive.Id;
         }
 
+        public async Task UpdateBeehiveApiary(int beehiveId, int apiaryId)
+        {
+            var beehive = this.beehiveRepository
+                .All()
+                .FirstOrDefault(b => b.Id == beehiveId);
+
+            beehive.ApiaryId = apiaryId;
+
+            await this.beehiveRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateBeehiveNumber(int beehiveId, int beehiveNumber)
+        {
+            var beehive = this.beehiveRepository
+                .All()
+                .FirstOrDefault(b => b.Id == beehiveId);
+
+            beehive.Number = beehiveNumber;
+
+            await this.beehiveRepository.SaveChangesAsync();
+        }
+
         public int GetAllBeehivesCountByApiaryId(int apiaryId) =>
             this.beehiveRepository
                 .All()
@@ -299,6 +321,36 @@
             await this.beehiveRepository.SaveChangesAsync();
 
             return beehive.ApiaryId;
+        }
+
+        public bool BeehiveNumberExistsInApiary(int beehiveNumber, int apiaryId)
+        {
+            var beehive = this.beehiveRepository
+                .All()
+                .Where(b => b.ApiaryId == apiaryId && b.Number == beehiveNumber)
+                .FirstOrDefault();
+
+            if (beehive == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool BeehiveExistsInApiary(int beehiveId, int apiaryId)
+        {
+            var beehive = this.beehiveRepository
+                .All()
+                .Where(b => b.ApiaryId == apiaryId && b.Id == beehiveId)
+                .FirstOrDefault();
+
+            if (beehive == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IEnumerable<T> GetAllBeehives<T>()

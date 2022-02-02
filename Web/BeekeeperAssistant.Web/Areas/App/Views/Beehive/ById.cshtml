@@ -111,6 +111,12 @@
 
 <div class="tabs-body">
     <partial name="_StatusMessagePartial" />
+    <div class="page-controls one intab">
+        <a class="btn apiary" asp-controller="Beehive" asp-action="SelectApiaryToMoveBeehive" asp-route-id="@Model.Id">
+            <i class="fas fa-people-carry"></i>
+            Премести в пчелин
+        </a>
+    </div>
     <div id="Beehive" class="tabcontent">
         <div class="data-view">
             <div class="qr-code">

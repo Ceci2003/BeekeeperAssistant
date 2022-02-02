@@ -113,12 +113,12 @@
         <a class="btn @if (Model.IsClosed) { @("light-green") } else { @("queen") }" asp-controller="Apiary" asp-action="UpdateMovableStatus" asp-route-id="@Model.Id">
             @if (Model.IsClosed)
             {
-                @* <i class="fas fa-plus-square pr-2"></i> *@
+                <i class="fas fa-lock-open"></i>
                 @("Отвори пчелина")
             }
             else
             {
-                @* <i class="fas fa-plus-square pr-2"></i> *@
+                <i class="fas fa-lock"></i>
                 @("Затвори пчелина")
             }
         </a>

@@ -14,6 +14,8 @@
 
         string GetApiaryNumberByBeehiveId(int beehiveId);
 
+        string GetApiaryNameByBeehiveId(int beehiveId);
+
         string GetApiaryNumberByApiaryId(int apiaryId);
 
         string GetApiaryNameByApiaryId(int apiaryId);
@@ -59,6 +61,8 @@
             DateTime closingDate);
 
         IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
+
+        IEnumerable<KeyValuePair<int, string>> GetUserApiariesWithoutTemporaryAsKeyValuePairs(string userId);
 
         int GetAllUserApiariesCount(string userId);
 

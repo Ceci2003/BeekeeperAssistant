@@ -41,6 +41,10 @@
             bool hasPropolisCatcher,
             bool isItMovable);
 
+        Task UpdateBeehiveApiary(int beehiveId, int apiaryId);
+
+        Task UpdateBeehiveNumber(int beehiveId, int beehiveNumber);
+
         IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0);
 
         IEnumerable<T> GetBeehivesByApiaryIdWithoutInTemporary<T>(int apiaryId);
@@ -75,5 +79,8 @@
 
         bool HasDiary(int beehiveId);
 
+        bool BeehiveNumberExistsInApiary(int beehiveNumber, int apiaryId);
+
+        bool BeehiveExistsInApiary(int beehiveId, int apiaryId);
     }
 }

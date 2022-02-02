@@ -299,7 +299,7 @@
                 TemporaryId = id,
                 TemporaryNumber = apiaryService.GetApiaryNumberByApiaryId(id),
                 TemporaryName = apiaryService.GetApiaryNameByApiaryId(id),
-                AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id),
+                AllApiaries = apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id),
             };
 
             return View(inputModel);

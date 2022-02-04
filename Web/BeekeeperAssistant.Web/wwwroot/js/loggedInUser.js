@@ -200,6 +200,11 @@ function markRequiredFields() {
   });
 }
 
+function styleUpdates() {
+  var tinyCloudErrMsg = document.querySelector(".tox-notification--warning");
+  tinyCloudErrMsg.style.display = "none";
+}
+
 function allBeehives() {
   var allBeehives = document.getElementById("AllBeehives");
   var beehiveNumbersSpaceSeparated = document.getElementById(

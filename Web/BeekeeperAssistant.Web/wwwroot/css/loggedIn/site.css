@@ -2458,3 +2458,7 @@ th a.ordered {
 .add-beehive-type .input-box .add-new {
   margin-right: 10px;
 }
+
+.tox .tox-notification--warning {
+  display: none;
+}

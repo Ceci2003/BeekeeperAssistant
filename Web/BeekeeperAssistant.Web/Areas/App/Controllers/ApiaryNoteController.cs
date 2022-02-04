@@ -77,7 +77,7 @@
                     inputModel.Color,
                     currentUser.Id);
 
-            return RedirectToAction("AllByApiaryId", "ApiaryNote", new { apiaryId = id });
+            return RedirectToAction("AllByApiaryId", "ApiaryNote", new { id = id });
         }
 
         public IActionResult Edit(int id)

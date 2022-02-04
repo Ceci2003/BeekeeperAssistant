@@ -895,6 +895,17 @@ td.queen-red {
   display: none;
 }
 
+.data-table tr:hover,
+.all-table tr:hover {
+  background-color: lightyellow;
+}
+
+tr[id*="trExpandInspection"]:hover,
+tr[id*="trExpandTreatment"]:hover,
+tr[id*="trExpandHarvest"]:hover {
+  background-color: var(--expand-row-background);
+}
+
 /* All forms */
 
 .form-box {
@@ -1176,8 +1187,6 @@ textarea {
   justify-content: center;
   align-items: center;
   margin: 0 10px 10px 0;
-
-
 }
 
 .beehive-check:checked ~ .beehive-number {
@@ -2448,8 +2457,4 @@ th a.ordered {
 
 .add-beehive-type .input-box .add-new {
   margin-right: 10px;
-}
-
-table tr:hover {
-  background-color: lightyellow;
 }

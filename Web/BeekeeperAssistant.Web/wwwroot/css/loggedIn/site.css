@@ -1155,6 +1155,37 @@ textarea {
   font-weight: bold;
 }
 
+.select-beehive-list {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 25px;
+}
+
+.select-beehive-list .beehive-check {
+  display: none;
+}
+
+.select-beehive-list .beehive-number {
+  cursor: pointer;
+  font-size: 20px;
+  border: 2px solid var(--beehive-color);
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px 10px 0;
+
+
+}
+
+.beehive-check:checked ~ .beehive-number {
+  background-color: var(--beehive-color);
+  font-weight: bold;
+  color: var(--white);
+}
+
 /* Feedback */
 .feedback-icon {
   display: flex;
@@ -2417,4 +2448,8 @@ th a.ordered {
 
 .add-beehive-type .input-box .add-new {
   margin-right: 10px;
+}
+
+table tr:hover {
+  background-color: lightyellow;
 }

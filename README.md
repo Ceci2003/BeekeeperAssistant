@@ -1,9 +1,7 @@
 # BeekeeperAssistant
 Дневникът на съвременния пчелар.
 
-
 ## Автори
-
 Иван Ангелов - разработил основата на проекта, базата данни
 - Username: ivancho_03, E-mail: ivan4o03.it@gmail.com 
 
@@ -12,6 +10,9 @@
 
 ## Използвани технологии
 Използвани технологии: C#, .NET, ASP.NET MVC, Entity Framework Core, HTML5, CSS3, JavaScript, jQuery, AutoMapper.
+
+## Документация на проекта
+Линк към документацията: https://drive.google.com/file/d/1fOSAN6-Snh7AUYC-Wcyygo-idbflFXP2/view?usp=sharing
 
 ## Демо
 Линк към публикувания проект: http://beekeeperassistant.com/

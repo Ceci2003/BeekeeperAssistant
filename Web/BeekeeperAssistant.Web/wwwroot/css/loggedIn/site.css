@@ -458,6 +458,11 @@ button::selection {
   justify-content: end;
 }
 
+.page-controls.both-sides {
+  display: flex;
+  justify-content: space-between;
+}
+
 .export-file {
   display: flex;
   align-items: center;
@@ -966,6 +971,94 @@ tr[id*="trExpandHarvest"]:hover {
 
 .form-box form .input-group.check label {
   margin-right: 3px;
+}
+
+.form-box form .input-group.flags {
+  flex-direction: row;
+  align-items: center;
+}
+
+.flag-label {
+  font-size: 20px;
+  /* margin: 0 10px 0 10px; */
+  /* cursor: pointer; */
+}
+
+.flag-label.Red {
+  color: var(--red);
+}
+
+.flag-label.Orange {
+  color: var(--beehive-color);
+}
+
+.flag-label.Green {
+  color: var(--light-green);
+}
+
+.flag-label.checked-flag {
+  order: 2px solid var(--orange);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.flag-radio {
+  appearance: none;
+  outline: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* .flag-radio:checked ~ .flag-label {
+  color: pink;
+} */
+
+.beehive-flag-box {
+  display: flex;
+  flex-flow: column;
+  border: 3px solid var(--orange);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 10px 20px 10px;
+}
+
+.beehive-flag-box p {
+  font-family: monospace, sans-serif;
+}
+
+.beehive-flag-box .info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.beehive-flag-box .info .controls {
+  display: flex;
+  justify-content: end;
+}
+
+.beehive-flag-box .info .controls .edit,
+.beehive-flag-box .info .controls .delete {
+  padding: 5px;
+}
+
+.beehive-flag-box .info .controls .edit {
+  color: var(--green-hover);
+  margin-right: 5px;
+}
+
+.beehive-flag-box .info .controls .edit:hover {
+  color: var(--green);
+}
+
+.beehive-flag-box .info .controls .delete {
+  color: var(--red);
+}
+
+.beehive-flag-box .info .controls .delete:hover {
+  color: var(--red-hover);
 }
 
 input,
@@ -2459,6 +2552,53 @@ th a.ordered {
   margin-right: 10px;
 }
 
+/* TinyMCE */
 .tox .tox-notification--warning {
   display: none;
+}
+
+/* Beehive mark flad */
+.beehive-flag {
+  display: flex;
+  align-items: center;
+}
+
+.beehive-flag .choose-mark {
+  display: flex;
+  align-items: center;
+}
+
+.beehive-flag .choose-mark .flags .red,
+.beehive-flag .choose-mark .flags .orange,
+.beehive-flag .choose-mark .flags .green {
+  margin: 0 10px 0 10px;
+}
+
+.beehive-flag .choose-mark .flags {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.beehive-flag .choose-mark .flags .red {
+  color: var(--red);
+}
+
+.beehive-flag .choose-mark .flags .red:hover {
+  color: var(--red-hover);
+}
+
+.beehive-flag .choose-mark .flags .orange {
+  color: var(--beehive-color);
+}
+
+.beehive-flag .choose-mark .flags .orange:hover {
+  color: var(--orange);
+}
+
+.beehive-flag .choose-mark .flags .green {
+  color: var(--light-green);
+}
+
+.beehive-flag .choose-mark .flags .green:hover {
+  color: var(--light-green-hover);
 }

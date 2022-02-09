@@ -96,5 +96,11 @@
             this.temporaryApiaryBeehiveRepository.Delete(beehive);
             await this.temporaryApiaryBeehiveRepository.SaveChangesAsync();
         }
+
+        public int GetApiaryBeehivesCount(int apiaryId) =>
+            this.temporaryApiaryBeehiveRepository
+                .All()
+                .Where(ab => ab.ApiaryId == apiaryId)
+                .Count();
     }
 }

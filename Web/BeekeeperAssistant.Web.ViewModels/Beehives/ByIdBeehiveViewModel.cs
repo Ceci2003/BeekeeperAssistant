@@ -9,6 +9,7 @@
     using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
@@ -20,7 +21,7 @@
         public string ApiaryId { get; set; }
 
         public string ApiaryNumber { get; set; }
-        
+
         public string ApiaryName { get; set; }
 
         public int Number { get; set; }
@@ -50,6 +51,10 @@
         public bool HasHelpers { get; set; }
 
         public bool HasQueen { get; set; }
+
+        public bool HasFlag { get; set; }
+
+        public BeehivemarkFlagViewModel FlagViewModel { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -10,6 +10,8 @@
     {
         T GetApiaryById<T>(int apiaryId);
 
+        int GetApiaryBeehivesCount(int apiaryId);
+
         Task AddBeehiveToApiary(int apiaryId, int beehiveId);
 
         Task AddMultipleBeehiveToApiary(int apiaryId, List<int> beehivesIds);

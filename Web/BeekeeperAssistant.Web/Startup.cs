@@ -100,6 +100,7 @@
             services.AddTransient<IApiaryDiaryService, ApiaryDiaryService>();
             services.AddTransient<IBeehiveDiaryService, BeehiveDiaryService>();
             services.AddTransient<ITemporaryApiaryBeehiveService, TemporaryApiaryBeehiveService>();
+            services.AddTransient<IBeehiveMarkFlagService, BeehiveMarkFlagService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

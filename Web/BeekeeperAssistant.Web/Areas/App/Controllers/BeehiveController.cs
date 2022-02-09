@@ -7,6 +7,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
+    using BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Harvest;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
@@ -29,6 +30,7 @@
         private readonly IQueenHelperService queenHelperService;
         private readonly IExcelExportService excelExportService;
         private readonly ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService;
+        private readonly IBeehiveMarkFlagService beehiveMarkFlagService;
 
         public BeehiveController(
             IApiaryService apiaryService,
@@ -42,7 +44,8 @@
             IInspectionService inspectionService,
             IQueenHelperService queenHelperService,
             IExcelExportService excelExportService,
-            ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService)
+            ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService,
+            IBeehiveMarkFlagService beehiveMarkFlagService)
         {
             this.apiaryService = apiaryService;
             this.apiaryHelperService = apiaryHelperService;
@@ -56,6 +59,7 @@
             this.queenHelperService = queenHelperService;
             this.excelExportService = excelExportService;
             this.temporaryApiaryBeehiveService = temporaryApiaryBeehiveService;
+            this.beehiveMarkFlagService = beehiveMarkFlagService;
         }
 
         public async Task<IActionResult> All(int page = 1, string orderBy = null)
@@ -152,6 +156,13 @@
         public async Task<IActionResult> ById(int id)
         {
             var viewModel = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
+
+            var hasFlag = beehiveMarkFlagService.BeehiveHasFlag(id);
+            if (hasFlag)
+            {
+                viewModel.HasFlag = hasFlag;
+                viewModel.FlagViewModel = beehiveMarkFlagService.GetBeehiveFlagByBeehiveId<BeehivemarkFlagViewModel>(id);
+            }
 
             var currentUser = await userManager.GetUserAsync(User);
 

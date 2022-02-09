@@ -137,6 +137,11 @@
                 PagesCount = pagesApiaryCount,
             };
 
+            foreach (var apiary in viewModel.AllUserMovableApiaries)
+            {
+                apiary.BeehivesCount = temporaryApiaryBeehiveService.GetApiaryBeehivesCount(apiary.Id);
+            }
+
             if (viewModel.PagesCount == 0)
             {
                 viewModel.PagesCount = 1;

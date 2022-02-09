@@ -317,6 +317,16 @@
     justify-content: center;
   }
 
+  /* Page controls */
+  .page-controls.one {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-controls .btn {
+    margin-bottom: 10px;
+  }
+
   /* Choose add beehive for movable apiary */
   .add-beehive-type .input-box .input-group {
     display: flex;
@@ -325,6 +335,23 @@
 
   .add-beehive-type .input-box .add-new {
     margin-right: 0;
+  }
+
+  /* Page controls */
+  .beehive-flag {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .page-controls.both-sides {
+    display: flex;
+    flex-flow: column;
+  }
+
+  /* Beehive mark flad */
+  .beehive-flag .choose-mark .flags {
+    margin-left: 10px;
+    font-size: 24px;
   }
 }
 

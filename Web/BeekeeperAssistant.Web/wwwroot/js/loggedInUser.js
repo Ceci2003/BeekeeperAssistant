@@ -202,7 +202,9 @@ function markRequiredFields() {
 
 function styleUpdates() {
   var tinyCloudErrMsg = document.querySelector(".tox-notification--warning");
-  tinyCloudErrMsg.style.display = "none";
+  if (tinyCloudErrMsg != null) {
+    tinyCloudErrMsg.style.display = "none";
+  }
 }
 
 function allBeehives() {
@@ -281,18 +283,18 @@ function HideDeleteForm(id) {
 }
 
 function setBackground(color) {
-    var colorInput = document.querySelector('#Color');
-    colorInput.value = color;
-    document.querySelector('#Content').style.backgroundColor = color;
+  var colorInput = document.querySelector("#Color");
+  colorInput.value = color;
+  document.querySelector("#Content").style.backgroundColor = color;
 }
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 var property = params["orderBy"];
 if (property) {
-  console.log(document.querySelectorAll('.' + property));
+  console.log(document.querySelectorAll("." + property));
   console.log(property);
-  document.querySelectorAll('.' + property).forEach(element => {
+  document.querySelectorAll("." + property).forEach((element) => {
     element.classList.add("ordered");
   });
 }

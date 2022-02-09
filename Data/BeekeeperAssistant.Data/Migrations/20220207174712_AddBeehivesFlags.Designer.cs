@@ -4,14 +4,16 @@ using BeekeeperAssistant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeekeeperAssistant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220207174712_AddBeehivesFlags")]
+    partial class AddBeehivesFlags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -427,6 +429,21 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.ToTable("BeehivesDiaries");
                 });
 
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveFlag", b =>
+                {
+                    b.Property<int>("BeehiveId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BeehiveMarkFlagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BeehiveId", "BeehiveMarkFlagId");
+
+                    b.HasIndex("BeehiveMarkFlagId");
+
+                    b.ToTable("BeehivesFlags");
+                });
+
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveHelper", b =>
                 {
                     b.Property<int>("BeehiveId")
@@ -452,9 +469,6 @@ namespace BeekeeperAssistant.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("BeehiveId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -475,11 +489,9 @@ namespace BeekeeperAssistant.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BeehiveId");
-
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("BeehivesMarkFlags");
+                    b.ToTable("BeehiveMarkFlag");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveNote", b =>
@@ -1266,6 +1278,25 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("ModifiendBy");
                 });
 
+            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveFlag", b =>
+                {
+                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
+                        .WithMany()
+                        .HasForeignKey("BeehiveId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BeekeeperAssistant.Data.Models.BeehiveMarkFlag", "BeehiveMarkFlag")
+                        .WithMany()
+                        .HasForeignKey("BeehiveMarkFlagId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Beehive");
+
+                    b.Navigation("BeehiveMarkFlag");
+                });
+
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveHelper", b =>
                 {
                     b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
@@ -1283,17 +1314,6 @@ namespace BeekeeperAssistant.Data.Migrations
                     b.Navigation("Beehive");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveMarkFlag", b =>
-                {
-                    b.HasOne("BeekeeperAssistant.Data.Models.Beehive", "Beehive")
-                        .WithMany()
-                        .HasForeignKey("BeehiveId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Beehive");
                 });
 
             modelBuilder.Entity("BeekeeperAssistant.Data.Models.BeehiveNote", b =>

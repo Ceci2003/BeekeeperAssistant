@@ -23,6 +23,8 @@
 
         T GetBeehiveFlagByFlagId<T>(int id);
 
+        MarkFlagType? GetBeehiveFlagTypeByBeehiveId(int beehiveId);
+
         bool BeehiveHasFlag(int beehiveId);
     }
 }

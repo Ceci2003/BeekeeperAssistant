@@ -114,7 +114,19 @@
                         </a>
                     </td>
                     <td class="number">
-                        <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">@beehive.Number</a>
+                        <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">
+                            @if (beehive.MarkFlagType != null)
+                            {
+                                <div class="table-number-flag-mark">
+                                    @beehive.Number
+                                    <i class="fas fa-flag table-flag-mark-@beehive.MarkFlagType"></i>
+                                </div>
+                            }
+                            else
+                            {
+                                @beehive.Number
+                            }
+                        </a>
                     </td>
                     <td>
                         @if (beehive.IsItMovable)
@@ -211,7 +223,19 @@
                     <tr>
                         <td>Номер</td>
                         <td class="number">
-                            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">@beehive.Number</a>
+                            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">
+                                @if (beehive.MarkFlagType != null)
+                                {
+                                    <div class="table-number-flag-mark">
+                                        @beehive.Number
+                                        <i class="fas fa-flag table-flag-mark-@beehive.MarkFlagType"></i>
+                                    </div>
+                                }
+                                else
+                                {
+                                    @beehive.Number
+                                }
+                            </a>
                         </td>
                     </tr>
                     <tr>

@@ -128,7 +128,7 @@
         <table class="data-table all-table">
             <thead>
                 <tr>
-                    <th>Пчелин</th>
+                    <th>Основен пчелин</th>
                     <th>Номер</th>
                     <th>Вид</th>
                     <th>Система</th>
@@ -153,7 +153,19 @@
                         </a>
                     </td>
                     <td class="number">
-                        <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.BeehiveId">@beehive.BeehiveNumber</a>
+                        <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.BeehiveId">
+                            @if (beehive.MarkFlagType != null)
+                            {
+                                <div class="table-number-flag-mark">
+                                    @beehive.BeehiveNumber
+                                    <i class="fas fa-flag table-flag-mark-@beehive.MarkFlagType"></i>
+                                </div>
+                            }
+                            else
+                            {
+                                @beehive.BeehiveNumber
+                            }
+                        </a>
                     </td>
                     <td>@Html.DisplayFor(x => beehive.BeehiveBeehiveType)</td>
                     <td>@Html.DisplayFor(x => beehive.BeehiveBeehiveSystem)</td>
@@ -209,7 +221,7 @@
                     @foreach (var beehive in Model.AllBeehives)
                     {
                         <tr>
-                            <th>Пчелин</th>
+                            <td>Основен пчелин</td>
                             <td class="number">
                                 <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.BeehiveApiaryId">@beehive.BeehiveApiaryNumber</a>
                             </td>
@@ -217,7 +229,19 @@
                         <tr class="@if (beehive.BeehiveHasDevice == true) {@hasDevice}">
                             <td>Номер</td>
                             <td class="number">
-                                <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.BeehiveId">@beehive.BeehiveNumber</a>
+                                <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.BeehiveId">
+                                    @if (beehive.MarkFlagType != null)
+                                    {
+                                        <div class="table-number-flag-mark">
+                                            @beehive.BeehiveNumber
+                                            <i class="fas fa-flag table-flag-mark-@beehive.MarkFlagType"></i>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @beehive.BeehiveNumber
+                                    }
+                                </a>
                             </td>
                         </tr>
                         <tr>

@@ -31,5 +31,7 @@
         public Access BeehiveAccess { get; set; }
 
         public string CreatorId { get; set; }
+
+        public MarkFlagType? MarkFlagType { get; set; }
     }
 }

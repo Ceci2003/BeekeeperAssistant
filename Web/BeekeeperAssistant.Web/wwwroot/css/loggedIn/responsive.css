@@ -353,6 +353,15 @@
     margin-left: 10px;
     font-size: 24px;
   }
+
+  .table-number-flag-mark {
+    display: flex;
+    justify-content: center;
+  }
+
+  .table-number-flag-mark i {
+    margin-left: 10px;
+  }
 }
 
 @media only screen and (max-width: 767px) {

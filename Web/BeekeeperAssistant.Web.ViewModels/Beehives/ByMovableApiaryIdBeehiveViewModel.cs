@@ -34,5 +34,7 @@
         public BeehiveSystem BeehiveBeehiveSystem { get; set; }
 
         public BeehivePower BeehiveBeehivePower { get; set; }
+
+        public MarkFlagType? MarkFlagType { get; set; }
     }
 }

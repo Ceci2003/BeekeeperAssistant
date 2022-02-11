@@ -9,12 +9,12 @@
 
     public class BeehiveMarkFlagService : IBeehiveMarkFlagService
     {
-        private readonly IRepository<BeehiveMarkFlag> beehiveMarkFlagRepositoey;
+        private readonly IRepository<BeehiveMarkFlag> beehiveMarkFlagRepository;
 
         public BeehiveMarkFlagService(
             IRepository<BeehiveMarkFlag> beehiveMarkFlagRepositoey)
         {
-            this.beehiveMarkFlagRepositoey = beehiveMarkFlagRepositoey;
+            this.beehiveMarkFlagRepository = beehiveMarkFlagRepositoey;
         }
 
         public async Task<int> CreateBeehiveFlag(int beehiveId, string content, MarkFlagType flagType)
@@ -26,53 +26,68 @@
                 FlagType = flagType,
             };
 
-            await this.beehiveMarkFlagRepositoey.AddAsync(beehiveMarkFlag);
-            await this.beehiveMarkFlagRepositoey.SaveChangesAsync();
+            await this.beehiveMarkFlagRepository.AddAsync(beehiveMarkFlag);
+            await this.beehiveMarkFlagRepository.SaveChangesAsync();
 
             return beehiveMarkFlag.Id;
         }
 
         public async Task<int> EditBeehiveFlag(int id, string content, MarkFlagType flagType)
         {
-            var beehiveMarkFlag = this.beehiveMarkFlagRepositoey
+            var beehiveMarkFlag = this.beehiveMarkFlagRepository
                 .All()
                 .FirstOrDefault(bf => bf.Id == id);
 
             beehiveMarkFlag.Content = content;
             beehiveMarkFlag.FlagType = flagType;
 
-            await this.beehiveMarkFlagRepositoey.SaveChangesAsync();
+            await this.beehiveMarkFlagRepository.SaveChangesAsync();
 
             return beehiveMarkFlag.Id;
         }
 
         public async Task DeleteBeehiveFlag(int id)
         {
-            var beehiveMarkFlag = this.beehiveMarkFlagRepositoey
+            var beehiveMarkFlag = this.beehiveMarkFlagRepository
                 .All()
                 .FirstOrDefault(bf => bf.Id == id);
 
-            this.beehiveMarkFlagRepositoey.Delete(beehiveMarkFlag);
-            await this.beehiveMarkFlagRepositoey.SaveChangesAsync();
+            this.beehiveMarkFlagRepository.Delete(beehiveMarkFlag);
+            await this.beehiveMarkFlagRepository.SaveChangesAsync();
         }
 
         public T GetBeehiveFlagByBeehiveId<T>(int beehiveId) =>
-            this.beehiveMarkFlagRepositoey
+            this.beehiveMarkFlagRepository
                 .All()
                 .Where(bf => bf.BeehiveId == beehiveId)
                 .To<T>()
                 .FirstOrDefault();
 
         public T GetBeehiveFlagByFlagId<T>(int id) =>
-            this.beehiveMarkFlagRepositoey
+            this.beehiveMarkFlagRepository
                 .All()
                 .Where(bf => bf.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
+        public MarkFlagType? GetBeehiveFlagTypeByBeehiveId(int beehiveId)
+        {
+            var flagType = this.beehiveMarkFlagRepository
+                .All()
+                .Where(bf => bf.BeehiveId == beehiveId)
+                .FirstOrDefault();
+
+            if (flagType == null)
+            {
+                return null;
+            }
+
+            return flagType.FlagType;
+        }
+
         public bool BeehiveHasFlag(int beehiveId)
         {
-            var beehiveMarkFlag = this.beehiveMarkFlagRepositoey
+            var beehiveMarkFlag = this.beehiveMarkFlagRepository
                 .All()
                 .FirstOrDefault(bf => bf.BeehiveId == beehiveId);
 

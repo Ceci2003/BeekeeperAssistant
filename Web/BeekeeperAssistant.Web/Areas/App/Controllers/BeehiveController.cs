@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
@@ -72,6 +73,11 @@
             var currentUser = await userManager.GetUserAsync(User);
             var allBehhives = beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
 
+            foreach (var beehive in allBehhives)
+            {
+                beehive.MarkFlagType = beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.Id);
+            }
+
             var viewModel = new AllBeehiveViewModel
             {
                 AllBeehives = allBehhives,
@@ -106,6 +112,7 @@
             foreach (var beehive in viewModel.AllBeehives)
             {
                 beehive.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.Id);
+                beehive.MarkFlagType = beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.Id);
             }
 
             var count = beehiveService.GetAllBeehivesCountByApiaryId(id);
@@ -138,6 +145,7 @@
             foreach (var beehive in viewModel.AllBeehives)
             {
                 beehive.BeehiveBeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.BeehiveId);
+                beehive.MarkFlagType = beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.BeehiveId);
             }
 
             var count = beehiveService.GetAllBeehivesCountByApiaryId(id);

@@ -30,6 +30,8 @@
 
         public BeehiveSystem BeehiveSystem { get; set; }
 
-         public BeehivePower BeehivePower { get; set; }
+        public BeehivePower BeehivePower { get; set; }
+
+        public MarkFlagType? MarkFlagType { get; set; }
     }
 }

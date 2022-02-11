@@ -911,6 +911,23 @@ tr[id*="trExpandHarvest"]:hover {
   background-color: var(--expand-row-background);
 }
 
+.table-number-flag-mark {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-flag-mark-Red {
+  color: var(--red);
+}
+
+.table-flag-mark-Orange {
+  color: var(--orange);
+}
+
+.table-flag-mark-Green {
+  color: var(--light-green);
+}
+
 /* All forms */
 
 .form-box {
@@ -2320,7 +2337,7 @@ input[readonly] {
 }
 
 .all-table-responsive table tr.edit-row {
-  border-bottom: 3px solid var(--lightgray);
+  border-bottom: 5px solid var(--lightgray);
 }
 
 .all-table-responsive table tr td:first-child {

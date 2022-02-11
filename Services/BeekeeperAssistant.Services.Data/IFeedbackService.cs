@@ -15,11 +15,15 @@
 
         IEnumerable<T> GetAllHelpFeedbacks<T>(int? take = null, int skip = 0);
 
+        IEnumerable<T> GetAllReportFeedbacks<T>(int? take = null, int skip = 0);
+
         IEnumerable<T> GetAllFeedbacks<T>(int? take = null, int skip = 0);
 
         int GetAllHelpFeedbacksCount();
 
         int GetAllFeedbackFeedbacksCount();
+
+        int GetAllReporsFeedbacksCount();
 
         T GetFeedbackById<T>(int id);
     }

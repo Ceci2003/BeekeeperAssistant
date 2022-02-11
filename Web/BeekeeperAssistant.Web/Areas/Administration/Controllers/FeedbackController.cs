@@ -15,7 +15,7 @@
             this.feedbackService = feedbackService;
         }
 
-        public IActionResult All(int pageFeedbacks = 1, int pageHelps = 1)
+        public IActionResult All(int pageFeedbacks = 1, int pageHelps = 1, int pageReports = 1)
         {
             if (pageFeedbacks <= 0)
             {
@@ -32,7 +32,7 @@
             viewModel.Feedbacks = new AllFeedbackFeedbacksViewModel();
 
             var allFeedbacksCount = this.feedbackService.GetAllFeedbackFeedbacksCount();
-            var pagesFeedbacksCount = (int)Math.Ceiling((double)allFeedbacksCount / GlobalConstants.ApiariesPerPage);
+            var pagesFeedbacksCount = (int)Math.Ceiling((double)allFeedbacksCount / GlobalConstants.FeedbacksPerPage);
 
             if (pageFeedbacks <= 0)
             {
@@ -48,15 +48,15 @@
             viewModel.Feedbacks.CurrentPage = pageFeedbacks;
 
             var feedbacks = this.feedbackService.GetAllFeedbackFeedbacks<FeedbackDataAdministrationViewModel>(
-                GlobalConstants.ApiariesPerPage,
-                (pageFeedbacks - 1) * GlobalConstants.ApiariesPerPage);
+                GlobalConstants.FeedbacksPerPage,
+                (pageFeedbacks - 1) * GlobalConstants.FeedbacksPerPage);
             viewModel.Feedbacks.AllFeedbacks = feedbacks;
 
             // -------------------------------------------------
             viewModel.Helps = new AllFeedbackFeedbacksViewModel();
 
             var allHelpsCount = this.feedbackService.GetAllHelpFeedbacksCount();
-            var pagesHelpsCount = (int)Math.Ceiling((double)allHelpsCount / GlobalConstants.ApiariesPerPage);
+            var pagesHelpsCount = (int)Math.Ceiling((double)allHelpsCount / GlobalConstants.FeedbacksPerPage);
 
             if (pageHelps <= 0)
             {
@@ -71,10 +71,34 @@
 
             viewModel.Helps.CurrentPage = pageHelps;
             var helps = this.feedbackService.GetAllHelpFeedbacks<FeedbackDataAdministrationViewModel>(
-                GlobalConstants.ApiariesPerPage,
-                (pageHelps - 1) * GlobalConstants.ApiariesPerPage);
+                GlobalConstants.FeedbacksPerPage,
+                (pageHelps - 1) * GlobalConstants.FeedbacksPerPage);
 
             viewModel.Helps.AllFeedbacks = helps;
+
+            // -------------------------------------------------
+            viewModel.Reports = new AllFeedbackFeedbacksViewModel();
+
+            var allReportsCount = this.feedbackService.GetAllReporsFeedbacksCount();
+            var pagesReportsCount = (int)Math.Ceiling((double)allReportsCount / GlobalConstants.FeedbacksPerPage);
+
+            if (pageReports <= 0)
+            {
+                pageReports = 1;
+            }
+            else if (pageReports > pagesReportsCount)
+            {
+                pageReports = pagesReportsCount == 0 ? 1 : pagesReportsCount;
+            }
+
+            viewModel.Reports.PagesCount = pagesReportsCount == 0 ? 1 : pagesReportsCount;
+
+            viewModel.Reports.CurrentPage = pageReports;
+            var reports = this.feedbackService.GetAllReportFeedbacks<FeedbackDataAdministrationViewModel>(
+                GlobalConstants.FeedbacksPerPage,
+                (pageHelps - 1) * GlobalConstants.FeedbacksPerPage);
+
+            viewModel.Reports.AllFeedbacks = reports;
 
             return this.View(viewModel);
         }

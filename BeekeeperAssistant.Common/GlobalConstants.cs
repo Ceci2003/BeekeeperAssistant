@@ -23,6 +23,7 @@
         public const int ApiaryHelpersPerPageAdministration = 25;
         public const int BeehivesPerPageAdministration = 25;
         public const int UsersPerPageAdministration = 25;
+        public const int FeedbacksPerPage = 5;
 
         // Apiary Constants
         public const string ApiaryPartNumberRegex = @"\d{4}";

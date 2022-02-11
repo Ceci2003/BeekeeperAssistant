@@ -28,7 +28,8 @@
 </div>
 
 <div class="content">
-    <h1 class="title-1">Всички отзиви</h1>
+    @*---------- Feedbacks ----------*@
+    <h1 class="title-1">Отзиви</h1>
     <table class="data-table">
         <thead>
             <tr>
@@ -81,7 +82,7 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@Model.Helps.CurrentPage" asp-route-pageFeedbacks="@i">@i</a>
+                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@Model.Feedbacks.CurrentPage" asp-route-pageFeedbacks="@i">@i</a>
                     </li>
                 }
             }
@@ -105,8 +106,8 @@
             }
         </ul>
     </div>
-    @*----------------------------------*@
-    <h1 class="title-1">Всички искания на помощ</h1>
+    @*---------- Helps ----------*@
+    <h1 class="title-1">Искания на помощ</h1>
     <table class="data-table">
         <thead>
             <tr>
@@ -159,7 +160,7 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@i" asp-route-pageFeedbacks="@Model.Feedbacks.CurrentPage">@i</a>
+                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@i" asp-route-pageFeedbacks="@Model.Helps.CurrentPage">@i</a>
                     </li>
                 }
             }
@@ -177,6 +178,86 @@
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
                        asp-route-pageHelps="@(Model.Helps.CurrentPage + 1)"
                        asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+    @*---------- Reports ----------*@
+    <h1 class="title-1">Сигнали за грешки</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Заглавие</th>
+                <th>От</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model.Reports.AllFeedbacks)
+            {
+                <tr>
+                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@report.Id">@report.Title</a></td>
+                    <td>@report.UserUsername</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!Model.Reports.AllFeedbacks.Any())
+    {
+        <p class="empty-row">няма отзиви</p>
+    }
+    <div class="pagination">
+        <ul>
+            @if (this.Model.Helps.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
+                       asp-route-pageHelps="@(Model.Helps.CurrentPage)"
+                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage)"
+                       asp-route-pageReports="@(this.Model.Feedbacks.CurrentPage - 1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.Reports.PagesCount; i++)
+            {
+                @if (i == this.Model.Reports.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All" asp-route-pageHelps="@this.Model.Helps.CurrentPage" asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage" asp-route-pageReports="@i">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.Helps.CurrentPage == this.Model.Reports.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
+                       asp-route-pageHelps="@(Model.Helps.CurrentPage)"
+                       asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage"
+                       asp-route-pageReports="@(this.Model.Feedbacks.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

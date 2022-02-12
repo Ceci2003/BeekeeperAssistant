@@ -32,38 +32,38 @@
 
         public IActionResult ByApiaryId(int id)
         {
-            var viewModel = apiaryDiaryService.GetApiaryDiaryByApiaryId<ByApiaryIdApiaryDiaryViewModel>(id);
+            var viewModel = this.apiaryDiaryService.GetApiaryDiaryByApiaryId<ByApiaryIdApiaryDiaryViewModel>(id);
 
             if (viewModel == null)
             {
                 viewModel = new ByApiaryIdApiaryDiaryViewModel();
-                var apiary = apiaryService.GetApiaryById<ApiaryDataModel>(id);
+                var apiary = this.apiaryService.GetApiaryById<ApiaryDataModel>(id);
                 viewModel.ApiaryId = id;
                 viewModel.ApiaryNumber = apiary.Number;
                 viewModel.ApiaryName = apiary.Name;
                 viewModel.ApiaryApiaryType = apiary.ApiaryType;
             }
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Save(int id, ByApiaryIdApiaryDiaryViewModel inputModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var apiaryId = (int)default;
 
-            if (apiaryService.HasDiary(id))
+            if (this.apiaryService.HasDiary(id))
             {
-                apiaryId = await apiaryDiaryService.SaveAsync(id, inputModel.Content, currentUser.Id);
+                apiaryId = await this.apiaryDiaryService.SaveAsync(id, inputModel.Content, currentUser.Id);
             }
             else
             {
-                apiaryId = await apiaryDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
+                apiaryId = await this.apiaryDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
             }
 
-            return RedirectToAction(nameof(this.ByApiaryId), new { id = apiaryId });
+            return this.RedirectToAction(nameof(this.ByApiaryId), new { id = apiaryId });
         }
     }
 }

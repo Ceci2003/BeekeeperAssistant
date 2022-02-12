@@ -28,33 +28,33 @@
 
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult Create(FeedbackType feedbackType)
         {
-            if (enumerationMethodsService.IsEnumerationDefined(feedbackType))
+            if (this.enumerationMethodsService.IsEnumerationDefined(feedbackType))
             {
-                ViewData["FeedbackType"] = feedbackType;
+                this.ViewData["FeedbackType"] = feedbackType;
             }
 
-            return View();
+            return this.View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateFeedbackInputModel inputModel)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            await feedbackService.CreateAsync(currentUser.Id, inputModel.Title, inputModel.Body, inputModel.FeedbackType);
+            await this.feedbackService.CreateAsync(currentUser.Id, inputModel.Title, inputModel.Body, inputModel.FeedbackType);
 
-            TempData[GlobalConstants.SuccessMessage] = "Успешно изпратено запитване!";
-            return RedirectToAction("Index", "Home");
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно изпратено запитване!";
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

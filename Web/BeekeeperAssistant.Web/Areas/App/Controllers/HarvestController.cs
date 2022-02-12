@@ -49,24 +49,24 @@
                 page = 1;
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var viewModel = new AllByBeehiveIdHarvestViewModel()
             {
                 AllHarvests =
-                    harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
             };
 
             viewModel.BeehiveId = id;
-            viewModel.BeehiveNumber = beehiveService.GetBeehiveNumberById(id);
-            viewModel.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+            viewModel.BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id);
+            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
-            var apiary = apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
+            var apiary = this.apiaryService.GetUserApiaryByBeehiveId<ApiaryDataModel>(id);
             viewModel.ApiaryId = apiary.Id;
             viewModel.ApiaryNumber = apiary.Number;
             viewModel.ApiaryName = apiary.Name;
 
-            var count = harvestService.GetAllBeehiveHarvestsCountByBeehiveId(id);
+            var count = this.harvestService.GetAllBeehiveHarvestsCountByBeehiveId(id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ApiariesPerPage);
 
             if (viewModel.PagesCount == 0)
@@ -76,12 +76,12 @@
 
             viewModel.CurrentPage = page;
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Create(int? id)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var inputModel = new CreateHarvestInputModel
             {
@@ -90,47 +90,47 @@
 
             if (id == null)
             {
-                inputModel.Apiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
             }
             else
             {
-                var apiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(id.Value);
-                var beehiveNumber = beehiveService.GetBeehiveNumberById(id.Value);
+                var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id.Value);
+                var beehiveNumber = this.beehiveService.GetBeehiveNumberById(id.Value);
 
-                inputModel.ApiaryId = apiaryService.GetApiaryIdByBeehiveId(id.Value);
+                inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
                 inputModel.BeehiveId = id.Value;
                 inputModel.ApiaryNumber = apiaryNumber;
                 inputModel.BeehiveNumber = beehiveNumber;
             }
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateHarvestInputModel inputModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 inputModel.DateOfHarves = DateTime.UtcNow.Date;
                 if (inputModel.BeehiveId == null)
                 {
-                    inputModel.Apiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                    inputModel.Apiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
                 }
 
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            var apiaryOwnerId = apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
 
             if (inputModel.BeehiveId == null)
             {
-                var apiaryBeehives = beehiveService.GetBeehivesByApiaryId<BeehiveDataModel>(inputModel.ApiaryId).ToList();
+                var apiaryBeehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataModel>(inputModel.ApiaryId).ToList();
                 if (inputModel.AllBeehives)
                 {
                     var beehiveIds = apiaryBeehives.Select(b => b.Id).ToList();
-                    await harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, beehiveIds);
+                    await this.harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, beehiveIds);
                 }
                 else
                 {
@@ -145,37 +145,37 @@
                         }
                     }
 
-                    await harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, selectedIds);
+                    await this.harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, selectedIds);
                 }
 
-                TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
-                return RedirectToAction("Index", "Home");
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
+                return this.RedirectToAction("Index", "Home");
             }
             else
             {
-                await harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
+                await this.harvestService.CreateUserHarvestAsync(apiaryOwnerId, currentUser.Id, inputModel, new List<int> { inputModel.BeehiveId.Value });
 
-                TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
-                return RedirectToAction(nameof(this.AllByBeehiveId), new { id = inputModel.BeehiveId.Value });
+                this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавен добив!";
+                return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = inputModel.BeehiveId.Value });
             }
         }
 
         // DONE []
         public IActionResult Edit(int id)
         {
-            var inputModel = harvestService.GetHarvestById<EditHarvestInputModel>(id);
+            var inputModel = this.harvestService.GetHarvestById<EditHarvestInputModel>(id);
             inputModel.QuantityText = inputModel.Quantity.ToString();
 
-            var beehiveId = beehiveService.GetBeehiveIdByHarvesId(id);
+            var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
 
-            var apiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            var beehiveNumber = beehiveService.GetBeehiveNumberById(beehiveId);
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
 
             inputModel.BeehiveId = beehiveId;
             inputModel.ApiaryNumber = apiaryNumber;
             inputModel.BeehiveNumber = beehiveNumber;
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         // DONE []
@@ -184,42 +184,42 @@
         {
             inputModel.Quantity = Convert.ToDouble(inputModel.QuantityText);
 
-            await harvestService.EditHarvestAsync(id, inputModel);
+            await this.harvestService.EditHarvestAsync(id, inputModel);
 
-            var beehiveId = beehiveService.GetBeehiveIdByHarvesId(id);
+            var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран добив!";
-            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран добив!";
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
         }
 
         // DONE []
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var currentuser = await userManager.GetUserAsync(User);
-            var inputModel = harvestService.GetHarvestById<HarvestDatavVewModel>(id);
+            var currentuser = await this.userManager.GetUserAsync(this.User);
+            var inputModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
 
             if (inputModel.CreatorId != currentuser.Id)
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
-            var beehiveId = beehiveService.GetBeehiveIdByHarvesId(id);
+            var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
 
-            await harvestService.DeleteHarvestAsync(id);
+            await this.harvestService.DeleteHarvestAsync(id);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит добив!";
-            return RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит добив!";
+            return this.RedirectToAction(nameof(this.AllByBeehiveId), new { id = beehiveId });
         }
 
         // DONE []
         public IActionResult ExportToExcel(int id)
         {
-            var pck = excelExportService.ExportAsExcelHarvest(id);
+            var pck = this.excelExportService.ExportAsExcelHarvest(id);
 
-            var apiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(id);
-            var beehive = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
-            Response.Headers.Add("content-disposition", "attachment: filename=" + $"{beehive.Number}_{apiaryNumber}_Harvests.xlsx");
+            var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
+            this.Response.Headers.Add("content-disposition", "attachment: filename=" + $"{beehive.Number}_{apiaryNumber}_Harvests.xlsx");
             return new FileContentResult(pck.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }

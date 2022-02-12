@@ -63,10 +63,10 @@
                             // !TODO make send email to administrators when catch exeption status code different from 404
                             // Also send email to multiple users
 
-                            await emailSender.SendEmailAsync(
-                                  configuration["SendGrid:RecipientEmail"],
+                            await this.emailSender.SendEmailAsync(
+                                  this.configuration["SendGrid:RecipientEmail"],
                                   GlobalConstants.SystemName,
-                                  configuration["SendGrid:RecipientEmail"],
+                                  this.configuration["SendGrid:RecipientEmail"],
                                   $"System Exeption - {(int)statusCodeInHttpCode}",
                                   $"System exeption were cathed {(int)statusCodeInHttpCode} - {statusCodeInHttpCode}");
                         }
@@ -121,10 +121,10 @@
                             // !TODO make send email to administrators when catch exeption status code different from 404
                             // Also send email to multiple users
 
-                            await emailSender.SendEmailAsync(
-                                  configuration["SendGrid:RecipientEmail"],
+                            await this.emailSender.SendEmailAsync(
+                                  this.configuration["SendGrid:RecipientEmail"],
                                   GlobalConstants.SystemName,
-                                  configuration["SendGrid:RecipientEmail"],
+                                  this.configuration["SendGrid:RecipientEmail"],
                                   $"System Exeption - {(int)statusCodeInHttpCode}",
                                   $"System exeption were cathed {(int)statusCodeInHttpCode} - {statusCodeInHttpCode}");
                         }

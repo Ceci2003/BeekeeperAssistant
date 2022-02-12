@@ -30,54 +30,54 @@
 
         public IActionResult All(int id)
         {
-            var beehive = beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(id);
+            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(id);
 
             var viewModel = new AllQueenHelperViewModel
             {
-                AllHelpers = queenHelperService.GetAllQueenByQueenId<QueenHelperViewModel>(id),
+                AllHelpers = this.queenHelperService.GetAllQueenByQueenId<QueenHelperViewModel>(id),
                 BeehiveId = beehive.Id,
                 BeehiveNumber = beehive.Number,
                 ApiaryNumber = beehive.Apiary.Number,
                 QueenId = id,
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public IActionResult Edit(string userId, int queenId)
         {
-            var inputModel = queenHelperService.GetQueenHelper<EditQueenHelperInputModel>(userId, queenId);
+            var inputModel = this.queenHelperService.GetQueenHelper<EditQueenHelperInputModel>(userId, queenId);
             inputModel.QueenId = queenId;
 
-            var beehive = beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(queenId);
+            var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(queenId);
             inputModel.BeehiveId = beehive.Id;
             inputModel.BeehiveNumber = beehive.Number;
             inputModel.ApiaryNumber = beehive.Apiary.Number;
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditQueenHelperInputModel inputModel, string userId, int queenId)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                var user = await userManager.FindByIdAsync(userId);
+                var user = await this.userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
                 inputModel.QueenId = queenId;
 
-                var beehive = beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(queenId);
+                var beehive = this.beehiveService.GetBeehiveByQueenId<BeehiveDataModel>(queenId);
                 inputModel.BeehiveId = beehive.Id;
                 inputModel.BeehiveNumber = beehive.Number;
                 inputModel.ApiaryNumber = beehive.Apiary.Number;
 
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            await queenHelperService.EditAsync(userId, queenId, inputModel.Access);
+            await this.queenHelperService.EditAsync(userId, queenId, inputModel.Access);
 
-            TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
-            return RedirectToAction(nameof(this.All), new { id = queenId });
+            this.TempData[GlobalConstants.SuccessMessage] = "Успешно редактиран помощник!";
+            return this.RedirectToAction(nameof(this.All), new { id = queenId });
         }
     }
 }

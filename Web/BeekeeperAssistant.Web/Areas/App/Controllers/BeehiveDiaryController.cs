@@ -30,13 +30,13 @@ namespace BeekeeperAssistant.Web.Areas.App.Controllers
 
         public IActionResult ByBeehiveId(int id)
         {
-            var viewModel = beehiveDiaryService.GetBeehiveDiaryByBeehiveId<ByBeehiveIdBeehiveDiaryViewModel>(id);
+            var viewModel = this.beehiveDiaryService.GetBeehiveDiaryByBeehiveId<ByBeehiveIdBeehiveDiaryViewModel>(id);
 
             if (viewModel == null)
             {
                 viewModel = new ByBeehiveIdBeehiveDiaryViewModel();
 
-                var beehive = beehiveService.GetBeehiveById<BeehiveDataModel>(id);
+                var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id);
 
                 viewModel.BeehiveId = id;
                 viewModel.BeehiveApiaryNumber = beehive.Apiary.Number;
@@ -45,26 +45,26 @@ namespace BeekeeperAssistant.Web.Areas.App.Controllers
                 viewModel.BeehiveApiaryId = beehive.Apiary.Id;
             }
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Save(int id, ByBeehiveIdBeehiveDiaryViewModel inputModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var apiaryId = (int)default;
 
-            if (beehiveService.HasDiary(id))
+            if (this.beehiveService.HasDiary(id))
             {
-                apiaryId = await beehiveDiaryService.SaveAsync(id, inputModel.Content, currentUser.Id);
+                apiaryId = await this.beehiveDiaryService.SaveAsync(id, inputModel.Content, currentUser.Id);
             }
             else
             {
-                apiaryId = await beehiveDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
+                apiaryId = await this.beehiveDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
             }
 
-            return RedirectToAction(nameof(this.ByBeehiveId), new { id = apiaryId });
+            return this.RedirectToAction(nameof(this.ByBeehiveId), new { id = apiaryId });
         }
     }
 }

@@ -70,12 +70,12 @@
                 page = 1;
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
-            var allBehhives = beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
 
             foreach (var beehive in allBehhives)
             {
-                beehive.MarkFlagType = beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.Id);
+                beehive.MarkFlagType = this.beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.Id);
             }
 
             var viewModel = new AllBeehiveViewModel
@@ -83,7 +83,7 @@
                 AllBeehives = allBehhives,
             };
 
-            var count = beehiveService.GetAllUserBeehivesCount(currentUser.Id);
+            var count = this.beehiveService.GetAllUserBeehivesCount(currentUser.Id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 
             if (viewModel.PagesCount == 0)
@@ -93,7 +93,7 @@
 
             viewModel.CurrentPage = page;
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> AllByApiaryId(int id, int page = 1)
@@ -103,19 +103,19 @@
                 page = 1;
             }
 
-            var viewModel = apiaryService.GetApiaryById<AllByApiaryIdBeehiveViewModel>(id);
-            var currentUser = await userManager.GetUserAsync(User);
+            var viewModel = this.apiaryService.GetApiaryById<AllByApiaryIdBeehiveViewModel>(id);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            viewModel.AllBeehives = beehiveService.GetBeehivesByApiaryId<ByApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
-            viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
+            viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<ByApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
 
             foreach (var beehive in viewModel.AllBeehives)
             {
-                beehive.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.Id);
-                beehive.MarkFlagType = beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.Id);
+                beehive.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.Id);
+                beehive.MarkFlagType = this.beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.Id);
             }
 
-            var count = beehiveService.GetAllBeehivesCountByApiaryId(id);
+            var count = this.beehiveService.GetAllBeehivesCountByApiaryId(id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 
             if (viewModel.PagesCount == 0)
@@ -125,7 +125,7 @@
 
             viewModel.CurrentPage = page;
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> AllByMovableApiaryId(int id, int page = 1)
@@ -135,20 +135,20 @@
                 page = 1;
             }
 
-            var viewModel = temporaryApiaryBeehiveService.GetApiaryById<AllByMovableApiaryIdBeehiveViewModel>(id);
-            var currentUser = await userManager.GetUserAsync(User);
+            var viewModel = this.apiaryService.GetApiaryById<AllByMovableApiaryIdBeehiveViewModel>(id);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            viewModel.AllBeehives = temporaryApiaryBeehiveService.GetBeehivesByApiaryId<ByMovableApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+            viewModel.AllBeehives = this.temporaryApiaryBeehiveService.GetBeehivesByApiaryId<ByMovableApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
 
-            viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
+            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
 
             foreach (var beehive in viewModel.AllBeehives)
             {
-                beehive.BeehiveBeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.BeehiveId);
-                beehive.MarkFlagType = beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.BeehiveId);
+                beehive.BeehiveBeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, beehive.BeehiveId);
+                beehive.MarkFlagType = this.beehiveMarkFlagService.GetBeehiveFlagTypeByBeehiveId(beehive.BeehiveId);
             }
 
-            var count = beehiveService.GetAllBeehivesCountByApiaryId(id);
+            var count = this.beehiveService.GetAllBeehivesCountByApiaryId(id);
             viewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.BeehivesPerPage);
 
             if (viewModel.PagesCount == 0)
@@ -158,25 +158,25 @@
 
             viewModel.CurrentPage = page;
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> ById(int id)
         {
-            var viewModel = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
+            var viewModel = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
 
-            var hasFlag = beehiveMarkFlagService.BeehiveHasFlag(id);
+            var hasFlag = this.beehiveMarkFlagService.BeehiveHasFlag(id);
             if (hasFlag)
             {
                 viewModel.HasFlag = hasFlag;
-                viewModel.FlagViewModel = beehiveMarkFlagService.GetBeehiveFlagByBeehiveId<BeehivemarkFlagViewModel>(id);
+                viewModel.FlagViewModel = this.beehiveMarkFlagService.GetBeehiveFlagByBeehiveId<BeehivemarkFlagViewModel>(id);
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            viewModel.BeehiveAccess = await beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
+            viewModel.BeehiveAccess = await this.beehiveHelperService.GetUserBeehiveAccessAsync(currentUser.Id, id);
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Create(int? id, bool stayOnPage = false)
@@ -185,8 +185,8 @@
 
             if (id == null)
             {
-                var currentUser = await userManager.GetUserAsync(User);
-                inputModel.AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                var currentUser = await this.userManager.GetUserAsync(this.User);
+                inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
             }
             else
             {
@@ -196,27 +196,27 @@
             inputModel.Date = DateTime.UtcNow.Date;
             inputModel.StayOnThePage = stayOnPage;
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int? id, CreateBeehiveInputModel inputModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 if (!id.HasValue)
                 {
-                    inputModel.AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+                    inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
                 }
 
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            var apiaryOwnerId = apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
 
-            var beehiveId = await beehiveService
+            var beehiveId = await this.beehiveService
                 .CreateBeehiveAsync(
                 apiaryOwnerId,
                 currentUser.Id,
@@ -231,33 +231,33 @@
                 inputModel.HasPropolisCatcher,
                 inputModel.IsItMovable);
 
-            apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
+            this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
 
             if (inputModel.StayOnThePage)
             {
                 inputModel.Number += 1;
 
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            return RedirectToAction(nameof(this.ById), new { id = beehiveId });
+            return this.RedirectToAction(nameof(this.ById), new { id = beehiveId });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var inputModel = beehiveService.GetBeehiveById<EditBeehiveInputModel>(id);
-            inputModel.AllApiaries = apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
+            var inputModel = this.beehiveService.GetBeehiveById<EditBeehiveInputModel>(id);
+            inputModel.AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id);
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditBeehiveInputModel inputModel)
         {
-            var beehiveId = await beehiveService.EditUserBeehiveAsync(
+            var beehiveId = await this.beehiveService.EditUserBeehiveAsync(
                 id,
                 inputModel.Number,
                 inputModel.BeehiveSystem,
@@ -270,137 +270,137 @@
                 inputModel.HasPropolisCatcher,
                 inputModel.IsItMovable);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран кошер!";
-            return RedirectToAction(nameof(this.ById), new { id = beehiveId });
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран кошер!";
+            return this.RedirectToAction(nameof(this.ById), new { id = beehiveId });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var beehive = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
-            var currentUser = await userManager.GetUserAsync(User);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var apiaryId = apiaryService.GetApiaryIdByBeehiveId(beehive.Id);
+            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehive.Id);
 
             if (beehive.CreatorId != currentUser.Id &&
-                !beehiveHelperService.IsBeehiveHelper(currentUser.Id, beehive.Id) &&
-                !apiaryService.IsApiaryCreator(currentUser.Id, apiaryId) &&
-                !User.IsInRole(GlobalConstants.AdministratorRoleName))
+                !this.beehiveHelperService.IsBeehiveHelper(currentUser.Id, beehive.Id) &&
+                !this.apiaryService.IsApiaryCreator(currentUser.Id, apiaryId) &&
+                !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
-            await beehiveService.DeleteBeehiveByIdAsync(id);
+            await this.beehiveService.DeleteBeehiveByIdAsync(id);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
-            return RedirectToAction(nameof(this.AllByApiaryId), new { id = apiaryId });
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
+            return this.RedirectToAction(nameof(this.AllByApiaryId), new { id = apiaryId });
         }
 
         public async Task<IActionResult> ExportToExcel(int? id)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var result = excelExportService.ExportAsExcelBeehive(currentUser.Id, id);
+            var result = this.excelExportService.ExportAsExcelBeehive(currentUser.Id, id);
 
-            Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            this.Response.Headers.Add("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
             return new FileContentResult(result.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> Bookmark(int id, string returnUrl)
         {
-            var apiaryId = await beehiveService.BookmarkBeehiveAsync(id);
+            var apiaryId = await this.beehiveService.BookmarkBeehiveAsync(id);
 
             if (!apiaryId.HasValue)
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
             if (returnUrl != null)
             {
-                return Redirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
 
-            return RedirectToAction(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> SelectApiaryToMoveBeehive(int id)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var inputModel = new SelectApiaryToMoveBeehiveIn
             {
                 BeehiveId = id,
-                BeehiveNumber = beehiveService.GetBeehiveNumberById(id),
-                BeehiveApiaryId = apiaryService.GetApiaryIdByBeehiveId(id),
-                BeehiveApiaryNumber = apiaryService.GetApiaryNumberByBeehiveId(id),
-                BeehiveApiaryName = apiaryService.GetApiaryNameByBeehiveId(id),
-                AllApiaries = apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id),
+                BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id),
+                BeehiveApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id),
+                BeehiveApiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id),
+                BeehiveApiaryName = this.apiaryService.GetApiaryNameByBeehiveId(id),
+                AllApiaries = this.apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id),
             };
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> SelectApiaryToMoveBeehive(int id, SelectApiaryToMoveBeehiveIn inputModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             //if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
             //{
             //    ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
             //}
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                inputModel.AllApiaries = apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id);
-                return View(inputModel);
+                inputModel.AllApiaries = this.apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id);
+                return this.View(inputModel);
             }
 
-            if (beehiveService.BeehiveNumberExistsInApiary(inputModel.BeehiveNumber, inputModel.SelectedApiaryId))
+            if (this.beehiveService.BeehiveNumberExistsInApiary(inputModel.BeehiveNumber, inputModel.SelectedApiaryId))
             {
-                return RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId});
+                return this.RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId});
             }
 
-            beehiveService.UpdateBeehiveApiary(id, inputModel.SelectedApiaryId);
+            this.beehiveService.UpdateBeehiveApiary(id, inputModel.SelectedApiaryId);
 
             var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
 
-            TempData[GlobalConstants.SuccessMessage] = messageText;
-            return RedirectToAction(nameof(this.ById), new { id = id });
+            this.TempData[GlobalConstants.SuccessMessage] = messageText;
+            return this.RedirectToAction(nameof(this.ById), new { id = id });
         }
 
         public async Task<IActionResult> ChooseNewNumberForBeehive(int id, int selectedApiaryId)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var inputModel = new ChooseNewNumberForBeehiveInputModel
             {
                 BeehiveId = id,
-                BeehiveNumber = beehiveService.GetBeehiveNumberById(id),
+                BeehiveNumber = this.beehiveService.GetBeehiveNumberById(id),
                 BeehiveApiaryId = selectedApiaryId,
-                BeehiveApiaryName = apiaryService.GetApiaryNameByApiaryId(selectedApiaryId),
-                BeehiveApiaryNumber = apiaryService.GetApiaryNumberByApiaryId(selectedApiaryId),
+                BeehiveApiaryName = this.apiaryService.GetApiaryNameByApiaryId(selectedApiaryId),
+                BeehiveApiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(selectedApiaryId),
             };
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> ChooseNewNumberForBeehive(int id, ChooseNewNumberForBeehiveInputModel inputModel)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            beehiveService.UpdateBeehiveNumberAndApiary(id, inputModel.BeehiveNumber, inputModel.BeehiveApiaryId);
+            this.beehiveService.UpdateBeehiveNumberAndApiary(id, inputModel.BeehiveNumber, inputModel.BeehiveApiaryId);
 
             var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
 
-            TempData[GlobalConstants.SuccessMessage] = messageText;
-            return RedirectToAction(nameof(this.ById), new { id = id });
+            this.TempData[GlobalConstants.SuccessMessage] = messageText;
+            return this.RedirectToAction(nameof(this.ById), new { id = id });
         }
     }
 }

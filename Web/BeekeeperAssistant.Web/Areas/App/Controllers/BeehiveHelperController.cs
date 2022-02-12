@@ -31,43 +31,43 @@
         // DONE []
         public IActionResult All(int id)
         {
-            var beehive = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
+            var beehive = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(id);
 
             var viewModel = new AllBeehiveHelperViewModel
             {
-                AllHelpers = beehiveHelperService.GetAllBeehiveHelpersByBeehiveId<BeehiveHelperViewModel>(id),
+                AllHelpers = this.beehiveHelperService.GetAllBeehiveHelpersByBeehiveId<BeehiveHelperViewModel>(id),
                 BeehiveId = id,
                 BeehiveNumber = beehive.Number,
                 ApiaryNumber = beehive.ApiaryNumber,
             };
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public IActionResult Edit(string userId, int beehiveId)
         {
-            var inputModel = beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
+            var inputModel = this.beehiveHelperService.GetBeehiveHelper<EditBeehiveHelperInputModel>(userId, beehiveId);
             inputModel.BeehiveId = beehiveId;
-            inputModel.BeehiveNumber = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
-            return View(inputModel);
+            inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditBeehiveHelperInputModel inputModel, string userId, int beehiveId)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                var user = await userManager.FindByIdAsync(userId);
+                var user = await this.userManager.FindByIdAsync(userId);
                 inputModel.UserUserName = user.UserName;
                 inputModel.BeehiveId = beehiveId;
-                inputModel.BeehiveNumber = beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
-                return View(inputModel);
+                inputModel.BeehiveNumber = this.beehiveService.GetBeehiveById<ByIdBeehiveViewModel>(beehiveId).Number;
+                return this.View(inputModel);
             }
 
-            await beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
+            await this.beehiveHelperService.EditAsync(userId, beehiveId, inputModel.Access);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран помощник!";
-            return RedirectToAction(nameof(this.All), new { id = beehiveId });
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран помощник!";
+            return this.RedirectToAction(nameof(this.All), new { id = beehiveId });
         }
     }
 }

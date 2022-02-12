@@ -67,19 +67,19 @@
                 pageHelperApiaries = 1;
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var userApiariesCount = apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
             var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
 
-            var apiaryHelperCount = apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
+            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
             var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
 
             var viewModel = new AllApiaryViewModel
             {
                 UserApiaries = new AllApiaryUserApiariesViewModel
                 {
-                    AllUserApiaries = apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
+                    AllUserApiaries = this.apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
                         (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
@@ -87,7 +87,7 @@
                 },
                 UserHelperApiaries = new AllApiaryUserHelperApiariesViewModel
                 {
-                    AllUserHelperApiaries = apiaryHelperService.GetUserHelperApiaries<AllApiaryUserHelperApiariesDataViewModel>(
+                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<AllApiaryUserHelperApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiaryHelpersApiaryPerPage,
                         (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
@@ -97,7 +97,7 @@
 
             foreach (var apiary in viewModel.UserHelperApiaries.AllUserHelperApiaries)
             {
-                apiary.Access = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiary.ApiaryId);
+                apiary.Access = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiary.ApiaryId);
             }
 
             if (viewModel.UserApiaries.PagesCount == 0)
@@ -113,7 +113,7 @@
             viewModel.UserApiaries.CurrentPage = pageAllApiaries;
             viewModel.UserHelperApiaries.CurrentPage = pageHelperApiaries;
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> AllMovable(int pageAllApiaries = 1)
@@ -123,14 +123,14 @@
                 pageAllApiaries = 1;
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var userApiariesCount = apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
             var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
 
             var viewModel = new AllApiaryUserMovableApiariesViewModel
             {
-                AllUserMovableApiaries = apiaryService.GetAllUserMovableApiaries<AllApiaryUserMovableApiariesDataViewModel>(
+                AllUserMovableApiaries = this.apiaryService.GetAllUserMovableApiaries<AllApiaryUserMovableApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
                         (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
@@ -139,7 +139,7 @@
 
             foreach (var apiary in viewModel.AllUserMovableApiaries)
             {
-                apiary.BeehivesCount = temporaryApiaryBeehiveService.GetApiaryBeehivesCount(apiary.Id);
+                apiary.BeehivesCount = this.temporaryApiaryBeehiveService.GetApiaryBeehivesCount(apiary.Id);
             }
 
             if (viewModel.PagesCount == 0)
@@ -149,48 +149,48 @@
 
             viewModel.CurrentPage = pageAllApiaries;
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> ById(int id)
         {
-            var viewModel = apiaryService.GetApiaryById<ByNumberApiaryViewModel>(id);
+            var viewModel = this.apiaryService.GetApiaryById<ByNumberApiaryViewModel>(id);
 
             if (viewModel == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             if (viewModel.CreatorId != currentUser.Id &&
-                !apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id) &&
-                !await userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName))
+                !this.apiaryHelperService.IsApiaryHelper(currentUser.Id, viewModel.Id) &&
+                !await this.userManager.IsInRoleAsync(currentUser, GlobalConstants.AdministratorRoleName))
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
-            viewModel.ApiaryAccess = await apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
+            viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
 
             if (viewModel.Number != null)
             {
                 var postcode = viewModel.Number.Split('-')[0];
                 viewModel.ForecastResult =
-                    await forecastService.GetApiaryCurrentWeatherByCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]);
+                    await this.forecastService.GetApiaryCurrentWeatherByCityPostcode(postcode, this.configuration["OpenWeatherMap:ApiId"]);
 
                 if (viewModel.ForecastResult == null)
                 {
                     viewModel.ForecastResult =
-                        await forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
+                        await this.forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
                 }
             }
             else
             {
                 viewModel.ForecastResult =
-                    await forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, configuration["OpenWeatherMap:ApiId"]);
+                    await this.forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
             }
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         public IActionResult Create()
@@ -198,7 +198,7 @@
             var inputModel = new CreateApiaryInputModel();
             inputModel.IsRegistered = true;
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -207,21 +207,21 @@
             if (inputModel.IsRegistered && inputModel.CityCode != null)
             {
                 var postcode = inputModel.CityCode.Split('-')[0];
-                if (!forecastService.ValidateCityPostcode(postcode, configuration["OpenWeatherMap:ApiId"]))
+                if (!this.forecastService.ValidateCityPostcode(postcode, this.configuration["OpenWeatherMap:ApiId"]))
                 {
-                    ModelState.AddModelError(string.Empty, "Не съществува населено място с въведения пощенски код.");
+                    this.ModelState.AddModelError(string.Empty, "Не съществува населено място с въведения пощенски код.");
                 }
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var apiaryId =
-                await apiaryService.CreateUserApiaryAsync(
+                await this.apiaryService.CreateUserApiaryAsync(
                     currentUser.Id,
                     inputModel.Number,
                     inputModel.Name,
@@ -232,40 +232,40 @@
                     inputModel.OpeningDate,
                     inputModel.ClosingDate);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден пчелин!";
 
-            return RedirectToAction(nameof(this.ById), new { id = apiaryId });
+            return this.RedirectToAction(nameof(this.ById), new { id = apiaryId });
         }
 
         public IActionResult Edit(int id)
         {
-            var viewModel = apiaryService.GetApiaryById<EditApiaryInputModel>(id);
+            var viewModel = this.apiaryService.GetApiaryById<EditApiaryInputModel>(id);
 
             if (viewModel.IsRegistered)
             {
-                viewModel.CityCode = apiaryNumberService.GetCityCode(viewModel.Number);
-                viewModel.FarmNumber = apiaryNumberService.GetFarmNumber(viewModel.Number);
+                viewModel.CityCode = this.apiaryNumberService.GetCityCode(viewModel.Number);
+                viewModel.FarmNumber = this.apiaryNumberService.GetFarmNumber(viewModel.Number);
             }
 
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditApiaryInputModel inputModel)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(inputModel);
+                return this.View(inputModel);
             }
 
-            var modelNumber = apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
+            var modelNumber = this.apiaryNumberService.CreateApiaryNumber(inputModel.CityCode, inputModel.FarmNumber);
             if (!inputModel.IsRegistered)
             {
                 modelNumber = null;
             }
 
             var apiaryId =
-                await apiaryService.EditApiaryByIdAsync(
+                await this.apiaryService.EditApiaryByIdAsync(
                     id,
                     modelNumber,
                     inputModel.Name,
@@ -276,59 +276,59 @@
                     inputModel.OpeningDate,
                     inputModel.ClosingDate);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
-            return RedirectToAction(nameof(this.ById), new { id = apiaryId });
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
+            return this.RedirectToAction(nameof(this.ById), new { id = apiaryId });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id, string returnUrl)
         {
-            await apiaryService.DeleteApiaryByIdAsync(id);
+            await this.apiaryService.DeleteApiaryByIdAsync(id);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит пчелин!";
 
             if (returnUrl != null)
             {
-                return Redirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
 
-            return RedirectToAction(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> SelectApiaryToAddBeehiveInTemporary(int id)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var inputModel = new SelectApiaryToAddBeehiveInTemporaryInputModel
             {
                 TemporaryId = id,
-                TemporaryNumber = apiaryService.GetApiaryNumberByApiaryId(id),
-                TemporaryName = apiaryService.GetApiaryNameByApiaryId(id),
-                AllApiaries = apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id),
+                TemporaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(id),
+                TemporaryName = this.apiaryService.GetApiaryNameByApiaryId(id),
+                AllApiaries = this.apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id),
             };
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> SelectApiaryToAddBeehiveInTemporary(int id, SelectApiaryToAddBeehiveInTemporaryInputModel inputModel)
         {
-            return RedirectToAction(nameof(this.SelectBeehivesToAddInTemporary), new { selectedId = inputModel.SelectedApiaryId, temporaryId = id });
+            return this.RedirectToAction(nameof(this.SelectBeehivesToAddInTemporary), new { selectedId = inputModel.SelectedApiaryId, temporaryId = id });
         }
 
         public async Task<IActionResult> SelectBeehivesToAddInTemporary(int selectedId, int temporaryId)
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
             var inputModel = new SelectBeehivesToAddInTemporaryInputModel
             {
                 TemporaryId = temporaryId,
-                TemporaryNumber = apiaryService.GetApiaryNumberByApiaryId(temporaryId),
-                TemporaryName = apiaryService.GetApiaryNameByApiaryId(temporaryId),
-                Beehives = beehiveService.GetBeehivesByApiaryIdWithoutInTemporary<SelectBeehiveToAddInTemporaryModel>(selectedId).ToList(),
+                TemporaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(temporaryId),
+                TemporaryName = this.apiaryService.GetApiaryNameByApiaryId(temporaryId),
+                Beehives = this.beehiveService.GetBeehivesByApiaryIdWithoutInTemporary<SelectBeehiveToAddInTemporaryModel>(selectedId).ToList(),
             };
 
-            return View(inputModel);
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -336,34 +336,34 @@
         {
             var selectedBeehivesIds = inputModel.Beehives.Where(b => b.IsChecked == true).Select(b => b.Id).ToList();
 
-            await temporaryApiaryBeehiveService.AddMultipleBeehiveToApiary(inputModel.TemporaryId, selectedBeehivesIds);
+            await this.temporaryApiaryBeehiveService.AddMultipleBeehiveToApiary(inputModel.TemporaryId, selectedBeehivesIds);
 
-            return RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = inputModel.TemporaryId });
+            return this.RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = inputModel.TemporaryId });
         }
 
         public async Task<IActionResult> RemoveBeehiveFromTemporary(int id, int temporaryId)
         {
-            await temporaryApiaryBeehiveService.RemoveBeehiveFromTemporaryAsync(id);
+            await this.temporaryApiaryBeehiveService.RemoveBeehiveFromTemporaryAsync(id);
 
-            TempData[GlobalConstants.SuccessMessage] = $"Успешно премахнат кошер/и!";
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно премахнат кошер/и!";
 
-            return RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = temporaryId });
+            return this.RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = temporaryId });
         }
 
         public async Task<IActionResult> ExportToExcel()
         {
-            var currentUser = await userManager.GetUserAsync(User);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var exportResult = excelExportService.ExportAsExcelApiary(currentUser.Id);
+            var exportResult = this.excelExportService.ExportAsExcelApiary(currentUser.Id);
 
-            Response.Headers.Add("content-disposition", "attachment: filename=ExcelReport.xlsx");
+            this.Response.Headers.Add("content-disposition", "attachment: filename=ExcelReport.xlsx");
             return new FileContentResult(exportResult.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
         public async Task<IActionResult> Bookmark(int id)
         {
-            await apiaryService.BookmarkApiaryAsync(id);
-            return RedirectToAction(nameof(this.All));
+            await this.apiaryService.BookmarkApiaryAsync(id);
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public async Task<IActionResult> UpdateMovableStatus(int id)
@@ -372,12 +372,12 @@
 
             if (beehivesCount > 0)
             {
-                TempData[GlobalConstants.ErrorMessage] = $"В временния/подвижния пчелин има кошери които нямат основен пчелин!";
-                return RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = id });
+                this.TempData[GlobalConstants.ErrorMessage] = $"В временния/подвижния пчелин има кошери които нямат основен пчелин!";
+                return this.RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = id });
             }
 
             await this.apiaryService.UpdateMovableStatus(id);
-            return RedirectToAction(nameof(this.ById), new { id = id });
+            return this.RedirectToAction(nameof(this.ById), new { id = id });
         }
     }
 }

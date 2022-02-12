@@ -40,7 +40,7 @@
         [HttpPost]
         public async Task<IActionResult> Create(int id, CreateBeehiveMarkFlagInputModel inputModel)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
@@ -66,7 +66,7 @@
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditBeehiveMarkFlagInputModel inputModel)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }

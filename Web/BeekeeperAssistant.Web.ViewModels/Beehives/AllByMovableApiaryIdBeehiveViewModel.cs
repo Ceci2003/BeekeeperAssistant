@@ -9,13 +9,13 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class AllByMovableApiaryIdBeehiveViewModel : IMapFrom<TemporaryApiaryBeehive>
+    public class AllByMovableApiaryIdBeehiveViewModel : IMapFrom<Apiary>
     {
-        public int ApiaryId { get; set; }
+        public int Id { get; set; }
 
-        public string ApiaryNumber { get; set; }
+        public string Number { get; set; }
 
-        public string ApiaryName { get; set; }
+        public string Name { get; set; }
 
         public Access ApiaryAccess { get; set; }
 

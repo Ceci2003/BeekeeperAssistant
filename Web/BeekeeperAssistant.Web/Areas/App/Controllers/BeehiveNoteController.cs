@@ -77,7 +77,7 @@
                     inputModel.Color,
                     currentUser.Id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId = id });
+            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { id = id });
         }
 
         public IActionResult Edit(int id)
@@ -110,14 +110,14 @@
                 inputModel.Color,
                 currentUser.Id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId });
+            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { id = beehiveId });
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             var beehiveId = await this.beehiveNoteService.DeleteAsync(id);
 
-            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { beehiveId });
+            return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { id = beehiveId });
         }
     }
 }

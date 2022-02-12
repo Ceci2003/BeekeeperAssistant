@@ -90,7 +90,7 @@
             var beehives = this.beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id);
             viewModel.BeehivesCount = beehives.Count();
 
-            var beehivesCountByPower = new Dictionary<BeehivePower, int>(); //beehives.ToList().GroupBy(b => b.BeehivePower).ToDictionary(k => k.Key, v => v.Count());
+            var beehivesCountByPower = new Dictionary<BeehivePower, int>();
             beehivesCountByPower.Add(BeehivePower.Strong, beehives.Where(b => b.BeehivePower == BeehivePower.Strong).Count());
             beehivesCountByPower.Add(BeehivePower.Medium, beehives.Where(b => b.BeehivePower == BeehivePower.Medium).Count());
             beehivesCountByPower.Add(BeehivePower.Weak, beehives.Where(b => b.BeehivePower == BeehivePower.Weak).Count());

@@ -44,6 +44,8 @@
                 viewModel.ApiaryApiaryType = apiary.ApiaryType;
             }
 
+            this.TempData = this.TempData;
+
             return this.View(viewModel);
         }
 
@@ -62,6 +64,8 @@
             {
                 apiaryId = await this.apiaryDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
             }
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно запазихте дневника на пчелина!";
 
             return this.RedirectToAction(nameof(this.ByApiaryId), new { id = apiaryId });
         }

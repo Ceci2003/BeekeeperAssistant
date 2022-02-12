@@ -1,4 +1,8 @@
-@{ 
+@if (this.User.Identity.IsAuthenticated)
+{
     this.Layout = "/Views/Shared/_LoggedInLayout.cshtml";
 }
-
+else
+{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+}

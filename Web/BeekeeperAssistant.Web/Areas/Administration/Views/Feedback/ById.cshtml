@@ -83,8 +83,9 @@
         @Model.Body
     </div>
 
+    <button style="margin-top: 25px;" class="btn apiary" onclick="openHideForm(this);">Отговори</button>
 
-    <div class="form-box">
+    <div id="submit-form" class="form-box close-section" style="display: none;">
         <form asp-controller="Feedback" asp-action="AnswerSendEmail" method="post">
             <h2>Отговори</h2>
 
@@ -129,10 +130,33 @@
             <input type="hidden" asp-for="@Model.Title" />
             <input type="hidden" asp-for="@Model.Body" />
 
-            <div class="btn-group multiple">
+            <div class="btn-group more">
                 <button class="btn queen" type="reset">Изчисти</button>
                 <input class="btn beehive-create" type="submit" value="изпрати" />
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    var isClosed = true;
+    function openHideForm(button) {
+        var form = document.getElementById("submit-form");
+        if(isClosed)
+        {
+            button.innerText = "Затвори формата";
+            button.classList = "btn queen";
+            form.classList = "form-box open-section";
+            form.style.display = "block";
+        }
+        else
+        {
+            button.innerText = "Отговори";
+            button.classList = "btn apiary";
+            form.classList = "form-box close-section";
+            form.style.display = "none";
+        }
+
+        isClosed = !isClosed;
+    }
+</script>

@@ -126,6 +126,7 @@
             removeIndex = currentUser.UserName.IndexOf("@");
             viewModel.SenderName = currentUser.UserName.Remove(removeIndex);
             viewModel.SenderEmail = currentUser.Email;
+            viewModel.Subject = $"Re: {viewModel.Title}";
 
             return this.View(viewModel);
         }

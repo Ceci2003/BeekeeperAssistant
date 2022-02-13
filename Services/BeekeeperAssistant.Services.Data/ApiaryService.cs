@@ -296,6 +296,9 @@
         {
             var query = this.apiaryRepository
                 .AllWithDeleted()
+                .OrderBy(a => a.Number)
+                .ThenByDescending(a => a.Creator.UserName)
+                .ThenByDescending(a => a.Number)
                 .Skip(skip);
 
             if (take.HasValue)

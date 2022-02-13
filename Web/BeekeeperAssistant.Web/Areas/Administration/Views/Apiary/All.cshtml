@@ -48,13 +48,29 @@
                     <td class="number">
                         @if (!apiary.IsDeleted)
                         {
-                            <a asp-controller="Apiary" asp-action="ByNumber"
-                               asp-route-apiaryNumber="@apiary.Number">@(apiary.Number)</a>
+                            <a asp-area="App" asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
+                                @if (apiary.Number != null)
+                                {
+                                    @apiary.Number
+                                }
+                                else
+                                {
+                                    @apiary.Name
+                                }
+                            </a>
                         }
                         else
                         {
-                            <a style="pointer-events: none; color: #110400;" asp-controller="Apiary" asp-action="ByNumber"
-                               asp-route-apiaryNumber="@apiary.Number">@(apiary.Number)</a>
+                            <a style="pointer-events: none; color: #110400;" asp-area="App" asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
+                                @if (apiary.Number != null)
+                                {
+                                    @apiary.Number
+                                }
+                                else
+                                {
+                                    @apiary.Name
+                                }
+                            </a>
                         }
                     </td>
                     <td>

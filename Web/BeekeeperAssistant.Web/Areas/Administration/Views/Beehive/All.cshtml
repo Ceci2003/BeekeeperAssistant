@@ -21,7 +21,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -45,18 +45,45 @@
             {
                 <tr>
                     <td class="number" style="padding: 8px;">
-                        @(beehive.Number)
+                        @if (!beehive.IsDeleted)
+                        {
+                            <a asp-area="App" asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">
+                                @beehive.Number
+                            </a>
+                        }
+                        else
+                        {
+                            <a style="pointer-events: none; color: #110400;" asp-area="App" asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.Id">
+                                @beehive.Number
+                            </a>
+                        }
                     </td>
                     <td>
                         @if (!beehive.IsDeleted)
                         {
-                            <a asp-controller="Apiary" asp-action="ByNumber"
-                               asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
+                            <a asp-area="App" asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.ApiaryId">
+                                @if (beehive.ApiaryNumber != null)
+                                {
+                                    @beehive.ApiaryNumber
+                                }
+                                else
+                                {
+                                    @beehive.ApiaryName
+                                }
+                            </a>
                         }
                         else
                         {
-                            <a style="pointer-events: none; color: #110400;" asp-controller="Apiary" asp-action="ByNumber"
-                               asp-route-apiaryNumber="@beehive.ApiaryNumber">@(beehive.ApiaryNumber)</a>
+                            <a style="pointer-events: none; color: #110400;" asp-area="App" asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.ApiaryId">
+                                @if (beehive.ApiaryNumber != null)
+                                {
+                                    @beehive.ApiaryNumber
+                                }
+                                else
+                                {
+                                    @beehive.ApiaryName
+                                }
+                            </a>
                         }
                     </td>
                     <td style="color: @if (beehive.IsDeleted) @("#d9695d") else @("#558b2f");">

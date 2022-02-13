@@ -30,6 +30,14 @@
   --queen-color-hover: #d9695d;
 }
 
+.content.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50vh;
+}
+
 p::selection,
 a::selection,
 h1::selection,
@@ -763,4 +771,44 @@ footer h1 {
 
 .app-benefits-cards-list .card .card-inner .back-page p {
   padding: 10px 25px;
+}
+
+/* Error page */
+.error-page-btns a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 25px;
+}
+
+.error-page-btns a i {
+  margin-right: 5px;
+}
+
+.error-page-btns a.report {
+  background-color: var(--red);
+}
+
+.error-page-btns a.report:hover {
+  background-color: var(--red-hover);
+}
+
+.error-page-btns a.connect {
+  background-color: var(--green-hover);
+}
+
+.error-page-btns a.connect:hover {
+  background-color: var(--green);
+}
+
+.error-page-btns a.system {
+  background-color: var(--beehive-color);
+}
+
+.error-page-btns a.system:hover {
+  background-color: var(--orange);
 }

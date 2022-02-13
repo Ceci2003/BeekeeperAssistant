@@ -109,8 +109,14 @@
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return this.View(
-                new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+            var viewModel = new ErrorViewModel
+            {
+                RequestId = System.Diagnostics.Activity.Current?.Id ?? this.HttpContext.TraceIdentifier,
+                Message = "Възникна грешка при обработването на вашата заявка.",
+                Title = "Системна грешка",
+            };
+
+            return this.View(viewModel);
         }
     }
 }

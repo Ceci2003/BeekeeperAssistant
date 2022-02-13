@@ -1,4 +1,5 @@
-﻿using BeekeeperAssistant.Data.Models;
+﻿using BeekeeperAssistant.Common;
+using BeekeeperAssistant.Data.Models;
 using BeekeeperAssistant.Services.Data;
 using BeekeeperAssistant.Web.ViewModels.ApiaryDiaries;
 using BeekeeperAssistant.Web.ViewModels.BeehiveDiaries;
@@ -45,6 +46,8 @@ namespace BeekeeperAssistant.Web.Areas.App.Controllers
                 viewModel.BeehiveApiaryId = beehive.Apiary.Id;
             }
 
+            this.TempData = this.TempData;
+
             return this.View(viewModel);
         }
 
@@ -63,6 +66,8 @@ namespace BeekeeperAssistant.Web.Areas.App.Controllers
             {
                 apiaryId = await this.beehiveDiaryService.CreateAsync(id, inputModel.Content, currentUser.Id);
             }
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно запазихте дневника на кошера!";
 
             return this.RedirectToAction(nameof(this.ByBeehiveId), new { id = apiaryId });
         }

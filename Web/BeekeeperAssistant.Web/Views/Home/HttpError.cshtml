@@ -3,27 +3,33 @@
     this.ViewData["Title"] = "Упс...";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <div class="breadcrumb">
-        <ul class="breadcrumb-list">
-            <li class="breadcrumb-item">
-                <a asp-controller="Home" asp-action="Index" asp-area="">Табло</a>
-            </li>
-            <li class="breadcrumb-item active">@ViewData["Title"]</li>
-        </ul>
-        <div class="breadcrumb-leave">
-            <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-            </form>
-        </div>
-    </div>
-}
+<div class="content center error">
+    <h1 class="text-danger">@Model.Message</h1>
+    <h2 class="text-danger">Код на грешката: @Model.StatusCode</h2>
 
-<div class="content">
-    <div class="center-screen-parent border">
-        <h3>@this.ViewData["Title"]</h3>
-        <p>@Model.Message</p>
+    <div class="error-page-btns">
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <a class="report" asp-area="App" asp-controller="Feedback" asp-action="Create"
+            asp-route-feedbackType="@FeedbackType.Report">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Подайте сигнал</p>
+            </a>
+            <a class="system" asp-area="App" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-chevron-circle-left"></i>
+                Обратно към системата
+            </a>
+        }
+        else
+        {
+            <a class="connect" asp-area="" asp-controller="Home" asp-action="Contact">
+                <i class="fas fa-envelope"></i>
+                Свържете се с нас
+            </a>
+            <a class="system" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-chevron-circle-left"></i>
+                Обратно към системата
+            </a>
+        }
     </div>
 </div>

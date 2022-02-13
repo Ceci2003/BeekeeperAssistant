@@ -196,10 +196,12 @@ button::selection {
 
 .sidebar-navigation .navigations::-webkit-scrollbar-track {
   -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
 }
 
 .sidebar-navigation .navigations::-webkit-scrollbar-thumb {
   -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
+  box-shadow: #6f6968; /* inset 0 0 6px red; */
 }
 
 /* Side navigation dropdowns */
@@ -1014,7 +1016,7 @@ tr[id*="trExpandHarvest"]:hover {
 }
 
 .flag-label.checked-flag {
-  order: 2px solid var(--orange);
+  border: 2px solid var(--orange);
   border-radius: 5px;
   padding: 5px;
 }
@@ -1278,7 +1280,7 @@ textarea {
 
 .select-beehive-list {
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   margin-bottom: 25px;
 }
 
@@ -2619,3 +2621,45 @@ th a.ordered {
 .beehive-flag .choose-mark .flags .green:hover {
   color: var(--light-green-hover);
 }
+
+/* Error page */
+.error-page-btns a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 25px;
+}
+
+.error-page-btns a i {
+  margin-right: 5px;
+}
+
+.error-page-btns a.report {
+  background-color: var(--red);
+}
+
+.error-page-btns a.report:hover {
+  background-color: var(--red-hover);
+}
+
+.error-page-btns a.connect {
+  background-color: var(--green-hover);
+}
+
+.error-page-btns a.connect:hover {
+  background-color: var(--green);
+}
+
+.error-page-btns a.system {
+  background-color: var(--beehive-color);
+}
+
+.error-page-btns a.system:hover {
+  background-color: var(--orange);
+}
+
+/* HttpError page */

@@ -32,6 +32,14 @@
 <div class="content">
     <h1 class="title-1">@ViewData["Title"]</h1>
     <partial name="_StatusMessagePartial" />
+
+    <div class="page-controls one">
+        <a class="btn apiary-create" asp-controller="Apiary" asp-action="Create" asp-route-selectMovable="@true">
+            <i class="fas fa-plus-square pr-2"></i>
+            Добави пчелин
+        </a>
+    </div>
+
     <table class="data-table all-table">
         <thead>
             <tr>

@@ -193,10 +193,15 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(bool selectMovable = false)
         {
             var inputModel = new CreateApiaryInputModel();
             inputModel.IsRegistered = true;
+
+            if (selectMovable)
+            {
+                inputModel.ApiaryType = ApiaryType.Movable;
+            }
 
             return this.View(inputModel);
         }

@@ -51,10 +51,12 @@
 
   .sidebar-navigation::-webkit-scrollbar-track {
     -webkit-box-shadow: #110400;
+    box-shadow: #110400;
   }
 
   .sidebar-navigation::-webkit-scrollbar-thumb {
     -webkit-box-shadow: #110400;
+    box-shadow: #110400;
   }
 
   /* sidebar navigations scroller */
@@ -68,12 +70,13 @@
 
   .sidebar-navigation .navigations::-webkit-scrollbar-track {
     -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
     border-radius: 5px;
   }
 
   .sidebar-navigation .navigations::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
+    box-shadow: #6f6968; /* inset 0 0 6px red; */
   }
 
   .content {

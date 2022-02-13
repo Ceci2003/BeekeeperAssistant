@@ -1263,6 +1263,11 @@ textarea {
   justify-content: flex-end;
 }
 
+.btn-group.more {
+  display: flex;
+  justify-content: space-between;
+}
+
 .form-star-tip {
   color: var(--darkgray);
   font-style: italic;

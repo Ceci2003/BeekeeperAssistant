@@ -1,10 +1,11 @@
-﻿using BeekeeperAssistant.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeekeeperAssistant.Data.Models
+﻿namespace BeekeeperAssistant.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using BeekeeperAssistant.Data.Common.Models;
+
     public class Feedback : BaseDeletableModel<int>
     {
         public string Title { get; set; }

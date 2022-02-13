@@ -1,13 +1,10 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Feedbacks
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Administration.Feedbacks;
 
     public class AdministrationByIdFeedbackViewModel : IMapFrom<Feedback>
     {
@@ -20,5 +17,7 @@
         public FeedbackType FeedbackType { get; set; }
 
         public string UserUserName { get; set; }
+
+        public string UserEmail { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@using BeekeeperAssistant.Data.Models
-@model BeekeeperAssistant.Web.ViewModels.Feedbacks.AdministrationByIdFeedbackViewModel
+@model BeekeeperAssistant.Web.ViewModels.Administration.Feedbacks.AdministrationFeedbackAnswerInputViewModel
 @{
     ViewData["Title"] = "Отзив";
     string submitClass = "beehive-create";
@@ -68,7 +68,7 @@
     </div>
     <h3>Заглавие: @Model.Title</h3>
     <h3>Дата: @Model.CreatedOn.ToString("ddd dd-MMM-yyyy")</h3>
-    
+
     <br>
 
     <div>Вид: @Html.DisplayFor(x => Model.FeedbackType)</div>
@@ -81,5 +81,58 @@
         Съдържание:
         <br>
         @Model.Body
+    </div>
+
+
+    <div class="form-box">
+        <form asp-controller="Feedback" asp-action="AnswerSendEmail" method="post">
+            <h2>Отговори</h2>
+
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.UserUserName"></label>
+                    <input asp-for="@Model.UserUserName" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.UserEmail"></label>
+                    <input asp-for="@Model.UserEmail" />
+                </div>
+            </div>
+
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.SenderName"></label>
+                    <input asp-for="@Model.SenderName" />
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.SenderEmail"></label>
+                    <input asp-for="@Model.SenderEmail" />
+                </div>
+            </div>
+
+            <div class="input-group max">
+                <label asp-for="@Model.Subject"></label>
+                <input asp-for="@Model.Subject" />
+                <span asp-validation-for="@Model.Subject"></span>
+            </div>
+
+            <div class="input-group max">
+                <label class="required" asp-for="@Model.AnswerContent"></label>
+                <textarea asp-for="@Model.AnswerContent" cols="30"
+                          rows="10"></textarea>
+                <span asp-validation-for="@Model.AnswerContent"></span>
+            </div>
+
+            <input type="hidden" asp-for="@Model.Id" />
+            <input type="hidden" asp-for="@Model.Title" />
+            <input type="hidden" asp-for="@Model.Id" />
+            <input type="hidden" asp-for="@Model.Title" />
+            <input type="hidden" asp-for="@Model.Body" />
+
+            <div class="btn-group multiple">
+                <button class="btn queen" type="reset">Изчисти</button>
+                <input class="btn beehive-create" type="submit" value="изпрати" />
+            </div>
+        </form>
     </div>
 </div>

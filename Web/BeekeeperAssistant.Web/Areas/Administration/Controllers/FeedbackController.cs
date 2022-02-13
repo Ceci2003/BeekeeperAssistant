@@ -1,18 +1,30 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 {
-    using BeekeeperAssistant.Common;
-    using BeekeeperAssistant.Services.Data;
-    using BeekeeperAssistant.Web.ViewModels.Feedbacks;
-    using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Threading.Tasks;
+    using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Services.Messaging;
+    using BeekeeperAssistant.Web.ViewModels.Administration.Feedbacks;
+    using BeekeeperAssistant.Web.ViewModels.Feedbacks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
 
     public class FeedbackController : AdministrationController
     {
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IFeedbackService feedbackService;
+        private readonly IEmailSender emailSender;
 
-        public FeedbackController(IFeedbackService feedbackService)
+        public FeedbackController(
+            UserManager<ApplicationUser> userManager,
+            IFeedbackService feedbackService,
+            IEmailSender emailSender)
         {
+            this.userManager = userManager;
             this.feedbackService = feedbackService;
+            this.emailSender = emailSender;
         }
 
         public IActionResult All(int pageFeedbacks = 1, int pageHelps = 1, int pageReports = 1)
@@ -103,11 +115,32 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ById(int id)
+        public async Task<IActionResult> ById(int id)
         {
-            var viewModel = this.feedbackService.GetFeedbackById<AdministrationByIdFeedbackViewModel>(id);
+            var viewModel = this.feedbackService.GetFeedbackById<AdministrationFeedbackAnswerInputViewModel>(id);
+
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var removeIndex = viewModel.UserUserName.IndexOf("@");
+            viewModel.UserUserName = viewModel.UserUserName.Remove(removeIndex);
+            removeIndex = currentUser.UserName.IndexOf("@");
+            viewModel.SenderName = currentUser.UserName.Remove(removeIndex);
+            viewModel.SenderEmail = currentUser.Email;
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AnswerSendEmail(AdministrationFeedbackAnswerInputViewModel inputModel)
+        {
+            await this.emailSender.SendEmailAsync(
+                  inputModel.SenderEmail,
+                  inputModel.SenderName,
+                  inputModel.UserEmail,
+                  inputModel.Subject,
+                  inputModel.AnswerContent);
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

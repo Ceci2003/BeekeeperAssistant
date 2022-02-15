@@ -21,7 +21,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -37,6 +37,7 @@
                 <th>Номер</th>
                 <th>Собственик</th>
                 <th>Създаден на</th>
+                <th>Изтрит на</th>
                 <th>Статус</th>
                 <th>Опция</th>
             </tr>
@@ -79,7 +80,17 @@
                     <td>
                         @apiary.CreatedOn.ToString("ddd dd-MMMM-yyyy")
                     </td>
-                    
+                    <td>
+                        @if (apiary.IsDeleted)
+                        {
+                            @apiary.DeletedOn.ToString("ddd dd-MMMM-yyyy")
+                        }
+                        else
+                        {
+                            @("-")
+                        }
+                    </td>
+
                     <td style="color: @if (apiary.IsDeleted) @("#d9695d") else @("#558b2f");">
                         @if (apiary.IsDeleted)
                         {

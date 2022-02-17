@@ -83,7 +83,7 @@
 
         public async Task<ForecastResult> GetApiaryCurrentWeatherByCityPostcode(string postcode, string apiId)
         {
-            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&appid={apiId}";
+            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&units=metric&cnt=1&appid={apiId}";
 
             using (WebClient client = new WebClient())
             {

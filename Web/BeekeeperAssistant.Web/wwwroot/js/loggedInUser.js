@@ -104,7 +104,7 @@ function removeClass(elements, className) {
 var greetMessageElement = document.getElementById("greet-message");
 var currentDateTime = new Date();
 
-if (currentDateTime.getHours() < 12) {
+if (currentDateTime.getHours() < 9) {
   greetMessageElement.innerText = "Добро утро,";
 } else if (currentDateTime.getHours() < 18) {
   greetMessageElement.innerText = "Добър ден,";

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BeekeeperAssistant.Data.Migrations
+﻿namespace BeekeeperAssistant.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class UpdateInspectionNames : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

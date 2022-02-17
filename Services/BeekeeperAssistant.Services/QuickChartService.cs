@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using QuickChart;
 
     public class QuickChartService : IQuickChartService
@@ -24,8 +25,9 @@
                                 "data: { " +
                                     "datasets: [{ " +
                                         $"data: [{string.Join(", ", data)}], " +
-                                        //"backgroundColor:['#4e73df', '#0f3dc4']" +
-                                        //$"backgroundColor:['#008995', '#009386', '#139a67', '#579e3e', '#8d9b00', '#c69000', '#ff7800']" +
+
+                                        // "backgroundColor:['#4e73df', '#0f3dc4']" +
+                                        // $"backgroundColor:['#008995', '#009386', '#139a67', '#579e3e', '#8d9b00', '#c69000', '#ff7800']" +
                                         $"backgroundColor:[{string.Join(", ", colors)}]," +
                                         $"borderColor: '#7B7B7B', " +
                                     "}] " +

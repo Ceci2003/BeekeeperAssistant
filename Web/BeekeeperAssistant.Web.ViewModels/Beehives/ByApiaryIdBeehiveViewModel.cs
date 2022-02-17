@@ -1,8 +1,9 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Beehives
 {
+    using System;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using System;
 
     public class ByApiaryIdBeehiveViewModel : IMapFrom<Beehive>
     {

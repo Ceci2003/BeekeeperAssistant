@@ -7,11 +7,11 @@
     {
         public int Id { get; set; }
 
-        public string ApiaryId{ get; set; }
+        public string ApiaryId { get; set; }
 
         public string ApiaryNumber { get; set; }
 
-        public string ApiaryName{ get; set; }
+        public string ApiaryName { get; set; }
 
         public int Number { get; set; }
 

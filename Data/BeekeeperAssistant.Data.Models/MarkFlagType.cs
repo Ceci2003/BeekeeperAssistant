@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BeekeeperAssistant.Data.Models
+﻿namespace BeekeeperAssistant.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum MarkFlagType
     {
         [Display(Name = "Червен")]

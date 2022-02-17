@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using BeekeeperAssistant.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
+﻿namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
+
+#pragma warning disable SA1649 // File name should match first type name
     public class ChangePasswordModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<ChangePasswordModel> _logger;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<ChangePasswordModel> logger;
 
         public ChangePasswordModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
-            this._userManager = userManager;
-            this._signInManager = signInManager;
-            this._logger = logger;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -51,15 +55,17 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
             public string ConfirmPassword { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public async Task<IActionResult> OnGetAsync()
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
-            var hasPassword = await this._userManager.HasPasswordAsync(user);
+            var hasPassword = await this.userManager.HasPasswordAsync(user);
             if (!hasPassword)
             {
                 return this.RedirectToPage("./SetPassword");
@@ -75,24 +81,25 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 return this.Page();
             }
 
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
-            var changePasswordResult = await this._userManager.ChangePasswordAsync(user, this.Input.OldPassword, this.Input.NewPassword);
+            var changePasswordResult = await this.userManager.ChangePasswordAsync(user, this.Input.OldPassword, this.Input.NewPassword);
             if (!changePasswordResult.Succeeded)
             {
                 foreach (var error in changePasswordResult.Errors)
                 {
                     this.ModelState.AddModelError(string.Empty, error.Description);
                 }
+
                 return this.Page();
             }
 
-            await this._signInManager.RefreshSignInAsync(user);
-            this._logger.LogInformation("User changed their password successfully.");
+            await this.signInManager.RefreshSignInAsync(user);
+            this.logger.LogInformation("User changed their password successfully.");
             this.StatusMessage = "Your password has been changed.";
 
             return this.RedirectToPage();

@@ -5,6 +5,7 @@
     using System.Net;
     using System.Text;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Services.Messaging;
     using Microsoft.Extensions.Configuration;
@@ -62,7 +63,6 @@
                         {
                             // !TODO make send email to administrators when catch exeption status code different from 404
                             // Also send email to multiple users
-
                             await this.emailSender.SendEmailAsync(
                                   this.configuration["SendGrid:RecipientEmail"],
                                   GlobalConstants.SystemName,
@@ -120,7 +120,6 @@
                         {
                             // !TODO make send email to administrators when catch exeption status code different from 404
                             // Also send email to multiple users
-
                             await this.emailSender.SendEmailAsync(
                                   this.configuration["SendGrid:RecipientEmail"],
                                   GlobalConstants.SystemName,
@@ -154,7 +153,7 @@
                         string json = client.DownloadString(url);
                         return true;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return false;
                     }

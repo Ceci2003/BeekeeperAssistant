@@ -19,7 +19,6 @@
     using BeekeeperAssistant.Web.Infrastructure.RouteConstraints;
     using BeekeeperAssistant.Web.Routes;
     using BeekeeperAssistant.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

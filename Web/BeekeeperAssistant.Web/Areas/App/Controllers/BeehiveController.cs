@@ -345,11 +345,10 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            //if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
-            //{
-            //    ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
-            //}
-
+            // if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
+            // {
+            //     ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
+            // }
             if (!this.ModelState.IsValid)
             {
                 inputModel.AllApiaries = this.apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id);
@@ -358,7 +357,7 @@
 
             if (this.beehiveService.BeehiveNumberExistsInApiary(inputModel.BeehiveNumber, inputModel.SelectedApiaryId))
             {
-                return this.RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId});
+                return this.RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId });
             }
 
             await this.beehiveService.UpdateBeehiveApiary(id, inputModel.SelectedApiaryId);

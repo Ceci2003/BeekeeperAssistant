@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
@@ -39,23 +40,22 @@
         public bool IsClosed { get; set; }
 
         [Display(Name = "Дата на отваряне")]
-        public DateTime OpeningDate { get; set; }
+        public DateTime? OpeningDate { get; set; }
 
         [Display(Name = "Дата на затваряне")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
-        private string NumberGenerator()
-        {
-            if (this.IsRegistered)
-            {
-                return $"{this.CityCode}-{this.FarmNumber}";
-            }
-            else
-            {
-                return null;
-            }
-        }
-
+        // private string NumberGenerator()
+        // {
+        //    if (this.IsRegistered)
+        //    {
+        //        return $"{this.CityCode}-{this.FarmNumber}";
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        // }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

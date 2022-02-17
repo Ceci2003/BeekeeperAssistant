@@ -2,7 +2,6 @@
 {
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Web.Controllers;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

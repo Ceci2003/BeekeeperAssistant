@@ -1,6 +1,5 @@
 ﻿namespace BeekeeperAssistant.Data.Models
 {
-
     using BeekeeperAssistant.Data.Common.Models;
 
     public class BeehiveMarkFlag : BaseDeletableModel<int>

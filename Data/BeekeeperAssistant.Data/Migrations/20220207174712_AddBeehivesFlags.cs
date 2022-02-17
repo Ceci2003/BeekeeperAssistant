@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BeekeeperAssistant.Data.Migrations
+﻿namespace BeekeeperAssistant.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddBeehivesFlags : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +19,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -30,7 +31,7 @@ namespace BeekeeperAssistant.Data.Migrations
                 columns: table => new
                 {
                     BeehiveId = table.Column<int>(type: "int", nullable: false),
-                    BeehiveMarkFlagId = table.Column<int>(type: "int", nullable: false)
+                    BeehiveMarkFlagId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

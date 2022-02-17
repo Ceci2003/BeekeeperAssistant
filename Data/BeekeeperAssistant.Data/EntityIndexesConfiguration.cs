@@ -3,7 +3,6 @@
     using System.Linq;
 
     using BeekeeperAssistant.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
 
     internal static class EntityIndexesConfiguration

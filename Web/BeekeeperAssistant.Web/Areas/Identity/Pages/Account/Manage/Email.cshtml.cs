@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Linq;
-using System.Threading.Tasks;
-using BeekeeperAssistant.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using BeekeeperAssistant.Common;
-using Microsoft.Extensions.Configuration;
-using BeekeeperAssistant.Services.Messaging;
-
-namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
+﻿namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+    using System.Text.Encodings.Web;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Messaging;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.WebUtilities;
+    using Microsoft.Extensions.Configuration;
+
     public partial class EmailModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IEmailSender emailSender;
         private readonly IConfiguration configuration;
 
         public EmailModel(
@@ -29,9 +30,9 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
             IEmailSender emailSender,
             IConfiguration configuration)
         {
-            this._userManager = userManager;
-            this._signInManager = signInManager;
-            this._emailSender = emailSender;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.emailSender = emailSender;
             this.configuration = configuration;
         }
 
@@ -55,9 +56,11 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         private async Task LoadAsync(ApplicationUser user)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
-            var email = await this._userManager.GetEmailAsync(user);
+            var email = await this.userManager.GetEmailAsync(user);
             this.Email = email;
 
             this.Input = new InputModel
@@ -65,15 +68,15 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 NewEmail = email,
             };
 
-            this.IsEmailConfirmed = await this._userManager.IsEmailConfirmedAsync(user);
+            this.IsEmailConfirmed = await this.userManager.IsEmailConfirmedAsync(user);
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             await this.LoadAsync(user);
@@ -82,10 +85,10 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostChangeEmailAsync()
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
@@ -94,11 +97,11 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 return this.Page();
             }
 
-            var email = await this._userManager.GetEmailAsync(user);
+            var email = await this.userManager.GetEmailAsync(user);
             if (this.Input.NewEmail != email)
             {
-                var userId = await this._userManager.GetUserIdAsync(user);
-                var code = await this._userManager.GenerateChangeEmailTokenAsync(user, this.Input.NewEmail);
+                var userId = await this.userManager.GetUserIdAsync(user);
+                var code = await this.userManager.GenerateChangeEmailTokenAsync(user, this.Input.NewEmail);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = this.Url.Page(
                     "/Account/ConfirmEmailChange",
@@ -107,7 +110,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                     protocol: this.Request.Scheme);
 
 
-                await this._emailSender.SendEmailAsync(
+                await this.emailSender.SendEmailAsync(
                     this.configuration["SendGrid:SenderEmail"],
                     GlobalConstants.SystemName,
                     this.Input.NewEmail,
@@ -124,10 +127,10 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostSendVerificationEmailAsync()
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
@@ -136,9 +139,9 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 return this.Page();
             }
 
-            var userId = await this._userManager.GetUserIdAsync(user);
-            var email = await this._userManager.GetEmailAsync(user);
-            var code = await this._userManager.GenerateEmailConfirmationTokenAsync(user);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var email = await this.userManager.GetEmailAsync(user);
+            var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var callbackUrl = this.Url.Page(
                 "/Account/ConfirmEmail",
@@ -146,7 +149,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: this.Request.Scheme);
 
-            await this._emailSender.SendEmailAsync(
+            await this.emailSender.SendEmailAsync(
                 this.configuration["SendGrid:SenderEmail"],
                 GlobalConstants.SystemName,
                 email,

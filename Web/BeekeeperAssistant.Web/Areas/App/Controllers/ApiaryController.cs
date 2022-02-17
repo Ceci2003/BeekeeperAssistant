@@ -316,7 +316,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> SelectApiaryToAddBeehiveInTemporary(int id, SelectApiaryToAddBeehiveInTemporaryInputModel inputModel)
+        public IActionResult SelectApiaryToAddBeehiveInTemporary(int id, SelectApiaryToAddBeehiveInTemporaryInputModel inputModel)
         {
             return this.RedirectToAction(nameof(this.SelectBeehivesToAddInTemporary), new { selectedId = inputModel.SelectedApiaryId, temporaryId = id });
         }

@@ -6,7 +6,6 @@
 
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 

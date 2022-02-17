@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using BeekeeperAssistant.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
+﻿namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
-            this._userManager = userManager;
-            this._signInManager = signInManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         public string Username { get; set; }
@@ -38,25 +39,27 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         private async Task LoadAsync(ApplicationUser user)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
-            var userName = await this._userManager.GetUserNameAsync(user);
-            var phoneNumber = await this._userManager.GetPhoneNumberAsync(user);
+            var userName = await this.userManager.GetUserNameAsync(user);
+            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
 
             this.Username = userName;
 
             this.Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
             };
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             await this.LoadAsync(user);
@@ -65,10 +68,10 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await this._userManager.GetUserAsync(this.User);
+            var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this._userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
@@ -77,10 +80,10 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 return this.Page();
             }
 
-            var phoneNumber = await this._userManager.GetPhoneNumberAsync(user);
+            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
             if (this.Input.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await this._userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
+                var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
                     this.StatusMessage = "Unexpected error when trying to set phone number.";
@@ -88,7 +91,7 @@ namespace BeekeeperAssistant.Web.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            await this._signInManager.RefreshSignInAsync(user);
+            await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();
         }

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Services.Data
+﻿namespace BeekeeperAssistant.Services.Data
 {
+    using System.Threading.Tasks;
+
     public interface IBeehiveDiaryService
     {
         Task<int> CreateAsync(int beehiveId, string content, string modifiedBy);

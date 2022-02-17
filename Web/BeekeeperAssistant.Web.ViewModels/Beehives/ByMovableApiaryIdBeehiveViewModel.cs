@@ -13,7 +13,7 @@
 
         public string BeehiveApiaryNumber { get; set; }
 
-        public string BeehiveApiaryName{ get; set; }
+        public string BeehiveApiaryName { get; set; }
 
         public int BeehiveNumber { get; set; }
 

@@ -24,6 +24,7 @@
             {
                 list.Add(new KeyValuePair<string, int>(e.ToString(), (int)e));
             }
+
             return list;
         }
 

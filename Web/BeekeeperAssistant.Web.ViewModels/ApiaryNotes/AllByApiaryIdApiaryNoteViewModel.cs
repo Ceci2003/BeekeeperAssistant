@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;

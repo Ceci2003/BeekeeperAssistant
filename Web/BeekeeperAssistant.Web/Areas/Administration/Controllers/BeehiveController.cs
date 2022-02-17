@@ -1,15 +1,16 @@
-﻿using BeekeeperAssistant.Common;
-using BeekeeperAssistant.Services.Data;
-using BeekeeperAssistant.Web.ViewModels.Administration.Beehives;
-using BeekeeperAssistant.Web.ViewModels.Beehives;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.Administration.Beehives;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
+    using Microsoft.AspNetCore.Mvc;
+
     public class BeehiveController : AdministrationController
     {
         private readonly IBeehiveService beehiveService;

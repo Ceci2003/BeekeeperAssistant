@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Web.Filters
+﻿namespace BeekeeperAssistant.Web.Filters
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc.Filters;
+
     public class RedirectResourceFilter : IResourceFilter
     {
         public void OnResourceExecuted(ResourceExecutedContext context)

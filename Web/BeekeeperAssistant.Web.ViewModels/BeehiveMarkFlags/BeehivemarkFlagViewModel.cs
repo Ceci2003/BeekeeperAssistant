@@ -1,6 +1,5 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags
 {
-
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 

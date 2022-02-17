@@ -13,6 +13,5 @@
         public AllFeedbackFeedbacksViewModel Helps { get; set; }
 
         public AllFeedbackFeedbacksViewModel Reports { get; set; }
-
     }
 }

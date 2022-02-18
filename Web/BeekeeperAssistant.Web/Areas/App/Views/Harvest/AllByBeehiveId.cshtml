@@ -126,21 +126,21 @@
                     {
                         string rowMasterId = "trMasterHarvest" + harvest.Id;
                         string rowExpandId = "trExpandHarvest" + harvest.Id;
-                        <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
-                            <td>
+                        <tr id="@rowMasterId" class="table-sdate">
+                            <td onclick="expandTable(@rowMasterId)">
                                 @harvest.HarvestName
                             </td>
-                            <td class="table-sdate">
+                            <td class="table-sdate" onclick="expandTable(@rowMasterId)">
                                 <time datetime="@harvest.DateOfHarves.ToString("O")"></time>
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @Html.DisplayFor(x => harvest.HarvestProductType)
                                 @if (harvest.HarvestProductType == HarvestProductType.Honey)
                                 {
                                     <span> - @Html.DisplayFor(x => harvest.HoneyType)</span>
                                 }
                             </td>
-                            <td class="table-amount">
+                            <td class="table-amount" onclick="expandTable(@rowMasterId)">
                                 @harvest.Quantity
                                 <span>@Html.DisplayFor(x => harvest.Unit)</span>
                             </td>
@@ -148,10 +148,10 @@
                                 <div class="edit-container">
                                     @if (Model.BeehiveAccess == Access.ReadWrite)
                                     {
-                                        <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id">
+                                        <a class="edit" asp-controller="Harvest" asp-action="Edit" asp-route-id="@harvest.Id" title="Редактирай добива">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a class="delete" onclick="ShowDeleteForm('@harvest.Id-harvest')">
+                                        <a class="delete" onclick="ShowDeleteForm('@harvest.Id-harvest')" title="Изтрий добива">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
 

@@ -85,8 +85,7 @@
             Кошери
         </span>
     </a>
-    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
-        asp-route-id="@Model.ApiaryId">
+    <a class="tablinks active" asp-controller="ApiaryNote" asp-action="AllByApiaryId" asp-route-id="@Model.ApiaryId">
         <i class="fas fa-sticky-note"></i>
         <span class="text">
             Бележки
@@ -104,10 +103,6 @@
     <div id="Notes" class="tabcontent">
         <div class="form-box">
             <form asp-controller="ApiaryNote" asp-action="Create" asp-route-id="@Model.ApiaryId">
-                <a class="back-arrow" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
-                    asp-route-id="@Model.ApiaryId">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
                 <h2>@ViewData["Title"]</h2>
                 <div class="input-group max" onchange="test(this);">
                     <label asp-for="@Model.Color"></label>
@@ -128,7 +123,9 @@
                     <span asp-validation-for="Content"></span>
                 </div>
                 <input type="hidden" asp-for="@Model.Color" value="@GlobalConstants.NoteBackgroundColors[2]">
-                <div class="btn-group">
+                <div class="btn-group more">
+                    <a class="back-button btn form-back" asp-controller="ApiaryNote" asp-action="AllByApiaryId"
+                        asp-route-id="@Model.ApiaryId">Отмени</a>
                     <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
                 </div>
             </form>

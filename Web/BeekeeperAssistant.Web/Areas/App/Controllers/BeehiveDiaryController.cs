@@ -1,18 +1,19 @@
-﻿using BeekeeperAssistant.Common;
-using BeekeeperAssistant.Data.Models;
-using BeekeeperAssistant.Services.Data;
-using BeekeeperAssistant.Web.ViewModels.ApiaryDiaries;
-using BeekeeperAssistant.Web.ViewModels.BeehiveDiaries;
-using BeekeeperAssistant.Web.ViewModels.Beehives;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeekeeperAssistant.Web.Areas.App.Controllers
+﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data;
+    using BeekeeperAssistant.Web.ViewModels.ApiaryDiaries;
+    using BeekeeperAssistant.Web.ViewModels.BeehiveDiaries;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class BeehiveDiaryController : AppBaseController
     {
         private readonly IBeehiveDiaryService beehiveDiaryService;
@@ -46,7 +47,7 @@ namespace BeekeeperAssistant.Web.Areas.App.Controllers
                 viewModel.BeehiveApiaryId = beehive.Apiary.Id;
             }
 
-            this.TempData = this.TempData;
+            this.TempData.Keep();
 
             return this.View(viewModel);
         }

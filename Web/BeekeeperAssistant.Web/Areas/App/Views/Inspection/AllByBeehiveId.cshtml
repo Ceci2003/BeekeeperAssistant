@@ -136,14 +136,14 @@
                     {
                         string rowMasterId = "trMasterInspection" + inspection.Id;
                         string rowExpandId = "trExpandInspection" + inspection.Id;
-                        <tr id="@rowMasterId" onclick="expandTable(@rowMasterId)">
-                            <td class="table-sdate">
+                        <tr id="@rowMasterId">
+                            <td class="table-sdate" onclick="expandTable(@rowMasterId)">
                                 <time datetime="@inspection.DateOfInspection.ToString("O")"></time>
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @Html.DisplayFor(i => inspection.InspectionType)
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @if (inspection.Swarmed)
                                 {
                                     <strong>@yesNo[1]</strong>
@@ -153,7 +153,7 @@
                                     @yesNo[0]
                                 }
                             </td>
-                            <td class="@powerClasses[inspection.BeehivePower.ToString().ToLower()]">
+                            <td class="@powerClasses[inspection.BeehivePower.ToString().ToLower()]" onclick="expandTable(@rowMasterId)">
                                 @Html.DisplayFor(i => inspection.BeehivePower)
                             </td>
                             <td class="edit">
@@ -161,10 +161,10 @@
                                     @if (Model.BeehiveAccess == Access.ReadWrite)
                                     {
                                         <a class="edit" asp-controller="Inspection" asp-action="Edit"
-                                           asp-route-id="@inspection.Id" asp-route-id="@Model.BeehiveId">
+                                           asp-route-id="@inspection.Id" asp-route-beehiveId="@Model.BeehiveId" title="Редактирай прегледа">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a class="delete" onclick="ShowDeleteForm('@inspection.Id-inspection')">
+                                        <a class="delete" onclick="ShowDeleteForm('@inspection.Id-inspection')" title="Изтрий прегледа">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
 

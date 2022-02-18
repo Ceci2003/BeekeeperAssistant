@@ -349,7 +349,8 @@ button::selection {
 .btn.apiary,
 .btn.beehive,
 .btn.queen,
-.btn.light-green {
+.btn.light-green,
+.btn.form-back {
   color: var(--white);
   border: none;
 }
@@ -384,6 +385,14 @@ button::selection {
 
 .btn.light-green:hover {
   background-color: var(--light-green);
+}
+
+.btn.form-back {
+  background-color: var(--red-hover);
+}
+
+.btn.form-back:hover {
+  background-color: var(--red);
 }
 
 .btn.apiary-create,
@@ -587,6 +596,10 @@ tr.has-device td.number a:hover {
 }
 
 /* td with table data edit controls */
+td.edit {
+  cursor: default;
+}
+
 td.edit .edit-container {
   display: flex;
   justify-content: space-around;
@@ -1259,6 +1272,7 @@ textarea {
 }
 
 .btn-group {
+  margin-top: 15px;
   display: flex;
   justify-content: flex-end;
 }
@@ -1269,6 +1283,7 @@ textarea {
 }
 
 .form-star-tip {
+  margin-top: 10px;
   color: var(--darkgray);
   font-style: italic;
 }
@@ -2399,6 +2414,10 @@ input[readonly] {
 /* Apiary & Beehive notes */
 .empty-custom-notes-list {
   text-align: center;
+}
+
+.empty-custom-notes-list a {
+  color: red;
 }
 
 .custom-notes-list {

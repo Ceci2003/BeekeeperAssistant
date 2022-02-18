@@ -145,15 +145,15 @@
                     </td>
                     <td class="edit">
                         <div class="edit-container">
-                            <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
+                            <a class="mark" title="Отбележи кошера" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
                             asp-route-returnUrl="@this.Context.Request.Path">
                                 <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
+                            <a class="edit" title="Редактирай кошера" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                 <i class="far fa-edit"></i>
                             </a>
 
-                            <a class="delete" onclick="ShowDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
+                            <a class="delete" title="Изтрий кошера" onclick="ShowDeleteForm('@beehive.Number-@beehive.Apiary.Id')">
                                 <i class="far fa-trash-alt"></i>
                             </a>
                             <div id="@beehive.Number-@beehive.Apiary.Id" class="delete-form-display">
@@ -269,15 +269,15 @@
                         <td>Редактиране</td>
                         <td class="edit">
                             <div class="edit-container">
-                                <a class="mark" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
+                                <a class="mark" title="Отбележи кошера" asp-controller="Beehive" asp-action="Bookmark" asp-route-id="@beehive.Id"
                                 asp-route-returnUrl="@this.Context.Request.Path">
                                     <i class="@(beehive.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                 </a>
-                                <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
+                                <a class="edit" title="Редактирай кошера" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.Id">
                                     <i class="far fa-edit"></i>
                                 </a>
 
-                                <a class="delete" onclick="ShowDeleteForm('@beehive.Number-@beehive.Apiary.Id-responsive')">
+                                <a class="delete" title="Изтрий кошера" onclick="ShowDeleteForm('@beehive.Number-@beehive.Apiary.Id-responsive')">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                                 <div id="@beehive.Number-@beehive.Apiary.Id-responsive" class="delete-form-display">

@@ -38,10 +38,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Beehive" asp-action="Edit" method="post">
-            <a class="back-arrow" asp-controller="Beehive" asp-action="All">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <h2>@ViewData["Title"] - №@Model.Number</h2>
+            <h2 class="no-required">@ViewData["Title"] - №@Model.Number</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
             <div class="row-form-group">
                 <div class="input-group">
@@ -103,7 +100,8 @@
                 </div>
             </div>
             <input type="hidden" asp-for="@Model.ApiaryId" />
-            <div class="btn-group">
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-controller="Beehive" asp-action="All">Отмени</a>
                 <input class="btn edit" type="submit" value="Редактирай" />
             </div>
             <div class="form-star-tip">

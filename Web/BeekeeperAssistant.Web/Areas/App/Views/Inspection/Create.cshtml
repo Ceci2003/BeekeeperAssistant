@@ -66,20 +66,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Inspection" asp-action="Create">
-            @if (Model.BeehiveId != null)
-            {
-                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId"
-                asp-route-tabPage="Inspections">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-            }
-            else
-            {
-                <a class="back-arrow" asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-            }
-            <h2>@ViewData["Title"]</h2>
+            <h2 class="no-required">@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
             @if (Model.Apiaries != null)
             {
@@ -285,7 +272,16 @@
             <input type="hidden" asp-for="@Model.IncludeSpottedProblem">
             <input type="hidden" asp-for="@Model.IncludeWeatherInfo">
             <input type="hidden" asp-for="@Model.ApiaryId" />
-            <div class="btn-group">
+            <div class="btn-group more">
+                @if (Model.BeehiveId != null)
+                {
+                    <a class="back-button btn form-back" asp-controller="Beehive" asp-action="ById"
+                    asp-route-id="@Model.BeehiveId" asp-route-tabPage="Inspections">Отмени</a>
+                }
+                else
+                {
+                    <a class="back-button btn form-back" asp-controller="Home" asp-action="Index">Отмени</a>
+                }
                 <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
             </div>
         </form>

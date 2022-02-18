@@ -93,13 +93,13 @@
                     <td>@apiary.BeehivesCount</td>
                     <td class="edit">
                         <div class="edit-container">
-                            <a class="mark" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
+                            <a class="mark" title="Маркирай пчелина" asp-controller="Apiary" asp-action="Bookmark" asp-route-id="@apiary.Id">
                                 <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id" asp-route-returnUrl="@returnUrl">
+                            <a class="edit" title="Радактирай пчелина" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id" asp-route-returnUrl="@returnUrl">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <a class="delete" onclick="ShowDeleteForm('@apiary.Id')">
+                            <a class="delete" title="Изтрий пчелина" onclick="ShowDeleteForm('@apiary.Id')">
                                 <i class="far fa-trash-alt"></i>
                             </a>
                             <div id="@apiary.Id" class="delete-form-display">

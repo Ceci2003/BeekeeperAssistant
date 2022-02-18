@@ -95,10 +95,6 @@
     <div id="SelectBeehives" class="tabcontent">
         <div class="form-box">
             <form asp-controller="Apiary" asp-action="SelectBeehivesToAddInTemporary" asp-route-id="@Model.TemporaryId">
-                <a class="back-arrow" asp-controller="Apiary" asp-action="SelectApiaryToAddBeehiveInTemporary"
-                    asp-route-id="@Model.TemporaryId">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
                 <h2>@ViewData["Title"]</h2>
                 @if (Model.Beehives.Count() != 0)
                 {
@@ -111,12 +107,15 @@
                         {
                             <div class="choose-number">
                                 <input class="beehive-check" asp-for="@Model.Beehives[i].IsChecked" />
-                                <label class="beehive-number no-required" asp-for="@Model.Beehives[i].IsChecked">@Model.Beehives[i].Number</label>
+                                <label class="beehive-number no-required"
+                            asp-for="@Model.Beehives[i].IsChecked">@Model.Beehives[i].Number</label>
                                 <input type="hidden" asp-for="@Model.Beehives[i].Id" />
                             </div>
                         }
                     </div>
-                    <div class="btn-group">
+                    <div class="btn-group more">
+                        <a class="back-button btn form-back" asp-controller="Apiary"
+                        asp-action="SelectApiaryToAddBeehiveInTemporary" asp-route-id="@Model.TemporaryId">Отмени</a>
                         <input class="btn beehive-create" type="submit" value="Избери" />
                     </div>
                 }

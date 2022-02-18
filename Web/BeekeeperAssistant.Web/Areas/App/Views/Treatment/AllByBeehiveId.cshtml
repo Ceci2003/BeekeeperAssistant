@@ -129,26 +129,26 @@
                     {
                         string rowMasterId = "trMasterTreatment" + treatment.Id;
                         string rowExpandId = "trExpandTreatment" + treatment.Id;
-                        <tr id="@rowMasterId" class="table-sdate" onclick="expandTable(@rowMasterId)">
-                            <td>
+                        <tr id="@rowMasterId" class="table-sdate">
+                            <td onclick="expandTable(@rowMasterId)">
                                 <time datetime="@treatment.DateOfTreatment.ToString("O")"></time>
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @treatment.Name
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @treatment.Disease
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @treatment.Medication
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @Html.DisplayFor(t => treatment.InputAs)
                             </td>
-                            <td class="table-amount">
+                            <td class="table-amount" onclick="expandTable(@rowMasterId)">
                                 @treatment.Quantity
                             </td>
-                            <td>
+                            <td onclick="expandTable(@rowMasterId)">
                                 @Html.DisplayFor(t => treatment.Dose)
                             </td>
                             <td class="edit">
@@ -156,10 +156,10 @@
                                     @if (Model.BeehiveAccess == Access.ReadWrite)
                                     {
                                         <a class="edit" asp-controller="Treatment" asp-action="Edit"
-                                           asp-route-id="@treatment.Id">
+                                           asp-route-id="@treatment.Id" title="Редактирай третирането">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a class="delete" onclick="ShowDeleteForm('@treatment.Id-treatment')">
+                                        <a class="delete" onclick="ShowDeleteForm('@treatment.Id-treatment')" title="Изтрий третирането">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
 

@@ -108,10 +108,7 @@
     <div id="Beehive" class="tabcontent">
         <div class="form-box">
             <form asp-controller="Beehive" asp-action="SelectApiaryToMoveBeehive" asp-route-id="@Model.BeehiveId">
-                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <h2>@ViewData["Title"]</h2>
+                <h2 class="no-required">@ViewData["Title"]</h2>
                 @if (Model.AllApiaries != null)
                 {
                     <p class="form-note">
@@ -136,7 +133,9 @@
                 <input type="hidden" asp-for="@Model.BeehiveNumber" />
                 <input type="hidden" asp-for="@Model.BeehiveApiaryName" />
                 <input type="hidden" asp-for="@Model.BeehiveApiaryNumber" />
-                <div class="btn-group">
+                <div class="btn-group more">
+                    <a class="back-button btn form-back" asp-controller="Beehive" asp-action="ById"
+                        asp-route-id="@Model.BeehiveId">Отмени</a>
                     <input class="btn beehive-create" type="submit" value="Избери" />
                 </div>
             </form>

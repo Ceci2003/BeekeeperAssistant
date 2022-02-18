@@ -44,7 +44,7 @@
                 viewModel.ApiaryApiaryType = apiary.ApiaryType;
             }
 
-            this.TempData = this.TempData;
+            this.TempData.Keep();
 
             return this.View(viewModel);
         }

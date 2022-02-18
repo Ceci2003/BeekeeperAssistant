@@ -45,6 +45,8 @@
             viewModel.ApiaryName = apiary.Name;
             viewModel.ApiaryType = apiary.ApiaryType;
 
+            this.TempData.Keep();
+
             return this.View(viewModel);
         }
 
@@ -77,6 +79,8 @@
                     inputModel.Color,
                     currentUser.Id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавихте бележка на пчелина!";
+
             return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { id = id });
         }
 
@@ -104,12 +108,16 @@
                 inputModel.Color,
                 currentUser.Id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактирахте бележката бележка на пчелина!";
+
             return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { id = apiaryId });
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             var apiaryId = await this.apiaryNoteService.DeleteAsync(id);
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрихте бележката бележка на пчелина!";
 
             return this.RedirectToAction("AllByApiaryId", "ApiaryNote", new { id = apiaryId });
         }

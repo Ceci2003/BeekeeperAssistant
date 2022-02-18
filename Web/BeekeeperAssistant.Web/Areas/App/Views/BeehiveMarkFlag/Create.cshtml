@@ -101,10 +101,7 @@
     <div id="Notes" class="tabcontent">
         <div class="form-box">
             <form asp-controller="BeehiveMarkFlag" asp-action="Create" asp-route-id="@Model.BeehiveId">
-                <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <h2>Коментар за кошера</h2>
+                <h2 class="no-required">Коментар за кошера</h2>
 
                 <div class="input-group flags">
                     <label asp-for="@Model.FlagType">Флаг:</label>
@@ -121,7 +118,8 @@
                 <input type="hidden" asp-for="@Model.BeehiveApiaryId">
                 <input type="hidden" asp-for="@Model.BeehiveApiaryNumber">
                 <input type="hidden" asp-for="@Model.BeehiveApiaryName">
-                <div class="btn-group">
+                <div class="btn-group more">
+                    <a class="back-button btn form-back" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">Отмени</a>
                     <input class="btn beehive-create" type="submit" value="Създай" />
                 </div>
             </form>

@@ -176,10 +176,10 @@
                         <div class="edit-container">
                             @if (beehive.BeehiveBeehiveAccess == Access.ReadWrite)
                             {
-                                <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
+                                <a class="edit" title="Редактирай кошера" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a class="delete" onclick="ShowDeleteForm('@beehive.BeehiveId')">
+                                <a class="delete" title="Премахни кошера от подвижния пчелин" onclick="ShowDeleteForm('@beehive.BeehiveId')">
                                     <i class="fas fa-ban"></i>
                                 </a>
                                 <div id="@beehive.BeehiveId" class="delete-form-display">

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BeekeeperAssistant.Data.Migrations
+﻿namespace BeekeeperAssistant.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddHarvestedBeehives : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,7 +48,7 @@ namespace BeekeeperAssistant.Data.Migrations
                 columns: table => new
                 {
                     BeehiveId = table.Column<int>(type: "int", nullable: false),
-                    HarvestId = table.Column<int>(type: "int", nullable: false)
+                    HarvestId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

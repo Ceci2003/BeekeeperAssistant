@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BeekeeperAssistant.Data.Migrations
+﻿namespace BeekeeperAssistant.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddHelpersAndChangeTableNames : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -12,7 +12,7 @@ namespace BeekeeperAssistant.Data.Migrations
                 {
                     BeehiveId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Access = table.Column<int>(type: "int", nullable: false)
+                    Access = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,7 @@ namespace BeekeeperAssistant.Data.Migrations
                 {
                     QueenId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Access = table.Column<int>(type: "int", nullable: false)
+                    Access = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

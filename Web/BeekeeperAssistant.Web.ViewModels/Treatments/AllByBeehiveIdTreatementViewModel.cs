@@ -1,7 +1,8 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Treatments
 {
-    using BeekeeperAssistant.Data.Models;
     using System.Collections.Generic;
+
+    using BeekeeperAssistant.Data.Models;
 
     public class AllByBeehiveIdTreatementViewModel
     {

@@ -12,9 +12,7 @@
     using BeekeeperAssistant.Data.Repositories;
     using BeekeeperAssistant.Data.Seeding;
     using BeekeeperAssistant.Services.Messaging;
-
     using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

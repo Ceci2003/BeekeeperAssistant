@@ -6,6 +6,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Messaging;
@@ -17,10 +18,12 @@
     using Microsoft.Extensions.Configuration;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class ForgotPasswordModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEmailSender emailSender;
         private readonly IConfiguration configuration;
 
         public ForgotPasswordModel(
@@ -28,8 +31,8 @@
             IEmailSender emailSender,
             IConfiguration configuration)
         {
-            this._userManager = userManager;
-            this._emailSender = emailSender;
+            this.userManager = userManager;
+            this.emailSender = emailSender;
             this.configuration = configuration;
         }
 
@@ -44,12 +47,14 @@
             public string Email { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public async Task<IActionResult> OnPostAsync()
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this._userManager.FindByEmailAsync(this.Input.Email);
-                if (user == null || !(await this._userManager.IsEmailConfirmedAsync(user)))
+                var user = await this.userManager.FindByEmailAsync(this.Input.Email);
+                if (user == null || !(await this.userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return this.RedirectToPage("./ForgotPasswordConfirmation");
@@ -57,7 +62,7 @@
 
                 // For more information on how to enable account confirmation and password reset please 
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await this._userManager.GeneratePasswordResetTokenAsync(user);
+                var code = await this.userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = this.Url.Page(
                     "/Account/ResetPassword",
@@ -65,7 +70,7 @@
                     values: new { area = "Identity", code },
                     protocol: this.Request.Scheme);
 
-                await this._emailSender.SendEmailAsync(
+                await this.emailSender.SendEmailAsync(
                     this.configuration["SendGrid:SenderEmail"],
                     GlobalConstants.SystemName,
                     this.Input.Email,

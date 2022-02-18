@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BeekeeperAssistant.Data.Migrations
+﻿namespace BeekeeperAssistant.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddApiaryHelpers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -13,7 +13,7 @@ namespace BeekeeperAssistant.Data.Migrations
                     ApiaryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CanRead = table.Column<bool>(type: "bit", nullable: false),
-                    CanWrite = table.Column<bool>(type: "bit", nullable: false)
+                    CanWrite = table.Column<bool>(type: "bit", nullable: false),
                 },
                 constraints: table =>
                 {

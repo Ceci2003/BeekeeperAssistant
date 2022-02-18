@@ -12,13 +12,15 @@
     using Microsoft.AspNetCore.WebUtilities;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class ResetPasswordModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ResetPasswordModel(UserManager<ApplicationUser> userManager)
         {
-            this._userManager = userManager;
+            this.userManager = userManager;
         }
 
         [BindProperty]
@@ -45,7 +47,9 @@
             public string Code { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public IActionResult OnGet(string code = null)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             if (code == null)
             {
@@ -55,7 +59,7 @@
             {
                 this.Input = new InputModel
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)),
                 };
                 return this.Page();
             }
@@ -68,14 +72,14 @@
                 return this.Page();
             }
 
-            var user = await this._userManager.FindByEmailAsync(this.Input.Email);
+            var user = await this.userManager.FindByEmailAsync(this.Input.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return this.RedirectToPage("./ResetPasswordConfirmation");
             }
 
-            var result = await this._userManager.ResetPasswordAsync(user, this.Input.Code, this.Input.Password);
+            var result = await this.userManager.ResetPasswordAsync(user, this.Input.Code, this.Input.Password);
             if (result.Succeeded)
             {
                 return this.RedirectToPage("./ResetPasswordConfirmation");
@@ -85,6 +89,7 @@
             {
                 this.ModelState.AddModelError(string.Empty, error.Description);
             }
+
             return this.Page();
         }
     }

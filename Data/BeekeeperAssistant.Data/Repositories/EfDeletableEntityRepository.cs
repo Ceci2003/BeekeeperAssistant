@@ -5,7 +5,6 @@
 
     using BeekeeperAssistant.Data.Common.Models;
     using BeekeeperAssistant.Data.Common.Repositories;
-
     using Microsoft.EntityFrameworkCore;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>

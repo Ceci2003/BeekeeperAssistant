@@ -353,10 +353,10 @@
 
             if (this.beehiveService.BeehiveNumberExistsInApiary(inputModel.BeehiveNumber, inputModel.SelectedApiaryId))
             {
-                return this.RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId});
+                return this.RedirectToAction(nameof(this.ChooseNewNumberForBeehive), new { id = id, selectedApiaryId = inputModel.SelectedApiaryId });
             }
 
-            this.beehiveService.UpdateBeehiveApiary(id, inputModel.SelectedApiaryId);
+            await this.beehiveService.UpdateBeehiveApiary(id, inputModel.SelectedApiaryId);
 
             var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
 

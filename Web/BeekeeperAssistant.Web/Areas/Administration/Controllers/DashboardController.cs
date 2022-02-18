@@ -1,10 +1,10 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Administration.Dashboard;
-
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class DashboardController : AdministrationController
     {

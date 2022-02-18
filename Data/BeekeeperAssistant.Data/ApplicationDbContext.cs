@@ -8,7 +8,6 @@
 
     using BeekeeperAssistant.Data.Common.Models;
     using BeekeeperAssistant.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 

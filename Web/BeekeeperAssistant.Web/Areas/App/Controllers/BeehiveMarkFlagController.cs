@@ -1,10 +1,11 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class BeehiveMarkFlagController : AppBaseController
     {

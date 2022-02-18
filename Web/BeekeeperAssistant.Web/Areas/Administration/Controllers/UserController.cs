@@ -1,5 +1,8 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
@@ -7,8 +10,6 @@
     using BeekeeperAssistant.Web.ViewModels.Administration.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
 
     public class UserController : AdministrationController
     {

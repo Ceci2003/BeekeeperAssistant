@@ -1,9 +1,9 @@
-﻿using BeekeeperAssistant.Data.Models;
-using BeekeeperAssistant.Services.Mapping;
-using Ganss.XSS;
-
-namespace BeekeeperAssistant.Web.ViewModels.ApiaryDiaries
+﻿namespace BeekeeperAssistant.Web.ViewModels.ApiaryDiaries
 {
+    using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Mapping;
+    using Ganss.XSS;
+
     public class ByApiaryIdApiaryDiaryViewModel : IMapFrom<ApiaryDiary>
     {
         public int ApiaryId { get; set; }
@@ -17,6 +17,5 @@ namespace BeekeeperAssistant.Web.ViewModels.ApiaryDiaries
         public string ApiaryName { get; set; }
 
         public ApiaryType ApiaryApiaryType { get; set; }
-
     }
 }

@@ -84,8 +84,8 @@
             string address,
             bool isRegistered,
             bool isClosed,
-            DateTime openingDate,
-            DateTime closingDate)
+            DateTime? openingDate,
+            DateTime? closingDate)
         {
             var apiary = this.apiaryRepository
                 .All()
@@ -97,8 +97,8 @@
             apiary.Adress = address;
             apiary.IsRegistered = isRegistered;
             apiary.IsClosed = isClosed;
-            apiary.OpeningDate = openingDate;
-            apiary.ClosingDate = closingDate;
+            apiary.OpeningDate = openingDate ?? DateTime.Today;
+            apiary.ClosingDate = closingDate ?? DateTime.Today;
 
             await this.apiaryRepository.SaveChangesAsync();
 

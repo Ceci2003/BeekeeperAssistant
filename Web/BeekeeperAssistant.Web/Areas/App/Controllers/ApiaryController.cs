@@ -278,8 +278,8 @@
                     inputModel.Adress,
                     inputModel.IsRegistered,
                     inputModel.IsClosed,
-                    inputModel.OpeningDate,
-                    inputModel.ClosingDate);
+                    inputModel.OpeningDate.Value,
+                    inputModel.ClosingDate.Value);
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактиран пчелин!";
             return this.RedirectToAction(nameof(this.ById), new { id = apiaryId });

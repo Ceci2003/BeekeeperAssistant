@@ -394,7 +394,7 @@
                 return this.View(inputModel);
             }
 
-            this.beehiveService.UpdateBeehiveNumberAndApiary(id, inputModel.BeehiveNumber, inputModel.BeehiveApiaryId);
+            await this.beehiveService.UpdateBeehiveNumberAndApiary(id, inputModel.BeehiveNumber, inputModel.BeehiveApiaryId);
 
             var messageText = $"Успешно преместихте кошер №{inputModel.BeehiveNumber}!";
 

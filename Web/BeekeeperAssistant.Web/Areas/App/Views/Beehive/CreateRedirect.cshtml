@@ -1,0 +1,11 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateRedirectBeehiveViewModel
+@{ 
+    ViewData["Title"] = "Пренасочване";
+}
+
+<div>
+    <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">Към кошера</a>
+</div>
+<div>
+    <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId">Добавяне на нов кошер</a>
+</div>

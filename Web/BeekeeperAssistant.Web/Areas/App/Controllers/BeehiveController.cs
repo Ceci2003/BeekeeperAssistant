@@ -179,7 +179,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> Create(int? id, bool stayOnPage = false)
+        public async Task<IActionResult> Create(int? id)
         {
             var inputModel = new CreateBeehiveInputModel();
 
@@ -194,7 +194,6 @@
             }
 
             inputModel.Date = DateTime.UtcNow.Date;
-            inputModel.StayOnThePage = stayOnPage;
 
             return this.View(inputModel);
         }
@@ -234,14 +233,18 @@
             this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно създаден кошер!";
 
-            if (inputModel.StayOnThePage)
+            return this.RedirectToAction(nameof(this.CreateRedirect), new { beehiveId = beehiveId, apiaryId = inputModel.ApiaryId });
+        }
+
+        public IActionResult CreateRedirect(int beehiveId, int apiaryId)
+        {
+            var viewModel = new CreateRedirectBeehiveViewModel
             {
-                inputModel.Number += 1;
+                ApiaryId = apiaryId,
+                BeehiveId = beehiveId,
+            };
 
-                return this.View(inputModel);
-            }
-
-            return this.RedirectToAction(nameof(this.ById), new { id = beehiveId });
+            return this.View(viewModel);
         }
 
         public async Task<IActionResult> Edit(int id)

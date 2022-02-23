@@ -115,17 +115,17 @@
 <div class="tabs-body">
     <partial name="_StatusMessagePartial" />
     <div id="Notes" class="tabcontent">
-        @if (Model.ApiaryAccess == Access.ReadWrite)
-        {
-            <div class="page-controls one">
-                <a class="btn beehive-create" asp-controller="ApiaryNote" asp-action="Create"
-                asp-route-id="@Model.ApiaryId" asp-route-returnUrl="@returnUrl">
-                    <i class="far fa-plus-square"></i> Добави бележка
-                </a>
-            </div>
-        }
         @if (Model.AllNotes.Any())
         {
+            @if (Model.ApiaryAccess == Access.ReadWrite)
+            {
+                <div class="page-controls one">
+                    <a class="btn beehive-create" asp-controller="ApiaryNote" asp-action="Create" asp-route-id="@Model.ApiaryId"
+                asp-route-returnUrl="@returnUrl">
+                        <i class="far fa-plus-square"></i> Добави бележка
+                    </a>
+                </div>
+            }
             <div class="custom-notes-list">
                 @foreach (var note in Model.AllNotes)
                 {
@@ -159,12 +159,11 @@
         else
         {
             <div class="empty-custom-notes-list">
-                Няма създадени бележки към пчелина.
+                <p style="margin-bottom: 25px;">Няма създадени бележки към пчелина.</p>
                 @if (Model.ApiaryAccess == Access.ReadWrite)
                 {
-                    @("Добавете нова от тук:")
-                    <br>
-                    <a asp-controller="ApiaryNote" asp-action="Create" asp-route-id="@Model.ApiaryId"
+                    <a style="padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px;user-select: none; cursor: pointer; color: var(--white); background-color: var(--beehive-color);"
+                asp-controller="ApiaryNote" asp-action="Create" asp-route-id="@Model.ApiaryId"
                 asp-route-returnUrl="@returnUrl">
                         <i class="far fa-plus-square"></i> Добави бележка
                     </a>

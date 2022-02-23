@@ -70,14 +70,14 @@
                     <td>@Html.DisplayFor(x => queen.Breed)</td>
                     <td class="edit">
                         <div class="edit-container">
-                            <a class="mark" asp-controller="Queen" asp-action="Bookmark" asp-route-id="@queen.Id">
+                            <a class="mark" asp-controller="Queen" asp-action="Bookmark" asp-route-id="@queen.Id" title="Отбележи майката">
                                 <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
                             <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
-                            asp-route-id="@queen.BeehiveId">
+                            asp-route-id="@queen.BeehiveId" title="Редактирай майката">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <a class="delete" onclick="ShowDeleteForm('@queen.Id')">
+                            <a class="delete" onclick="ShowDeleteForm('@queen.Id')" title="Изтрий майката">
                                 <i class="far fa-trash-alt"></i>
                             </a>
 

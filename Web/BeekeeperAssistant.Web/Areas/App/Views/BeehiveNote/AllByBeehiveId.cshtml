@@ -47,7 +47,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -102,17 +102,17 @@
 <div class="tabs-body">
     <partial name="_StatusMessagePartial" />
     <div id="Notes" class="tabcontent">
-        @if (Model.BeehiveAccess == Access.ReadWrite)
-        {
-            <div class="page-controls one">
-                <a class="btn beehive-create" asp-controller="BeehiveNote" asp-action="Create"
-                   asp-route-id="@Model.BeehiveId">
-                    <i class="far fa-plus-square"></i> Добави бележка
-                </a>
-            </div>
-        }
         @if (Model.AllNotes.Any())
         {
+            @if (Model.BeehiveAccess == Access.ReadWrite)
+            {
+                <div class="page-controls one">
+                    <a class="btn beehive-create" asp-controller="BeehiveNote" asp-action="Create"
+                asp-route-id="@Model.BeehiveId">
+                        <i class="far fa-plus-square"></i> Добави бележка
+                    </a>
+                </div>
+            }
             <div class="custom-notes-list">
                 @foreach (var note in Model.AllNotes)
                 {
@@ -146,12 +146,12 @@
         else
         {
             <div class="empty-custom-notes-list">
-                Няма създадени бележки към пчелина.
+                <p style="margin-bottom: 25px;">Няма създадени бележки към кошера.</p>
                 @if (Model.BeehiveAccess == Access.ReadWrite)
                 {
-                    @("Добавете нова от тук:")
                     <br>
-                    <a asp-controller="BeehiveNote" asp-action="Create" asp-route-id="@Model.BeehiveId">
+                    <a style="padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px;user-select: none; cursor: pointer; color: var(--white); background-color: var(--beehive-color);"
+                asp-controller="BeehiveNote" asp-action="Create" asp-route-id="@Model.BeehiveId">
                         <i class="far fa-plus-square"></i> Добави бележка
                     </a>
                 }

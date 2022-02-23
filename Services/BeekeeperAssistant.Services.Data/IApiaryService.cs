@@ -57,8 +57,8 @@
             string address,
             bool isRegistered,
             bool isClosed,
-            DateTime openingDate,
-            DateTime closingDate);
+            DateTime? openingDate,
+            DateTime? closingDate);
 
         IEnumerable<KeyValuePair<int, string>> GetUserApiariesAsKeyValuePairs(string userId);
 

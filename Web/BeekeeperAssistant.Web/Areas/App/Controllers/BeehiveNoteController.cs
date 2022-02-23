@@ -1,7 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.BeehiveNotes;
@@ -43,6 +43,8 @@
             viewModel.ApiaryName = beehive.Apiary.Name;
             viewModel.ApiaryNumber = beehive.Apiary.Number;
 
+            this.TempData.Keep();
+
             return this.View(viewModel);
         }
 
@@ -77,6 +79,8 @@
                     inputModel.Color,
                     currentUser.Id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно добавихте бележка на пчелина!";
+
             return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { id = id });
         }
 
@@ -110,12 +114,16 @@
                 inputModel.Color,
                 currentUser.Id);
 
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно редактирахте бележката бележка на пчелина!";
+
             return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { id = beehiveId });
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             var beehiveId = await this.beehiveNoteService.DeleteAsync(id);
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрихте бележката бележка на пчелина!";
 
             return this.RedirectToAction("AllByBeehiveId", "BeehiveNote", new { id = beehiveId });
         }

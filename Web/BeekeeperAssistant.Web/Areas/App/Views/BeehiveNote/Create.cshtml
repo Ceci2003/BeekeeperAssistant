@@ -47,7 +47,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -105,18 +105,14 @@
     <div id="Notes" class="tabcontent">
         <div class="form-box">
             <form asp-controller="BeehiveNote" asp-action="Create" asp-route-id="@Model.BeehiveId">
-                <a class="back-arrow" asp-controller="BeehiveNote" asp-action="AllByBeehiveId"
-                   asp-route-id="@Model.BeehiveId">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <h2>@ViewData["Title"]</h2>
+                <h2 class="no-required">@ViewData["Title"]</h2>
                 <div class="input-group max" onchange="test(this);">
                     <label asp-for="@Model.Color"></label>
                     <div class="input-note-background-colors">
                         @foreach (var color in GlobalConstants.NoteBackgroundColors)
                         {
                             <div class="custom-note-color" style="background-color: @color;"
-                                 onclick="setBackground('@color');">
+                            onclick="setBackground('@color');">
                             </div>
                         }
                         @* <input type="color" value="@GlobalConstants.NoteBackgroundColors[2]"> *@
@@ -124,11 +120,14 @@
                 </div>
                 <div class="input-group max">
                     <label asp-for="@Model.Content"></label>
-                    <textarea asp-for="@Model.Content" cols="30" rows="15" style="background-color: @GlobalConstants.NoteBackgroundColors[2];"></textarea>
+                    <textarea asp-for="@Model.Content" cols="30" rows="15"
+                        style="background-color: @GlobalConstants.NoteBackgroundColors[2];"></textarea>
                     <span asp-validation-for="Content"></span>
                 </div>
                 <input type="hidden" asp-for="@Model.Color" value="@GlobalConstants.NoteBackgroundColors[2]">
-                <div class="btn-group">
+                <div class="btn-group more">
+                    <a class="back-button btn form-back" asp-controller="BeehiveNote" asp-action="AllByBeehiveId"
+                        asp-route-id="@Model.BeehiveId">Отмени</a>
                     <input class="btn beehive-create" type="submit" value="@this.ViewData["Title"]" />
                 </div>
             </form>

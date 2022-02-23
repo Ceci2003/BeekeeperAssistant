@@ -95,8 +95,8 @@
     <div class="tabcontent">
         <div class="page-controls one">
             @* <a class="export-file excel" asp-controller="Beehive" asp-action="ExportToExcel" asp-route-id="@Model.Id">
-                <i class="fas fa-file-download"></i> Excel
-            </a> *@
+                    <i class="fas fa-file-download"></i> Excel
+                </a> *@
             @if (Model.ApiaryAccess == Access.ReadWrite)
             {
                 <a class="btn beehive-create" onclick="showInput();">
@@ -139,74 +139,104 @@
             <tbody>
                 @foreach (var beehive in Model.AllBeehives)
                 {
-                <tr class="@if (beehive.BeehiveHasDevice == true) {@hasDevice}">
-                    <td class="number">
-                        <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.BeehiveApiaryId">
-                            @if (beehive.BeehiveApiaryNumber == null)
-                            {
-                                @beehive.BeehiveApiaryName
-                            }
-                            else
-                            {
-                                @beehive.BeehiveApiaryNumber
-                            }
-                        </a>
-                    </td>
-                    <td class="number">
-                        <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.BeehiveId">
-                            @if (beehive.MarkFlagType != null)
-                            {
-                                <div class="table-number-flag-mark">
+                    <tr class="@if (beehive.BeehiveHasDevice == true) {@hasDevice}">
+                        <td class="number">
+                            <a asp-controller="Apiary" asp-action="ById" asp-route-id="@beehive.BeehiveApiaryId">
+                                @if (beehive.BeehiveApiaryNumber == null)
+                                {
+                                    @beehive.BeehiveApiaryName
+                                }
+                                else
+                                {
+                                    @beehive.BeehiveApiaryNumber
+                                }
+                            </a>
+                        </td>
+                        <td class="number">
+                            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@beehive.BeehiveId">
+                                @if (beehive.MarkFlagType != null)
+                                {
+                                    <div class="table-number-flag-mark">
+                                        @beehive.BeehiveNumber
+                                        <i class="fas fa-flag table-flag-mark-@beehive.MarkFlagType"></i>
+                                    </div>
+                                }
+                                else
+                                {
                                     @beehive.BeehiveNumber
-                                    <i class="fas fa-flag table-flag-mark-@beehive.MarkFlagType"></i>
-                                </div>
-                            }
-                            else
-                            {
-                                @beehive.BeehiveNumber
-                            }
-                        </a>
-                    </td>
-                    <td>@Html.DisplayFor(x => beehive.BeehiveBeehiveType)</td>
-                    <td>@Html.DisplayFor(x => beehive.BeehiveBeehiveSystem)</td>
-                    <td class="@powerClasses[beehive.BeehiveBeehivePower.ToString().ToLower()]">
-                        @Html.DisplayFor(x => beehive.BeehiveBeehivePower)
-                    </td>
-                    <td class="edit">
-                        <div class="edit-container">
-                            @if (beehive.BeehiveBeehiveAccess == Access.ReadWrite)
-                            {
-                                <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <a class="delete" onclick="ShowDeleteForm('@beehive.BeehiveId')">
-                                    <i class="fas fa-ban"></i>
-                                </a>
-                                <div id="@beehive.BeehiveId" class="delete-form-display">
-                                    <form method="post" id="form-@beehive.BeehiveId" asp-controller="Apiary"
-                                          asp-action="RemoveBeehiveFromTemporary" asp-route-id="@beehive.BeehiveId" asp-route-temporaryId="@Model.Id">
-                                        <a class="delete close" onclick="HideDeleteForm('@beehive.BeehiveId')">
-                                            <i class="fas fa-times"></i>
+                                }
+                            </a>
+                        </td>
+                        <td>@Html.DisplayFor(x => beehive.BeehiveBeehiveType)</td>
+                        <td>@Html.DisplayFor(x => beehive.BeehiveBeehiveSystem)</td>
+                        <td class="@powerClasses[beehive.BeehiveBeehivePower.ToString().ToLower()]">
+                            @Html.DisplayFor(x => beehive.BeehiveBeehivePower)
+                        </td>
+                        <td class="edit">
+                            <div class="edit-container">
+                                @if (beehive.BeehiveBeehiveAccess == Access.ReadWrite)
+                                {
+                                    <a class="edit" title="Редактирай кошера" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    @if (beehive.BeehiveApiaryId == Model.Id)
+                                    {
+                                        <a class="delete" title="Изтрий кошера" onclick="ShowDeleteForm('@beehive.BeehiveId')">
+                                            <i class="far fa-trash-alt"></i>
                                         </a>
-                                        <p>
-                                            Сигурни ли сте че искате да премахнете кошер
-                                            <strong>№@beehive.BeehiveNumber</strong>?
-                                        </p>
-                                        <button type="submit" class="delete">
-                                            Премахни <i class="fas fa-ban"></i>
-                                        </button>
-                                    </form>
-                                    <div id="@beehive.BeehiveId-back" class="content-cover"
-                                         onclick="HideDeleteForm('@beehive.BeehiveId')"></div>
-                                </div>
-                            }
-                            else
-                            {
-                                @onlyReadMsg
-                            }
-                        </div>
-                    </td>
-                </tr>
+                                        <div id="@beehive.BeehiveId" class="delete-form-display">
+                                            <form method="post" id="form-@beehive.BeehiveId" asp-controller="Beehive" asp-action="Delete"
+                                                  asp-route-id="@beehive.BeehiveId">
+                                                <a class="delete close" onclick="HideDeleteForm('@beehive.BeehiveId')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    <strong>Кошерът е създаден в подвижния пчелин</strong>!
+                                                    <br />
+                                                    Сигурни ли сте че искате да изтриете завинаги кошер
+                                                    <strong>№@beehive.BeehiveNumber</strong>?
+                                                    <br />
+                                                    <i style="font-size: 14px; color: lightslategray;">Ако не искате да изтриете кошера, може да го преместите в друг пчелни.</i>
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Изтрий <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@beehive.BeehiveId-back" class="content-cover"
+                                                 onclick="HideDeleteForm('@beehive.BeehiveId')"></div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a class="delete" title="Премахни кошера от подвижния пчелин" onclick="ShowDeleteForm('@beehive.BeehiveId')">
+                                            <i class="fas fa-ban"></i>
+                                        </a>
+                                        <div id="@beehive.BeehiveId" class="delete-form-display">
+                                            <form method="post" id="form-@beehive.BeehiveId" asp-controller="Apiary"
+                                                  asp-action="RemoveBeehiveFromTemporary" asp-route-id="@beehive.BeehiveId" asp-route-temporaryId="@Model.Id">
+                                                <a class="delete close" onclick="HideDeleteForm('@beehive.BeehiveId')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                                <p>
+                                                    Сигурни ли сте че искате да премахнете кошер
+                                                    <strong>№@beehive.BeehiveNumber</strong>?
+                                                </p>
+                                                <button type="submit" class="delete">
+                                                    Премахни <i class="fas fa-ban"></i>
+                                                </button>
+                                            </form>
+                                            <div id="@beehive.BeehiveId-back" class="content-cover"
+                                                 onclick="HideDeleteForm('@beehive.BeehiveId')"></div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    @onlyReadMsg
+                                }
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -289,27 +319,58 @@
                                         <a class="edit" asp-controller="Beehive" asp-action="Edit" asp-route-id="@beehive.BeehiveId">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a class="delete" onclick="ShowDeleteForm('@beehive.BeehiveId-responsive')">
-                                            <i class="far fa-trash-alt"></i>
-                                        </a>
-                                        <div id="@beehive.BeehiveId-responsive" class="delete-form-display">
-                                            <form method="post" id="form-@beehive.BeehiveId" asp-controller="Apiary"
-                                                  asp-action="RemoveBeehiveFromTemporary" asp-route-id="@beehive.BeehiveId" asp-route-temporaryId="@Model.Id">
-                                                <a class="delete close"
-                                                   onclick="HideDeleteForm('@beehive.BeehiveId-responsive')">
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                                <p>
-                                                    Сигурни ли сте че искате да премахнете кошер
-                                                    <strong>№@beehive.BeehiveNumber</strong>?
-                                                </p>
-                                                <button type="submit" class="delete">
-                                                    Изтрий <i class="fas fa-ban"></i>
-                                                </button>
-                                            </form>
-                                            <div id="@beehive.BeehiveId-back" class="content-cover"
-                                                 onclick="HideDeleteForm('@beehive.BeehiveId-responsive')"></div>
-                                        </div>
+                                        @if (beehive.BeehiveApiaryId == Model.Id)
+                                        {
+                                            <a class="delete" onclick="ShowDeleteForm('@beehive.BeehiveId-responsive')">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+                                            <div id="@beehive.BeehiveId-responsive" class="delete-form-display">
+                                                <form method="post" id="form-@beehive.BeehiveId" asp-controller="Beehive"
+                                                      asp-action="Delete" asp-route-id="@beehive.BeehiveId">
+                                                    <a class="delete close"
+                                                       onclick="HideDeleteForm('@beehive.BeehiveId-responsive')">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                    <p>
+                                                        <strong>Кошерът е създаден в подвижния пчелин</strong>!
+                                                        <br />
+                                                        Сигурни ли сте че искате да изтриете завинаги кошер
+                                                        <strong>№@beehive.BeehiveNumber</strong>?
+                                                        <br />
+                                                        <i style="font-size: 14px; color: lightslategray;">Ако не искате да изтриете кошера, може да го преместите в друг пчелни.</i>
+                                                    </p>
+                                                    <button type="submit" class="delete">
+                                                        Изтрий <i class="far fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                                <div id="@beehive.BeehiveId-back" class="content-cover"
+                                                     onclick="HideDeleteForm('@beehive.BeehiveId-responsive')"></div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <a class="delete" onclick="ShowDeleteForm('@beehive.BeehiveId-responsive')">
+                                                <i class="fas fa-ban"></i>
+                                            </a>
+                                            <div id="@beehive.BeehiveId-responsive" class="delete-form-display">
+                                                <form method="post" id="form-@beehive.BeehiveId" asp-controller="Apiary"
+                                                      asp-action="RemoveBeehiveFromTemporary" asp-route-id="@beehive.BeehiveId" asp-route-temporaryId="@Model.Id">
+                                                    <a class="delete close"
+                                                       onclick="HideDeleteForm('@beehive.BeehiveId-responsive')">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                    <p>
+                                                        Сигурни ли сте че искате да премахнете кошер
+                                                        <strong>№@beehive.BeehiveNumber</strong>?
+                                                    </p>
+                                                    <button type="submit" class="delete">
+                                                        Изтрий <i class="fas fa-ban"></i>
+                                                    </button>
+                                                </form>
+                                                <div id="@beehive.BeehiveId-back" class="content-cover"
+                                                     onclick="HideDeleteForm('@beehive.BeehiveId-responsive')"></div>
+                                            </div>
+                                        }
                                     }
                                 </div>
                             </td>
@@ -390,7 +451,7 @@
 </div>
 
 <script>
-    function hideInput(){
+    function hideInput() {
         var input = document.getElementById("add-beehive-type");
         input.style.display = "none";
 
@@ -398,7 +459,7 @@
         inputBack.style.display = "none";
     }
 
-    function showInput(){
+    function showInput() {
         var input = document.getElementById("add-beehive-type");
         input.style.display = "flex";
 

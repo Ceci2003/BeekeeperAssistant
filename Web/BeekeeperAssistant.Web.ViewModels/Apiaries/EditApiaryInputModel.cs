@@ -45,17 +45,6 @@
         [Display(Name = "Дата на затваряне")]
         public DateTime? ClosingDate { get; set; }
 
-        // private string NumberGenerator()
-        // {
-        //    if (this.IsRegistered)
-        //    {
-        //        return $"{this.CityCode}-{this.FarmNumber}";
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        // }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

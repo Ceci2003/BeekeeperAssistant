@@ -345,10 +345,6 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            // if (beehiveService.BeehiveExistsInApiary(id, inputModel.SelectedApiaryId))
-            // {
-            //     ModelState.AddModelError(string.Empty, "Кошерът вече се намира в избрания пчелин.");
-            // }
             if (!this.ModelState.IsValid)
             {
                 inputModel.AllApiaries = this.apiaryService.GetUserApiariesWithoutTemporaryAsKeyValuePairs(currentUser.Id);

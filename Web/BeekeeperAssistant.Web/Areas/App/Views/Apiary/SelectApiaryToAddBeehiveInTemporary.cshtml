@@ -102,10 +102,6 @@
         <div class="form-box">
             <form asp-controller="Apiary" asp-action="SelectApiaryToAddBeehiveInTemporary"
                 asp-route-id="@Model.TemporaryId">
-                <a class="back-arrow" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
-                    asp-route-id="@Model.TemporaryId">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
                 <h2>@ViewData["Title"]</h2>
                 @if (Model.AllApiaries != null)
                 {
@@ -113,7 +109,7 @@
                         <span class="star">*</span>
                         Изберете пчелин, от който да добавите кошери.
                     </p>
-                    <div class="input-group">
+                    <div class="input-group max">
                         <label asp-for="@Model.SelectedApiaryId"></label>
                         <select asp-for="@Model.SelectedApiaryId" asp-items="keyValuePairApiaries"></select>
                     </div>
@@ -124,7 +120,9 @@
                         Не са намерени пчелини със свободни кошери за добавяне.
                     </p>
                 }
-                <div class="btn-group">
+                <div class="btn-group more">
+                    <a class="back-button btn form-back" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
+                        asp-route-id="@Model.TemporaryId">Отмени</a>
                     <input class="btn beehive-create" type="submit" value="Избери" />
                 </div>
             </form>

@@ -20,7 +20,8 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId"
+                asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
@@ -32,13 +33,14 @@
             <a href="/Apiary/@Model.ApiaryNumber">@Model.ApiaryNumber</a>
         </li>
         <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
+            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId"
+                asp-route-tabPage="Inspections">@Model.BeehiveNumber</a>
         </li>
         <li class="breadcrumb-item active">Редактиране</li>
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -47,10 +49,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Inspection" asp-action="Edit">
-            <a class="back-arrow" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId" asp-route-tabPage="Inspections">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <h2>@ViewData["Title"]</h2>
+            <h2 class="no-required">@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
             <div class="row-form-group">
                 <div class="input-group">
@@ -80,7 +79,7 @@
                 <div class="input-group">
                     <label asp-for="BeehiveTemperament"></label>
                     <select asp-for="BeehiveTemperament"
-                            asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
+                        asp-items="@Html.GetEnumSelectList<BeehiveTemperament>()"></select>
                 </div>
             </div>
             <div class="input-group max">
@@ -107,7 +106,7 @@
                 <div class="input-group form-checkbox">
                     <label>
                         <input asp-for="QueenSeen" /> @Html.DisplayNameFor(model =>
-model.QueenSeen)
+                        model.QueenSeen)
                     </label>
                 </div>
                 <div class="input-group">
@@ -117,7 +116,7 @@ model.QueenSeen)
                 <div class="input-group">
                     <label asp-for="QueenWorkingStatus"></label>
                     <select asp-for="QueenWorkingStatus"
-                            asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
+                        asp-items="@Html.GetEnumSelectList<QueenWorkingStatus>()"></select>
                 </div>
                 <div class="input-group">
                     <label asp-for="QueenPowerStatus"></label>
@@ -135,13 +134,13 @@ model.QueenSeen)
                 <div class="input-group form-checkbox">
                     <label>
                         <input asp-for="ClappedBrood" /> @Html.DisplayNameFor(model =>
-model.ClappedBrood)
+                        model.ClappedBrood)
                     </label>
                 </div>
                 <div class="input-group form-checkbox">
                     <label>
                         <input asp-for="UnclappedBrood" /> @Html.DisplayNameFor(model =>
-model.UnclappedBrood)
+                        model.UnclappedBrood)
                     </label>
                 </div>
             </div>
@@ -246,7 +245,9 @@ model.UnclappedBrood)
             <input type="hidden" asp-for="@Model.IncludeSpottedProblem">
             <input type="hidden" asp-for="@Model.IncludeWeatherInfo">
             <input type="hidden" asp-for="@Model.BeehiveId">
-            <div class="btn-group">
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-controller="Beehive" asp-action="ById"
+                    asp-route-id="@Model.BeehiveId" asp-route-tabPage="Inspections">Отмени</a>
                 <input class="btn beehive-create" type="submit" value="Редактирай" />
             </div>
         </form>

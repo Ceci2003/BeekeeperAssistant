@@ -298,3 +298,16 @@ if (property) {
     element.classList.add("ordered");
   });
 }
+
+// set url user cames from to anchor tag href
+function updateReturnUrls() {
+  var backArrow = document.querySelector(".back-arrow");
+  if (backArrow != null && backArrow.href != document.referrer) {
+    backArrow.href = document.referrer;
+  }
+
+  var backButton = document.querySelector(".back-button");
+  if (backButton != null) {
+    backButton.href = document.referrer;
+  }
+}

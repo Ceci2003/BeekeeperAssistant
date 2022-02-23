@@ -69,10 +69,7 @@
 <div class="content">
     <div class="form-box">
         <form asp-controller="Feedback" asp-action="Create" method="post">
-            <a class="back-arrow" asp-controller="Feedback" asp-action="Index">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <div class="feedback-icon">
+            <div class="feedback-icon no-required">
                 <i class="@feedbackIcon @feedbackIconType"></i>
             </div>
             <h2>@ViewData["Title"]</h2>
@@ -109,7 +106,8 @@
                 <textarea asp-for="Body" cols="30" rows="10"></textarea>
                 <span asp-validation-for="Body"></span>
             </div>
-            <div class="btn-group">
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-controller="Feedback" asp-action="Index">Отмени</a>
                 <input class="btn @submitClass" type="submit" value="@this.ViewData["Title"]" />
             </div>
             <div class="form-star-tip">

@@ -24,6 +24,8 @@
 
         T GetBeehiveById<T>(int beehiveId);
 
+        int GetLatestBeehiveNumber(int apiaryId);
+
         IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0, string orederBy = null);
 
         Task<string> DeleteBeehiveByIdAsync(int beehiveId);

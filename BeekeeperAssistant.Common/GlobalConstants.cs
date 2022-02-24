@@ -14,6 +14,9 @@
         public const string SuccessMessage = "SuccessMessage";
         public const string ErrorMessage = "ErrorMessage";
 
+        // Tempdata dictionary
+        public const string NextBeehiveNumber = "NextBeehiveNumber";
+
         // Pagination values
         public const int ApiariesPerPage = 5;
         public const int ApiaryHelpersApiaryPerPage = 5;

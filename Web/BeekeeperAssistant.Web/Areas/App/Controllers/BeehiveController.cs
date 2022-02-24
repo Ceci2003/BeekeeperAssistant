@@ -245,6 +245,10 @@
                 BeehiveId = beehiveId,
             };
 
+            var latestBeehiveNumber = this.beehiveService.GetLatestBeehiveNumber(apiaryId);
+
+            this.TempData[GlobalConstants.NextBeehiveNumber] = latestBeehiveNumber + 1;
+
             return this.View(viewModel);
         }
 

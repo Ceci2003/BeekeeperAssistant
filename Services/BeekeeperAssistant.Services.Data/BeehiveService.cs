@@ -432,5 +432,15 @@
         {
             return this.beehiveDiaryRepository.All().Any(bd => bd.BeehiveId == beehiveId);
         }
+
+        public int GetLatestBeehiveNumber(int apiaryId)
+        {
+            var beehive = this.beehiveRepository.All()
+                .Where(b => b.ApiaryId == apiaryId)
+                .OrderByDescending(b => b.CreatedOn)
+                .FirstOrDefault();
+
+            return beehive.Number;
+        }
     }
 }

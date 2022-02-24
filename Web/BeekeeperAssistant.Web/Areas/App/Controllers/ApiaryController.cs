@@ -377,7 +377,7 @@
 
             if (beehivesCount > 0)
             {
-                this.TempData[GlobalConstants.ErrorMessage] = $"В временния/подвижния пчелин има кошери които нямат основен пчелин!";
+                this.TempData[GlobalConstants.ErrorMessage] = $"В подвижния пчелин има кошери които нямат основен пчелин!";
                 return this.RedirectToAction("AllByMovableApiaryId", "Beehive", new { id = id });
             }
 

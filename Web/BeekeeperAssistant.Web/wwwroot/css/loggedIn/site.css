@@ -920,6 +920,10 @@ td.queen-red {
   background-color: lightyellow;
 }
 
+.data-table thead tr:hover {
+  background-color: var(--transparent);
+}
+
 tr[id*="trExpandInspection"]:hover,
 tr[id*="trExpandTreatment"]:hover,
 tr[id*="trExpandHarvest"]:hover {
@@ -2686,4 +2690,14 @@ th a.ordered {
   background-color: var(--orange);
 }
 
-/* HttpError page */
+/* Beehive create redirect page */
+.create-redirect-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.create-redirect-container-center a:last-child {
+  margin-left: 15px;
+}

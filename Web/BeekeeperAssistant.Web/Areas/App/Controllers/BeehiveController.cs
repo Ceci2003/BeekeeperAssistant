@@ -158,6 +158,7 @@
 
             viewModel.CurrentPage = page;
 
+            //this.TempData.Keep();
             return this.View(viewModel);
         }
 
@@ -294,6 +295,11 @@
             }
 
             await this.beehiveService.DeleteBeehiveByIdAsync(id);
+
+            if (this.temporaryApiaryBeehiveService.IsBeehiveInTemporary(id))
+            {
+                await this.temporaryApiaryBeehiveService.RemoveBeehiveFromTemporaryAsync(id);
+            }
 
             this.TempData[GlobalConstants.SuccessMessage] = $"Успешно изтрит кошер!";
             return this.RedirectToAction(nameof(this.AllByApiaryId), new { id = apiaryId });

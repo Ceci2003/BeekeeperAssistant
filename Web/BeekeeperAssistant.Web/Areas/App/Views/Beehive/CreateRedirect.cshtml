@@ -18,14 +18,17 @@
     </ul>
 </div>
 
-<div class="content">
-    <div class="center-screen-parent border">
-        <div>
-            <a asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">Към кошера</a>
-        </div>
-        <div>
-            <a asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId">Добавяне на нов кошер</a>
+<div class="content center">
+    <div>
+        <h1 style="text-align: center;">Продължете към?</h1>
+        <div class="create-redirect-container-center">
+            <a class="btn beehive" asp-controller="Beehive" asp-action="ById" asp-route-id="@Model.BeehiveId">
+                Към кошера
+            </a>
+            <a class="btn edit" asp-controller="Beehive" asp-action="Create" asp-route-id="@Model.ApiaryId">
+                Добавяне на нов кошер
+            </a>
         </div>
     </div>
 </div>
-
+</div>

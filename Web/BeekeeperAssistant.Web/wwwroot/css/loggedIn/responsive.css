@@ -368,4 +368,18 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .create-redirect-container-center {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+  
+  .create-redirect-container-center a {
+    width: 100%;
+  }
+  
+  .create-redirect-container-center a:last-child {
+    margin-top: 25px;
+    margin-left: 0;
+  }
 }

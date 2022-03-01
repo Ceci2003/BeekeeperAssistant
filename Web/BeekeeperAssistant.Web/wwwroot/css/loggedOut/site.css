@@ -551,7 +551,7 @@ footer h1 {
 
 .about-page,
 .contact-page {
-  height: 100vh;
+  height: 70vh;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -651,7 +651,7 @@ footer h1 {
 
 .app-benefits-cards .quote {
   font-size: 24px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .app-benefits-cards .quotes {

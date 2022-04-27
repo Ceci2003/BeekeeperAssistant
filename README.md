@@ -14,7 +14,11 @@
 - Username: ceci1706, E-mail: ceci1706@abv.bg
 
 ## Документация на проекта
-Линк към документацията: https://drive.google.com/file/d/1fOSAN6-Snh7AUYC-Wcyygo-idbflFXP2/view?usp=sharing
+Линк към документацията: [Към документацията на проекта](https://drive.google.com/file/d/1Gb4-3NUKxERmFwoQwPZNEkPBvETCFsCA/view?usp=sharing)
+
+Линк към ръководството за потребители: [Към ръководството за потребители](https://drive.google.com/file/d/1B05NvJXxOPcZFmuNzygDHwWT6i2fwkkc/view?usp=sharing)
+
+Рекламна диплянка : [Към рекламната диплянка](https://drive.google.com/file/d/1xSq2euEX_qRo787wc5kIKWRS0zQiiAfo/view?usp=sharing)
 
 ## Демо
 Линк към публикувания проект: http://beekeeperassistant.com/

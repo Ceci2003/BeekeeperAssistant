@@ -34,6 +34,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  flex-flow: column;
   align-items: center;
   overflow: auto;
 }
@@ -1849,10 +1850,12 @@ textarea {
   background-color: var(--blue-hover);
 }
 
+.feedback-content-card a.documentation,
 .feedback-content-card a.feed {
   color: var(--orange);
 }
 
+.feedback-content-card a.documentation:hover,
 .feedback-content-card a.feed:hover {
   color: var(--white);
   background-color: var(--orange);

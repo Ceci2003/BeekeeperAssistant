@@ -158,7 +158,6 @@
 
             viewModel.CurrentPage = page;
 
-            //this.TempData.Keep();
             return this.View(viewModel);
         }
 

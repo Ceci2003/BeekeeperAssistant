@@ -14,7 +14,7 @@
     using BeekeeperAssistant.Web.ViewModels.Inspections;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
 
-    public class ByIdBeehiveViewModel : IMapFrom<Beehive>, IHaveCustomMappings
+    public class ByIdBeehiveViewModel : IMapFrom<Beehive>, IMapFrom<BeehiveDataModel>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

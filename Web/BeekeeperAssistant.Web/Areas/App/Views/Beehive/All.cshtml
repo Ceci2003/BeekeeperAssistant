@@ -49,23 +49,23 @@
     </div>
     <table class="data-table all-table">
         <colgroup>
-            <col class="@stringManipulation.Slugify("Apiary.Number")" />
-            <col class="@stringManipulation.Slugify(nameof(Beehive.Number))" />
-            <col class="@stringManipulation.Slugify(nameof(Beehive.IsItMovable))" />
-            <col class="@stringManipulation.Slugify(nameof(Beehive.BeehiveType))" />
-            <col class="@stringManipulation.Slugify(nameof(Beehive.BeehiveSystem))" />
-            <col class="@stringManipulation.Slugify(nameof(Beehive.BeehivePower))" />
+            <col class="@stringManipulation.Slugify(nameof(BeehiveDataModel.ApiaryNumber))" />
+            <col class="@stringManipulation.Slugify(nameof(BeehiveDataModel.Number))" />
+            <col class="@stringManipulation.Slugify(nameof(BeehiveDataModel.IsItMovable))" />
+            <col class="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehiveType))" />
+            <col class="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehiveSystem))" />
+            <col class="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehivePower))" />
         </colgroup>
         <thead>
             <tr>
                 <th>
-                    <a class="@stringManipulation.Slugify("Apiary.Number")" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
-                        asp-route-orderBy="@stringManipulation.Slugify("Apiary.Number")">
+                    <a class="@stringManipulation.Slugify(nameof(BeehiveDataModel.ApiaryNumber))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(BeehiveDataModel.ApiaryNumber))">
                         Номер на пчелин
                     </a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(Beehive.Number))" asp-controller="Beehive" asp-action="All" asp-route-page="@Model.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(Beehive.Number))" asp-controller="Beehive" asp-action="All" asp-route-id="@Model." asp-route-page="@Model.CurrentPage"
                         asp-route-orderBy="@stringManipulation.Slugify(nameof(Beehive.Number))">
                         Номер
                     </a>

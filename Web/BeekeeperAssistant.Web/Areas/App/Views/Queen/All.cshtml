@@ -1,4 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Queens.AllQueenViewModel
+@inject BeekeeperAssistant.Services.IStringManipulationService stringManipulation;
+
 @{
     ViewData["Title"] = "Майки - всички";
 }
@@ -21,7 +23,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -32,12 +34,38 @@
     <table class="data-table all-table">
         <thead>
             <tr>
-                <th>Цвят</th>
-                <th>Дата на придаване</th>
-                <th>Номер на пчелин</th>
-                <th>Номер на кошер</th>
-                <th>Произход</th>
-                <th>Порода</th>
+                <th>
+                    <a class="@stringManipulation.Slugify(nameof(QueenDataModel.Color))" asp-controller="Queen" asp-action="All" asp-route-page="@Model.CurrentPage"
+                       asp-route-orderBy="@stringManipulation.Slugify(nameof(QueenDataModel.Color))">Цвят</a>
+                </th>
+                <th>
+                    <a class="@stringManipulation.Slugify(nameof(QueenDataModel.GivingDate))" asp-controller="Queen" asp-action="All" asp-route-page="@Model.CurrentPage"
+                       asp-route-orderBy="@stringManipulation.Slugify(nameof(QueenDataModel.GivingDate))">Дата на придаване</a>
+                </th>
+                <th>
+                    <a class="@stringManipulation.Slugify(nameof(QueenDataModel.BeehiveApiaryNumber))" asp-controller="Queen" asp-action="All" asp-route-page="@Model.CurrentPage"
+                       asp-route-orderBy="@stringManipulation.Slugify(nameof(QueenDataModel.BeehiveApiaryNumber))">
+                        Номер на пчелин
+                    </a>
+                </th>
+                <th>
+                    <a class="@stringManipulation.Slugify(nameof(QueenDataModel.BeehiveNumber))" asp-controller="Queen" asp-action="All" asp-route-page="@Model.CurrentPage"
+                       asp-route-orderBy="@stringManipulation.Slugify(nameof(QueenDataModel.BeehiveNumber))">
+                        Номер на кошер
+                    </a>
+                </th>
+                <th>
+                    <a class="@stringManipulation.Slugify(nameof(QueenDataModel.Origin))" asp-controller="Queen" asp-action="All" asp-route-page="@Model.CurrentPage"
+                       asp-route-orderBy="@stringManipulation.Slugify(nameof(QueenDataModel.Origin))">
+                        Произход
+                    </a>
+                </th>
+                <th>
+                    <a class="@stringManipulation.Slugify(nameof(QueenDataModel.Breed))" asp-controller="Queen" asp-action="All" asp-route-page="@Model.CurrentPage"
+                       asp-route-orderBy="@stringManipulation.Slugify(nameof(QueenDataModel.Breed))">
+                        Порода
+                    </a>
+                </th>
                 <th>Редактиране</th>
             </tr>
         </thead>
@@ -63,7 +91,7 @@
                     </td>
                     <td class="number">
                         <a asp-action="ById" asp-controller="Beehive" asp-route-id="@queen.BeehiveId"
-                        asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
+                           asp-route-tabPage="Queen">@queen.BeehiveNumber</a>
                     </td>
 
                     <td>@queen.Origin</td>
@@ -74,7 +102,7 @@
                                 <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
                             <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
-                            asp-route-id="@queen.BeehiveId" title="Редактирай майката">
+                               asp-route-id="@queen.BeehiveId" title="Редактирай майката">
                                 <i class="far fa-edit"></i>
                             </a>
                             <a class="delete" onclick="ShowDeleteForm('@queen.Id')" title="Изтрий майката">
@@ -121,8 +149,8 @@
     <div class="all-table-responsive">
         <table>
             <thead>
-                <th>Параметър</th>
-                <th>Стойност</th>
+            <th>Параметър</th>
+            <th>Стойност</th>
             </thead>
             <tbody>
                 @foreach (var queen in Model.AllQueens)
@@ -158,7 +186,7 @@
                         <td>Номер на кошер</td>
                         <td class="number">
                             <a asp-controller="Beehive" asp-action="ById"
-                            asp-route-id="@queen.BeehiveId">@queen.BeehiveNumber</a>
+                               asp-route-id="@queen.BeehiveId">@queen.BeehiveNumber</a>
                         </td>
                     </tr>
                     <tr>
@@ -177,7 +205,7 @@
                                     <i class="@(queen.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                                 </a>
                                 <a class="edit" asp-controller="Queen" asp-action="Edit" asp-route-id="@queen.Id"
-                                asp-route-id="@queen.BeehiveId">
+                                   asp-route-id="@queen.BeehiveId">
                                     <i class="far fa-edit"></i>
                                 </a>
                                 <a class="delete" onclick="ShowDeleteForm('@queen.Id-responsive')">
@@ -186,7 +214,7 @@
 
                                 <div id="@queen.Id-responsive" class="delete-form-display">
                                     <form id="form-@queen.Id" asp-controller="Queen" asp-action="Delete"
-                                    asp-route-id="@queen.Id">
+                                          asp-route-id="@queen.Id">
                                         <a class="delete close" onclick="HideDeleteForm('@queen.Id-responsive')">
                                             <i class="fas fa-times"></i>
                                         </a>
@@ -195,7 +223,7 @@
                                             <strong>
                                                 №@queen.BeehiveNumber
                                             </strong>
-                                            в пчелин 
+                                            в пчелин
                                             <strong>
                                                 @if (queen.BeehiveApiaryNumber != null)
                                                 {
@@ -240,7 +268,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Queen" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage - 1)">
+                       asp-route-page="@(this.Model.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -272,7 +300,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Queen" asp-action="All"
-                    asp-route-page="@(this.Model.CurrentPage + 1)">
+                       asp-route-page="@(this.Model.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

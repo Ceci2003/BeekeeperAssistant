@@ -9,8 +9,9 @@
     using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class AllByApiaryIdBeehiveViewModel : IMapFrom<Apiary>
+    public class AllByApiaryIdBeehiveViewModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>
     {
         public int Id { get; set; }
 

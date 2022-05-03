@@ -8,9 +8,9 @@
 
     public interface IApiaryService
     {
-        IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0, string orderBy = null);
 
-        IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0, string orderBy = null);
 
         string GetApiaryNumberByBeehiveId(int beehiveId);
 

@@ -104,7 +104,7 @@
             viewModel.BeehivesCountChartUrl = beehivesCountChartUrl;
 
             // queens chart
-            var queens = this.queenService.GetAllUserQueens<QueenViewModel>(currentUser.Id);
+            var queens = this.queenService.GetAllUserQueens<QueenDataModel>(currentUser.Id);
             viewModel.QueensCount = queens.Count();
 
             var queensCountByGivingDate = queens.ToList().OrderBy(q => q.GivingDate).GroupBy(q => q.GivingDate.Year).ToDictionary(k => k.Key, v => v.Count());

@@ -13,7 +13,7 @@
     using BeekeeperAssistant.Web.ViewModels.Beehives;
 
     // {area}{action}{controller}{FieldName?}ViewModel
-    public class ByNumberApiaryViewModel : IMapFrom<Apiary>, IHaveCustomMappings
+    public class ByNumberApiaryViewModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

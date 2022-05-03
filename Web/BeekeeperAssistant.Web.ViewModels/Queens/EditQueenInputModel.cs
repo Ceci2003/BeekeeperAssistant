@@ -10,7 +10,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class EditQueenInputModel : IMapFrom<Queen>
+    public class EditQueenInputModel : IMapFrom<Queen>, IMapFrom<QueenDataModel>
     {
         [Required]
         public int BeehiveId { get; set; }

@@ -3,16 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-
+    using AutoMapper;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class BeehiveDataModel : IMapFrom<Beehive>
+    public class BeehiveDataModel : IMapFrom<Beehive>, IMapFrom<BeehiveDataModel>
     {
         public int Id { get; set; }
 
-        public ApiaryDataModel Apiary { get; set; }
+        public Apiary Apiary { get; set; }
+
+        public string ApiaryNumber { get; set; }
 
         public int Number { get; set; }
 

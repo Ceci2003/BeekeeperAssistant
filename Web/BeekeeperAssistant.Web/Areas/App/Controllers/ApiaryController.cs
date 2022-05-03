@@ -1,6 +1,7 @@
 ﻿namespace BeekeeperAssistant.Web.Areas.App.Controllers
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Drawing;
     using System.Linq;
     using System.Threading.Tasks;
@@ -55,7 +56,11 @@
             this.excelExportService = excelExportService;
         }
 
-        public async Task<IActionResult> All(int pageAllApiaries = 1, int pageHelperApiaries = 1)
+        public async Task<IActionResult> All(
+            int pageAllApiaries = 1,
+            string allApieariesOrderBy = null,
+            int pageHelperApiaries = 1,
+            string helperApiariesOrderBy = null)
         {
             if (pageAllApiaries <= 0)
             {
@@ -82,7 +87,8 @@
                     AllUserApiaries = this.apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
-                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
+                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage,
+                        allApieariesOrderBy),
                     PagesCount = pagesApiaryCount,
                 },
                 UserHelperApiaries = new AllApiaryUserHelperApiariesViewModel
@@ -116,7 +122,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AllMovable(int pageAllApiaries = 1)
+        public async Task<IActionResult> AllMovable(int pageAllApiaries = 1, string orderBy = null)
         {
             if (pageAllApiaries <= 0)
             {
@@ -133,7 +139,8 @@
                 AllUserMovableApiaries = this.apiaryService.GetAllUserMovableApiaries<AllApiaryUserMovableApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
-                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage),
+                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage,
+                        orderBy),
                 PagesCount = pagesApiaryCount,
             };
 

@@ -7,7 +7,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class ApiaryDataModel : IMapFrom<Apiary>
+    public class ApiaryDataModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>
     {
         public string Number { get; set; }
 
@@ -32,5 +32,8 @@
         public DateTime CreatedOn { get; set; }
 
         public bool IsRegistered { get; set; }
+
+        public bool IsClosed { get; set; }
+
     }
 }

@@ -10,6 +10,7 @@
     using BeekeeperAssistant.Data.Common.Repositories;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.EntityFrameworkCore;
 
     public class BeehiveService : IBeehiveService
@@ -218,12 +219,12 @@
         {
             var query = this.beehiveRepository
                 .All()
-                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted);
+                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted)
+                .To<BeehiveDataModel>();
 
             if (orderBy != null)
             {
-                var parts = orderBy.Split("-");
-                query = query.OrderByProeprtyDescending(parts);
+                query = query.OrderByProeprtyDescending(orderBy);
             }
             else
             {
@@ -240,7 +241,6 @@
                 query = query.Take(take.Value);
             }
 
-            var result = query.To<T>().ToQueryString();
             return query.To<T>().ToList();
         }
 
@@ -250,14 +250,24 @@
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Count();
 
-        public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0, string order = null)
         {
             var query = this.beehiveRepository
                 .All()
-                .OrderByDescending(b => b.IsBookMarked)
-                .ThenBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId)
-                .Skip(skip);
+                .To<BeehiveDataModel>();
+
+            if (order != null)
+            {
+                query = query.OrderByProeprtyDescending(order);
+            }
+            else
+            {
+                query = query.OrderByDescending(b => b.IsBookMarked)
+                .ThenBy(b => b.Number);
+            }
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {
@@ -378,7 +388,7 @@
 
             if (orderBy != null)
             {
-                query = query.OrderBy(b => b.GetType().GetProperty(orderBy).GetValue(b));
+                query = query.OrderByProeprtyDescending(orderBy);
             }
 
             query = query.Where(b => !b.Apiary.IsDeleted)

@@ -96,7 +96,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AllByApiaryId(int id, int page = 1)
+        public async Task<IActionResult> AllByApiaryId(int id, int page = 1, string orderBy = null)
         {
             if (page <= 0)
             {
@@ -106,7 +106,7 @@
             var viewModel = this.apiaryService.GetApiaryById<AllByApiaryIdBeehiveViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<ByApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage);
+            viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<ByApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
             viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
 
             foreach (var beehive in viewModel.AllBeehives)

@@ -39,7 +39,7 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> All(int page = 1)
+        public async Task<IActionResult> All(int page = 1, string orderBy = null)
         {
             if (page <= 0)
             {
@@ -49,7 +49,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllQueenViewModel
             {
-                AllQueens = this.queenService.GetAllUserQueens<QueenViewModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage),
+                AllQueens = this.queenService.GetAllUserQueens<QueenDataModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage, orderBy),
             };
 
             var count = this.queenService.GetAllUserQueensCount(user.Id);

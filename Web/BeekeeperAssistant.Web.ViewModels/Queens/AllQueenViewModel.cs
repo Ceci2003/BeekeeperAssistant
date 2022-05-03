@@ -8,7 +8,7 @@
 
     public class AllQueenViewModel
     {
-        public IEnumerable<QueenViewModel> AllQueens { get; set; }
+        public IEnumerable<QueenDataModel> AllQueens { get; set; }
 
         public int CurrentPage { get; set; }
 

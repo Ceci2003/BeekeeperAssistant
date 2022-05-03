@@ -5,7 +5,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class QueenViewModel : IMapFrom<Queen>
+    public class QueenDataModel : IMapFrom<Queen>, IMapFrom<QueenDataModel>
     {
         public int Id { get; set; }
 

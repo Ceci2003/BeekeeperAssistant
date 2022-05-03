@@ -49,7 +49,7 @@
 
         Task UpdateBeehiveNumberAndApiary(int beehiveId, int beehiveNumber, int apiaryId);
 
-        IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0);
+        IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0, string order = null);
 
         IEnumerable<T> GetBeehivesByApiaryIdWithoutInTemporary<T>(int apiaryId);
 

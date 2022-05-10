@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
     using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Data.Models;
@@ -183,6 +184,10 @@
                 .Where(q => q.OwnerId == ownerId && !q.Beehive.IsDeleted)
                 .Skip(skip)
                 .To<QueenDataModel>();
+
+            var filter = new Filter<QueenDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
 
             query = query.Skip(skip);
 

@@ -1,11 +1,12 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
     using System;
-
+    using System.Linq;
+    using BeekeeperAssistant.Data.Filters.Contracts;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class QueenDataModel : IMapFrom<Queen>, IMapFrom<QueenDataModel>
+    public class QueenDataModel : IMapFrom<Queen>, IMapFrom<QueenDataModel>, IDefaultOrder<QueenDataModel>
     {
         public int Id { get; set; }
 
@@ -28,5 +29,14 @@
         public QueenBreed Breed { get; set; }
 
         public bool IsBookMarked { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime FertilizationDate { get; set; }
+
+        public IOrderedQueryable<QueenDataModel> DefaultOrder(IQueryable<QueenDataModel> query)
+        {
+            return query.OrderByDescending(x => x.IsBookMarked).ThenByDescending(x => x.CreatedOn);
+        }
     }
 }

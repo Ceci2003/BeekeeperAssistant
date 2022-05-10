@@ -359,5 +359,11 @@
 
             await this.apiaryRepository.SaveChangesAsync();
         }
+
+        public int GetAllUserMovableApiariesCount(string userId)
+         => this.apiaryRepository
+                .All()
+                .Where(a => a.CreatorId == userId && a.ApiaryType == ApiaryType.Movable)
+                .Count();
     }
 }

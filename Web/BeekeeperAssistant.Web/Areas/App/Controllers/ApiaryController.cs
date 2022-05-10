@@ -108,25 +108,33 @@
 
         public async Task<IActionResult> AllMovable(
             FilterModel filterModel,
-            int pageAllApiaries = 1
-            )
+            int page = 1)
         {
-            if (pageAllApiaries <= 0)
+            if (page <= 0)
             {
-                pageAllApiaries = 1;
+                page = 1;
             }
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
+            var userApiariesCount = this.apiaryService.GetAllUserMovableApiariesCount(currentUser.Id);
             var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
 
             var viewModel = new AllApiaryUserMovableApiariesViewModel
             {
+                AllUserMovableApiariesFilterModel = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllMovableApiaryFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllMovableApiaryFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 AllUserMovableApiaries = this.apiaryService.GetAllUserMovableApiaries<AllApiaryUserMovableApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
-                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage,
+                        (page - 1) * GlobalConstants.ApiariesPerPage,
                         filterModel),
                 PagesCount = pagesApiaryCount,
             };
@@ -141,7 +149,7 @@
                 viewModel.PagesCount = 1;
             }
 
-            viewModel.CurrentPage = pageAllApiaries;
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }
@@ -359,9 +367,15 @@
             return new FileContentResult(exportResult.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-        public async Task<IActionResult> Bookmark(int id)
+        public async Task<IActionResult> Bookmark(int id, string returnUrl)
         {
             await this.apiaryService.BookmarkApiaryAsync(id);
+
+            if (returnUrl != null)
+            {
+                return this.Redirect(returnUrl);
+            }
+
             return this.RedirectToAction(nameof(this.All));
         }
 

@@ -4,10 +4,12 @@
     <form class="flex-row" method="get">
 
         <div class="margin-small-right">
+            <label asp-for="@Model.PropertyName">Ред:</label>
             <select asp-for="@Model.Order" asp-items="@Html.GetEnumSelectList<Order>()"></select>
         </div>
 
         <div class="margin-small-right">
+            <label asp-for="@Model.PropertyName">Колона:</label>
             <select asp-for="@Model.PropertyName">
                 @for (int i = 0; i < Model.Data.ModelProperties.Count(); i++)
                 {

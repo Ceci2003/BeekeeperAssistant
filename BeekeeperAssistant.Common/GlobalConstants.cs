@@ -18,7 +18,7 @@
         public const string NextBeehiveNumber = "NextBeehiveNumber";
 
         // Pagination values
-        public const int ApiariesPerPage = 5;
+        public const int ApiariesPerPage = 25;
         public const int ApiaryHelpersApiaryPerPage = 5;
         public const int BeehivesPerPage = 25;
         public const int QueensPerPage = 25;

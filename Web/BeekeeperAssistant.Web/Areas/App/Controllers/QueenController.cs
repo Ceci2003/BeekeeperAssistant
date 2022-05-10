@@ -6,7 +6,9 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
@@ -22,6 +24,7 @@
         private readonly IQueenHelperService queenHelperService;
         private readonly IBeehiveHelperService beehiveHelperService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ITypeService typeService;
 
         public QueenController(
             IQueenService queenService,
@@ -29,7 +32,8 @@
             IBeehiveService beehiveService,
             IQueenHelperService queenHelperService,
             IBeehiveHelperService beehiveHelperService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ITypeService typeService)
         {
             this.queenService = queenService;
             this.apiaryService = apiaryService;
@@ -37,9 +41,10 @@
             this.queenHelperService = queenHelperService;
             this.beehiveHelperService = beehiveHelperService;
             this.userManager = userManager;
+            this.typeService = typeService;
         }
 
-        public async Task<IActionResult> All(int page = 1, string orderBy = null)
+        public async Task<IActionResult> All(FilterModel filterModel, int page = 1)
         {
             if (page <= 0)
             {
@@ -49,7 +54,16 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllQueenViewModel
             {
-                AllQueens = this.queenService.GetAllUserQueens<QueenDataModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage),
+                AllQueensFilterModel = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllQueensFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllQueensFilterModel)),
+                        PageNumber = page,
+                    },
+                },
+                AllQueens = this.queenService.GetAllUserQueens<QueenDataModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage, filterModel),
             };
 
             var count = this.queenService.GetAllUserQueensCount(user.Id);

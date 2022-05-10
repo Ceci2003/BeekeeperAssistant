@@ -123,13 +123,18 @@
                     </a>
                 </div>
             }
+
+            <partial model="@Model.AllInspectionsFilterModel" name="_FiltersPartial"/>
+
             <table class="all-table">
                 <thead>
-                <th>Дата на прегледа</th>
-                <th>Вид на прегледа</th>
-                <th>Роил ли се е</th>
-                <th>Сила на кошера</th>
-                <th>Редактиране</th>
+                    <tr>
+                        <th>Дата на прегледа</th>
+                        <th>Вид на прегледа</th>
+                        <th>Роил ли се е</th>
+                        <th>Сила на кошера</th>
+                        <th>Редактиране</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var inspection in Model.AllInspections)

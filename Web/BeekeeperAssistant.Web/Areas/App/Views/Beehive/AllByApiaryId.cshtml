@@ -118,6 +118,9 @@
                 </a>
             }
         </div>
+
+        <partial model="@Model.ApiaryBeehivesFilter" name="_FiltersPartial" />
+
         <table class="data-table all-table">
             <thead>
                 <tr>
@@ -337,9 +340,9 @@
                     else
                     {
                         @*<li class="page-item">
-                                <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                                   asp-route-page="@i">@i</a>
-                            </li>*@
+                            <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                               asp-route-page="@i">@i</a>
+                        </li>*@
                         <li class="page-item">
                             <a class="page-link" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id" asp-route-page="@i">@i</a>
                         </li>

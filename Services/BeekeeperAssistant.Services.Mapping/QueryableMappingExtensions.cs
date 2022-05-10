@@ -60,6 +60,8 @@
             var parameter = Expression.Parameter(typeof(TSource), "x");
             Expression property = Expression.Property(parameter, propertiesName[0]);
 
+            var containsMehod = typeof(Queryable).GetMethods().First(x => x.Name == "Contains" && x.GetParameters().Length == 2);
+
             for (int i = 1; i < propertiesName.Length; i++)
             {
                 property = Expression.Property(property, propertiesName[i]);

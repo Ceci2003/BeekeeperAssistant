@@ -6,7 +6,9 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Queens;
 
@@ -174,26 +176,13 @@
             return queen.BeehiveId;
         }
 
-        public IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0, string orderBy = null)
+        public IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.queenRepository
                 .All()
                 .Where(q => q.OwnerId == ownerId && !q.Beehive.IsDeleted)
                 .Skip(skip)
                 .To<QueenDataModel>();
-
-            if (orderBy != null)
-            {
-                query = query.OrderByProeprtyDescending(orderBy);
-            }
-            else
-            {
-                query = query
-                .OrderByDescending(q => q.IsBookMarked)
-                .ThenByDescending(q => q.GivingDate)
-                .ThenBy(q => q.BeehiveApiaryNumber)
-                .ThenBy(q => q.BeehiveNumber);
-            }
 
             query = query.Skip(skip);
 

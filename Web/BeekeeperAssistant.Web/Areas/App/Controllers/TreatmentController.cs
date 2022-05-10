@@ -7,7 +7,9 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
@@ -26,6 +28,7 @@
         private readonly IBeehiveService beehiveService;
         private readonly IExcelExportService excelExportService;
         private readonly IBeehiveHelperService beehiveHelperService;
+        private readonly ITypeService typeService;
 
         public TreatmentController(
             UserManager<ApplicationUser> userManager,
@@ -33,7 +36,8 @@
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
             IExcelExportService excelExportService,
-            IBeehiveHelperService beehiveHelperService)
+            IBeehiveHelperService beehiveHelperService,
+            ITypeService typeService)
         {
             this.userManager = userManager;
             this.treatmentService = treatmentService;
@@ -41,9 +45,10 @@
             this.beehiveService = beehiveService;
             this.excelExportService = excelExportService;
             this.beehiveHelperService = beehiveHelperService;
+            this.typeService = typeService;
         }
 
-        public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
+        public async Task<IActionResult> AllByBeehiveId(int id, FilterModel filterModel, int page = 1)
         {
             if (page <= 0)
             {
@@ -52,8 +57,17 @@
 
             var viewModel = new AllByBeehiveIdTreatementViewModel()
             {
+                AllTreatementsFilterModel = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllByBeehiveIdTreatmentFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllByBeehiveIdTreatmentFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 AllTreatements =
-                    this.treatmentService.GetAllBeehiveTreatments<TreatmentDataViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    this.treatmentService.GetAllBeehiveTreatments<TreatmentDataModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage, filterModel),
             };
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -230,7 +244,7 @@
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var treatment = this.treatmentService.GetTreatmentById<TreatmentDataViewModel>(id);
+            var treatment = this.treatmentService.GetTreatmentById<TreatmentDataModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
             if (treatment.CreatorId != currentUser.Id)

@@ -10,7 +10,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class AllByBeehiveIdInspectionAllInspectionsViewModel : IMapFrom<Inspection>
+    public class AllByBeehiveIdInspectionAllInspectionsViewModel : IMapFrom<Inspection>, IMapFrom<InspectionDataModel>
     {
         public int Id { get; set; }
 

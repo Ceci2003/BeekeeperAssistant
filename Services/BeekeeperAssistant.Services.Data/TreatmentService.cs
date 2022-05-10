@@ -6,8 +6,12 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Treatments;
     using Microsoft.EntityFrameworkCore;
 
     public class TreatmentService : ITreatmentService
@@ -111,21 +115,26 @@
             await this.treatmentRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
-            var qurey = this.treatedBeehivesRepository
+            var query = this.treatedBeehivesRepository
                 .AllAsNoTracking()
                 .Where(a => a.Beehive.Id == beehiveId)
-                .OrderByDescending(tb => tb.Treatment.DateOfTreatment)
                 .Select(t => t.Treatment)
-                .Skip(skip);
+                .To<TreatmentDataModel>();
+
+            var filter = new Filter<TreatmentDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {
-                qurey = qurey.Take(take.Value);
+                query = query.Take(take.Value);
             }
 
-            return qurey.To<T>().ToList();
+            return query.To<T>().ToList();
         }
 
         public T GetTreatmentById<T>(int treatmentId) =>

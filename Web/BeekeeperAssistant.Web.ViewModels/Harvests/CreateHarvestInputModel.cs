@@ -1,4 +1,4 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Harvest
+﻿namespace BeekeeperAssistant.Web.ViewModels.Harvests
 {
     using System;
     using System.Collections.Generic;

@@ -1,0 +1,25 @@
+﻿@model BeekeeperAssistant.Data.Filters.Models.FilterModel;
+
+<div>
+    <form class="flex-row" method="get">
+
+        <div class="margin-small-right">
+            <select asp-for="@Model.Order" asp-items="@Html.GetEnumSelectList<Order>()"></select>
+        </div>
+
+        <div class="margin-small-right">
+            <select asp-for="@Model.PropertyName">
+                @for (int i = 0; i < Model.Data.ModelProperties.Count(); i++)
+                {
+                    <option value="@Model.Data.ModelProperties[i]"> @Model.Data.ModelPropertiesDisplayNames[i]</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <input type="hidden" name="page" value="@Model.Data.PageNumber" />
+        </div>
+
+        <input type="submit" value="Филтрирай" />
+    </form>
+</div>

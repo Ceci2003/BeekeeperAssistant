@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
 
     public interface ITreatmentService
     {
@@ -41,6 +42,6 @@
 
         int GetBeehiveTreatmentsCountByBeehiveId(int beehiveId);
 
-        IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllBeehiveTreatments<T>(int beehiveId, int? take = null, int skip = 0, FilterModel filterModel = null);
     }
 }

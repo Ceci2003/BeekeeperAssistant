@@ -49,7 +49,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = new AllQueenViewModel
             {
-                AllQueens = this.queenService.GetAllUserQueens<QueenDataModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage, orderBy),
+                AllQueens = this.queenService.GetAllUserQueens<QueenDataModel>(user.Id, GlobalConstants.QueensPerPage, (page - 1) * GlobalConstants.QueensPerPage),
             };
 
             var count = this.queenService.GetAllUserQueensCount(user.Id);

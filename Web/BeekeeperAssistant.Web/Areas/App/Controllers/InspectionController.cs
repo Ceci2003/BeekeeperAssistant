@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
@@ -29,6 +30,7 @@
         private readonly IExcelExportService excelExportService;
         private readonly IBeehiveHelperService beehiveHelperService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ITypeService typeService;
 
         public InspectionController(
             IInspectionService inspectionService,
@@ -38,7 +40,8 @@
             IConfiguration configuration,
             IExcelExportService excelExportService,
             IBeehiveHelperService beehiveHelperService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ITypeService typeService)
         {
             this.inspectionService = inspectionService;
             this.beehiveService = beehiveService;
@@ -48,9 +51,10 @@
             this.excelExportService = excelExportService;
             this.beehiveHelperService = beehiveHelperService;
             this.userManager = userManager;
+            this.typeService = typeService;
         }
 
-        public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
+        public async Task<IActionResult> AllByBeehiveId(int id, FilterModel filterModel, int page = 1)
         {
             if (page <= 0)
             {
@@ -61,8 +65,17 @@
 
             var viewModel = new AllByBeehiveIdInspectionViewModel()
             {
+                AllInspectionsFilterModel = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllByBeehiveIdInspectionFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllByBeehiveIdInspectionFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 AllInspections =
-                    this.inspectionService.GetAllBeehiveInspections<AllByBeehiveIdInspectionAllInspectionsViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    this.inspectionService.GetAllBeehiveInspections<AllByBeehiveIdInspectionAllInspectionsViewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage, filterModel),
             };
 
             viewModel.BeehiveId = id;
@@ -267,7 +280,7 @@
         public async Task<IActionResult> Delete(int id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var inspection = this.inspectionService.GetInspectionById<InspectionDataViewModel>(id);
+            var inspection = this.inspectionService.GetInspectionById<InspectionDataModel>(id);
 
             if (inspection.CreatorId != currentUser.Id)
             {

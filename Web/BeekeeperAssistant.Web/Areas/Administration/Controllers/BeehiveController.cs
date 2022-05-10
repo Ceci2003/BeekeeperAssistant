@@ -36,8 +36,7 @@
             {
                 AllBeehives = this.beehiveService.GetAllBeehivesWithDeleted<BeehivesAdministrationViewModel>(
                     GlobalConstants.BeehivesPerPageAdministration,
-                    (page - 1) * GlobalConstants.BeehivesPerPageAdministration,
-                    orderBy),
+                    (page - 1) * GlobalConstants.BeehivesPerPageAdministration),
                 PagesCount = pagesCount,
             };
 

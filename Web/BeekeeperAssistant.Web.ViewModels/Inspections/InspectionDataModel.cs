@@ -2,11 +2,12 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Linq;
+    using BeekeeperAssistant.Data.Filters.Contracts;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class InspectionDataViewModel : IMapFrom<Inspection>
+    public class InspectionDataModel : IMapFrom<Inspection>, IMapFrom<InspectionDataModel>, IDefaultOrder<InspectionDataModel>
     {
         public int Id { get; set; }
 
@@ -147,5 +148,12 @@
 
         [Display(Name = "Влажност")]
         public double WeatherHumidity { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public IOrderedQueryable<InspectionDataModel> DefaultOrder(IQueryable<InspectionDataModel> query)
+        {
+            return query.OrderByDescending(x => x.CreatedOn);
+        }
     }
 }

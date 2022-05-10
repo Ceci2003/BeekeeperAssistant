@@ -6,7 +6,10 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using Microsoft.EntityFrameworkCore;
@@ -123,23 +126,16 @@
                 .Where(a => a.CreatorId == userId)
                 .Count();
 
-        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0, string orderBy = null)
+        public IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.apiaryRepository
                 .All()
                 .Where(a => a.CreatorId == userId && a.ApiaryType != ApiaryType.Movable)
                 .To<ApiaryDataModel>();
 
-            if (orderBy != null)
-            {
-                query = query.OrderByProeprtyDescending(orderBy);
-            }
-            else
-            {
-                query = query
-                .OrderByDescending(x => x.IsBookMarked)
-                .ThenByDescending(x => x.CreatedOn);
-            }
+            var filter = new Filter<ApiaryDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
 
             query = query.Skip(skip);
 
@@ -151,23 +147,16 @@
             return query.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0, string orderBy = null)
+        public IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var qurey = this.apiaryRepository
                 .All()
                 .Where(a => a.CreatorId == userId && a.ApiaryType == ApiaryType.Movable)
                 .To<ApiaryDataModel>();
 
-            if (orderBy != null)
-            {
-                qurey = qurey.OrderByProeprtyDescending(orderBy);
-            }
-            else
-            {
-                qurey = qurey
-                .OrderByDescending(x => x.IsBookMarked)
-                .ThenByDescending(x => x.CreatedOn);
-            }
+            var filter = new Filter<ApiaryDataModel>();
+
+            qurey = filter.FilterCollection(qurey, filterModel);
 
             qurey = qurey.Skip(skip);
 
@@ -315,14 +304,17 @@
                 .To<T>()
                 .ToList();
 
-        public IEnumerable<T> GetAllApiariesWithDeleted<T>(int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllApiariesWithDeleted<T>(int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.apiaryRepository
                 .AllWithDeleted()
-                .OrderBy(a => a.Number)
-                .ThenByDescending(a => a.Creator.UserName)
-                .ThenByDescending(a => a.Number)
-                .Skip(skip);
+                .To<ApiaryDataModel>();
+
+            var filter = new Filter<ApiaryDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {

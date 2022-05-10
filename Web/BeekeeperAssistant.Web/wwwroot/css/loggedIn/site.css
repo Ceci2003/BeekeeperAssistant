@@ -2704,3 +2704,14 @@ th a.ordered {
 .create-redirect-container-center a:last-child {
   margin-left: 15px;
 }
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+}
+
+.margin-small-right{
+    margin-right: 20px
+}
+

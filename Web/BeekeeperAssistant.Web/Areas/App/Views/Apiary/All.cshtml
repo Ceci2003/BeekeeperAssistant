@@ -1,10 +1,8 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.AllApiaryViewModel
-@inject BeekeeperAssistant.Services.IStringManipulationService stringManipulation;
+@inject BeekeeperAssistant.Services.IStringManipulationService stringManipulation
 @{
     ViewData["Title"] = "Пчелини - основни";
     ViewData["HelperApiaries"] = "Пчелини с достъп";
-    var onlyReadMsg = "нямате достъп";
-
     var returnUrl = Context.Request.Path;
 }
 
@@ -46,27 +44,29 @@
         </a>
     </div>
 
+    <partial model="@Model.UserApiariesFilter" name="_FiltersPartial"/>
+
     <table class="data-table all-table">
         <thead>
             <tr>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))" asp-controller="Apiary" asp-action="All" asp-route-pageAllApiaries="@Model.UserApiaries.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))" asp-controller="Apiary" asp-action="All" asp-route-page="@Model.UserApiaries.CurrentPage"
                        asp-route-allApieariesOrderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))">Номер</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))" asp-controller="Apiary" asp-action="All" asp-route-pageAllApiaries="@Model.UserApiaries.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))" asp-controller="Apiary" asp-action="All" asp-route-page="@Model.UserApiaries.CurrentPage"
                        asp-route-allApieariesOrderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))">Име</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))" asp-controller="Apiary" asp-action="All" asp-route-pageAllApiaries="@Model.UserApiaries.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))" asp-controller="Apiary" asp-action="All" asp-route-page="@Model.UserApiaries.CurrentPage"
                        asp-route-allApieariesOrderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))">Местоположение</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.ApiaryType))" asp-controller="Apiary" asp-action="All" asp-route-pageAllApiaries="@Model.UserApiaries.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.ApiaryType))" asp-controller="Apiary" asp-action="All" asp-route-page="@Model.UserApiaries.CurrentPage"
                        asp-route-allApieariesOrderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.ApiaryType))">Вид</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))" asp-controller="Apiary" asp-action="All" asp-route-pageAllApiaries="@Model.UserApiaries.CurrentPage"
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))" asp-controller="Apiary" asp-action="All" asp-route-page="@Model.UserApiaries.CurrentPage"
                        asp-route-allApieariesOrderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))">Бр. кошери</a>
                 </th>
                 <th>Редактиране</th>
@@ -150,8 +150,10 @@
     <div class="all-table-responsive">
         <table>
             <thead>
-            <th>Параметър</th>
-            <th>Стойност</th>
+                <tr>
+                    <th>Параметър</th>
+                    <th>Стойност</th>
+                </tr>
             </thead>
             <tbody>
                 @foreach (var apiary in Model.UserApiaries.AllUserApiaries)
@@ -263,8 +265,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="All"
-                       asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
-                       asp-route-pageAllApiaries="@(this.Model.UserApiaries.CurrentPage - 1)">
+                       asp-route-page="@(this.Model.UserApiaries.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -281,8 +282,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" asp-controller="Apiary" asp-action="All"
-                           asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
-                           asp-route-pageAllApiaries="@i">@i</a>
+                           asp-route-page="@i">@i</a>
                     </li>
                 }
             }
@@ -298,8 +298,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="All"
-                       asp-route-pageHelperApiaries="@Model.UserHelperApiaries.CurrentPage"
-                       asp-route-pageAllApiaries="@(this.Model.UserApiaries.CurrentPage + 1)">
+                       asp-route-page="@(this.Model.UserApiaries.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

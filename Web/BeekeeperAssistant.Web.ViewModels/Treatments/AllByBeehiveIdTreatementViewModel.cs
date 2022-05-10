@@ -1,12 +1,14 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Treatments
 {
     using System.Collections.Generic;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
 
     public class AllByBeehiveIdTreatementViewModel
     {
-        public IEnumerable<TreatmentDataViewModel> AllTreatements { get; set; }
+        public FilterModel AllTreatementsFilterModel { get; set; }
+
+        public IEnumerable<TreatmentDataModel> AllTreatements { get; set; }
 
         public Access BeehiveAccess { get; set; }
 

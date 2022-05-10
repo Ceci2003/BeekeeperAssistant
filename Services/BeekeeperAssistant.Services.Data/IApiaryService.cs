@@ -3,14 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
 
     public interface IApiaryService
     {
-        IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0, string orderBy = null);
+        IEnumerable<T> GetAllUserApiaries<T>(string userId, int? take = null, int skip = 0, FilterModel filterModel = null);
 
-        IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0, string orderBy = null);
+        IEnumerable<T> GetAllUserMovableApiaries<T>(string userId, int? take = null, int skip = 0, FilterModel filterModel = null);
 
         string GetApiaryNumberByBeehiveId(int beehiveId);
 
@@ -70,7 +71,7 @@
 
         IEnumerable<T> GetAllApiaries<T>();
 
-        IEnumerable<T> GetAllApiariesWithDeleted<T>(int? take = null, int skip = 0);
+        IEnumerable<T> GetAllApiariesWithDeleted<T>(int? take = null, int skip = 0, FilterModel filterModel = null);
 
         int GetAllApiariesWithDeletedCount();
 

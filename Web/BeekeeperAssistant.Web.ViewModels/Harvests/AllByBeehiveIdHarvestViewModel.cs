@@ -1,12 +1,14 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Harvest
+﻿namespace BeekeeperAssistant.Web.ViewModels.Harvests
 {
     using System.Collections.Generic;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
 
     public class AllByBeehiveIdHarvestViewModel
     {
-        public IEnumerable<HarvestDatavVewModel> AllHarvests { get; set; }
+        public FilterModel AllHarvestsFilters { get; set; }
+
+        public IEnumerable<HarvestDataModel> AllHarvests { get; set; }
 
         public int BeehiveId { get; set; }
 

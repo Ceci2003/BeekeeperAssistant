@@ -5,12 +5,14 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
-    using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Harvests;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
     using Microsoft.AspNetCore.Authorization;
@@ -32,6 +34,7 @@
         private readonly IExcelExportService excelExportService;
         private readonly ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService;
         private readonly IBeehiveMarkFlagService beehiveMarkFlagService;
+        private readonly ITypeService typeService;
 
         public BeehiveController(
             IApiaryService apiaryService,
@@ -46,7 +49,8 @@
             IQueenHelperService queenHelperService,
             IExcelExportService excelExportService,
             ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService,
-            IBeehiveMarkFlagService beehiveMarkFlagService)
+            IBeehiveMarkFlagService beehiveMarkFlagService,
+            ITypeService typeService)
         {
             this.apiaryService = apiaryService;
             this.apiaryHelperService = apiaryHelperService;
@@ -61,9 +65,10 @@
             this.excelExportService = excelExportService;
             this.temporaryApiaryBeehiveService = temporaryApiaryBeehiveService;
             this.beehiveMarkFlagService = beehiveMarkFlagService;
+            this.typeService = typeService;
         }
 
-        public async Task<IActionResult> All(int page = 1, string orderBy = null)
+        public async Task<IActionResult> All(FilterModel filterModel, int page = 1)
         {
             if (page <= 0)
             {
@@ -71,7 +76,7 @@
             }
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
+            var allBehhives = this.beehiveService.GetAllUserBeehives<BeehiveDataModel>(currentUser.Id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, filterModel);
 
             foreach (var beehive in allBehhives)
             {
@@ -80,6 +85,15 @@
 
             var viewModel = new AllBeehiveViewModel
             {
+                AllBeehivesFilterModel = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllBeehiveFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllBeehiveFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 AllBeehives = allBehhives,
             };
 
@@ -96,7 +110,7 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AllByApiaryId(int id, int page = 1, string orderBy = null)
+        public async Task<IActionResult> AllByApiaryId(int id, FilterModel filterModel, int page = 1, string orderBy = null)
         {
             if (page <= 0)
             {
@@ -106,7 +120,17 @@
             var viewModel = this.apiaryService.GetApiaryById<AllByApiaryIdBeehiveViewModel>(id);
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
-            viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<ByApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, orderBy);
+            viewModel.ApiaryBeehivesFilter = new FilterModel
+            {
+                Data = new FilterData
+                {
+                    ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllByApiaryIdBeehiveFilterModel)),
+                    ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllByApiaryIdBeehiveFilterModel)),
+                    PageNumber = page,
+                },
+            };
+
+            viewModel.AllBeehives = this.beehiveService.GetBeehivesByApiaryId<ByApiaryIdBeehiveViewModel>(id, GlobalConstants.BeehivesPerPage, (page - 1) * GlobalConstants.BeehivesPerPage, filterModel);
             viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, id);
 
             foreach (var beehive in viewModel.AllBeehives)

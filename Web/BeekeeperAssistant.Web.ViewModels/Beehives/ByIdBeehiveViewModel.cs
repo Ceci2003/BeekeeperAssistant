@@ -10,7 +10,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags;
-    using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Harvests;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
 

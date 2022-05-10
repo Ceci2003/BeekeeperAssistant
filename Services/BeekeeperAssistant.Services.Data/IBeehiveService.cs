@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
+    
 
     public interface IBeehiveService
     {
@@ -26,7 +28,7 @@
 
         int GetLatestBeehiveNumber(int apiaryId);
 
-        IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0, string orederBy = null);
+        IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0, FilterModel filterModel = null);
 
         Task<string> DeleteBeehiveByIdAsync(int beehiveId);
 
@@ -49,7 +51,7 @@
 
         Task UpdateBeehiveNumberAndApiary(int beehiveId, int beehiveNumber, int apiaryId);
 
-        IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0, string order = null);
+        IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0, FilterModel filterModel = null);
 
         IEnumerable<T> GetBeehivesByApiaryIdWithoutInTemporary<T>(int apiaryId);
 
@@ -69,7 +71,7 @@
 
         IEnumerable<T> GetAllBeehives<T>();
 
-        IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0, string orderBy = null);
+        IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0, FilterModel filterModel = null);
 
         Task UndeleteAsync(int beehiveId);
 

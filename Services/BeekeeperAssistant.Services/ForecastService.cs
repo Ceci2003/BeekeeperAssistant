@@ -28,7 +28,7 @@
         {
             string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cityName}&units=metric&cnt=1&APPID={apiId}";
 
-            using (WebClient client = new WebClient())
+            using (var client = new WebClient())
             {
                 try
                 {
@@ -36,11 +36,11 @@
 
                     try
                     {
-                        string json = await client.DownloadStringTaskAsync(url);
+                        var json = await client.DownloadStringTaskAsync(url);
 
-                        ForecastModel weatherInfo = JsonConvert.DeserializeObject<ForecastModel>(json);
+                        var weatherInfo = JsonConvert.DeserializeObject<ForecastModel>(json);
 
-                        ForecastResult weatherResult = new ForecastResult
+                        var weatherResult = new ForecastResult
                         {
                             City = weatherInfo.Name,
                             Description = weatherInfo.Weather[0].Description,
@@ -57,7 +57,7 @@
                     catch (WebException ex)
                     {
                         var statusCodeInHttpCode = ((HttpWebResponse)ex.Response).StatusCode;
-                        ForecastResult forecastResult = new ForecastResult();
+                        var forecastResult = new ForecastResult();
 
                         if (statusCodeInHttpCode != HttpStatusCode.NotFound)
                         {
@@ -83,9 +83,9 @@
 
         public async Task<ForecastResult> GetApiaryCurrentWeatherByCityPostcode(string postcode, string apiId)
         {
-            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&units=metric&cnt=1&appid={apiId}";
+            var stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&units=metric&cnt=1&appid={apiId}";
 
-            using (WebClient client = new WebClient())
+            using (var client = new WebClient())
             {
                 try
                 {
@@ -93,11 +93,11 @@
 
                     try
                     {
-                        string json = await client.DownloadStringTaskAsync(url);
+                        var json = await client.DownloadStringTaskAsync(url);
 
-                        ForecastModel weatherInfo = JsonConvert.DeserializeObject<ForecastModel>(json);
+                        var weatherInfo = JsonConvert.DeserializeObject<ForecastModel>(json);
 
-                        ForecastResult weatherResult = new ForecastResult
+                        var weatherResult = new ForecastResult
                         {
                             City = weatherInfo.Name,
                             Description = weatherInfo.Weather[0].Description,
@@ -114,7 +114,7 @@
                     catch (WebException ex)
                     {
                         var statusCodeInHttpCode = ((HttpWebResponse)ex.Response).StatusCode;
-                        ForecastResult forecastResult = new ForecastResult();
+                        var forecastResult = new ForecastResult();
 
                         if (statusCodeInHttpCode != HttpStatusCode.NotFound)
                         {
@@ -140,9 +140,9 @@
 
         public bool ValidateCityPostcode(string postcode, string apiId)
         {
-            string stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&appid={apiId}";
+            var stringUrl = $"http://api.openweathermap.org/data/2.5/weather?zip={postcode},BG&appid={apiId}";
 
-            using (WebClient client = new WebClient())
+            using (var client = new WebClient())
             {
                 try
                 {
@@ -150,7 +150,7 @@
 
                     try
                     {
-                        string json = client.DownloadString(url);
+                        var json = client.DownloadString(url);
                         return true;
                     }
                     catch (Exception)

@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
@@ -31,6 +32,7 @@
         private readonly IBeehiveHelperService beehiveHelperService;
         private readonly ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService;
         private readonly IExcelExportService excelExportService;
+        private readonly ITypeService typeService;
 
         public ApiaryController(
             UserManager<ApplicationUser> userManager,
@@ -42,7 +44,8 @@
             IApiaryHelperService apiaryHelperService,
             IBeehiveHelperService beehiveHelperService,
             ITemporaryApiaryBeehiveService temporaryApiaryBeehiveService,
-            IExcelExportService excelExportService)
+            IExcelExportService excelExportService,
+            ITypeService typeService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -54,22 +57,16 @@
             this.beehiveHelperService = beehiveHelperService;
             this.temporaryApiaryBeehiveService = temporaryApiaryBeehiveService;
             this.excelExportService = excelExportService;
+            this.typeService = typeService;
         }
 
         public async Task<IActionResult> All(
-            int pageAllApiaries = 1,
-            string allApieariesOrderBy = null,
-            int pageHelperApiaries = 1,
-            string helperApiariesOrderBy = null)
+            FilterModel filterModel,
+            int page = 1)
         {
-            if (pageAllApiaries <= 0)
+            if (page <= 0)
             {
-                pageAllApiaries = 1;
-            }
-
-            if (pageHelperApiaries <= 0)
-            {
-                pageHelperApiaries = 1;
+                page = 1;
             }
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
@@ -77,52 +74,42 @@
             var userApiariesCount = this.apiaryService.GetAllUserApiariesCount(currentUser.Id);
             var pagesApiaryCount = (int)Math.Ceiling((double)userApiariesCount / GlobalConstants.ApiariesPerPage);
 
-            var apiaryHelperCount = this.apiaryHelperService.GetUserHelperApiariesCount(currentUser.Id);
-            var pagesApiaryHelperCount = (int)Math.Ceiling((double)apiaryHelperCount / GlobalConstants.ApiaryHelpersApiaryPerPage);
-
             var viewModel = new AllApiaryViewModel
             {
+                UserApiariesFilter = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllApiaryFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllApiaryFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 UserApiaries = new AllApiaryUserApiariesViewModel
                 {
                     AllUserApiaries = this.apiaryService.GetAllUserApiaries<AllApiaryUserApiariesDataViewModel>(
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
-                        (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage,
-                        allApieariesOrderBy),
+                        (page - 1) * GlobalConstants.ApiariesPerPage,
+                        filterModel),
                     PagesCount = pagesApiaryCount,
                 },
-                UserHelperApiaries = new AllApiaryUserHelperApiariesViewModel
-                {
-                    AllUserHelperApiaries = this.apiaryHelperService.GetUserHelperApiaries<AllApiaryUserHelperApiariesDataViewModel>(
-                        currentUser.Id,
-                        GlobalConstants.ApiaryHelpersApiaryPerPage,
-                        (pageHelperApiaries - 1) * GlobalConstants.ApiaryHelpersApiaryPerPage),
-                    PagesCount = pagesApiaryHelperCount,
-                },
             };
-
-            foreach (var apiary in viewModel.UserHelperApiaries.AllUserHelperApiaries)
-            {
-                apiary.Access = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, apiary.ApiaryId);
-            }
 
             if (viewModel.UserApiaries.PagesCount == 0)
             {
                 viewModel.UserApiaries.PagesCount = 1;
             }
 
-            if (viewModel.UserHelperApiaries.PagesCount == 0)
-            {
-                viewModel.UserHelperApiaries.PagesCount = 1;
-            }
-
-            viewModel.UserApiaries.CurrentPage = pageAllApiaries;
-            viewModel.UserHelperApiaries.CurrentPage = pageHelperApiaries;
+            viewModel.UserApiaries.CurrentPage = page;
 
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AllMovable(int pageAllApiaries = 1, string orderBy = null)
+        public async Task<IActionResult> AllMovable(
+            FilterModel filterModel,
+            int pageAllApiaries = 1
+            )
         {
             if (pageAllApiaries <= 0)
             {
@@ -140,7 +127,7 @@
                         currentUser.Id,
                         GlobalConstants.ApiariesPerPage,
                         (pageAllApiaries - 1) * GlobalConstants.ApiariesPerPage,
-                        orderBy),
+                        filterModel),
                 PagesCount = pagesApiaryCount,
             };
 

@@ -226,8 +226,20 @@
                 }
             }
 
-            if (!inputModel.IncludeWeatherInfo)
+            if (inputModel.IncludeWeatherInfo)
             {
+                if (inputModel.WeatherHumidityString != null)
+                {
+                    inputModel.IncludeWeatherInfo = true;
+                    inputModel.WeatherHumidity = double.Parse(inputModel.WeatherHumidityString);
+                }
+
+                if (inputModel.WeatherTemperatureString != null)
+                {
+                    inputModel.IncludeWeatherInfo = true;
+                    inputModel.WeatherTemperature = double.Parse(inputModel.WeatherTemperatureString, System.Globalization.NumberStyles.Float);
+                }
+
                 if (inputModel.Conditions != null)
                 {
                     inputModel.IncludeWeatherInfo = true;

@@ -9,7 +9,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class AllApiaryUserMovableApiariesDataViewModel : IMapFrom<Apiary>
+    public class AllApiaryUserMovableApiariesDataViewModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>
     {
         public string Number { get; set; }
 

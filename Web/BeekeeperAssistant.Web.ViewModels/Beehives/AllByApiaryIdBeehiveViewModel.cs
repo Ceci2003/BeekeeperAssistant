@@ -7,11 +7,15 @@
     using System.Threading.Tasks;
 
     using AutoMapper;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class AllByApiaryIdBeehiveViewModel : IMapFrom<Apiary>
+    public class AllByApiaryIdBeehiveViewModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>
     {
+        public FilterModel ApiaryBeehivesFilter { get; set; }
+
         public int Id { get; set; }
 
         public string CreatorId { get; set; }

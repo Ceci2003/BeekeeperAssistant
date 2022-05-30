@@ -32,8 +32,9 @@
             return source.ProjectTo<TDestination>(AutoMapperConfig.MapperInstance.ConfigurationProvider, parameters);
         }
 
-        public static IOrderedQueryable<TSource> OrderByProeprtyDescending<TSource>(this IQueryable<TSource> source, params string[] propertiesName)
+        public static IOrderedQueryable<TSource> OrderByProeprtyDescending<TSource>(this IQueryable<TSource> source, string objectProperty)
         {
+            var propertiesName = objectProperty.Split('-');
             // LAMBDA: x => x.[PropertyName]
             var parameter = Expression.Parameter(typeof(TSource), "x");
             Expression property = Expression.Property(parameter, propertiesName[0]);
@@ -58,6 +59,8 @@
             // LAMBDA: x => x.[PropertyName]
             var parameter = Expression.Parameter(typeof(TSource), "x");
             Expression property = Expression.Property(parameter, propertiesName[0]);
+
+            var containsMehod = typeof(Queryable).GetMethods().First(x => x.Name == "Contains" && x.GetParameters().Length == 2);
 
             for (int i = 1; i < propertiesName.Length; i++)
             {

@@ -2,8 +2,9 @@
 {
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
 
-    public class BeehivesAdministrationViewModel : IMapFrom<Beehive>
+    public class BeehivesAdministrationViewModel : IMapFrom<Beehive>, IMapFrom<BeehiveDataModel>
     {
         public int Id { get; set; }
 

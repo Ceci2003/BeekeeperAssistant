@@ -3,7 +3,7 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class SelectBeehiveToAddInTemporaryModel : IMapFrom<Beehive>
+    public class SelectBeehiveToAddInTemporaryModel : IMapFrom<Beehive>, IMapFrom<BeehiveDataModel>
     {
         public int Id { get; set; }
 

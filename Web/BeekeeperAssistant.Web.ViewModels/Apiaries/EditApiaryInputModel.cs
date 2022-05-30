@@ -11,7 +11,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class EditApiaryInputModel : IMapFrom<Apiary>
+    public class EditApiaryInputModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>
     {
         [RegularExpression(GlobalConstants.ApiaryPartNumberRegex, ErrorMessage = "Пощенският код не съществува или не е валиден. Трябва да въведете 4 цифри.")]
         [Display(Name = "Пощенски код")]

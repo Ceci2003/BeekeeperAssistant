@@ -1,12 +1,13 @@
-﻿namespace BeekeeperAssistant.Web.ViewModels.Harvest
+﻿namespace BeekeeperAssistant.Web.ViewModels.Harvests
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Linq;
+    using BeekeeperAssistant.Data.Filters.Contracts;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class HarvestDatavVewModel : IMapFrom<Harvest>
+    public class HarvestDataModel : IMapFrom<Harvest>, IMapFrom<HarvestDataModel>, IDefaultOrder<HarvestDataModel>
     {
         public int Id { get; set; }
 
@@ -32,5 +33,12 @@
 
         [Display(Name = "Еденица")]
         public Unit Unit { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public IOrderedQueryable<HarvestDataModel> DefaultOrder(IQueryable<HarvestDataModel> query)
+        {
+            return query.OrderByDescending(x => x.DateOfHarves);
+        }
     }
 }

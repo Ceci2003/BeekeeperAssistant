@@ -6,9 +6,12 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
-    using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Harvests;
 
     public class HarvestService : IHarvestService
     {
@@ -109,14 +112,19 @@
             .Where(h => !h.Beehive.IsDeleted && h.Harvest.CreatorId == userId)
             .Count();
 
-        public IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.harvestedBeehiveRepository
             .All()
             .Where(hb => hb.BeehiveId == beehiveId)
-            .OrderByDescending(hb => hb.Harvest.DateOfHarves)
             .Select(hb => hb.Harvest)
-            .Skip(skip);
+            .To<HarvestDataModel>();
+
+            var filter = new Filter<HarvestDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {

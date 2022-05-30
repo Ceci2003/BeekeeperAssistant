@@ -6,8 +6,12 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Queens;
 
     public class QueenService : IQueenService
     {
@@ -173,16 +177,19 @@
             return queen.BeehiveId;
         }
 
-        public IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.queenRepository
                 .All()
-                .OrderByDescending(q => q.IsBookMarked)
-                .ThenByDescending(q => q.GivingDate)
-                .ThenBy(q => q.Beehive.Apiary.Number)
-                .ThenBy(q => q.Beehive.Number)
                 .Where(q => q.OwnerId == ownerId && !q.Beehive.IsDeleted)
-                .Skip(skip);
+                .Skip(skip)
+                .To<QueenDataModel>();
+
+            var filter = new Filter<QueenDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {

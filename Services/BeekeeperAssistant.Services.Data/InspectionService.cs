@@ -6,7 +6,10 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
 
@@ -160,21 +163,25 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
-            var qurey = this.inspectionRepository
+            var query = this.inspectionRepository
                 .AllAsNoTracking()
                 .Where(i => i.BeehiveId == beehiveId)
-                .OrderByDescending(i => i.DateOfInspection)
-                .OrderByDescending(i => i.CreatedOn)
-                .Skip(skip);
+                .To<InspectionDataModel>();
+
+            var filter = new Filter<InspectionDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {
-                qurey = qurey.Take(take.Value);
+                query = query.Take(take.Value);
             }
 
-            return qurey.To<T>().ToList();
+            return query.To<T>().ToList();
         }
 
         public int GetAllUserInspectionsForLastYearCount(string userId) =>

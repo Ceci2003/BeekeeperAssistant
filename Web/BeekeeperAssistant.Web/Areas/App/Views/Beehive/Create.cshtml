@@ -34,7 +34,7 @@
     </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -49,7 +49,14 @@
             <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Number"></label>
-                    <input asp-for="@Model.Number" min="1" value="@Model.Number" />
+                    @if (this.TempData[GlobalConstants.NextBeehiveNumber] != null)
+                    {
+                        <input asp-for="@Model.Number" min="1" value="@this.TempData[GlobalConstants.NextBeehiveNumber]" />
+                    }
+                    else
+                    {
+                        <input asp-for="@Model.Number" min="1" value="@Model.Number" />
+                    }
                     <span class="" asp-validation-for="@Model.Number"></span>
                 </div>
                 @if (Model.AllApiaries != null)

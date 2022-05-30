@@ -7,6 +7,8 @@
     using BeekeeperAssistant.Data;
     using BeekeeperAssistant.Data.Common;
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Contracts;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Data.Repositories;
     using BeekeeperAssistant.Data.Seeding;
@@ -100,6 +102,7 @@
             services.AddTransient<IBeehiveDiaryService, BeehiveDiaryService>();
             services.AddTransient<ITemporaryApiaryBeehiveService, TemporaryApiaryBeehiveService>();
             services.AddTransient<IBeehiveMarkFlagService, BeehiveMarkFlagService>();
+            services.AddTransient<ITypeService, TypeService>();
             services.AddTransient<IExportDocumentService, ExportDocumentService>();
         }
 

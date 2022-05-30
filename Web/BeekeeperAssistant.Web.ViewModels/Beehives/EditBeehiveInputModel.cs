@@ -8,7 +8,7 @@
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class EditBeehiveInputModel : IMapFrom<Beehive>
+    public class EditBeehiveInputModel : IMapFrom<Beehive>, IMapFrom<BeehiveDataModel>
     {
         [Required(ErrorMessage = "Полето 'Номер' е задължително!")]
         [Display(Name = "Номер")]

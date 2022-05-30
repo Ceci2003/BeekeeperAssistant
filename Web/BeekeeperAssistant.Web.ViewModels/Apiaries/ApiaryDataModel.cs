@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
-
+    using BeekeeperAssistant.Data.Filters.Contracts;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class ApiaryDataModel : IMapFrom<Apiary>
+    public class ApiaryDataModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>, IDefaultOrder<ApiaryDataModel>
     {
         public string Number { get; set; }
 
@@ -32,5 +34,12 @@
         public DateTime CreatedOn { get; set; }
 
         public bool IsRegistered { get; set; }
+
+        public bool IsClosed { get; set; }
+
+        public IOrderedQueryable<ApiaryDataModel> DefaultOrder(IQueryable<ApiaryDataModel> query)
+        {
+            return query.OrderByDescending(x => x.IsBookMarked).ThenByDescending(x => x.CreatedOn);
+        }
     }
 }

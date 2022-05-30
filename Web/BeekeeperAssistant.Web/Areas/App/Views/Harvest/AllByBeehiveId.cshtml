@@ -1,4 +1,4 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Harvest.AllByBeehiveIdHarvestViewModel
+﻿@model BeekeeperAssistant.Web.ViewModels.Harvests.AllByBeehiveIdHarvestViewModel
 @{
     this.ViewData["Title"] = "Информация за кошер - №" + Model.BeehiveNumber;
     var onlyReadMsg = "нямате достъп";
@@ -113,13 +113,18 @@
                     </a>
                 </div>
             }
+
+            <partial model="@Model.AllHarvestsFilters" name="_FiltersPartial" />
+
             <table class="all-table">
                 <thead>
-                <th>Име</th>
-                <th class="table-sdate">Дата</th>
-                <th>Продукт</th>
-                <th class="table-amount">Количество</th>
-                <th>Редактиране</th>
+                    <tr>
+                        <th>Име</th>
+                        <th class="table-sdate">Дата</th>
+                        <th>Продукт</th>
+                        <th class="table-amount">Количество</th>
+                        <th>Редактиране</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var harvest in Model.AllHarvests)

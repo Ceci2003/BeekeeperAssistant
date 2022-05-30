@@ -2,11 +2,12 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Linq;
+    using BeekeeperAssistant.Data.Filters.Contracts;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
-    public class TreatmentDataViewModel : IMapFrom<Treatment>
+    public class TreatmentDataModel : IMapFrom<Treatment>, IMapFrom<TreatmentDataModel>, IDefaultOrder<TreatmentDataModel>
     {
         public int Id { get; set; }
 
@@ -40,6 +41,13 @@
         [Display(Name = "Дозировка")]
         public Dose Dose { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public string CreatorId { get; set; }
+
+        public IOrderedQueryable<TreatmentDataModel> DefaultOrder(IQueryable<TreatmentDataModel> query)
+        {
+            return query.OrderByDescending(x => x.CreatedOn);
+        }
     }
 }

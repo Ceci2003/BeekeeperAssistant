@@ -10,11 +10,11 @@
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.BeehiveMarkFlags;
-    using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Harvests;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
     using BeekeeperAssistant.Web.ViewModels.Treatments;
 
-    public class ByIdBeehiveViewModel : IMapFrom<Beehive>, IHaveCustomMappings
+    public class ByIdBeehiveViewModel : IMapFrom<Beehive>, IMapFrom<BeehiveDataModel>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

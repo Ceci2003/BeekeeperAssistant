@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
 
     public interface IQueenService
     {
@@ -25,7 +26,7 @@
 
         T GetQueenByBeehiveId<T>(int beehiveId);
 
-        IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllUserQueens<T>(string ownerId, int? take = null, int skip = 0, FilterModel filterModel = null);
 
         Task<int> DeleteQueenAsync(int queenId);
 

@@ -15,7 +15,7 @@
             int height = 300,
             int width = 500)
         {
-            Chart chart = new Chart();
+            var chart = new Chart();
 
             chart.Width = 500;
             chart.Height = 300;

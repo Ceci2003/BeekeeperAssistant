@@ -7,11 +7,13 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Beehives;
-    using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Web.ViewModels.Harvests;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using OfficeOpenXml;
@@ -25,6 +27,7 @@
         private readonly IBeehiveService beehiveService;
         private readonly IExcelExportService excelExportService;
         private readonly IBeehiveHelperService beehiveHelperService;
+        private readonly ITypeService typeService;
 
         public HarvestController(
             UserManager<ApplicationUser> userManager,
@@ -32,7 +35,8 @@
             IApiaryService apiaryService,
             IBeehiveService beehiveService,
             IExcelExportService excelExportService,
-            IBeehiveHelperService beehiveHelperService)
+            IBeehiveHelperService beehiveHelperService,
+            ITypeService typeService)
         {
             this.userManager = userManager;
             this.harvestService = harvestService;
@@ -40,9 +44,10 @@
             this.beehiveService = beehiveService;
             this.excelExportService = excelExportService;
             this.beehiveHelperService = beehiveHelperService;
+            this.typeService = typeService;
         }
 
-        public async Task<IActionResult> AllByBeehiveId(int id, int page = 1)
+        public async Task<IActionResult> AllByBeehiveId(int id, FilterModel filterModel, int page = 1)
         {
             if (page <= 0)
             {
@@ -53,8 +58,17 @@
 
             var viewModel = new AllByBeehiveIdHarvestViewModel()
             {
+                AllHarvestsFilters = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AllByBeehiveIdHarvestFilterModel)),
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AllByBeehiveIdHarvestFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 AllHarvests =
-                    this.harvestService.GetAllBeehiveHarvests<HarvestDatavVewModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage),
+                    this.harvestService.GetAllBeehiveHarvests<HarvestDataModel>(id, GlobalConstants.ApiariesPerPage, (page - 1) * GlobalConstants.ApiariesPerPage, filterModel),
             };
 
             viewModel.BeehiveId = id;
@@ -197,7 +211,7 @@
         public async Task<IActionResult> Delete(int id)
         {
             var currentuser = await this.userManager.GetUserAsync(this.User);
-            var inputModel = this.harvestService.GetHarvestById<HarvestDatavVewModel>(id);
+            var inputModel = this.harvestService.GetHarvestById<HarvestDataModel>(id);
 
             if (inputModel.CreatorId != currentuser.Id)
             {

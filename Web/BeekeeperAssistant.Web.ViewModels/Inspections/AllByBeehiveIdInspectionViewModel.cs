@@ -1,12 +1,14 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Inspections
 {
     using System.Collections.Generic;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
 
     public class AllByBeehiveIdInspectionViewModel
     {
+        public FilterModel AllInspectionsFilterModel { get; set; }
+
         public IEnumerable<AllByBeehiveIdInspectionAllInspectionsViewModel> AllInspections { get; set; }
 
         public int BeehiveId { get; set; }

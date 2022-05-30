@@ -3,9 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Web.ViewModels.Harvest;
+    using BeekeeperAssistant.Services.Data.Models;
+    using BeekeeperAssistant.Web.ViewModels.Harvests;
 
     public interface IHarvestService
     {
@@ -29,6 +30,6 @@
 
         IEnumerable<T> GetAllUserHarvests<T>(string userId);
 
-        IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllBeehiveHarvests<T>(int beehiveId, int? take = null, int skip = 0, FilterModel filterModel = null);
     }
 }

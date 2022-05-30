@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Queens
 {
+    using BeekeeperAssistant.Data.Filters.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,7 +9,9 @@
 
     public class AllQueenViewModel
     {
-        public IEnumerable<QueenViewModel> AllQueens { get; set; }
+        public FilterModel AllQueensFilterModel { get; set; }
+
+        public IEnumerable<QueenDataModel> AllQueens { get; set; }
 
         public int CurrentPage { get; set; }
 

@@ -8,8 +8,9 @@
 
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+    using BeekeeperAssistant.Web.ViewModels.Apiaries;
 
-    public class AdministrationAllApiaryAllApiariesViewModel : IMapFrom<Apiary>
+    public class AdministrationAllApiaryAllApiariesViewModel : IMapFrom<Apiary>, IMapFrom<ApiaryDataModel>
     {
         public string Number { get; set; }
 

@@ -8,8 +8,13 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Common.Repositories;
+    using BeekeeperAssistant.Data.Filters;
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
+
+    using BeekeeperAssistant.Web.ViewModels.Beehives;
     using Microsoft.EntityFrameworkCore;
 
     public class BeehiveService : IBeehiveService
@@ -214,24 +219,16 @@
                 .Where(b => b.ApiaryId == apiaryId)
                 .Count();
 
-        public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0, string orderBy = null)
+        public IEnumerable<T> GetAllUserBeehives<T>(string userId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.beehiveRepository
                 .All()
-                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted);
+                .Where(b => b.CreatorId == userId && !b.Apiary.IsDeleted)
+                .To<BeehiveDataModel>();
 
-            if (orderBy != null)
-            {
-                var parts = orderBy.Split("-");
-                query = query.OrderByProeprtyDescending(parts);
-            }
-            else
-            {
-                query = query
-                .OrderByDescending(b => b.IsBookMarked)
-                .ThenBy(b => b.Apiary.Number)
-                .ThenBy(b => b.Number);
-            }
+            var filter = new Filter<BeehiveDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
 
             query = query.Skip(skip);
 
@@ -240,7 +237,6 @@
                 query = query.Take(take.Value);
             }
 
-            var result = query.To<T>().ToQueryString();
             return query.To<T>().ToList();
         }
 
@@ -250,14 +246,18 @@
                 .Where(b => b.CreatorId == userId && b.Apiary.IsDeleted == false)
                 .Count();
 
-        public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetBeehivesByApiaryId<T>(int apiaryId, int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.beehiveRepository
                 .All()
-                .OrderByDescending(b => b.IsBookMarked)
-                .ThenBy(b => b.Number)
                 .Where(b => b.ApiaryId == apiaryId)
-                .Skip(skip);
+                .To<BeehiveDataModel>();
+
+            var filter = new Filter<BeehiveDataModel>();
+
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query.Skip(skip);
 
             if (take.HasValue)
             {
@@ -371,17 +371,18 @@
                 .To<T>()
                 .ToList();
 
-        public IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0, string orderBy = null)
+        public IEnumerable<T> GetAllBeehivesWithDeleted<T>(int? take = null, int skip = 0, FilterModel filterModel = null)
         {
             var query = this.beehiveRepository
-                .AllWithDeleted();
+                .AllWithDeleted()
+                .Where(b => !b.Apiary.IsDeleted)
+                .To<BeehiveDataModel>();
 
-            if (orderBy != null)
-            {
-                query = query.OrderBy(b => b.GetType().GetProperty(orderBy).GetValue(b));
-            }
+            var filter = new Filter<BeehiveDataModel>();
 
-            query = query.Where(b => !b.Apiary.IsDeleted)
+            query = filter.FilterCollection(query, filterModel);
+
+            query = query
                 .Skip(skip);
 
             if (take.HasValue)
@@ -431,6 +432,16 @@
         public bool HasDiary(int beehiveId)
         {
             return this.beehiveDiaryRepository.All().Any(bd => bd.BeehiveId == beehiveId);
+        }
+
+        public int GetLatestBeehiveNumber(int apiaryId)
+        {
+            var beehive = this.beehiveRepository.All()
+                .Where(b => b.ApiaryId == apiaryId)
+                .OrderByDescending(b => b.CreatedOn)
+                .FirstOrDefault();
+
+            return beehive.Number;
         }
     }
 }

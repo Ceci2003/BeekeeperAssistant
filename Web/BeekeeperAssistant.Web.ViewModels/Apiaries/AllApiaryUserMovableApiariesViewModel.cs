@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Web.ViewModels.Apiaries
 {
+    using BeekeeperAssistant.Data.Filters.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,6 +9,8 @@
 
     public class AllApiaryUserMovableApiariesViewModel
     {
+        public FilterModel AllUserMovableApiariesFilterModel { get; set; }
+
         public IEnumerable<AllApiaryUserMovableApiariesDataViewModel> AllUserMovableApiaries { get; set; }
 
         public int CurrentPage { get; set; }

@@ -113,16 +113,21 @@
                     </a>
                 </div>
             }
+
+            <partial model="@Model.AllTreatementsFilterModel" name="_FiltersPartial" />
+
             <table id="TreatmentsTable" class="all-table">
                 <thead>
-                <th>Дата на третирането</th>
-                <th>Име на третирането</th>
-                <th>Превенция на</th>
-                <th>Препарат</th>
-                <th>Въведен като</th>
-                <th>Количество</th>
-                <th>Дозировка</th>
-                <th>Редактиране</th>
+                    <tr>
+                        <th>Дата на третирането</th>
+                        <th>Име на третирането</th>
+                        <th>Превенция на</th>
+                        <th>Препарат</th>
+                        <th>Въведен като</th>
+                        <th>Количество</th>
+                        <th>Дозировка</th>
+                        <th>Редактиране</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var treatment in Model.AllTreatements)

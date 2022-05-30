@@ -1,5 +1,6 @@
 ﻿namespace BeekeeperAssistant.Services
 {
+    using BeekeeperAssistant.Common;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Web.ViewModels.ExportDocument;
@@ -19,11 +20,6 @@
             this.apiaryService = apiaryService;
             this.beehiveService = beehiveService;
         }
-
-
-        private const string EmptyFieldShort = ".............";
-        private const string EmptyFieldMegaLong = ".........................................................................................................................";
-
 
         public ExcelPackage ExcelExportForDFZ(CreateExcelExportForDFZInputModel inputModel)
         {
@@ -83,19 +79,19 @@
             string apartmentBuilding = "";
             if (string.IsNullOrWhiteSpace(inputModel.UserApartmentBuilding))
             {
-                apartmentBuilding = EmptyFieldShort;
+                apartmentBuilding = GlobalConstants.ExportDocumentEmptyFieldShort;
             }
 
             string apartment = "";
             if (string.IsNullOrWhiteSpace(inputModel.UserApartment))
             {
-                apartment = EmptyFieldShort;
+                apartment = GlobalConstants.ExportDocumentEmptyFieldShort;
             }
 
             string floor = "";
             if (string.IsNullOrWhiteSpace(inputModel.UserFloor.ToString()))
             {
-                floor = EmptyFieldShort;
+                floor = GlobalConstants.ExportDocumentEmptyFieldShort;
             }
 
             ws.Cells[$"A{n}:I{n + 1}"].Value = $"с ЕГН/ЕИК: {inputModel.EgnEik}, с адрес: гр./с. {inputModel.UserCity} , Община {inputModel.UserMunicipality}, ул. {inputModel.UserStreet} №{inputModel.UserStreetNumber}," +
@@ -166,7 +162,7 @@
             ws.Cells[$"A{n}:I{n + 1}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             ws.Cells[$"A{n}:I{n + 1}"].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
             ws.Cells[$"A{n}:I{n + 1}"].Style.WrapText = true;
-            ws.Cells[$"A{n}:I{n + 1}"].Value = "1.\t\tживотните изброените в приложение № 1 /опис на животните в животновъдния обект \nса собственост на " + EmptyFieldMegaLong;
+            ws.Cells[$"A{n}:I{n + 1}"].Value = "1.\t\tживотните изброените в приложение № 1 /опис на животните в животновъдния обект \nса собственост на " + GlobalConstants.ExportDocumentEmptyFieldMegaLong;
 
             n += 2; // n=32
             ws.Cells[$"A{n}:I{n + 1}"].Merge = true;

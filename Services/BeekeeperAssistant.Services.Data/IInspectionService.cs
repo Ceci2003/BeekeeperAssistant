@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Web.ViewModels.Inspections;
 
     public interface IInspectionService
@@ -74,6 +75,6 @@
 
         IEnumerable<Inspection> GetAllInspectionsByBeehiveId(int beehiveId);
 
-        IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0);
+        IEnumerable<T> GetAllBeehiveInspections<T>(int beehiveId, int? take = null, int skip = 0, FilterModel filterModel = null);
     }
 }

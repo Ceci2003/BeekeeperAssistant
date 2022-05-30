@@ -1,4 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.AllByApiaryIdBeehiveViewModel
+@inject BeekeeperAssistant.Services.IStringManipulationService stringManipulation;
+
 @{
     var title = "";
     if (!string.IsNullOrEmpty(Model.Number))
@@ -116,13 +118,28 @@
                 </a>
             }
         </div>
+
+        <partial model="@Model.ApiaryBeehivesFilter" name="_FiltersPartial" />
+
         <table class="data-table all-table">
             <thead>
                 <tr>
-                    <th>Номер</th>
-                    <th>Вид</th>
-                    <th>Система</th>
-                    <th>Сила</th>
+                    <th>
+                        <a class="@stringManipulation.Slugify(nameof(BeehiveDataModel.Number))" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id" asp-route-page="@Model.CurrentPage"
+                           asp-route-orderBy="@stringManipulation.Slugify(nameof(BeehiveDataModel.Number))">Номер</a>
+                    </th>
+                    <th>
+                        <a class="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehiveType))" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id" asp-route-page="@Model.CurrentPage"
+                           asp-route-orderBy="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehiveType))">Вид</a>
+                    </th>
+                    <th>
+                        <a class="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehiveSystem))" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id" asp-route-page="@Model.CurrentPage"
+                           asp-route-orderBy="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehiveSystem))">Система</a>
+                    </th>
+                    <th>
+                        <a class="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehivePower))" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id" asp-route-page="@Model.CurrentPage"
+                           asp-route-orderBy="@stringManipulation.Slugify(nameof(BeehiveDataModel.BeehivePower))">Сила</a>
+                    </th>
                     <th>Редактиране</th>
                 </tr>
             </thead>
@@ -323,9 +340,9 @@
                     else
                     {
                         @*<li class="page-item">
-                                <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
-                                   asp-route-page="@i">@i</a>
-                            </li>*@
+                            <a class="page-link" asp-route="apiaryRoute" asp-route-apiaryNumber="@Model.Number"
+                               asp-route-page="@i">@i</a>
+                        </li>*@
                         <li class="page-item">
                             <a class="page-link" asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@Model.Id" asp-route-page="@i">@i</a>
                         </li>

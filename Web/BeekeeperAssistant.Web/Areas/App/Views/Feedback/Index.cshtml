@@ -21,6 +21,7 @@
 </div>
 
 <div class="content center">
+    <partial name="_StatusMessagePartial" />
     <div class="dashboard-cards-list">
         <div class="feedback-content-card">
             <a class="help" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Help">
@@ -48,6 +49,12 @@
             <a class="documentation" target="blank" href="~/documents/BeekeeperAssistant_Users_Guide.pdf">
                 <i class="fas fa-book-open"></i>
                 <p>Потребителскo ръководство</p>
+            </a>
+        </div>
+        <div class="feedback-content-card">
+            <a class="excel-export-doc" asp-controller="ExportDocument" asp-action="ExcelExportForDFZ">
+                <i class="fas fa-file-excel"></i>
+                <p>Образец ЗХОЖКФ – 87 А</p>
             </a>
         </div>
     </div>

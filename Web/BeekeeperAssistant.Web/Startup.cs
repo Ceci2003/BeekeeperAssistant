@@ -100,6 +100,7 @@
             services.AddTransient<IBeehiveDiaryService, BeehiveDiaryService>();
             services.AddTransient<ITemporaryApiaryBeehiveService, TemporaryApiaryBeehiveService>();
             services.AddTransient<IBeehiveMarkFlagService, BeehiveMarkFlagService>();
+            services.AddTransient<IExportDocumentService, ExportDocumentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

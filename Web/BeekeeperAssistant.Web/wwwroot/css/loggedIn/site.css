@@ -921,6 +921,12 @@ td.queen-red {
   background-color: lightyellow;
 }
 
+.data-table thead,
+.all-table thead {
+  position: sticky;
+  top: 40px;
+}
+
 .data-table thead tr:hover {
   background-color: var(--transparent);
 }
@@ -1274,6 +1280,26 @@ textarea {
 .form-box form .group-box .input-group {
   width: 290px;
   margin-top: 5px;
+}
+
+.form-box form .group-box .input-group {
+  width: 290px;
+  margin-top: 5px;
+}
+
+.form-box form .big-group-box {
+  border: 2px solid var(--lightgray);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.form-box form .big-group-box .row-form-group {
+  width: 100%;
+}
+
+.form-box form .big-group-box .input-group {
+ width: 290px;
 }
 
 .btn-group {
@@ -1885,6 +1911,15 @@ textarea {
 
 .feedback-content-card a:hover i.hover-show {
   display: none;
+}
+
+.feedback-content-card a.excel-export-doc {
+  color: var(--green-hover);
+}
+
+.feedback-content-card a.excel-export-doc:hover {
+  color: var(--white);
+  background-color: var(--green-hover);
 }
 
 /* Breadcrumb */

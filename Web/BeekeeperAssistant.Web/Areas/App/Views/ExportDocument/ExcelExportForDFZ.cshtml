@@ -1,0 +1,186 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.ExportDocument.CreateExcelExportForDFZInputModel;
+
+@{
+    this.ViewData["Title"] = "Експортиране на Образец ЗХОЖКФ – 87 А";
+
+    var keyValuePairApiaries = new List<SelectListItem>();
+    if (Model.AllApiaries != null)
+    {
+        keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+    }
+}
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">Образец ЗХОЖКФ – 87 А</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <partial name="_StatusMessagePartial" />
+    <div class="form-box">
+        <form asp-controller="ExportDocument" asp-action="ExcelExportForDFZ" method="post">
+            <h2 class="no-required">Декларация</h2>
+            <h2 class="no-required">@this.ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.UserNames"></label>
+                    <input asp-for="@Model.UserNames" />
+                    <span asp-validation-for="@Model.UserNames"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.EgnEik"></label>
+                    <input asp-for="@Model.EgnEik" />
+                    <span asp-validation-for="@Model.EgnEik"></span>
+                </div>
+            </div>
+            <h1 class="required" style="font-size: 16px; font-weight:400;">Адрес</h1>
+            <div class="row-form-group big-group-box">
+                <div class="row-form-group">
+                    <div class="input-group">
+                        <label asp-for="@Model.UserCity"></label>
+                        <input asp-for="@Model.UserCity" />
+                        <span asp-validation-for="@Model.UserCity"></span>
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="@Model.UserMunicipality"></label>
+                        <input asp-for="@Model.UserMunicipality" />
+                        <span asp-validation-for="@Model.UserMunicipality"></span>
+                    </div>
+                </div>
+                <div class="row-form-group">
+                    <div class="input-group">
+                        <label asp-for="@Model.UserStreet"></label>
+                        <input asp-for="@Model.UserStreet" />
+                        <span asp-validation-for="@Model.UserStreet"></span>
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="@Model.UserStreetNumber"></label>
+                        <input min="1" value="1" asp-for="@Model.UserStreetNumber" />
+                        <span asp-validation-for="@Model.UserStreetNumber"></span>
+                    </div>
+                </div>
+                <div class="row-form-group">
+                    <div class="input-group">
+                        <label asp-for="@Model.UserApartmentBuilding"></label>
+                        <input asp-for="@Model.UserApartmentBuilding" />
+                        <span asp-validation-for="@Model.UserApartmentBuilding"></span>
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="@Model.UserApartment"></label>
+                        <input asp-for="@Model.UserApartment" />
+                        <span asp-validation-for="@Model.UserApartment"></span>
+                    </div>
+                </div>
+                <div class="row-form-group">
+                    <div class="input-group">
+                        <label asp-for="@Model.UserFloor"></label>
+                        <input min="1" value="1" asp-for="@Model.UserFloor" />
+                        <span asp-validation-for="@Model.UserFloor"></span>
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="@Model.PhoneNumber"></label>
+                        <input asp-for="@Model.PhoneNumber" />
+                        <span asp-validation-for="@Model.PhoneNumber"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.UserTypeAsFirst"></label>
+                    <select asp-for="@Model.UserTypeAsFirst">
+                        <option value="собственик" selected>собственик</option>
+                        <option value="ползвател">ползвател</option>
+                        <option value="управител, изпълнителен директор,съдружник, член на УС, член на борд на директорите и др.">управител, изпълнителен директор,съдружник, член на УС, член на борд на директорите и др.</option>
+                    </select>
+                    <span asp-validation-for="@Model.UserTypeAsFirst"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.NameOfET"></label>
+                    <input asp-for="@Model.NameOfET" />
+                    <span asp-validation-for="@Model.NameOfET"></span>
+                </div>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.UserTypeAsSecond"></label>
+                    <select asp-for="@Model.UserTypeAsSecond">
+                        <option value="собственик" selected>собственик</option>
+                        <option value="ползвател">ползвател</option>
+                    </select>
+                    <span asp-validation-for="@Model.UserTypeAsFirst"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.ApiaryId"></label>
+                    <select asp-for="@Model.ApiaryId" asp-items="keyValuePairApiaries"></select>
+                    <span asp-validation-for="@Model.ApiaryId"></span>
+                </div>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.ApiaryCity"></label>
+                    <input asp-for="@Model.ApiaryCity" />
+                    <span asp-validation-for="@Model.ApiaryCity"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.ApiaryMunicipality"></label>
+                    <input asp-for="@Model.ApiaryMunicipality" />
+                    <span asp-validation-for="@Model.ApiaryMunicipality"></span>
+                </div>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.ApiaryState"></label>
+                    <input asp-for="@Model.ApiaryState" />
+                    <span asp-validation-for="@Model.ApiaryState"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.VetNames"></label>
+                    <input asp-for="@Model.VetNames" />
+                    <span asp-validation-for="@Model.VetNames"></span>
+                </div>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.SubmissionDate"></label>
+                    <input type="date" asp-for="@Model.SubmissionDate" />
+                    <span asp-validation-for="@Model.SubmissionDate"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.InventoryDate"></label>
+                    <input type="date" asp-for="@Model.InventoryDate" />
+                    <span asp-validation-for="@Model.InventoryDate"></span>
+                </div>
+            </div>
+            <input type="hidden" asp-for="@Model.ApiaryId" />
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-area="App" asp-controller="Feedback" asp-action="Index">Отмени</a>
+                <input class="btn beehive-create" type="submit" value="Експортирай" />
+            </div>
+            <div class="form-star-tip">
+                *Полетата обозначени с
+                '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+                са задължителни.
+            </div>
+        </form>
+    </div>
+</div>

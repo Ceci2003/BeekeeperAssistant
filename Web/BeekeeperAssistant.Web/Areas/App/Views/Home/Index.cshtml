@@ -13,9 +13,12 @@
     <ul class="breadcrumb-list">
         <li class="breadcrumb-item active">@ViewData["Title"]</li>
     </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
     <div class="breadcrumb-leave">
         <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
             <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
     </div>
@@ -135,7 +138,7 @@
                     {
                         <div class="legend-row">
                             <div class="legend-color"
-                                 style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                 @Model.ApiariesCountByType[ac]
                             </div>
                             <div class="legend-value">@Html.DisplayFor(x => ac)</div>
@@ -165,7 +168,7 @@
                     {
                         <div class="legend-row">
                             <div class="legend-color"
-                                 style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                 @Model.BeehivesCountByPower[bc]
                             </div>
                             <div class="legend-value">@Html.DisplayFor(x => bc)</div>
@@ -195,7 +198,7 @@
                     {
                         <div class="legend-row">
                             <div class="legend-color"
-                                 style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                 @Model.QueensCountByGivingDate[bc]
                             </div>
                             @if (bc == 0)

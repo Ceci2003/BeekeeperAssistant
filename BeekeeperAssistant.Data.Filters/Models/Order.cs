@@ -4,7 +4,7 @@ namespace BeekeeperAssistant.Data.Filters.Models
 {
     public enum Order
     {
-        [Display(Name = "По подразбиране")]
+        [Display(Name = "Филтър по подразбиране")]
         Default = 0,
         [Display(Name = "Възходящ")]
         Ascending = 1,

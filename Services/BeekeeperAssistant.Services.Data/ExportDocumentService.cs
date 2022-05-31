@@ -24,7 +24,7 @@
         public ExcelPackage ExcelExportForDFZ(CreateExcelExportForDFZInputModel inputModel)
         {
             var apiaryNumber = this.apiaryService.GetApiaryNumberByApiaryId(inputModel.ApiaryId);
-            var beehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataExcelExportModel>(inputModel.ApiaryId);
+            var beehives = this.beehiveService.GetBeehivesByApiaryId<BeehiveDataExportForDFZModel>(inputModel.ApiaryId).OrderBy(b => b.Number).ToList();
             var beehivesCount = beehives.Count();
 
             ExcelPackage pck = new ExcelPackage();
@@ -76,19 +76,19 @@
             ws.Cells[$"A{n}:I{n + 1}"].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
             ws.Cells[$"A{n}:I{n + 1}"].Style.WrapText = true;
 
-            string apartmentBuilding = "";
+            string apartmentBuilding = string.Empty;
             if (string.IsNullOrWhiteSpace(inputModel.UserApartmentBuilding))
             {
                 apartmentBuilding = GlobalConstants.ExportDocumentEmptyFieldShort;
             }
 
-            string apartment = "";
+            string apartment = string.Empty;
             if (string.IsNullOrWhiteSpace(inputModel.UserApartment))
             {
                 apartment = GlobalConstants.ExportDocumentEmptyFieldShort;
             }
 
-            string floor = "";
+            string floor = string.Empty;
             if (string.IsNullOrWhiteSpace(inputModel.UserFloor.ToString()))
             {
                 floor = GlobalConstants.ExportDocumentEmptyFieldShort;
@@ -229,13 +229,12 @@
             ws.Cells[$"A{n}:E{n}"].Style.Font.Size = 12;
             ws.Cells[$"F{n}:I{n}"].Value = "Собственик на животните: ....................";
 
-
             n += 38; // n=96
             this.PrintTableHeader(ref ws, ref n);
 
             n += 5;
 
-            for (int i = 1; i <= beehivesCount; i++)
+            for (int i = 0; i < beehivesCount; i++)
             {
                 n++;
 
@@ -248,24 +247,24 @@
                 ws.Cells[$"A{n}:I{n}"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
                 ws.Cells[$"A{n}:I{n}"].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
 
-                ws.Cells[$"A{n}"].Value = $"{i}.";
+                ws.Cells[$"A{n}"].Value = $"{i + 1}.";
                 ws.Cells[$"A{n}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
 
                 ws.Cells[$"B{n}:D{n}"].Merge = true;
                 ws.Cells[$"B{n}:D{n}"].Value = "ПЧЕЛНО СЕМЕЙСТВО";
 
                 ws.Cells[$"F{n}:G{n}"].Merge = true;
-                ws.Cells[$"F{n}:G{n}"].Value = $"{apiaryNumber} - {i}";
+                ws.Cells[$"F{n}:G{n}"].Value = $"{apiaryNumber} - {beehives[i].Number}";
 
                 ws.Cells[$"H{n}:I{n}"].Merge = true;
 
-                if (i == beehivesCount)
+                if (i + 1 == beehivesCount)
                 {
                     n++;
                     this.PrintTableFooter(ref ws, ref n);
                 }
 
-                if (i % 50 == 0)
+                if ((i + 1) % 50 == 0)
                 {
                     n++;
                     this.PrintTableFooter(ref ws, ref n);

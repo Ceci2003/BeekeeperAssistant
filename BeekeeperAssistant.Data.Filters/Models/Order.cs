@@ -8,7 +8,7 @@ namespace BeekeeperAssistant.Data.Filters.Models
         Default = 0,
         [Display(Name = "Възходящ")]
         Ascending = 1,
-        [Display(Name = "Нисходящ")]
+        [Display(Name = "Низходящ")]
         Descending = 2,
     }
 }

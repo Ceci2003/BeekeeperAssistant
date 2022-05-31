@@ -1,14 +1,17 @@
 ﻿@model BeekeeperAssistant.Data.Filters.Models.FilterModel;
 
-<div>
+<link rel="stylesheet" href="~/css/loggedIn/tableFiltering.css">
+
+<div class="table-filters">
     <form class="flex-row" method="get">
 
         <div class="margin-small-right">
             <label asp-for="@Model.PropertyName">Ред:</label>
-            <select asp-for="@Model.Order" asp-items="@Html.GetEnumSelectList<Order>()"></select>
+            <select id="order" asp-for="@Model.Order" asp-items="@Html.GetEnumSelectList<Order>()"
+                onchange="hideFilter(this)"></select>
         </div>
 
-        <div class="margin-small-right">
+        <div id="column" class="margin-small-right slide-right">
             <label asp-for="@Model.PropertyName">Колона:</label>
             <select asp-for="@Model.PropertyName">
                 @for (int i = 0; i < Model.Data.ModelProperties.Count(); i++)
@@ -18,10 +21,10 @@
             </select>
         </div>
 
-        <div>
-            <input type="hidden" name="page" value="@Model.Data.PageNumber" />
-        </div>
+        <input type="hidden" name="page" value="@Model.Data.PageNumber" />
 
-        <input type="submit" value="Филтрирай" />
+        <input id="input" type="submit" value="Филтрирай" />
     </form>
 </div>
+
+<script src="~/js/tableFiltering.js" type="text/javascript"></script>

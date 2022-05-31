@@ -1,0 +1,27 @@
+html {
+  scroll-behavior: smooth;
+}
+
+#btn {
+  width: 25px;
+  height: 25px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  font-size: 15px;
+  background-color: #f29422;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#btn:hover {
+    background-color: #fead34;
+}

@@ -30,5 +30,7 @@
         int GetAllUsersInRoleWithDeletedCount(string role);
 
         ApplicationUser GetUserByIdWithUndeleted(string userId);
+
+        ApplicationUser GetAllUserInfoAsync(string userId);
     }
 }

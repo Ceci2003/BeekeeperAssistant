@@ -148,5 +148,10 @@
             this.userRepository.Update(user);
             await this.userRepository.SaveChangesAsync();
         }
+
+        public ApplicationUser GetAllUserInfoAsync(string userId)
+            => this.userRepository
+                .AllWithDeleted()
+                .FirstOrDefault(u => u.Id == userId);
     }
 }

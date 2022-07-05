@@ -113,5 +113,15 @@
             this.TempData[GlobalConstants.SuccessMessage] = "Успешно възстановен потребител!";
             return this.RedirectToAction(nameof(this.All));
         }
+
+        public IActionResult Profile(string id)
+        {
+            var viewModel = new UserProfileViewModel()
+            {
+                User = this.userService.GetAllUserInfoAsync(id),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

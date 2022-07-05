@@ -1,0 +1,98 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Users.UserProfileViewModel;
+@{
+    ViewData["Title"] = $"Потребителски профил - {@Model.User.UserName}";
+}
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Dashboard" asp-action="Index">Администрация</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Dashboard" asp-action="Index">...</a>
+        </li>
+        <li class="breadcrumb-item active">@Model.User.UserName</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<h1 class="tab-title title-1">@ViewData["Title"]</h1>
+<partial name="_StatusMessagePartial" />
+<div class="user-profile">
+    <div class="data-view">
+        <div class="profile-mage">
+            <img src="~/img/userImage.png" alt="профил" height="250">
+        </div>
+        <div class="table-info">
+            <table>
+                <tbody>
+                    <tr>
+                        <th scope="row">ID:</th>
+                        <td>@Model.User.Id</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Username:</th>
+                        <td>@Model.User.UserName</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email:</th>
+                        <td>
+                            <a href="mailto:@Model.User.Email">@Model.User.Email</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Телефон:</th>
+                        <td>
+                            <a href="tel:@Model.User.PhoneNumber">@Model.User.PhoneNumber</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">EmailConfirmed:</th>
+                        <td>
+                            @if (Model.User.EmailConfirmed)
+                            {
+                                @("да");
+                            }
+                            else
+                            {
+                                <strong>НЕ</strong>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Създаден на:</th>
+                        <td>@Model.User.CreatedOn</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Редактиран на:</th>
+                        <td>@Model.User.ModifiedOn</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Изтрит:</th>
+                        <td>
+                            @if (Model.User.IsDeleted)
+                            {
+                                <strong>ДА - на @Model.User.DeletedOn</strong>
+                            }
+                            else
+                            {
+                                @("не");
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

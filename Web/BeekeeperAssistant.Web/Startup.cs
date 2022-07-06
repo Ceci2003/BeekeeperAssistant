@@ -104,6 +104,7 @@
             services.AddTransient<IBeehiveMarkFlagService, BeehiveMarkFlagService>();
             services.AddTransient<ITypeService, TypeService>();
             services.AddTransient<IExportDocumentService, ExportDocumentService>();
+            services.AddTransient<ISystemNotificationService, SystemNotificationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

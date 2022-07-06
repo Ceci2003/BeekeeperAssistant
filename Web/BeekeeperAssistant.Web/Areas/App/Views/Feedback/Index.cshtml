@@ -31,30 +31,24 @@
             </a>
         </div>
         <div class="feedback-content-card">
-            <a class="feed" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Feedback">
+            <a class="feed" asp-controller="Feedback" asp-action="Create"
+                asp-route-feedbackType="@FeedbackType.Feedback">
                 <i class="far fa-lightbulb hover-show"></i>
                 <i class="fas fa-lightbulb hover-hide"></i>
                 <p>Имате идея? Слушаме ви!</p>
             </a>
         </div>
         <div class="feedback-content-card">
-            <a class="report" asp-controller="Feedback" asp-action="Create" asp-route-feedbackType="@FeedbackType.Report">
+            <a class="report" asp-controller="Feedback" asp-action="Create"
+                asp-route-feedbackType="@FeedbackType.Report">
                 <i class="fas fa-exclamation-triangle"></i>
                 <p>Забелязали сте проблем?</p>
             </a>
         </div>
-    </div>
-    <div class="dashboard-cards-list">
         <div class="feedback-content-card">
             <a class="documentation" target="blank" href="~/documents/BeekeeperAssistant_Users_Guide.pdf">
                 <i class="fas fa-book-open"></i>
                 <p>Потребителскo ръководство</p>
-            </a>
-        </div>
-        <div class="feedback-content-card">
-            <a class="excel-export-doc" asp-controller="ExportDocument" asp-action="ExcelExportForDFZ">
-                <i class="fas fa-file-excel"></i>
-                <p>Образец ЗХОЖКФ – 87 А</p>
             </a>
         </div>
     </div>

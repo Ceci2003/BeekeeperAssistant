@@ -1,0 +1,82 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Home.AdditionalPageViewModel
+@{
+    ViewData["Title"] = "Допълнителни";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/loggedIn/views/additionalPage.css">
+</head>
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <partial name="_StatusMessagePartial" />
+    <div class="additionalPage-container">
+        <div class="system-notifications">
+            @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <div class="admin-controls">
+                    <a class="btn apiary-create" style="width:1oo%; float:none;" asp-area="Administration"
+                    asp-controller="SystemNotification" asp-action="Create">
+                        Добави известие
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="notificationс-title">
+                    Системни известия
+                </div>
+            }
+            <div class="list">
+                @foreach (var notification in Model.SystemNotifications)
+                {
+                    <div class="notification">
+                        <div class="version">
+                            <div>@notification.Version</div>
+                            <div>@notification.CreatedOn.ToString("dd-MM-yyyy")</div>
+                        </div>
+                        <h1 class="title">@notification.Title</h1>
+                        @if (notification.ImageUrl != null)
+                        {
+                            <img class="image" src="@notification.ImageUrl" alt="Снимка от статия">
+                        }
+                        <div class="notification-content">
+                            @Html.Raw(notification.Content)
+                        </div>
+                        <div class="created-on">
+                            Автор: Администратор
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="additional-buttons">
+            <div class="additional-title">
+                Експортиране на образци
+            </div>
+            <div class="list">
+                <a class="additional-button" asp-controller="ExportDocument" asp-action="ExcelExportForDFZ">
+                    <i class="fas fa-file-excel"></i>
+                    <p>Образец ЗХОЖКФ – 87 А</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.SystemNotification.CreateNotificationInputModel
+@using BeekeeperAssistant.Common
+@{
+    ViewData["Title"] = "Добавяне на системно известие";
+    int textAreaRows = 10;
+}
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ul>
+    <ul class="breadcrumb-list responsive">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="Index">Табло</a>
+        </li>
+        <li class="breadcrumb-item active">Добавяне</li>
+    </ul>
+    <div class="breadcrumb-leave">
+        <form asp-area="Identity" asp-page="/Account/Logout"
+              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="content">
+    <partial name="_StatusMessagePartial" />
+    <div class="form-box">
+        <form asp-controller="SystemNotification" asp-action="Create">
+            <h2 class="no-required">@ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            <div class="input-group max">
+                <label asp-for="@Model.Title"></label>
+                <input asp-for="@Model.Title" />
+                <span class="" asp-validation-for="@Model.Title"></span>
+            </div>
+            <div class="input-group max">
+                <label class="required" asp-for="@Model.Content"></label>
+                <textarea asp-for="@Model.Content" cols="30" rows="@textAreaRows"></textarea>
+                <span class="" asp-validation-for="@Model.Content"></span>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.Version"></label>
+                    <input asp-for="@Model.Version" value="@GlobalConstants.SystemVersion" readonly />
+                    <span class="" asp-validation-for="@Model.Version"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.ImageUrl"></label>
+                    <input asp-for="@Model.ImageUrl" />
+                    <span class="" asp-validation-for="@Model.ImageUrl"></span>
+                </div>
+            </div>
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-controller="Home" asp-action="AdditionalPage">Отмени</a>
+                <input class="btn beehive-create" type="submit" value="Добави известие" />
+            </div>
+            <div class="form-star-tip">
+                *Полетата обозначени с
+                '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+                са задължителни.
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

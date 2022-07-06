@@ -44,7 +44,9 @@
             {
                 <tr>
                     <td class="number" style="padding: 8px;">
-                        @(user.Username)
+                        <a asp-area="Administration" asp-controller="User" asp-action="Profile" asp-route-id="@user.Id">
+                            @(user.Username)
+                        </a>
                     </td>
                     <td style="text-align: center;">
                         @if (string.IsNullOrEmpty(user.PhoneNumber))

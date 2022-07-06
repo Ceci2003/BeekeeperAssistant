@@ -259,16 +259,16 @@
 
   .btn-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .btn-group input {
     margin-bottom: 15px;
   }
-
+/* 
   .btn-group input:last-child {
-    margin-bottom: 0;
-  }
+    /* margin-bottom: 0; */
+  } */
 
   .form-star-tip {
     margin-top: 30px;

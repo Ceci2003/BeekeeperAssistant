@@ -16,6 +16,7 @@
     using BeekeeperAssistant.Web.ViewModels.Beehives;
     using BeekeeperAssistant.Web.ViewModels.Home;
     using BeekeeperAssistant.Web.ViewModels.Queens;
+    using BeekeeperAssistant.Web.ViewModels.SystemNotification;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,7 @@
         private readonly IQuickChartService quickChartService;
         private readonly IEmailSender emailSender;
         private readonly IConfiguration configuration;
+        private readonly ISystemNotificationService systemNotificationService;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
@@ -44,7 +46,8 @@
             IHarvestService harvestService,
             IQuickChartService quickChartService,
             IEmailSender emailSender,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ISystemNotificationService systemNotificationService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -56,6 +59,7 @@
             this.quickChartService = quickChartService;
             this.emailSender = emailSender;
             this.configuration = configuration;
+            this.systemNotificationService = systemNotificationService;
         }
 
         public async Task<ActionResult> Index()
@@ -157,6 +161,16 @@
             {
                 StatusCode = statusCode,
                 Message = message,
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult AdditionalPage()
+        {
+            var viewModel = new AdditionalPageViewModel
+            {
+                SystemNotifications = this.systemNotificationService.GetAllNotifications<SystemNotificationViewModel>(),
             };
 
             return this.View(viewModel);

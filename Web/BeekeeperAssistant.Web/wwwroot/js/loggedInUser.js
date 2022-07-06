@@ -1,6 +1,7 @@
 ﻿const apiList = document.querySelector(".api-options");
 const beehiveList = document.querySelector(".beehive-options");
 const queenList = document.querySelector(".queen-options");
+const additionalsList = document.querySelector(".additionals-options");
 const administrationList = document.querySelector(".administration-options");
 const sidebarArrows = document.querySelectorAll(".primary .fas.fa-angle-left");
 
@@ -51,6 +52,23 @@ queensButton.addEventListener("click", (e) => {
       false,
       queenList,
       document.querySelector(".queens-drop-btn .fa-angle-left")
+    );
+  }
+});
+
+const additionalsButton = document.querySelector(".additionals-drop-btn");
+additionalsButton.addEventListener("click", (e) => {
+  if (additionalsList.classList.contains("show")) {
+    showHideMenu(
+      true,
+      additionalsList,
+      document.querySelector(".additionals-drop-btn .fa-angle-left")
+    );
+  } else {
+    showHideMenu(
+      false,
+      additionalsList,
+      document.querySelector(".additionals-drop-btn .fa-angle-left")
     );
   }
 });

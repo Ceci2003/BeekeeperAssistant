@@ -921,12 +921,6 @@ td.queen-red {
   background-color: lightyellow;
 }
 
-/* .data-table thead,
-.all-table thead {
-  position: sticky;
-  top: 40px;
-} */
-
 .data-table thead tr:hover {
   background-color: var(--transparent);
 }

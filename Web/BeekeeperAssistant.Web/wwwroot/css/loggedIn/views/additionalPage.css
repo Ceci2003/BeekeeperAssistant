@@ -91,8 +91,17 @@
     font-weight: bold;
 }
 
+.additional-buttons .additional-title.up {
+    margin-top: 20px;
+    border-top: 2px solid var(--lightgray);
+}
+
 .additional-buttons .list {
     padding: 10px;
+}
+
+.additional-buttons .list .additional-button:not(:first-child) {
+    margin-top: 10px;
 }
 
 .additional-buttons .list .additional-button {
@@ -108,8 +117,21 @@
     justify-content: space-around;
 }
 
-.additional-buttons .list .additional-button:hover {
+.additional-buttons .list .additional-button.excel-export {
+    color: var(--green-hover);
+}
+
+.additional-buttons .list .additional-button.excel-export:hover {
     background-color: var(--green-hover);
+    color: var(--white);
+}
+
+.additional-buttons .list .additional-button.documentation {
+    color: var(--orange);
+}
+
+.additional-buttons .list .documentation:hover {
+    background-color: var(--orange);
     color: var(--white);
 }
 

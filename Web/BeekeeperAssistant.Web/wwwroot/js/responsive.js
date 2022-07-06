@@ -1,1 +1,0 @@
-﻿// here is the js for the responsive design

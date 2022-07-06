@@ -42,8 +42,9 @@
             </div>
             <div class="input-group max">
                 <label class="required" asp-for="@Model.Content"></label>
-                <textarea asp-for="@Model.Content" cols="30" rows="@textAreaRows"></textarea>
-                <span class="" asp-validation-for="@Model.Content"></span>
+                @*<textarea asp-for="@Model.Content" cols="30" rows="@textAreaRows"></textarea>
+                <span class="" asp-validation-for="@Model.Content"></span>*@
+                <textarea asp-for="@Model.Content" id="tiny"></textarea>
             </div>
             <div class="row-form-group">
                 <div class="input-group">
@@ -73,5 +74,20 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        $('textarea#tiny').tinymce({
+            height: 350,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount table'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | table tabledelete | help'
+        });
+    </script>
 }
 

@@ -82,10 +82,10 @@
         public async Task<IActionResult> Contact(ContactHomeInputModel inputModel)
         {
             await this.emailSender.SendEmailAsync(
-                  inputModel.Email,
+                  this.configuration["SendGrid:RecipientEmail"],
                   string.Empty,
                   this.configuration["SendGrid:RecipientEmail"],
-                  inputModel.Subject,
+                  $"From: {inputModel.Email}, Subject: {inputModel.Subject}",
                   inputModel.Content);
 
             return this.RedirectToAction("Index", "Home");

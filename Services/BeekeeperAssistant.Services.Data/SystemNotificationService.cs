@@ -68,7 +68,7 @@
             var notifications = this.notificationRepository
                 .All()
                 .OrderByDescending(n => n.CreatedOn)
-                .Take(10)
+                .Take(5)
                 .To<T>()
                 .ToList();
 

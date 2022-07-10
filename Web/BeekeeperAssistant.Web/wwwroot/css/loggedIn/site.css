@@ -59,7 +59,8 @@ td::selection,
 img::selection,
 strong::selection,
 div::selection,
-button::selection {
+button::selection,
+em::selection {
   background-color: var(--orange);
   color: var(--white);
 }

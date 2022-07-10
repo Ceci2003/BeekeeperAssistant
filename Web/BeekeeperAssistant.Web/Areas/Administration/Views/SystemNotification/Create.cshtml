@@ -84,9 +84,13 @@
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount table'
+                'insertdatetime media table paste code help wordcount table image'
             ],
-            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | table tabledelete | help'
+            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | image | bullist numlist outdent indent | removeformat | table tabledelete | help',
+            a11y_advanced_options: true,
+            image_list: [
+                {title: 'BA Logo', value: '/img/ba_logo.svg'}
+            ]
         });
     </script>
 }

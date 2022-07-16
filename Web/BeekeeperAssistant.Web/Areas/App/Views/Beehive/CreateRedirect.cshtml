@@ -1,22 +1,20 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateRedirectBeehiveViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
 @{
     ViewData["Title"] = "Пренасочване";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+    navigation.Add("Кошери - всички", "/App/Beehive/All");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
 
-<div class="breadcrumb">
-    <div class="aside-icon" onclick="asideBurgerMenuClick();">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Табло</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="All">Кошери - всички</a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-</div>
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 <div class="content center">
     <div>

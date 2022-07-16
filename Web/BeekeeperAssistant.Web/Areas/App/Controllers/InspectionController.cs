@@ -121,8 +121,10 @@
                 var beehive = this.beehiveService.GetBeehiveById<BeehiveDataModel>(id.Value);
 
                 inputModel.BeehiveId = id.Value;
-                inputModel.ApiaryNumber = apiary.Number;
                 inputModel.BeehiveNumber = beehive.Number;
+                inputModel.ApiaryId = apiary.Id;
+                inputModel.ApiaryNumber = apiary.Number;
+                inputModel.ApiaryName = apiary.Name;
                 var apiaryAddres = apiary.Adress;
 
                 ForecastResult forecastResult = await this.forecastService.GetApiaryCurrentWeatherByCityName(apiary.Adress, this.configuration["OpenWeatherMap:ApiId"]);
@@ -267,11 +269,15 @@
             inputModel.WeatherHumidityString = inputModel.WeatherHumidity.ToString();
             inputModel.WeatherTemperatureString = inputModel.WeatherTemperature.ToString();
 
+            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var apiaryName = this.apiaryService.GetApiaryNameByBeehiveId(beehiveId);
             var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
             inputModel.BeehiveId = beehiveId;
-            inputModel.ApiaryNumber = apiaryNumber;
             inputModel.BeehiveNumber = beehiveNumber;
+            inputModel.ApiaryId = apiaryId;
+            inputModel.ApiaryNumber = apiaryNumber;
+            inputModel.ApiaryName = apiaryName;
 
             return this.View(inputModel);
         }

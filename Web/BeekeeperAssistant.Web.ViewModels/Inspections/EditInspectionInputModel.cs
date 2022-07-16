@@ -153,6 +153,10 @@
 
         public int BeehiveNumber { get; set; }
 
+        public int ApiaryId { get; set; }
+
         public string ApiaryNumber { get; set; }
+
+        public string ApiaryName { get; set; }
     }
 }

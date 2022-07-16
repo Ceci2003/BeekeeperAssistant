@@ -1,5 +1,7 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateBeehiveInputModel
-@using BeekeeperAssistant.Data.Models;
+@using BeekeeperAssistant.Data.Models
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
 @{
     this.ViewData["Title"] = "Добавяне на кошер";
 
@@ -8,37 +10,19 @@
     {
         keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
     }
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+    navigation.Add("Кошери - всички", "/App/Beehive/All");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
 
-<div class="breadcrumb">
-    <div class="aside-icon" onclick="asideBurgerMenuClick();">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Табло</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="All">Кошери - всички</a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <ul class="breadcrumb-list responsive">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Табло</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a asp-controller="Beehive" asp-action="All">Кошери</a>
-        </li>
-        <li class="breadcrumb-item active">Добавяне</li>
-    </ul>
-    <div class="breadcrumb-leave">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-              asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
-    </div>
-</div>
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 <div class="content">
     <partial name="_StatusMessagePartial" />

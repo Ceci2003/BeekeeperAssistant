@@ -1919,7 +1919,7 @@ textarea {
 
 /* Breadcrumb */
 
-.breadcrumb {
+/* .breadcrumb {
   position: fixed;
   top: 0;
   display: flex;
@@ -1980,7 +1980,7 @@ textarea {
 
 .breadcrumb .breadcrumb-leave form .exit:hover {
   color: var(--red);
-}
+} */
 
 /* Pagination */
 .pagination {

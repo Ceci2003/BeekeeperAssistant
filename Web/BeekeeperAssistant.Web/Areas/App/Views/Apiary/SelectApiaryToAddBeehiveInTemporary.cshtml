@@ -1,4 +1,6 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.SelectApiaryToAddBeehiveInTemporaryInputModel;
+﻿@model BeekeeperAssistant.Web.ViewModels.Apiaries.SelectApiaryToAddBeehiveInTemporaryInputModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
 @{
     this.ViewData["Title"] = "Избиране на пчелин";
 
@@ -7,55 +9,30 @@
     {
         keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
     }
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+
+    var title = "";
+    @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
+    {
+        title = $"Пчелин № {Model.TemporaryNumber}";
+    }
+    else
+    {
+        title = Model.TemporaryName;
+    }
+
+    navigation.Add(title, $"/App/Apiary/ById/{Model.TemporaryId}");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
 
-<div class="breadcrumb">
-    <div class="aside-icon" onclick="asideBurgerMenuClick();">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Табло</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.TemporaryId">
-                @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
-                {
-                    @($"Пчелин № {Model.TemporaryNumber}")
-                }
-                else
-                {
-                    @Model.TemporaryName
-                }
-            </a>
-        </li>
-        <li class="breadcrumb-item active">Избиране</li>
-    </ul>
-    <ul class="breadcrumb-list responsive">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">...</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.TemporaryId">
-                @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
-                {
-                    @Model.TemporaryNumber
-                }
-                else
-                {
-                    @Model.TemporaryName
-                }
-            </a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <div class="breadcrumb-leave">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
-    </div>
-</div>
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 <h1 class="tab-title title-1">
     @if (!string.IsNullOrEmpty(Model.TemporaryNumber))
@@ -77,7 +54,7 @@
         </span>
     </a>
     <a class="tablinks active" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
-        asp-route-id="@Model.TemporaryId">
+       asp-route-id="@Model.TemporaryId">
         <i class="fas fa-border-all"></i>
         <span class="text">
             Кошери
@@ -101,7 +78,7 @@
     <div id="SelectApiary" class="tabcontent">
         <div class="form-box">
             <form asp-controller="Apiary" asp-action="SelectApiaryToAddBeehiveInTemporary"
-                asp-route-id="@Model.TemporaryId">
+                  asp-route-id="@Model.TemporaryId">
                 <h2>@ViewData["Title"]</h2>
                 @if (Model.AllApiaries != null)
                 {
@@ -122,7 +99,7 @@
                 }
                 <div class="btn-group more">
                     <a class="back-button btn form-back" asp-controller="Beehive" asp-action="AllByMovableApiaryId"
-                        asp-route-id="@Model.TemporaryId">Отмени</a>
+                       asp-route-id="@Model.TemporaryId">Отмени</a>
                     <input class="btn beehive-create" type="submit" value="Избери" />
                 </div>
             </form>

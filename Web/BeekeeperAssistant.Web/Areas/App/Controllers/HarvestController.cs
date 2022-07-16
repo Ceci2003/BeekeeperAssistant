@@ -109,11 +109,13 @@
             else
             {
                 var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(id.Value);
+                var apiaryName = this.apiaryService.GetApiaryNameByBeehiveId(id.Value);
                 var beehiveNumber = this.beehiveService.GetBeehiveNumberById(id.Value);
 
                 inputModel.ApiaryId = this.apiaryService.GetApiaryIdByBeehiveId(id.Value);
                 inputModel.BeehiveId = id.Value;
                 inputModel.ApiaryNumber = apiaryNumber;
+                inputModel.ApiaryName = apiaryName;
                 inputModel.BeehiveNumber = beehiveNumber;
             }
 
@@ -183,10 +185,14 @@
             var beehiveId = this.beehiveService.GetBeehiveIdByHarvesId(id);
 
             var apiaryNumber = this.apiaryService.GetApiaryNumberByBeehiveId(beehiveId);
+            var apiaryName = this.apiaryService.GetApiaryNameByBeehiveId(beehiveId);
+            var apiaryId = this.apiaryService.GetApiaryIdByBeehiveId(beehiveId);
             var beehiveNumber = this.beehiveService.GetBeehiveNumberById(beehiveId);
 
             inputModel.BeehiveId = beehiveId;
             inputModel.ApiaryNumber = apiaryNumber;
+            inputModel.ApiaryName = apiaryName;
+            inputModel.ApiaryId = apiaryId;
             inputModel.BeehiveNumber = beehiveNumber;
 
             return this.View(inputModel);

@@ -1,56 +1,33 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Treatments.AllByBeehiveIdTreatementViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
 @{
     this.ViewData["Title"] = "Информация за кошер - №" + Model.BeehiveNumber;
     var onlyReadMsg = "нямате достъп";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+
+    var title = "";
+    if (!string.IsNullOrEmpty(Model.ApiaryNumber))
+    {
+        title = Model.ApiaryNumber;
+    }
+    else
+    {
+        title = Model.ApiaryName;
+    }
+
+    navigation.Add(title, $"/App/Apiary/ById/{Model.ApiaryId}");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
 
-<div class="breadcrumb">
-    <div class="aside-icon" onclick="asideBurgerMenuClick();">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">Табло</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
-                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
-                {
-                    @($"Пчелин № {Model.ApiaryNumber}")
-                }
-                else
-                {
-                    @Model.ApiaryName
-                }
-            </a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <ul class="breadcrumb-list responsive">
-        <li class="breadcrumb-item">
-            <a asp-controller="Home" asp-action="Index">...</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class="tablinks active" asp-controller="Apiary" asp-action="ById" asp-route-id="@Model.ApiaryId">
-                @if (!string.IsNullOrEmpty(Model.ApiaryNumber))
-                {
-                    @($"Пчелин № {Model.ApiaryNumber}")
-                }
-                else
-                {
-                    @Model.ApiaryName
-                }
-            </a>
-        </li>
-        <li class="breadcrumb-item active">@Model.BeehiveNumber</li>
-    </ul>
-    <div class="breadcrumb-leave">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
-    </div>
-</div>
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 <h1 class="tab-title title-1">Информация за кошер - №@Model.BeehiveNumber</h1>
 <div class="tab beehive">

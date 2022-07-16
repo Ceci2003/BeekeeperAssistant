@@ -1,4 +1,6 @@
 ﻿@model BeekeeperAssistant.Web.ViewModels.Inspections.AllByBeehiveIdInspectionViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
 @{
     this.ViewData["Title"] = "Информация за кошер - №" + Model.BeehiveNumber;
     Dictionary<string, string> powerClasses = new Dictionary<string, string>();
@@ -9,7 +11,34 @@
     var onlyReadMsg = "нямате достъп";
 
     string website = $"{this.Context.Request.Scheme}://{this.Context.Request.Host}{this.Context.Request.Path}";
+
+    var navigation = new Dictionary<string, string>();
+    @if (Model.BeehiveId != null)
+    {
+        navigation.Add("...", "/App");
+        if(Model.ApiaryNumber != null)
+        {
+            navigation.Add(Model.ApiaryNumber, $"/App/Apiary/ById/{Model.ApiaryId}");
+        }
+        else
+        {
+            navigation.Add(Model.ApiaryName, $"/App/Apiary/ById/{Model.ApiaryId}");
+        }
+        navigation.Add(Model.BeehiveNumber.ToString(), $"/App/Harvest/AllByBeehiveId/{Model.BeehiveId}");
+    }
+    else
+    {
+        navigation.Add("Табло", "/App");
+    }
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
+
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 <div class="breadcrumb">
     <div class="aside-icon" onclick="asideBurgerMenuClick();">

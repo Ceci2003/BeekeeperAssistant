@@ -58,6 +58,8 @@
 
         public string ApiaryNumber { get; set; }
 
+        public string ApiaryName { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errorList = new List<ValidationResult>();

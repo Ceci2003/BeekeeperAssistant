@@ -1,4 +1,6 @@
-﻿@{
+﻿@using BeekeeperAssistant.Web.ViewModels.Shared
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout;
@@ -7,32 +9,19 @@
     {
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Управление на профила", "/Identity/Account/Manage");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
 <link rel="stylesheet" href="~/css/profile.css">
 
-<div class="breadcrumb">
-    <div class="aside-icon" onclick="asideBurgerMenuClick();">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-page="./Index">Управление на профилa</a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <ul class="breadcrumb-list responsive">
-        <li class="breadcrumb-item">
-            <a asp-page="./Index">Профил</a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <div class="breadcrumb-leave">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
-    </div>
-</div>
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 
 <div class="profile-content">

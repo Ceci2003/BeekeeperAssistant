@@ -1,31 +1,21 @@
-﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Users.UserProfileViewModel;
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Users.UserProfileViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
 @{
     ViewData["Title"] = $"Потребителски профил - {@Model.User.UserName}";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Администрация", "/Administration/Dashboard");
+    navigation.Add("Потребители", "/Administration/User/All");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
 }
 
-<div class="breadcrumb">
-    <div class="aside-icon" onclick="asideBurgerMenuClick();">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item">
-            <a asp-controller="Dashboard" asp-action="Index">Администрация</a>
-        </li>
-        <li class="breadcrumb-item active">@ViewData["Title"]</li>
-    </ul>
-    <ul class="breadcrumb-list responsive">
-        <li class="breadcrumb-item">
-            <a asp-controller="Dashboard" asp-action="Index">...</a>
-        </li>
-        <li class="breadcrumb-item active">@Model.User.UserName</li>
-    </ul>
-    <div class="breadcrumb-leave">
-        <form asp-area="Identity" asp-page="/Account/Logout"
-            asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-            <button type="submit" class="exit"><i class="fas fa-sign-out-alt"></i></button>
-        </form>
-    </div>
-</div>
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
 <h1 class="tab-title title-1">@ViewData["Title"]</h1>
 <partial name="_StatusMessagePartial" />
@@ -54,7 +44,14 @@
                     <tr>
                         <th scope="row">Телефон:</th>
                         <td>
-                            <a href="tel:@Model.User.PhoneNumber">@Model.User.PhoneNumber</a>
+                            @if (Model.User.PhoneNumber == null)
+                            {
+                                @("не е въведен")
+                            }
+                            else
+                            {
+                                <a href="tel:@Model.User.PhoneNumber">@Model.User.PhoneNumber</a>
+                            }
                         </td>
                     </tr>
                     <tr>
@@ -62,7 +59,8 @@
                         <td>
                             @if (Model.User.EmailConfirmed)
                             {
-                                @("да");
+                                @("да")
+                                ;
                             }
                             else
                             {
@@ -87,7 +85,8 @@
                             }
                             else
                             {
-                                @("не");
+                                @("не")
+                                ;
                             }
                         </td>
                     </tr>

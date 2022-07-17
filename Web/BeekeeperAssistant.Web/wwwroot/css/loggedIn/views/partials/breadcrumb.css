@@ -1,0 +1,142 @@
+.breadcrumb {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  background-color: var(--main-background);
+  z-index: 2;
+}
+
+.breadcrumb .aside-icon {
+  display: none;
+  color: var(--white);
+  margin-left: 10px;
+}
+
+.breadcrumb .breadcrumb-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.breadcrumb .breadcrumb-list .breadcrumb-item:not(:last-child)::after {
+  content: "/";
+  color: var(--orange);
+  margin: 0 5px;
+}
+
+.breadcrumb .breadcrumb-list .breadcrumb-item a {
+  color: var(--white);
+}
+
+.breadcrumb .breadcrumb-list .breadcrumb-item.active {
+  color: var(--orange);
+}
+
+.breadcrumb .dropdown {
+  position: inherit;
+  right: 0;
+}
+
+.breadcrumb .dropbtn {
+  background-color: var(--beehive-color);
+  color: var(--white);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.breadcrumb .dropbtn i {
+  margin-right: 10px;
+}
+
+.breadcrumb .dropbtn .click {
+  height: 40px;
+  width: 100%;
+  position: absolute;
+}
+
+.breadcrumb .dropbtn:hover,
+.breadcrumb .dropbtn:focus,
+.breadcrumb .dropbtn:focus-visible {
+  background-color: var(--orange);
+}
+
+.breadcrumb .dropdown .dropdown-content {
+  display: none;
+  position: fixed;
+  right: 0;
+  background-color: var(--expand-row-background);
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: -5px 8px 16px 0 rgb(0 0 0 / 20%);
+  z-index: 1;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.breadcrumb .dropdown .dropdown-content.show {
+  display: flex;
+}
+
+.breadcrumb .dropdown .dropdown-content a,
+.breadcrumb .dropdown .dropdown-content .leave form button {
+  color: var(--black);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.breadcrumb .dropdown .dropdown-content a i,
+.breadcrumb .dropdown .dropdown-content .leave form button i {
+  margin-right: 10px;
+}
+
+.breadcrumb .dropdown .dropdown-content a:hover,
+.breadcrumb .dropdown .dropdown-content .leave form button:hover {
+  background-color: var(--lightgray);
+}
+
+.breadcrumb .dropdown .dropdown-content .leave {
+  border-top: 2px solid var(--darkgray);
+}
+
+.breadcrumb .dropdown .dropdown-content .leave form button {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1023px) {
+  .breadcrumb .aside-icon {
+    display: block;
+  }
+
+  .breadcrumb .breadcrumb-list .breadcrumb-item:not(.active) {
+    display: none;
+  }
+
+  .breadcrumb .dropdown {
+    position: unset;
+  }
+
+  .breadcrumb .dropdown .dropbtn .text {
+    display: none;
+  }
+
+  .breadcrumb .dropdown .dropbtn i {
+    margin: 0;
+  }
+}

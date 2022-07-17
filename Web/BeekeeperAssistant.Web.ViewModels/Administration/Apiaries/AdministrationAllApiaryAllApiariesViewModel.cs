@@ -20,6 +20,8 @@
 
         public string CreatorUserName { get; set; }
 
+        public string CreatorId { get; set; }
+
         public int Id { get; set; }
 
         public DateTime CreatedOn { get; set; }

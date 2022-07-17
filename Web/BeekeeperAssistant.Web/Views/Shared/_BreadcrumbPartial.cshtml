@@ -1,0 +1,60 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Shared.BreadcrumbModel
+
+<link rel="stylesheet" href="~/css/loggedIn/views/partials/breadcrumb.css">
+
+<div class="breadcrumb">
+    <div class="aside-icon" onclick="asideBurgerMenuClick();">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <ul class="breadcrumb-list">
+        @foreach (var path in Model.Navigation)
+        {
+            if (path.Value == null)
+            {
+                <li class="breadcrumb-item active">@path.Key</li>
+            }
+            else
+            {
+                <li class="breadcrumb-item">
+                    <a href="@path.Value">@path.Key</a>
+                </li>
+            }
+        }
+    </ul>
+
+    <div class="dropdown">
+        <div>
+            <div class="dropbtn">
+                <i class="fas fa-chevron-circle-down"></i>
+                <div class="text">@User.Identity.Name.Split('@')[0]</div>
+                <div class="click" onclick="showDropdown()"></div>
+            </div>
+        </div>
+
+        <div id="dropdown-list" class="dropdown-content">
+            <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                <i class="fas fa-user-circle"></i>
+                Профил
+            </a>
+            <a asp-area="App" asp-controller="Feedback" asp-action="Create"
+                asp-route-feedbackType="@FeedbackType.Report">
+                <i class="fas fa-exclamation-triangle"></i>
+                Забелязали сте проблем?
+            </a>
+            <div class="leave">
+                <form asp-area="Identity" asp-page="/Account/Logout"
+                    asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+                    <button type="submit" class="exit">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Изход
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/js/views/partials/breadcrumbPartial.js" type="text/javascript"></script>

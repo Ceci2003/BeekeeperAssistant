@@ -6,6 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
@@ -13,6 +14,8 @@
     // {area}{action}{controller}{FieldName?}ViewModel
     public class AdministrationAllApiaryViewModel
     {
+        public FilterModel ApiariesFilter { get; set; }
+
         public IEnumerable<AdministrationAllApiaryAllApiariesViewModel> AllApiaries { get; set; }
 
         public int CurrentPage { get; set; }

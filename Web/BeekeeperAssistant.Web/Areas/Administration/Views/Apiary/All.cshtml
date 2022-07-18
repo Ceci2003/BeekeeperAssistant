@@ -20,99 +20,106 @@
     <partial name="_StatusMessagePartial" />
 
     <h1 class="title-1">@ViewData["Title"]</h1>
-    <table class="data-table administration">
-        <thead>
-            <tr>
-                <th>Номер</th>
-                <th>Собственик</th>
-                <th>Създаден на</th>
-                <th>Изтрит на</th>
-                <th>Статус</th>
-                <th>Опция</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var apiary in Model.AllApiaries)
-            {
-                <tr>
-                    <td class="number">
-                        @if (!apiary.IsDeleted)
-                        {
-                            <a asp-area="App" asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
-                                @if (apiary.Number != null)
-                                {
-                                    @apiary.Number
-                                }
-                                else
-                                {
-                                    @apiary.Name
-                                }
-                            </a>
-                        }
-                        else
-                        {
-                            <a style="pointer-events: none; color: #110400;" asp-area="App" asp-controller="Apiary"
-                        asp-action="ById" asp-route-id="@apiary.Id">
-                                @if (apiary.Number != null)
-                                {
-                                    @apiary.Number
-                                }
-                                else
-                                {
-                                    @apiary.Name
-                                }
-                            </a>
-                        }
-                    </td>
-                    <td class="number" style="padding: 8px;">
-                        <a asp-area="Administration" asp-controller="User" asp-action="Profile" asp-route-id="@apiary.CreatorId">
-                            @(apiary.CreatorUserName)
-                        </a>
-                    </td>
-                    <td>
-                        @apiary.CreatedOn.ToString("ddd dd-MMMM-yyyy")
-                    </td>
-                    <td>
-                        @if (apiary.IsDeleted)
-                        {
-                            @apiary.DeletedOn.ToString("ddd dd-MMMM-yyyy")
-                        }
-                        else
-                        {
-                            @("-")
-                        }
-                    </td>
 
-                    <td style="color: @if (apiary.IsDeleted) @("#d9695d") else @("#558b2f");">
-                        @if (apiary.IsDeleted)
-                        {
-                            <div style="font-weight: 500;">Изтрит</div>
-                        }
-                        else
-                        {
-                            <div>Активен</div>
-                        }
-                    </td>
-                    <td class="edit-delete" style="padding: 4px;">
-                        @if (!apiary.IsDeleted)
-                        {
-                            <form method="post" asp-area="Administration" asp-controller="Apiary" asp-action="Delete"
-                        asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
-                                <button type="submit" class="btn delete">Изтрий</button>
-                            </form>
-                        }
-                        else
-                        {
-                            <form method="post" asp-area="Administration" asp-controller="Apiary" asp-action="Undelete"
-                        asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
-                                <button type="submit" class="btn edit">Възстанови</button>
-                            </form>
-                        }
-                    </td>
+    <partial model="@Model.ApiariesFilter" name="_FiltersPartial" />
+
+    <div class="overflow-table-container">
+        <table class="data-table administration">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Собственик</th>
+                    <th>Създаден на</th>
+                    <th>Изтрит на</th>
+                    <th>Статус</th>
+                    <th>Опция</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var apiary in Model.AllApiaries)
+                {
+                    <tr>
+                        <td class="number">
+                            @if (!apiary.IsDeleted)
+                            {
+                                <a asp-area="App" asp-controller="Apiary" asp-action="ById" asp-route-id="@apiary.Id">
+                                    @if (apiary.Number != null)
+                                    {
+                                        @apiary.Number
+                                    }
+                                    else
+                                    {
+                                        @apiary.Name
+                                    }
+                                </a>
+                            }
+                            else
+                            {
+                                <a style="pointer-events: none; color: #110400;" asp-area="App" asp-controller="Apiary"
+                            asp-action="ById" asp-route-id="@apiary.Id">
+                                    @if (apiary.Number != null)
+                                    {
+                                        @apiary.Number
+                                    }
+                                    else
+                                    {
+                                        @apiary.Name
+                                    }
+                                </a>
+                            }
+                        </td>
+                        <td class="number" style="padding: 8px;">
+                            <a asp-area="Administration" asp-controller="User" asp-action="Profile"
+                            asp-route-id="@apiary.CreatorId">
+                                @(apiary.CreatorUserName)
+                            </a>
+                        </td>
+                        <td>
+                            @apiary.CreatedOn.ToString("ddd dd-MMMM-yyyy")
+                        </td>
+                        <td>
+                            @if (apiary.IsDeleted)
+                            {
+                                @apiary.DeletedOn.ToString("ddd dd-MMMM-yyyy")
+                            }
+                            else
+                            {
+                                @("-")
+                            }
+                        </td>
+
+                        <td style="color: @if (apiary.IsDeleted) @("#d9695d") else @("#558b2f");">
+                            @if (apiary.IsDeleted)
+                            {
+                                <div style="font-weight: 500;">Изтрит</div>
+                            }
+                            else
+                            {
+                                <div>Активен</div>
+                            }
+                        </td>
+                        <td class="edit-delete" style="padding: 4px;">
+                            @if (!apiary.IsDeleted)
+                            {
+                                <form method="post" asp-area="Administration" asp-controller="Apiary" asp-action="Delete"
+                            asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                    <button type="submit" class="btn delete">Изтрий</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" asp-area="Administration" asp-controller="Apiary" asp-action="Undelete"
+                            asp-route-id="@apiary.Id" asp-route-returnUrl="@this.Context.Request.Path">
+                                    <button type="submit" class="btn edit">Възстанови</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
     <div class="pagination">
         <ul>
             @if (this.Model.CurrentPage == 1)

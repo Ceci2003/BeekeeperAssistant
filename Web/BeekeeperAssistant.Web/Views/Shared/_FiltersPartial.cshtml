@@ -3,15 +3,15 @@
 <link rel="stylesheet" href="~/css/loggedIn/views/tableFiltering.css">
 
 <div class="table-filters">
-    <form class="flex-row" method="get">
+    <form class="form-inline" method="get">
 
-        <div class="margin-small-right">
+        <div class="filter">
             <label asp-for="@Model.PropertyName">Ред:</label>
             <select id="order" asp-for="@Model.Order" asp-items="@Html.GetEnumSelectList<Order>()"
                 onchange="hideFilter(this)"></select>
         </div>
 
-        <div id="column" class="margin-small-right slide-right">
+        <div id="column" class="filter">
             <label asp-for="@Model.PropertyName">Колона:</label>
             <select asp-for="@Model.PropertyName">
                 @for (int i = 0; i < Model.Data.ModelProperties.Count(); i++)

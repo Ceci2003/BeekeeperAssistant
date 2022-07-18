@@ -2745,3 +2745,6 @@ th a.ordered {
     margin-right: 20px
 }
 
+.overflow-table-container {
+  overflow-x: auto;
+}

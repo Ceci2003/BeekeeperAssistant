@@ -6,6 +6,8 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Common;
+    using BeekeeperAssistant.Data.Filters.Models;
+    using BeekeeperAssistant.Services;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Web.ViewModels.Administration.Apiaries;
     using BeekeeperAssistant.Web.ViewModels.Apiaries;
@@ -14,13 +16,19 @@
     public class ApiaryController : AdministrationController
     {
         private readonly IApiaryService apiaryService;
+        private readonly ITypeService typeService;
 
-        public ApiaryController(IApiaryService apiaryService)
+        public ApiaryController(
+            IApiaryService apiaryService,
+            ITypeService typeService)
         {
             this.apiaryService = apiaryService;
+            this.typeService = typeService;
         }
 
-        public IActionResult All(int page = 1)
+        public IActionResult All(
+            FilterModel filterModel,
+            int page = 1)
         {
             if (page <= 0)
             {
@@ -32,9 +40,19 @@
 
             var viewModel = new AdministrationAllApiaryViewModel
             {
+                ApiariesFilter = new FilterModel
+                {
+                    Data = new FilterData
+                    {
+                        ModelProperties = this.typeService.GetAllTypePropertiesName(typeof(AdministrationAllApiaryFilterModel)),
+                        ModelPropertiesDisplayNames = this.typeService.GetAllTypePropertiesDisplayName(typeof(AdministrationAllApiaryFilterModel)),
+                        PageNumber = page,
+                    },
+                },
                 AllApiaries = this.apiaryService.GetAllApiariesWithDeleted<AdministrationAllApiaryAllApiariesViewModel>(
                     GlobalConstants.ApiariesPerPageAdministration,
-                    (page - 1) * GlobalConstants.ApiariesPerPageAdministration),
+                    (page - 1) * GlobalConstants.ApiariesPerPageAdministration,
+                    filterModel),
                 PagesCount = pagesCount,
             };
 

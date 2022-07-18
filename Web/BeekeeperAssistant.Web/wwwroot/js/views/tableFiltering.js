@@ -12,13 +12,18 @@ function hideFilter() {
     if (window.innerWidth < 767) {
       input.classList.add("up");
     }
-    if (window.innerWidth > 767) {
-      input.classList.add("up");
+    else {
+      input.classList.add("slide-bck-left-btn");
     }
   } else {
     column.classList.remove("slide-bck-left");
     column.classList.add("slide-right");
 
-    input.classList.remove("up");
+    if (window.innerWidth < 767) {
+      input.classList.remove("up");
+    }
+    else {
+      input.classList.remove("slide-bck-left-btn");
+    }
   }
 }

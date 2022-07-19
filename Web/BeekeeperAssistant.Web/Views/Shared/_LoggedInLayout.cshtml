@@ -1,6 +1,11 @@
 ﻿@using BeekeeperAssistant.Common
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     string startClass = " start";
+
+    var user = await UserManager.GetUserAsync(User); 
 }
 
 <!DOCTYPE html>
@@ -36,7 +41,14 @@
         </section>
         <section class="user-area">
             <div class="user-image">
-                <img src="~/img/userImage.png" alt="профил">
+                @if (user.ProfileImageUrl != null)
+                {
+                    <img src="@user.ProfileImageUrl" alt="профил">
+                }
+                else
+                {
+                    <img src="~/img/userImage.png" alt="профил">
+                }
             </div>
             <div class="user-greeting">
                 <p id="greet-message">Hello,</p>
@@ -103,7 +115,6 @@
                         </a>
                     </div>
                 </section>
-
             }
             <section
                 class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">

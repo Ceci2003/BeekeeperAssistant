@@ -22,7 +22,14 @@
 <div class="user-profile">
     <div class="data-view">
         <div class="profile-mage">
-            <img src="~/img/userImage.png" alt="профил" height="250">
+            @if (Model.User.ProfileImageUrl != null)
+            {
+                <img src="@Model.User.ProfileImageUrl" alt="профил" width="250">
+            }
+            else
+            {
+                <img src="~/img/userImage.png" alt="профил" width="250" >
+            }
         </div>
         <div class="table-info">
             <table>

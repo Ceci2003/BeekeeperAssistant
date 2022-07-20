@@ -3,7 +3,7 @@
     public static class GlobalConstants
     {
         public const string SystemName = "BeekeeperAssistant";
-        public const string SystemVersion = "v1.3.3";
+        public const string SystemVersion = "v1.3.4";
         public const string AdministratorRoleName = "Administrator";
         public const string SearchKeywords = "BeekeeperAssistant, beekeeperassistant, Beekeeper Assistant, beekeeper assistant, пчеларство, пчели, дфз, фонд земеделие, държавен фонд земеделие, пчеларски софтуер, пчеларска програма, пчеларски програми, земеделие, пчелин, кошери, пчелни майки, майки";
         public const string SearchDescription = "BeekeeperAssistant е съвременният дневник на пчеларя. Той дава на пчеларите възможност да улеснят работата си, като следят информацията и дейностите по пчелините и кошерите.";

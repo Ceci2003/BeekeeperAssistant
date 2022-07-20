@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BeekeeperAssistant.Common\BeekeeperAssistant.Common.csproj" />
+    <ProjectReference Include="..\..\BeekeeperAssistant.Services.Cloudinary\BeekeeperAssistant.Services.Cloudinary.csproj" />
     <ProjectReference Include="..\..\Data\BeekeeperAssistant.Data.Models\BeekeeperAssistant.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\BeekeeperAssistant.Data\BeekeeperAssistant.Data.csproj" />
     <ProjectReference Include="..\..\Services\BeekeeperAssistant.Services.Data\BeekeeperAssistant.Services.Data.csproj" />

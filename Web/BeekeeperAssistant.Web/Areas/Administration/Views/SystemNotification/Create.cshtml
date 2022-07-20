@@ -22,7 +22,7 @@
 <div class="content">
     <partial name="_StatusMessagePartial" />
     <div class="form-box">
-        <form asp-controller="SystemNotification" asp-action="Create">
+        <form asp-controller="SystemNotification" asp-action="Create" style="width: 100%;">
             <h2 class="no-required">@ViewData["Title"]</h2>
             <div class="error-msg" asp-validation-summary="All"></div>
             <div class="input-group max">
@@ -39,7 +39,7 @@
             <div class="row-form-group">
                 <div class="input-group">
                     <label asp-for="@Model.Version"></label>
-                    <input asp-for="@Model.Version" value="@GlobalConstants.SystemVersion" readonly />
+                    <input asp-for="@Model.Version" value="@GlobalConstants.SystemVersion" />
                     <span class="" asp-validation-for="@Model.Version"></span>
                 </div>
                 <div class="input-group">
@@ -70,13 +70,16 @@
     <script>
         $('textarea#tiny').tinymce({
             height: 350,
-            menubar: false,
+            menubar: true,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount table image'
+                'insertdatetime media table paste code help wordcount table image',
+                'link preview code'
             ],
-            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | image | bullist numlist outdent indent | removeformat | table tabledelete | help',
+        	toolbar_mode: 'wide',
+            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | image | bullist numlist outdent indent | removeformat | table tabledelete | link anchor preview  code | help'
+            ,
             a11y_advanced_options: true,
             image_list: [
                 {title: 'BA Logo', value: '/img/ba_logo.svg'}

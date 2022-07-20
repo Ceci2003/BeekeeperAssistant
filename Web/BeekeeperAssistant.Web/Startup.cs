@@ -13,6 +13,7 @@
     using BeekeeperAssistant.Data.Repositories;
     using BeekeeperAssistant.Data.Seeding;
     using BeekeeperAssistant.Services;
+    using BeekeeperAssistant.Services.Cloudinary;
     using BeekeeperAssistant.Services.Data;
     using BeekeeperAssistant.Services.Data.Models;
     using BeekeeperAssistant.Services.Mapping;
@@ -79,6 +80,7 @@
 
             // Application services
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiId"]));
+            services.AddTransient<ICloudinaryUploader>(x => new CloudinaryUploader(this.configuration["Cloudinary:CloudName"], this.configuration["Cloudinary:APIKey"], this.configuration["Cloudinary:APISecret"]));
             services.AddTransient<IApiaryService, ApiaryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IForecastService, ForecastService>();

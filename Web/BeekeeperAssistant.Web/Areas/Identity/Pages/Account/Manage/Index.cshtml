@@ -22,13 +22,11 @@
         <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="file" asp-for="Input.ImageFile" placeholder="Hello" id="imgInp">
+        <input type="file" asp-for="Input.ImageFile" placeholder="Hello" id="imgInp" accept=".jpg,.png,.gif,.tiff,.svg">
     </div>
-    <div class="form-group">
-        <label asp-for="Input.ImageUrl"></label>
-        <input asp-for="Input.ImageUrl" class="file-path validate" type="text" placeholder="Изберете профилна снимка"
-            readonly>
-    </div>
+
+    <input type="hidden" asp-for="Input.ImageUrl">
+
     <button id="update-profile-button" type="submit" class="btn btn-info">Запази</button>
 </form>
 

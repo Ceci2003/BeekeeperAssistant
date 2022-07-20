@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Services.Cloudinary;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Http;
@@ -20,16 +21,16 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IConfiguration configuration;
+        private readonly ICloudinaryUploader cloudinaryUploader;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            ICloudinaryUploader cloudinaryUploader)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.configuration = configuration;
+            this.cloudinaryUploader = cloudinaryUploader;
         }
 
         public string Username { get; set; }
@@ -105,54 +106,27 @@
                 }
             }
 
-            //var cloudinaryAccount = this.configuration.GetSection("Cloudinary");
-
-            Account account = new Account(
-                this.configuration["Cloudinary:CloudName"],
-                this.configuration["Cloudinary:APIKey"],
-                this.configuration["Cloudinary:APISecret"]);
-                //cloudinaryAccount["CloudName"],
-                //cloudinaryAccount["APIKey"],
-                //cloudinaryAccount["APISecret"]
-
-            Cloudinary cloudinary = new Cloudinary(account);
-
             var file = this.Input.ImageFile;
-
-            var uploadResult = new ImageUploadResult();
-
-            var imageUrl = "";
 
             if (file != null)
             {
-                if (file.Length > 0)
+                var url = await this.cloudinaryUploader.UploadImageAsync(user.Id, file, "profile", user.Id, true);
+
+                if (!string.IsNullOrEmpty(url))
                 {
-                    string fileExtension = Path.GetExtension(file.FileName);
-
-                    using (var stream = file.OpenReadStream())
-                    {
-                        var uploadParams = new ImageUploadParams()
-                        {
-                            File = new FileDescription($"{user.Id}{fileExtension}", stream),
-                            Overwrite = true,
-                            Folder = "beekeeper_assistant",
-                            PublicId = $"profile/{user.Id}",
-                            //PublicId = $"beekeeper_assistant/{user.Id}.{fileExtension}",
-                            //Transformation = new Transformation().Width(100).Height(100).Gravity("face").Radius("max").Border("2px_solid_white").Crop("thumb"),
-                        };
-
-                        uploadResult = cloudinary.Upload(uploadParams);
-                    }
+                    user.ProfileImageUrl = url;
                 }
-
-                imageUrl = uploadResult.Uri.ToString();
+                else
+                {
+                    user.ProfileImageUrl = this.Input.ImageUrl;
+                }
             }
             else
             {
-                imageUrl = this.Input.ImageUrl;
+
+                user.ProfileImageUrl = this.Input.ImageUrl;
             }
 
-            user.ProfileImageUrl = imageUrl;
             var setImageResult = await this.userManager.UpdateAsync(user);
             if (!setImageResult.Succeeded)
             {

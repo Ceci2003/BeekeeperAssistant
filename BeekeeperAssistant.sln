@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeekeeperAssistant.Web.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeekeeperAssistant.Web.ViewModels", "Web\BeekeeperAssistant.Web.ViewModels\BeekeeperAssistant.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeekeeperAssistant.Data.Filters", "BeekeeperAssistant.Data.Filters\BeekeeperAssistant.Data.Filters.csproj", "{1C6F2569-1262-4F4F-9726-12E9CE8D1183}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeekeeperAssistant.Data.Filters", "BeekeeperAssistant.Data.Filters\BeekeeperAssistant.Data.Filters.csproj", "{1C6F2569-1262-4F4F-9726-12E9CE8D1183}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeekeeperAssistant.Services.Cloudinary", "BeekeeperAssistant.Services.Cloudinary\BeekeeperAssistant.Services.Cloudinary.csproj", "{70613645-FDBA-4704-914E-BE12502BCE9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{1C6F2569-1262-4F4F-9726-12E9CE8D1183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C6F2569-1262-4F4F-9726-12E9CE8D1183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C6F2569-1262-4F4F-9726-12E9CE8D1183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70613645-FDBA-4704-914E-BE12502BCE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70613645-FDBA-4704-914E-BE12502BCE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70613645-FDBA-4704-914E-BE12502BCE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70613645-FDBA-4704-914E-BE12502BCE9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{3EE06C6E-C8F3-418A-A309-8AC81976A074} = {7A731632-6714-44E2-A9E4-069EBA9E666C}
 		{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7} = {E389DEB6-5F90-444B-A054-12A10D39C76F}
 		{1C6F2569-1262-4F4F-9726-12E9CE8D1183} = {ACBE44C4-E198-45E2-BA02-6655250A0006}
+		{70613645-FDBA-4704-914E-BE12502BCE9A} = {516E002B-9E6E-4456-B7F6-EAA353966DE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {384484BE-4680-4529-9CC2-AD37BA4D12D1}

@@ -5,7 +5,7 @@
 @{
     string startClass = " start";
 
-    var user = await UserManager.GetUserAsync(User); 
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <!DOCTYPE html>
@@ -39,185 +39,188 @@
         <section class="version-control">
             <p>@GlobalConstants.SystemVersion</p>
         </section>
-        <section class="user-area">
-            <div class="user-image">
-                @if (user.ProfileImageUrl != null)
+        <div class="aside-scrollable">
+            <section class="user-area">
+                <div class="user-image">
+                    @if (user.ProfileImageUrl != null)
+                    {
+                        <img src="@user.ProfileImageUrl" alt="профил">
+                    }
+                    else
+                    {
+                        <img src="~/img/userImage.png" alt="профил">
+                    }
+                </div>
+                <div class="user-greeting">
+                    <p id="greet-message">Hello,</p>
+                    <p>@this.User.Identity.Name</p>
+                </div>
+                <hr>
+                <a class="btn profile-btn" asp-area="Identity" asp-page="/Account/Manage/Index">
+                    Профил
+                </a>
+            </section>
+            <section class="navigations">
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
-                    <img src="@user.ProfileImageUrl" alt="профил">
+                    <section class="sidebar-dropdown start">
+                        <div class="primary administration-drop-btn">
+                            <span>
+                                <i class="fas fa-user-shield"></i>
+                                Администрация
+                            </span>
+                            <i class="fas fa-angle-left"></i>
+                        </div>
+                        <div class="administration-options hide">
+                            <a class="secondary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                                <div>
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    Табло
+                                </div>
+                            </a>
+                            <a class="secondary" asp-area="Administration" asp-controller="User"
+                            asp-action="AllAdministrators">
+                                <div>
+                                    <i class="fas fa-users-cog"></i>
+                                    Администратори
+                                </div>
+                            </a>
+                            <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="All">
+                                <div>
+                                    <i class="fas fa-users-cog"></i>
+                                    Регистрирани потребители
+                                </div>
+                            </a>
+                            <a class="secondary" asp-area="Administration" asp-controller="ApiaryHelper" asp-action="All">
+                                <div>
+                                    <i class="fas fa-people-carry"></i>
+                                    Създадени помощници
+                                </div>
+                            </a>
+                            <a class="secondary" asp-area="Administration" asp-controller="Apiary" asp-action="All">
+                                <div>
+                                    <i class="fas fa-th-large"></i>
+                                    Създадени пчелини
+                                </div>
+                            </a>
+                            <a class="secondary" asp-area="Administration" asp-controller="Beehive" asp-action="All">
+                                <div>
+                                    <i class="fas fa-boxes"></i>
+                                    Създадени кошери
+                                </div>
+                            </a>
+                            <a class="secondary" asp-area="Administration" asp-controller="Feedback" asp-action="All">
+                                <div>
+                                    <i class="fas fa-question-circle"></i>
+                                    Въпроси и отзиви
+                                </div>
+                            </a>
+                        </div>
+                    </section>
                 }
-                else
-                {
-                    <img src="~/img/userImage.png" alt="профил">
-                }
-            </div>
-            <div class="user-greeting">
-                <p id="greet-message">Hello,</p>
-                <p>@this.User.Identity.Name</p>
-            </div>
-            <hr>
-            <a class="btn profile-btn" asp-area="Identity" asp-page="/Account/Manage/Index">
-                Профил
-            </a>
-        </section>
-        <section class="navigations">
-            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                <section class="sidebar-dropdown start">
-                    <div class="primary administration-drop-btn">
+                <section
+                    class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
+                    <a class="primary" asp-area="App" asp-controller="Home" asp-action="Index">
+                        <div>
+                            <i class="fas fa-tachometer-alt"></i>
+                            Табло
+                        </div>
+                    </a>
+                </section>
+                <section class="sidebar-dropdown">
+                    <div class="primary apiaries-drop-btn">
                         <span>
-                            <i class="fas fa-user-shield"></i>
-                            Администрация
+                            <i class="fas fa-th-large"></i>
+                            Пчелини
                         </span>
                         <i class="fas fa-angle-left"></i>
                     </div>
-                    <div class="administration-options hide">
-                        <a class="secondary" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                    <div class="api-options hide">
+                        <a class="secondary" asp-area="App" asp-controller="Apiary" asp-action="All">
                             <div>
-                                <i class="fas fa-tachometer-alt"></i>
-                                Табло
+                                <i class="fas fa-home"></i>
+                                Основни
                             </div>
                         </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="AllAdministrators">
+                        <a class="secondary" asp-area="App" asp-controller="Apiary" asp-action="AllMovable">
                             <div>
-                                <i class="fas fa-users-cog"></i>
-                                Администратори
+                                <i class="fas fa-truck-loading"></i>
+                                Подвижни
                             </div>
                         </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="User" asp-action="All">
+                        <a class="secondary" asp-area="App" asp-controller="Apiary" asp-action="Create">
                             <div>
-                                <i class="fas fa-users-cog"></i>
-                                Регистрирани потребители
-                            </div>
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="ApiaryHelper" asp-action="All">
-                            <div>
-                                <i class="fas fa-people-carry"></i>
-                                Създадени помощници
-                            </div>
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="Apiary" asp-action="All">
-                            <div>
-                                <i class="fas fa-th-large"></i>
-                                Създадени пчелини
-                            </div>
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="Beehive" asp-action="All">
-                            <div>
-                                <i class="fas fa-boxes"></i>
-                                Създадени кошери
-                            </div>
-                        </a>
-                        <a class="secondary" asp-area="Administration" asp-controller="Feedback" asp-action="All">
-                            <div>
-                                <i class="fas fa-question-circle"></i>
-                                Въпроси и отзиви
+                                <i class="fas fa-plus-square"></i>
+                                Добави
                             </div>
                         </a>
                     </div>
                 </section>
-            }
-            <section
-                class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
-                <a class="primary" asp-area="App" asp-controller="Home" asp-action="Index">
-                    <div>
-                        <i class="fas fa-tachometer-alt"></i>
-                        Табло
-                    </div>
-                </a>
-            </section>
-            <section class="sidebar-dropdown">
-                <div class="primary apiaries-drop-btn">
-                    <span>
-                        <i class="fas fa-th-large"></i>
-                        Пчелини
-                    </span>
-                    <i class="fas fa-angle-left"></i>
-                </div>
-                <div class="api-options hide">
-                    <a class="secondary" asp-area="App" asp-controller="Apiary" asp-action="All">
-                        <div>
-                            <i class="fas fa-home"></i>
-                            Основни
-                        </div>
-                    </a>
-                    <a class="secondary" asp-area="App" asp-controller="Apiary" asp-action="AllMovable">
-                        <div>
-                            <i class="fas fa-truck-loading"></i>
-                            Подвижни
-                        </div>
-                    </a>
-                    <a class="secondary" asp-area="App" asp-controller="Apiary" asp-action="Create">
-                        <div>
-                            <i class="fas fa-plus-square"></i>
-                            Добави
-                        </div>
-                    </a>
-                </div>
-            </section>
-            <section class="sidebar-dropdown">
-                <div class="primary beehives-drop-btn">
-                    <span>
-                        <i class="fas fa-boxes"></i>
-                        Кошери
-                    </span>
-                    <i class="fas fa-angle-left"></i>
-                </div>
-                <div class="beehive-options hide">
-                    <a class="secondary" asp-area="App" asp-controller="Beehive" asp-action="All">
-                        <div>
+                <section class="sidebar-dropdown">
+                    <div class="primary beehives-drop-btn">
+                        <span>
                             <i class="fas fa-boxes"></i>
-                            Всички
-                        </div>
-                    </a>
-                    <a class="secondary" asp-area="App" asp-controller="Beehive" asp-action="Create">
-                        <div>
-                            <i class="fas fa-plus-square"></i>
-                            Добави
-                        </div>
-                    </a>
-                </div>
+                            Кошери
+                        </span>
+                        <i class="fas fa-angle-left"></i>
+                    </div>
+                    <div class="beehive-options hide">
+                        <a class="secondary" asp-area="App" asp-controller="Beehive" asp-action="All">
+                            <div>
+                                <i class="fas fa-boxes"></i>
+                                Всички
+                            </div>
+                        </a>
+                        <a class="secondary" asp-area="App" asp-controller="Beehive" asp-action="Create">
+                            <div>
+                                <i class="fas fa-plus-square"></i>
+                                Добави
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                <section class="sidebar-dropdown">
+                    <div class="primary queens-drop-btn">
+                        <span>
+                            <i class="fas fa-crown"></i>
+                            Майки
+                        </span>
+                        <i class="fas fa-angle-left"></i>
+                    </div>
+                    <div class="queen-options hide">
+                        <a class="secondary" asp-area="App" asp-controller="Queen" asp-action="All">
+                            <div>
+                                <i class="fas fa-list-alt"></i>
+                                Всички
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                <section class="sidebar-dropdown">
+                    <div class="primary additionals-drop-btn">
+                        <span>
+                            <i class="fas fa-inbox"></i>
+                            Допълнителни
+                        </span>
+                        <i class="fas fa-angle-left"></i>
+                    </div>
+                    <div class="additionals-options hide">
+                        <a class="secondary" asp-area="App" asp-controller="Home" asp-action="AdditionalPage">
+                            <div>
+                                <i class="fas fa-newspaper"></i>
+                                Система
+                            </div>
+                        </a>
+                        <a class="secondary" asp-area="App" asp-controller="Feedback" asp-action="Index">
+                            <div>
+                                <i class="fas fa-question-circle"></i>
+                                Помощ и отзиви
+                            </div>
+                        </a>
+                    </div>
+                </section>
             </section>
-            <section class="sidebar-dropdown">
-                <div class="primary queens-drop-btn">
-                    <span>
-                        <i class="fas fa-crown"></i>
-                        Майки
-                    </span>
-                    <i class="fas fa-angle-left"></i>
-                </div>
-                <div class="queen-options hide">
-                    <a class="secondary" asp-area="App" asp-controller="Queen" asp-action="All">
-                        <div>
-                            <i class="fas fa-list-alt"></i>
-                            Всички
-                        </div>
-                    </a>
-                </div>
-            </section>
-            <section class="sidebar-dropdown">
-                <div class="primary additionals-drop-btn">
-                    <span>
-                        <i class="fas fa-inbox"></i>
-                        Допълнителни
-                    </span>
-                    <i class="fas fa-angle-left"></i>
-                </div>
-                <div class="additionals-options hide">
-                    <a class="secondary" asp-area="App" asp-controller="Home" asp-action="AdditionalPage">
-                        <div>
-                            <i class="fas fa-newspaper"></i>
-                            Система
-                        </div>
-                    </a>
-                    <a class="secondary" asp-area="App" asp-controller="Feedback" asp-action="Index">
-                        <div>
-                            <i class="fas fa-question-circle"></i>
-                            Помощ и отзиви
-                        </div>
-                    </a>
-                </div>
-            </section>
-        </section>
+        </div>
     </aside>
 
     <div class="aside-content-cover" onclick="closeAside();"></div>

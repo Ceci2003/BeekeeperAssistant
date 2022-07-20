@@ -207,6 +207,26 @@ em::selection {
   box-shadow: #6f6968; /* inset 0 0 6px red; */
 }
 
+/* Side main navigation scroll */
+.aside-scrollable {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.sidebar-navigation .aside-scrollable::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-navigation .aside-scrollable::-webkit-scrollbar-track {
+  -webkit-box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  box-shadow: #290b02; /* inset 0 0 6px rgba(0, 0, 0, 0.3); */
+}
+
+.sidebar-navigation .aside-scrollable::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: #6f6968; /* inset 0 0 6px red; */
+  box-shadow: #6f6968; /* inset 0 0 6px red; */
+}
+
 /* Side navigation dropdowns */
 .sidebar-dropdown {
   border-top: 2px solid var(--white);
@@ -1295,7 +1315,7 @@ textarea {
 }
 
 .form-box form .big-group-box .input-group {
- width: 290px;
+  width: 290px;
 }
 
 .btn-group {
@@ -2736,14 +2756,14 @@ th a.ordered {
   margin-left: 15px;
 }
 
-.flex-row{
-    display: flex;
-    flex-direction: row;
-    margin: 10px 0px;
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px;
 }
 
-.margin-small-right{
-    margin-right: 20px
+.margin-small-right {
+  margin-right: 20px;
 }
 
 .overflow-table-container {

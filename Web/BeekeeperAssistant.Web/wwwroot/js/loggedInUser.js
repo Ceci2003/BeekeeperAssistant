@@ -94,7 +94,7 @@ if (administrationButton != null) {
 
 function showHideMenu(addOrRemove, list, arrow) {
   // backgroundToBase();
-  removeClass([beehiveList, queenList, apiList, administrationList], "show");
+  removeClass([beehiveList, queenList, apiList, additionalsList, administrationList, list], "show");
   removeClass(sidebarArrows, "rotate-270");
 
   if (addOrRemove) {

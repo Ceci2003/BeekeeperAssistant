@@ -36,24 +36,30 @@
         <thead>
             <tr>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))" asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))">Номер</a>
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))" asp-controller="Apiary"
+                        asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Number))">Номер</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))" asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))">Име</a>
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))" asp-controller="Apiary"
+                        asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Name))">Име</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))" asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))">Местоположение</a>
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))" asp-controller="Apiary"
+                        asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.Adress))">Местоположение</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.IsClosed))" asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.IsClosed))">Статус</a>
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.IsClosed))" asp-controller="Apiary"
+                        asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.IsClosed))">Статус</a>
                 </th>
                 <th>
-                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))" asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
-                       asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))">Бр. кошери</a>
+                    <a class="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))"
+                        asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@Model.CurrentPage"
+                        asp-route-orderBy="@stringManipulation.Slugify(nameof(ApiaryDataModel.BeehivesCount))">Бр.
+                        кошери</a>
                 </th>
                 <th>Редактиране</th>
             </tr>
@@ -90,20 +96,28 @@
                     <td class="@if (apiary.IsClosed){@("td-weak")} else{@("td-strong")}">
                         @if (apiary.IsClosed)
                         {
-                            @("Затворен");
+                            @("Затворен")
+                            ;
                         }
                         else
                         {
-                            @("Отворен");
+                            @("Отворен")
+                            ;
                         }
                     </td>
-                    <td>@apiary.BeehivesCount</td>
+                    <td class="number">
+                        <a asp-controller="Beehive" asp-action="AllByMovableApiaryId" asp-route-id="@apiary.Id">
+                            @apiary.BeehivesCount
+                        </a>
+                    </td>
                     <td class="edit">
                         <div class="edit-container">
-                            <a class="mark" title="Маркирай пчелина" asp-controller="Apiary" asp-action="Bookmark" asp-route-returnUrl="@returnUrl" asp-route-id="@apiary.Id">
+                            <a class="mark" title="Маркирай пчелина" asp-controller="Apiary" asp-action="Bookmark"
+                            asp-route-returnUrl="@returnUrl" asp-route-id="@apiary.Id">
                                 <i class="@(apiary.IsBookMarked ? "fas " : "far") fa-bookmark"></i>
                             </a>
-                            <a class="edit" title="Радактирай пчелина" asp-controller="Apiary" asp-action="Edit" asp-route-id="@apiary.Id" asp-route-returnUrl="@returnUrl">
+                            <a class="edit" title="Радактирай пчелина" asp-controller="Apiary" asp-action="Edit"
+                            asp-route-id="@apiary.Id" asp-route-returnUrl="@returnUrl">
                                 <i class="far fa-edit"></i>
                             </a>
                             <a class="delete" title="Изтрий пчелина" onclick="ShowDeleteForm('@apiary.Id')">
@@ -111,7 +125,7 @@
                             </a>
                             <div id="@apiary.Id" class="delete-form-display">
                                 <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
-                                      asp-route-id="@apiary.Id">
+                                asp-route-id="@apiary.Id">
                                     <a class="delete close" onclick="HideDeleteForm('@apiary.Id')">
                                         <i class="fas fa-times"></i>
                                     </a>
@@ -145,8 +159,8 @@
     <div class="all-table-responsive">
         <table>
             <thead>
-            <th>Параметър</th>
-            <th>Стойност</th>
+                <th>Параметър</th>
+                <th>Стойност</th>
             </thead>
             <tbody>
                 @foreach (var apiary in Model.AllUserMovableApiaries)
@@ -191,7 +205,11 @@
                     </tr>
                     <tr>
                         <td>Бр. кошери</td>
-                        <td>@apiary.BeehivesCount</td>
+                        <td class="number">
+                            <a asp-controller="Beehive" asp-action="AllByMovableApiaryId" asp-route-id="@apiary.Id">
+                                @apiary.BeehivesCount
+                            </a>
+                        </td>
                     </tr>
                     <tr class="edit-row">
                         <td>Редактиране</td>
@@ -208,7 +226,7 @@
                                 </a>
                                 <div id="@apiary.Id-responsive" class="delete-form-display">
                                     <form id="form-@apiary.Id" asp-controller="Apiary" asp-action="Delete"
-                                          asp-route-id="@apiary.Id">
+                                    asp-route-id="@apiary.Id">
                                         <a class="delete close" onclick="HideDeleteForm('@apiary.Id-responsive')">
                                             <i class="fas fa-times"></i>
                                         </a>
@@ -231,7 +249,7 @@
                                         </button>
                                     </form>
                                     <div id="@apiary.Id-back" class="content-cover"
-                                         onclick="HideDeleteForm('@apiary.Id-responsive')"></div>
+                                    onclick="HideDeleteForm('@apiary.Id-responsive')"></div>
                                 </div>
                             </div>
                         </td>
@@ -258,7 +276,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="AllMovable"
-                       asp-route-page="@(this.Model.CurrentPage - 1)">
+                    asp-route-page="@(this.Model.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -274,8 +292,7 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-controller="Apiary" asp-action="AllMovable"
-                           asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-controller="Apiary" asp-action="AllMovable" asp-route-page="@i">@i</a>
                     </li>
                 }
             }
@@ -291,7 +308,7 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-controller="Apiary" asp-action="AllMovable"
-                       asp-route-page="@(this.Model.CurrentPage + 1)">
+                    asp-route-page="@(this.Model.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

@@ -97,7 +97,11 @@
                     </td>
                     <td>@apiary.Adress</td>
                     <td>@Html.DisplayFor(x => apiary.ApiaryType)</td>
-                    <td>@apiary.BeehivesCount</td>
+                    <td class="number">
+                        <a asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@apiary.Id">
+                            @apiary.BeehivesCount
+                        </a>
+                    </td>
                     <td class="edit">
                         <div class="edit-container">
                             <a class="mark" title="Отбележи пчелина" asp-controller="Apiary" asp-action="Bookmark"
@@ -195,7 +199,11 @@
                     </tr>
                     <tr>
                         <td>Бр. кошери</td>
-                        <td>@apiary.BeehivesCount</td>
+                        <td class="number">
+                            <a asp-controller="Beehive" asp-action="AllByApiaryId" asp-route-id="@apiary.Id">
+                                @apiary.BeehivesCount
+                            </a>
+                        </td>
                     </tr>
                     <tr class="edit-row">
                         <td>Редактиране</td>

@@ -44,7 +44,7 @@
                 viewModel.ApiaryApiaryType = apiary.ApiaryType;
             }
 
-            this.TempData.Keep();
+            this.TempData[GlobalConstants.InfoMessage] = $"Моля не забравяйте да запазите дневника след като извършите промяна!";
 
             return this.View(viewModel);
         }

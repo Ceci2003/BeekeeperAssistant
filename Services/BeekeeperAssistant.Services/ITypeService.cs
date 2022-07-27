@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BeekeeperAssistant.Services
+﻿namespace BeekeeperAssistant.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface ITypeService
     {
         string[] GetAllTypePropertiesName(Type type);

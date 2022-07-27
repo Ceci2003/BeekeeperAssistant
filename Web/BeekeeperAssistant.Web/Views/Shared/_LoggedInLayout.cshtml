@@ -79,7 +79,7 @@
                                 </div>
                             </a>
                             <a class="secondary" asp-area="Administration" asp-controller="User"
-                            asp-action="AllAdministrators">
+                               asp-action="AllAdministrators">
                                 <div>
                                     <i class="fas fa-users-cog"></i>
                                     Администратори
@@ -118,8 +118,7 @@
                         </div>
                     </section>
                 }
-                <section
-                    class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
+                <section class="sidebar-dropdown @if(!this.User.IsInRole(GlobalConstants.AdministratorRoleName)) { @startClass }">
                     <a class="primary" asp-area="App" asp-controller="Home" asp-action="Index">
                         <div>
                             <i class="fas fa-tachometer-alt"></i>
@@ -195,6 +194,14 @@
                             </div>
                         </a>
                     </div>
+                </section>
+                <section class="sidebar-dropdown">
+                    <a class="primary" asp-area="App" asp-controller="UserDiary" asp-action="ByUserId">
+                        <div>
+                            <i class="fas fa-book"></i>
+                            Бележник
+                        </div>
+                    </a>
                 </section>
                 <section class="sidebar-dropdown">
                     <div class="primary additionals-drop-btn">

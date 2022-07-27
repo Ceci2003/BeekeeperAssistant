@@ -11,3 +11,10 @@
         @TempData[GlobalConstants.ErrorMessage]
     </div>
 }
+
+@if (TempData[GlobalConstants.InfoMessage] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData[GlobalConstants.InfoMessage]
+    </div>
+}

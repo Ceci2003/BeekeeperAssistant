@@ -1,0 +1,62 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.UserDiary.ByUserIdViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
+@{
+    ViewData["Title"] = "Дневник";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
+}
+
+<style>
+    .alert {
+        margin: 10px 0;
+    }
+</style>
+
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
+
+
+<div class="content">
+    <partial name="_StatusMessagePartial" />
+    <form asp-controller="UserDiary" asp-action="Save">
+        <h1 class="title-1 no-required">@ViewData["Title"]</h1>
+        <div class="btn-group">
+            <button class="btn edit save" type="submit">
+                <i class="far fa-save"></i>
+                Запази
+            </button>
+        </div>
+        <textarea asp-for="@Model.Content" id="tiny">@Model.SanitizedContent</textarea>
+        <input asp-for="@Model.UserId" type="hidden" />
+        <input asp-for="@Model.UserDiaryId" type="hidden" />
+    </form>
+</div>
+
+
+
+@section Scripts
+{
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+
+        $('textarea#tiny').tinymce({
+            height: 450,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount table'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | table tabledelete | help',
+            toolbar_mode: 'wide'
+        });
+    </script>
+}

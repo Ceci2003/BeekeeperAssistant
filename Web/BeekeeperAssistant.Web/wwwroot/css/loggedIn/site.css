@@ -2325,6 +2325,12 @@ input[readonly] {
   border-color: #f5c6cb;
 }
 
+.alert-info {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
+}
+
 .data-table.administration .edit-delete form .btn {
   width: 100%;
 }

@@ -107,6 +107,7 @@
             services.AddTransient<ITypeService, TypeService>();
             services.AddTransient<IExportDocumentService, ExportDocumentService>();
             services.AddTransient<ISystemNotificationService, SystemNotificationService>();
+            services.AddTransient<IUserDiaryService, UserDiaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,6 +13,7 @@
         // Creation status messages
         public const string SuccessMessage = "SuccessMessage";
         public const string ErrorMessage = "ErrorMessage";
+        public const string InfoMessage = "InfoMessage";
 
         // Tempdata dictionary
         public const string NextBeehiveNumber = "NextBeehiveNumber";

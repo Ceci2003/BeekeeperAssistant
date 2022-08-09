@@ -16,7 +16,7 @@
   border: 2px solid var(--lightgray);
   border-radius: 5px;
   height: fit-content;
-  box-shadow: 5px 5px 15px #e2e2e2;
+  box-shadow: 5px 5px 15px var(--shadow);
 }
 
 .system-notifications {
@@ -25,7 +25,7 @@
   border: 2px solid var(--lightgray);
   border-radius: 5px;
   max-height: 650px;
-  box-shadow: 5px 5px 15px #e2e2e2;
+  box-shadow: 5px 5px 15px var(--shadow);
 }
 
 .admin-controls {
@@ -54,7 +54,7 @@
 .notification {
   border: 1px solid var(--lightgray);
   border-radius: 5px;
-  box-shadow: 3px 3px 5px #e2e2e2;
+  box-shadow: 3px 3px 5px var(--shadow);
 }
 
 .notification .version {
@@ -143,11 +143,11 @@
   padding: 10px;
 }
 
-::-webkit-scrollbar-track {
+.system-notifications .list::-webkit-scrollbar-track {
   border-bottom-right-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb {
+.system-notifications .list::-webkit-scrollbar-thumb {
   border-bottom-right-radius: 5px;
 }
 

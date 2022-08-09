@@ -1,0 +1,222 @@
+.tasks-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.tasks-content .create {
+  width: 30%;
+  height: 600px;
+  padding: 10px;
+  border: 2px solid var(--lightgray);
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px var(--shadow);
+}
+
+.tasks-content .create .title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.tasks-content .create .input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks-content .create .input-group:not(:first-child) {
+  margin-top: 10px;
+}
+
+.tasks-content .create .colors {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.tasks-content .create .colors .color {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--dark-blue-gray);
+  margin-right: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tasks-content .create .colors .color.active {
+  border-radius: 20%;
+  border-width: 2px;
+}
+
+.tasks-content .create .create-btn {
+  width: 100%;
+  background-color: var(--apiary-color);
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.tasks-content .create .create-btn:hover {
+  background-color: var(--blue-hover);
+}
+
+.tasks-content .list {
+  width: 67%;
+  height: 600px;
+  border: 2px solid var(--lightgray);
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px var(--shadow);
+}
+
+.tasks-content .list .controls {
+  padding: 10px;
+  border-bottom: 2px solid var(--lightgray);
+}
+
+.tasks-content .list .controls .title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.tasks-content .list .tasks {
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 525px;
+}
+
+.tasks-content .list .tasks .task {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px var(--shadow);
+}
+
+.tasks-content .list .tasks .task .task-controls {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 10px 10px 0 10px;
+  font-size: 20px;
+}
+
+.tasks-content .list .tasks .task .task-controls .finish,
+.tasks-content .list .tasks .task .task-controls .edit {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 4px;
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+
+.tasks-content .list .tasks .task .task-controls .finish i,
+.tasks-content .list .tasks .task .task-controls .edit i {
+  margin-right: 3px;
+}
+
+.tasks-content .list .tasks .task .task-controls .finish {
+  background: var(--beehive-color);
+  margin-right: 10px;
+}
+
+.tasks-content .list .tasks .task .task-controls .finish:hover {
+  background: var(--beehive-color-hover);
+}
+
+.tasks-content .list .tasks .task .task-controls .edit {
+  background: var(--light-green-hover);
+}
+
+.tasks-content .list .tasks .task .task-controls .edit:hover {
+  background: var(--light-green);
+}
+
+.tasks-content .list .tasks .task .title {
+  font-size: 22px;
+  color: var(--white);
+  padding: 0 10px 10px 10px;
+}
+
+.tasks-content .list .tasks .task .content {
+  padding: 10px;
+}
+
+.tasks-content .list .tasks .task .time-span {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tasks-content .list .tasks .task .time-span.right {
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+}
+
+.tasks-content .list .tasks .task .start,
+.tasks-content .list .tasks .task .end {
+  padding: 10px;
+  background-color: var(--white);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.tasks-content .list .tasks .task .start {
+  color: var(--green-hover);
+}
+
+.tasks-content .list .tasks .task .end {
+  color: var(--red-hover);
+}
+
+.tasks-content .list .tasks .task .time-title {
+  color: var(--main-background);
+}
+
+.tasks-content .list .tasks::-webkit-scrollbar-track {
+  border-bottom-right-radius: 5px;
+}
+
+.tasks-content .list .tasks::-webkit-scrollbar-thumb {
+  border-bottom-right-radius: 5px;
+}
+
+#edit-form .form-controls {
+  display: flex;
+  justify-content: end;
+}
+
+#edit-form .form-controls a {
+  font-size: 22px;
+  color: var(--red);
+}
+
+#edit-form .form-controls a:hover {
+  font-size: 22px;
+  color: var(--red-hover);
+}
+
+@media only screen and (max-width: 767px) {
+  .tasks-content .list {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .tasks-content .create {
+    width: 100%;
+    margin: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .tasks-content .list .tasks .task .task-controls .text {
+    display: none;
+  }
+}

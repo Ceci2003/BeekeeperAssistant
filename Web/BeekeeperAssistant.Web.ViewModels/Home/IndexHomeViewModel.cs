@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using BeekeeperAssistant.Data.Models;
+    using BeekeeperAssistant.Web.ViewModels.UserTasks;
 
     public class IndexHomeViewModel
     {
@@ -32,5 +33,9 @@
         public string QueensCountByGivingDateChartUrl { get; set; }
 
         public List<string> QueenChartColors { get; set; }
+
+        public IEnumerable<UserTaskViewModel> LastUserTasks { get; set; }
+
+        public Dictionary<string, int> UserTasksCountByColor { get; set; }
     }
 }

@@ -246,13 +246,13 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/loggedInUser.js" asp-append-version="true"></script>
 
-    <script>
+    @*<script>
         window.onload = function () {
             markRequiredFields();
             styleUpdates();
             updateReturnUrls();
         };
-    </script>
+    </script>*@
 
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>

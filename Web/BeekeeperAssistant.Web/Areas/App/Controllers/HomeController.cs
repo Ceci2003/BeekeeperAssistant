@@ -17,6 +17,7 @@
     using BeekeeperAssistant.Web.ViewModels.Home;
     using BeekeeperAssistant.Web.ViewModels.Queens;
     using BeekeeperAssistant.Web.ViewModels.SystemNotification;
+    using BeekeeperAssistant.Web.ViewModels.UserTasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,7 @@
         private readonly IEmailSender emailSender;
         private readonly IConfiguration configuration;
         private readonly ISystemNotificationService systemNotificationService;
+        private readonly IUserTaskService userTaskService;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
@@ -47,7 +49,8 @@
             IQuickChartService quickChartService,
             IEmailSender emailSender,
             IConfiguration configuration,
-            ISystemNotificationService systemNotificationService)
+            ISystemNotificationService systemNotificationService,
+            IUserTaskService userTaskService)
         {
             this.userManager = userManager;
             this.apiaryService = apiaryService;
@@ -60,6 +63,7 @@
             this.emailSender = emailSender;
             this.configuration = configuration;
             this.systemNotificationService = systemNotificationService;
+            this.userTaskService = userTaskService;
         }
 
         public async Task<ActionResult> Index()
@@ -76,7 +80,7 @@
             viewModel.InspectionsCount = inspectionsCount;
             viewModel.HarvestsCount = harvestsCount;
 
-            // TODO: Make services
+            // TODO: Make service for home controller
 
             // apiaries chart
             var apiaries = this.apiaryService.GetAllUserApiaries<ApiaryDataModel>(currentUser.Id);
@@ -146,6 +150,13 @@
             viewModel.QueenChartColors = queenColors;
             viewModel.QueensCountByGivingDate = queensCountByGivingDate;
             viewModel.QueensCountByGivingDateChartUrl = queensCountByGivingDateChart;
+
+            viewModel.LastUserTasks = this.userTaskService.GetLastUserTasks<UserTaskViewModel>(currentUser.Id);
+            viewModel.UserTasksCountByColor = new Dictionary<string, int>();
+            viewModel.UserTasksCountByColor.Add("#BF3C30", this.userTaskService.GetUserTasksCountByColor(currentUser.Id, "#BF3C30"));
+            viewModel.UserTasksCountByColor.Add("#F2A30F", this.userTaskService.GetUserTasksCountByColor(currentUser.Id, "#F2A30F"));
+            viewModel.UserTasksCountByColor.Add("#61912A", this.userTaskService.GetUserTasksCountByColor(currentUser.Id, "#61912A"));
+            viewModel.UserTasksCountByColor.Add("#639CBF", this.userTaskService.GetUserTasksCountByColor(currentUser.Id, "#639CBF"));
 
             return this.View(viewModel);
         }

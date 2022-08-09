@@ -57,6 +57,8 @@
 
         public DbSet<BeehiveNote> BeehiveNotes { get; set; }
 
+        public DbSet<UserTask> UserTasks { get; set; }
+
         public DbSet<TemporaryApiaryBeehive> TemporaryApiariesBeehives { get; set; }
 
         public DbSet<BeehiveMarkFlag> BeehivesMarkFlags { get; set; }

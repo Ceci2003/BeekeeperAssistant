@@ -1,0 +1,43 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.UserTasks.CreateUserTaskInputModel
+
+<form id="create-form" asp-controller="UserTask" asp-action="Create" method="post" style="display: @if (Model.DisplayCss) @("block") else @("none")">
+    <h1 class="title no-required">Добави задача</h1>
+
+    <div class="input-group">
+        <label class="required" asp-for="@Model.Title"></label>
+        <textarea asp-for="@Model.Title" cols="30" rows="3"></textarea>
+        <span asp-validation-for="@Model.Title"></span>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="@Model.Content"></label>
+        <textarea asp-for="@Model.Content" cols="30" rows="5"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="@Model.StartDate"></label>
+        <input type="datetime-local" asp-for="@Model.StartDate" />
+    </div>
+
+    <div class="input-group">
+        <label asp-for="@Model.EndDate"></label>
+        <input type="datetime-local" asp-for="@Model.EndDate" />
+    </div>
+
+    <div class="colors">
+        <div class="color" style="background-color: #BF3C30;" onclick="chooseColor(this, '#BF3C30');"></div>
+        <div class="color" style="background-color: #F2A30F;" onclick="chooseColor(this, '#F2A30F');"></div>
+        <div class="color" style="background-color: #61912A;" onclick="chooseColor(this, '#61912A');"></div>
+        <div class="color active" style="background-color: #639CBF;" onclick="chooseColor(this, '#639CBF');"></div>
+    </div>
+
+    <input id="input-color" type="hidden" asp-for="@Model.Color" value="#639CBF" />
+
+    <input class="create-btn" type="submit" value="Добави" />
+
+    <div class="form-star-tip">
+        *Полетата обозначени с
+        '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+        са задължителни.
+    </div>
+</form>

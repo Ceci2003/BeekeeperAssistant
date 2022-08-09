@@ -1,0 +1,50 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.UserTasks.EditUserTaskInputModel
+
+<form id="edit-form" asp-controller="UserTask" asp-action="Edit" method="post">
+    <div class="form-controls no-required">
+        <a onclick="closeEditForm()">
+            <i class="fas fa-times-circle"></i>
+        </a>
+    </div>
+    <h1 class="title no-required">Редактиране</h1>
+
+    <div class="input-group">
+        <label class="required" asp-for="@Model.Title"></label>
+        <textarea asp-for="@Model.Title" cols="30" rows="3"></textarea>
+        <span asp-validation-for="@Model.Title"></span>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="@Model.Content"></label>
+        <textarea asp-for="@Model.Content" cols="30" rows="5"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label asp-for="@Model.StartDate"></label>
+        <input type="datetime-local" asp-for="@Model.StartDate" />
+    </div>
+
+    <div class="input-group">
+        <label asp-for="@Model.EndDate"></label>
+        <input type="datetime-local" asp-for="@Model.EndDate" />
+    </div>
+
+    <div class="colors">
+        <div id="edit-red" class="color @if(Model.Color == "#BF3C30")@("active")" style="background-color: #BF3C30;" onclick="chooseEditColor(this, '#BF3C30');"></div>
+        <div id="edit-orange" class="color @if(Model.Color == "#F2A30F")@("active")" style="background-color: #F2A30F;" onclick="chooseEditColor(this, '#F2A30F');"></div>
+        <div id="edit-green" class="color @if(Model.Color == "#61912A")@("active")" style="background-color: #61912A;" onclick="chooseEditColor(this, '#61912A');"></div>
+        <div id="edit-blue" class="color @if(Model.Color == "#639CBF")@("active")" style="background-color: #639CBF;" onclick="chooseEditColor(this, '#639CBF');"></div>
+    </div>
+
+    <input id="input-edit-color" type="hidden" asp-for="@Model.Color" value="#639CBF" />
+
+    <input type="hidden" asp-for="@Model.Id" />
+
+    <input class="create-btn" type="submit" value="Редактирай" />
+
+    <div class="form-star-tip">
+        *Полетата обозначени с
+        '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+        са задължителни.
+    </div>
+</form>

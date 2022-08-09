@@ -121,6 +121,97 @@
         </div>
     </div>
 
+
+
+
+
+    <div style="color: red; font-size: 24px; font-weight: bold;">
+        добави в breadcrumb модела задачите за изпълнение и отготре да стои бройката
+        <br>
+        при респонсив без breadcrumb ???
+        <br>
+        - ???
+    </div>
+
+    @if (Model.LastUserTasks.Any())
+    {
+        <div class="dashboard-tasks">
+            <h1 class="title">Последно добавени задачи</h1>
+            <div class="tasks-info">
+                <div class="tasks-list">
+                    <div class="list">
+                        @foreach (var task in Model.LastUserTasks)
+                        {
+                            <div class="task" style="background-color: @task.Color;">
+                                <div class="task-controls">
+                                    <a class="finish" asp-controller="UserTask" asp-action="Delete" asp-route-id="@task.Id"
+                                title="Завърши задачата">
+                                        <i class="fas fa-check-square"></i>
+                                    </a>
+                                    <a class="edit" asp-controller="UserTask" asp-action="All" asp-route-editId="@task.Id"
+                                title="Редактирай задачата">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                                <h1 class="title">
+                                    @task.Title
+                                </h1>
+                                @if (!string.IsNullOrWhiteSpace(task.Content))
+                                {
+                                    <p class="task-content">@task.Content</p>
+                                }
+                                @if (task.StartDate.HasValue || task.EndDate.HasValue)
+                                {
+                                    <div class="time-span @if (!task.StartDate.HasValue && task.EndDate.HasValue) { @("right") } ">
+                                        @if (task.StartDate.HasValue)
+                                        {
+                                            <div class="start">
+                                                <div class="time-title">
+                                                    Начало
+                                                </div>
+                                                @task.StartDate.Value.ToString("dd.MM.yyyy г. HH:mm ч.")
+                                            </div>
+                                        }
+                                        @if (task.EndDate.HasValue)
+                                        {
+                                            <div class="end">
+                                                <div class="time-title">
+                                                    Край
+                                                </div>
+                                                @task.EndDate.Value.ToString("dd.MM.yyyy г. HH:mm ч.")
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div class="more">
+                        <a asp-area="App" asp-controller="UserTask" asp-action="All">
+                            <i class="fas fa-clipboard"></i>
+                            Виж всички
+                        </a>
+                    </div>
+                </div>
+                <div class="tasks-count">
+                    @foreach (var count in Model.UserTasksCountByColor)
+                    {
+                        <div class="count" style="background-color: @count.Key;">
+                            @count.Value
+                            <a asp-area="App" asp-controller="UserTask" asp-action="All">
+                                <i class="fas fa-clipboard"></i>
+                                Към задачите
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+
     <div class="dashboard-cards-list">
         @if (Model.ApiariesCount > 0)
         {
@@ -131,7 +222,7 @@
                     {
                         <div class="legend-row">
                             <div class="legend-color"
-                                 style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @GlobalConstants.ApiaryTypeChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                 @Model.ApiariesCountByType[ac]
                             </div>
                             <div class="legend-value">@Html.DisplayFor(x => ac)</div>
@@ -161,7 +252,7 @@
                     {
                         <div class="legend-row">
                             <div class="legend-color"
-                                 style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @GlobalConstants.BeehivePowerChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                 @Model.BeehivesCountByPower[bc]
                             </div>
                             <div class="legend-value">@Html.DisplayFor(x => bc)</div>
@@ -191,7 +282,7 @@
                     {
                         <div class="legend-row">
                             <div class="legend-color"
-                                 style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
+                        style="background: @Model.QueenChartColors[colorsCounter].Remove(0, 1).Remove(7);">
                                 @Model.QueensCountByGivingDate[bc]
                             </div>
                             @if (bc == 0)

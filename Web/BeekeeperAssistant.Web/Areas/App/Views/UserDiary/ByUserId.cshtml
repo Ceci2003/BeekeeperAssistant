@@ -14,17 +14,29 @@
     };
 }
 
-<style>
-    .alert {
-        margin: 10px 0;
-    }
-</style>
-
 <partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
 
-
 <div class="content">
+
+    <div class="user-diary-task-tab">
+        <div class="tabs">
+            <div class="tab active">
+                <a asp-area="App" asp-controller="UserDiary" asp-action="ByUserId">
+                    <i class="fas fa-book-open"></i>
+                    Дневник
+                </a>
+            </div>
+            <div class="tab">
+                <a  asp-area="App" asp-controller="UserTask" asp-action="All">
+                    <i class="fas fa-clipboard"></i>
+                    Задачи
+                </a>
+            </div>
+        </div>
+    </div>
+
     <partial name="_StatusMessagePartial" />
+
     <form asp-controller="UserDiary" asp-action="Save">
         <h1 class="title-1 no-required">@ViewData["Title"]</h1>
         <div class="btn-group">
@@ -43,20 +55,20 @@
 
 @section Scripts
 {
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+<script>
 
-        $('textarea#tiny').tinymce({
-            height: 450,
-            menubar: false,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount table'
-            ],
-            toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | table tabledelete | help',
-            toolbar_mode: 'wide'
-        });
-    </script>
+    $('textarea#tiny').tinymce({
+        height: 450,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount table'
+        ],
+        toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | table tabledelete | help',
+        toolbar_mode: 'wide'
+    });
+</script>
 }

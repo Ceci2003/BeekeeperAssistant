@@ -84,6 +84,7 @@ em::selection {
   --white: #ffffff;
   --lightgray: #d3d3d3;
   --darkgray: #615b5b;
+  --shadow: #e2e2e2;
   --dark-blue-gray: #454857;
   --apiary-color: #17a2b8;
   --apiary-color-hover: #6ce7e3;
@@ -484,7 +485,7 @@ em::selection {
 }
 
 .page-controls.intab {
-  margin: 10px 10px 0 10px;
+  margin-top: 10px;
 }
 
 .page-controls.one {
@@ -1733,6 +1734,180 @@ textarea {
   height: 100%;
 }
 
+/* Dashboard Tasks display */
+.dashboard-tasks {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.dashboard-tasks .title {
+  width: 100%;
+  font-size: 28px;
+  text-align: center;
+}
+
+.dashboard-tasks .tasks-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.dashboard-tasks .tasks-list {
+  width: 70%;
+  height: 500px;
+  border: 2px solid var(--lightgray);
+}
+
+.dashboard-tasks .list {
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 430px;
+}
+
+.dashboard-tasks .list .task {
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.dashboard-tasks .list .task .task-controls {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 10px 10px 0 10px;
+  font-size: 20px;
+}
+
+.dashboard-tasks .list .task .task-controls .finish,
+.dashboard-tasks .list .task .task-controls .edit {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 4px;
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+
+.dashboard-tasks .list .task .task-controls .finish i,
+.dashboard-tasks .list .task .task-controls .edit i {
+  margin-right: 3px;
+}
+
+.dashboard-tasks .list .task .task-controls .finish {
+  background: var(--beehive-color);
+  margin-right: 10px;
+}
+
+.dashboard-tasks .list .task .task-controls .finish:hover {
+  background: var(--beehive-color-hover);
+}
+
+.dashboard-tasks .list .task .task-controls .edit {
+  background: var(--light-green-hover);
+}
+
+.dashboard-tasks .list .task .task-controls .edit:hover {
+  background: var(--light-green);
+}
+
+.dashboard-tasks .list .task .title {
+  font-size: 22px;
+  color: var(--white);
+  padding: 0 10px 10px 10px;
+  text-align: left;
+}
+
+.dashboard-tasks .list .task .content {
+  padding: 10px;
+}
+
+.dashboard-tasks .list .task .time-span {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.dashboard-tasks .list .task .time-span.right {
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+}
+
+.dashboard-tasks .list .task .start,
+.dashboard-tasks .list .task .end {
+  padding: 10px;
+  background-color: var(--white);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.dashboard-tasks .list .task .start {
+  color: var(--green-hover);
+}
+
+.dashboard-tasks .list .task .end {
+  color: var(--red-hover);
+}
+
+.dashboard-tasks .list .task .time-title {
+  color: var(--main-background);
+}
+
+.dashboard-tasks .more {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-tasks .more a {
+  width: 100%;
+  background-color: var(--apiary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  margin: 15px 10px 0 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dashboard-tasks .more a:hover {
+  background-color: var(--blue-hover);
+}
+
+.dashboard-tasks .more a i {
+  margin-right: 10px;
+}
+
+.dashboard-tasks .tasks-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-tasks .tasks-count .count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--white);
+  font-size: 30px;
+  padding: 15px 10px;
+}
+
+.dashboard-tasks .tasks-count .count:not(:first-child) {
+  margin-top: 15px;
+}
+
+.dashboard-tasks .tasks-count .count a {
+  font-size: 16px;
+  padding: 5px;
+  color: white;
+  border: 1px solid var(--white);
+  margin-top: 5px;
+}
+
 /* count-add */
 .count-add-card,
 .count-card {
@@ -2120,11 +2295,12 @@ textarea {
 
 .tabs-body {
   border-top: 3px solid var(--orange);
+  padding: 10px;
 }
 
 /* Style the tab content */
 .tabcontent {
-  padding: 10px;
+  margin-top: 10px;
 }
 
 /* Scrollbar */
@@ -2306,9 +2482,10 @@ input[readonly] {
   content: none;
 }
 
+/* Alert styles */
 .alert {
   padding: 10px 20px;
-  margin: 10px;
+  margin: 10px 0;
   border: 1px solid transparent;
   border-radius: 5px;
 }
@@ -2774,4 +2951,56 @@ th a.ordered {
 
 .overflow-table-container {
   overflow-x: auto;
+}
+
+/* User diary task tabs */
+.user-diary-task-tab {
+  border-bottom: 3px solid var(--orange);
+  display: flex;
+  justify-content: center;
+}
+
+.user-diary-task-tab .tabs {
+  display: flex;
+  align-items: center;
+}
+
+.user-diary-task-tab .tabs .tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.user-diary-task-tab .tabs .tab a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px 30px;
+  color: var(--main-background);
+}
+
+.user-diary-task-tab .tabs .tab a:hover {
+  background-color: var(--lightgray);
+}
+
+.user-diary-task-tab .tabs .tab.active {
+  border-left: 3px solid var(--orange);
+  border-right: 3px solid var(--orange);
+  pointer-events: none;
+}
+
+.user-diary-task-tab .tabs .tab.active a {
+  color: var(--orange);
+  pointer-events: none;
+}
+
+/* .user-diary-task-tab .tabs .tab a :not(:first-child()) {
+  border-left: 3px solid var(--orange);
+} */
+
+.user-diary-task-tab .tabs .tab a i {
+  margin-right: 5px;
 }

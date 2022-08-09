@@ -1,0 +1,140 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.UserTasks.AllByUserIdUserTaskViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
+@{
+    ViewData["Title"] = "Задачи";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/loggedIn/views/allUserTasks.css">
+</head>
+
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
+
+<div class="content">
+
+    <div class="user-diary-task-tab">
+        <div class="tabs">
+            <div class="tab">
+                <a asp-area="App" asp-controller="UserDiary" asp-action="ByUserId">
+                    <i class="fas fa-book-open"></i>
+                    Дневник
+                </a>
+            </div>
+            <div class="tab active">
+                <a asp-area="App" asp-controller="UserTask" asp-action="All">
+                    <i class="fas fa-clipboard"></i>
+                    Задачи
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_StatusMessagePartial" />
+
+    
+
+    <div class="tasks-content">
+        <div class="list">
+            <div class="controls">
+                <h1 class="title">Задачи</h1>
+            </div>
+
+            <div class="tasks">
+                @if (Model.UserTasks.Any())
+                {
+
+                    @foreach (var task in Model.UserTasks)
+                    {
+                        <div class="task" style="background-color: @task.Color;">
+                            <div class="task-controls">
+                                <a class="finish" asp-controller="UserTask" asp-action="Delete" asp-route-id="@task.Id" title="Завърши задачата">
+                                    <i class="fas fa-check-square"></i>
+                                    <div class="text">
+                                        Завърши
+                                    </div>
+                                </a>
+                                <a class="edit" asp-controller="UserTask" asp-action="All" asp-route-editId="@task.Id" title="Редактирай задачата">
+                                    <i class="fas fa-edit"></i>
+                                    <div class="text">
+                                        Редактирай
+                                    </div>
+                                </a>
+                            </div>
+                            <h1 class="title">
+                                @task.Title
+                            </h1>
+                            @if (!string.IsNullOrWhiteSpace(task.Content))
+                            {
+                                <p class="content">@task.Content</p>
+                            }
+                            @if (task.StartDate.HasValue || task.EndDate.HasValue)
+                            {
+                                <div class="time-span @if (!task.StartDate.HasValue && task.EndDate.HasValue) { @("right") } ">
+                                    @if (task.StartDate.HasValue)
+                                    {
+                                        <div class="start">
+                                            <div class="time-title">
+                                                Начало
+                                            </div>
+                                            @task.StartDate.Value.ToString("dd.MM.yyyy г. HH:mm ч.")
+                                        </div>
+                                    }
+                                    @if (task.EndDate.HasValue)
+                                    {
+                                        <div class="end">
+                                            <div class="time-title">
+                                                Край
+                                            </div>
+                                            @task.EndDate.Value.ToString("dd.MM.yyyy г. HH:mm ч.")
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+
+
+                }
+                else
+                {
+                    <p>Няма добавени задачи</p>
+                }
+            </div>
+        </div>
+
+        <div class="create">
+            <partial model="@Model.CreateModel" name="_CreatePartial" />
+
+            @if (Model.EditModel != null)
+            {
+                <partial model="@Model.EditModel" name="_EditPartial" />
+            }
+        </div>
+    </div>
+
+    <div class="callendar">
+        <div class="controls">
+            <h1 class="title">Календар</h1>
+        </div>
+
+        <div style="width: 100%; display: flex; justify-content: center; align-items: center; flex-flow: column; font-size: 22px;">
+            Календарът е в процес на разработка
+            <div style="display: flex; justify-content: center; align-items: center; font-size: 32px; margin-top: 30px">
+                <img src="~/img/ba_logo.svg" alt="Лого" width="100">
+                BeekeeperAssistant
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/views/partials/createUserTaskPartial.js" type="text/javascript"></script>

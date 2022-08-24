@@ -1475,7 +1475,6 @@ textarea {
   width: 80px;
   height: 26px;
   background: var(--orange);
-  /* margin: 20px auto; */
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
@@ -1483,9 +1482,9 @@ textarea {
 }
 
 .slider-yes-no:after {
-  content: "НЕ";
+  content: "ДА";
+  color: #008c00;
   font: 12px/26px Arial, sans-serif;
-  color: var(--red);
   position: absolute;
   right: 10px;
   z-index: 0;
@@ -1494,9 +1493,9 @@ textarea {
 }
 
 .slider-yes-no:before {
-  content: "ДА";
+  content: "НЕ";
+  color: var(--red);
   font: 12px/26px Arial, sans-serif;
-  color: #008c00;
   position: absolute;
   left: 10px;
   z-index: 0;
@@ -1903,8 +1902,16 @@ textarea {
 .dashboard-tasks .tasks-count .count a {
   font-size: 16px;
   padding: 5px;
-  color: white;
+  color: var(--white);
   border: 1px solid var(--white);
+  margin-top: 5px;
+}
+
+.dashboard-tasks .tasks-count .count a:hover {
+  font-size: 16px;
+  padding: 5px;
+  color: var(--beehive-color);
+  background-color: var(--white);
   margin-top: 5px;
 }
 
@@ -3003,4 +3010,36 @@ th a.ordered {
 
 .user-diary-task-tab .tabs .tab a i {
   margin-right: 5px;
+}
+
+.choose-how-to-add-hives {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: auto;
+}
+
+.choose-how-to-add-hives .add-1,
+.choose-how-to-add-hives .add-2 {
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.choose-how-to-add-hives .add-1 {
+  background-color: var(--beehive-color);
+}
+
+.choose-how-to-add-hives .add-1:hover {
+  background-color: var(--beehive-color-hover);
+}
+
+.choose-how-to-add-hives .add-2 {
+  background-color: var(--blue-hover);
+}
+
+.choose-how-to-add-hives .add-2:hover {
+  background-color: var(--apiary-color);
 }

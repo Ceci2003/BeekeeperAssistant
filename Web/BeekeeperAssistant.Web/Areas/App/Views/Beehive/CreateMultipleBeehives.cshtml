@@ -1,0 +1,122 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Beehives.CreateMultipleBeehivesInputModel;
+@using BeekeeperAssistant.Data.Models
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
+@{
+
+    this.ViewData["Title"] = "Добавяне на кошери";
+
+    var keyValuePairApiaries = new List<SelectListItem>();
+    if (Model.AllApiaries != null)
+    {
+        keyValuePairApiaries = Model.AllApiaries.Select(x => new SelectListItem(x.Value.ToString(), x.Key.ToString())).ToList();
+    }
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Табло", "/App");
+    navigation.Add("Кошери - всички", "/App/Beehive/All");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
+}
+
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
+
+<div class="content">
+    <partial name="_StatusMessagePartial" />
+    <div class="form-box">
+        <form asp-controller="Beehive" asp-action="CreateMultipleBeehives">
+            <h2 class="no-required">@ViewData["Title"]</h2>
+            <div class="error-msg" asp-validation-summary="All"></div>
+            @if (Model.UseStartEndNumber)
+            {
+                <div class="row-form-group">
+                    <div class="input-group">
+                        <label asp-for="@Model.StartNumber"></label>
+                        <input asp-for="@Model.StartNumber" min="1" />
+                    </div>
+                    <div class="input-group">
+                        <label asp-for="@Model.EndNumber"></label>
+                        <input asp-for="@Model.EndNumber" min="2" value="2" />
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="input-group max">
+                    <label asp-for="@Model.NumbersSeparatedWithComma"></label>
+                    <textarea asp-for="@Model.NumbersSeparatedWithComma" cols="30" rows="5"></textarea>
+                </div>
+            }
+
+            <div class="input-group max">
+                <label asp-for="@Model.CreateOption"></label>
+                <select asp-for="@Model.CreateOption"
+                    asp-items="@Html.GetEnumSelectList<CreateMultipleBeehivesOptions>()"></select>
+            </div>
+
+            @if (Model.AllApiaries != null)
+            {
+                <div class="input-group max">
+                    <label asp-for="@Model.ApiaryId"></label>
+                    <select asp-for="@Model.ApiaryId" asp-items="keyValuePairApiaries"></select>
+                </div>
+            }
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.Date"></label>
+                    <input asp-for="@Model.Date" />
+                    <span class="" asp-validation-for="@Model.Date"></span>
+                </div>
+                <div class="input-group">
+                    <label asp-for="@Model.BeehiveSystem"></label>
+                    <select asp-for="@Model.BeehiveSystem"
+                        asp-items="@Html.GetEnumSelectList<BeehiveSystem>()"></select>
+                </div>
+            </div>
+            <div class="row-form-group">
+                <div class="input-group">
+                    <label asp-for="@Model.BeehiveType"></label>
+                    <select asp-for="@Model.BeehiveType" asp-items="@Html.GetEnumSelectList<BeehiveType>()"></select>
+                </div>
+            </div>
+            <div class="check">
+                <div class="input-group check">
+                    <label asp-for="@Model.IsItMovable"></label>
+                    <div class="slider-yes-no">
+                        <input asp-for="@Model.IsItMovable" />
+                        <label for="IsItMovable"></label>
+                    </div>
+                </div>
+                <div class="input-group check">
+                    <label asp-for="@Model.HasPolenCatcher"></label>
+                    <div class="slider-yes-no">
+                        <input asp-for="@Model.HasPolenCatcher" />
+                        <label for="HasPolenCatcher"></label>
+                    </div>
+                </div>
+                <div class="input-group check">
+                    <label asp-for="@Model.HasPropolisCatcher"></label>
+                    <div class="slider-yes-no">
+                        <input asp-for="@Model.HasPropolisCatcher" />
+                        <label for="HasPropolisCatcher"></label>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" asp-for="@Model.ApiaryId" />
+            <input type="hidden" asp-for="@Model.UseStartEndNumber" />
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-controller="Beehive" asp-action="All">Отмени</a>
+                <input class="btn beehive-create" type="submit" value="Добави кошер" />
+            </div>
+            <div class="form-star-tip">
+                *Полетата обозначени с
+                '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+                са задължителни.
+            </div>
+        </form>
+    </div>
+</div>

@@ -3,10 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using BeekeeperAssistant.Data.Filters.Models;
     using BeekeeperAssistant.Data.Models;
-    using BeekeeperAssistant.Services.Data.Models;
-    
 
     public interface IBeehiveService
     {
@@ -23,6 +22,33 @@
             bool hasPolenCatcher,
             bool hasPropolisCatcher,
             bool isItMovable);
+
+        Task CreateMultipleBeehivesFromStartEndNumber(
+            int startNumber,
+            int endNumber,
+            string ownerId,
+            string creatorId,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher,
+            bool isItMovable,
+            CreateMultipleBeehivesOptions createOptions);
+
+        Task CreateMultipleBeehivesFromList(
+            string numbersSeparatedWithComma,
+            string ownerId,
+            string creatorId,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher,
+            bool isItMovable,
+            CreateMultipleBeehivesOptions createOptions);
 
         T GetBeehiveById<T>(int beehiveId);
 
@@ -62,6 +88,8 @@
         int GetBeehiveIdByQueen(int queenId);
 
         T GetBeehiveByQueenId<T>(int queenId);
+
+        int GetBeehiveIdByNumberAndApiaryId(int beehiveNumber, int apiaryId);
 
         int GetAllUserBeehivesCount(string userId);
 

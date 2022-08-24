@@ -73,7 +73,7 @@
         public string ApiaryState { get; set; }
 
         [Required(ErrorMessage = "Полето '' е задължително!")]
-        [Display(Name = "Име на вееринарен лекар")]
+        [Display(Name = "Име на ветеринарен лекар")]
         public string VetNames { get; set; }
 
         [Required(ErrorMessage = "Полето 'Дата на подаване' е задължително!")]

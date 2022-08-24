@@ -260,6 +260,68 @@
             return this.RedirectToAction(nameof(this.CreateRedirect), new { beehiveId = beehiveId, apiaryId = inputModel.ApiaryId });
         }
 
+        public IActionResult CreateMultipleBeehivesChooseType()
+        {
+            return this.View();
+        }
+
+        public async Task<IActionResult> CreateMultipleBeehives(bool useStartEndNumber = true)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            var inputModel = new CreateMultipleBeehivesInputModel()
+            {
+                UseStartEndNumber = useStartEndNumber,
+                AllApiaries = this.apiaryService.GetUserApiariesAsKeyValuePairs(currentUser.Id),
+                Date = DateTime.UtcNow.Date,
+            };
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMultipleBeehives(CreateMultipleBeehivesInputModel inputModel)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var apiaryOwnerId = this.apiaryService.GetApiaryOwnerIdByApiaryId(inputModel.ApiaryId);
+
+            if (inputModel.UseStartEndNumber)
+            {
+                await this.beehiveService.CreateMultipleBeehivesFromStartEndNumber(
+                        inputModel.StartNumber,
+                        inputModel.EndNumber,
+                        currentUser.Id,
+                        currentUser.Id,
+                        inputModel.BeehiveSystem,
+                        inputModel.BeehiveType,
+                        inputModel.Date,
+                        inputModel.ApiaryId,
+                        inputModel.HasPolenCatcher,
+                        inputModel.HasPropolisCatcher,
+                        inputModel.IsItMovable,
+                        inputModel.CreateOption);
+            }
+            else
+            {
+                await this.beehiveService.CreateMultipleBeehivesFromList(
+                        inputModel.NumbersSeparatedWithComma,
+                        currentUser.Id,
+                        currentUser.Id,
+                        inputModel.BeehiveSystem,
+                        inputModel.BeehiveType,
+                        inputModel.Date,
+                        inputModel.ApiaryId,
+                        inputModel.HasPolenCatcher,
+                        inputModel.HasPropolisCatcher,
+                        inputModel.IsItMovable,
+                        inputModel.CreateOption);
+            }
+
+            this.TempData[GlobalConstants.SuccessMessage] = $"Кошерите бяха добавени успешно!";
+
+            return this.RedirectToAction(nameof(this.AllByApiaryId), new { id = inputModel.ApiaryId });
+        }
+
         public IActionResult CreateRedirect(int beehiveId, int apiaryId)
         {
             var viewModel = new CreateRedirectBeehiveViewModel

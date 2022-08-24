@@ -134,6 +134,109 @@
             return beehive.Id;
         }
 
+        public async Task CreateMultipleBeehivesFromStartEndNumber(
+            int startNumber,
+            int endNumber,
+            string ownerId,
+            string creatorId,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher,
+            bool isItMovable,
+            CreateMultipleBeehivesOptions createOptions)
+        {
+            for (int number = startNumber; number <= endNumber; number++)
+            {
+                if (this.BeehiveNumberExistsInApiary(number, apiaryId))
+                {
+                    if (createOptions == CreateMultipleBeehivesOptions.ReplaceExistingBeehives)
+                    {
+                        var beehiveId = this.GetBeehiveIdByNumberAndApiaryId(number, apiaryId);
+                        await this.DeleteBeehiveByIdAsync(beehiveId);
+                    }
+                    else if (createOptions == CreateMultipleBeehivesOptions.AddOnlyBeehivesThatDontExist)
+                    {
+                        continue;
+                    }
+                }
+
+                var beehive = new Beehive
+                {
+                    CreatorId = creatorId,
+                    OwnerId = ownerId,
+                    Number = number,
+                    BeehiveSystem = beehiveSystem,
+                    BeehiveType = beehiveType,
+                    BeehivePower = BeehivePower.Weak,
+                    Date = dateTime,
+                    ApiaryId = apiaryId,
+                    HasDevice = false,
+                    HasPolenCatcher = hasPolenCatcher,
+                    HasPropolisCatcher = hasPropolisCatcher,
+                    IsItMovable = isItMovable,
+                };
+
+                await this.beehiveRepository.AddAsync(beehive);
+            }
+
+            await this.beehiveRepository.SaveChangesAsync();
+        }
+
+        public async Task CreateMultipleBeehivesFromList(
+            string numbersSeparatedWithComma,
+            string ownerId,
+            string creatorId,
+            BeehiveSystem beehiveSystem,
+            BeehiveType beehiveType,
+            DateTime dateTime,
+            int apiaryId,
+            bool hasPolenCatcher,
+            bool hasPropolisCatcher,
+            bool isItMovable,
+            CreateMultipleBeehivesOptions createOptions)
+        {
+            var numbers = numbersSeparatedWithComma.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(n => int.Parse(n));
+
+            foreach (var number in numbers)
+            {
+                if (this.BeehiveNumberExistsInApiary(number, apiaryId))
+                {
+                    if (createOptions == CreateMultipleBeehivesOptions.ReplaceExistingBeehives)
+                    {
+                        var beehiveId = this.GetBeehiveIdByNumberAndApiaryId(number, apiaryId);
+                        await this.DeleteBeehiveByIdAsync(beehiveId);
+                    }
+                    else if (createOptions == CreateMultipleBeehivesOptions.AddOnlyBeehivesThatDontExist)
+                    {
+                        continue;
+                    }
+                }
+
+                var beehive = new Beehive
+                {
+                    CreatorId = creatorId,
+                    OwnerId = ownerId,
+                    Number = number,
+                    BeehiveSystem = beehiveSystem,
+                    BeehiveType = beehiveType,
+                    BeehivePower = BeehivePower.Weak,
+                    Date = dateTime,
+                    ApiaryId = apiaryId,
+                    HasDevice = false,
+                    HasPolenCatcher = hasPolenCatcher,
+                    HasPropolisCatcher = hasPropolisCatcher,
+                    IsItMovable = isItMovable,
+                };
+
+                await this.beehiveRepository.AddAsync(beehive);
+            }
+
+            await this.beehiveRepository.SaveChangesAsync();
+        }
+
         public async Task<string> DeleteBeehiveByIdAsync(int beehiveId)
         {
             var beehive = this.beehiveRepository
@@ -251,6 +354,7 @@
             var query = this.beehiveRepository
                 .All()
                 .Where(b => b.ApiaryId == apiaryId)
+                .OrderByDescending(b => b.Number)
                 .To<BeehiveDataModel>();
 
             var filter = new Filter<BeehiveDataModel>();
@@ -442,6 +546,15 @@
                 .FirstOrDefault();
 
             return beehive.Number;
+        }
+
+        public int GetBeehiveIdByNumberAndApiaryId(int beehiveNumber, int apiaryId)
+        {
+            var beehive = this.beehiveRepository.All()
+                .Where(b => b.Number == beehiveNumber && b.ApiaryId == apiaryId)
+                .FirstOrDefault();
+
+            return beehive.Id;
         }
     }
 }

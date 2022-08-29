@@ -15,6 +15,8 @@
 
         public bool IsDeleted { get; set; }
 
+        public bool EmailConfirmed { get; set; }
+
         public DateTime CreatedOn { get; set; }
     }
 }

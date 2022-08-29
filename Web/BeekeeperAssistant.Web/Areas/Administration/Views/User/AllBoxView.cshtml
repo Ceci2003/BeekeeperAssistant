@@ -1,0 +1,214 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Users.AdministrationAllUserBoxViewModel
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
+@{
+    this.ViewData["Title"] = "Потребители";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Администрация", "/Administration/Dashboard");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
+}
+
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
+
+<div class="content">
+    <partial name="_StatusMessagePartial" />
+
+    <h1 class="title-1">@ViewData["Title"]</h1>
+
+    <div class="all-user-page-controls">
+        <div class="controls">
+            <a class="table" asp-controller="User" asp-action="All">
+                <i class="fas fa-bars"></i>
+            </a>
+            <a class="boxes active" asp-controller="User" asp-action="AllBoxView">
+                <i class="fas fa-border-all"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="boxes-v-container">
+        @foreach (var user in Model.AllUsers)
+        {
+            <div class="box-v">
+                <div class="id">
+                    @user.Id
+                </div>
+                <div class="profile-img">
+                    <a asp-area="Administration" asp-controller="User" asp-action="Profile"
+                    asp-route-id="@user.Id">
+                        @if (string.IsNullOrWhiteSpace(@user.ProfileImageUrl))
+                        {
+
+                            <img src="~/img/userImage.png" alt="профилна снимка">
+                        }
+                        else
+                        {
+                            <img src="@user.ProfileImageUrl" alt="профилна снимка">
+                        }
+                    </a>
+                </div>
+
+                <a class="username" asp-area="Administration" asp-controller="User" asp-action="Profile"
+                asp-route-id="@user.Id">
+                    @(user.Username)
+                </a>
+
+                <div class="info">
+                    <div class="info-row">
+                        <h1>
+                            Имейл
+                        </h1>
+                        <div class="data">
+                            <a class="link" href="mailto:@user.Email">
+                                @user.Email
+                            </a>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <h1>
+                            Тел.
+                        </h1>
+                        <div class="data">
+                            @if (string.IsNullOrEmpty(user.PhoneNumber))
+                            {
+                                @("-")
+                            }
+                            else
+                            {
+                                <a class="link" href="tel:@user.PhoneNumber">@user.PhoneNumber</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <h1>
+                            Създаден на
+                        </h1>
+                        <div class="data">
+                            @(user.CreatedOn.ToString("ddd dd-MMMM-yyyy HH:mm"))
+                        </div>
+                    </div>
+                    <div class="info-row-cols">
+                        <div class="col">
+                            <h1>
+                                <i class="fas fa-envelope"></i>
+                            </h1>
+                            <div>
+                                @if (user.EmailConfirmed)
+                                {
+                                    <div style="color: #558b2f;">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="color: #d9695d;">
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h1>
+                                Статус
+                            </h1>
+                            <div style="color: @if (user.IsDeleted) @("#d9695d") else @("#558b2f"); text-align:center;">
+                                @if (!(user.Username == this.User.Identity.Name))
+                                {
+                                    if (user.IsDeleted)
+                                    {
+                                        <div style="font-weight: 500;">@("Изтрит")</div>
+                                    }
+                                    else
+                                    {
+                                        <div>Активен</div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    @if (!(user.Username == this.User.Identity.Name))
+                    {
+                        if (!user.IsDeleted)
+                        {
+                            <form method="post" asp-area="Administration" asp-controller="User" asp-action="Delete"
+                    asp-route-id="@user.Id">
+                                <button type="submit" class="btn delete">Изтрий</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-area="Administration" asp-controller="User" asp-action="Undelete"
+                    asp-route-id="@user.Id">
+                                <button style="width: 100%;" type="submit" class="btn edit">Възстанови</button>
+                            </form>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="pagination">
+        <ul>
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="User" asp-action="All"
+                    asp-route-page="@(this.Model.CurrentPage - 1)">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </li>
+            }
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                @if (i == this.Model.CurrentPage)
+                {
+                    <li class="page-item active">
+                        <span class="page-link">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-area="Administration" asp-controller="User" asp-action="All"
+                    asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-area="Administration" asp-controller="User" asp-action="All"
+                    asp-route-page="@(this.Model.CurrentPage + 1)">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

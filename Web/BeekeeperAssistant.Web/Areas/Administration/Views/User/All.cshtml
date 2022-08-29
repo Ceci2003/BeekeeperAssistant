@@ -20,6 +20,18 @@
     <partial name="_StatusMessagePartial" />
 
     <h1 class="title-1">@ViewData["Title"]</h1>
+
+    <div class="all-user-page-controls">
+        <div class="controls">
+            <a class="table active" asp-controller="User" asp-action="All">
+                <i class="fas fa-bars"></i>
+            </a>
+            <a class="boxes" asp-controller="User" asp-action="AllBoxView">
+                <i class="fas fa-border-all"></i>
+            </a>
+        </div>
+    </div>
+
     <table class="data-table administration">
         <thead>
             <tr>

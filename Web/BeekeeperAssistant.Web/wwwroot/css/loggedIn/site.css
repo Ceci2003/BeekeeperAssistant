@@ -3043,3 +3043,153 @@ th a.ordered {
 .choose-how-to-add-hives .add-2:hover {
   background-color: var(--apiary-color);
 }
+
+/* Administration */
+/* Users */
+
+.all-user-page-controls {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.all-user-page-controls .controls {
+  display: flex;
+  align-items: center;
+}
+
+.all-user-page-controls .controls .table,
+.all-user-page-controls .controls .boxes {
+  color: var(--beehive-color);
+  font-size: 18px;
+  background-color: var(--lightgray);
+  border: 2px solid var(--dark-blue-gray);
+  padding: 5px 10px;
+}
+
+.all-user-page-controls .controls .table:hover,
+.all-user-page-controls .controls .boxes:hover {
+  background-color: var(--dark-blue-gray);
+  color: var(--white);
+}
+
+.all-user-page-controls .controls .table.active,
+.all-user-page-controls .controls .boxes.active {
+  background-color: var(--dark-blue-gray);
+  color: var(--white);
+  pointer-events: none;
+}
+
+.all-user-page-controls .controls .table {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.all-user-page-controls .controls .boxes {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* BoxViewPage */
+.boxes-v-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.boxes-v-container .box-v {
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border: 3px solid var(--lightgray);
+  width: 300px;
+  box-sizing: content-box;
+}
+
+.boxes-v-container .box-v .id {
+  color: var(--lightgray);
+  position: absolute;
+  width: 300px;
+}
+
+.boxes-v-container .box-v .profile-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+}
+
+.boxes-v-container .box-v .profile-img img {
+  width: 200px;
+}
+
+.boxes-v-container .box-v .username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: var(--blue-hover);
+  padding: 5px 0;
+  border-top: 3px solid var(--lightgray);
+  border-bottom: 3px solid var(--lightgray);
+}
+
+.boxes-v-container .box-v .username:hover {
+  color: var(--blue);
+}
+
+.boxes-v-container .box-v .info .info-row {
+  text-align: center;
+}
+
+.boxes-v-container .box-v .info .info-row:not(:last-child) {
+  border-bottom: 2px solid var(--lightgray);
+}
+
+.boxes-v-container .box-v .info .info-row h1 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.boxes-v-container .box-v .info .info-row .link {
+  color: var(--blue-hover);
+}
+
+.boxes-v-container .box-v .info .info-row .link:hover {
+  color: var(--blue);
+}
+
+.boxes-v-container .box-v .info .info-row-cols {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  border-bottom: 2px solid var(--lightgray);
+}
+
+.boxes-v-container .box-v .info .info-row,
+.boxes-v-container .box-v .info .info-row-cols .col {
+  padding: 5px 0;
+}
+
+.boxes-v-container .box-v .info .info-row-cols .col {
+  width: 100%;
+  text-align: center;
+}
+
+.boxes-v-container .box-v .info .info-row-cols .col:not(:last-child) {
+  border-right: 2px solid var(--lightgray);
+}
+
+.boxes-v-container .box-v .info .info-row-cols .col h1 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.boxes-v-container .box-v .info .info-row data {
+  font-size: 16px;
+}
+
+.boxes-v-container .box-v .controls {
+  padding: 10px;
+}

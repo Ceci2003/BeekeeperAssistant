@@ -52,6 +52,34 @@
             return this.View(viewModel);
         }
 
+        public IActionResult AllBoxView(int page = 1)
+        {
+            if (page <= 0)
+            {
+                page = 1;
+            }
+
+            var allCount = this.userService.GetAllUsersWithDeletedCount();
+            var pagesCount = (int)Math.Ceiling((double)allCount / GlobalConstants.UsersPerPageAdministration);
+
+            var viewModel = new AdministrationAllUserBoxViewModel
+            {
+                AllUsers = this.userService.GetAllUsersWithDeleted<UserBoxViewModel>(
+                GlobalConstants.UsersPerPageAdministration,
+                (page - 1) * GlobalConstants.UsersPerPageAdministration),
+                PagesCount = pagesCount,
+            };
+
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
+
+            return this.View(viewModel);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {

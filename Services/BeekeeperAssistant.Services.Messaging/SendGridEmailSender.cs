@@ -47,5 +47,32 @@
                 throw;
             }
         }
+
+        public async Task SendMultipleEmailsAsync(string from, string fromName, string[] emails, string subject, string htmlContent, IEnumerable<EmailAttachment> attachments = null)
+        {
+            var message = new SendGridMessage
+            {
+                From = new EmailAddress(from, fromName),
+                Subject = subject,
+                HtmlContent = htmlContent,
+            };
+
+            foreach (var email in emails)
+            {
+                message.AddTo(new EmailAddress(email), 0);
+            }
+
+            try
+            {
+                var response = await this.client.SendEmailAsync(message);
+                Console.WriteLine(response.StatusCode);
+                Console.WriteLine(await response.Body.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

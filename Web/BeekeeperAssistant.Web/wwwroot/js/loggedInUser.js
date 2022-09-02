@@ -340,6 +340,10 @@ function updateReturnUrls() {
   }
 }
 
+function selectEmailOptions(select) {
+  
+}
+
 window.onload = function () {
   markRequiredFields();
   styleUpdates();

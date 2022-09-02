@@ -12,5 +12,13 @@
             string subject,
             string htmlContent,
             IEnumerable<EmailAttachment> attachments = null);
+
+        Task SendMultipleEmailsAsync(
+            string from,
+            string fromName,
+            string[] emails,
+            string subject,
+            string htmlContent,
+            IEnumerable<EmailAttachment> attachments = null);
     }
 }

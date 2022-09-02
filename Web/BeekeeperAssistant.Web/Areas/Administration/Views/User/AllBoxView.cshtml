@@ -151,6 +151,10 @@
                                 <button style="width: 100%;" type="submit" class="btn edit">Възстанови</button>
                             </form>
                         }
+
+                        <a asp-controller="Communication" asp-action="SendEmail" asp-route-toOne="@user.Email">
+                            Изпрати имейл
+                        </a>
                     }
                 </div>
             </div>

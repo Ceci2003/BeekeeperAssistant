@@ -15,5 +15,16 @@
         {
             return Task.CompletedTask;
         }
+
+        public Task SendMultipleEmailsAsync(
+            string from,
+            string fromName,
+            string[] emails,
+            string subject,
+            string htmlContent,
+            IEnumerable<EmailAttachment> attachments = null)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

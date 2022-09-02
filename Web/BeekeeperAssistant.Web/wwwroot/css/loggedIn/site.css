@@ -374,6 +374,7 @@ em::selection {
 .btn.beehive,
 .btn.queen,
 .btn.light-green,
+.btn.form-clear,
 .btn.form-back {
   color: var(--white);
   border: none;
@@ -417,6 +418,14 @@ em::selection {
 
 .btn.form-back:hover {
   background-color: var(--red);
+}
+
+.btn.form-clear {
+  background-color: var(--queen-color);
+}
+
+.btn.form-clear:hover {
+  background-color: var(--queen-color-hover);
 }
 
 .btn.apiary-create,

@@ -1,0 +1,125 @@
+﻿@model BeekeeperAssistant.Web.ViewModels.Administration.Communication.SendEmailInputModel
+@using BeekeeperAssistant.Data.Models
+@using BeekeeperAssistant.Web.ViewModels.Shared
+
+@{
+    ViewData["Title"] = "Изпращане на имейл";
+
+    var navigation = new Dictionary<string, string>();
+    navigation.Add("Администрация", "/Administration/Dashboard");
+    navigation.Add("Комуникации", "/Administration/Communication");
+    navigation.Add(ViewData["Title"].ToString(), null);
+
+    var breadcrumbNav = new BreadcrumbModel
+    {
+        Navigation = navigation,
+    };
+}
+
+<partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
+
+<div class="content">
+    <div class="form-box">
+        <form asp-controller="Communication" asp-action="SendEmail" style="width: 100%;">
+
+            <h2 class="no-required">@ViewData["Title"]</h2>
+
+            <div class="error-msg" asp-validation-summary="All"></div>
+
+            <div class="row-form-group">
+                <div class="input-group" style="width: 49%;">
+                    <label asp-for="@Model.FromEmail"></label>
+                    <input asp-for="@Model.FromEmail" />
+                    <span asp-validation-for="@Model.FromEmail"></span>
+                </div>
+                <div class="input-group" style="width: 49%;">
+                    <label asp-for="@Model.FromName"></label>
+                    <input asp-for="@Model.FromName" />
+                    <span asp-validation-for="@Model.FromName"></span>
+                </div>
+            </div>
+
+            <div class="input-group max">
+                <label asp-for="@Model.SendOptions"></label>
+                <select id="selectOptions" asp-for="@Model.SendOptions"
+                        asp-items="@Html.GetEnumSelectList<SendEmailOptions>()"></select>
+                <span asp-validation-for="@Model.SendOptions"></span>
+            </div>
+
+            <div id="to" class="input-group max" style="@if(string.IsNullOrEmpty(Model.To)) @("display: none;")">
+                <label asp-for="@Model.To"></label>
+                <input asp-for="@Model.To" />
+                <span asp-validation-for="@Model.To"></span>
+            </div>
+
+            <div id="toMultiple" class="input-group max" style="@if(string.IsNullOrEmpty(Model.ToMultiple)) @("display: none;")">
+                <label asp-for="@Model.ToMultiple"></label>
+                <input asp-for="@Model.ToMultiple" />
+                <span asp-validation-for="@Model.ToMultiple"></span>
+            </div>
+
+            <div id="to" class="input-group max">
+                <label asp-for="@Model.Subject"></label>
+                <input asp-for="@Model.Subject" />
+                <span asp-validation-for="@Model.Subject"></span>
+            </div>
+
+            <div class="input-group max">
+                <label class="required" asp-for="@Model.HtmlContent"></label>
+                <textarea asp-for="@Model.HtmlContent" id="tiny"></textarea>
+            </div>
+
+            <div class="btn-group more">
+                <a class="back-button btn form-back" asp-controller="Communication" asp-action="SendEmail">Отмени</a>
+                <button class="back-button btn form-clear" type="reset">Изчисти</button>
+                <input class="btn beehive-create" type="submit" value="Изпрати" />
+            </div>
+
+            <div class="form-star-tip">
+                *Полетата обозначени с
+                '<span style="color: var(--red); font-size: 16px; font-weight: bold;">*</span>'
+                са задължителни.
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+ <partial name="_ValidationScriptsPartial" /> 
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    $('textarea#tiny').tinymce({
+        height: 450,
+        menubar: true,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount table image',
+            'link preview code emoticons fullscreen'
+        ],
+        toolbar_mode: 'wide',
+        toolbar: 'undo redo | formatselect | bold italic underline strikethrough subscript superscript | fontsizeselect backcolor forecolor | alignleft aligncenter alignright alignjustify | image | bullist numlist outdent indent | removeformat | table tabledelete | link anchor preview  code fullscreen | emoticons | help'
+        ,
+        a11y_advanced_options: true,
+        image_list: [
+            { title: 'BA Logo', value: '/img/ba_logo.svg' }
+        ]
+    });
+
+    $('#selectOptions').on('change', function () {
+        if ($(this).val() == 3) {
+            $('#to').show();
+            $('#toMultiple').hide();
+        } else if ($(this).val() == 4) {
+            $('#toMultiple').show();
+            $('#to').hide();
+        }
+        else {
+            $('#to').hide();
+            $('#toMultiple').hide();
+        }
+    });
+</script>
+}

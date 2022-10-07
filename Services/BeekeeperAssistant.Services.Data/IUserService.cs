@@ -32,5 +32,7 @@
         ApplicationUser GetUserByIdWithUndeleted(string userId);
 
         ApplicationUser GetAllUserInfoAsync(string userId);
+
+        ApplicationUser GetUserInfoByUsername(string username);
     }
 }

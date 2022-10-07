@@ -9,9 +9,9 @@
     navigation.Add(ViewData["Title"].ToString(), null);
 
     var breadcrumbNav = new BreadcrumbModel
-    {
-        Navigation = navigation,
-    };
+            {
+                Navigation = navigation,
+            };
 }
 
 <partial model="@breadcrumbNav" name="_BreadcrumbPartial" />
@@ -30,8 +30,15 @@
             @foreach (var feedback in Model.Feedbacks.AllFeedbacks)
             {
                 <tr>
-                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a></td>
-                    <td>@feedback.UserUsername</td>
+                    <td class="number" style="padding: 8px;">
+                        <a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a>
+                    </td>
+                    <td class="number" style="padding: 8px;">
+                        <a asp-area="Administration" asp-controller="User" asp-action="ProfileByUsername"
+                       asp-route-username="@feedback.UserUsername">
+                            @(feedback.UserUsername)
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -54,8 +61,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
-                       asp-route-pageHelps="@Model.Helps.CurrentPage"
-                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage - 1)">
+                   asp-route-pageHelps="@Model.Helps.CurrentPage"
+                   asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -87,8 +94,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
-                       asp-route-pageHelps="@Model.Helps.CurrentPage"
-                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage + 1)">
+                   asp-route-pageHelps="@Model.Helps.CurrentPage"
+                   asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>
@@ -108,8 +115,15 @@
             @foreach (var feedback in Model.Helps.AllFeedbacks)
             {
                 <tr>
-                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a></td>
-                    <td>@feedback.UserUsername</td>
+                    <td class="number" style="padding: 8px;">
+                        <a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@feedback.Id">@feedback.Title</a>
+                    </td>
+                    <td class="number" style="padding: 8px;">
+                        <a asp-area="Administration" asp-controller="User" asp-action="ProfileByUsername"
+                       asp-route-username="@feedback.UserUsername">
+                            @(feedback.UserUsername)
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -132,8 +146,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
-                       asp-route-pageHelps="@(Model.Helps.CurrentPage - 1)"
-                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage)">
+                   asp-route-pageHelps="@(Model.Helps.CurrentPage - 1)"
+                   asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -165,8 +179,8 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
-                       asp-route-pageHelps="@(Model.Helps.CurrentPage + 1)"
-                       asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage">
+                   asp-route-pageHelps="@(Model.Helps.CurrentPage + 1)"
+                   asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>
@@ -186,8 +200,15 @@
             @foreach (var report in Model.Reports.AllFeedbacks)
             {
                 <tr>
-                    <td><a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@report.Id">@report.Title</a></td>
-                    <td>@report.UserUsername</td>
+                    <td class="number" style="padding: 8px;">
+                        <a asp-area="Administration" asp-controller="Feedback" asp-action="ById" asp-route-id="@report.Id">@report.Title</a>
+                    </td>
+                    <td class="number" style="padding: 8px;">
+                        <a asp-area="Administration" asp-controller="User" asp-action="ProfileByUsername"
+                       asp-route-username="@report.UserUsername">
+                            @(report.UserUsername)
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -210,9 +231,9 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
-                       asp-route-pageHelps="@(Model.Helps.CurrentPage)"
-                       asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage)"
-                       asp-route-pageReports="@(this.Model.Feedbacks.CurrentPage - 1)">
+                   asp-route-pageHelps="@(Model.Helps.CurrentPage)"
+                   asp-route-pageFeedbacks="@(this.Model.Feedbacks.CurrentPage)"
+                   asp-route-pageReports="@(this.Model.Feedbacks.CurrentPage - 1)">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </li>
@@ -244,9 +265,9 @@
             {
                 <li class="page-item">
                     <a class="page-link" asp-area="Administration" asp-controller="Feedback" asp-action="All"
-                       asp-route-pageHelps="@(Model.Helps.CurrentPage)"
-                       asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage"
-                       asp-route-pageReports="@(this.Model.Feedbacks.CurrentPage + 1)">
+                   asp-route-pageHelps="@(Model.Helps.CurrentPage)"
+                   asp-route-pageFeedbacks="@this.Model.Feedbacks.CurrentPage"
+                   asp-route-pageReports="@(this.Model.Feedbacks.CurrentPage + 1)">
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </li>

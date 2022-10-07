@@ -153,5 +153,10 @@
             => this.userRepository
                 .AllWithDeleted()
                 .FirstOrDefault(u => u.Id == userId);
+
+        public ApplicationUser GetUserInfoByUsername(string username)
+            => this.userRepository
+                .AllWithDeleted()
+                .FirstOrDefault(u => u.UserName == username);
     }
 }

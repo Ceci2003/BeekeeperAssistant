@@ -151,5 +151,15 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult ProfileByUsername(string username)
+        {
+            var viewModel = new UserProfileViewModel()
+            {
+                User = this.userService.GetUserInfoByUsername(username),
+            };
+
+            return this.View("Profile", viewModel);
+        }
     }
 }

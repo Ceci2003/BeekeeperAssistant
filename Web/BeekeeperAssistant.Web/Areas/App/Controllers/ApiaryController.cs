@@ -174,24 +174,6 @@
 
             viewModel.ApiaryAccess = await this.apiaryHelperService.GetUserApiaryAccessAsync(currentUser.Id, viewModel.Id);
 
-            if (viewModel.Number != null)
-            {
-                var postcode = viewModel.Number.Split('-')[0];
-                viewModel.ForecastResult =
-                    await this.forecastService.GetApiaryCurrentWeatherByCityPostcode(postcode, this.configuration["OpenWeatherMap:ApiId"]);
-
-                if (viewModel.ForecastResult == null)
-                {
-                    viewModel.ForecastResult =
-                        await this.forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
-                }
-            }
-            else
-            {
-                viewModel.ForecastResult =
-                    await this.forecastService.GetApiaryCurrentWeatherByCityName(viewModel.Adress, this.configuration["OpenWeatherMap:ApiId"]);
-            }
-
             return this.View(viewModel);
         }
 
